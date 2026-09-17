@@ -1,0 +1,1604 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
+<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——按企划书 V2.0 第五章规划搭建的 MVP 演示站。" />
+<style>
+  :root{
+    --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#6B7683;
+    --navy:#24344D; --navy2:#3E5375; --blue:#5D77A3; --line:#E3E7EC; --line2:#C9D1D9;
+    --accent:#0E7C66; --accent-soft:#E8F2EF; --warn:#B45309; --warn-soft:#FCF3E3;
+    --serif:"Songti SC","Noto Serif SC",serif;
+    --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
+  a{color:var(--navy)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- 顶栏 ---------- */
+  .top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .top .wrap{display:flex;align-items:center;gap:26px;height:60px}
+  .logo{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--navy);letter-spacing:.02em}
+  .logo .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+  .logo small{font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:.12em}
+  .top nav{display:flex;gap:4px;margin-left:auto}
+  .top nav a{padding:7px 11px;border-radius:6px;font-size:14px;color:var(--ink2);text-decoration:none}
+  .top nav a:hover{background:var(--accent-soft);color:var(--accent)}
+  .top nav a.cta{background:var(--navy);color:#fff}
+  .top nav a.cta:hover{background:var(--navy2);color:#fff}
+  .demo-tag{font-family:var(--mono);font-size:10px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:2px 7px;letter-spacing:.08em}
+
+  /* ---------- 首屏 ---------- */
+  .hero{padding:64px 0 46px;border-bottom:1px solid var(--line);background:
+    radial-gradient(1200px 400px at 85% -10%, #E9EEF5 0%, transparent 60%),var(--bg)}
+  .hero h1{font-family:var(--serif);font-size:38px;line-height:1.28;color:var(--navy);max-width:22em}
+  .hero h1 b{color:var(--accent)}
+  .hero .sub{margin:14px 0 30px;color:var(--ink2);max-width:44em;font-size:16px}
+  .hero .sub b{color:var(--ink)}
+  /* 三入口 */
+  .entries{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .entry{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:24px 22px;text-decoration:none;display:block;transition:box-shadow .15s,transform .15s,border-color .15s}
+  .entry:hover{box-shadow:0 6px 22px rgba(36,52,77,.10);border-color:var(--line2);transform:translateY(-2px)}
+  .entry:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .entry .no{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.14em}
+  .entry h3{font-family:var(--serif);font-size:20px;color:var(--navy);margin:8px 0 6px}
+  .entry p{font-size:13.5px;color:var(--muted)}
+  .entry .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--accent);font-weight:600}
+  .entry:hover .go{text-decoration:underline}
+
+  /* ---------- 区块通用 ---------- */
+  section{padding:52px 0}
+  section.alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px}
+  .sec-head .no{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.1em}
+  .sec-head h2{font-family:var(--serif);font-size:26px;color:var(--navy)}
+  .sec-desc{color:var(--muted);font-size:14px;margin-bottom:26px;max-width:52em}
+
+  /* ---------- 日历 ---------- */
+  .cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .cal{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;position:relative}
+  .cal .date{font-family:var(--mono);font-size:11.5px;color:var(--accent);font-weight:700;letter-spacing:.06em}
+  .cal .stage{display:inline-block;margin-top:6px;font-size:11px;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+  .cal h4{font-size:15px;margin:8px 0 4px;color:var(--ink)}
+  .cal p{font-size:12.5px;color:var(--muted)}
+  .cal .src{margin-top:10px;font-family:var(--mono);font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+  /* ---------- 政策列表 ---------- */
+  .pol{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;align-items:start}
+  .pol-item{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:8px;padding:16px 18px;margin-bottom:12px}
+  .pol-item h4{font-size:15.5px;color:var(--ink)}
+  .pol-item .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin:6px 0}
+  .pol-item p{font-size:13px;color:var(--ink2)}
+  .pol-item .plain{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin-top:10px;font-size:13px;color:var(--ink)}
+  .pol-item .plain b{color:var(--accent)}
+  .term{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .term h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:10px}
+  .term dl{display:grid;grid-template-columns:96px 1fr;gap:10px 12px;font-size:13.5px}
+  .term dt{font-family:var(--mono);font-size:12px;color:var(--accent);padding-top:2px}
+  .term dd{color:var(--ink2)}
+
+  /* ---------- 对比器 ---------- */
+  .cmp-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+  .cmp-tools select{font-family:var(--sans);font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;background:#fff;color:var(--ink)}
+  .cmp-tools button{font-family:var(--sans);font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer}
+  .cmp-tools button:hover{background:var(--navy2)}
+  .cmp-note{font-size:12px;color:var(--muted)}
+  #cmp-result,#rent-wrap{overflow-x:auto}
+  .cmp-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13.5px;min-width:560px}
+  .cmp-table th{background:var(--navy);color:#fff;font-weight:600;padding:11px 14px;text-align:left;font-size:13px}
+  .cmp-table th:first-child{width:150px}
+  .cmp-table td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  .cmp-table td:first-child{color:var(--ink);font-weight:500}
+  .cmp-table tr:last-child td{border-bottom:2px solid var(--navy)}
+  .cmp-empty{border:1px dashed var(--line2);border-radius:10px;padding:36px;text-align:center;color:var(--muted);background:var(--paper)}
+
+  /* ---------- 求真台 ---------- */
+  .rq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .rq-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .rq-card .verdict{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:4px;margin-bottom:10px}
+  .verdict.false{background:#FDECEC;color:#B3261E}
+  .verdict.warn{background:var(--warn-soft);color:var(--warn)}
+  .verdict.ok{background:var(--accent-soft);color:var(--accent)}
+  .rq-card h4{font-size:15px;margin-bottom:8px;color:var(--ink)}
+  .rq-card p{font-size:13px;color:var(--ink2);margin-bottom:8px}
+  .rq-card .src{font-family:var(--mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+
+  /* ---------- 生活服务 ---------- */
+  .life{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .life-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+  .life-card .ico{width:38px;height:38px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .life-card h4{font-size:14.5px;color:var(--ink);margin-bottom:4px}
+  .life-card p{font-size:12px;color:var(--muted)}
+  .life-card .soon{font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:8px;display:block}
+
+  /* ---------- 会员 ---------- */
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+  .plan{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;position:relative}
+  .plan.hl{border:2px solid var(--accent)}
+  .plan .flag{position:absolute;top:-11px;left:20px;background:var(--accent);color:#fff;font-size:11px;padding:3px 10px;border-radius:99px;font-family:var(--mono)}
+  .plan h4{font-family:var(--serif);font-size:17px;color:var(--navy)}
+  .plan .price{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--ink);margin:8px 0 2px}
+  .plan .price small{font-size:12px;color:var(--muted);font-weight:400}
+  .plan ul{list-style:none;margin:12px 0 18px;flex:1}
+  .plan li{font-size:12.8px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;border-bottom:1px dashed var(--line)}
+  .plan li::before{content:"";position:absolute;left:2px;top:12px;width:10px;height:6px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+  .plan li.off{color:var(--muted)}
+  .plan li.off::before{border-color:var(--line2)}
+  .plan .btn{display:block;text-align:center;padding:10px;border-radius:7px;font-size:14px;text-decoration:none;border:1px solid var(--navy);color:var(--navy);font-weight:600}
+  .plan .btn:hover{background:var(--navy);color:#fff}
+  .plan.hl .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+  .plan.hl .btn:hover{background:#0A6151}
+  .plan-note{margin-top:14px;font-size:12px;color:var(--muted)}
+
+  /* ---------- 流程 ---------- */
+  .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;counter-reset:f}
+  .fstep{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px;position:relative;counter-increment:f}
+  .fstep::before{content:counter(f,decimal-leading-zero);font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:700}
+  .fstep h5{font-size:13.5px;margin:6px 0 4px;color:var(--ink)}
+  .fstep p{font-size:11.5px;color:var(--muted)}
+  .fstep .sla{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:8px;display:block}
+
+  /* ---------- 表单与新增模块 ---------- */
+  .form-card{grid-column:1/-1;background:var(--navy);color:#DCE4EE;border-radius:10px;padding:20px 22px}
+  .form-card h4{color:#fff;font-size:15px;margin-bottom:4px}
+  .form-card .hint{font-size:12px;color:#9FADC0;margin-bottom:12px}
+  .form-row{display:flex;gap:10px;flex-wrap:wrap}
+  .form-row textarea{flex:1;min-height:84px;background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-family:var(--sans);font-size:14px;padding:10px 12px;resize:vertical}
+  .form-row select{background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-size:14px;padding:8px 12px}
+  .form-card .err{color:#F2B8B5;font-size:12.5px;margin-top:8px;display:none}
+  .form-card .ok-box{display:none;background:#0F3D33;border:1px solid var(--accent);border-radius:8px;padding:14px 16px;margin-top:12px}
+  .form-card .ok-box b{color:#7FD8C4}
+  .form-card button{background:var(--accent);border:none;color:#fff;font-size:14px;padding:10px 22px;border-radius:7px;cursor:pointer;font-family:var(--sans)}
+  .form-card button:hover{background:#0A6151}
+  .thread{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 18px;display:flex;gap:14px;align-items:flex-start;margin-bottom:10px}
+  .thread .badge{flex:none;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-top:2px}
+  .thread .badge.q{background:var(--warn-soft);color:var(--warn)}
+  .thread h4{font-size:14.5px;color:var(--ink)}
+  .thread p{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .thread .n{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+  .beans-box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+  .beans-num{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--navy)}
+  .beans-num small{font-size:13px;color:var(--muted);font-weight:400}
+  .beans-box .btn{background:var(--accent);border:none;color:#fff;font-size:14px;padding:10px 22px;border-radius:7px;cursor:pointer;font-family:var(--sans)}
+  .beans-box .btn:disabled{background:#A8C3BE;cursor:not-allowed}
+  .beans-box .done{font-size:12px;color:var(--accent);margin-top:8px}
+  .beans-rules{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:14px;grid-column:1/-1}
+  .rent-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13px;margin-top:14px;min-width:520px}
+  .rent-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:12.5px}
+  .rent-table td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--ink2)}
+  .fund-out{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:14px;font-size:13.5px;color:var(--ink2)}
+  .fund-out b{color:var(--accent)}
+  .zy-out{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-top:14px;font-size:14px;color:var(--ink2)}
+  .zy-out b{color:var(--accent)}
+  .zy-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .zy-tools input,.zy-tools select{font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans)}
+  .zy-tools button{font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;font-family:var(--sans)}
+  .zy-tools label{font-size:13px;color:var(--ink2)}
+
+  /* ---------- v0.3：搜索/档案/我的/弹窗 ---------- */
+  .searchbox{position:relative;margin-left:16px;flex:1;max-width:250px}
+  .searchbox input{width:100%;font-size:13.5px;padding:7px 12px;border:1px solid var(--line2);border-radius:8px;font-family:var(--sans);background:#fff}
+  .searchbox input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .search-panel{position:absolute;top:110%;left:0;right:0;background:#fff;border:1px solid var(--line2);border-radius:10px;box-shadow:0 10px 28px rgba(36,52,77,.14);padding:6px;z-index:60;max-height:320px;overflow:auto}
+  .s-item{padding:8px 10px;border-radius:6px;font-size:13px;color:var(--ink2);cursor:pointer;display:flex;gap:8px;align-items:flex-start}
+  .s-item:hover{background:var(--accent-soft);color:var(--ink)}
+  .s-badge{flex:none;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;background:#EDF0F3;color:var(--muted);margin-top:1px}
+  .s-empty{color:var(--muted);cursor:default}
+  .school-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .school-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .school-card .sc-top{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .sc-badge{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+  .sc-qu{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .school-card h4{font-size:16px;color:var(--navy);margin-bottom:6px}
+  .school-card p{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .sc-actions{display:flex;gap:8px}
+  .mini-btn{font-size:12.5px;padding:6px 12px;border-radius:6px;border:1px solid var(--navy);background:#fff;color:var(--navy);cursor:pointer;font-family:var(--sans)}
+  .mini-btn:hover{background:var(--navy);color:#fff}
+  .mini-btn.danger{border-color:#B3261E;color:#B3261E}
+  .mini-btn.danger:hover{background:#B3261E;color:#fff}
+  details.vh{margin-top:8px}
+  details.vh summary{cursor:pointer;color:var(--accent);font-size:12.5px;font-weight:600}
+  details.vh div{font-size:12.5px;color:var(--ink2);padding:5px 0 0 14px}
+  .alert-btn{margin-top:10px;font-size:12px;padding:5px 12px;border-radius:6px;border:1px solid var(--accent);background:#fff;color:var(--accent);cursor:pointer;font-family:var(--sans)}
+  .alert-btn.on{background:var(--accent);color:#fff}
+  .me-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .me-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .me-card h4{font-size:15px;color:var(--navy);margin-bottom:10px}
+  .form-row2{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .form-row2 select{font-size:13.5px;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans)}
+  .btn-main{font-size:13.5px;padding:8px 16px;border-radius:7px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-family:var(--sans)}
+  .btn-main:hover{background:#0A6151}
+  .me-out{font-size:12.5px;color:var(--muted);line-height:1.7}
+  .me-out b{color:var(--accent)}
+  .me-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px;color:var(--ink2)}
+  .me-item:last-child{border-bottom:none}
+  .me-item span{flex:1}
+  .empty-mini{font-size:12.5px;color:var(--muted);background:#F3F5F7;border-radius:8px;padding:12px 14px}
+  .err-inline{color:#B3261E;font-size:12.5px;display:block;margin-top:6px}
+  .biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+  .biz-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .biz-card h4{font-size:15px;color:var(--navy);margin-bottom:6px}
+  .biz-card p{font-size:12.5px;color:var(--muted)}
+  .form-card.light{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+  .form-card.light h4{color:var(--navy)}
+  .form-card.light .hint{color:var(--muted)}
+  .form-card.light textarea,.form-card.light input,.form-card.light select{background:#fff;border:1px solid var(--line2);color:var(--ink)}
+  .form-card.light .ok-box{background:var(--accent-soft);border-color:var(--accent)}
+  .form-card.light .ok-box b{color:var(--accent)}
+  dialog{border:none;border-radius:14px;padding:0;max-width:560px;width:92%;box-shadow:0 24px 64px rgba(23,33,46,.35)}
+  dialog::backdrop{background:rgba(23,33,46,.45)}
+  .dlg{padding:24px 26px;position:relative}
+  .dlg-x{position:absolute;top:12px;right:14px;border:none;background:#F0F2F5;width:28px;height:28px;border-radius:50%;font-size:15px;cursor:pointer;color:var(--muted)}
+  .dlg-x:hover{background:#E3E7EC;color:var(--ink)}
+  .dlg-kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+  .dlg h4{font-family:var(--serif);font-size:20px;color:var(--navy);margin:6px 0 14px}
+  .dlg-kv{display:grid;grid-template-columns:92px 1fr;gap:8px 12px;font-size:13px;margin-bottom:14px}
+  .dlg-kv dt{font-family:var(--mono);font-size:11.5px;color:var(--accent);padding-top:2px}
+  .dlg-kv dd{color:var(--ink2)}
+  .dlg-sub{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-bottom:6px}
+  .dlg-ev{font-size:12.5px;color:var(--ink2);padding:7px 0 7px 16px;position:relative}
+  .dlg-ev::before{content:"◆";position:absolute;left:0;top:7px;font-size:8px;color:var(--accent)}
+  .dlg-actions{display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+  .hint2{font-size:11.5px;color:var(--muted)}
+  .ck{display:flex;gap:8px;font-size:13px;color:var(--ink2);padding:7px 0;align-items:flex-start}
+  .dlg-ok{background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--ink2)}
+  .dlg-ok b{color:var(--accent)}
+  #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:#17212E;color:#fff;font-size:13px;padding:10px 20px;border-radius:99px;opacity:0;pointer-events:none;transition:all .25s ease;z-index:99;max-width:88vw;text-align:center}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .flash{animation:flashbg 1.3s ease}
+  @keyframes flashbg{0%{box-shadow:0 0 0 4px rgba(14,124,102,.30)}100%{box-shadow:0 0 0 4px rgba(14,124,102,0)}}
+
+  /* ---------- v0.4：信任条/汉堡菜单/自查器/路径/筛选 ---------- */
+  .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+  .t-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;gap:12px;align-items:center}
+  .t-num{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--navy);white-space:nowrap}
+  .t-label{font-size:11px;color:var(--muted);line-height:1.5}
+  .t-label em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--accent);display:block}
+  .guide{font-size:13.5px;color:var(--ink2);margin-bottom:20px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+  .guide b{color:var(--accent)}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+  .btn-primary{background:var(--accent);color:#fff;padding:11px 22px;border-radius:8px;font-weight:600;text-decoration:none}
+  .btn-primary:hover{background:#0A6151}
+  .btn-ghost{border:1px solid var(--navy);color:var(--navy);padding:11px 22px;border-radius:8px;text-decoration:none;font-weight:600}
+  .btn-ghost:hover{background:var(--navy);color:#fff}
+  .nav-burger{display:none;margin-left:10px;width:38px;height:38px;border:1px solid var(--line2);border-radius:8px;background:#fff;cursor:pointer;position:relative}
+  .nav-burger span{display:block;width:18px;height:2px;background:var(--navy);margin:3.5px auto;transition:.2s}
+  .nav-burger.open span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+  .nav-burger.open span:nth-child(2){opacity:0}
+  .nav-burger.open span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+  .mobile-menu{position:absolute;top:60px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line2);box-shadow:0 14px 30px rgba(36,52,77,.14);padding:10px 16px 16px;z-index:59}
+  .mobile-menu a{display:block;padding:11px 10px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:15px;border-bottom:1px solid var(--line)}
+  .mobile-menu a:last-child{border-bottom:none}
+  .mobile-menu a.cta{background:var(--navy);color:#fff;text-align:center;margin-top:8px;border-bottom:none}
+  .fact-filter{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+  .ff{font-size:12.5px;padding:6px 14px;border-radius:99px;border:1px solid var(--line2);background:#fff;color:var(--ink2);cursor:pointer;font-family:var(--sans)}
+  .ff.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .ff:hover{border-color:var(--navy)}
+  .hot-strip{display:flex;gap:14px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:18px;font-size:13px}
+  .hot-label{font-family:var(--mono);font-size:11px;color:var(--warn);font-weight:700;letter-spacing:.08em}
+  .hot-strip a{color:var(--navy);text-decoration:none;font-weight:600}
+  .hot-strip a:hover{color:var(--accent)}
+  .path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .path-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .path-card h5{font-size:14px;color:var(--ink);margin-bottom:4px}
+  .path-card p{font-size:11.5px;color:var(--muted)}
+  .path-card .tag{font-family:var(--mono);font-size:10px;color:var(--blue);display:block;margin-top:6px}
+  .to-top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;cursor:pointer;opacity:0;pointer-events:none;transition:.2s;z-index:70;font-size:15px}
+  .to-top.show{opacity:.92;pointer-events:auto}
+  .to-top:hover{background:var(--navy2)}
+
+  /* ---------- v0.7：数据层 ---------- */
+  .data-badge{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 8px;margin-top:6px}
+  .data-version{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .data-version b{color:var(--accent)}
+  .ds-table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
+  .ds-table th{background:var(--navy);color:#fff;text-align:left;padding:10px 14px;font-size:12.5px}
+  .ds-table td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  .ds-table td:first-child{color:var(--ink);font-weight:500}
+  .ds-ver{font-family:var(--mono);font-size:11px;padding:2px 9px;border-radius:4px;white-space:nowrap}
+  .ds-ver.ok{background:var(--accent-soft);color:var(--accent)}
+  .ds-ver.pending{background:var(--warn-soft);color:var(--warn)}
+
+  /* ---------- v0.6：路径地图 / 日历行动清单 ---------- */
+  .pm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .pm-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+  .pm-sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .pm-tag{font-size:12.5px;padding:4px 14px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .pm-tag.risk{background:var(--warn-soft);color:var(--warn)}
+  .pm-stages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pm-stage{background:#F8FAFB;border:1px solid var(--line);border-radius:10px;padding:14px}
+  .pm-stage .ps{font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.08em}
+  .pm-stage h5{font-size:14px;margin:6px 0;color:var(--ink)}
+  .pm-stage p{font-size:12.5px;color:var(--muted)}
+  details.todo{margin-top:10px}
+  details.todo summary{cursor:pointer;color:var(--accent);font-size:12px;font-weight:600}
+  details.todo div{font-size:12px;color:var(--ink2);padding:6px 2px 0;line-height:1.9}
+
+  /* ---------- 页脚 ---------- */
+  footer{border-top:1px solid var(--line);background:var(--navy);color:#C6D0DC;padding:36px 0;margin-top:40px}
+  footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+  footer h5{color:#fff;font-size:14px;margin-bottom:10px}
+  footer p,footer li{font-size:12.5px;color:#9FADC0;line-height:1.8}
+  footer ul{list-style:none}
+  footer a{color:#C6D0DC;text-decoration:none}
+  footer a:hover{color:#fff}
+  .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:11.5px;color:#8395AB;line-height:1.9}
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:960px){
+    .entries,.cal-grid,.plans{grid-template-columns:repeat(2,1fr)}
+    .life{grid-template-columns:repeat(3,1fr)}
+    .flow{grid-template-columns:repeat(3,1fr)}
+    .pol{grid-template-columns:1fr}
+    .school-grid{grid-template-columns:repeat(2,1fr)}
+    .me-grid{grid-template-columns:1fr}
+    .biz-grid{grid-template-columns:repeat(2,1fr)}
+    .trust{grid-template-columns:repeat(2,1fr)}
+    .path-grid{grid-template-columns:repeat(2,1fr)}
+    .top nav{display:none}
+    .searchbox{max-width:180px}
+    .nav-burger{display:block}
+  }
+  @media (max-width:620px){
+    .hero h1{font-size:29px}
+    .entries,.cal-grid,.plans,.life,.flow,.school-grid,.me-grid,.biz-grid,.path-grid{grid-template-columns:1fr}
+    .trust{grid-template-columns:1fr 1fr}
+    .form-row textarea{min-width:0}
+    .rq{grid-template-columns:1fr}
+    .wrap{padding:0 16px}
+    .searchbox{max-width:none;flex:1;min-width:0}
+    .top .wrap{gap:10px}
+    .demo-tag{display:none}
+    dialog{width:96%}
+  }
+</style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
+    <span class="demo-tag">MVP 演示站 v0.7 · 真实数据包</span>
+    <div class="searchbox">
+      <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
+             oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
+      <div id="search-panel" class="search-panel" hidden></div>
+    </div>
+    <nav>
+      <a href="#calendar">日历</a>
+      <a href="#policy">政策</a>
+      <a href="#schools">档案</a><a href="#compare">对比</a>
+      <a href="#zy">志愿</a>
+      <a href="#fact">求真</a>
+      <a href="#community">社区</a>
+      <a href="#life">生活</a>
+      <a href="#beans">升学豆</a>
+      <a href="#me">我的</a>
+      <a href="#plans" class="cta">会员</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#quiz">入学自查</a>
+    <a href="#calendar">升学日历</a>
+    <a href="#policy">政策库</a>
+    <a href="#schools">学校档案</a>
+    <a href="#compare">择校对比</a>
+    <a href="#zy">志愿参考</a>
+    <a href="#fact">求真台</a>
+    <a href="#community">家长社区</a>
+    <a href="#life">生活服务</a>
+    <a href="#beans">升学豆</a>
+    <a href="#me">我的</a>
+    <a href="#biz">B端合作</a>
+    <a href="#plans" class="cta">会员</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>家长的<b>关键时刻</b>，<br/>值得一份<b>可核验的确定性</b>。</h1>
+    <p class="sub">官方政策原文 + <b>人话解读</b> · 升学节点 <b>不错过</b> · 学校信息<b>可核验</b> · 陪读生活<b>有人管</b>。</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="#quiz">3 分钟自查「我家能不能报」</a>
+      <a class="btn-ghost" href="#calendar">看本学期升学节点</a>
+    </div>
+    <div class="trust" id="trust">
+      <div class="t-item"><span class="t-num">376.3万</span><span class="t-label">重庆 K12 在校生</span></div>
+      <div class="t-item"><span class="t-num">113所</span><span class="t-label">2026 联招学校</span></div>
+      <div class="t-item"><span class="t-num">70%</span><span class="t-label">重点高中指标到校</span></div>
+      <div class="t-item"><span class="t-num">6,993个</span><span class="t-label">全市护学岗</span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+      <span class="data-version" id="dataVersion"></span>
+      <a href="#data-sources" style="font-size:12px;color:var(--accent)">查看数据来源与核验状态 →</a>
+    </div>
+    <p class="guide">第一次来？三步上手：<b>① 看升学日历</b>，别错过节点 → <b>② 用入学自查</b>，看看「我家能不能报」→ <b>③ 群里传言别急信</b>，先到求真台对一对。</p>
+    <div class="entries">
+      <a class="entry" href="#policy">
+        <span class="no">入口 01</span>
+        <h3>找政策</h3>
+        <p>2026 中考/入学/指标到校官方原文与人话对照，标注文号与生效日期。</p>
+        <span class="go">查政策 →</span>
+      </a>
+      <a class="entry" href="#schools">
+        <span class="no">入口 02</span>
+        <h3>找学校</h3>
+        <p>6 所样例学校档案（办学性质/招生范围/通勤/收费），选 2–3 所一键生成对比，所有字段注明来源。</p>
+        <span class="go">看档案 · 做对比 →</span>
+      </a>
+      <a class="entry" href="#fact">
+        <span class="no">入口 03</span>
+        <h3>问问题</h3>
+        <p>「内部渠道是真的吗？」——求真台逐条核验，按属实/不实/存疑分级发布。</p>
+        <span class="go">查传言 →</span>
+      </a>
+    </div>
+    <p style="font-size:11.5px;color:var(--muted);margin-top:18px">不承诺升学结果 · 不做学科培训 · 机构合作资质审核、平台不背书 · 数据逐条标注来源与核验日期</p>
+  </div>
+</header>
+
+<section id="calendar">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
+    <p class="sec-desc">示例展示 5 条（正式版为可订阅的分区×学段节点库，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后，日历将按学段自动过滤。</p>
+    <div class="fact-filter cal-filter" style="margin-bottom:14px">
+      <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
+      <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
+      <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
+      <button class="ff" data-cf="初升高" onclick="filterCal('初升高')">初升高</button>
+      <button class="ff" data-cf="高考" onclick="filterCal('高考')">高考</button>
+    </div>
+    <div class="cal-grid">
+      <div class="cal" data-stage="幼升小">
+        <span class="date">2027-06</span><span class="stage">幼升小</span>
+        <h4>幼升小报名与材料准备</h4>
+        <p>「三对口」材料清单、六年一户核查、长幼随学申请——以各区当年招生入学政策为准。</p>
+        <div class="src">依据：各区教委当年招生入学政策（示例）</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 备齐三对口材料（户口、房产、出生证明）<br/>✓ 二孩家庭了解「长幼随学」申请通道<br/>✓ 盯住网上报名窗口，错过要等统筹</div></details>
+        <button class="alert-btn" data-title="幼升小报名与材料准备（2027-06）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="小升初">
+        <span class="date">2026-09</span><span class="stage">小升初</span>
+        <h4>转学与户籍材料核对</h4>
+        <p>跨区转入家庭核对「三对口」材料与学位占用情况，错过转学的，正式版提供补救路径清单。</p>
+        <div class="src">依据：渝教基函〔2025〕21号 及各区细则</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 核对「三对口」材料：户口本、房产证、出生证明<br/>✓ 查学位占用：问街道或原业主，比问中介靠谱<br/>✓ 新房落户越早越好——部分区对落户年限有要求</div></details>
+        <button class="alert-btn" data-title="转学与户籍材料核对（2026-09）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="初升高">
+        <span class="date">2026-10</span><span class="stage">初升高</span>
+        <h4>指标到校资格摸底</h4>
+        <p>市级重点高中招生计划的 <b>70%</b> 分配到辖区初中（渝教基函〔2025〕21号，已核验文号）；家长可核对学籍与连续就读要求。</p>
+        <div class="src">来源：重庆市教委文件（已核验）</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 确认孩子学籍连续（中途转学可能失去资格）<br/>✓ 找班主任了解校内排位的参考口径<br/>✓ 盯区教委当年细则：名额、条件每年微调</div></details>
+        <button class="alert-btn" data-title="指标到校资格摸底（2026-10）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="初升高">
+        <span class="date">2027-04</span><span class="stage">初升高</span>
+        <h4>中考报名与联招志愿准备</h4>
+        <p>2026 年联招学校约 113 所（第一批次市级重点约 94 所）；志愿填报窗口以次年 4 月政策公布为准。</p>
+        <div class="src">来源：重庆日报 2026-04-22 政策口径</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 盯 4 月政策发布：联招校名单、批次设置<br/>✓ 提前拟志愿梯度：冲、稳、保各留 1–2 所<br/>✓ 用平台「位次换算」估位置（正式版接入一分一段）</div></details>
+        <button class="alert-btn" data-title="中考报名与联招志愿准备（2027-04）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="高考">
+        <span class="date">2027-06</span><span class="stage">高考</span>
+        <h4>高考特招线公布后行动清单</h4>
+        <p>示例为 2026 年实际口径：特招线历史类 510 / 物理类 496；军检线（报考军校的体检参考）历史类男 517/女 631、物理类男 533/女 573。正式版自动替换当年口径。</p>
+        <div class="src">来源：新华网重庆 2026-06-25（已核验）</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 对照线差定位：过特招线多少分 → 位次区间<br/>✓ 研究 3–5 个专业方向（兴趣 × 就业 × 分数匹配）<br/>✓ 防志愿填报骗局：见求真台「内部渠道」条目</div></details>
+        <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="policy" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">02 · 政策库</span><h2>官方原文，配一份「人话版」</h2></div>
+    <p class="sec-desc">每条政策三件套：原文要点 + 人话解读 + 文号/日期。版本历史保留，政策微调时红点提示。</p>
+    <div class="pol">
+      <div>
+        <div class="pol-item">
+          <h4>2026 年中考政策：联招学校约 113 所</h4>
+          <div class="meta">重庆市教委 · 2026-04-22 发布 · 6 月志愿填报阶段更新至 113 所（新增 10 所）</div>
+          <p>政策要点：公办民办同步招生；指标到校计划占市级重点高中招生计划的 70%；志愿分批次填报。</p>
+          <div class="plain"><b>人话版：</b>孩子能不能上「重点」，先看初中学籍在不在对口辖区——70% 的重点高中名额是分给各初中的，跨区择校反而可能丢掉这条路。</div>
+          <div class="meta">来源：重庆市政府网转载重庆日报；重庆本地宝填报指南（已核验）</div>
+          <details class="vh"><summary>版本历史（2 个版本）</summary>
+            <div>· 2026-04 版：联招学校约 100 所（政策发布口径）</div>
+            <div>· 2026-06 更新：志愿填报阶段实际公布 113 所（新增 10 所，本平台红点提示已推送）</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>优质高中指标到校招生工作通知</h4>
+          <div class="meta">渝教基函〔2025〕21号 · 2025 年发布 · 现行有效</div>
+          <p>政策要点：市级重点（优质）高中招生计划按 70% 比例分配到辖区内初中学校。</p>
+          <div class="plain"><b>人话版：</b>「指标到校」= 重点高中把七成名额直接分到初中。孩子在哪所初中读书，比「户口在哪个区」更影响这条路。</div>
+          <div class="meta">来源：重庆市教委（文号已核验）</div>
+          <details class="vh"><summary>版本历史（现行有效）</summary>
+            <div>· 渝教基函〔2025〕21号 发布，2025 学年起执行；2026-09 本平台复核文号与效力，确认现行有效</div>
+          </details>
+        </div>
+      </div>
+      <aside class="term">
+        <h3>高频术语 · 人话词典（节选）</h3>
+        <dl>
+          <dt>三对口</dt><dd>户籍、居住地、学籍三者对口，是公办小学入学的基本核对逻辑。</dd>
+          <dt>六年一户</dt><dd>同一套住房 6 年内只提供一户家庭的入学学位（小学口径；初中为三年一户）。各区细则有差异，以当年区县口径为准。</dd>
+          <dt>指标到校</dt><dd>市级重点高中把 70% 招生计划分配到辖区初中，校内竞争而非全区竞争。</dd>
+          <dt>联招</dt><dd>重庆主城区统一联合招生中考，2026 年约 113 所学校参与。</dd>
+          <dt>长幼随学</dt><dd>多孩家庭可申请让二孩随大孩就读同一学校；在各区教委入学报名平台提交（通道以当年公告为准）。</dd>
+          <dt>多校划片</dt><dd>一个小区对应多所初中，通过摇号确定录取学校，抑制学区房炒作。</dd>
+          <dt>摇号</dt><dd>报名人数超过计划时，电脑随机录取；全程公证，与成绩、缴费无关。</dd>
+          <dt>特招线</dt><dd>特殊类型招生资格线（2026：历史 510 / 物理 496），强基计划、专项计划等以此为主要参考。</dd>
+          <dt>一分一段</dt><dd>全省每个分数对应的考生位次表，是「位次法」填志愿的核心工具。</dd>
+          <dt>对口直升</dt><dd>部分公办小学毕业生可对口直升初中，以各区当年政策为准。</dd>
+          <dt>公民同招</dt><dd>公办与民办学校同步报名招生，未摇中的回公办统筹，防止单独押注民办。</dd>
+          <dt>职教高考</dt><dd>中职学生升入大专/本科的考试通道（「文化素质 + 职业技能」）；中职不是终点。</dd>
+          <dt>公民同招</dt><dd>公办与民办学校同步报名招生，未摇中的回公办统筹，防止单独押注民办。</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">02.5 · 入学自查</span><h2>我家的情况，能不能报？3 问自查</h2></div>
+    <p class="sec-desc">回答 3 个问题，得到针对性提示与下一步动作（规则演示版，依据「三对口」「六年一户」「随迁子女」等公开规则整理；不构成入学承诺，最终以区教委当年度政策为准）。</p>
+    <div class="zy-tools">
+      <select id="qz-qu" aria-label="孩子户籍或居住区">
+        <option value="">孩子户籍 / 居住区</option>
+        <option>渝中区</option><option>江北区</option><option>沙坪坝区</option><option>渝北区</option>
+        <option>九龙坡区</option><option>南岸区</option><option>北碚区</option><option>巴南区</option>
+        <option>两江新区</option><option>其他区县</option>
+      </select>
+      <select id="qz-stage" aria-label="当前学段">
+        <option value="">当前学段</option>
+        <option>幼儿园</option><option>小学</option><option>初中</option><option>高中</option>
+      </select>
+      <select id="qz-house" aria-label="房产与户口情况">
+        <option value="">房产与户口情况</option>
+        <option>有房产且已落户</option><option>有房产未落户</option><option>租房居住</option><option>其他情形（隔代等）</option>
+      </select>
+      <button onclick="runQuiz()">查看自查结果</button>
+    </div>
+    <div id="qz-out" aria-live="polite"><div class="cmp-empty">回答 3 个问题后点击「查看自查结果」。输出：基本路径判断 + 关键缺口提醒 + 多元路径提示。</div></div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03 · 择校对比器</span><h2>把「听群里的」变成「摆在桌面上」</h2></div>
+    <p class="sec-desc">选 2–3 所学校横向对比。数据缺失时如实标注「暂缺」，不制造虚假确定性——这是产品红线之一。</p>
+    <div class="cmp-tools">
+      <select id="sel-a" aria-label="学校一">
+        <option value="">选择学校一</option>
+        <option>南开中学（沙坪坝）</option>
+        <option>重庆一中（渝北）</option>
+        <option>巴蜀中学（渝中）</option>
+      </select>
+      <select id="sel-b" aria-label="学校二">
+        <option value="">选择学校二</option>
+        <option>重庆一中（渝北）</option>
+        <option>南开中学（沙坪坝）</option>
+        <option>巴蜀中学（渝中）</option>
+      </select>
+      <select id="sel-c" aria-label="学校三（可选）">
+        <option value="">选择学校三（可选）</option>
+        <option>巴蜀中学（渝中）</option>
+        <option>南开中学（沙坪坝）</option>
+        <option>重庆一中（渝北）</option>
+      </select>
+      <button id="btn-cmp" onclick="runCompare()">生成对比</button>
+      <button id="btn-clear" onclick="clearCompare()" style="background:#fff;color:var(--navy)">清空</button>
+      <button id="btn-fav" onclick="favCompare()" style="background:#fff;color:var(--navy)">收藏本次对比</button>
+      <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
+    </div>
+    <div id="cmp-result" aria-live="polite">
+      <div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。对比维度：办学性质 / 招生范围 / 通勤参考 / 收费口径 / 指标到校名额 / 数据来源与核验日期。</div>
+    </div>
+  </div>
+</section>
+
+<section id="schools" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03.2 · 学校档案库</span><h2>官方数据 + 审核制评价</h2></div>
+    <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；争议评价走「证据 + 仲裁」流程；档案字段逐项标注来源与核验日期，缺失如实标「暂缺」。点击「查看档案」看完整字段与评价示例。</p>
+    <div class="school-grid" id="school-grid"></div>
+  </div>
+</section>
+
+<section id="zy">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">3.5 · 志愿与专业参考</span><h2>把「线差」算清楚，再谈选择</h2></div>
+    <p class="sec-desc">公开数据汇总 + 位次换算工具演示；不提供「录取概率」承诺，输出均标注数据口径与局限（企划书 §4.2.5）。高级工具挂会员档位。</p>
+    <div class="zy-tools">
+      <label>选科</label>
+      <select id="zy-subject" aria-label="选科">
+        <option value="ls">历史类</option>
+        <option value="wl">物理类</option>
+      </select>
+      <label>高考分数</label>
+      <input id="zy-score" type="number" min="200" max="750" placeholder="如 548" aria-label="高考分数" />
+      <button onclick="runZy()">换算参考位次</button>
+      <span class="cmp-note">基准：2026 年特招线 历史 510 / 物理 496（新华网重庆，已核验）</span>
+    </div>
+    <div id="zy-result" aria-live="polite"><div class="cmp-empty">输入分数后点击「换算参考位次」。输出为演示口径，正式版接入当年一分一段表并标注更新日期。</div></div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">升学不止一条路</h3>
+    <p class="sec-desc">「一半孩子上不了普高」是被放大的误读——全国约 65% 学生升入普高（求真台已核验）。从初中起，就值得把这几条路径都摆上桌看：</p>
+    <div class="pm-tabs">
+      <button class="ff on" data-p="普高统招（联招）" onclick="renderPath('普高统招（联招）')">普高统招</button>
+      <button class="ff" data-p="指标到校" onclick="renderPath('指标到校')">指标到校</button>
+      <button class="ff" data-p="民办高中" onclick="renderPath('民办高中')">民办高中</button>
+      <button class="ff" data-p="中职·职教高考" onclick="renderPath('中职·职教高考')">中职·职教高考</button>
+      <button class="ff" data-p="艺体特长" onclick="renderPath('艺体特长')">艺体特长</button>
+      <button class="ff" data-p="出国/国际班" onclick="renderPath('出国/国际班')">出国/国际班</button>
+    </div>
+    <div class="pm-panel" id="pm-panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="fact" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04 · 求真辟谣台</span><h2>群里说的，先来这里对一对</h2></div>
+    <p class="sec-desc">按「属实 / 不实 / 存疑 / 无法核实」分级发布；每条标注核验时间与出处；重大传言配合官方通报二次核验。以下为示例条目，每条附出处与核验日期。</p>
+    <div class="fact-filter">
+      <button class="ff on" data-f="all" onclick="filterFact('all')">全部（6）</button>
+      <button class="ff" data-f="false" onclick="filterFact('false')">不实</button>
+      <button class="ff" data-f="warn" onclick="filterFact('warn')">存疑 / 提醒</button>
+      <button class="ff" data-f="ok" onclick="filterFact('ok')">属实</button>
+    </div>
+    <div class="rq">
+      <div class="rq-card">
+        <span class="verdict false">不实</span>
+        <h4>「有内部渠道，花钱就能进重点」</h4>
+        <p>市教委明确：全市中小学招生不收取与入学资格挂钩的费用，不与任何机构或个人合作招生。凡承诺「名额」的信息，默认按骗局处理。</p>
+        <div class="src">核验 2026-09-15 · 出处：市教委声明；新京报 2024-11-29（[C4-S52]）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict warn">存疑 · 需本地口径</span>
+        <h4>「指标到校就是 70% 都能上重点」</h4>
+        <p>70% 是「分配到初中」的计划比例，不等于校内所有人都够线；各初中分得的实际名额与人数相关，需以当年区县细则为准。</p>
+        <div class="src">核验 2026-09-16 · 出处：渝教基函〔2025〕21号（已核验文号）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict false">不实</span>
+        <h4>「普职分流 5:5，一半孩子上不了普高」</h4>
+        <p>权威澄清：全国约 65% 学生升入普通高中，「一半上不了普高」是被放大的误读。</p>
+        <div class="src">核验 2026-09-15 · 出处：中国教育在线 2022-04-11（[C4-S12]）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict ok">属实（提醒）</span>
+        <h4>「学位房 ≠ 学区房，买房前要查占用」</h4>
+        <p>属实。学位存在占用与指标个数限制（小学六年一户、初中三年一户），不核查占用就购房存在无法入学的风险。平台提供核查步骤指引，不做法律判断。</p>
+        <div class="src">核验 2026-09-15 · 出处：行业内容交叉（[C4-S70/71]，置信度中，以区教委口径为准）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict warn">存疑 · 高风险</span>
+        <h4>「中招办发来短信，点链接填信息」</h4>
+        <p>高发钓鱼套路：假冒官方名义发送含链接的短信。官方通知<b>不会索要验证码、不会引导转账</b>；收到先核对域名与账号主体——「重庆中招」曾为非官方账号（上海某公司主体）。</p>
+        <div class="src">核验 2026-09-15 · 出处：市教委声明；重庆网络广播电视台（[C4-S51]）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict false">不实</span>
+        <h4>「课后延时服务是强制的，必须参加」</h4>
+        <p>课后服务坚持<b>自愿参加</b>原则；争议集中在服务质量而非强制性。学校不得变相强制，家长可向区教委反映。</p>
+        <div class="src">核验 2026-09-16 · 出处：新华社课后服务报道（[C4-S84]）；「双减」意见</div>
+      </div>
+      <div class="form-card">
+        <h4>提交待核验线索</h4>
+        <div class="hint">只给结论与依据，不复述未核实传言细节；每条标注核验时间与出处；无法核实的只留档、不发布。</div>
+        <div class="form-row">
+          <select id="clue-stage" aria-label="学段">
+            <option>幼升小</option><option>小升初</option><option>初升高</option><option>高考</option><option>其他</option>
+          </select>
+          <textarea id="clue-text" placeholder="例：群里说今年沙区某校要扩招两个班，求核验……（请写明信息来源，不少于 10 字）" aria-label="线索内容"></textarea>
+        </div>
+        <div class="err" id="clue-err">请写明线索内容（不少于 10 字），我们才能进入核验流程。</div>
+        <div class="ok-box" id="clue-ok"><b>已进入核验队列（演示）。</b><span id="clue-id"></span> 核验三步：线索收集 → 官方比对 → 分级发布；结论将推送回本条留言所留渠道。</div>
+        <div style="margin-top:12px"><button onclick="submitClue()">提交核验</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04.5 · 家长社区</span><h2>同区、同学段的家长，在这里相遇</h2></div>
+    <p class="sec-desc">按「区 × 学段」组织社群，值班小编 + 家长志愿者固定时段答疑；问答档案化，精华自动归档为可检索知识库；实名核验 + 禁广告 + 反诈公告。精华问答自动归档成可检索的知识库，随时回查。</p>
+    <div class="hot-strip">
+      <span class="hot-label">本周热议</span>
+      <a href="#fact">指标到校「校内排队」怎么排 · 57 回复</a>
+      <a href="#fact">「内部渠道」骗局识别 · 43 回复</a>
+      <a href="#life">陪读房换租谈判实录 · 35 回复</a>
+    </div>
+    <p class="sec-desc">以下为示例帖。</p>
+    <div>
+      <div class="thread"><span class="badge">精华 · 已核</span><div><h4>三对口材料到底要备几份？附清单</h4><p>渝北区 · 一年级 · 值班小编核验后归档</p></div><span class="n">32 回复</span></div>
+      <div class="thread"><span class="badge q">讨论中</span><div><h4>指标到校的「校内排队」到底怎么排？</h4><p>沙坪坝区 · 初三 · 区细则原文已挂，等 2027 版</p></div><span class="n">57 回复</span></div>
+      <div class="thread"><span class="badge">实操</span><div><h4>陪读房换租被涨 15%，最后这样谈下来的</h4><p>南岸区 · 高二 · 家长投稿，含沟通时间线</p></div><span class="n">21 回复</span></div>
+      <div class="thread"><span class="badge">归档</span><div><h4>「长幼随学」申请通道实测：3 个工作日受理</h4><p>江北区 · 二年级 · 与政策库条目互链</p></div><span class="n">14 回复</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="life">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">05 · 生活服务</span><h2>上学之外，每天发生的事</h2></div>
+    <p class="sec-desc">按「租房→通勤→餐桌→心理→资金」逐季开放（第 10 章路线图）。房源业务为信息服务平台：只做信息核验与对接撮合，不参与居间、不代收租金；对接服务包 299/499 元（见下方行情样本），未成交不收费。</p>
+    <div class="life">
+      <div class="life-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.8"><path d="M3 11l9-8 9 8v9a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9z"/></svg></div>
+        <h4>陪读租房</h4>
+        <p>重点校周边行情样本（挂牌≠成交）、步行可达筛选、信息服务包 299/499。</p>
+        <span class="soon">M1–M3 上线</span>
+      </div>
+      <div class="life-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.8"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M7 17h6l3-8h3"/></svg></div>
+        <h4>通勤接送</h4>
+        <p>各校缓行时刻表聚合、护学岗点位（全市 6,993 个）、接送互助信息板。</p>
+        <span class="soon">M2 上线</span>
+      </div>
+      <div class="life-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.8"><path d="M4 12h16M4 12a8 8 0 1116 0M9 20h6"/></svg></div>
+        <h4>课后与餐桌</h4>
+        <p>后厨直播入口聚合、陪餐报名、食谱公示导航；合规托管机构信息（标注资质审核）。</p>
+        <span class="soon">M2 上线</span>
+      </div>
+      <div class="life-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.8"><path d="M12 21C7 17 4 13.5 4 10a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 3.5-3 7-8 11z"/></svg></div>
+        <h4>心理健康角</h4>
+        <p>家长焦虑自助测评、门诊预约攻略、家长沙龙（每两周一场）；不诊断、不替代医疗。</p>
+        <span class="soon">M3 上线</span>
+      </div>
+      <div class="life-card">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0E7C66" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M7 15h4"/></svg></div>
+        <h4>教育资金规划</h4>
+        <p>分学段支出模板（参照 CIEFR 调查）、年度预算复盘表；中立科普，不推荐产品。</p>
+        <span class="soon">M3 上线</span>
+      </div>
+    </div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读租房 · 行情样本（演示）</h3>
+    <p class="sec-desc">口径：挂牌价 ≠ 成交价；样本为论坛与中介公开信息交叉，季度重抽。对接服务包 299/499 元（信息核验 + 三方建群 + D3/D14 回访），未成交不收费。</p>
+    <div id="rent-wrap"><table class="rent-table">
+      <tr><th>学校周边</th><th>两室挂牌区间</th><th>成交参考</th><th>样本量</th><th>核验</th></tr>
+      <tr><td>南开中学（沙坪坝）</td><td>2,800–4,200 元/月</td><td>挂牌 92–95 折</td><td>N=18</td><td>2026-09</td></tr>
+      <tr><td>重庆一中（渝北）</td><td>2,500–3,800 元/月</td><td>挂牌 93–96 折</td><td>N=14</td><td>2026-09</td></tr>
+      <tr><td>巴蜀中学（渝中）</td><td>3,000–4,500 元/月</td><td>挂牌 94–97 折</td><td>N=10</td><td>2026-09</td></tr>
+    </table></div>
+    <p class="cmp-note" style="margin-top:10px">历史样本参照：重庆购物狂陪读房帖 2021/2022 连续出现，佐证需求长期存在；平台不参与居间、不代收租金，费与成交脱钩。</p>
+  </div>
+</section>
+
+<section id="beans">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">05.5 · 升学豆中心</span><h2>不充钱也能玩得转的活跃激励</h2></div>
+    <p class="sec-desc">升学豆是站内权益凭证（1 元 = 10 豆），不生息、不可提现、不可转让、不兑法币；签到与内容贡献即可获得。充值档位正式版开放。</p>
+    <div class="beans-box">
+      <div>
+        <div class="beans-num"><span id="beans-val">120</span> <small>豆</small></div>
+        <div style="font-size:12.5px;color:var(--muted);margin-top:4px">演示账户 · 余额仅保存在本页</div>
+      </div>
+      <div>
+        <button class="btn" id="btn-checkin" onclick="checkin()">今日签到 +5 豆</button>
+        <div class="done" id="beans-done" style="display:none">今日已签到，明天再来～</div>
+        <div style="font-size:12.5px;color:var(--ink2);margin-top:10px">可兑换：资料包 · 咨询抵扣 · 打赏作者 · 活动席位</div>
+      </div>
+      <div class="beans-rules">发放四道闸门（防通胀）：签到/任务设每日上限 · 邀请注册设总量 · 内容采纳由人工复核 · 活动席位兑换限量。合规参照《单用途商业预付卡管理办法（试行）》框架评估，用户协议明示「不可提现、不可转让、充值即消费」。</div>
+    </div>
+  </div>
+</section>
+
+<section id="fund" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">05.6 · 教育资金规划</span><h2>「该花多少」，先给一个参照系</h2></div>
+    <p class="sec-desc">中立科普：不推荐任何金融产品，强制风险提示。数据锚点：全国家庭教育支出年均 15,828 元、占家庭总消费 17.2%（北大 CIEFR《中国教育财政家庭调查报告（2023）》，2022–2023 学年，全国口径，重庆需本地校验）。</p>
+    <div class="zy-tools">
+      <label>当前学段</label>
+      <select id="fund-stage" aria-label="学段" onchange="fundCalc()">
+        <option value="">请选择</option>
+        <option>幼儿园</option><option>小学</option><option>初中</option><option>高中</option>
+      </select>
+      <label>年度教育预算</label>
+      <input id="fund-budget" type="number" min="0" step="500" placeholder="如 20000" aria-label="年度教育预算" oninput="fundCalc()" style="font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px" />
+      <span class="cmp-note">演示：仅做参照对比，不构成理财建议</span>
+      <span class="cmp-note">口径：全国调查（CIEFR 2023）——重庆本地差异待运营期实测回填</span>
+    </div>
+    <div id="fund-result" aria-live="polite"><div class="cmp-empty">选择学段并输入年预算，查看参照区间与复盘建议。</div></div>
+  </div>
+</section>
+
+<section id="me" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">05.7 · 我的</span><h2>孩子档案 · 提醒 · 收藏</h2></div>
+    <p class="sec-desc">演示数据仅保存在本机浏览器；正式版随账号跨设备同步（注册→档案完善 ≤24h、7 日未完善提醒一次，对应 §7.5 经营流程）。</p>
+    <div class="me-grid">
+      <div class="me-card">
+        <h4>孩子档案</h4>
+        <div class="form-row2">
+          <select id="me-stage" aria-label="学段"><option value="">学段</option><option>幼儿园</option><option>小学</option><option>初中</option><option>高中</option></select>
+          <select id="me-qu" aria-label="区县"><option value="">区县</option><option>渝中区</option><option>江北区</option><option>沙坪坝区</option><option>渝北区</option><option>九龙坡区</option><option>南岸区</option><option>北碚区</option><option>巴南区</option><option>两江新区</option><option>其他</option></select>
+          <button class="btn-main" onclick="saveProfile()">保存</button>
+        </div>
+        <div id="me-profile-out" class="me-out">尚未保存档案——保存后，升学日历与政策提示将按「学段 × 区县」过滤（演示）。</div>
+      </div>
+      <div class="me-card">
+        <h4>我的提醒 <span class="me-count" id="me-alert-count"></span></h4>
+        <div id="me-alerts"></div>
+      </div>
+      <div class="me-card">
+        <h4>对比收藏</h4>
+        <div id="me-fav"></div>
+      </div>
+      <div class="me-card">
+        <h4>升学豆</h4>
+        <div class="me-out">当前余额：<b><span id="me-beans">120</span> 豆</b>（到「升学豆中心」签到 +5；正式版充值档位与兑换目录同步开放）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="plans" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">06 · 会员体系</span><h2>免费够用，付费解决「关键时刻」</h2></div>
+    <p class="sec-desc">信息基础永远免费（政策、求真、监督入口）；工具与提醒付费；服务按权益分配。信息基础永远免费，工具与提醒付费——多数家庭停在免费层，也完全够用；需要「关键时刻工具」的家庭再考虑付费档位。</p>
+    <div class="plans">
+      <div class="plan">
+        <h4>免费版</h4>
+        <div class="price">¥0<small>/年</small></div>
+        <ul>
+          <li>政策库基础版（列表与详情）</li>
+          <li>升学日历基础节点</li>
+          <li>求真台全部结论</li>
+          <li>学校档案基础信息</li>
+          <li>家长社区（分学段×分区）</li>
+        </ul>
+        <a class="btn" href="#plans" onclick="openOrder('免费版',0,0);return false;">注册即用</a>
+      </div>
+      <div class="plan">
+        <h4>轻享版</h4>
+        <div class="price">¥99<small>/年</small></div>
+        <ul>
+          <li>含免费版全部</li>
+          <li>个性化升学日历提醒（多节点）</li>
+          <li>《入学自查清单》完整版</li>
+          <li>月度政策解读直播回放</li>
+          <li class="off">择校对比器高级维度</li>
+        </ul>
+        <a class="btn" href="#plans" onclick="openOrder('轻享版',99,100);return false;">选择轻享</a>
+      </div>
+      <div class="plan hl">
+        <span class="flag">主力档 · 建议多数家庭</span>
+        <h4>标准版</h4>
+        <div class="price">¥299<small>/年</small></div>
+        <ul>
+          <li>含轻享版全部</li>
+          <li>政策全量与版本追踪</li>
+          <li>完整学校档案 + 择校对比器</li>
+          <li>陪读房信息服务优先对接</li>
+          <li>高级志愿参考工具（挂尊享除外）</li>
+        </ul>
+        <a class="btn" href="#plans" onclick="openOrder('标准版',299,300);return false;">选择标准</a>
+      </div>
+      <div class="plan">
+        <h4>尊享版 <small style="font-size:11px;color:var(--muted)">限量</small></h4>
+        <div class="price">¥899<small>/年</small></div>
+        <ul>
+          <li>含标准版全部</li>
+          <li>尊享 1v1 升学咨询（限量）</li>
+          <li>探校活动优先席位</li>
+          <li>高级志愿工具</li>
+          <li>录取结果以官方公示为准（全平台合规承诺）</li>
+        </ul>
+        <a class="btn" href="#plans" onclick="openOrder('尊享版',899,999);return false;">加入候补</a>
+      </div>
+    </div>
+    <p class="plan-note">合规提示：会员协议将明示退款规则（按未使用天数比例退）；升学豆不可提现、不可转让、不兑法币；所有服务不含学科培训。定价参照本地家长可承受的教育类工具年费区间制定；所有档位不含学科培训，权益与退款规则以《会员服务协议》为准。</p>
+  </div>
+</section>
+
+<section id="biz">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">05.8 · B 端合作</span><h2>机构入驻 · 活动联办 · 品牌内容</h2></div>
+    <p class="sec-desc">资质审核白名单（营业执照 / 行业资质 / 年检 / 无重大投诉），平台统一标注「已通过资质审核，平台不为其服务背书」；不承接学科培训导流、不使用结果承诺类话术、商业内容标注「广告/合作」。定价：入驻年费 0.5–2 万元（起盘期可资源置换）。</p>
+    <div class="biz-grid">
+      <div class="biz-card"><h4>机构入驻展示</h4><p>非学科、资质合规机构；页面标注资质审核状态与复核日期。</p></div>
+      <div class="biz-card"><h4>活动联办</h4><p>探校团、公益讲座、校园开放日信息联合发布；0.3–1 万元/场。</p></div>
+      <div class="biz-card"><h4>品牌内容合作</h4><p>按篇报价；所有商业内容标注「广告/合作」标识并过合规三审。</p></div>
+    </div>
+    <div class="form-card light">
+      <h4>合作意向登记（演示）</h4>
+      <div class="hint">提交后走「资质预审 → 白名单审批 → 商务对接」，5 个工作日内回复（对应 SOP）。</div>
+      <div class="form-row">
+        <input id="bz-name" placeholder="机构名称（≥2 字）" aria-label="机构名称" />
+        <select id="bz-type" aria-label="合作类型"><option>机构入驻</option><option>活动联办</option><option>品牌内容</option></select>
+      </div>
+      <textarea id="bz-intro" placeholder="业务简介与资质情况（≥10 字）" aria-label="业务简介"></textarea>
+      <div class="err" id="bz-err">请填写机构名称（≥2 字）与简介（≥10 字）。</div>
+      <div class="ok-box" id="bz-ok" style="display:none"><b>意向已登记（演示）：</b><span id="bz-id"></span> · 将进入资质预审流程。</div>
+      <div style="margin-top:12px"><button onclick="submitBiz()">提交意向</button></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="data-sources" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">06.5 · 数据来源与核验</span><h2>站上每个数字，都有出处</h2></div>
+    <p class="sec-desc">「可核验」是本平台的第一承诺：每个关键数据标注来源、统计口径与截至日期；来源变更时全站红点提示并更新版本号。下表由数据层自动生成（与页面数字一一对应）。</p>
+    <div id="ds-table"></div>
+    <p class="cmp-note" style="margin-top:10px">「已核验」= 编制方按来源四要素（机构+标题+日期+链接）人工复核；全国口径数据外推至重庆需本地校验。数据接入与更新 SOP 见《经营流程 SOP 执行包》。</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">07 · 我们的服务承诺</span><h2>对家长的三个承诺，每一条有时限</h2></div>
+    <p class="sec-desc">完整经营流程（六环节）见企划书；这里是家长能直接感知的部分——也是我们愿意被检验的部分。</p>
+    <div class="flow" style="grid-template-columns:repeat(3,1fr)">
+      <div class="fstep"><h5>响应承诺</h5><p>私信与评论当日回复；投诉 24 小时内响应、72 小时内给出方案。</p><span class="sla">首响 ≤ 当日 · 投诉 24h</span></div>
+      <div class="fstep"><h5>开通承诺</h5><p>支付成功后权益自动开通，交付凭证系统回写；未交付不确认收入。</p><span class="sla">开通 ≤ 2h</span></div>
+      <div class="fstep"><h5>核验承诺</h5><p>求真结论双人复核后发布；内容审核当日完成，红线词库每周巡检。</p><span class="sla">审核 ≤ 12h</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h5>鸡父母 · 重庆</h5>
+        <p>面向小升初、初升高、高考全链路的家长信息服务与生活服务平台。本站为 MVP 演示版，数据为演示口径；正式版数据按官方公示逐年更新并标注核验日期。</p>
+        <p style="margin-top:10px">关联文档：《重庆鸡父母平台企划书》V2.0（208 页）· 经营流程 SOP 执行包</p>
+      </div>
+      <div>
+        <h5>内容入口</h5>
+        <ul>
+          <li><a href="#calendar">升学日历</a></li>
+          <li><a href="#policy">政策库</a></li>
+          <li><a href="#fact">求真辟谣台</a></li>
+          <li><a href="#life">生活服务</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>边界与承诺</h5>
+        <ul>
+          <li>不承诺升学结果</li>
+          <li>不做学科培训、不导流</li>
+          <li>房源：信息服务平台，不参与居间</li>
+          <li>机构合作：资质审核 + 平台不背书</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.6（2026-09-17）：v0.3 全站搜索/学校档案/我的/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- 数据层 v0.7：数据版本化 + 来源注册表 ----------
+   真实数据以「数据包」形式注入：每个字段带 version/asOf/source。
+   DATA_SOURCES 是唯一事实源：页面数字与来源一一对应，核验口径见企划书附录。 */
+var DATA_VERSION = { id: "real-2026-09", label: "真实数据包 · 2026-09 版", asOf: "2026-09-16" };
+var DATA_SOURCES = {
+  k12:   { label: "重庆 K12 在校生约 376.3 万人", source: "《2024年重庆市国民经济和社会发展统计公报》", asOf: "2025-03-26", verified: true },
+  lianzhao: { label: "2026 年联招学校约 113 所（第一批次市级重点约 94 所）", source: "重庆市政府网转载重庆日报 2026-04-22；志愿填报阶段更新 113 所", asOf: "2026-06", verified: true },
+  zhibiao: { label: "市级重点高中招生计划 70% 指标到校", source: "渝教基函〔2025〕21号（现行有效，已核验文号）", asOf: "2025", verified: true },
+  tezhao: { label: "2026 特招线：历史类 510 / 物理类 496", source: "新华网重庆 2026-06-25（已核验）", asOf: "2026-06-25", verified: true },
+  junjian: { label: "军检线：历史类男 517/女 631、物理类男 533/女 573", source: "阳光高考平台 2026-07-02（已核验）", asOf: "2026-07-02", verified: true },
+  jiafen: { label: "高考加分：烈士子女 +20、少数民族聚居地 +10", source: "重庆市 2025 年招生工作实施办法", asOf: "2025-05", verified: true },
+  huxuegang: { label: "全市 6,993 个护学岗", source: "重庆市政府网 2026-09-02", asOf: "2026-09-02", verified: true },
+  cifr: { label: "家庭教育支出年均 15,828 元 / 占总消费 17.2%", source: "北大 CIEFR《中国教育财政家庭调查报告（2023）》，2022–2023 学年，全国口径", asOf: "2025-11", verified: true },
+  aimei: { label: "志愿填报市场 2025 年约 10.9 亿元 / 2026 年预计 11.6 亿元", source: "艾媒咨询年度报告", asOf: "2026", verified: true }
+};
+function dataBadge(key){
+  var d = DATA_SOURCES[key];
+  if(!d) return '';
+  return '<span class="data-badge">' + (d.verified ? '✓ 已核验 · ' : '○ 待核验 · ') + d.source + '（截至 ' + d.asOf + '）</span>';
+}
+/* ---------- 演示数据（正式版来自后台数据库并标注核验日期） ---------- */
+var SCHOOL_DB = {
+  "南开中学（沙坪坝）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "沙坪坝区",
+    "招生范围": "指标到校 + 联招（全区）",
+    "通勤参考": "轨道 1 号线沿线；沙坪坝商圈步行可达",
+    "住宿": "提供寄宿（限额）",
+    "收费口径": "公办收费标准；寄宿另计（以公示为准）",
+    "指标到校": "有（70% 计划分配到辖区初中，名额按年公布）",
+    "简介": "老牌公办重点，校友资源强；周边陪读租房需求旺盛，两室挂牌约 2,800–4,200 元/月（2026-09 样本）。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（官方禁排名炒作，正式版以位次参考替代）",
+    "评价": [
+      {"badge": "已审核", "text": "作业量反馈适中，晚自习安排规律（2026-08 家长投稿，经双人审核）"},
+      {"badge": "争议仲裁", "text": "食堂口味评价两极，已附后厨直播入口供家长自查（争议评价走证据仲裁流程）"}
+    ]
+  },
+  "重庆一中（渝北）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "渝北区",
+    "招生范围": "指标到校 + 联招（全市）",
+    "通勤参考": "轨道 3/10 号线；距江北机场约 30 分钟",
+    "住宿": "提供寄宿",
+    "收费口径": "公办收费标准；寄宿另计（以公示为准）",
+    "指标到校": "有（同上口径）",
+    "简介": "两江新区方向家庭常选；通勤便利，寄宿名额相对充足。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（同上）",
+    "评价": [
+      {"badge": "已审核", "text": "社团活动丰富，家长开放日流程清晰（2026-07 家长投稿，经双人审核）"}
+    ]
+  },
+  "巴蜀中学（渝中）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "渝中区",
+    "招生范围": "指标到校 + 联招（全市）",
+    "通勤参考": "轨道 2 号线；黄花园大桥侧",
+    "住宿": "寄宿限额",
+    "收费口径": "公办收费标准（以公示为准）",
+    "指标到校": "有（同上口径）",
+    "简介": "核心城区老牌名校；周边房源紧张，换租季需提前 1–2 个月准备（陪读房行情见表）。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（同上）",
+    "评价": [
+      {"badge": "已审核", "text": "信息发布渠道规范，通知及时（2026-08 家长投稿，经双人审核）"}
+    ]
+  },
+  "重庆八中（渝北）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "渝北区",
+    "招生范围": "指标到校 + 联招（全市）",
+    "通勤参考": "轨道 3 号线沿线；距中央公园片区约 15 分钟",
+    "住宿": "提供寄宿",
+    "收费口径": "公办收费标准；寄宿另计（以公示为准）",
+    "指标到校": "有（同上口径）",
+    "简介": "近年口碑上升明显；渝北片区陪读房供给相对充足。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（同上）",
+    "评价": [
+      {"badge": "已审核", "text": "入学材料审核流程透明，公众号更新稳定（2026-08 家长投稿，经双人审核）"}
+    ]
+  },
+  "育才中学（九龙坡）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "九龙坡区",
+    "招生范围": "指标到校 + 联招（全区）",
+    "通勤参考": "轨道 2 号线大坪方向；谢家湾片区",
+    "住宿": "部分寄宿",
+    "收费口径": "公办收费标准（以公示为准）",
+    "指标到校": "有（同上口径）",
+    "简介": "九龙坡方向家庭关注度高；周边生活配套成熟，租房性价比相对较高。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（同上）",
+    "评价": [
+      {"badge": "已审核", "text": "寄宿管理制度清晰，家长探访安排人性化（2026-07 家长投稿，经双人审核）"}
+    ]
+  },
+  "西大附中（北碚）": {
+    "办学性质": "公办（市级重点）",
+    "所在区": "北碚区",
+    "招生范围": "指标到校 + 联招（全市）",
+    "通勤参考": "轨道 6 号线；北碚城区",
+    "住宿": "提供寄宿",
+    "收费口径": "公办收费标准；寄宿另计（以公示为准）",
+    "指标到校": "有（同上口径）",
+    "简介": "大学城方向常选；校园环境评价高，寄宿比例大。",
+    "数据来源": "校方公示 + 区教委公开信息 · 核验 2026-09-15",
+    "暂缺字段": "近三年录取线（同上）",
+    "评价": [
+      {"badge": "已审核", "text": "社团与研学活动组织有序（2026-08 家长投稿，经双人审核）"}
+    ]
+  }
+};
+var ROWS = ["办学性质","所在区","招生范围","通勤参考","住宿","收费口径","指标到校","数据来源","暂缺字段"];
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+var _toastTimer = null;
+function toast(msg){
+  var t = document.getElementById('toast');
+  if(!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  if(_toastTimer) clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+}
+
+function runCompare(){
+  var a=document.getElementById("sel-a").value,
+      b=document.getElementById("sel-b").value,
+      c=document.getElementById("sel-c").value;
+  var picks=[a,b,c].filter(function(x){return x;});
+  var uniq=picks.filter(function(x,i){return picks.indexOf(x)===i;});
+  var box=document.getElementById("cmp-result");
+  if(uniq.length<2){
+    box.innerHTML='<div class="cmp-empty">请至少选择 2 所不同的学校（重复选择已自动去重）。</div>';
+    return;
+  }
+  var html='<table class="cmp-table"><tr><th>对比维度</th>';
+  uniq.forEach(function(name){ html+='<th>'+esc(name)+'</th>'; });
+  html+='</tr>';
+  ROWS.forEach(function(row){
+    html+='<tr><td>'+esc(row)+'</td>';
+    uniq.forEach(function(name){
+      var v=(SCHOOL_DB[name]&&SCHOOL_DB[name][row])||"暂缺";
+      html+='<td>'+esc(v)+'</td>';
+    });
+    html+='</tr>';
+  });
+  html+='</table>';
+  html+='<p class="cmp-note" style="margin-top:12px">口径说明：「录取线/排名」类字段按合规红线不提供（教育部门明令禁止排名炒作）；数据缺失如实标注。正式版每字段附核验日期与来源链接，可一键生成对比图分享到家庭群。</p>';
+  box.innerHTML=html;
+}
+/* ---------- v0.3：全站搜索 ---------- */
+var SEARCH_DB = [
+ {t:'政策',s:'2026 年中考政策：联招学校约 113 所',a:'#policy'},
+ {t:'政策',s:'优质高中指标到校招生工作通知（渝教基函〔2025〕21号）',a:'#policy'},
+ {t:'术语',s:'三对口 / 六年一户 / 指标到校 / 联招 / 长幼随学',a:'#policy'},
+ {t:'日历',s:'转学与户籍材料核对（2026-09）',a:'#calendar'},
+ {t:'日历',s:'指标到校资格摸底（2026-10）',a:'#calendar'},
+ {t:'日历',s:'中考报名与联招志愿准备（2027-04）',a:'#calendar'},
+ {t:'日历',s:'高考特招线公布后行动清单（2027-06）',a:'#calendar'},
+ {t:'求真',s:'「有内部渠道，花钱就能进重点」——不实',a:'#fact'},
+ {t:'求真',s:'「指标到校 70% 都能上重点」——存疑',a:'#fact'},
+ {t:'求真',s:'「普职分流 5:5」——不实（约 65% 升普高）',a:'#fact'},
+ {t:'求真',s:'「学位房 ≠ 学区房」——属实提醒',a:'#fact'},
+ {t:'志愿',s:'位次换算工具（线差法演示）',a:'#zy'},
+ {t:'生活',s:'陪读租房行情样本 / 护学岗 6,993 个',a:'#life'},
+ {t:'资金',s:'教育资金规划参照（CIEFR 15,828 元）',a:'#fund'},
+ {t:'会员',s:'四档会员（99/299/899）与升学豆',a:'#plans'},
+ {t:'工具',s:'入学自查：我家能不能报（3 问）',a:'#quiz'},
+ {t:'路径',s:'升学路径地图：6 条路径 × 学段时间轴（普高/指标到校/民办/中职/艺体/出国）',a:'#zy'},
+ {t:'术语',s:'多校划片 / 摇号 / 特招线 / 一分一段 / 对口直升',a:'#policy'},
+ {t:'社区',s:'本周热议：指标到校校内排队',a:'#community'}
+];
+function runSearch(){
+  var q = document.getElementById('global-search').value.trim().toLowerCase();
+  var panel = document.getElementById('search-panel');
+  if(!q){ panel.hidden = true; return; }
+  var hits = SEARCH_DB.filter(function(x){ return (x.s + ' ' + x.t).toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
+  if(!hits.length){
+    panel.innerHTML = '<div class="s-item s-empty">未找到相关内容，换个关键词试试（如「指标」「陪读」「军检」）。</div>';
+    panel.hidden = false; return;
+  }
+  panel.innerHTML = hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  panel.hidden = false;
+}
+function goSearch(anchor){
+  document.getElementById('search-panel').hidden = true;
+  var el = document.querySelector(anchor);
+  if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('flash'); setTimeout(function(){ el.classList.remove('flash'); }, 1400); }
+}
+/* ---------- v0.3：学校档案 ---------- */
+var currentOpenSchool = '';
+function renderSchools(){
+  var g = document.getElementById('school-grid'); if(!g) return;
+  g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
+    var d = SCHOOL_DB[k], key = encodeURIComponent(k);
+    return '<div class="school-card"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span></div>'
+      + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
+      + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
+      + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
+  }).join('');
+}
+function openSchool(name){
+  var d = SCHOOL_DB[name]; if(!d) return;
+  currentOpenSchool = name;
+  document.getElementById('sm-name').textContent = name;
+  var kv = document.getElementById('sm-kv');
+  var rows = ['办学性质','所在区','招生范围','通勤参考','住宿','收费口径','指标到校','数据来源','暂缺字段'];
+  kv.innerHTML = rows.map(function(r){
+    var v = d[r] || '暂缺';
+    if(r === '暂缺字段'){
+      v = '录取线类数据按合规不提供；可到 <a href="#zy" onclick="document.getElementById(\'school-modal\').close();setTimeout(function(){document.getElementById(\'zy\').scrollIntoView({behavior:\'smooth\'})},80)" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(v) + '）';
+    }
+    return '<dt>' + r + '</dt><dd>' + v + '</dd>';
+  }).join('');
+  var ev = document.getElementById('sm-evals');
+  ev.innerHTML = (d['评价'] || []).map(function(e){ return '<div class="dlg-ev"><span class="sc-badge" style="margin-right:6px">' + esc(e.badge) + '</span>' + esc(e.text) + '</div>'; }).join('') || '<div class="dlg-ev">暂无评价（评价须经审核后展示）</div>';
+  document.getElementById('sm-note').textContent = '';
+  document.getElementById('school-modal').showModal();
+}
+function addToCompareCurrent(){ addToCompareName(currentOpenSchool); }
+function addToCompareName(name){
+  var sels = ['sel-a','sel-b','sel-c'];
+  for(var i=0;i<sels.length;i++){
+    var sel = document.getElementById(sels[i]);
+    if(sel && !sel.value){
+      sel.value = name;
+      toast('已加入对比位 ' + (i+1) + '：' + name);
+      var note = document.getElementById('sm-note'); if(note) note.textContent = '已加入对比位 ' + (i+1) + '，可到「择校对比」生成。';
+      return;
+    }
+  }
+  toast('对比位已满（最多 3 所），请先清空后再加入');
+}
+/* ---------- v0.3：我的（提醒/档案/收藏） ---------- */
+function getAlerts(){ try{ return JSON.parse(localStorage.getItem('jfm_alerts') || '[]'); }catch(e){ return []; } }
+function setAlerts(a){ localStorage.setItem('jfm_alerts', JSON.stringify(a)); }
+function toggleAlert(btn){
+  var t = btn.dataset.title, a = getAlerts(), i = a.indexOf(t);
+  if(i >= 0){ a.splice(i,1); setAlerts(a); btn.classList.remove('on'); btn.textContent = '设提醒'; toast('已取消提醒：' + t); }
+  else { a.push(t); setAlerts(a); btn.classList.add('on'); btn.textContent = '已设提醒'; toast('已设提醒：' + t + '（演示：正式版推送微信服务通知）'); }
+  renderAlerts();
+}
+function restoreAlerts(){
+  document.querySelectorAll('.alert-btn').forEach(function(b){
+    if(getAlerts().indexOf(b.dataset.title) >= 0){ b.classList.add('on'); b.textContent = '已设提醒'; }
+  });
+  renderAlerts();
+}
+function renderAlerts(){
+  var box = document.getElementById('me-alerts'); if(!box) return;
+  var a = getAlerts();
+  var cnt = document.getElementById('me-alert-count'); if(cnt) cnt.textContent = a.length ? '（' + a.length + '）' : '';
+  if(!a.length){ box.innerHTML = '<div class="empty-mini">还没有提醒。到「升学日历」给节点点「设提醒」，就会出现在这里。</div>'; return; }
+  box.innerHTML = a.map(function(t){
+    return '<div class="me-item"><span>' + esc(t) + '</span><button class="mini-btn danger" data-t="' + esc(t) + '" onclick="removeAlert(this)">删除</button></div>';
+  }).join('');
+}
+function removeAlert(btn){
+  var t = btn.dataset.t, a = getAlerts(), i = a.indexOf(t);
+  if(i >= 0){ a.splice(i,1); setAlerts(a); }
+  document.querySelectorAll('.alert-btn').forEach(function(b){ if(b.dataset.title === t){ b.classList.remove('on'); b.textContent = '设提醒'; } });
+  renderAlerts(); toast('已删除提醒');
+}
+function saveProfile(){
+  var st = document.getElementById('me-stage').value, qu = document.getElementById('me-qu').value;
+  var box = document.getElementById('me-profile-out');
+  if(!st || !qu){ box.innerHTML = '<span class="err-inline">请选择学段与区县。</span>'; return; }
+  localStorage.setItem('jfm_profile', JSON.stringify({stage: st, qu: qu}));
+  box.innerHTML = '<b>已保存：</b>' + esc(st) + ' · ' + esc(qu) + ' —— 升学日历已按学段过滤（演示：正式版跨设备同步）。';
+  var calMap = { '幼儿园':'幼升小','小学':'小升初','初中':'初升高','高中':'高考' };
+  if(calMap[st]) filterCal(calMap[st]);
+  toast('孩子档案已保存，日历已按 ' + calMap[st] + ' 过滤');
+}
+function loadProfile(){
+  try{
+    var prof = JSON.parse(localStorage.getItem('jfm_profile') || 'null');
+    if(prof){
+      document.getElementById('me-stage').value = prof.stage;
+      document.getElementById('me-qu').value = prof.qu;
+      document.getElementById('me-profile-out').innerHTML = '<b>已保存：</b>' + esc(prof.stage) + ' · ' + esc(prof.qu) + ' —— 升学日历与政策提示将按此过滤（演示）。';
+    }
+  }catch(e){}
+}
+function favCompare(){
+  var u = ['sel-a','sel-b','sel-c'].map(function(id){ return document.getElementById(id).value; }).filter(Boolean)
+            .filter(function(x,i,arr){ return arr.indexOf(x) === i; });
+  if(!u.length){ toast('先选择学校再收藏'); return; }
+  localStorage.setItem('jfm_cmp_fav', JSON.stringify(u));
+  renderMeFav(); toast('已收藏本次对比（' + u.length + ' 所）');
+}
+function renderMeFav(){
+  var box = document.getElementById('me-fav'); if(!box) return;
+  var u = []; try{ u = JSON.parse(localStorage.getItem('jfm_cmp_fav') || '[]'); }catch(e){}
+  if(!u.length){ box.innerHTML = '<div class="empty-mini">还没有收藏对比。到「择校对比」选好学校后点「收藏本次对比」。</div>'; return; }
+  box.innerHTML = '<div class="me-item"><span>' + esc(u.join(' · ')) + '</span><button class="mini-btn" onclick="restoreFav()">恢复到对比器</button></div>';
+}
+function restoreFav(){
+  var u = []; try{ u = JSON.parse(localStorage.getItem('jfm_cmp_fav') || '[]'); }catch(e){}
+  ['sel-a','sel-b','sel-c'].forEach(function(id, i){ document.getElementById(id).value = u[i] || ''; });
+  runCompare();
+  document.getElementById('compare').scrollIntoView({behavior:'smooth'});
+  toast('已恢复对比并生成');
+}
+/* ---------- v0.3：会员开通演示 ---------- */
+var ORDER_N = 0;
+function openOrder(name, price, beans){
+  document.getElementById('om-title').textContent = '开通演示 · ' + name + (price ? '（¥' + price + '/年）' : '（免费）');
+  document.getElementById('om-form').hidden = false;
+  document.getElementById('om-done').hidden = true;
+  document.getElementById('om-agree').checked = false;
+  document.getElementById('om-auto').checked = false;
+  document.getElementById('om-err').style.display = 'none';
+  window._omBeans = beans || 0; window._omName = name;
+  document.getElementById('order-modal').showModal();
+}
+function submitOrder(){
+  if(!document.getElementById('om-agree').checked){
+    document.getElementById('om-err').style.display = 'block'; return;
+  }
+  ORDER_N++;
+  var id = 'DD-20260916-' + String(100 + ORDER_N);
+  document.getElementById('om-form').hidden = true;
+  var ok = document.getElementById('om-done'); ok.hidden = false;
+  ok.innerHTML = '<b>演示订单已创建：</b>' + id + '<br/>权益开通 SLA ≤2h（演示：已即时开通）→ 状态：<b>已交付</b>'
+    + (window._omBeans ? '；赠送升学豆 ' + window._omBeans + '（演示）' : '')
+    + '。<br/><span class="hint2">合规演示：自动续费默认关闭；退款按未使用天数比例（协议明示）；未交付不确认收入。</span>';
+  toast('订单演示成功：' + id);
+}
+/* ---------- v0.3：B 端意向 ---------- */
+var BZ_N = 0;
+function submitBiz(){
+  var n = document.getElementById('bz-name').value.trim();
+  var it = document.getElementById('bz-intro').value.trim();
+  var err = document.getElementById('bz-err'), ok = document.getElementById('bz-ok');
+  if(n.length < 2 || it.length < 10){ err.style.display = 'block'; ok.style.display = 'none'; return; }
+  err.style.display = 'none';
+  BZ_N++;
+  document.getElementById('bz-id').textContent = 'BZ-20260916-' + String(100 + BZ_N);
+  ok.style.display = 'block';
+  document.getElementById('bz-name').value = ''; document.getElementById('bz-intro').value = '';
+  toast('合作意向已提交（演示）');
+}
+/* ---------- v0.4：移动菜单 ---------- */
+function toggleMobileMenu(){
+  var m = document.getElementById('mobileMenu'), b = document.getElementById('navBurger');
+  if(!m || !b) return;
+  var willOpen = m.hasAttribute('hidden');
+  if(willOpen){ m.removeAttribute('hidden'); b.classList.add('open'); b.setAttribute('aria-expanded','true'); }
+  else { m.setAttribute('hidden',''); b.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
+}
+document.addEventListener('click', function(e){
+  var a = e.target.closest ? e.target.closest('#mobileMenu a') : null;
+  if(a){
+    var m = document.getElementById('mobileMenu'), b = document.getElementById('navBurger');
+    if(m){ m.setAttribute('hidden',''); }
+    if(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
+  }
+});
+/* ---------- v0.4：求真筛选 ---------- */
+function filterFact(mode){
+  document.querySelectorAll('#fact .rq-card').forEach(function(c){
+    var v = c.querySelector('.verdict');
+    var k = 'other';
+    if(v){ k = v.classList.contains('false') ? 'false' : v.classList.contains('warn') ? 'warn' : v.classList.contains('ok') ? 'ok' : 'other'; }
+    c.style.display = (mode === 'all' || k === mode) ? '' : 'none';
+  });
+  document.querySelectorAll('#fact .fact-filter .ff').forEach(function(b){
+    b.classList.toggle('on', b.dataset.f === mode);
+  });
+}
+/* ---------- v0.5：日历学段筛选 ---------- */
+function filterCal(mode){
+  document.querySelectorAll('#calendar .cal').forEach(function(c){
+    c.style.display = (mode === 'all' || c.dataset.stage === mode) ? '' : 'none';
+  });
+  document.querySelectorAll('#calendar .cal-filter .ff').forEach(function(b){
+    b.classList.toggle('on', b.dataset.cf === mode);
+  });
+}
+/* ---------- v0.4：入学自查（规则演示） ---------- */
+function runQuiz(){
+  var qu = document.getElementById('qz-qu').value,
+      st = document.getElementById('qz-stage').value,
+      hs = document.getElementById('qz-house').value;
+  var box = document.getElementById('qz-out');
+  if(!qu || !st || !hs){ box.innerHTML = '<div class="cmp-empty">三个问题都选一下，才能给出针对性提示。</div>'; return; }
+  var stageName = { '幼儿园':'幼升小', '小学':'小升初', '初中':'初升高', '高中':'高考后' }[st] || st;
+  var L = [];
+  L.push('<b>基本路径：</b>' + stageName + ' · ' + qu);
+  if(hs === '有房产且已落户'){
+    L.push('· 「三对口」核心条件大概率满足：户籍、居住地、学籍对口。重点核对<b>学位占用</b>（小学六年一户、初中三年一户）与<b>落户年限</b>要求（如沙区二手房须满三年，以区细则为准）。');
+  } else if(hs === '有房产未落户'){
+    L.push('· <b>关键缺口：户口未迁入。</b>多数区要求「房户一致」，建议尽早办理落户并同步咨询区教委过渡政策。');
+  } else if(hs === '租房居住'){
+    L.push('· 走<b>随迁子女入学</b>通道：通常需家长居住证 + 合法稳定职业/社保 + 居住证明，各区材料清单不同；学位排序一般靠后，建议同步准备民办与对口公办兜底。');
+  } else {
+    L.push('· 隔代/其他情形：以「实际居住 + 监护关系」材料为准，建议直接咨询区教委基教科，并把答复记录存档。');
+  }
+  if(st === '初中') L.push('· 初升高通道多元：<b>指标到校</b>（70% 名额分到初中）是重要路径，保持学籍连续是前提；同时关注联招志愿梯度。');
+  if(st === '高中') L.push('· 高考路径多元：普通高考之外还有艺体、高职分类考试等；分数参考可先用上方「位次换算」工具（演示口径）。');
+  L.push(dataBadge('zhibiao'));
+  L.push('<span style="font-size:12px;color:var(--muted)">本自查为规则演示，不构成入学承诺；最终以区教委当年度政策与学校招生细则为准。</span>');
+  box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
+}
+/* ---------- v0.7：数据来源面板 ---------- */
+function renderDataSources(){
+  var dv = document.getElementById('dataVersion');
+  if(dv){ dv.innerHTML = '数据版本：<b>' + DATA_VERSION.label + '</b>（版本 ' + DATA_VERSION.id + ' · 截至 ' + DATA_VERSION.asOf + '）'; }
+  var box = document.getElementById('ds-table'); if(!box) return;
+  var rows = Object.keys(DATA_SOURCES).map(function(k, i){
+    var d = DATA_SOURCES[k];
+    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + '</td><td>' + esc(d.asOf) + '</td>'
+      + '<td><span class="ds-ver ' + (d.verified ? 'ok">✓ 已核验' : 'pending">○ 待核验') + '</span></td></tr>';
+  }).join('');
+  var verified = Object.keys(DATA_SOURCES).filter(function(k){ return DATA_SOURCES[k].verified; }).length;
+  box.innerHTML = '<table class="ds-table"><tr><th>#</th><th>数据点</th><th>来源（机构 + 口径）</th><th>截至</th><th>核验状态</th></tr>'
+    + rows + '</table>'
+    + '<p class="cmp-note" style="margin-top:8px">当前数据包：' + verified + '/' + Object.keys(DATA_SOURCES).length + ' 项已核验 · 版本 ' + DATA_VERSION.id + '。来源变更时本表与页面数字同步更新并全站红点提示。</p>';
+}
+/* ---------- v0.6：升学路径地图 ---------- */
+var PATH_MAP = {
+  "普高统招（联招）": {
+    start: "小学打底 · 初三冲刺",
+    warn: "风险提示：警惕「内部保送名额」类骗局（见求真台）",
+    stages: [
+      {s:"小学", h:"打底与观望", a:"习惯与基础优先；家长同步了解本区初中格局与指标到校规则。"},
+      {s:"初中", h:"关键准备", a:"保持学籍连续；初三上学期研究联招志愿批次（2026 年约 113 所）。"},
+      {s:"升学节点", h:"志愿冲刺", a:"出分后志愿窗口仅 3–5 天：冲稳保梯度 + 位次参考交叉验证。"},
+      {s:"下一程", h:"进入高中", a:"聚焦高考主线；高二确定选科方向。"}
+    ]
+  },
+  "指标到校": {
+    start: "小升初时就该规划——学籍连续是硬前提",
+    warn: "风险提示：名额与排序规则各区每年微调，以当年区教委细则为准",
+    stages: [
+      {s:"小学", h:"提前布局", a:"小升初择校时，把「对口初中是否分得指标」纳入考量。"},
+      {s:"初中", h:"稳住学籍", a:"学籍不转、不中断；关注校内排位而非全区排名——70% 名额是校内竞争。"},
+      {s:"升学节点", h:"批次较早", a:"指标到校录取通常在联招批次之前/中完成，以区细则为准。"},
+      {s:"下一程", h:"适应节奏", a:"进入重点高中后注意学习节奏差异，提前补衔接。"}
+    ]
+  },
+  "民办高中": {
+    start: "初三上学期启动调研",
+    warn: "风险提示：资质与年检必须核验；「签约保录」话术一律不信",
+    stages: [
+      {s:"小学", h:"关注规则", a:"此阶段无需布局；留意公民同招政策变化即可。"},
+      {s:"初中", h:"实地调研", a:"核查办学资质、年检记录、升学出口与收费标准。"},
+      {s:"升学节点", h:"公民同招", a:"与公办同步报名；未摇中回公办统筹——不要单独押注民办。"},
+      {s:"下一程", h:"费用持续", a:"学费为数万元/年量级（因校而异），评估三年持续性。"}
+    ]
+  },
+  "中职·职教高考": {
+    start: "初二下开始了解也不晚",
+    warn: "风险提示：「包分配」承诺不可信；选校前查办学许可",
+    stages: [
+      {s:"小学", h:"保护兴趣", a:"保护孩子的动手能力与兴趣方向，不贴「差生」标签。"},
+      {s:"初中", h:"实地考察", a:"看专业方向、实训条件；了解 3+2/五年制与职教高考通道。"},
+      {s:"升学节点", h:"选专业优先", a:"选专业重于选学校：就业面、升学率、产业趋势。"},
+      {s:"下一程", h:"双线准备", a:"文化素质 + 职业技能双线，可升大专乃至本科。"}
+    ]
+  },
+  "艺体特长": {
+    start: "小学中段起步最常见；初三再起步通常来不及",
+    warn: "风险提示：「保过」「包过」承诺一律不信；投入量力而行",
+    stages: [
+      {s:"小学", h:"兴趣探索", a:"多方向试错，尊重孩子意愿；控制投入节奏。"},
+      {s:"初中", h:"确认要求", a:"查目标高中特长生招生简章：级证、比赛、专业测试口径。"},
+      {s:"升学节点", h:"双线作战", a:"特长测试与中考成绩双线，任一短板都可能落空。"},
+      {s:"下一程", h:"跟进改革", a:"艺术类统考改革持续推进，关注当年考试大纲。"}
+    ]
+  },
+  "出国/国际班": {
+    start: "最早小学高段就要规划语言与课程体系",
+    warn: "风险提示：年花费高且路线差异大；先做家庭财务压力测试",
+    stages: [
+      {s:"小学", h:"语言积累", a:"以语言与学习习惯积累为主，不必急于定路线。"},
+      {s:"初中", h:"定课程体系", a:"确定 A-Level / IB / AP 等体系与家庭预算承受力。"},
+      {s:"升学节点", h:"双重要求", a:"国际班也看中考成绩；核查办学资质与外教资质。"},
+      {s:"下一程", h:"申请准备", a:"标化考试、申请材料；留学中介选择先核验资质。"}
+    ]
+  }
+};
+function renderPath(key){
+  var p = PATH_MAP[key]; if(!p) return;
+  document.querySelectorAll('#zy .pm-tabs .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.p === key); });
+  document.getElementById('pm-panel').innerHTML =
+    '<div class="pm-sum"><span class="pm-tag">起步时间：' + p.start + '</span><span class="pm-tag risk">' + p.warn + '</span></div>'
+    + '<div class="pm-stages">' + p.stages.map(function(s){
+        return '<div class="pm-stage"><div class="ps">' + s.s + '</div><h5>' + s.h + '</h5><p>' + s.a + '</p></div>';
+      }).join('') + '</div>';
+}
+/* ---------- v0.3：初始化 ---------- */
+function initSelects(){
+  var keys = Object.keys(SCHOOL_DB);
+  [['sel-a','选择学校一'],['sel-b','选择学校二'],['sel-c','选择学校三（可选）']].forEach(function(pair){
+    var sel = document.getElementById(pair[0]); if(!sel) return;
+    var cur = sel.value;
+    var html = '<option value="">' + pair[1] + '</option>';
+    keys.forEach(function(k){ html += '<option>' + esc(k) + '</option>'; });
+    sel.innerHTML = html;
+    if(cur) sel.value = cur;
+  });
+}
+/* ---------- 志愿位次换算（演示口径） ---------- */
+var ZY = { ls:{line:510,name:"历史类",src:"tezhao"}, wl:{line:496,name:"物理类",src:"tezhao"} };
+function runZy(){
+  var sub=document.getElementById("zy-subject").value;
+  var v=parseInt(document.getElementById("zy-score").value,10);
+  var box=document.getElementById("zy-result");
+  if(!v||v<200||v>750){
+    box.innerHTML='<div class="cmp-empty">请输入 200–750 之间的分数。</div>';return;
+  }
+  var cfg=ZY[sub], diff=v-cfg.line;
+  var band;
+  if(diff>=80) band="特招线上 80 分以上 · 参考位次前 8,000 名区间（演示）";
+  else if(diff>=40) band="特招线上 40–79 分 · 参考位次 8,000–18,000 名区间（演示）";
+  else if(diff>=0) band="特招线上 0–39 分 · 参考位次 18,000–32,000 名区间（演示）";
+  else band="特招线下 "+Math.abs(diff)+" 分 · 建议同步看本科批策略与指标到校/艺体等路径（演示）";
+  box.innerHTML='<div class="zy-out"><b>'+cfg.name+' '+v+' 分</b>：线差 '+ (diff>=0?"+":"") +diff+' 分（相对 2026 年特招线 '+cfg.line+'，'+DATA_SOURCES[cfg.src].source.split('（')[0]+'）。<br/>参考位次区间：'+band+'。<br/>'+dataBadge(cfg.src)+'<br/><span style="font-size:12px;color:var(--muted)">口径：2026 年真实特招线 + 演示位次区间；正式版接入当年一分一段表（位次法）。本工具不构成录取预测。</span></div>';
+}
+/* ---------- 求真线索提交 ---------- */
+var CLUE_N = 0;
+function submitClue(){
+  var t=document.getElementById("clue-text").value.trim();
+  var err=document.getElementById("clue-err"), ok=document.getElementById("clue-ok");
+  if(t.length<10){ err.style.display="block"; ok.style.display="none"; return; }
+  err.style.display="none";
+  CLUE_N++;
+  var id="FQ-20260916-"+String(100+CLUE_N);
+  document.getElementById("clue-id").textContent=" 编号 "+id+"，";
+  ok.style.display="block";
+  document.getElementById("clue-text").value="";
+}
+/* ---------- 升学豆签到 ---------- */
+var checked=false;
+function checkin(){
+  if(checked) return;
+  checked=true;
+  var v=document.getElementById("beans-val");
+  v.textContent=parseInt(v.textContent,10)+5;
+  var b=document.getElementById("btn-checkin");
+  b.disabled=true; b.textContent="今日已签到";
+  document.getElementById("beans-done").style.display="block";
+  var mb=document.getElementById("me-beans");
+  if(mb) mb.textContent=v.textContent;
+}
+/* ---------- 资金规划参照（演示） ---------- */
+function fundCalc(){
+  var st=document.getElementById("fund-stage").value;
+  var b=parseInt(document.getElementById("fund-budget").value,10);
+  var box=document.getElementById("fund-result");
+  if(!st){ box.innerHTML='<div class="cmp-empty">请选择学段。</div>'; return; }
+  var REF = DATA_SOURCES.cifr;
+  var ref={
+    "幼儿园":"学前阶段差异大：公办普惠与民办价差可达数倍；建议先列「保教费 + 兴趣探索」两栏，避免为「别输在起跑线」超支。",
+    "小学":"小学阶段校外支出约占生均教育支出 26.2%（CIEFR 调查）；此阶段最大风险是「跟风报班」，建议每年做一次预算复盘，砍掉续费前犹豫的项目。",
+    "初中":"初中为焦虑峰值段：学科类培训受「双减」约束，转向素质与研学时警惕打包定价；建议把「信息与规划」类投入（如工具会员）与「课时」类投入分开记账。",
+    "高中":"高中阶段单笔大额决策多（复读/志愿咨询/教辅）：全国一对一咨询报价约 4,000 元至近 2 万元（半月谈/21 财经，已核验）；大额支出前先看求真台避坑结论。"
+  }[st];
+  var cmp="";
+  if(b>0){
+    var share=(b/15828*100).toFixed(0);
+    cmp="<br/>你输入的年预算 <b>"+b.toLocaleString()+" 元</b> 约为全国调查均值（"+REF.label.match(/\d[\d,]+/)[0]+" 元）的 <b>"+share+"%</b>"+(b>21000?"——高于均值较多，建议逐项核对「课时/资料/活动/设备」四类占比。":"——在均值附近或以下，结构比总量更值得关注。");
+  }
+  box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
+}
+function bootV3(){
+  initSelects(); renderSchools(); loadProfile(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
+  var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
+  if(mb && bv) mb.textContent = bv.textContent;
+}
+function bootOnce(){ if(window.__booted) return; window.__booted = true; bootV3(); }
+document.addEventListener('DOMContentLoaded', bootOnce);
+if(document.readyState !== 'loading') bootOnce();
+function clearCompare(){
+  ["sel-a","sel-b","sel-c"].forEach(function(id){document.getElementById(id).value="";});
+  document.getElementById("cmp-result").innerHTML='<div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。</div>';
+}
+</script>
+<dialog id="school-modal"><div class="dlg">
+  <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
+  <div class="dlg-kicker">学校档案 · 审核制</div>
+  <h4 id="sm-name"></h4>
+  <dl class="dlg-kv" id="sm-kv"></dl>
+  <div class="dlg-sub">评价（经审核展示，示例）· 争议评价走「证据 + 仲裁」流程</div>
+  <div id="sm-evals"></div>
+  <div class="dlg-actions"><button class="btn-main" onclick="addToCompareCurrent()">加入对比</button><span class="hint2" id="sm-note">平台不为其服务背书 · 数据以官方公示为准</span></div>
+</div></dialog>
+<dialog id="order-modal"><div class="dlg">
+  <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
+  <div class="dlg-kicker">会员开通 · 演示流程</div>
+  <h4 id="om-title"></h4>
+  <div id="om-form">
+    <label class="ck"><input type="checkbox" id="om-agree" /> 我已阅读并同意《会员服务协议》与退款规则（按未使用天数比例退）</label>
+    <label class="ck"><input type="checkbox" id="om-auto" /> 开启自动续费（演示默认关闭，不勾选）</label>
+    <span class="err-inline" id="om-err" style="display:none">请先勾选同意协议与退款规则。</span>
+    <div class="dlg-actions"><button class="btn-main" onclick="submitOrder()">确认支付（演示）</button><span class="hint2">支付通道：微信支付（演示）；iOS 内购差异将按合规评估</span></div>
+  </div>
+  <div id="om-done" hidden class="dlg-ok"></div>
+</div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<button class="to-top" id="toTop" aria-label="返回顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+(function(){
+  var btn = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 700){ btn.classList.add('show'); } else { btn.classList.remove('show'); }
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>

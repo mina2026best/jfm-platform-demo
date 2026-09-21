@@ -6,3 +6,6 @@
   @media print{ html.fs-large{zoom:1} }
   .me-utils{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
   .me-utils .mini-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  /* ---------- v0.16：阅读进度条 ---------- */
+  #readBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:90;pointer-events:none}
+  @media print{ #readBar{display:none} }

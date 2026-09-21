@@ -1,6 +1,7 @@
 /* ---------- v0.10：资讯中心（信息流 + 站内编辑台） ---------- */
 var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','办事提醒'];
 var newsFilter = 'all';
+var newsQuery = '';
 var neEditingId = null;
 
 function todayStr(){
@@ -25,12 +26,27 @@ function newsCombined(){
   return arr;
 }
 function setNewsFilter(cat){ newsFilter = cat; renderNews(); }
+function setNewsQuery(v){ newsQuery = v || ''; renderNews(); }
+function clearNewsQuery(){
+  var el = document.getElementById('news-q');
+  if(el){ el.value = ''; el.focus(); }
+  newsQuery = ''; renderNews();
+}
 function renderNews(){
   var box = document.getElementById('news-list'); if(!box) return;
   var arr = newsCombined();
-  var shown = arr.filter(function(x){ return newsFilter === 'all' || x.cat === newsFilter; });
+  var q = newsQuery.trim().toLowerCase();
+  var shown = arr.filter(function(x){
+    if(newsFilter !== 'all' && x.cat !== newsFilter) return false;
+    if(q){
+      var hay = ((x.t || '') + ' ' + (x.sum || '') + ' ' + (x.src || '') + ' ' + (x.cat || '')).toLowerCase();
+      if(hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
   box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
-    : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>';
+    : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
+         : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>');
   var counts = { all: arr.length };
   NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
   var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
@@ -43,6 +59,7 @@ function renderNews(){
   if(meta){
     var us = getUserNews().length;
     meta.textContent = '演示数据：编辑部条目 ' + allNews().length + ' 条' + (us ? ' · 本机编辑 ' + us + ' 条（含草稿）' : '')
+      + (q ? ' · 搜索「' + newsQuery.trim() + '」命中 ' + shown.length + ' 条' : '')
       + ' · 「编辑台」内容保存在本机浏览器，可导出 JSON 交接；正式版接入后台审核发布流程。';
   }
 }

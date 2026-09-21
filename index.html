@@ -468,6 +468,9 @@
   .news-actions{display:flex;gap:8px;flex-wrap:wrap}
   .news-actions .mini-btn{border-color:var(--accent);color:var(--accent)}
   .news-actions .mini-btn:hover{background:var(--accent);color:#fff}
+  .news-search{flex:1;min-width:200px;max-width:340px}
+  .news-search input{width:100%;box-sizing:border-box;font-size:13px;padding:7px 12px;border:1px solid var(--line2);border-radius:99px;font-family:var(--sans);background:var(--paper);color:var(--ink)}
+  .news-search input:focus{outline:2px solid var(--accent);outline-offset:1px}
   .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .news-item{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--line2);border-radius:10px;padding:14px 18px;transition:box-shadow .15s,border-color .15s}
   .news-item:hover{box-shadow:0 6px 22px rgba(36,52,77,.08)}
@@ -514,6 +517,7 @@
     .news-grid{grid-template-columns:1fr}
     .about-grid{grid-template-columns:1fr}
     .news-toolbar{align-items:flex-start}
+    .news-search{flex-basis:100%;max-width:none;order:3}
   }
 
 
@@ -569,6 +573,9 @@
   @media print{ html.fs-large{zoom:1} }
   .me-utils{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
   .me-utils .mini-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  /* ---------- v0.16：阅读进度条 ---------- */
+  #readBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:90;pointer-events:none}
+  @media print{ #readBar{display:none} }
 
 
 /* ============ 23-theme ============ */
@@ -681,6 +688,8 @@
 </head>
 <body>
 
+<div id="readBar" aria-hidden="true"></div>
+
 <a class="skip-link" href="#main">跳到主要内容</a>
 
 <div class="ann-bar" id="annBar" hidden>
@@ -690,7 +699,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.15 · 深色模式</span>
+    <span class="demo-tag">MVP 演示站 v0.16 · 资讯快搜</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -847,6 +856,10 @@
         <button class="ff" data-nf="家庭教育" onclick="setNewsFilter('家庭教育')">家庭教育</button>
         <button class="ff" data-nf="安全提醒" onclick="setNewsFilter('安全提醒')">安全提醒</button>
         <button class="ff" data-nf="办事提醒" onclick="setNewsFilter('办事提醒')">办事提醒</button>
+      </div>
+      <div class="news-search">
+        <input id="news-q" type="search" placeholder="搜索资讯标题 / 摘要 / 来源…" aria-label="搜索资讯" autocomplete="off"
+          oninput="setNewsQuery(this.value)" onkeydown="if(event.key==='Escape'){this.value='';setNewsQuery('');}" />
       </div>
       <div class="news-actions">
         <button class="mini-btn" onclick="openNewsEditor()">✎ 打开编辑台</button>
@@ -1424,7 +1437,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.15（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.16（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a>
     </div>
   </div>
 </footer>
@@ -2427,7 +2440,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -2444,6 +2457,7 @@ function clearCompare(){
 /* ---------- v0.10：资讯中心（信息流 + 站内编辑台） ---------- */
 var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','办事提醒'];
 var newsFilter = 'all';
+var newsQuery = '';
 var neEditingId = null;
 
 function todayStr(){
@@ -2468,12 +2482,27 @@ function newsCombined(){
   return arr;
 }
 function setNewsFilter(cat){ newsFilter = cat; renderNews(); }
+function setNewsQuery(v){ newsQuery = v || ''; renderNews(); }
+function clearNewsQuery(){
+  var el = document.getElementById('news-q');
+  if(el){ el.value = ''; el.focus(); }
+  newsQuery = ''; renderNews();
+}
 function renderNews(){
   var box = document.getElementById('news-list'); if(!box) return;
   var arr = newsCombined();
-  var shown = arr.filter(function(x){ return newsFilter === 'all' || x.cat === newsFilter; });
+  var q = newsQuery.trim().toLowerCase();
+  var shown = arr.filter(function(x){
+    if(newsFilter !== 'all' && x.cat !== newsFilter) return false;
+    if(q){
+      var hay = ((x.t || '') + ' ' + (x.sum || '') + ' ' + (x.src || '') + ' ' + (x.cat || '')).toLowerCase();
+      if(hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
   box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
-    : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>';
+    : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
+         : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>');
   var counts = { all: arr.length };
   NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
   var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
@@ -2486,6 +2515,7 @@ function renderNews(){
   if(meta){
     var us = getUserNews().length;
     meta.textContent = '演示数据：编辑部条目 ' + allNews().length + ' 条' + (us ? ' · 本机编辑 ' + us + ' 条（含草稿）' : '')
+      + (q ? ' · 搜索「' + newsQuery.trim() + '」命中 ' + shown.length + ' 条' : '')
       + ' · 「编辑台」内容保存在本机浏览器，可导出 JSON 交接；正式版接入后台审核发布流程。';
   }
 }
@@ -2854,6 +2884,27 @@ function initTheme(){
     else if(mq.addListener) mq.addListener(onSys);
   }
 }
+
+
+/* ---------- 35-pageui ---------- */
+/* ---------- v0.16：返回顶部 / 阅读进度条 ---------- */
+function initPageUI(){
+  var btn = document.getElementById('toTop');
+  var bar = document.getElementById('readBar');
+  function onScroll(){
+    var doc = document.documentElement;
+    var y = window.scrollY || doc.scrollTop || 0;
+    if(btn) btn.classList.toggle('show', y > 600);
+    if(bar){
+      var max = doc.scrollHeight - window.innerHeight;
+      var pct = max > 0 ? Math.min(100, Math.max(0, (y / max) * 100)) : 0;
+      bar.style.width = pct.toFixed(1) + '%';
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+}
 </script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
@@ -2918,6 +2969,7 @@ function initTheme(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.16</b><span>资讯快搜（标题/摘要/来源）+ 返回顶部 + 阅读进度条</span></div>
     <div class="cl-item"><b>v0.15</b><span>深色模式（跟随系统 / 手动切换，本机记忆；打印保持浅色）</span></div>
     <div class="cl-item"><b>v0.14</b><span>大字版无障碍切换 / 本机数据导出与清空（我的页）</span></div>
     <div class="cl-item"><b>v0.13</b><span>打印优化 / 一键复制分享（资讯·对比·档案）/ 更新日志弹窗</span></div>

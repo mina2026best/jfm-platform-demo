@@ -18,3 +18,4 @@
 27-fact-submit.js
 28-checkin.js
 29-fund.js
+30-news.js

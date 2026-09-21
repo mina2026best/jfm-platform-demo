@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
-<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——按企划书 V2.0 第五章规划搭建的 MVP 演示站。" />
+<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——含升学资讯中心与站内编辑台（MVP 演示站，按企划书 V2.0 第五章规划搭建）。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
 <meta property="og:type" content="website" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"鸡父母 · 重庆家长升学信息与生活服务平台","alternateName":"鸡父母","description":"可核验的升学信息、关键时刻的确定性、家长的生活服务（MVP 演示站）。","inLanguage":"zh-CN","url":"https://mina2026best.github.io/jfm-platform-demo/"}</script>
 <style>/* ============ base ============ */
 
   :root{
@@ -21,7 +22,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  section[id]{scroll-margin-top:76px}
+  header[id],section[id]{scroll-margin-top:76px}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -444,21 +445,82 @@
     .demo-tag{display:none}
     dialog{width:96%}
   }
+
+
+/* ============ 19-news ============ */
+  /* ---------- v0.10：资讯中心 / 编辑台 / 关于与联系 ---------- */
+  .skip-link{position:fixed;left:12px;top:12px;transform:translateY(-220%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:6px;z-index:120;font-size:13px;transition:transform .15s}
+  .skip-link:focus{transform:none;color:#fff}
+  .sec-desc code{font-family:var(--mono);font-size:.92em;background:#EEF1F4;padding:1px 5px;border-radius:4px}
+  .news-toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:16px}
+  .news-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .news-actions .mini-btn{border-color:var(--accent);color:var(--accent)}
+  .news-actions .mini-btn:hover{background:var(--accent);color:#fff}
+  .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .news-item{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--line2);border-radius:10px;padding:14px 18px;transition:box-shadow .15s,border-color .15s}
+  .news-item:hover{box-shadow:0 6px 22px rgba(36,52,77,.08)}
+  .news-item[data-cat="政策速递"]{border-left-color:var(--navy)}
+  .news-item[data-cat="升学动态"]{border-left-color:var(--accent)}
+  .news-item[data-cat="家庭教育"]{border-left-color:var(--blue)}
+  .news-item[data-cat="安全提醒"]{border-left-color:var(--warn)}
+  .news-item[data-cat="办事提醒"]{border-left-color:var(--muted)}
+  .ni-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .ni-cat{color:var(--accent);font-weight:700;letter-spacing:.04em}
+  .ni-tag.local{background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:1px 8px;font-size:10.5px}
+  .ni-title{font-size:15px;color:var(--ink);margin:8px 0 6px;cursor:pointer}
+  .ni-title:hover{color:var(--accent)}
+  .ni-sum{font-size:12.5px;color:var(--ink2);margin:0}
+  .ni-body{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink2)}
+  .ni-actions{display:flex;gap:8px;margin-top:10px}
+  .news-next{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:16px;font-size:12.5px;color:var(--muted)}
+  .news-next a{color:var(--accent)}
+  @keyframes newsFlash{0%{box-shadow:0 0 0 3px rgba(14,124,102,.35)}100%{box-shadow:0 0 0 3px rgba(14,124,102,0)}}
+  .news-item.flash{animation:newsFlash 1.2s ease-out 1;border-color:var(--accent)}
+  /* 编辑台 */
+  #news-editor{max-width:700px}
+  #news-editor .dlg{width:min(680px,94vw)}
+  .ne-form input,.ne-form select,.ne-form textarea,.ne-ta{width:100%;box-sizing:border-box;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line2);border-radius:6px;margin-bottom:8px;background:#fff;color:var(--ink)}
+  .ne-form textarea,.ne-ta{min-height:64px;resize:vertical}
+  .ne-row2{display:flex;gap:8px}
+  .ne-row2>*{flex:1;min-width:0}
+  .ne-radios{display:flex;gap:16px;align-items:center;margin:2px 0 10px;font-size:13px;color:var(--ink2)}
+  .ne-radios label{display:flex;gap:6px;align-items:center;cursor:pointer}
+  .ne-radios input{width:auto;margin:0}
+  .ne-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  .ne-item:last-child{border-bottom:none}
+  .ne-t{flex:1;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ne-st{font-family:var(--mono);font-size:10.5px;border-radius:99px;padding:1px 8px;flex:none}
+  .ne-st.pub{background:var(--accent-soft);color:var(--accent)}
+  .ne-st.draft{background:#F3F5F7;color:var(--muted)}
+  /* 关于与联系 */
+  .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .about-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .about-card h4{font-size:15px;color:var(--navy);margin-bottom:8px}
+  .about-card p{font-size:12.5px;color:var(--ink2)}
+  .about-card a{color:var(--accent)}
+  @media (max-width:960px){
+    .news-grid{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr}
+    .news-toolbar{align-items:flex-start}
+  }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 </head>
 <body>
 
+<a class="skip-link" href="#main">跳到主要内容</a>
+
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.9 · 模块化工程</span>
+    <span class="demo-tag">MVP 演示站 v0.10 · 资讯中心</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
     <nav>
+      <a href="#news">资讯</a>
       <a href="#calendar">日历</a>
       <a href="#policy">政策</a>
       <a href="#schools">档案</a><a href="#compare">对比</a>
@@ -473,6 +535,7 @@
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#news">升学资讯</a>
     <a href="#quiz">入学自查</a>
     <a href="#calendar">升学日历</a>
     <a href="#policy">政策库</a>
@@ -489,7 +552,7 @@
   </div>
 </div>
 
-<header class="hero">
+<header class="hero" id="main">
   <div class="wrap">
     <h1>家长的<b>关键时刻</b>，<br/>值得一份<b>可核验的确定性</b>。</h1>
     <p class="sub">官方政策原文 + <b>人话解读</b> · 升学节点 <b>不错过</b> · 学校信息<b>可核验</b> · 陪读生活<b>有人管</b>。</p>
@@ -591,6 +654,31 @@
         <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">01.5 · 升学资讯</span><h2>编辑部精选 · 每天 3 分钟</h2></div>
+    <p class="sec-desc">政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布（演示数据，每条标注来源与日期）。「编辑台」支持自助采集、编辑、草稿与导入导出（保存在本机浏览器）。</p>
+    <div class="news-toolbar">
+      <div class="fact-filter news-filter" id="news-filter">
+        <button class="ff on" data-nf="all" onclick="setNewsFilter('all')">全部</button>
+        <button class="ff" data-nf="政策速递" onclick="setNewsFilter('政策速递')">政策速递</button>
+        <button class="ff" data-nf="升学动态" onclick="setNewsFilter('升学动态')">升学动态</button>
+        <button class="ff" data-nf="家庭教育" onclick="setNewsFilter('家庭教育')">家庭教育</button>
+        <button class="ff" data-nf="安全提醒" onclick="setNewsFilter('安全提醒')">安全提醒</button>
+        <button class="ff" data-nf="办事提醒" onclick="setNewsFilter('办事提醒')">办事提醒</button>
+      </div>
+      <div class="news-actions">
+        <button class="mini-btn" onclick="openNewsEditor()">✎ 打开编辑台</button>
+        <button class="mini-btn" onclick="exportNews()">导出资讯</button>
+      </div>
+    </div>
+    <div class="news-grid" id="news-list"></div>
+    <p class="cmp-note" id="news-meta-line" style="margin-top:10px"></p>
+    <p class="cmp-note" style="margin-top:6px">采集说明：内置资讯由 src/news/seed.json 维护；工程侧提供 collect.py 采集脚本（公开页面抓取 → 待审核队列 → 审核后发布），站内编辑台支持人工采集整理与 JSON 导出交接。</p>
+    <div class="news-next">关联入口：<a href="#calendar">升学日历</a> <a href="#policy">政策库</a> <a href="#fact">求真台</a> <a href="#quiz">入学自查</a></div>
   </div>
 </section>
 
@@ -1052,6 +1140,27 @@
   </div>
 </section>
 
+<section id="about" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">08 · 关于与联系</span><h2>谁在做、怎么审、怎么找到我们</h2></div>
+    <p class="sec-desc">一份能长期被信任的信息服务，靠的是可追溯的编辑流程与明确的边界。以下为演示版说明，正式版将公示完整信息。</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h4>我们是谁</h4>
+        <p>面向重庆家长的升学信息与生活服务平台：官方政策原文兼人话解读、升学节点提醒、学校档案核验、陪读生活信息服务。不承诺升学结果、不做学科培训、不做排名。</p>
+      </div>
+      <div class="about-card">
+        <h4>编辑与审核规范</h4>
+        <p>资讯中心每日采集公开来源 → 待审核队列 → 双人复核后发布；每条标注来源与日期；红线词库每周巡检。纠错通道：见「求真台 · 提交线索」，24 小时内响应。</p>
+      </div>
+      <div class="about-card">
+        <h4>联系与线索通道</h4>
+        <p>内容纠错：<a href="#fact">求真台</a> 提交线索；机构合作：<a href="#biz">B 端登记</a>；正式版将公示客服邮箱与备案信息（演示版不提供对外联系方式）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="cols">
@@ -1061,12 +1170,21 @@
         <p style="margin-top:10px">关联文档：《重庆鸡父母平台企划书》V2.0（208 页）· 经营流程 SOP 执行包</p>
       </div>
       <div>
-        <h5>内容入口</h5>
+        <h5>站点地图</h5>
         <ul>
+          <li><a href="#news">升学资讯</a></li>
           <li><a href="#calendar">升学日历</a></li>
           <li><a href="#policy">政策库</a></li>
+          <li><a href="#quiz">入学自查</a></li>
+          <li><a href="#schools">学校档案</a></li>
+          <li><a href="#compare">择校对比</a></li>
+          <li><a href="#zy">志愿与路径</a></li>
           <li><a href="#fact">求真辟谣台</a></li>
+          <li><a href="#community">家长社区</a></li>
           <li><a href="#life">生活服务</a></li>
+          <li><a href="#beans">升学豆</a></li>
+          <li><a href="#plans">会员体系</a></li>
+          <li><a href="#about">关于与联系</a></li>
         </ul>
       </div>
       <div>
@@ -1081,7 +1199,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图
     </div>
   </div>
 </footer>
@@ -1107,6 +1225,120 @@ function dataBadge(key){
   if(!d) return '';
   return '<span class="data-badge">' + (d.verified ? '✓ 已核验 · ' : '○ 待核验 · ') + d.source + '（截至 ' + d.asOf + '）</span>';
 }
+
+
+/* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
+var NEWS_FEED = [
+  {
+    "t": "家庭年度教育支出复盘：先看结构，再看总量",
+    "cat": "家庭教育",
+    "src": "编辑部整理（参照 CIEFR 调查）",
+    "date": "2026-09-20",
+    "sum": "全国调查显示校外支出约占生均教育支出 26.2%；建议每年做一次预算复盘。",
+    "body": "把支出分成「课时 / 资料 / 活动 / 设备」四类分别记账，比只看总额更容易发现问题。行业调查显示全国教育支出均值约 15,828 元/年（CIEFR），可用「教育资金规划」工具做对照。",
+    "url": ""
+  },
+  {
+    "t": "初中阶段亲子沟通：先处理情绪，再处理问题",
+    "cat": "家庭教育",
+    "src": "编辑部 · 示范内容",
+    "date": "2026-09-18",
+    "sum": "青春期沟通三原则：先听完、不评判、给选择。",
+    "body": "示范内容（正式版由签约教育顾问撰写）：① 先听完孩子的完整表达再回应；② 用「我信息」表达担心而不是指责；③ 把「你必须」换成「你可以选 A 或 B」。",
+    "url": ""
+  },
+  {
+    "t": "秋季流感季：校园防护与请假流程提示",
+    "cat": "安全提醒",
+    "src": "编辑部 · 示范内容",
+    "date": "2026-09-15",
+    "sum": "勤洗手、教室通风、生病及时报备；按学校流程办理请假与复课。",
+    "body": "换季高发期请配合学校晨检；孩子出现发热等症状时按规定请假并就医，复课时按学校要求提交材料。",
+    "url": ""
+  },
+  {
+    "t": "接送高峰行车安全：即停即走与护学通道",
+    "cat": "安全提醒",
+    "src": "编辑部 · 示范内容",
+    "date": "2026-09-12",
+    "sum": "校门口 50 米内不调头、不长时间停车；听从护学岗指挥。",
+    "body": "开车接送请遵守学校周边交通组织：① 即停即走；② 不乱停；③ 服从护学岗与交警指挥。步行接送固定一条安全路线并教会孩子识别风险点。",
+    "url": ""
+  },
+  {
+    "t": "材料核对月：把「三对口」收进一个文件袋",
+    "cat": "办事提醒",
+    "src": "编辑部整理",
+    "date": "2026-09-10",
+    "sum": "户口本、房产证明、出生证明、学籍信息——四样归位，报名不慌。",
+    "body": "建议每学期初做一次材料核对：证件在不在、信息准不准、复印件够不够。用「我的提醒」设一个 10 月的核对提醒。",
+    "url": ""
+  },
+  {
+    "t": "联招志愿梯度怎么排：冲稳保各留 1–2 所",
+    "cat": "升学动态",
+    "src": "编辑部整理（对照 2026 政策口径）",
+    "date": "2026-09-08",
+    "sum": "梯度填报降低滑档风险；结合线差法先定位、再排序。",
+    "body": "建议先把候选学校分成「冲刺 / 稳妥 / 保底」三档各 1–2 所；用「位次换算」工具做线差参考（演示口径），正式版将接入当年一分一段表。",
+    "url": ""
+  },
+  {
+    "t": "全市护学岗 6,993 个：接送安全再补一层",
+    "cat": "升学动态",
+    "src": "重庆发布（公开报道）",
+    "date": "2026-09-01",
+    "sum": "校园周边护学岗全覆盖推进；接送高峰建议合理使用即停即走区域。",
+    "body": "开学季校园安全防护升级。家长接送建议：① 提前 10 分钟错峰；② 在指定即停即走区上下车；③ 教育孩子过马路走护学通道。",
+    "url": ""
+  },
+  {
+    "t": "开学季数据：重庆 K12 在校生规模约 376.3 万",
+    "cat": "升学动态",
+    "src": "市教委统计口径（转引）",
+    "date": "2026-09-01",
+    "sum": "全市 K12 在校生规模保持高位，学位供给与入学政策持续受关注。",
+    "body": "了解区域学位供给情况，有助于判断入学竞争态势。具体到各区县，请以当年度招生细则与片区公告为准。",
+    "url": ""
+  },
+  {
+    "t": "2026 年高考特招线公布：历史类 510 / 物理类 496",
+    "cat": "政策速递",
+    "src": "新华网重庆（2026-06-25）",
+    "date": "2026-06-25",
+    "sum": "特招线与军检线同步公布；可用「位次换算」工具做线差参考。",
+    "body": "2026 年重庆市高考特招线：历史类 510 分、物理类 496 分；军检线（报考军校体检参考）历史类男 517 / 女 631、物理类男 533 / 女 573。以上为当年口径，次年以官方发布替换。",
+    "url": ""
+  },
+  {
+    "t": "幼升小报名季：三对口材料与网报窗口提示",
+    "cat": "政策速递",
+    "src": "各区教委当年招生政策（汇总口径）",
+    "date": "2026-06-10",
+    "sum": "「三对口」材料提前收齐：户口本、房产证明、出生证明；网报窗口错过需等统筹。",
+    "body": "幼升小报名以各区当年招生入学政策为准。建议把户口本、房产证明、出生证明等材料统一收进一个文件袋，并设置日历提醒盯住网报开始与截止时间。二孩家庭可了解「长幼随学」申请通道。",
+    "url": ""
+  },
+  {
+    "t": "2026 年联招学校约 113 所（新增 10 所）",
+    "cat": "政策速递",
+    "src": "重庆日报（2026-04-22 政策口径）",
+    "date": "2026-04-22",
+    "sum": "全市联招学校约 113 所，其中第一批次市级重点约 94 所；志愿分批次填报，以当年 4 月官方发布为准。",
+    "body": "市教委发布 2026 年中考政策：公办民办同步招生；指标到校计划占市级重点高中招生计划的 70%；志愿分批次填报。家长可先用「升学路径地图」了解各批次差异，再结合孩子实际情况规划志愿梯度。",
+    "url": ""
+  },
+  {
+    "t": "指标到校：市级重点高中 70% 计划分配到辖区初中",
+    "cat": "政策速递",
+    "src": "渝教基函〔2025〕21号（已核验文号）",
+    "date": "2025-11-20",
+    "sum": "市级重点高中招生计划的 70% 分配到辖区初中；保持学籍连续是参与前提。",
+    "body": "指标到校名额分配到各初中后在校内竞争；中途转学可能影响资格。建议：① 确认学籍连续性；② 向班主任了解校内参考口径；③ 关注区教委当年细则（名额与条件每年微调）。",
+    "url": ""
+  }
+];
+var NEWS_META = {"generated": "2026-09-22 01:37", "seed": 12, "collected": 0, "fetchedPending": 2};
 
 
 /* ---------- 10-demo-data ---------- */
@@ -1268,18 +1500,31 @@ var SEARCH_DB = [
  {t:'术语',s:'多校划片 / 摇号 / 特招线 / 一分一段 / 对口直升',a:'#policy'},
  {t:'社区',s:'本周热议：指标到校校内排队',a:'#community'},
  {t:'工具',s:'多孩档案：按孩子切换，日历自动过滤（v0.8）',a:'#me'},
- {t:'工具',s:'提醒导出 .ics / 打印升学行动清单（v0.8）',a:'#me'}
+ {t:'资讯',s:'升学资讯中心：分类筛选 + 编辑台采集与导出（v0.10）',a:'#news'},
+ {t:'关于',s:'关于与联系：编辑与审核规范 / 线索通道 / 站点地图',a:'#about'}
 ];
 function runSearch(){
   var q = document.getElementById('global-search').value.trim().toLowerCase();
   var panel = document.getElementById('search-panel');
   if(!q){ panel.hidden = true; return; }
   var hits = SEARCH_DB.filter(function(x){ return (x.s + ' ' + x.t).toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
-  if(!hits.length){
+  var nhits = [];
+  try{
+    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
+      .map(function(x){ return { t: '资讯', s: x.t, k: x._k }; });
+  }catch(e){}
+  var html = '';
+  if(nhits.length){
+    html += nhits.map(function(x){ return '<div class="s-item" onclick="goNewsByKey(\'' + x.k + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  }
+  if(hits.length){
+    html += hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  }
+  if(!html){
     panel.innerHTML = '<div class="s-item s-empty">未找到相关内容，换个关键词试试（如「指标」「陪读」「军检」）。</div>';
     panel.hidden = false; return;
   }
-  panel.innerHTML = hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  panel.innerHTML = html;
   panel.hidden = false;
 }
 function goSearch(anchor){
@@ -1885,7 +2130,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -1895,6 +2140,215 @@ if(document.readyState !== 'loading') bootOnce();
 function clearCompare(){
   ["sel-a","sel-b","sel-c"].forEach(function(id){document.getElementById(id).value="";});
   document.getElementById("cmp-result").innerHTML='<div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。</div>';
+}
+
+
+/* ---------- 30-news ---------- */
+/* ---------- v0.10：资讯中心（信息流 + 站内编辑台） ---------- */
+var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','办事提醒'];
+var newsFilter = 'all';
+var neEditingId = null;
+
+function todayStr(){
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function getUserNews(){ try{ return JSON.parse(localStorage.getItem('jfm_news_user') || '[]'); }catch(e){ return []; } }
+function setUserNews(l){ localStorage.setItem('jfm_news_user', JSON.stringify(l)); }
+function allNews(){
+  return (window.NEWS_FEED || []).map(function(x, i){
+    var o = {}; for(var k in x) o[k] = x[k]; o._k = 'b' + i; o._local = false; return o;
+  });
+}
+function pubUserNews(){
+  return getUserNews().filter(function(x){ return x.st === 'pub'; }).map(function(x){
+    var o = {}; for(var k in x) o[k] = x[k]; o._k = x.id; o._local = true; return o;
+  });
+}
+function newsCombined(){
+  var arr = allNews().concat(pubUserNews());
+  arr.sort(function(a, b){ return String(b.date || '').localeCompare(String(a.date || '')); });
+  return arr;
+}
+function setNewsFilter(cat){ newsFilter = cat; renderNews(); }
+function renderNews(){
+  var box = document.getElementById('news-list'); if(!box) return;
+  var arr = newsCombined();
+  var shown = arr.filter(function(x){ return newsFilter === 'all' || x.cat === newsFilter; });
+  box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
+    : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>';
+  var counts = { all: arr.length };
+  NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
+  var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
+  document.querySelectorAll('#news-filter .ff').forEach(function(b){
+    var c = b.dataset.nf;
+    b.classList.toggle('on', c === newsFilter);
+    b.textContent = labels[c] + (counts[c] ? ' ' + counts[c] : '');
+  });
+  var meta = document.getElementById('news-meta-line');
+  if(meta){
+    var us = getUserNews().length;
+    meta.textContent = '演示数据：编辑部条目 ' + allNews().length + ' 条' + (us ? ' · 本机编辑 ' + us + ' 条（含草稿）' : '')
+      + ' · 「编辑台」内容保存在本机浏览器，可导出 JSON 交接；正式版接入后台审核发布流程。';
+  }
+}
+function newsItemHTML(x){
+  var bodyHTML = (x.body || x.url)
+    ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
+    : '';
+  return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">'
+    + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
+    + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
+    + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
+    + '<h4 class="ni-title" onclick="toggleNewsBody(this)" title="点击展开/收起">' + esc(x.t) + '</h4>'
+    + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
+    + bodyHTML
+    + (x._local ? '<div class="ni-actions"><button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button></div>' : '')
+    + '</div>';
+}
+function toggleNewsBody(el){
+  var item = el.closest('.news-item'); if(!item) return;
+  var body = item.querySelector('.ni-body'); if(!body) return;
+  body.hidden = !body.hidden;
+}
+function goNewsByKey(key){
+  document.getElementById('search-panel').hidden = true;
+  newsFilter = 'all'; renderNews();
+  var el = document.querySelector('#news-list .news-item[data-key="' + key + '"]');
+  if(!el) return;
+  var body = el.querySelector('.ni-body'); if(body) body.hidden = false;
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.add('flash');
+  setTimeout(function(){ el.classList.remove('flash'); }, 1400);
+}
+/* —— 编辑台（本机采集与编辑） —— */
+function openNewsEditor(){
+  var d = document.getElementById('news-editor'); if(!d) return;
+  var dt = document.getElementById('ne-date'); if(dt && !dt.value) dt.value = todayStr();
+  renderEditorList();
+  if(d.showModal) d.showModal();
+}
+function saveNewsItem(){
+  var t = (document.getElementById('ne-title').value || '').trim();
+  var src = (document.getElementById('ne-src').value || '').trim();
+  var err = document.getElementById('ne-err');
+  if(!t || !src){ err.textContent = '标题与来源为必填项（演示校验）。'; err.style.display = 'inline'; return; }
+  err.style.display = 'none';
+  var item = {
+    cat: document.getElementById('ne-cat').value,
+    t: t, src: src,
+    date: document.getElementById('ne-date').value || todayStr(),
+    url: (document.getElementById('ne-url').value || '').trim(),
+    sum: (document.getElementById('ne-sum').value || '').trim(),
+    body: (document.getElementById('ne-body').value || '').trim(),
+    st: (document.querySelector('input[name="ne-st"]:checked') || {}).value || 'pub'
+  };
+  var list = getUserNews();
+  if(neEditingId){
+    list = list.map(function(x){ if(x.id === neEditingId){ for(var k in item) x[k] = item[k]; } return x; });
+    toast('已更新条目（本机）');
+  } else {
+    item.id = 'u' + Date.now();
+    list.push(item);
+    toast(item.st === 'pub' ? '已发布到资讯流（本机）' : '已存草稿（仅编辑台可见）');
+  }
+  setUserNews(list);
+  neEditingId = null;
+  ['ne-title','ne-src','ne-url','ne-sum','ne-body'].forEach(function(id){ document.getElementById(id).value = ''; });
+  var save = document.getElementById('ne-save'); if(save) save.textContent = '保存到资讯流';
+  renderEditorList(); renderNews();
+}
+function editNewsItem(id){
+  var mine = getUserNews(), x = null;
+  mine.forEach(function(o){ if(o.id === id) x = o; });
+  if(!x) return;
+  neEditingId = id;
+  document.getElementById('ne-title').value = x.t || '';
+  document.getElementById('ne-cat').value = x.cat || NEWS_CATS[0];
+  document.getElementById('ne-src').value = x.src || '';
+  document.getElementById('ne-date').value = x.date || todayStr();
+  document.getElementById('ne-url').value = x.url || '';
+  document.getElementById('ne-sum').value = x.sum || '';
+  document.getElementById('ne-body').value = x.body || '';
+  var r = document.querySelector('input[name="ne-st"][value="' + (x.st || 'pub') + '"]'); if(r) r.checked = true;
+  var save = document.getElementById('ne-save'); if(save) save.textContent = '保存修改';
+  document.getElementById('ne-err').style.display = 'none';
+  var dlg = document.getElementById('news-editor'); if(dlg && dlg.scrollTo) dlg.scrollTo(0, 0);
+}
+function delNewsItem(id){
+  setUserNews(getUserNews().filter(function(x){ return x.id !== id; }));
+  if(neEditingId === id) neEditingId = null;
+  renderEditorList(); renderNews(); toast('已删除本机条目');
+}
+function toggleNewsStatus(id){
+  var list = getUserNews();
+  list = list.map(function(x){ if(x.id === id){ x.st = x.st === 'pub' ? 'draft' : 'pub'; } return x; });
+  setUserNews(list); renderEditorList(); renderNews();
+  toast('已切换条目状态');
+}
+function renderEditorList(){
+  var box = document.getElementById('ne-list'); if(!box) return;
+  var mine = getUserNews();
+  if(!mine.length){ box.innerHTML = '<div class="empty-mini">还没有本机条目——用上方表单采集第一条，或从下方批量导入。</div>'; return; }
+  box.innerHTML = mine.map(function(x){
+    return '<div class="ne-item"><span class="ne-st ' + (x.st === 'pub' ? 'pub' : 'draft') + '">' + (x.st === 'pub' ? '已发布' : '草稿') + '</span>'
+      + '<span class="ne-t" title="' + esc(x.t) + '">' + esc(x.t) + '</span>'
+      + '<button class="mini-btn" onclick="editNewsItem(\'' + x.id + '\')">编辑</button>'
+      + '<button class="mini-btn" onclick="toggleNewsStatus(\'' + x.id + '\')">' + (x.st === 'pub' ? '转草稿' : '发布') + '</button>'
+      + '<button class="mini-btn danger" onclick="delNewsItem(\'' + x.id + '\')">删除</button></div>';
+  }).join('');
+  var note = document.getElementById('ne-note');
+  if(note && window.NEWS_META){ note.textContent = '数据文件 ' + NEWS_META.generated + ' · 编辑部 ' + NEWS_META.seed + ' 条 + 本机 ' + mine.length + ' 条'; }
+}
+function importNews(){
+  var raw = (document.getElementById('ne-import').value || '').trim();
+  if(!raw){ toast('先粘贴要导入的内容'); return; }
+  var list = getUserNews(), added = 0;
+  if(raw[0] === '['){
+    try{
+      var arr = JSON.parse(raw);
+      arr.forEach(function(o){
+        if(!o || !o.t) return;
+        list.push({
+          id: 'u' + Date.now() + added,
+          t: String(o.t),
+          cat: NEWS_CATS.indexOf(o.cat) >= 0 ? o.cat : '升学动态',
+          src: String(o.src || '外部导入'),
+          date: o.date || todayStr(),
+          url: o.url || '', sum: o.sum || '', body: o.body || '',
+          st: o.st === 'draft' ? 'draft' : 'pub'
+        });
+        added++;
+      });
+    }catch(e){ toast('JSON 解析失败：' + e.message.slice(0, 40)); return; }
+  } else {
+    raw.split('\n').forEach(function(line){
+      line = line.trim(); if(!line) return;
+      var parts = line.split('|').map(function(s){ return s.trim(); });
+      if(!parts[0]) return;
+      list.push({
+        id: 'u' + Date.now() + added,
+        t: parts[0],
+        src: parts[1] || '外部导入',
+        cat: NEWS_CATS.indexOf(parts[2]) >= 0 ? parts[2] : '升学动态',
+        date: parts[3] || todayStr(),
+        url: '', sum: '', body: '', st: 'pub'
+      });
+      added++;
+    });
+  }
+  setUserNews(list); renderEditorList(); renderNews();
+  document.getElementById('ne-import').value = '';
+  toast(added ? '已导入 ' + added + ' 条（本机）' : '没有解析到有效条目');
+}
+function exportNews(){
+  var payload = { exportedAt: new Date().toISOString(), note: '鸡父母平台资讯导出（演示）', items: newsCombined() };
+  var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  var u = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = u; a.download = 'jfm-news-export.json';
+  document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 1200);
+  toast('已导出资讯 JSON（' + payload.items.length + ' 条）');
 }
 </script>
 <dialog id="school-modal"><div class="dlg">
@@ -1917,6 +2371,43 @@ function clearCompare(){
     <div class="dlg-actions"><button class="btn-main" onclick="submitOrder()">确认支付（演示）</button><span class="hint2">支付通道：微信支付（演示）；iOS 内购差异将按合规评估</span></div>
   </div>
   <div id="om-done" hidden class="dlg-ok"></div>
+</div></dialog>
+<dialog id="news-editor"><div class="dlg">
+  <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
+  <div class="dlg-kicker">资讯中心 · 编辑台（本地）</div>
+  <h4>采集与编辑资讯</h4>
+  <div class="ne-form">
+    <input id="ne-title" placeholder="标题（必填）" />
+    <div class="ne-row2">
+      <select id="ne-cat" aria-label="分类">
+        <option>政策速递</option><option>升学动态</option><option>家庭教育</option><option>安全提醒</option><option>办事提醒</option>
+      </select>
+      <input id="ne-src" placeholder="来源（必填，如：重庆日报）" />
+    </div>
+    <div class="ne-row2">
+      <input id="ne-date" type="date" />
+      <input id="ne-url" placeholder="原文链接（可选）" />
+    </div>
+    <textarea id="ne-sum" placeholder="摘要（1–2 句，列表展示）"></textarea>
+    <textarea id="ne-body" placeholder="正文（可选，点击标题展开）"></textarea>
+  </div>
+  <div class="ne-radios">
+    <label><input type="radio" name="ne-st" value="pub" checked /> 发布</label>
+    <label><input type="radio" name="ne-st" value="draft" /> 存草稿</label>
+  </div>
+  <span class="err-inline" id="ne-err" style="display:none"></span>
+  <div class="dlg-actions">
+    <button class="btn-main" id="ne-save" onclick="saveNewsItem()">保存到资讯流</button>
+  </div>
+  <div class="dlg-sub">我编辑的条目（保存在本机）</div>
+  <div id="ne-list"></div>
+  <div class="dlg-sub">批量导入 / 导出</div>
+  <textarea class="ne-ta" id="ne-import" placeholder="每行一条：标题 | 来源 | 分类（可选）；或直接粘贴 JSON 数组"></textarea>
+  <div class="dlg-actions">
+    <button class="mini-btn" onclick="importNews()">导入</button>
+    <button class="mini-btn" onclick="exportNews()">导出 JSON</button>
+    <span class="hint2" id="ne-note"></span>
+  </div>
 </div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 <button class="to-top" id="toTop" aria-label="返回顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

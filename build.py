@@ -32,6 +32,11 @@ def build_css():
 def build_js():
     data = read(f"{SRC}/data.js")
     guard("data.js", data)
+    dn = os.path.join(SRC, "data-news.js")
+    if os.path.exists(dn):
+        extra = read(dn)
+        guard("data-news.js", extra)
+        data = data + "\n\n" + extra
     feats = []
     fdir = f"{SRC}/features"
     order = [l.strip() for l in read(f"{fdir}/_order.txt").splitlines() if l.strip() and not l.startswith("#")]

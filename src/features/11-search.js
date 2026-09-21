@@ -20,18 +20,31 @@ var SEARCH_DB = [
  {t:'术语',s:'多校划片 / 摇号 / 特招线 / 一分一段 / 对口直升',a:'#policy'},
  {t:'社区',s:'本周热议：指标到校校内排队',a:'#community'},
  {t:'工具',s:'多孩档案：按孩子切换，日历自动过滤（v0.8）',a:'#me'},
- {t:'工具',s:'提醒导出 .ics / 打印升学行动清单（v0.8）',a:'#me'}
+ {t:'资讯',s:'升学资讯中心：分类筛选 + 编辑台采集与导出（v0.10）',a:'#news'},
+ {t:'关于',s:'关于与联系：编辑与审核规范 / 线索通道 / 站点地图',a:'#about'}
 ];
 function runSearch(){
   var q = document.getElementById('global-search').value.trim().toLowerCase();
   var panel = document.getElementById('search-panel');
   if(!q){ panel.hidden = true; return; }
   var hits = SEARCH_DB.filter(function(x){ return (x.s + ' ' + x.t).toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
-  if(!hits.length){
+  var nhits = [];
+  try{
+    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
+      .map(function(x){ return { t: '资讯', s: x.t, k: x._k }; });
+  }catch(e){}
+  var html = '';
+  if(nhits.length){
+    html += nhits.map(function(x){ return '<div class="s-item" onclick="goNewsByKey(\'' + x.k + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  }
+  if(hits.length){
+    html += hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  }
+  if(!html){
     panel.innerHTML = '<div class="s-item s-empty">未找到相关内容，换个关键词试试（如「指标」「陪读」「军检」）。</div>';
     panel.hidden = false; return;
   }
-  panel.innerHTML = hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  panel.innerHTML = html;
   panel.hidden = false;
 }
 function goSearch(anchor){

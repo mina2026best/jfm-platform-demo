@@ -4,26 +4,30 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
-<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——按企划书 V2.0 第五章规划搭建的 MVP 演示站。" />
+<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——含升学资讯中心与站内编辑台（MVP 演示站，按企划书 V2.0 第五章规划搭建）。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
 <meta property="og:type" content="website" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"鸡父母 · 重庆家长升学信息与生活服务平台","alternateName":"鸡父母","description":"可核验的升学信息、关键时刻的确定性、家长的生活服务（MVP 演示站）。","inLanguage":"zh-CN","url":"https://mina2026best.github.io/jfm-platform-demo/"}</script>
 <style>/*__BUILD_CSS__*/</style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 </head>
 <body>
 
+<a class="skip-link" href="#main">跳到主要内容</a>
+
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.9 · 模块化工程</span>
+    <span class="demo-tag">MVP 演示站 v0.10 · 资讯中心</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
     <nav>
+      <a href="#news">资讯</a>
       <a href="#calendar">日历</a>
       <a href="#policy">政策</a>
       <a href="#schools">档案</a><a href="#compare">对比</a>
@@ -38,6 +42,7 @@
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#news">升学资讯</a>
     <a href="#quiz">入学自查</a>
     <a href="#calendar">升学日历</a>
     <a href="#policy">政策库</a>
@@ -54,7 +59,7 @@
   </div>
 </div>
 
-<header class="hero">
+<header class="hero" id="main">
   <div class="wrap">
     <h1>家长的<b>关键时刻</b>，<br/>值得一份<b>可核验的确定性</b>。</h1>
     <p class="sub">官方政策原文 + <b>人话解读</b> · 升学节点 <b>不错过</b> · 学校信息<b>可核验</b> · 陪读生活<b>有人管</b>。</p>
@@ -156,6 +161,31 @@
         <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="news">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">01.5 · 升学资讯</span><h2>编辑部精选 · 每天 3 分钟</h2></div>
+    <p class="sec-desc">政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布（演示数据，每条标注来源与日期）。「编辑台」支持自助采集、编辑、草稿与导入导出（保存在本机浏览器）。</p>
+    <div class="news-toolbar">
+      <div class="fact-filter news-filter" id="news-filter">
+        <button class="ff on" data-nf="all" onclick="setNewsFilter('all')">全部</button>
+        <button class="ff" data-nf="政策速递" onclick="setNewsFilter('政策速递')">政策速递</button>
+        <button class="ff" data-nf="升学动态" onclick="setNewsFilter('升学动态')">升学动态</button>
+        <button class="ff" data-nf="家庭教育" onclick="setNewsFilter('家庭教育')">家庭教育</button>
+        <button class="ff" data-nf="安全提醒" onclick="setNewsFilter('安全提醒')">安全提醒</button>
+        <button class="ff" data-nf="办事提醒" onclick="setNewsFilter('办事提醒')">办事提醒</button>
+      </div>
+      <div class="news-actions">
+        <button class="mini-btn" onclick="openNewsEditor()">✎ 打开编辑台</button>
+        <button class="mini-btn" onclick="exportNews()">导出资讯</button>
+      </div>
+    </div>
+    <div class="news-grid" id="news-list"></div>
+    <p class="cmp-note" id="news-meta-line" style="margin-top:10px"></p>
+    <p class="cmp-note" style="margin-top:6px">采集说明：内置资讯由 src/news/seed.json 维护；工程侧提供 collect.py 采集脚本（公开页面抓取 → 待审核队列 → 审核后发布），站内编辑台支持人工采集整理与 JSON 导出交接。</p>
+    <div class="news-next">关联入口：<a href="#calendar">升学日历</a> <a href="#policy">政策库</a> <a href="#fact">求真台</a> <a href="#quiz">入学自查</a></div>
   </div>
 </section>
 
@@ -617,6 +647,27 @@
   </div>
 </section>
 
+<section id="about" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">08 · 关于与联系</span><h2>谁在做、怎么审、怎么找到我们</h2></div>
+    <p class="sec-desc">一份能长期被信任的信息服务，靠的是可追溯的编辑流程与明确的边界。以下为演示版说明，正式版将公示完整信息。</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <h4>我们是谁</h4>
+        <p>面向重庆家长的升学信息与生活服务平台：官方政策原文兼人话解读、升学节点提醒、学校档案核验、陪读生活信息服务。不承诺升学结果、不做学科培训、不做排名。</p>
+      </div>
+      <div class="about-card">
+        <h4>编辑与审核规范</h4>
+        <p>资讯中心每日采集公开来源 → 待审核队列 → 双人复核后发布；每条标注来源与日期；红线词库每周巡检。纠错通道：见「求真台 · 提交线索」，24 小时内响应。</p>
+      </div>
+      <div class="about-card">
+        <h4>联系与线索通道</h4>
+        <p>内容纠错：<a href="#fact">求真台</a> 提交线索；机构合作：<a href="#biz">B 端登记</a>；正式版将公示客服邮箱与备案信息（演示版不提供对外联系方式）。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="cols">
@@ -626,12 +677,21 @@
         <p style="margin-top:10px">关联文档：《重庆鸡父母平台企划书》V2.0（208 页）· 经营流程 SOP 执行包</p>
       </div>
       <div>
-        <h5>内容入口</h5>
+        <h5>站点地图</h5>
         <ul>
+          <li><a href="#news">升学资讯</a></li>
           <li><a href="#calendar">升学日历</a></li>
           <li><a href="#policy">政策库</a></li>
+          <li><a href="#quiz">入学自查</a></li>
+          <li><a href="#schools">学校档案</a></li>
+          <li><a href="#compare">择校对比</a></li>
+          <li><a href="#zy">志愿与路径</a></li>
           <li><a href="#fact">求真辟谣台</a></li>
+          <li><a href="#community">家长社区</a></li>
           <li><a href="#life">生活服务</a></li>
+          <li><a href="#beans">升学豆</a></li>
+          <li><a href="#plans">会员体系</a></li>
+          <li><a href="#about">关于与联系</a></li>
         </ul>
       </div>
       <div>
@@ -646,7 +706,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图
     </div>
   </div>
 </footer>
@@ -672,6 +732,43 @@
     <div class="dlg-actions"><button class="btn-main" onclick="submitOrder()">确认支付（演示）</button><span class="hint2">支付通道：微信支付（演示）；iOS 内购差异将按合规评估</span></div>
   </div>
   <div id="om-done" hidden class="dlg-ok"></div>
+</div></dialog>
+<dialog id="news-editor"><div class="dlg">
+  <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
+  <div class="dlg-kicker">资讯中心 · 编辑台（本地）</div>
+  <h4>采集与编辑资讯</h4>
+  <div class="ne-form">
+    <input id="ne-title" placeholder="标题（必填）" />
+    <div class="ne-row2">
+      <select id="ne-cat" aria-label="分类">
+        <option>政策速递</option><option>升学动态</option><option>家庭教育</option><option>安全提醒</option><option>办事提醒</option>
+      </select>
+      <input id="ne-src" placeholder="来源（必填，如：重庆日报）" />
+    </div>
+    <div class="ne-row2">
+      <input id="ne-date" type="date" />
+      <input id="ne-url" placeholder="原文链接（可选）" />
+    </div>
+    <textarea id="ne-sum" placeholder="摘要（1–2 句，列表展示）"></textarea>
+    <textarea id="ne-body" placeholder="正文（可选，点击标题展开）"></textarea>
+  </div>
+  <div class="ne-radios">
+    <label><input type="radio" name="ne-st" value="pub" checked /> 发布</label>
+    <label><input type="radio" name="ne-st" value="draft" /> 存草稿</label>
+  </div>
+  <span class="err-inline" id="ne-err" style="display:none"></span>
+  <div class="dlg-actions">
+    <button class="btn-main" id="ne-save" onclick="saveNewsItem()">保存到资讯流</button>
+  </div>
+  <div class="dlg-sub">我编辑的条目（保存在本机）</div>
+  <div id="ne-list"></div>
+  <div class="dlg-sub">批量导入 / 导出</div>
+  <textarea class="ne-ta" id="ne-import" placeholder="每行一条：标题 | 来源 | 分类（可选）；或直接粘贴 JSON 数组"></textarea>
+  <div class="dlg-actions">
+    <button class="mini-btn" onclick="importNews()">导入</button>
+    <button class="mini-btn" onclick="exportNews()">导出 JSON</button>
+    <span class="hint2" id="ne-note"></span>
+  </div>
 </div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
 <button class="to-top" id="toTop" aria-label="返回顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>

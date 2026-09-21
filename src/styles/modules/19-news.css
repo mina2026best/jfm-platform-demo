@@ -1,0 +1,55 @@
+  /* ---------- v0.10：资讯中心 / 编辑台 / 关于与联系 ---------- */
+  .skip-link{position:fixed;left:12px;top:12px;transform:translateY(-220%);background:var(--navy);color:#fff;padding:9px 16px;border-radius:6px;z-index:120;font-size:13px;transition:transform .15s}
+  .skip-link:focus{transform:none;color:#fff}
+  .sec-desc code{font-family:var(--mono);font-size:.92em;background:#EEF1F4;padding:1px 5px;border-radius:4px}
+  .news-toolbar{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between;margin-bottom:16px}
+  .news-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .news-actions .mini-btn{border-color:var(--accent);color:var(--accent)}
+  .news-actions .mini-btn:hover{background:var(--accent);color:#fff}
+  .news-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .news-item{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--line2);border-radius:10px;padding:14px 18px;transition:box-shadow .15s,border-color .15s}
+  .news-item:hover{box-shadow:0 6px 22px rgba(36,52,77,.08)}
+  .news-item[data-cat="政策速递"]{border-left-color:var(--navy)}
+  .news-item[data-cat="升学动态"]{border-left-color:var(--accent)}
+  .news-item[data-cat="家庭教育"]{border-left-color:var(--blue)}
+  .news-item[data-cat="安全提醒"]{border-left-color:var(--warn)}
+  .news-item[data-cat="办事提醒"]{border-left-color:var(--muted)}
+  .ni-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .ni-cat{color:var(--accent);font-weight:700;letter-spacing:.04em}
+  .ni-tag.local{background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:1px 8px;font-size:10.5px}
+  .ni-title{font-size:15px;color:var(--ink);margin:8px 0 6px;cursor:pointer}
+  .ni-title:hover{color:var(--accent)}
+  .ni-sum{font-size:12.5px;color:var(--ink2);margin:0}
+  .ni-body{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--ink2)}
+  .ni-actions{display:flex;gap:8px;margin-top:10px}
+  .news-next{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:16px;font-size:12.5px;color:var(--muted)}
+  .news-next a{color:var(--accent)}
+  @keyframes newsFlash{0%{box-shadow:0 0 0 3px rgba(14,124,102,.35)}100%{box-shadow:0 0 0 3px rgba(14,124,102,0)}}
+  .news-item.flash{animation:newsFlash 1.2s ease-out 1;border-color:var(--accent)}
+  /* 编辑台 */
+  #news-editor{max-width:700px}
+  #news-editor .dlg{width:min(680px,94vw)}
+  .ne-form input,.ne-form select,.ne-form textarea,.ne-ta{width:100%;box-sizing:border-box;font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line2);border-radius:6px;margin-bottom:8px;background:#fff;color:var(--ink)}
+  .ne-form textarea,.ne-ta{min-height:64px;resize:vertical}
+  .ne-row2{display:flex;gap:8px}
+  .ne-row2>*{flex:1;min-width:0}
+  .ne-radios{display:flex;gap:16px;align-items:center;margin:2px 0 10px;font-size:13px;color:var(--ink2)}
+  .ne-radios label{display:flex;gap:6px;align-items:center;cursor:pointer}
+  .ne-radios input{width:auto;margin:0}
+  .ne-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  .ne-item:last-child{border-bottom:none}
+  .ne-t{flex:1;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ne-st{font-family:var(--mono);font-size:10.5px;border-radius:99px;padding:1px 8px;flex:none}
+  .ne-st.pub{background:var(--accent-soft);color:var(--accent)}
+  .ne-st.draft{background:#F3F5F7;color:var(--muted)}
+  /* 关于与联系 */
+  .about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .about-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .about-card h4{font-size:15px;color:var(--navy);margin-bottom:8px}
+  .about-card p{font-size:12.5px;color:var(--ink2)}
+  .about-card a{color:var(--accent)}
+  @media (max-width:960px){
+    .news-grid{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr}
+    .news-toolbar{align-items:flex-start}
+  }

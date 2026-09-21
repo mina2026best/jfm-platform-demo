@@ -19,7 +19,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }

@@ -24,7 +24,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.11 · 资讯扩容</span>
+    <span class="demo-tag">MVP 演示站 v0.12 · 家长学堂</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -55,6 +55,7 @@
     <a href="#zy">志愿参考</a>
     <a href="#fact">求真台</a>
     <a href="#community">家长社区</a>
+    <a href="#learn">家长学堂</a>
     <a href="#life">生活服务</a>
     <a href="#beans">升学豆</a>
     <a href="#me">我的</a>
@@ -424,6 +425,32 @@
   </div>
 </section>
 
+<section id="learn" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04.7 · 家长学堂</span><h2>专家问答 × 过来人经验</h2></div>
+    <p class="sec-desc">签约教育顾问答疑 + 高年级家长实操经验（示范内容）；升学决策类问题请以当年官方政策与孩子实际情况为准。</p>
+    <div class="fact-filter learn-filter" id="learn-filter">
+      <button class="ff on" data-ls="all" onclick="filterLearn('all')">全部</button>
+      <button class="ff" data-ls="幼升小" onclick="filterLearn('幼升小')">幼升小</button>
+      <button class="ff" data-ls="小升初" onclick="filterLearn('小升初')">小升初</button>
+      <button class="ff" data-ls="初升高" onclick="filterLearn('初升高')">初升高</button>
+      <button class="ff" data-ls="高考" onclick="filterLearn('高考')">高考</button>
+      <button class="ff" data-ls="家长心理" onclick="filterLearn('家长心理')">家长心理</button>
+      <button class="ff" data-ls="陪读生活" onclick="filterLearn('陪读生活')">陪读生活</button>
+    </div>
+    <div class="learn-grid">
+      <div class="learn-col">
+        <h3 class="learn-h">专家问答 <span class="learn-sub">EDUCATION ADVISOR</span></h3>
+        <div id="learn-qa"></div>
+      </div>
+      <div class="learn-col">
+        <h3 class="learn-h">过来人经验 <span class="learn-sub">PARENT STORIES</span></h3>
+        <div id="learn-tips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="life">
   <div class="wrap">
     <div class="sec-head"><span class="no">05 · 生活服务</span><h2>上学之外，每天发生的事</h2></div>
@@ -692,6 +719,7 @@
           <li><a href="#zy">志愿与路径</a></li>
           <li><a href="#fact">求真辟谣台</a></li>
           <li><a href="#community">家长社区</a></li>
+          <li><a href="#learn">家长学堂</a></li>
           <li><a href="#life">生活服务</a></li>
           <li><a href="#beans">升学豆</a></li>
           <li><a href="#plans">会员体系</a></li>
@@ -710,7 +738,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验）
     </div>
   </div>
 </footer>

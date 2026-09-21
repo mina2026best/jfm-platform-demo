@@ -514,6 +514,28 @@
     .about-grid{grid-template-columns:1fr}
     .news-toolbar{align-items:flex-start}
   }
+
+
+/* ============ 20-learn ============ */
+  /* ---------- v0.12：家长学堂 ---------- */
+  .learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+  .learn-col{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .learn-h{font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:12px;display:flex;align-items:baseline;gap:8px}
+  .learn-sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:400;letter-spacing:.06em}
+  .lq{border-bottom:1px dashed var(--line);padding:2px 0}
+  .lq:last-child{border-bottom:none}
+  .lq summary{cursor:pointer;font-size:13.5px;color:var(--ink);padding:9px 2px;list-style:none;display:flex;gap:8px;align-items:baseline}
+  .lq summary::-webkit-details-marker{display:none}
+  .lq summary::after{content:'＋';margin-left:auto;color:var(--muted);font-size:13px;flex:none}
+  .lq[open] summary::after{content:'－'}
+  .lq[open] summary{color:var(--accent)}
+  .lq-tag{flex:none;font-size:10.5px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .lq-tag.gold{background:var(--warn-soft);color:var(--warn)}
+  .lq-a{font-size:12.5px;color:var(--ink2);line-height:1.85;padding:2px 2px 10px;border-left:2px solid var(--accent-soft);padding-left:10px;margin-left:2px}
+  .lq-by{display:block;margin-top:6px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  @media (max-width:960px){
+    .learn-grid{grid-template-columns:1fr}
+  }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 </head>
@@ -528,7 +550,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.11 · 资讯扩容</span>
+    <span class="demo-tag">MVP 演示站 v0.12 · 家长学堂</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -559,6 +581,7 @@
     <a href="#zy">志愿参考</a>
     <a href="#fact">求真台</a>
     <a href="#community">家长社区</a>
+    <a href="#learn">家长学堂</a>
     <a href="#life">生活服务</a>
     <a href="#beans">升学豆</a>
     <a href="#me">我的</a>
@@ -928,6 +951,32 @@
   </div>
 </section>
 
+<section id="learn" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04.7 · 家长学堂</span><h2>专家问答 × 过来人经验</h2></div>
+    <p class="sec-desc">签约教育顾问答疑 + 高年级家长实操经验（示范内容）；升学决策类问题请以当年官方政策与孩子实际情况为准。</p>
+    <div class="fact-filter learn-filter" id="learn-filter">
+      <button class="ff on" data-ls="all" onclick="filterLearn('all')">全部</button>
+      <button class="ff" data-ls="幼升小" onclick="filterLearn('幼升小')">幼升小</button>
+      <button class="ff" data-ls="小升初" onclick="filterLearn('小升初')">小升初</button>
+      <button class="ff" data-ls="初升高" onclick="filterLearn('初升高')">初升高</button>
+      <button class="ff" data-ls="高考" onclick="filterLearn('高考')">高考</button>
+      <button class="ff" data-ls="家长心理" onclick="filterLearn('家长心理')">家长心理</button>
+      <button class="ff" data-ls="陪读生活" onclick="filterLearn('陪读生活')">陪读生活</button>
+    </div>
+    <div class="learn-grid">
+      <div class="learn-col">
+        <h3 class="learn-h">专家问答 <span class="learn-sub">EDUCATION ADVISOR</span></h3>
+        <div id="learn-qa"></div>
+      </div>
+      <div class="learn-col">
+        <h3 class="learn-h">过来人经验 <span class="learn-sub">PARENT STORIES</span></h3>
+        <div id="learn-tips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="life">
   <div class="wrap">
     <div class="sec-head"><span class="no">05 · 生活服务</span><h2>上学之外，每天发生的事</h2></div>
@@ -1196,6 +1245,7 @@
           <li><a href="#zy">志愿与路径</a></li>
           <li><a href="#fact">求真辟谣台</a></li>
           <li><a href="#community">家长社区</a></li>
+          <li><a href="#learn">家长学堂</a></li>
           <li><a href="#life">生活服务</a></li>
           <li><a href="#beans">升学豆</a></li>
           <li><a href="#plans">会员体系</a></li>
@@ -1214,7 +1264,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验）
     </div>
   </div>
 </footer>
@@ -2217,7 +2267,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); initAnnBar(); initSearchShortcut(); initScrollSpy(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -2473,6 +2523,38 @@ function initScrollSpy(){
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   Object.keys(map).forEach(function(id){ var s = document.getElementById(id); if(s) obs.observe(s); });
+}
+
+
+/* ---------- 32-learn ---------- */
+/* ---------- v0.12：家长学堂（专家问答 + 过来人经验） ---------- */
+var LEARN_QA = [
+ {s:'幼升小', q:'要不要提前教拼音和算术？', a:'不建议系统性提前教学。多数小学实行「零起点教学」，抢跑优势通常在两个月内消失，反而容易让孩子开学后注意力下降。更值得投入的是「上学能力」：作息、握笔、表达需求、整理书包。', by:'教育顾问 · 示范'},
+ {s:'小升初', q:'指标到校和择校怎么权衡？', a:'先并排看两条路径：指标到校看「学籍连续性 + 校内表现」，择校看目标校招生范围与通勤成本。建议用「升学路径地图」把时间轴并排拉直，再对照孩子实际学籍做选择——不要问「哪个更好」，要问「哪个更适合我家」。', by:'教育顾问 · 示范'},
+ {s:'初升高', q:'孩子成绩中等，路径怎么规划？', a:'中等成绩段其实是路径最丰富的区间：普高统招、指标到校（若资格在）、民办、中职职教高考、艺体特长都可以纳入备选。建议逐条核对资格条件，再定主攻方向与保底方案。', by:'教育顾问 · 示范'},
+ {s:'高考', q:'志愿「冲稳保」怎么分配？', a:'常见做法是冲 2–3 个、稳 3–4 个、保 1–2 个，具体数量看批次规则与家庭风险承受度。先用「位次换算」做线差参考（演示口径），正式填报以当年一分一段表为准。', by:'教育顾问 · 示范'},
+ {s:'家长心理', q:'大考前，家长怎么说话不添乱？', a:'少问「考得怎么样」，多问「今天想吃什么」。把焦虑留在自己这里，把稳定交给孩子。一句示范话术：「不管结果如何，我们都在。」', by:'教育顾问 · 示范'}
+];
+var LEARN_TIPS = [
+ {s:'初升高', q:'陪考三年，我做对了三件事', a:'一是初一就建「重要节点台账」，每条政策都记文号与日期；二是不拿孩子和别人比，只和上周的他比；三是每次大考后开 20 分钟家庭复盘会：只谈事实，不谈情绪。', by:'2026 届家长 · 示范'},
+ {s:'初升高', q:'志愿填报：我们家做了三次模拟', a:'一模后粗排、政策公布后细排、正式填报前只微调。三次模拟让我们提前发现了两处明显失误（保底校梯度不够、通勤没算往返），正式填报时只花了半小时。', by:'2025 届家长 · 示范'},
+ {s:'陪读生活', q:'租房陪读一年：成本清单与踩坑', a:'省下的通勤时间约 40 分钟/天，但搬家成本、换租溢价、大人通勤变长都是真实成本。建议先短租两个月试住，再决定要不要长租；合同里把「续租涨幅」写清楚。', by:'陪读家长 · 示范'},
+ {s:'家长心理', q:'从焦虑到放手：我把家长群取消了置顶', a:'信息要看，但不必随时在线被带着跑。每天固定 20 分钟看整理好的平台信息就够了；剩下的时间还给自己和家人——家长情绪稳，孩子才稳。', by:'2024 届家长 · 示范'}
+];
+var learnFilter = 'all';
+function filterLearn(s){ learnFilter = s; renderLearn(); }
+function renderLearn(){
+  var qa = document.getElementById('learn-qa'), tips = document.getElementById('learn-tips');
+  if(!qa || !tips) return;
+  var f = function(x){ return learnFilter === 'all' || x.s === learnFilter; };
+  var q = LEARN_QA.filter(f), t = LEARN_TIPS.filter(f);
+  qa.innerHTML = q.length
+    ? q.map(function(x){ return '<details class="lq"><summary><span class="lq-tag">' + esc(x.s) + '</span>' + esc(x.q) + '</summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
+    : '<div class="empty-mini">该分类暂无问答——试试其他分类。</div>';
+  tips.innerHTML = t.length
+    ? t.map(function(x){ return '<details class="lq"><summary><span class="lq-tag gold">' + esc(x.s) + '</span>' + esc(x.q) + '</summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
+    : '<div class="empty-mini">该分类暂无经验分享——试试其他分类。</div>';
+  document.querySelectorAll('#learn-filter .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.ls === learnFilter); });
 }
 </script>
 <dialog id="school-modal"><div class="dlg">

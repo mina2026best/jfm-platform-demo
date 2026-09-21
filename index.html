@@ -536,6 +536,27 @@
   @media (max-width:960px){
     .learn-grid{grid-template-columns:1fr}
   }
+
+
+/* ============ 21-print ============ */
+  /* ---------- v0.13：打印优化 / 更新日志 ---------- */
+  .cl-list{display:grid;gap:8px;max-height:56vh;overflow:auto;margin:4px 0 6px}
+  .cl-item{display:flex;gap:10px;font-size:13px;color:var(--ink2);padding:8px 10px;background:#F3F5F7;border-radius:8px}
+  .cl-item b{font-family:var(--mono);color:var(--accent);flex:none;font-size:12px;padding-top:1px}
+  .cl-item span{min-width:0}
+  @media print{
+    .ann-bar,.top,.searchbox,.nav-burger,.mobile-menu,.to-top,#toast,.kid-bar,.cta-row,.mini-btn,.alert-btn,.btn,.btn-main,.news-toolbar,.news-actions,.ff,.cmp-tools,.dlg,.skip-link,.guide{display:none !important}
+    body{background:#fff;font-size:12.5px}
+    a{color:#000;text-decoration:none}
+    .hero{padding:18px 0 12px}
+    section{padding:26px 0;border-top:1px solid #e5e5e5}
+    .wrap{max-width:none;padding:0 6mm}
+    .alt{background:#fff}
+    .cal,.pol-item,.news-item,.rq-card,.life-card,.plan,.about-card,.learn-col,.fstep,.school-card,.lq{break-inside:avoid;box-shadow:none}
+    .lq-a{display:block !important}
+    footer{background:#fff;color:#333;border-top:1px solid #ddd;margin-top:0;padding:20px 0}
+    footer .legal{color:#555}
+  }
 </style>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 </head>
@@ -550,7 +571,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.12 · 家长学堂</span>
+    <span class="demo-tag">MVP 演示站 v0.13 · 打印与分享</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -821,6 +842,7 @@
       <button id="btn-cmp" onclick="runCompare()">生成对比</button>
       <button id="btn-clear" onclick="clearCompare()" style="background:#fff;color:var(--navy)">清空</button>
       <button id="btn-fav" onclick="favCompare()" style="background:#fff;color:var(--navy)">收藏本次对比</button>
+      <button id="btn-copy-cmp" onclick="copyCompare()" style="background:#fff;color:var(--navy)">复制对比文本</button>
       <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
     </div>
     <div id="cmp-result" aria-live="polite">
@@ -1250,6 +1272,7 @@
           <li><a href="#beans">升学豆</a></li>
           <li><a href="#plans">会员体系</a></li>
           <li><a href="#about">关于与联系</a></li>
+          <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
         </ul>
       </div>
       <div>
@@ -1264,7 +1287,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验）
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.13（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a>
     </div>
   </div>
 </footer>
@@ -2340,7 +2363,9 @@ function newsItemHTML(x){
     + '<h4 class="ni-title" onclick="toggleNewsBody(this)" title="点击展开/收起">' + esc(x.t) + '</h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
-    + (x._local ? '<div class="ni-actions"><button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button></div>' : '')
+    + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'
+    + (x._local ? '<button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button>' : '')
+    + '</div>'
     + '</div>';
 }
 function toggleNewsBody(el){
@@ -2524,6 +2549,59 @@ function initScrollSpy(){
   }, { rootMargin: '-30% 0px -60% 0px' });
   Object.keys(map).forEach(function(id){ var s = document.getElementById(id); if(s) obs.observe(s); });
 }
+/* ---------- v0.13：一键复制 / 更新日志 ---------- */
+function copyText(txt){
+  function done(){ toast('已复制到剪贴板'); }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.left = '-9999px';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('复制失败，请手动选择复制'); }
+    document.body.removeChild(ta);
+  }
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, fallback);
+      return;
+    }
+  }catch(e){}
+  fallback();
+}
+function copyNewsItem(k){
+  var arr = newsCombined(), x = null;
+  for(var i = 0; i < arr.length; i++){ if(arr[i]._k === k){ x = arr[i]; break; } }
+  if(!x) return;
+  var lines = ['【' + (x.cat || '资讯') + '】' + x.t];
+  if(x.sum) lines.push(x.sum);
+  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜鸡父母平台（演示）');
+  copyText(lines.join('\n'));
+}
+function copyCompare(){
+  var box = document.getElementById('cmp-result');
+  var table = box && box.querySelector('table');
+  if(!table){ toast('先生成对比，再复制'); return; }
+  var rows = [];
+  table.querySelectorAll('tr').forEach(function(tr){
+    var cells = [];
+    tr.querySelectorAll('th,td').forEach(function(td){ cells.push(td.textContent.trim()); });
+    if(cells.length) rows.push(cells.join(' ｜ '));
+  });
+  copyText('鸡父母平台 · 择校对比\n' + rows.join('\n') + '\n（口径详见站内「数据来源与核验」）');
+}
+function copySchoolSummary(){
+  var d = (typeof SCHOOL_DB !== 'undefined' && currentOpenSchool) ? SCHOOL_DB[currentOpenSchool] : null;
+  if(!d){ toast('未打开档案'); return; }
+  var lines = ['【学校档案】' + currentOpenSchool];
+  ['办学性质','所在区','招生范围','通勤参考','住宿','收费口径','指标到校','数据来源'].forEach(function(k){
+    if(d[k]) lines.push(k + '：' + d[k]);
+  });
+  lines.push('（来源与核验日期以站内档案为准 · 鸡父母平台演示）');
+  copyText(lines.join('\n'));
+}
+function openChangelog(){
+  var d = document.getElementById('changelog-modal');
+  if(d && d.showModal) d.showModal();
+}
 
 
 /* ---------- 32-learn ---------- */
@@ -2564,7 +2642,7 @@ function renderLearn(){
   <dl class="dlg-kv" id="sm-kv"></dl>
   <div class="dlg-sub">评价（经审核展示，示例）· 争议评价走「证据 + 仲裁」流程</div>
   <div id="sm-evals"></div>
-  <div class="dlg-actions"><button class="btn-main" onclick="addToCompareCurrent()">加入对比</button><span class="hint2" id="sm-note">平台不为其服务背书 · 数据以官方公示为准</span></div>
+  <div class="dlg-actions"><button class="btn-main" onclick="addToCompareCurrent()">加入对比</button><button class="mini-btn" onclick="copySchoolSummary()">复制摘要</button><span class="hint2" id="sm-note">平台不为其服务背书 · 数据以官方公示为准</span></div>
 </div></dialog>
 <dialog id="order-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
@@ -2613,6 +2691,26 @@ function renderLearn(){
     <button class="mini-btn" onclick="importNews()">导入</button>
     <button class="mini-btn" onclick="exportNews()">导出 JSON</button>
     <span class="hint2" id="ne-note"></span>
+  </div>
+</div></dialog>
+<dialog id="changelog-modal"><div class="dlg">
+  <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
+  <div class="dlg-kicker">站点更新 · CHANGELOG</div>
+  <h4>更新日志</h4>
+  <div class="cl-list">
+    <div class="cl-item"><b>v0.13</b><span>打印优化 / 一键复制分享（资讯·对比·档案）/ 更新日志弹窗</span></div>
+    <div class="cl-item"><b>v0.12</b><span>家长学堂：专家问答×5 + 过来人经验×4（筛选与折叠）</span></div>
+    <div class="cl-item"><b>v0.11</b><span>资讯扩容 20 条 / 站点公告条 / 搜索快捷键“/” / 导航滚动高亮</span></div>
+    <div class="cl-item"><b>v0.10</b><span>升学资讯中心（分类筛选·来源标注）+ 站内采集与编辑台 + 关于与联系 + 站点地图</span></div>
+    <div class="cl-item"><b>v0.9</b><span>模块化工程（src/ + 构建脚本）/ 首屏孩子快切条 / 同区学校徽标</span></div>
+    <div class="cl-item"><b>v0.8</b><span>多孩档案 / 日历按孩子过滤 / 提醒导出 .ics / 行动清单打印</span></div>
+    <div class="cl-item"><b>v0.7</b><span>真实数据包（9 项已核验）与数据来源面板</span></div>
+    <div class="cl-item"><b>v0.6</b><span>升学路径地图（6 路径×4 学段）/ 日历「现在该做什么」</span></div>
+    <div class="cl-item"><b>v0.5</b><span>三专家评审整改 24 项</span></div>
+    <div class="cl-item"><b>v0.4</b><span>入学自查 / 信任指标条 / 移动端导航</span></div>
+    <div class="cl-item"><b>v0.3</b><span>全站搜索 / 学校档案库 / 我的 / 会员开通演示 / B端合作</span></div>
+    <div class="cl-item"><b>v0.2</b><span>志愿换算 / 社区 / 升学豆 / 资金规划 / 求真提交 / 租房行情</span></div>
+    <div class="cl-item"><b>v0.1</b><span>首版：三入口 / 日历 / 政策库 / 对比器 / 求真台 / 生活服务</span></div>
   </div>
 </div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>

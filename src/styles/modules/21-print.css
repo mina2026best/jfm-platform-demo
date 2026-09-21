@@ -1,0 +1,18 @@
+  /* ---------- v0.13：打印优化 / 更新日志 ---------- */
+  .cl-list{display:grid;gap:8px;max-height:56vh;overflow:auto;margin:4px 0 6px}
+  .cl-item{display:flex;gap:10px;font-size:13px;color:var(--ink2);padding:8px 10px;background:#F3F5F7;border-radius:8px}
+  .cl-item b{font-family:var(--mono);color:var(--accent);flex:none;font-size:12px;padding-top:1px}
+  .cl-item span{min-width:0}
+  @media print{
+    .ann-bar,.top,.searchbox,.nav-burger,.mobile-menu,.to-top,#toast,.kid-bar,.cta-row,.mini-btn,.alert-btn,.btn,.btn-main,.news-toolbar,.news-actions,.ff,.cmp-tools,.dlg,.skip-link,.guide{display:none !important}
+    body{background:#fff;font-size:12.5px}
+    a{color:#000;text-decoration:none}
+    .hero{padding:18px 0 12px}
+    section{padding:26px 0;border-top:1px solid #e5e5e5}
+    .wrap{max-width:none;padding:0 6mm}
+    .alt{background:#fff}
+    .cal,.pol-item,.news-item,.rq-card,.life-card,.plan,.about-card,.learn-col,.fstep,.school-card,.lq{break-inside:avoid;box-shadow:none}
+    .lq-a{display:block !important}
+    footer{background:#fff;color:#333;border-top:1px solid #ddd;margin-top:0;padding:20px 0}
+    footer .legal{color:#555}
+  }

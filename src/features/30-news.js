@@ -57,7 +57,9 @@ function newsItemHTML(x){
     + '<h4 class="ni-title" onclick="toggleNewsBody(this)" title="点击展开/收起">' + esc(x.t) + '</h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
-    + (x._local ? '<div class="ni-actions"><button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button></div>' : '')
+    + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'
+    + (x._local ? '<button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button>' : '')
+    + '</div>'
     + '</div>';
 }
 function toggleNewsBody(el){

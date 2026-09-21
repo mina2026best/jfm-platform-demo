@@ -319,6 +319,19 @@
   details.todo summary{cursor:pointer;color:var(--accent);font-size:12px;font-weight:600}
   details.todo div{font-size:12px;color:var(--ink2);padding:6px 2px 0;line-height:1.9}
 
+  /* ---------- v0.8：多孩档案 / 日历个性化 ---------- */
+  .kid-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .kid-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);border-radius:99px;padding:5px 12px;font-size:12.5px;color:var(--ink2);background:var(--paper);cursor:pointer}
+  .kid-chip:hover{border-color:var(--accent)}
+  .kid-chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .kid-chip .x{color:var(--muted);font-size:13px;line-height:1;cursor:pointer}
+  .kid-chip .x:hover{color:#B3261E}
+  .cal-personal{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:7px 12px;font-size:12.5px;margin-bottom:14px}
+  .cal-personal[hidden]{display:none}
+  .cal-personal b{color:var(--accent)}
+  .cal-personal button{border:none;background:none;color:var(--accent);font-size:12.5px;cursor:pointer;text-decoration:underline;padding:0}
+  .cal-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+
   /* ---------- 页脚 ---------- */
   footer{border-top:1px solid var(--line);background:var(--navy);color:#C6D0DC;padding:36px 0;margin-top:40px}
   footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
@@ -364,7 +377,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.7 · 真实数据包</span>
+    <span class="demo-tag">MVP 演示站 v0.8 · 多孩个性化</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -447,13 +460,18 @@
 <section id="calendar">
   <div class="wrap">
     <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
-    <p class="sec-desc">示例展示 5 条（正式版为可订阅的分区×学段节点库，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后，日历将按学段自动过滤。</p>
+    <p class="sec-desc">示例展示 5 条（正式版为可订阅的分区×学段节点库，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后按学段自动过滤、支持多孩切换；提醒可导出日历文件，行动清单可打印。</p>
     <div class="fact-filter cal-filter" style="margin-bottom:14px">
       <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
       <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
       <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
       <button class="ff" data-cf="初升高" onclick="filterCal('初升高')">初升高</button>
       <button class="ff" data-cf="高考" onclick="filterCal('高考')">高考</button>
+    </div>
+    <div id="cal-personal" class="cal-personal" hidden></div>
+    <div class="cal-tools">
+      <button class="mini-btn" onclick="printTodoList()">打印行动清单</button>
+      <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF（演示）</span>
     </div>
     <div class="cal-grid">
       <div class="cal" data-stage="幼升小">
@@ -820,20 +838,26 @@
 <section id="me" class="alt">
   <div class="wrap">
     <div class="sec-head"><span class="no">05.7 · 我的</span><h2>孩子档案 · 提醒 · 收藏</h2></div>
-    <p class="sec-desc">演示数据仅保存在本机浏览器；正式版随账号跨设备同步（注册→档案完善 ≤24h、7 日未完善提醒一次，对应 §7.5 经营流程）。</p>
+    <p class="sec-desc">演示数据仅保存在本机浏览器；支持多孩档案（切换后日历按当前孩子的学段过滤），提醒可导出 .ics 或打印行动清单。正式版随账号跨设备同步（注册→档案完善 ≤24h、7 日未完善提醒一次，对应 §7.5 经营流程）。</p>
     <div class="me-grid">
       <div class="me-card">
-        <h4>孩子档案</h4>
+        <h4>孩子档案（多孩）</h4>
+        <div id="kid-chips" class="kid-chips"></div>
         <div class="form-row2">
+          <input id="kid-nick" placeholder="称呼（如：老大）" aria-label="孩子称呼" style="font-size:13.5px;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);width:104px" />
           <select id="me-stage" aria-label="学段"><option value="">学段</option><option>幼儿园</option><option>小学</option><option>初中</option><option>高中</option></select>
           <select id="me-qu" aria-label="区县"><option value="">区县</option><option>渝中区</option><option>江北区</option><option>沙坪坝区</option><option>渝北区</option><option>九龙坡区</option><option>南岸区</option><option>北碚区</option><option>巴南区</option><option>两江新区</option><option>其他</option></select>
-          <button class="btn-main" onclick="saveProfile()">保存</button>
+          <button class="btn-main" onclick="addChild()">添加孩子</button>
         </div>
-        <div id="me-profile-out" class="me-out">尚未保存档案——保存后，升学日历与政策提示将按「学段 × 区县」过滤（演示）。</div>
+        <div id="me-profile-out" class="me-out">添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于政策与生活服务的本地化提示（演示：正式版随账号跨设备同步）。</div>
       </div>
       <div class="me-card">
         <h4>我的提醒 <span class="me-count" id="me-alert-count"></span></h4>
         <div id="me-alerts"></div>
+        <div class="cal-tools" style="margin-top:12px">
+          <button class="mini-btn" onclick="exportIcs()">导出日历文件（.ics）</button>
+          <span class="cmp-note">导入手机 / 电脑日历（演示）</span>
+        </div>
       </div>
       <div class="me-card">
         <h4>对比收藏</h4>
@@ -981,7 +1005,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.6（2026-09-17）：v0.3 全站搜索/学校档案/我的/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.8（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单
     </div>
   </div>
 </footer>
@@ -1160,7 +1184,9 @@ var SEARCH_DB = [
  {t:'工具',s:'入学自查：我家能不能报（3 问）',a:'#quiz'},
  {t:'路径',s:'升学路径地图：6 条路径 × 学段时间轴（普高/指标到校/民办/中职/艺体/出国）',a:'#zy'},
  {t:'术语',s:'多校划片 / 摇号 / 特招线 / 一分一段 / 对口直升',a:'#policy'},
- {t:'社区',s:'本周热议：指标到校校内排队',a:'#community'}
+ {t:'社区',s:'本周热议：指标到校校内排队',a:'#community'},
+ {t:'工具',s:'多孩档案：按孩子切换，日历自动过滤（v0.8）',a:'#me'},
+ {t:'工具',s:'提醒导出 .ics / 打印升学行动清单（v0.8）',a:'#me'}
 ];
 function runSearch(){
   var q = document.getElementById('global-search').value.trim().toLowerCase();
@@ -1253,25 +1279,149 @@ function removeAlert(btn){
   document.querySelectorAll('.alert-btn').forEach(function(b){ if(b.dataset.title === t){ b.classList.remove('on'); b.textContent = '设提醒'; } });
   renderAlerts(); toast('已删除提醒');
 }
-function saveProfile(){
-  var st = document.getElementById('me-stage').value, qu = document.getElementById('me-qu').value;
-  var box = document.getElementById('me-profile-out');
-  if(!st || !qu){ box.innerHTML = '<span class="err-inline">请选择学段与区县。</span>'; return; }
-  localStorage.setItem('jfm_profile', JSON.stringify({stage: st, qu: qu}));
-  box.innerHTML = '<b>已保存：</b>' + esc(st) + ' · ' + esc(qu) + ' —— 升学日历已按学段过滤（演示：正式版跨设备同步）。';
-  var calMap = { '幼儿园':'幼升小','小学':'小升初','初中':'初升高','高中':'高考' };
-  if(calMap[st]) filterCal(calMap[st]);
-  toast('孩子档案已保存，日历已按 ' + calMap[st] + ' 过滤');
+/* ---------- v0.8：多孩档案 / 日历个性化 ---------- */
+var STAGE2CAL = { '幼儿园':'幼升小','小学':'小升初','初中':'初升高','高中':'高考' };
+function getKids(){ try{ return JSON.parse(localStorage.getItem('jfm_children') || '[]'); }catch(e){ return []; } }
+function setKids(a){ localStorage.setItem('jfm_children', JSON.stringify(a)); }
+function getActiveIdx(){
+  var n = parseInt(localStorage.getItem('jfm_active') || '0', 10), k = getKids();
+  return (n >= 0 && n < k.length) ? n : (k.length ? 0 : -1);
 }
-function loadProfile(){
+function setActiveIdx(i){ localStorage.setItem('jfm_active', String(i)); }
+function migrateProfile(){
+  if(getKids().length) return;
   try{
     var prof = JSON.parse(localStorage.getItem('jfm_profile') || 'null');
-    if(prof){
-      document.getElementById('me-stage').value = prof.stage;
-      document.getElementById('me-qu').value = prof.qu;
-      document.getElementById('me-profile-out').innerHTML = '<b>已保存：</b>' + esc(prof.stage) + ' · ' + esc(prof.qu) + ' —— 升学日历与政策提示将按此过滤（演示）。';
-    }
+    if(prof && prof.stage && prof.qu){ setKids([{ nick: '孩子', stage: prof.stage, qu: prof.qu }]); }
   }catch(e){}
+}
+function renderKids(){
+  var box = document.getElementById('kid-chips'); if(!box) return;
+  var k = getKids(), act = getActiveIdx();
+  if(!k.length){ box.innerHTML = '<span class="cmp-note">还没有孩子档案——在下方添加第一个。</span>'; return; }
+  box.innerHTML = k.map(function(c, i){
+    return '<span class="kid-chip' + (i === act ? ' on' : '') + '" onclick="switchKid(' + i + ')" title="点按切换为当前孩子">'
+      + esc((c.nick || '孩子') + ' · ' + c.stage + ' · ' + c.qu)
+      + ' <span class="x" role="button" aria-label="删除这个孩子" onclick="event.stopPropagation(); delKid(' + i + ')">×</span></span>';
+  }).join('');
+}
+function kidNote(msg){
+  var box = document.getElementById('me-profile-out'); if(!box) return;
+  if(msg){ box.innerHTML = msg; return; }
+  var k = getKids(), act = getActiveIdx();
+  if(act < 0){ box.innerHTML = '添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于本地化提示（演示：正式版随账号跨设备同步）。'; return; }
+  var c = k[act];
+  box.innerHTML = '<b>当前：</b>' + esc(c.nick || '孩子') + ' · ' + esc(c.stage) + ' · ' + esc(c.qu)
+    + ' —— 日历已按「' + (STAGE2CAL[c.stage] || '全部学段') + '」过滤；点上方孩子条切换，× 删除。';
+}
+function applyKidFilter(){
+  var k = getKids(), act = getActiveIdx(), chip = document.getElementById('cal-personal');
+  if(act < 0 || !k[act]){ if(chip) chip.hidden = true; filterCal('all'); return; }
+  var c = k[act], cal = STAGE2CAL[c.stage] || 'all';
+  filterCal(cal);
+  if(chip){
+    chip.hidden = false;
+    chip.innerHTML = '日历已按 <b>' + esc(c.nick || '孩子') + '</b>（' + esc(c.stage) + ' · ' + esc(c.qu) + '）的学段过滤'
+      + ' <button onclick="clearKidFilter()">查看全部学段</button>';
+  }
+}
+function clearKidFilter(){
+  filterCal('all');
+  var chip = document.getElementById('cal-personal'); if(chip) chip.hidden = true;
+}
+function addChild(){
+  var st = document.getElementById('me-stage').value, qu = document.getElementById('me-qu').value;
+  var nick = document.getElementById('kid-nick').value.trim();
+  if(!st || !qu){ kidNote('<span class="err-inline">请选择学段与区县（称呼可不填，自动记为「老大/老二…」）。</span>'); return; }
+  if(!nick){
+    var names = ['老大','老二','老三','老四','老五'];
+    nick = names[getKids().length] || ('孩子' + (getKids().length + 1));
+  }
+  var k = getKids();
+  k.push({ nick: nick, stage: st, qu: qu });
+  setKids(k); setActiveIdx(k.length - 1);
+  document.getElementById('kid-nick').value = '';
+  renderKids(); applyKidFilter(); kidNote();
+  toast('已添加 ' + nick + '，日历已按「' + STAGE2CAL[st] + '」过滤');
+}
+function switchKid(i){
+  setActiveIdx(i); renderKids(); applyKidFilter(); kidNote();
+  var c = getKids()[i];
+  if(c) toast('已切换到 ' + (c.nick || '孩子') + '（' + (STAGE2CAL[c.stage] || '全部') + '）');
+}
+function delKid(i){
+  var k = getKids(); if(i < 0 || i >= k.length) return;
+  var name = k[i].nick || '孩子';
+  k.splice(i, 1); setKids(k);
+  if(getActiveIdx() >= k.length) setActiveIdx(k.length ? k.length - 1 : 0);
+  renderKids(); applyKidFilter(); kidNote();
+  toast('已删除 ' + name + ' 的档案');
+}
+/* ---------- v0.8：提醒导出 .ics ---------- */
+function icsDate(t){
+  var m = String(t || '').match(/(\d{4})-(\d{2})/);
+  return m ? (m[1] + m[2] + '01') : '20260601';
+}
+function icsEsc(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,'); }
+function exportIcs(){
+  var a = getAlerts();
+  if(!a.length){ toast('还没有提醒——到「升学日历」给节点点「设提醒」再导出'); return; }
+  var stamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:鸡父母 · 升学节点提醒（演示）'];
+  a.forEach(function(t, i){
+    var ds = icsDate(t);
+    var d = new Date(parseInt(ds.slice(0,4),10), parseInt(ds.slice(4,6),10) - 1, 1);
+    d.setMonth(d.getMonth() + 1);
+    var de = d.getFullYear() + String(d.getMonth() + 1).padStart(2,'0') + '01';
+    L.push('BEGIN:VEVENT');
+    L.push('UID:jfm-' + Date.now() + '-' + i + '@demo');
+    L.push('DTSTAMP:' + stamp);
+    L.push('DTSTART;VALUE=DATE:' + ds);
+    L.push('DTEND;VALUE=DATE:' + de);
+    L.push('SUMMARY:' + icsEsc(t));
+    L.push('DESCRIPTION:鸡父母平台 MVP 演示导出；节点以当年官方发布为准');
+    L.push('END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  var blob = new Blob([L.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  var u = URL.createObjectURL(blob), el = document.createElement('a');
+  el.href = u; el.download = 'jfm-reminders.ics';
+  document.body.appendChild(el); el.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); el.remove(); }, 1500);
+  toast('已导出 .ics（' + a.length + ' 条）——可导入手机 / 电脑日历');
+}
+/* ---------- v0.8：行动清单打印 ---------- */
+function printTodoList(){
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#calendar .cal')).filter(function(c){ return c.style.display !== 'none'; });
+  if(!cards.length){ toast('当前过滤条件下没有可打印的节点'); return; }
+  var k = getKids(), act = getActiveIdx();
+  var who = (act >= 0 && k[act]) ? (esc(k[act].nick + '（' + k[act].stage + ' · ' + k[act].qu + '）')) : '全部学段';
+  var rows = cards.map(function(c){
+    var todo = c.querySelector('.todo div');
+    var items = todo ? todo.innerHTML.split(/<br\s*\/?>/i).filter(function(x){ return x.trim(); }) : [];
+    return '<h3><span class="p-date">' + esc(c.querySelector('.date').textContent) + '</span>'
+      + '<span class="p-stage">' + esc(c.querySelector('.stage').textContent) + '</span> '
+      + esc(c.querySelector('h4').textContent) + '</h3>'
+      + (items.length ? '<ul>' + items.map(function(x){ return '<li>' + x + '</li>'; }).join('') + '</ul>' : '');
+  }).join('');
+  var w = window.open('', '_blank');
+  if(!w){ toast('浏览器拦截了打印窗口——请允许弹出窗口后重试'); return; }
+  w.document.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>升学行动清单 · 鸡父母</title><style>'
+    + 'body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:#17212E;max-width:720px;margin:32px auto;padding:0 20px;font-size:14px;line-height:1.7}'
+    + 'h1{font-family:"Songti SC","Noto Serif SC",serif;font-size:22px;margin:0 0 4px}'
+    + '.p-meta{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6B7683;margin-bottom:18px}'
+    + 'h3{font-size:15px;margin:16px 0 4px}'
+    + '.p-date{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#0E7C66;font-weight:700}'
+    + '.p-stage{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:99px;background:#E8F2EF;color:#0E7C66;margin-left:8px}'
+    + 'ul{margin:6px 0 0 18px;font-size:12.5px;color:#3C4858}'
+    + '.p-foot{margin-top:24px;padding-top:10px;border-top:1px dashed #C9D1D9;font-size:10.5px;color:#6B7683}'
+    + '</style></head><body>'
+    + '<h1>升学行动清单</h1>'
+    + '<div class="p-meta">鸡父母 · 重庆（MVP 演示 v0.8）· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
+    + rows
+    + '<div class="p-foot">清单由演示站生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
+    + '<script>window.onload=function(){setTimeout(function(){window.print()},200)}<\/script></body></html>');
+  w.document.close();
 }
 function favCompare(){
   var u = ['sel-a','sel-b','sel-c'].map(function(id){ return document.getElementById(id).value; }).filter(Boolean)
@@ -1557,7 +1707,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); loadProfile(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }

@@ -5,7 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
 <meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——按企划书 V2.0 第五章规划搭建的 MVP 演示站。" />
-<style>
+<meta name="theme-color" content="#24344D" />
+<meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
+<meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
+<meta property="og:type" content="website" />
+<style>/* ============ base ============ */
+
   :root{
     --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#6B7683;
     --navy:#24344D; --navy2:#3E5375; --blue:#5D77A3; --line:#E3E7EC; --line2:#C9D1D9;
@@ -16,10 +21,18 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  section[id]{scroll-margin-top:76px}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  }
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7}
   a{color:var(--navy)}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
+
+
+/* ============ 01-top ============ */
   /* ---------- 顶栏 ---------- */
   .top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .top .wrap{display:flex;align-items:center;gap:26px;height:60px}
@@ -33,6 +46,9 @@
   .top nav a.cta:hover{background:var(--navy2);color:#fff}
   .demo-tag{font-family:var(--mono);font-size:10px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:2px 7px;letter-spacing:.08em}
 
+
+
+/* ============ 02-hero ============ */
   /* ---------- 首屏 ---------- */
   .hero{padding:64px 0 46px;border-bottom:1px solid var(--line);background:
     radial-gradient(1200px 400px at 85% -10%, #E9EEF5 0%, transparent 60%),var(--bg)}
@@ -51,6 +67,9 @@
   .entry .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--accent);font-weight:600}
   .entry:hover .go{text-decoration:underline}
 
+
+
+/* ============ 03-section ============ */
   /* ---------- 区块通用 ---------- */
   section{padding:52px 0}
   section.alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -59,6 +78,9 @@
   .sec-head h2{font-family:var(--serif);font-size:26px;color:var(--navy)}
   .sec-desc{color:var(--muted);font-size:14px;margin-bottom:26px;max-width:52em}
 
+
+
+/* ============ 04-calendar ============ */
   /* ---------- 日历 ---------- */
   .cal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .cal{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;position:relative}
@@ -68,6 +90,9 @@
   .cal p{font-size:12.5px;color:var(--muted)}
   .cal .src{margin-top:10px;font-family:var(--mono);font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
 
+
+
+/* ============ 05-policy ============ */
   /* ---------- 政策列表 ---------- */
   .pol{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;align-items:start}
   .pol-item{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--navy);border-radius:8px;padding:16px 18px;margin-bottom:12px}
@@ -82,6 +107,9 @@
   .term dt{font-family:var(--mono);font-size:12px;color:var(--accent);padding-top:2px}
   .term dd{color:var(--ink2)}
 
+
+
+/* ============ 06-compare ============ */
   /* ---------- 对比器 ---------- */
   .cmp-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
   .cmp-tools select{font-family:var(--sans);font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;background:#fff;color:var(--ink)}
@@ -97,6 +125,9 @@
   .cmp-table tr:last-child td{border-bottom:2px solid var(--navy)}
   .cmp-empty{border:1px dashed var(--line2);border-radius:10px;padding:36px;text-align:center;color:var(--muted);background:var(--paper)}
 
+
+
+/* ============ 07-fact ============ */
   /* ---------- 求真台 ---------- */
   .rq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .rq-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
@@ -108,6 +139,9 @@
   .rq-card p{font-size:13px;color:var(--ink2);margin-bottom:8px}
   .rq-card .src{font-family:var(--mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
 
+
+
+/* ============ 08-life ============ */
   /* ---------- 生活服务 ---------- */
   .life{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
   .life-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
@@ -116,6 +150,9 @@
   .life-card p{font-size:12px;color:var(--muted)}
   .life-card .soon{font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:8px;display:block}
 
+
+
+/* ============ 09-plans ============ */
   /* ---------- 会员 ---------- */
   .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
   .plan{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;position:relative}
@@ -135,6 +172,9 @@
   .plan.hl .btn:hover{background:#0A6151}
   .plan-note{margin-top:14px;font-size:12px;color:var(--muted)}
 
+
+
+/* ============ 10-flow ============ */
   /* ---------- 流程 ---------- */
   .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;counter-reset:f}
   .fstep{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px;position:relative;counter-increment:f}
@@ -143,6 +183,9 @@
   .fstep p{font-size:11.5px;color:var(--muted)}
   .fstep .sla{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-top:8px;display:block}
 
+
+
+/* ============ 11-forms ============ */
   /* ---------- 表单与新增模块 ---------- */
   .form-card{grid-column:1/-1;background:var(--navy);color:#DCE4EE;border-radius:10px;padding:20px 22px}
   .form-card h4{color:#fff;font-size:15px;margin-bottom:4px}
@@ -180,6 +223,9 @@
   .zy-tools button{font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;font-family:var(--sans)}
   .zy-tools label{font-size:13px;color:var(--ink2)}
 
+
+
+/* ============ 12-v03-ui ============ */
   /* ---------- v0.3：搜索/档案/我的/弹窗 ---------- */
   .searchbox{position:relative;margin-left:16px;flex:1;max-width:250px}
   .searchbox input{width:100%;font-size:13.5px;padding:7px 12px;border:1px solid var(--line2);border-radius:8px;font-family:var(--sans);background:#fff}
@@ -253,6 +299,9 @@
   .flash{animation:flashbg 1.3s ease}
   @keyframes flashbg{0%{box-shadow:0 0 0 4px rgba(14,124,102,.30)}100%{box-shadow:0 0 0 4px rgba(14,124,102,0)}}
 
+
+
+/* ============ 13-v04-ui ============ */
   /* ---------- v0.4：信任条/汉堡菜单/自查器/路径/筛选 ---------- */
   .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
   .t-item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;gap:12px;align-items:center}
@@ -292,6 +341,9 @@
   .to-top.show{opacity:.92;pointer-events:auto}
   .to-top:hover{background:var(--navy2)}
 
+
+
+/* ============ 14-v07-data ============ */
   /* ---------- v0.7：数据层 ---------- */
   .data-badge{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 8px;margin-top:6px}
   .data-version{font-family:var(--mono);font-size:11px;color:var(--muted)}
@@ -304,6 +356,9 @@
   .ds-ver.ok{background:var(--accent-soft);color:var(--accent)}
   .ds-ver.pending{background:var(--warn-soft);color:var(--warn)}
 
+
+
+/* ============ 15-calendar ============ */
   /* ---------- v0.6：路径地图 / 日历行动清单 ---------- */
   .pm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
   .pm-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
@@ -319,6 +374,9 @@
   details.todo summary{cursor:pointer;color:var(--accent);font-size:12px;font-weight:600}
   details.todo div{font-size:12px;color:var(--ink2);padding:6px 2px 0;line-height:1.9}
 
+
+
+/* ============ 16-calendar ============ */
   /* ---------- v0.8：多孩档案 / 日历个性化 ---------- */
   .kid-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
   .kid-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);border-radius:99px;padding:5px 12px;font-size:12.5px;color:var(--ink2);background:var(--paper);cursor:pointer}
@@ -332,6 +390,20 @@
   .cal-personal button{border:none;background:none;color:var(--accent);font-size:12.5px;cursor:pointer;text-decoration:underline;padding:0}
   .cal-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
 
+
+  /* ---------- v0.9：首屏孩子快切条 / 同区徽标 ---------- */
+  .kid-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin-top:18px;font-size:13px;color:var(--ink2)}
+  .kid-bar .kb-label{font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:.08em}
+  .kid-bar .kb-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);border-radius:99px;padding:4px 12px;font-size:12.5px;cursor:pointer;background:#fff;color:var(--ink2)}
+  .kid-bar .kb-chip:hover{border-color:var(--accent)}
+  .kid-bar .kb-chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .kid-bar .kb-go{margin-left:auto;font-size:12.5px;color:var(--accent);text-decoration:none;font-weight:600}
+  .kid-bar .kb-go:hover{text-decoration:underline}
+  .school-card.qu-match{border-color:var(--accent)}
+  .school-card .qu-badge{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
+
+
+/* ============ 17-footer ============ */
   /* ---------- 页脚 ---------- */
   footer{border-top:1px solid var(--line);background:var(--navy);color:#C6D0DC;padding:36px 0;margin-top:40px}
   footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
@@ -342,6 +414,9 @@
   footer a:hover{color:#fff}
   .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:11.5px;color:#8395AB;line-height:1.9}
 
+
+
+/* ============ 18-responsive ============ */
   /* ---------- 响应式 ---------- */
   @media (max-width:960px){
     .entries,.cal-grid,.plans{grid-template-columns:repeat(2,1fr)}
@@ -377,7 +452,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.8 · 多孩个性化</span>
+    <span class="demo-tag">MVP 演示站 v0.9 · 模块化工程</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -433,6 +508,7 @@
       <a href="#data-sources" style="font-size:12px;color:var(--accent)">查看数据来源与核验状态 →</a>
     </div>
     <p class="guide">第一次来？三步上手：<b>① 看升学日历</b>，别错过节点 → <b>② 用入学自查</b>，看看「我家能不能报」→ <b>③ 群里传言别急信</b>，先到求真台对一对。</p>
+    <div id="kid-bar" class="kid-bar" hidden></div>
     <div class="entries">
       <a class="entry" href="#policy">
         <span class="no">入口 01</span>
@@ -1005,7 +1081,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.8（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.9（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标
     </div>
   </div>
 </footer>
@@ -1031,6 +1107,9 @@ function dataBadge(key){
   if(!d) return '';
   return '<span class="data-badge">' + (d.verified ? '✓ 已核验 · ' : '○ 待核验 · ') + d.source + '（截至 ' + d.asOf + '）</span>';
 }
+
+
+/* ---------- 10-demo-data ---------- */
 /* ---------- 演示数据（正式版来自后台数据库并标注核验日期） ---------- */
 var SCHOOL_DB = {
   "南开中学（沙坪坝）": {
@@ -1164,6 +1243,9 @@ function runCompare(){
   html+='<p class="cmp-note" style="margin-top:12px">口径说明：「录取线/排名」类字段按合规红线不提供（教育部门明令禁止排名炒作）；数据缺失如实标注。正式版每字段附核验日期与来源链接，可一键生成对比图分享到家庭群。</p>';
   box.innerHTML=html;
 }
+
+
+/* ---------- 11-search ---------- */
 /* ---------- v0.3：全站搜索 ---------- */
 var SEARCH_DB = [
  {t:'政策',s:'2026 年中考政策：联招学校约 113 所',a:'#policy'},
@@ -1205,13 +1287,16 @@ function goSearch(anchor){
   var el = document.querySelector(anchor);
   if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('flash'); setTimeout(function(){ el.classList.remove('flash'); }, 1400); }
 }
+
+
+/* ---------- 12-school ---------- */
 /* ---------- v0.3：学校档案 ---------- */
 var currentOpenSchool = '';
 function renderSchools(){
   var g = document.getElementById('school-grid'); if(!g) return;
   g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
     var d = SCHOOL_DB[k], key = encodeURIComponent(k);
-    return '<div class="school-card"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span></div>'
+    return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
       + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
@@ -1249,6 +1334,9 @@ function addToCompareName(name){
   }
   toast('对比位已满（最多 3 所），请先清空后再加入');
 }
+
+
+/* ---------- 13-me ---------- */
 /* ---------- v0.3：我的（提醒/档案/收藏） ---------- */
 function getAlerts(){ try{ return JSON.parse(localStorage.getItem('jfm_alerts') || '[]'); }catch(e){ return []; } }
 function setAlerts(a){ localStorage.setItem('jfm_alerts', JSON.stringify(a)); }
@@ -1279,6 +1367,9 @@ function removeAlert(btn){
   document.querySelectorAll('.alert-btn').forEach(function(b){ if(b.dataset.title === t){ b.classList.remove('on'); b.textContent = '设提醒'; } });
   renderAlerts(); toast('已删除提醒');
 }
+
+
+/* ---------- 14-kids ---------- */
 /* ---------- v0.8：多孩档案 / 日历个性化 ---------- */
 var STAGE2CAL = { '幼儿园':'幼升小','小学':'小升初','初中':'初升高','高中':'高考' };
 function getKids(){ try{ return JSON.parse(localStorage.getItem('jfm_children') || '[]'); }catch(e){ return []; } }
@@ -1316,7 +1407,7 @@ function kidNote(msg){
 }
 function applyKidFilter(){
   var k = getKids(), act = getActiveIdx(), chip = document.getElementById('cal-personal');
-  if(act < 0 || !k[act]){ if(chip) chip.hidden = true; filterCal('all'); return; }
+  if(act < 0 || !k[act]){ if(chip) chip.hidden = true; filterCal('all'); renderKidBar(); clearQuBadge(); return; }
   var c = k[act], cal = STAGE2CAL[c.stage] || 'all';
   filterCal(cal);
   if(chip){
@@ -1324,6 +1415,48 @@ function applyKidFilter(){
     chip.innerHTML = '日历已按 <b>' + esc(c.nick || '孩子') + '</b>（' + esc(c.stage) + ' · ' + esc(c.qu) + '）的学段过滤'
       + ' <button onclick="clearKidFilter()">查看全部学段</button>';
   }
+  renderKidBar(); markSameDistrictSchools(c.qu);
+}
+/* ---------- v0.9：首屏孩子快切条 + 同区学校徽标 + 自查预填 ---------- */
+var QU_FILTER = ''; // 当前孩子区县（重渲染学校卡时打标用）
+function renderKidBar(){
+  var bar = document.getElementById('kid-bar'); if(!bar) return;
+  var k = getKids(), act = getActiveIdx();
+  if(!k.length){
+    bar.hidden = false;
+    bar.innerHTML = '<span class="kb-label">个性化</span>还没有孩子档案——'
+      + '<a class="kb-go" href="#me">去「我的」添加孩子档案 →</a>';
+    return;
+  }
+  var c = k[act];
+  bar.hidden = false;
+  bar.innerHTML = '<span class="kb-label">当前关注</span>'
+    + k.map(function(x, i){
+      return '<span class="kb-chip' + (i === act ? ' on' : '') + '" onclick="switchKid(' + i + ')" title="点按切换当前孩子">'
+        + esc(x.nick || '孩子') + ' · ' + esc(x.stage) + '</span>';
+    }).join('')
+    + '<span>' + esc(c.qu) + ' · 日历已按「' + esc(STAGE2CAL[c.stage] || '全部') + '」过滤</span>'
+    + '<a class="kb-go" href="#me">管理档案 →</a>';
+  prefillQuiz();
+}
+function markSameDistrictSchools(qu){
+  QU_FILTER = qu || '';
+  renderSchools();
+}
+function clearQuBadge(){
+  QU_FILTER = '';
+  var g = document.getElementById('school-grid');
+  if(g) renderSchools();
+}
+function prefillQuiz(){
+  var k = getKids(), act = getActiveIdx();
+  if(act < 0 || !k[act]) return;
+  var c = k[act];
+  ['qz-qu','qz-stage'].forEach(function(id){
+    var el = document.getElementById(id); if(!el || el.value) return;
+    var want = id === 'qz-qu' ? c.qu : c.stage;
+    for(var i = 0; i < el.options.length; i++){ if(el.options[i].text === want){ el.selectedIndex = i; break; } }
+  });
 }
 function clearKidFilter(){
   filterCal('all');
@@ -1357,6 +1490,9 @@ function delKid(i){
   renderKids(); applyKidFilter(); kidNote();
   toast('已删除 ' + name + ' 的档案');
 }
+
+
+/* ---------- 15-ics ---------- */
 /* ---------- v0.8：提醒导出 .ics ---------- */
 function icsDate(t){
   var m = String(t || '').match(/(\d{4})-(\d{2})/);
@@ -1390,6 +1526,9 @@ function exportIcs(){
   setTimeout(function(){ URL.revokeObjectURL(u); el.remove(); }, 1500);
   toast('已导出 .ics（' + a.length + ' 条）——可导入手机 / 电脑日历');
 }
+
+
+/* ---------- 16-print ---------- */
 /* ---------- v0.8：行动清单打印 ---------- */
 function printTodoList(){
   var cards = Array.prototype.slice.call(document.querySelectorAll('#calendar .cal')).filter(function(c){ return c.style.display !== 'none'; });
@@ -1443,6 +1582,9 @@ function restoreFav(){
   document.getElementById('compare').scrollIntoView({behavior:'smooth'});
   toast('已恢复对比并生成');
 }
+
+
+/* ---------- 17-order ---------- */
 /* ---------- v0.3：会员开通演示 ---------- */
 var ORDER_N = 0;
 function openOrder(name, price, beans){
@@ -1468,6 +1610,9 @@ function submitOrder(){
     + '。<br/><span class="hint2">合规演示：自动续费默认关闭；退款按未使用天数比例（协议明示）；未交付不确认收入。</span>';
   toast('订单演示成功：' + id);
 }
+
+
+/* ---------- 18-biz ---------- */
 /* ---------- v0.3：B 端意向 ---------- */
 var BZ_N = 0;
 function submitBiz(){
@@ -1482,6 +1627,9 @@ function submitBiz(){
   document.getElementById('bz-name').value = ''; document.getElementById('bz-intro').value = '';
   toast('合作意向已提交（演示）');
 }
+
+
+/* ---------- 19-mobile-menu ---------- */
 /* ---------- v0.4：移动菜单 ---------- */
 function toggleMobileMenu(){
   var m = document.getElementById('mobileMenu'), b = document.getElementById('navBurger');
@@ -1498,6 +1646,9 @@ document.addEventListener('click', function(e){
     if(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); }
   }
 });
+
+
+/* ---------- 20-fact-filter ---------- */
 /* ---------- v0.4：求真筛选 ---------- */
 function filterFact(mode){
   document.querySelectorAll('#fact .rq-card').forEach(function(c){
@@ -1510,6 +1661,9 @@ function filterFact(mode){
     b.classList.toggle('on', b.dataset.f === mode);
   });
 }
+
+
+/* ---------- 21-cal-filter ---------- */
 /* ---------- v0.5：日历学段筛选 ---------- */
 function filterCal(mode){
   document.querySelectorAll('#calendar .cal').forEach(function(c){
@@ -1519,6 +1673,9 @@ function filterCal(mode){
     b.classList.toggle('on', b.dataset.cf === mode);
   });
 }
+
+
+/* ---------- 22-quiz ---------- */
 /* ---------- v0.4：入学自查（规则演示） ---------- */
 function runQuiz(){
   var qu = document.getElementById('qz-qu').value,
@@ -1544,6 +1701,9 @@ function runQuiz(){
   L.push('<span style="font-size:12px;color:var(--muted)">本自查为规则演示，不构成入学承诺；最终以区教委当年度政策与学校招生细则为准。</span>');
   box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
 }
+
+
+/* ---------- 23-data-sources ---------- */
 /* ---------- v0.7：数据来源面板 ---------- */
 function renderDataSources(){
   var dv = document.getElementById('dataVersion');
@@ -1559,6 +1719,9 @@ function renderDataSources(){
     + rows + '</table>'
     + '<p class="cmp-note" style="margin-top:8px">当前数据包：' + verified + '/' + Object.keys(DATA_SOURCES).length + ' 项已核验 · 版本 ' + DATA_VERSION.id + '。来源变更时本表与页面数字同步更新并全站红点提示。</p>';
 }
+
+
+/* ---------- 24-path-map ---------- */
 /* ---------- v0.6：升学路径地图 ---------- */
 var PATH_MAP = {
   "普高统招（联招）": {
@@ -1631,6 +1794,9 @@ function renderPath(key){
         return '<div class="pm-stage"><div class="ps">' + s.s + '</div><h5>' + s.h + '</h5><p>' + s.a + '</p></div>';
       }).join('') + '</div>';
 }
+
+
+/* ---------- 25-init ---------- */
 /* ---------- v0.3：初始化 ---------- */
 function initSelects(){
   var keys = Object.keys(SCHOOL_DB);
@@ -1643,6 +1809,9 @@ function initSelects(){
     if(cur) sel.value = cur;
   });
 }
+
+
+/* ---------- 26-zy ---------- */
 /* ---------- 志愿位次换算（演示口径） ---------- */
 var ZY = { ls:{line:510,name:"历史类",src:"tezhao"}, wl:{line:496,name:"物理类",src:"tezhao"} };
 function runZy(){
@@ -1660,6 +1829,9 @@ function runZy(){
   else band="特招线下 "+Math.abs(diff)+" 分 · 建议同步看本科批策略与指标到校/艺体等路径（演示）";
   box.innerHTML='<div class="zy-out"><b>'+cfg.name+' '+v+' 分</b>：线差 '+ (diff>=0?"+":"") +diff+' 分（相对 2026 年特招线 '+cfg.line+'，'+DATA_SOURCES[cfg.src].source.split('（')[0]+'）。<br/>参考位次区间：'+band+'。<br/>'+dataBadge(cfg.src)+'<br/><span style="font-size:12px;color:var(--muted)">口径：2026 年真实特招线 + 演示位次区间；正式版接入当年一分一段表（位次法）。本工具不构成录取预测。</span></div>';
 }
+
+
+/* ---------- 27-fact-submit ---------- */
 /* ---------- 求真线索提交 ---------- */
 var CLUE_N = 0;
 function submitClue(){
@@ -1673,6 +1845,9 @@ function submitClue(){
   ok.style.display="block";
   document.getElementById("clue-text").value="";
 }
+
+
+/* ---------- 28-checkin ---------- */
 /* ---------- 升学豆签到 ---------- */
 var checked=false;
 function checkin(){
@@ -1686,6 +1861,9 @@ function checkin(){
   var mb=document.getElementById("me-beans");
   if(mb) mb.textContent=v.textContent;
 }
+
+
+/* ---------- 29-fund ---------- */
 /* ---------- 资金规划参照（演示） ---------- */
 function fundCalc(){
   var st=document.getElementById("fund-stage").value;
@@ -1707,7 +1885,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }

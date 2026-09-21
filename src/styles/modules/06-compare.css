@@ -1,0 +1,15 @@
+  /* ---------- 对比器 ---------- */
+  .cmp-tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+  .cmp-tools select{font-family:var(--sans);font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;background:#fff;color:var(--ink)}
+  .cmp-tools button{font-family:var(--sans);font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer}
+  .cmp-tools button:hover{background:var(--navy2)}
+  .cmp-note{font-size:12px;color:var(--muted)}
+  #cmp-result,#rent-wrap{overflow-x:auto}
+  .cmp-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13.5px;min-width:560px}
+  .cmp-table th{background:var(--navy);color:#fff;font-weight:600;padding:11px 14px;text-align:left;font-size:13px}
+  .cmp-table th:first-child{width:150px}
+  .cmp-table td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  .cmp-table td:first-child{color:var(--ink);font-weight:500}
+  .cmp-table tr:last-child td{border-bottom:2px solid var(--navy)}
+  .cmp-empty{border:1px dashed var(--line2);border-radius:10px;padding:36px;text-align:center;color:var(--muted);background:var(--paper)}
+

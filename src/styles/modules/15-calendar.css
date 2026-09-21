@@ -1,0 +1,15 @@
+  /* ---------- v0.6：路径地图 / 日历行动清单 ---------- */
+  .pm-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .pm-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+  .pm-sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .pm-tag{font-size:12.5px;padding:4px 14px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .pm-tag.risk{background:var(--warn-soft);color:var(--warn)}
+  .pm-stages{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .pm-stage{background:#F8FAFB;border:1px solid var(--line);border-radius:10px;padding:14px}
+  .pm-stage .ps{font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700;letter-spacing:.08em}
+  .pm-stage h5{font-size:14px;margin:6px 0;color:var(--ink)}
+  .pm-stage p{font-size:12.5px;color:var(--muted)}
+  details.todo{margin-top:10px}
+  details.todo summary{cursor:pointer;color:var(--accent);font-size:12px;font-weight:600}
+  details.todo div{font-size:12px;color:var(--ink2);padding:6px 2px 0;line-height:1.9}
+

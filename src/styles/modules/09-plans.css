@@ -1,0 +1,19 @@
+  /* ---------- 会员 ---------- */
+  .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+  .plan{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;position:relative}
+  .plan.hl{border:2px solid var(--accent)}
+  .plan .flag{position:absolute;top:-11px;left:20px;background:var(--accent);color:#fff;font-size:11px;padding:3px 10px;border-radius:99px;font-family:var(--mono)}
+  .plan h4{font-family:var(--serif);font-size:17px;color:var(--navy)}
+  .plan .price{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--ink);margin:8px 0 2px}
+  .plan .price small{font-size:12px;color:var(--muted);font-weight:400}
+  .plan ul{list-style:none;margin:12px 0 18px;flex:1}
+  .plan li{font-size:12.8px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;border-bottom:1px dashed var(--line)}
+  .plan li::before{content:"";position:absolute;left:2px;top:12px;width:10px;height:6px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+  .plan li.off{color:var(--muted)}
+  .plan li.off::before{border-color:var(--line2)}
+  .plan .btn{display:block;text-align:center;padding:10px;border-radius:7px;font-size:14px;text-decoration:none;border:1px solid var(--navy);color:var(--navy);font-weight:600}
+  .plan .btn:hover{background:var(--navy);color:#fff}
+  .plan.hl .btn{background:var(--accent);border-color:var(--accent);color:#fff}
+  .plan.hl .btn:hover{background:#0A6151}
+  .plan-note{margin-top:14px;font-size:12px;color:var(--muted)}
+

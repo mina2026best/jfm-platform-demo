@@ -18,3 +18,14 @@
   a{color:var(--navy)}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
 
+
+  /* ---------- v0.11：公告条 / 导航高亮 ---------- */
+  .ann-bar{background:var(--navy);color:#DCE4EE;font-size:12.5px}
+  .ann-bar .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:8px 24px}
+  .ann-bar .ab-tag{font-family:var(--mono);font-size:10px;border:1px solid rgba(255,255,255,.4);border-radius:4px;padding:1px 6px;color:#fff;flex:none;letter-spacing:.08em}
+  .ann-bar .ab-text{min-width:0}
+  .ann-bar a{color:#9EC7FF;text-decoration:none;white-space:nowrap}
+  .ann-bar a:hover{text-decoration:underline}
+  .ann-bar .ab-x{margin-left:auto;background:none;border:none;color:#DCE4EE;font-size:16px;cursor:pointer;line-height:1;padding:2px 6px}
+  .ann-bar .ab-x:hover{color:#fff}
+  .top nav a.on{background:var(--accent-soft);color:var(--accent)}

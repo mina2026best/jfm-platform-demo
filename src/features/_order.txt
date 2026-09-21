@@ -19,3 +19,4 @@
 28-checkin.js
 29-fund.js
 30-news.js
+31-polish.js

@@ -127,6 +127,7 @@
   .cmp-tools select{font-family:var(--sans);font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;background:#fff;color:var(--ink)}
   .cmp-tools button{font-family:var(--sans);font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer}
   .cmp-tools button:hover{background:var(--navy2)}
+  .cmp-tools button.cmp-alt{background:#fff;color:var(--navy)}
   .cmp-note{font-size:12px;color:var(--muted)}
   #cmp-result,#rent-wrap{overflow-x:auto}
   .cmp-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13.5px;min-width:560px}
@@ -568,7 +569,114 @@
   @media print{ html.fs-large{zoom:1} }
   .me-utils{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
   .me-utils .mini-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+
+
+/* ============ 23-theme ============ */
+  /* ---------- v0.15：深色模式（跟随系统 / 手动切换；仅屏幕生效，打印保持浅色） ---------- */
+  .theme-seg{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .theme-seg .mini-btn{min-width:62px;text-align:center;justify-content:center;display:inline-flex}
+  .mu-label{font-size:12.5px;color:var(--muted);margin-right:2px}
+  @media screen{
+    html.theme-dark{color-scheme:dark;
+      --bg:#0D131B; --paper:#141C27; --ink:#E8EDF4; --ink2:#BFC9D9; --muted:#8391A5;
+      --navy:#C9D8F0; --navy2:#39507A; --blue:#8CA6CC; --line:#232E3C; --line2:#344156;
+      --accent:#4CC2A3; --accent-soft:#123029; --warn:#DE9E4E; --warn-soft:#33261A;
+    }
+    /* 顶栏 / 首屏 / 公告条 / 页脚 */
+    html.theme-dark .top{background:rgba(13,19,27,.92)}
+    html.theme-dark .hero{background:radial-gradient(1200px 400px at 85% -10%,#1A2436 0%,transparent 60%),var(--bg)}
+    html.theme-dark .ann-bar{background:#1A2540}
+    html.theme-dark footer{background:#0F1620}
+
+    /* 品牌深蓝实底（加深，保持白字可读） */
+    html.theme-dark .top nav a.cta,
+    html.theme-dark .mobile-menu a.cta,
+    html.theme-dark .skip-link,
+    html.theme-dark .to-top,
+    html.theme-dark .zy-tools button,
+    html.theme-dark .cmp-tools button{background:#22304A;border-color:#31456B}
+    html.theme-dark .top nav a.cta:hover,
+    html.theme-dark .to-top:hover,
+    html.theme-dark .zy-tools button:hover,
+    html.theme-dark .cmp-tools button:hover{background:#2C3E5E}
+    html.theme-dark .ff.on{background:#2C3E5E;border-color:#2C3E5E;color:#F0F5FF}
+    html.theme-dark .rent-table th,
+    html.theme-dark .ds-table th,
+    html.theme-dark .cmp-table th{background:#1E2B43;color:#DCE6F5}
+    html.theme-dark .form-card{background:#1B2740}
+    html.theme-dark .form-row textarea,
+    html.theme-dark .form-row select{background:#101A29;border-color:#3A4F74;color:#EAF1FF}
+    html.theme-dark .cmp-tools button.cmp-alt{background:#22304A;color:#EAF1FF;border-color:#31456B}
+    html.theme-dark .cmp-tools button.cmp-alt:hover{background:#2C3E5E}
+
+    /* accent 实底按钮：用更深青绿，保证白字对比 */
+    html.theme-dark .btn-main,
+    html.theme-dark .btn-primary,
+    html.theme-dark .form-card button,
+    html.theme-dark .beans-box .btn,
+    html.theme-dark .plan .flag,
+    html.theme-dark .plan.hl .btn,
+    html.theme-dark .me-utils .mini-btn.on,
+    html.theme-dark .alert-btn.on{background:#12826A;border-color:#12826A;color:#fff}
+    html.theme-dark .btn-main:hover,
+    html.theme-dark .btn-primary:hover,
+    html.theme-dark .form-card button:hover,
+    html.theme-dark .plan.hl .btn:hover,
+    html.theme-dark .news-actions .mini-btn:hover{background:#0D6B56}
+    html.theme-dark .news-actions .mini-btn:hover{color:#fff}
+    html.theme-dark .beans-box .btn:disabled{background:#3A4A55;color:#94A3B1}
+
+    /* 浅色表面 → 深色表面 */
+    html.theme-dark .searchbox input{background:#101A29;color:var(--ink)}
+    html.theme-dark .search-panel{background:#141E2C;box-shadow:0 10px 28px rgba(0,0,0,.5)}
+    html.theme-dark .s-badge{background:#202B3A}
+    html.theme-dark .mini-btn{background:transparent}
+    html.theme-dark .mini-btn:hover{background:#2C3E5E;color:#F0F5FF}
+    html.theme-dark .mini-btn.danger{border-color:#C0524A;color:#E9938C}
+    html.theme-dark .mini-btn.danger:hover{background:#B3261E;border-color:#B3261E;color:#fff}
+    html.theme-dark .alert-btn{background:transparent}
+    html.theme-dark .empty-mini,
+    html.theme-dark .cl-item{background:#1A2431}
+    html.theme-dark .form-card.light{background:#141C27}
+    html.theme-dark .form-card.light textarea,
+    html.theme-dark .form-card.light input,
+    html.theme-dark .form-card.light select{background:#101A29;color:var(--ink)}
+    html.theme-dark dialog{background:var(--paper);color:var(--ink)}
+    html.theme-dark dialog::backdrop{background:rgba(0,0,0,.62)}
+    html.theme-dark .dlg-x{background:#212D3D}
+    html.theme-dark .dlg-x:hover{background:#2B3948}
+    html.theme-dark .t-item,
+    html.theme-dark .guide,
+    html.theme-dark .hot-strip,
+    html.theme-dark .pm-panel{background:#141C27}
+    html.theme-dark .nav-burger{background:transparent}
+    html.theme-dark .mobile-menu{background:#131A24;box-shadow:0 14px 30px rgba(0,0,0,.5)}
+    html.theme-dark .ff{background:transparent}
+    html.theme-dark .ff:hover{border-color:#4A6188}
+    html.theme-dark .sec-desc code{background:#1E2938}
+    html.theme-dark .ne-form input,
+    html.theme-dark .ne-form select,
+    html.theme-dark .ne-form textarea,
+    html.theme-dark .ne-ta{background:#101A29;color:var(--ink)}
+    html.theme-dark .ne-st.draft{background:#202B3A}
+    html.theme-dark .cmp-tools select{background:#101A29;color:var(--ink)}
+    html.theme-dark .ds-table{background:transparent}
+    html.theme-dark .pm-stage{background:#121A24}
+    html.theme-dark .kid-bar .kb-chip{background:#141C27}
+    html.theme-dark .verdict.false{background:#3D2226;color:#F2A9A2}
+    html.theme-dark .err-inline{color:#F2A9A2}
+    html.theme-dark #toast{background:#243348}
+
+    /* 通用输入控件（避免 UA 默认白底） */
+    html.theme-dark input:not([type]),
+    html.theme-dark input[type="text"],
+    html.theme-dark input[type="search"],
+    html.theme-dark input[type="number"],
+    html.theme-dark select,
+    html.theme-dark textarea{background:#101A29;color:var(--ink)}
+  }
 </style>
+<script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 </head>
 <body>
@@ -582,7 +690,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.14 · 大字版</span>
+    <span class="demo-tag">MVP 演示站 v0.15 · 深色模式</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -851,9 +959,9 @@
         <option>重庆一中（渝北）</option>
       </select>
       <button id="btn-cmp" onclick="runCompare()">生成对比</button>
-      <button id="btn-clear" onclick="clearCompare()" style="background:#fff;color:var(--navy)">清空</button>
-      <button id="btn-fav" onclick="favCompare()" style="background:#fff;color:var(--navy)">收藏本次对比</button>
-      <button id="btn-copy-cmp" onclick="copyCompare()" style="background:#fff;color:var(--navy)">复制对比文本</button>
+      <button id="btn-clear" class="cmp-alt" onclick="clearCompare()">清空</button>
+      <button id="btn-fav" class="cmp-alt" onclick="favCompare()">收藏本次对比</button>
+      <button id="btn-copy-cmp" class="cmp-alt" onclick="copyCompare()">复制对比文本</button>
       <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
     </div>
     <div id="cmp-result" aria-live="polite">
@@ -1131,6 +1239,15 @@
       <div class="me-card">
         <h4>显示与数据（本机）</h4>
         <div class="me-utils">
+          <span class="mu-label">外观</span>
+          <span class="theme-seg" role="group" aria-label="外观模式">
+            <button class="mini-btn" data-th="auto" aria-pressed="false" onclick="setTheme('auto')">跟随系统</button>
+            <button class="mini-btn" data-th="light" aria-pressed="false" onclick="setTheme('light')">浅色</button>
+            <button class="mini-btn" data-th="dark" aria-pressed="false" onclick="setTheme('dark')">深色</button>
+          </span>
+        </div>
+        <div class="me-out" id="theme-note" style="margin:-4px 0 10px"></div>
+        <div class="me-utils">
           <button class="mini-btn" id="fsToggle" onclick="toggleFs()">大字版：关</button>
           <button class="mini-btn" onclick="exportMyData()">导出本机数据</button>
           <button class="mini-btn danger" onclick="clearMyData()">清空本机数据</button>
@@ -1307,7 +1424,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.14（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.15（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a>
     </div>
   </div>
 </footer>
@@ -2310,7 +2427,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -2674,7 +2791,7 @@ function toggleFs(){
 }
 function exportMyData(){
   var out = {};
-  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs'].forEach(function(k){
+  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme'].forEach(function(k){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();
@@ -2689,11 +2806,53 @@ function exportMyData(){
 function clearMyData(){
   if(!confirm('确定清空本机全部演示数据吗？（档案/提醒/收藏/资讯编辑/显示设置，不影响线上站点）')) return;
   var n = 0;
-  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_ann_closed'].forEach(function(k){
+  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'].forEach(function(k){
     try{ if(localStorage.getItem(k) !== null){ localStorage.removeItem(k); n++; } }catch(e){}
   });
   toast('已清空本机数据（' + n + ' 项），即将刷新…');
   setTimeout(function(){ location.reload(); }, 1000);
+}
+
+
+/* ---------- 34-theme ---------- */
+/* ---------- v0.15：深色模式（跟随系统 / 手动；本机记忆） ---------- */
+function getThemePref(){ try{ return localStorage.getItem('jfm_theme') || 'auto'; }catch(e){ return 'auto'; } }
+function systemDark(){
+  try{ return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches); }
+  catch(e){ return false; }
+}
+function effTheme(pref){ return pref === 'dark' || pref === 'light' ? pref : (systemDark() ? 'dark' : 'light'); }
+function applyTheme(pref){
+  var eff = effTheme(pref);
+  document.documentElement.classList.toggle('theme-dark', eff === 'dark');
+  document.documentElement.setAttribute('data-theme', eff);
+  var meta = document.querySelector('meta[name="theme-color"]');
+  if(meta) meta.setAttribute('content', eff === 'dark' ? '#0D131B' : '#24344D');
+  document.querySelectorAll('.theme-seg .mini-btn').forEach(function(b){
+    var on = b.getAttribute('data-th') === pref;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  var note = document.getElementById('theme-note');
+  if(note){
+    note.textContent = pref === 'auto'
+      ? ('当前跟随系统：' + (eff === 'dark' ? '深色' : '浅色') + '。也可固定为浅色或深色（仅本机记忆）。')
+      : (pref === 'dark' ? '已固定深色模式（仅本机浏览器记忆，可随时改回）。' : '已固定浅色模式（仅本机浏览器记忆，可随时改回）。');
+  }
+}
+function setTheme(pref){
+  try{ localStorage.setItem('jfm_theme', pref); }catch(e){}
+  applyTheme(pref);
+  toast(pref === 'auto' ? '外观已跟随系统' : (pref === 'dark' ? '已切换深色模式' : '已切换浅色模式'));
+}
+function initTheme(){
+  applyTheme(getThemePref());
+  if(window.matchMedia){
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onSys = function(){ if(getThemePref() === 'auto') applyTheme('auto'); };
+    if(mq.addEventListener) mq.addEventListener('change', onSys);
+    else if(mq.addListener) mq.addListener(onSys);
+  }
 }
 </script>
 <dialog id="school-modal"><div class="dlg">
@@ -2759,6 +2918,7 @@ function clearMyData(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.15</b><span>深色模式（跟随系统 / 手动切换，本机记忆；打印保持浅色）</span></div>
     <div class="cl-item"><b>v0.14</b><span>大字版无障碍切换 / 本机数据导出与清空（我的页）</span></div>
     <div class="cl-item"><b>v0.13</b><span>打印优化 / 一键复制分享（资讯·对比·档案）/ 更新日志弹窗</span></div>
     <div class="cl-item"><b>v0.12</b><span>家长学堂：专家问答×5 + 过来人经验×4（筛选与折叠）</span></div>

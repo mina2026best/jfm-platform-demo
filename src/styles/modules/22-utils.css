@@ -1,0 +1,8 @@
+  /* ---------- v0.14：大字版 / 数据管理 ---------- */
+  html.fs-large{zoom:1.12}
+  html.fs-large .searchbox input{height:auto}
+  html.fs-large .wrap{max-width:1180px}
+  html.fs-large .mini-btn,html.fs-large .ff{font-size:14px;padding:7px 15px}
+  @media print{ html.fs-large{zoom:1} }
+  .me-utils{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+  .me-utils .mini-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}

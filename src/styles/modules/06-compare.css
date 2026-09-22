@@ -13,4 +13,8 @@
   .cmp-table td:first-child{color:var(--ink);font-weight:500}
   .cmp-table tr:last-child td{border-bottom:2px solid var(--navy)}
   .cmp-empty{border:1px dashed var(--line2);border-radius:10px;padding:36px;text-align:center;color:var(--muted);background:var(--paper)}
+  .cmp-diff td{background:rgba(180,83,9,.06)}
+  .cmp-diff td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+  .cmp-dot{color:var(--warn);font-size:9px;margin-left:6px;vertical-align:middle}
+  .cmp-tools button.cmp-alt.on{border-color:var(--accent);color:var(--accent)}
 

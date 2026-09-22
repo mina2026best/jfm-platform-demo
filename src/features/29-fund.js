@@ -28,5 +28,8 @@ document.addEventListener('DOMContentLoaded', bootOnce);
 if(document.readyState !== 'loading') bootOnce();
 function clearCompare(){
   ["sel-a","sel-b","sel-c"].forEach(function(id){document.getElementById(id).value="";});
+  cmpLast = null; cmpDiffOnly = false;
+  var dbtn = document.getElementById("btn-diff");
+  if(dbtn){ dbtn.classList.remove('on'); dbtn.setAttribute('aria-pressed','false'); dbtn.textContent = '仅看差异'; }
   document.getElementById("cmp-result").innerHTML='<div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。</div>';
 }

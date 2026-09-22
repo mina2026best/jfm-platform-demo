@@ -34,6 +34,8 @@
     html.theme-dark .form-row select{background:#101A29;border-color:#3A4F74;color:#EAF1FF}
     html.theme-dark .cmp-tools button.cmp-alt{background:#22304A;color:#EAF1FF;border-color:#31456B}
     html.theme-dark .cmp-tools button.cmp-alt:hover{background:#2C3E5E}
+    html.theme-dark .cmp-tools button.cmp-alt.on{border-color:var(--accent);color:var(--accent)}
+    html.theme-dark .cmp-diff td{background:rgba(222,158,78,.10)}
 
     /* accent 实底按钮：用更深青绿，保证白字对比 */
     html.theme-dark .btn-main,

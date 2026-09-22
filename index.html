@@ -137,6 +137,10 @@
   .cmp-table td:first-child{color:var(--ink);font-weight:500}
   .cmp-table tr:last-child td{border-bottom:2px solid var(--navy)}
   .cmp-empty{border:1px dashed var(--line2);border-radius:10px;padding:36px;text-align:center;color:var(--muted);background:var(--paper)}
+  .cmp-diff td{background:rgba(180,83,9,.06)}
+  .cmp-diff td:first-child{box-shadow:inset 3px 0 0 var(--warn)}
+  .cmp-dot{color:var(--warn);font-size:9px;margin-left:6px;vertical-align:middle}
+  .cmp-tools button.cmp-alt.on{border-color:var(--accent);color:var(--accent)}
 
 
 
@@ -615,6 +619,8 @@
     html.theme-dark .form-row select{background:#101A29;border-color:#3A4F74;color:#EAF1FF}
     html.theme-dark .cmp-tools button.cmp-alt{background:#22304A;color:#EAF1FF;border-color:#31456B}
     html.theme-dark .cmp-tools button.cmp-alt:hover{background:#2C3E5E}
+    html.theme-dark .cmp-tools button.cmp-alt.on{border-color:var(--accent);color:var(--accent)}
+    html.theme-dark .cmp-diff td{background:rgba(222,158,78,.10)}
 
     /* accent 实底按钮：用更深青绿，保证白字对比 */
     html.theme-dark .btn-main,
@@ -706,7 +712,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.17 · 无障碍增强</span>
+    <span class="demo-tag">MVP 演示站 v0.18 · 深色模式 · 对比增强</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -982,6 +988,7 @@
       <button id="btn-clear" class="cmp-alt" onclick="clearCompare()">清空</button>
       <button id="btn-fav" class="cmp-alt" onclick="favCompare()">收藏本次对比</button>
       <button id="btn-copy-cmp" class="cmp-alt" onclick="copyCompare()">复制对比文本</button>
+      <button id="btn-diff" class="cmp-alt" onclick="toggleDiffOnly()" aria-pressed="false">仅看差异</button>
       <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
     </div>
     <div id="cmp-result" aria-live="polite">
@@ -1444,7 +1451,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.17（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.18（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -1766,6 +1773,7 @@ function toast(msg){
   _toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
 }
 
+var cmpLast = null, cmpDiffOnly = false;
 function runCompare(){
   var a=document.getElementById("sel-a").value,
       b=document.getElementById("sel-b").value,
@@ -1774,23 +1782,51 @@ function runCompare(){
   var uniq=picks.filter(function(x,i){return picks.indexOf(x)===i;});
   var box=document.getElementById("cmp-result");
   if(uniq.length<2){
+    cmpLast = null; cmpDiffOnly = false;
+    var dbtn = document.getElementById("btn-diff");
+    if(dbtn){ dbtn.classList.remove('on'); dbtn.setAttribute('aria-pressed','false'); dbtn.textContent = '仅看差异'; }
     box.innerHTML='<div class="cmp-empty">请至少选择 2 所不同的学校（重复选择已自动去重）。</div>';
     return;
   }
+  cmpLast = {
+    schools: uniq,
+    rows: ROWS.map(function(row){
+      var vals = uniq.map(function(name){ var d = SCHOOL_DB[name]; return (d && d[row]) || "暂缺"; });
+      var diff = false;
+      for(var i=1;i<vals.length;i++){ if(vals[i] !== vals[0]){ diff = true; break; } }
+      return { row: row, vals: vals, diff: diff };
+    })
+  };
+  cmpDiffOnly = false;
+  renderCompareTable();
+}
+function renderCompareTable(){
+  var box = document.getElementById("cmp-result"); if(!box || !cmpLast) return;
+  var rows = cmpLast.rows, shown = cmpDiffOnly ? rows.filter(function(r){ return r.diff; }) : rows;
+  var diffCount = rows.filter(function(r){ return r.diff; }).length;
   var html='<table class="cmp-table"><tr><th>对比维度</th>';
-  uniq.forEach(function(name){ html+='<th>'+esc(name)+'</th>'; });
+  cmpLast.schools.forEach(function(name){ html+='<th>'+esc(name)+'</th>'; });
   html+='</tr>';
-  ROWS.forEach(function(row){
-    html+='<tr><td>'+esc(row)+'</td>';
-    uniq.forEach(function(name){
-      var v=(SCHOOL_DB[name]&&SCHOOL_DB[name][row])||"暂缺";
-      html+='<td>'+esc(v)+'</td>';
-    });
+  shown.forEach(function(r){
+    html+='<tr class="'+(r.diff?'cmp-diff':'')+'"><td>'+esc(r.row)+(r.diff?'<span class="cmp-dot" title="该维度各校存在差异">●</span>':'')+'</td>';
+    r.vals.forEach(function(v){ html+='<td>'+esc(v)+'</td>'; });
     html+='</tr>';
   });
   html+='</table>';
-  html+='<p class="cmp-note" style="margin-top:12px">口径说明：「录取线/排名」类字段按合规红线不提供（教育部门明令禁止排名炒作）；数据缺失如实标注。正式版每字段附核验日期与来源链接，可一键生成对比图分享到家庭群。</p>';
+  html+='<p class="cmp-note" style="margin-top:12px">'
+    + (cmpDiffOnly
+        ? '仅看差异：共显示 ' + shown.length + ' 个维度（另有 ' + (rows.length - shown.length) + ' 个各校一致的维度已折叠）。'
+        : '差异标记：<span class="cmp-dot">●</span> 表示该维度各校存在差异（共 ' + diffCount + ' 项）。')
+    + '口径说明：「录取线/排名」类字段按合规红线不提供（教育部门明令禁止排名炒作）；数据缺失如实标注。正式版每字段附核验日期与来源链接，可一键生成对比图分享到家庭群。</p>';
   box.innerHTML=html;
+  var btn = document.getElementById("btn-diff");
+  if(btn){ btn.classList.toggle('on', cmpDiffOnly); btn.setAttribute('aria-pressed', String(cmpDiffOnly)); btn.textContent = cmpDiffOnly ? '显示全部维度' : '仅看差异'; }
+}
+function toggleDiffOnly(){
+  if(!cmpLast){ toast('先生成对比，再筛选差异'); return; }
+  cmpDiffOnly = !cmpDiffOnly;
+  renderCompareTable();
+  toast(cmpDiffOnly ? '已折叠各校一致的维度' : '已显示全部维度');
 }
 
 
@@ -2457,6 +2493,9 @@ document.addEventListener('DOMContentLoaded', bootOnce);
 if(document.readyState !== 'loading') bootOnce();
 function clearCompare(){
   ["sel-a","sel-b","sel-c"].forEach(function(id){document.getElementById(id).value="";});
+  cmpLast = null; cmpDiffOnly = false;
+  var dbtn = document.getElementById("btn-diff");
+  if(dbtn){ dbtn.classList.remove('on'); dbtn.setAttribute('aria-pressed','false'); dbtn.textContent = '仅看差异'; }
   document.getElementById("cmp-result").innerHTML='<div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。</div>';
 }
 
@@ -3026,6 +3065,7 @@ function initDialogFocusTrap(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.18</b><span>择校对比增强：差异标记「●」/「仅看差异」折叠视图</span></div>
     <div class="cl-item"><b>v0.17</b><span>键盘与无障碍优化：焦点可见描边 / 「?」快捷键帮助 / aria 状态同步</span></div>
     <div class="cl-item"><b>v0.16</b><span>资讯快搜（标题/摘要/来源）+ 返回顶部 + 阅读进度条</span></div>
     <div class="cl-item"><b>v0.15</b><span>深色模式（跟随系统 / 手动切换，本机记忆；打印保持浅色）</span></div>

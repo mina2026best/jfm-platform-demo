@@ -15,6 +15,7 @@ function restoreAlerts(){
 }
 function renderAlerts(){
   var box = document.getElementById('me-alerts'); if(!box) return;
+  renderMeStats();
   var a = getAlerts();
   var cnt = document.getElementById('me-alert-count'); if(cnt) cnt.textContent = a.length ? '（' + a.length + '）' : '';
   if(!a.length){ box.innerHTML = '<div class="empty-mini">还没有提醒。到「升学日历」给节点点「设提醒」，就会出现在这里。</div>'; return; }

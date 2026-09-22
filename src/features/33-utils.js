@@ -36,3 +36,37 @@ function clearMyData(){
   toast('已清空本机数据（' + n + ' 项），即将刷新…');
   setTimeout(function(){ location.reload(); }, 1000);
 }
+/* ---------- v0.23：本机数据导入恢复 / 我的页统计条 ---------- */
+function importMyData(){
+  var f = document.getElementById('import-file');
+  if(f) f.click();
+}
+function onImportFile(input){
+  var file = input.files && input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(){
+    var data = null;
+    try{ data = JSON.parse(String(reader.result || '')); }catch(e){ toast('导入失败：JSON 格式不正确'); input.value=''; return; }
+    var keys = ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'];
+    var hit = [];
+    if(data && typeof data === 'object'){ keys.forEach(function(k){ if(k in data) hit.push(k); }); }
+    if(!hit.length){ toast('导入失败：未识别到可导入的数据键'); input.value=''; return; }
+    if(!window.confirm('将导入 ' + hit.length + ' 项数据并覆盖当前本机数据，确定继续？')){ input.value=''; return; }
+    try{
+      hit.forEach(function(k){
+        var v = data[k];
+        localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+      });
+      toast('导入成功（' + hit.length + ' 项），正在刷新…');
+      setTimeout(function(){ location.reload(); }, 600);
+    }catch(e){ toast('导入失败：本机存储不可用'); }
+    input.value = '';
+  };
+  reader.onerror = function(){ toast('导入失败：文件读取错误'); input.value=''; };
+  reader.readAsText(file);
+}
+function renderMeStats(){
+  var el = document.getElementById('me-stats'); if(!el) return;
+  function cnt(k){ var n = 0; try{ var v = JSON.parse(localStorage.getItem(k) || '[]'); if(v && v.length) n = v.length; }catch(e){} return n; }
+  el.innerHTML = '<span class="ms-chip">孩子 <b>' + cnt('jfm_children') + '</b></span><span class="ms-chip">提醒 <b>' + cnt('jfm_alerts') + '</b></span><span class="ms-chip">对比收藏 <b>' + cnt('jfm_cmp_fav') + '</b></span><span class="ms-chip">本机资讯 <b>' + cnt('jfm_news_user') + '</b></span>';
+}

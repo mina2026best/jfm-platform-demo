@@ -27,7 +27,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.22 · 陪读速算</span>
+    <span class="demo-tag">MVP 演示站 v0.23 · 数据互通</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -674,6 +674,7 @@
       </div>
       <div class="me-card">
         <h4>显示与数据（本机）</h4>
+        <div class="me-stats" id="me-stats"></div>
         <div class="me-utils">
           <span class="mu-label">外观</span>
           <span class="theme-seg" role="group" aria-label="外观模式">
@@ -686,9 +687,11 @@
         <div class="me-utils">
           <button class="mini-btn" id="fsToggle" onclick="toggleFs()">大字版：关</button>
           <button class="mini-btn" onclick="exportMyData()">导出本机数据</button>
+          <button class="mini-btn" onclick="importMyData()">导入本机数据</button>
           <button class="mini-btn danger" onclick="clearMyData()">清空本机数据</button>
         </div>
-        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可自行备份或交接。清空后回到初始演示状态（不影响线上站点）。</div>
+        <input type="file" id="import-file" accept=".json,application/json" style="display:none" onchange="onImportFile(this)" aria-hidden="true" />
+        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可备份或交接，导入 JSON 可恢复（换设备 / 交接场景）。清空后回到初始演示状态（不影响线上站点）。</div>
       </div>
     </div>
   </div>
@@ -860,7 +863,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.22（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.23（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -942,6 +945,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.23</b><span>本机数据导入恢复 + 「我的」数据统计条</span></div>
     <div class="cl-item"><b>v0.22</b><span>陪读成本速算器：房租 + 生活 + 通勤月度开销区间估算（生活服务）</span></div>
     <div class="cl-item"><b>v0.21</b><span>家长学堂 +3 问答 / +2 经验、求真台 +3、社区 +3、资讯扩容至 26 条</span></div>
     <div class="cl-item"><b>v0.20</b><span>政策库 +4 条（随迁子女 / 中考体育 / 学生资助 / 民办摇号）/ 术语词典扩至 18 条</span></div>

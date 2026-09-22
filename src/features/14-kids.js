@@ -16,6 +16,7 @@ function migrateProfile(){
 }
 function renderKids(){
   var box = document.getElementById('kid-chips'); if(!box) return;
+  renderMeStats();
   var k = getKids(), act = getActiveIdx();
   if(!k.length){ box.innerHTML = '<span class="cmp-note">还没有孩子档案——在下方添加第一个。</span>'; return; }
   box.innerHTML = k.map(function(c, i){

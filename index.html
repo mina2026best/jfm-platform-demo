@@ -580,6 +580,10 @@
   /* ---------- v0.16：阅读进度条 ---------- */
   #readBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:90;pointer-events:none}
   @media print{ #readBar{display:none} }
+  /* ---------- v0.23：我的页统计条 ---------- */
+  .me-stats{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
+  .ms-chip{font-size:12px;color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--paper)}
+  .ms-chip b{color:var(--accent);font-family:var(--mono)}
 
 
 /* ============ 23-theme ============ */
@@ -725,7 +729,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.22 · 陪读速算</span>
+    <span class="demo-tag">MVP 演示站 v0.23 · 数据互通</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -1372,6 +1376,7 @@
       </div>
       <div class="me-card">
         <h4>显示与数据（本机）</h4>
+        <div class="me-stats" id="me-stats"></div>
         <div class="me-utils">
           <span class="mu-label">外观</span>
           <span class="theme-seg" role="group" aria-label="外观模式">
@@ -1384,9 +1389,11 @@
         <div class="me-utils">
           <button class="mini-btn" id="fsToggle" onclick="toggleFs()">大字版：关</button>
           <button class="mini-btn" onclick="exportMyData()">导出本机数据</button>
+          <button class="mini-btn" onclick="importMyData()">导入本机数据</button>
           <button class="mini-btn danger" onclick="clearMyData()">清空本机数据</button>
         </div>
-        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可自行备份或交接。清空后回到初始演示状态（不影响线上站点）。</div>
+        <input type="file" id="import-file" accept=".json,application/json" style="display:none" onchange="onImportFile(this)" aria-hidden="true" />
+        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可备份或交接，导入 JSON 可恢复（换设备 / 交接场景）。清空后回到初始演示状态（不影响线上站点）。</div>
       </div>
     </div>
   </div>
@@ -1558,7 +1565,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.22（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.23（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -2220,6 +2227,7 @@ function restoreAlerts(){
 }
 function renderAlerts(){
   var box = document.getElementById('me-alerts'); if(!box) return;
+  renderMeStats();
   var a = getAlerts();
   var cnt = document.getElementById('me-alert-count'); if(cnt) cnt.textContent = a.length ? '（' + a.length + '）' : '';
   if(!a.length){ box.innerHTML = '<div class="empty-mini">还没有提醒。到「升学日历」给节点点「设提醒」，就会出现在这里。</div>'; return; }
@@ -2254,6 +2262,7 @@ function migrateProfile(){
 }
 function renderKids(){
   var box = document.getElementById('kid-chips'); if(!box) return;
+  renderMeStats();
   var k = getKids(), act = getActiveIdx();
   if(!k.length){ box.innerHTML = '<span class="cmp-note">还没有孩子档案——在下方添加第一个。</span>'; return; }
   box.innerHTML = k.map(function(c, i){
@@ -2752,7 +2761,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources();
+  initSelects(); renderSchools(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -3164,6 +3173,40 @@ function clearMyData(){
   toast('已清空本机数据（' + n + ' 项），即将刷新…');
   setTimeout(function(){ location.reload(); }, 1000);
 }
+/* ---------- v0.23：本机数据导入恢复 / 我的页统计条 ---------- */
+function importMyData(){
+  var f = document.getElementById('import-file');
+  if(f) f.click();
+}
+function onImportFile(input){
+  var file = input.files && input.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(){
+    var data = null;
+    try{ data = JSON.parse(String(reader.result || '')); }catch(e){ toast('导入失败：JSON 格式不正确'); input.value=''; return; }
+    var keys = ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'];
+    var hit = [];
+    if(data && typeof data === 'object'){ keys.forEach(function(k){ if(k in data) hit.push(k); }); }
+    if(!hit.length){ toast('导入失败：未识别到可导入的数据键'); input.value=''; return; }
+    if(!window.confirm('将导入 ' + hit.length + ' 项数据并覆盖当前本机数据，确定继续？')){ input.value=''; return; }
+    try{
+      hit.forEach(function(k){
+        var v = data[k];
+        localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+      });
+      toast('导入成功（' + hit.length + ' 项），正在刷新…');
+      setTimeout(function(){ location.reload(); }, 600);
+    }catch(e){ toast('导入失败：本机存储不可用'); }
+    input.value = '';
+  };
+  reader.onerror = function(){ toast('导入失败：文件读取错误'); input.value=''; };
+  reader.readAsText(file);
+}
+function renderMeStats(){
+  var el = document.getElementById('me-stats'); if(!el) return;
+  function cnt(k){ var n = 0; try{ var v = JSON.parse(localStorage.getItem(k) || '[]'); if(v && v.length) n = v.length; }catch(e){} return n; }
+  el.innerHTML = '<span class="ms-chip">孩子 <b>' + cnt('jfm_children') + '</b></span><span class="ms-chip">提醒 <b>' + cnt('jfm_alerts') + '</b></span><span class="ms-chip">对比收藏 <b>' + cnt('jfm_cmp_fav') + '</b></span><span class="ms-chip">本机资讯 <b>' + cnt('jfm_news_user') + '</b></span>';
+}
 
 
 /* ---------- 34-theme ---------- */
@@ -3371,6 +3414,7 @@ function copyLifeCost(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.23</b><span>本机数据导入恢复 + 「我的」数据统计条</span></div>
     <div class="cl-item"><b>v0.22</b><span>陪读成本速算器：房租 + 生活 + 通勤月度开销区间估算（生活服务）</span></div>
     <div class="cl-item"><b>v0.21</b><span>家长学堂 +3 问答 / +2 经验、求真台 +3、社区 +3、资讯扩容至 26 条</span></div>
     <div class="cl-item"><b>v0.20</b><span>政策库 +4 条（随迁子女 / 中考体育 / 学生资助 / 民办摇号）/ 术语词典扩至 18 条</span></div>

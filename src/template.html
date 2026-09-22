@@ -27,7 +27,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.20 · 政策术语库</span>
+    <span class="demo-tag">MVP 演示站 v0.21 · 内容扩充</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -400,7 +400,7 @@
     <div class="sec-head"><span class="no">04 · 求真辟谣台</span><h2>群里说的，先来这里对一对</h2></div>
     <p class="sec-desc">按「属实 / 不实 / 存疑 / 无法核实」分级发布；每条标注核验时间与出处；重大传言配合官方通报二次核验。以下为示例条目，每条附出处与核验日期。</p>
     <div class="fact-filter">
-      <button class="ff on" data-f="all" onclick="filterFact('all')">全部（6）</button>
+      <button class="ff on" data-f="all" onclick="filterFact('all')">全部（9）</button>
       <button class="ff" data-f="false" onclick="filterFact('false')">不实</button>
       <button class="ff" data-f="warn" onclick="filterFact('warn')">存疑 / 提醒</button>
       <button class="ff" data-f="ok" onclick="filterFact('ok')">属实</button>
@@ -442,6 +442,24 @@
         <p>课后服务坚持<b>自愿参加</b>原则；争议集中在服务质量而非强制性。学校不得变相强制，家长可向区教委反映。</p>
         <div class="src">核验 2026-09-16 · 出处：新华社课后服务报道（[C4-S84]）；「双减」意见</div>
       </div>
+      <div class="rq-card">
+        <span class="verdict false">不实</span>
+        <h4>「民办学校可以提前考试『占坑』」</h4>
+        <p>义务教育阶段公民同招、超计划全部摇号，任何形式的提前选拔、考试测评均属违规；遇到此类宣传可直接向区教委反映。</p>
+        <div class="src">核验 2026-09-22 · 出处：义务教育招生入学相关要求（演示条目）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict warn">存疑 · 提醒</span>
+        <h4>「体育中考临时练两个月就够了」</h4>
+        <p>过程性评价与日常考核占一定权重，突击效果有限；长期运动习惯更稳（也顺带解决久坐问题）。以当年考试方案为准。</p>
+        <div class="src">核验 2026-09-22 · 出处：体育与健康考试工作方案（演示条目）</div>
+      </div>
+      <div class="rq-card">
+        <span class="verdict ok">属实（提醒）</span>
+        <h4>「中考报名要核对本人身份信息」</h4>
+        <p>属实。多数区县要求核对身份信息并采集照片，具体流程与材料以当年报名通知为准；报名季前把身份证件有效期检查一遍。</p>
+        <div class="src">核验 2026-09-22 · 出处：中考报名相关通知（演示条目）</div>
+      </div>
       <div class="form-card">
         <h4>提交待核验线索</h4>
         <div class="hint">只给结论与依据，不复述未核实传言细节；每条标注核验时间与出处；无法核实的只留档、不发布。</div>
@@ -475,6 +493,9 @@
       <div class="thread"><span class="badge q">讨论中</span><div><h4>指标到校的「校内排队」到底怎么排？</h4><p>沙坪坝区 · 初三 · 区细则原文已挂，等 2027 版</p></div><span class="n">57 回复</span></div>
       <div class="thread"><span class="badge">实操</span><div><h4>陪读房换租被涨 15%，最后这样谈下来的</h4><p>南岸区 · 高二 · 家长投稿，含沟通时间线</p></div><span class="n">21 回复</span></div>
       <div class="thread"><span class="badge">归档</span><div><h4>「长幼随学」申请通道实测：3 个工作日受理</h4><p>江北区 · 二年级 · 与政策库条目互链</p></div><span class="n">14 回复</span></div>
+      <div class="thread"><span class="badge q">讨论中</span><div><h4>求同区家长：南岸弹子石片区陪读房怎么选？</h4><p>南岸区 · 高一 · 已收到 3 个小区对比</p></div><span class="n">18 回复</span></div>
+      <div class="thread"><span class="badge q">求助</span><div><h4>外区学籍想报江北的高中，联招能走吗？</h4><p>江北区 · 初三 · 值班小编已附路径说明</p></div><span class="n">12 回复</span></div>
+      <div class="thread"><span class="badge">实操</span><div><h4>分享：我们家的中考复习计划表（9 月版）</h4><p>沙坪坝区 · 初三 · 家长投稿，含周计划模板</p></div><span class="n">26 回复</span></div>
     </div>
   </div>
 </section>
@@ -813,7 +834,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.20（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.21（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -895,6 +916,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.21</b><span>家长学堂 +3 问答 / +2 经验、求真台 +3、社区 +3、资讯扩容至 26 条</span></div>
     <div class="cl-item"><b>v0.20</b><span>政策库 +4 条（随迁子女 / 中考体育 / 学生资助 / 民办摇号）/ 术语词典扩至 18 条</span></div>
     <div class="cl-item"><b>v0.19</b><span>学校档案库扩容至 12 所（新增 6 校）/ 全站搜索直达学校档案</span></div>
     <div class="cl-item"><b>v0.18</b><span>择校对比增强：差异标记「●」/「仅看差异」折叠视图</span></div>

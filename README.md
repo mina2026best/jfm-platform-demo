@@ -2,10 +2,10 @@
 
 > **🌐 线上访问（双渠道）**：
 > - GitHub Pages（国际）：https://mina2026best.github.io/jfm-platform-demo/
-> - EdgeOne Pages（国内直连）：认领后固定，当前部署地址见《EdgeOne 上线与认领指引》
+> - EdgeOne Pages（国内直连）：已认领并部署 v0.18；国内访问采用预览链接制（3 小时有效、可随时刷新），详见《EdgeOne 上线与认领指引》
 >
 > GitHub Pages：main 分支根目录，`git push` 后约 1 分钟自动重新发布。
-> EdgeOne：腾讯中国站免费计划；认领后长期固定，升级直接更新到同一网址。
+> EdgeOne：腾讯中国站免费计划；项目已认领（归入账号），升级一键更新到同一项目。
 > 本地副本仍可双击 `index.html` 离线打开，三端内容一致（单文件零依赖架构）。
 
 ## 零、v0.15–v0.18 更新要点（2026-09-22 上午 · 第二批四轮自主迭代）

@@ -1,0 +1,10 @@
+  /* ---------- v0.22：陪读成本速算器 ---------- */
+  .life-tools{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:14px}
+  .lt-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .lt-row label{font-size:13px;color:var(--ink2);display:flex;gap:6px;align-items:center}
+  .lt-row select{font-size:13px;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);background:var(--paper);color:var(--ink)}
+  .lt-out{margin-top:12px;font-size:13.5px;color:var(--ink2);line-height:1.8}
+  .lt-total{font-size:15px;color:var(--ink);margin-bottom:6px}
+  .lt-total b{color:var(--accent);font-family:var(--mono);font-size:17px}
+  .lt-detail{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:10px}
+  .lt-actions{display:flex;gap:8px}

@@ -695,6 +695,19 @@
   :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   .ni-title:focus-visible{text-decoration:underline}
   .skip-link:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+
+/* ============ 25-lifecalc ============ */
+  /* ---------- v0.22：陪读成本速算器 ---------- */
+  .life-tools{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:14px}
+  .lt-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .lt-row label{font-size:13px;color:var(--ink2);display:flex;gap:6px;align-items:center}
+  .lt-row select{font-size:13px;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);background:var(--paper);color:var(--ink)}
+  .lt-out{margin-top:12px;font-size:13.5px;color:var(--ink2);line-height:1.8}
+  .lt-total{font-size:15px;color:var(--ink);margin-bottom:6px}
+  .lt-total b{color:var(--accent);font-family:var(--mono);font-size:17px}
+  .lt-detail{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:10px}
+  .lt-actions{display:flex;gap:8px}
 </style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
@@ -712,7 +725,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.21 · 内容扩充</span>
+    <span class="demo-tag">MVP 演示站 v0.22 · 陪读速算</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -1258,6 +1271,32 @@
       <tr><td>重庆十八中（江北）</td><td>2,400–3,600 元/月</td><td>挂牌 94–97 折</td><td>N=11</td><td>2026-09</td></tr>
     </table></div>
     <p class="cmp-note" style="margin-top:10px">历史样本参照：重庆购物狂陪读房帖 2021/2022 连续出现，佐证需求长期存在；平台不参与居间、不代收租金，费与成交脱钩。</p>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读成本速算器（演示）</h3>
+    <p class="sec-desc">选片区、房型与档位，估算每月陪读开销区间。口径：行情样本演示，不含学费、培训与一次性搬家费用。</p>
+    <div class="life-tools">
+      <div class="lt-row">
+        <label>片区
+          <select id="lt-area" aria-label="片区">
+            <option>沙坪坝 · 南开周边</option>
+            <option>渝北 · 一中周边</option>
+            <option>渝中 · 巴蜀周边</option>
+            <option>南岸 · 十一中周边</option>
+            <option>江北 · 十八中周边</option>
+          </select>
+        </label>
+        <label>房型
+          <select id="lt-room" aria-label="房型"><option>一室</option><option selected>两室</option></select>
+        </label>
+        <label>生活档位
+          <select id="lt-life" aria-label="生活档位"><option>简省</option><option selected>常规</option><option>宽裕</option></select>
+        </label>
+        <label>通勤
+          <select id="lt-commute" aria-label="通勤方式"><option>步行/骑行</option><option selected>轨道/公交</option><option>自驾</option></select>
+        </label>
+        <button class="btn-main" onclick="calcLifeCost()">开始估算</button>
+      </div>
+      <div class="lt-out" id="lt-out">选择上方的片区与档位后，点击「开始估算」。</div>
+    </div>
   </div>
 </section>
 
@@ -1519,7 +1558,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.21（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.22（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -2060,6 +2099,7 @@ var SEARCH_DB = [
  {t:'求真',s:'「学位房 ≠ 学区房」——属实提醒',a:'#fact'},
  {t:'志愿',s:'位次换算工具（线差法演示）',a:'#zy'},
  {t:'生活',s:'陪读租房行情样本 / 护学岗 6,993 个',a:'#life'},
+ {t:'工具',s:'陪读成本速算器（房租+生活+通勤区间估算）',a:'#life'},
  {t:'资金',s:'教育资金规划参照（CIEFR 15,828 元）',a:'#fund'},
  {t:'会员',s:'四档会员（99/299/899）与升学豆',a:'#plans'},
  {t:'工具',s:'入学自查：我家能不能报（3 问）',a:'#quiz'},
@@ -3221,6 +3261,39 @@ function initDialogFocusTrap(){
     else if(e.shiftKey && active === first){ e.preventDefault(); last.focus(); }
   }, true);
 }
+
+
+/* ---------- 37-lifecalc ---------- */
+/* ---------- v0.22：陪读成本速算器 ---------- */
+var LT_RENT = {
+  '沙坪坝 · 南开周边': { '一室': [1800, 2700], '两室': [2800, 4200] },
+  '渝北 · 一中周边': { '一室': [1600, 2500], '两室': [2500, 3800] },
+  '渝中 · 巴蜀周边': { '一室': [2000, 3000], '两室': [3000, 4500] },
+  '南岸 · 十一中周边': { '一室': [1500, 2300], '两室': [2200, 3400] },
+  '江北 · 十八中周边': { '一室': [1600, 2400], '两室': [2400, 3600] }
+};
+var LT_LIFE = { '简省': [1200, 1800], '常规': [1800, 2600], '宽裕': [2600, 3800] };
+var LT_COMMUTE = { '步行/骑行': [0, 100], '轨道/公交': [150, 300], '自驾': [500, 900] };
+function ltNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+function calcLifeCost(){
+  var area = document.getElementById('lt-area').value;
+  var room = document.getElementById('lt-room').value;
+  var life = document.getElementById('lt-life').value;
+  var com  = document.getElementById('lt-commute').value;
+  var out = document.getElementById('lt-out'); if(!out) return;
+  var r = LT_RENT[area] && LT_RENT[area][room];
+  if(!r){ toast('请选择片区'); return; }
+  var l = LT_LIFE[life], c = LT_COMMUTE[com];
+  var lo = r[0] + l[0] + c[0], hi = r[1] + l[1] + c[1];
+  window._ltResult = '鸡父母平台 · 陪读成本估算（演示）\n片区：' + area + ' · ' + room + '\n房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元/月\n生活（' + life + '档）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元/月\n通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元/月\n合计约 ' + ltNum(lo) + '–' + ltNum(hi) + ' 元/月\n（不含学费与培训费用；口径为样本演示）';
+  out.innerHTML = '<div class="lt-total">每月合计约 <b>' + ltNum(lo) + '–' + ltNum(hi) + ' 元</b>（不含学费与培训）</div>'
+    + '<div class="lt-detail"><span>房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元</span><span>生活（' + life + '）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元</span><span>通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元</span></div>'
+    + '<div class="lt-actions"><button class="mini-btn" onclick="copyLifeCost()">复制结果</button></div>';
+}
+function copyLifeCost(){
+  if(!window._ltResult){ toast('先做一次估算'); return; }
+  copyText(window._ltResult);
+}
 </script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
@@ -3298,6 +3371,7 @@ function initDialogFocusTrap(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.22</b><span>陪读成本速算器：房租 + 生活 + 通勤月度开销区间估算（生活服务）</span></div>
     <div class="cl-item"><b>v0.21</b><span>家长学堂 +3 问答 / +2 经验、求真台 +3、社区 +3、资讯扩容至 26 条</span></div>
     <div class="cl-item"><b>v0.20</b><span>政策库 +4 条（随迁子女 / 中考体育 / 学生资助 / 民办摇号）/ 术语词典扩至 18 条</span></div>
     <div class="cl-item"><b>v0.19</b><span>学校档案库扩容至 12 所（新增 6 校）/ 全站搜索直达学校档案</span></div>

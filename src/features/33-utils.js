@@ -15,7 +15,7 @@ function toggleFs(){
 }
 function exportMyData(){
   var out = {};
-  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme'].forEach(function(k){
+  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'].forEach(function(k){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();

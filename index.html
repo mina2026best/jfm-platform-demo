@@ -555,7 +555,7 @@
   .cl-item b{font-family:var(--mono);color:var(--accent);flex:none;font-size:12px;padding-top:1px}
   .cl-item span{min-width:0}
   @media print{
-    .ann-bar,.top,.searchbox,.nav-burger,.mobile-menu,.to-top,#toast,.kid-bar,.cta-row,.mini-btn,.alert-btn,.btn,.btn-main,.news-toolbar,.news-actions,.ff,.cmp-tools,.dlg,.skip-link,.guide{display:none !important}
+    .ann-bar,.top,.searchbox,.nav-burger,.mobile-menu,.to-top,#toast,.kid-bar,.cta-row,.mini-btn,.alert-btn,.btn,.btn-main,.news-toolbar,.news-actions,.ff,.cmp-tools,.dlg,.skip-link,.guide,.cd-bar,#school-filter,.mat-row,.lt-row,#readBar{display:none !important}
     body{background:#fff;font-size:12.5px}
     a{color:#000;text-decoration:none}
     .hero{padding:18px 0 12px}
@@ -564,6 +564,10 @@
     .alt{background:#fff}
     .cal,.pol-item,.news-item,.rq-card,.life-card,.plan,.about-card,.learn-col,.fstep,.school-card,.lq{break-inside:avoid;box-shadow:none}
     .lq-a{display:block !important}
+    .mat-tool,.life-tools{border:none;padding:0;margin-top:8px}
+    .mat-note{font-size:11px}
+    .mat-out{font-size:12px}
+    #me-stats{display:none}
     footer{background:#fff;color:#333;border-top:1px solid #ddd;margin-top:0;padding:20px 0}
     footer .legal{color:#555}
   }
@@ -749,15 +753,15 @@
 <a class="skip-link" href="#main">跳到主要内容</a>
 
 <div class="ann-bar" id="annBar" hidden>
-  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">升学资讯中心已上线：分类浏览 + 站内采集编辑（演示）</span><a href="#news">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
+  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">体验优化四连发：数据导入恢复 · 节点倒计时 · 材料清单生成器 · 键盘导航（v0.23–v0.26）</span><a href="#news">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
 </div>
 
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.26 · 键盘导航</span>
+    <span class="demo-tag">MVP 演示站 v0.27 · 全站优化</span>
     <div class="searchbox">
-      <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
+      <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
@@ -1626,7 +1630,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.26（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.27（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -3243,7 +3247,7 @@ function toggleFs(){
 }
 function exportMyData(){
   var out = {};
-  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme'].forEach(function(k){
+  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'].forEach(function(k){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();
@@ -3586,6 +3590,7 @@ function copyMaterials(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.27</b><span>上帝视角全站审查优化：打印隐藏交互控件 / 导出补全键 / 公告条与搜索占位更新</span></div>
     <div class="cl-item"><b>v0.26</b><span>搜索键盘导航（↑↓/Enter）＋ 学校库公办/民办筛选</span></div>
     <div class="cl-item"><b>v0.25</b><span>入学材料清单生成器：学段 × 户籍 × 住房 → 材料清单（复制 / 打印）</span></div>
     <div class="cl-item"><b>v0.24</b><span>关键节点倒计时条（首屏今日提示，取自升学日历）</span></div>

@@ -25,5 +25,5 @@ function renderLearn(){
   tips.innerHTML = t.length
     ? t.map(function(x){ return '<details class="lq"><summary><span class="lq-tag gold">' + esc(x.s) + '</span>' + esc(x.q) + '</summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
     : '<div class="empty-mini">该分类暂无经验分享——试试其他分类。</div>';
-  document.querySelectorAll('#learn-filter .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.ls === learnFilter); });
+  document.querySelectorAll('#learn-filter .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.ls === learnFilter); b.setAttribute('aria-pressed', String(b.dataset.ls === learnFilter)); });
 }

@@ -53,6 +53,7 @@ function renderNews(){
   document.querySelectorAll('#news-filter .ff').forEach(function(b){
     var c = b.dataset.nf;
     b.classList.toggle('on', c === newsFilter);
+    b.setAttribute('aria-pressed', String(c === newsFilter));
     b.textContent = labels[c] + (counts[c] ? ' ' + counts[c] : '');
   });
   var meta = document.getElementById('news-meta-line');
@@ -71,7 +72,7 @@ function newsItemHTML(x){
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
-    + '<h4 class="ni-title" onclick="toggleNewsBody(this)" title="点击展开/收起">' + esc(x.t) + '</h4>'
+    + '<h4 class="ni-title" role="button" tabindex="0" aria-expanded="false" onclick="toggleNewsBody(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleNewsBody(this);}" title="点击或回车展开/收起">' + esc(x.t) + '</h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
     + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'
@@ -83,13 +84,14 @@ function toggleNewsBody(el){
   var item = el.closest('.news-item'); if(!item) return;
   var body = item.querySelector('.ni-body'); if(!body) return;
   body.hidden = !body.hidden;
+  el.setAttribute('aria-expanded', String(!body.hidden));
 }
 function goNewsByKey(key){
   document.getElementById('search-panel').hidden = true;
   newsFilter = 'all'; renderNews();
   var el = document.querySelector('#news-list .news-item[data-key="' + key + '"]');
   if(!el) return;
-  var body = el.querySelector('.ni-body'); if(body) body.hidden = false;
+  var body = el.querySelector('.ni-body'); if(body){ body.hidden = false; var tt = el.querySelector('.ni-title'); if(tt) tt.setAttribute('aria-expanded','true'); }
   el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   el.classList.add('flash');
   setTimeout(function(){ el.classList.remove('flash'); }, 1400);

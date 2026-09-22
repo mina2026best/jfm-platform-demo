@@ -4,13 +4,13 @@ function initFsToggle(){
   try{ on = localStorage.getItem('jfm_fs') === '1'; }catch(e){}
   if(on) document.documentElement.classList.add('fs-large');
   var btn = document.getElementById('fsToggle');
-  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); }
+  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); }
 }
 function toggleFs(){
   var on = document.documentElement.classList.toggle('fs-large');
   try{ localStorage.setItem('jfm_fs', on ? '1' : '0'); }catch(e){}
   var btn = document.getElementById('fsToggle');
-  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); }
+  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); }
   toast(on ? '已开启大字版（可在「我的」随时切换）' : '已恢复标准字号');
 }
 function exportMyData(){

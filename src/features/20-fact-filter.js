@@ -8,5 +8,6 @@ function filterFact(mode){
   });
   document.querySelectorAll('#fact .fact-filter .ff').forEach(function(b){
     b.classList.toggle('on', b.dataset.f === mode);
+    b.setAttribute('aria-pressed', String(b.dataset.f === mode));
   });
 }

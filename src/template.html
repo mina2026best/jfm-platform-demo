@@ -27,7 +27,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.24 · 节点倒计时</span>
+    <span class="demo-tag">MVP 演示站 v0.25 · 材料清单</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -319,6 +319,35 @@
       <button onclick="runQuiz()">查看自查结果</button>
     </div>
     <div id="qz-out" aria-live="polite"><div class="cmp-empty">回答 3 个问题后点击「查看自查结果」。输出：基本路径判断 + 关键缺口提醒 + 多元路径提示。</div></div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">入学材料清单生成器（演示）</h3>
+    <p class="sec-desc">选学段、户籍与住房情况，一键生成需准备的证件材料清单；可复制或打印，作为线下核对底稿。演示口径，以拟入学区当年公告为准。</p>
+    <div class="mat-tool">
+      <div class="mat-row">
+        <label>学段
+          <select id="mat-stage" aria-label="学段">
+            <option>小学一年级</option>
+            <option selected>初中一年级</option>
+            <option>高中一年级</option>
+          </select>
+        </label>
+        <label>户籍
+          <select id="mat-hukou" aria-label="户籍情况">
+            <option>本区户籍</option>
+            <option>跨区户籍</option>
+            <option selected>随迁（非户籍）</option>
+          </select>
+        </label>
+        <label>住房
+          <select id="mat-house" aria-label="住房情况">
+            <option>自有产权房</option>
+            <option selected>租赁（备案）</option>
+            <option>其他（借住等）</option>
+          </select>
+        </label>
+        <button class="btn-main" onclick="genMaterials()">生成清单</button>
+      </div>
+      <div class="mat-out" id="mat-out">选择上方三项后点击「生成清单」，可复制或打印。</div>
+    </div>
   </div>
 </section>
 
@@ -864,7 +893,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.24（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.25（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -946,6 +975,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.25</b><span>入学材料清单生成器：学段 × 户籍 × 住房 → 材料清单（复制 / 打印）</span></div>
     <div class="cl-item"><b>v0.24</b><span>关键节点倒计时条（首屏今日提示，取自升学日历）</span></div>
     <div class="cl-item"><b>v0.23</b><span>本机数据导入恢复 + 「我的」数据统计条</span></div>
     <div class="cl-item"><b>v0.22</b><span>陪读成本速算器：房租 + 生活 + 通勤月度开销区间估算（生活服务）</span></div>

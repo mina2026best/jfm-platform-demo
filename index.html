@@ -722,6 +722,21 @@
   .cd-bar a:hover{text-decoration:underline}
   .cd-note{color:var(--muted);font-size:12px;margin-left:6px}
   @media (max-width:720px){ .cd-bar{display:block;font-size:13px} }
+
+
+/* ============ 27-materials ============ */
+  /* ---------- v0.25：入学材料清单生成器 ---------- */
+  .mat-tool{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:12px}
+  .mat-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .mat-row label{font-size:13px;color:var(--ink2);display:flex;gap:6px;align-items:center}
+  .mat-row select{font-size:13px;padding:7px 10px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);background:var(--paper);color:var(--ink)}
+  .mat-out{margin-top:12px;font-size:13.5px;color:var(--ink2);line-height:1.8}
+  .mat-h{font-family:var(--serif);font-size:15px;color:var(--navy);margin:12px 0 6px}
+  .mat-list{list-style:none;display:grid;gap:6px}
+  .mat-list li{display:flex;gap:8px;font-size:13.5px;color:var(--ink2);align-items:flex-start}
+  .ck2{flex:none;width:12px;height:12px;border:1.5px solid var(--accent);border-radius:2px;transform:translateY(3px)}
+  .mat-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+  .mat-note{font-size:12px;color:var(--muted)}
 </style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
@@ -739,7 +754,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.24 · 节点倒计时</span>
+    <span class="demo-tag">MVP 演示站 v0.25 · 材料清单</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="if(event.key==='Enter'){var f=document.querySelector('#search-panel .s-item:not(.s-empty)');if(f)f.click();}if(event.key==='Escape'){document.getElementById('search-panel').hidden=true;this.value='';}" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -1031,6 +1046,35 @@
       <button onclick="runQuiz()">查看自查结果</button>
     </div>
     <div id="qz-out" aria-live="polite"><div class="cmp-empty">回答 3 个问题后点击「查看自查结果」。输出：基本路径判断 + 关键缺口提醒 + 多元路径提示。</div></div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">入学材料清单生成器（演示）</h3>
+    <p class="sec-desc">选学段、户籍与住房情况，一键生成需准备的证件材料清单；可复制或打印，作为线下核对底稿。演示口径，以拟入学区当年公告为准。</p>
+    <div class="mat-tool">
+      <div class="mat-row">
+        <label>学段
+          <select id="mat-stage" aria-label="学段">
+            <option>小学一年级</option>
+            <option selected>初中一年级</option>
+            <option>高中一年级</option>
+          </select>
+        </label>
+        <label>户籍
+          <select id="mat-hukou" aria-label="户籍情况">
+            <option>本区户籍</option>
+            <option>跨区户籍</option>
+            <option selected>随迁（非户籍）</option>
+          </select>
+        </label>
+        <label>住房
+          <select id="mat-house" aria-label="住房情况">
+            <option>自有产权房</option>
+            <option selected>租赁（备案）</option>
+            <option>其他（借住等）</option>
+          </select>
+        </label>
+        <button class="btn-main" onclick="genMaterials()">生成清单</button>
+      </div>
+      <div class="mat-out" id="mat-out">选择上方三项后点击「生成清单」，可复制或打印。</div>
+    </div>
   </div>
 </section>
 
@@ -1576,7 +1620,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.24（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.25（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -3376,6 +3420,59 @@ function renderCountdown(){
   var timing = days > 0 ? ('约 <b>' + days + '</b> 天') : '就在本月';
   el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="#calendar">看升学日历 →</a> <span class="cd-note">（示例口径，以官方发布为准）</span>';
 }
+
+
+/* ---------- 39-materials ---------- */
+/* ---------- v0.25：入学材料清单生成器 ---------- */
+var MAT_COMMON = [
+  '户口簿（原件 + 复印件：首页、户主页、孩子页）',
+  '孩子出生医学证明',
+  '父母双方身份证（原件 + 复印件）'
+];
+var MAT_STAGE = {
+  '小学一年级': ['预防接种证 + 查验单（开学前完成接种查验）', '《义务教育入学通知书》/ 报名回执（按区流程）'],
+  '初中一年级': ['小学毕业学籍证明 / 素质报告册', '《义务教育入学通知书》/ 报名回执（按区流程）'],
+  '高中一年级': ['中考准考证 / 成绩单', '录取通知书（报到注册用）']
+};
+var MAT_HUKOU = {
+  '本区户籍': ['户籍地居住证明（房产证或居住材料）'],
+  '跨区户籍': ['居住证明（地址须与实际居住一致）', '跨区就读要求材料（按拟入学区当年公告核对）'],
+  '随迁（非户籍）': ['居住证（地址与居住一致、在有效期内）', '社保连续缴纳记录或营业执照（按区要求）', '劳动合同 / 就业证明（按区要求）']
+};
+var MAT_HOUSE = {
+  '自有产权房': ['不动产权证（或购房合同 + 契税凭证）'],
+  '租赁（备案）': ['房屋租赁合同', '租赁备案证明（部分区要求）'],
+  '其他（借住等）': ['实际居住证明（水电气缴费单等，按区要求）']
+};
+var MAT_EXTRA = [
+  '多孩家庭：长幼随学申请材料（如有二孩随学需求）',
+  '优抚对象：相关证件（按当年政策办理）',
+  '统一建议：所有材料原件 + 复印件各一套、电子扫描件备份'
+];
+function fmtList(arr){ return arr.map(function(x){ return '<li><span class="ck2"></span>' + esc(x) + '</li>'; }).join(''); }
+function genMaterials(){
+  var box = document.getElementById('mat-out'); if(!box) return;
+  var stage = document.getElementById('mat-stage').value;
+  var hk = document.getElementById('mat-hukou').value;
+  var house = document.getElementById('mat-house').value;
+  window._matResult = '鸡父母平台 · 入学材料清单（演示）\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
+    + '\n\n【学段材料（' + stage + '）】\n- ' + MAT_STAGE[stage].join('\n- ')
+    + '\n\n【户籍相关（' + hk + '）】\n- ' + MAT_HUKOU[hk].join('\n- ')
+    + '\n\n【住房相关（' + house + '）】\n- ' + MAT_HOUSE[house].join('\n- ')
+    + '\n\n【如有特殊情况】\n- ' + MAT_EXTRA.join('\n- ')
+    + '\n\n（口径：演示条目，以拟入学区当年公告为准；不替代官方清单）';
+  box.innerHTML =
+    '<h4 class="mat-h">通用材料</h4><ul class="mat-list">' + fmtList(MAT_COMMON) + '</ul>'
+    + '<h4 class="mat-h">学段材料（' + esc(stage) + '）</h4><ul class="mat-list">' + fmtList(MAT_STAGE[stage]) + '</ul>'
+    + '<h4 class="mat-h">户籍相关（' + esc(hk) + '）</h4><ul class="mat-list">' + fmtList(MAT_HUKOU[hk]) + '</ul>'
+    + '<h4 class="mat-h">住房相关（' + esc(house) + '）</h4><ul class="mat-list">' + fmtList(MAT_HOUSE[house]) + '</ul>'
+    + '<h4 class="mat-h">如有特殊情况</h4><ul class="mat-list">' + fmtList(MAT_EXTRA) + '</ul>'
+    + '<div class="mat-actions"><button class="mini-btn" onclick="copyMaterials()">复制清单</button><button class="mini-btn" onclick="window.print()">打印清单</button><span class="mat-note">演示口径，以拟入学区当年公告为准；不替代官方清单</span></div>';
+}
+function copyMaterials(){
+  if(!window._matResult){ toast('先生成清单'); return; }
+  copyText(window._matResult);
+}
 </script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
@@ -3453,6 +3550,7 @@ function renderCountdown(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.25</b><span>入学材料清单生成器：学段 × 户籍 × 住房 → 材料清单（复制 / 打印）</span></div>
     <div class="cl-item"><b>v0.24</b><span>关键节点倒计时条（首屏今日提示，取自升学日历）</span></div>
     <div class="cl-item"><b>v0.23</b><span>本机数据导入恢复 + 「我的」数据统计条</span></div>
     <div class="cl-item"><b>v0.22</b><span>陪读成本速算器：房租 + 生活 + 通勤月度开销区间估算（生活服务）</span></div>

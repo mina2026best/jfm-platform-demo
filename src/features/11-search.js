@@ -33,9 +33,17 @@ function runSearch(){
     nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
       .map(function(x){ return { t: '资讯', s: x.t, k: x._k }; });
   }catch(e){}
+  var shits = [];
+  try{
+    shits = Object.keys(SCHOOL_DB).filter(function(k){ return k.toLowerCase().indexOf(q) >= 0; }).slice(0, 3)
+      .map(function(k){ return { s: k, k: k }; });
+  }catch(e){}
   var html = '';
   if(nhits.length){
     html += nhits.map(function(x){ return '<div class="s-item" onclick="goNewsByKey(\'' + x.k + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
+  }
+  if(shits.length){
+    html += shits.map(function(x){ return '<div class="s-item" onclick="goSchoolByName(\'' + esc(x.k) + '\')"><span class="s-badge">学校</span>' + esc(x.s) + '</div>'; }).join('');
   }
   if(hits.length){
     html += hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
@@ -51,4 +59,10 @@ function goSearch(anchor){
   document.getElementById('search-panel').hidden = true;
   var el = document.querySelector(anchor);
   if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); el.classList.add('flash'); setTimeout(function(){ el.classList.remove('flash'); }, 1400); }
+}
+function goSchoolByName(name){
+  document.getElementById('search-panel').hidden = true;
+  var s = document.getElementById('schools');
+  if(s) s.scrollIntoView({behavior:'smooth', block:'start'});
+  setTimeout(function(){ openSchool(name); }, 420);
 }

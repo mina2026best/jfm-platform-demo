@@ -69,3 +69,19 @@ function goSchoolByName(name){
   if(s) s.scrollIntoView({behavior:'smooth', block:'start'});
   setTimeout(function(){ openSchool(name); }, 420);
 }
+/* ---------- v0.26：搜索面板键盘导航（↑↓ / Enter） ---------- */
+function searchKeydown(e){
+  if(e.key === 'Escape'){ document.getElementById('search-panel').hidden = true; e.target.value = ''; return; }
+  var panel = document.getElementById('search-panel');
+  if(!panel || panel.hidden){ if(e.key === 'Enter') e.preventDefault(); return; }
+  var items = Array.prototype.slice.call(panel.querySelectorAll('.s-item:not(.s-empty)'));
+  if(!items.length) return;
+  var cur = -1;
+  items.forEach(function(el, i){ if(el.classList.contains('active')) cur = i; });
+  if(e.key === 'ArrowDown'){ e.preventDefault(); cur = cur < 0 ? 0 : (cur + 1) % items.length; }
+  else if(e.key === 'ArrowUp'){ e.preventDefault(); cur = cur <= 0 ? items.length - 1 : cur - 1; }
+  else if(e.key === 'Enter'){ e.preventDefault(); if(cur >= 0){ items[cur].click(); } else { items[0].click(); } return; }
+  else return;
+  items.forEach(function(el, i){ el.classList.toggle('active', i === cur); });
+  items[cur].scrollIntoView({ block: 'nearest' });
+}

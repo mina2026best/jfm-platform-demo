@@ -1,14 +1,28 @@
 /* ---------- v0.3：学校档案 ---------- */
 var currentOpenSchool = '';
+var schoolFilter = 'all';
+function filterSchools(kind){
+  schoolFilter = kind || 'all';
+  document.querySelectorAll('#school-filter .ff').forEach(function(b){
+    var on = b.dataset.sf === schoolFilter;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  document.querySelectorAll('#school-grid .school-card').forEach(function(card){
+    var show = schoolFilter === 'all' || (card.getAttribute('data-nature') || '') === schoolFilter;
+    card.style.display = show ? '' : 'none';
+  });
+}
 function renderSchools(){
   var g = document.getElementById('school-grid'); if(!g) return;
   g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
     var d = SCHOOL_DB[k], key = encodeURIComponent(k);
-    return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
+    return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(d['办学性质'].split('（')[0]) + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
       + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
   }).join('');
+  filterSchools(schoolFilter);
 }
 function openSchool(name){
   var d = SCHOOL_DB[name]; if(!d) return;

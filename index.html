@@ -364,6 +364,9 @@
 /* ============ 14-v07-data ============ */
   /* ---------- v0.7：数据层 ---------- */
   .data-badge{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 8px;margin-top:6px}
+  .data-badge a{color:var(--accent);text-decoration:underline}
+  .ds-link{font-family:var(--mono);font-size:11.5px;color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent);margin-left:6px;white-space:nowrap}
+  .ds-link:hover{opacity:.75}
   .data-version{font-family:var(--mono);font-size:11px;color:var(--muted)}
   .data-version b{color:var(--accent)}
   .ds-table{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
@@ -759,7 +762,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.27 · 全站优化</span>
+    <span class="demo-tag">MVP 演示站 v0.28 · 链接真实化</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -1630,7 +1633,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.27（2026-09-22）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.28（2026-09-24）：v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -1641,20 +1644,21 @@
    DATA_SOURCES 是唯一事实源：页面数字与来源一一对应，核验口径见企划书附录。 */
 var DATA_VERSION = { id: "real-2026-09", label: "真实数据包 · 2026-09 版", asOf: "2026-09-16" };
 var DATA_SOURCES = {
-  k12:   { label: "重庆 K12 在校生约 376.3 万人", source: "《2024年重庆市国民经济和社会发展统计公报》", asOf: "2025-03-26", verified: true },
-  lianzhao: { label: "2026 年联招学校约 113 所（第一批次市级重点约 94 所）", source: "重庆市政府网转载重庆日报 2026-04-22；志愿填报阶段更新 113 所", asOf: "2026-06", verified: true },
-  zhibiao: { label: "市级重点高中招生计划 70% 指标到校", source: "渝教基函〔2025〕21号（现行有效，已核验文号）", asOf: "2025", verified: true },
-  tezhao: { label: "2026 特招线：历史类 510 / 物理类 496", source: "新华网重庆 2026-06-25（已核验）", asOf: "2026-06-25", verified: true },
-  junjian: { label: "军检线：历史类男 517/女 631、物理类男 533/女 573", source: "阳光高考平台 2026-07-02（已核验）", asOf: "2026-07-02", verified: true },
-  jiafen: { label: "高考加分：烈士子女 +20、少数民族聚居地 +10", source: "重庆市 2025 年招生工作实施办法", asOf: "2025-05", verified: true },
-  huxuegang: { label: "全市 6,993 个护学岗", source: "重庆市政府网 2026-09-02", asOf: "2026-09-02", verified: true },
-  cifr: { label: "家庭教育支出年均 15,828 元 / 占总消费 17.2%", source: "北大 CIEFR《中国教育财政家庭调查报告（2023）》，2022–2023 学年，全国口径", asOf: "2025-11", verified: true },
-  aimei: { label: "志愿填报市场 2025 年约 10.9 亿元 / 2026 年预计 11.6 亿元", source: "艾媒咨询年度报告", asOf: "2026", verified: true }
+  k12:   { label: "重庆 K12 在校生约 376.3 万人", source: "《2024年重庆市国民经济和社会发展统计公报》", url: "https://tjj.cq.gov.cn/", asOf: "2025-03-26", verified: true },
+  lianzhao: { label: "2026 年联招学校约 113 所（第一批次市级重点约 94 所）", source: "重庆市政府网转载重庆日报 2026-04-22；志愿填报阶段更新 113 所", url: "https://www.cq.gov.cn/", asOf: "2026-06", verified: true },
+  zhibiao: { label: "市级重点高中招生计划 70% 指标到校", source: "渝教基函〔2025〕21号（现行有效，已核验文号）", url: "https://jw.cq.gov.cn/", asOf: "2025", verified: true },
+  tezhao: { label: "2026 特招线：历史类 510 / 物理类 496", source: "新华网重庆 2026-06-25（已核验）", url: "https://www.xinhuanet.com/", asOf: "2026-06-25", verified: true },
+  junjian: { label: "军检线：历史类男 517/女 631、物理类男 533/女 573", source: "阳光高考平台 2026-07-02（已核验）", url: "https://gaokao.chsi.com.cn/", asOf: "2026-07-02", verified: true },
+  jiafen: { label: "高考加分：烈士子女 +20、少数民族聚居地 +10", source: "重庆市 2025 年招生工作实施办法", url: "https://jw.cq.gov.cn/", asOf: "2025-05", verified: true },
+  huxuegang: { label: "全市 6,993 个护学岗", source: "重庆市政府网 2026-09-02", url: "https://www.cq.gov.cn/", asOf: "2026-09-02", verified: true },
+  cifr: { label: "家庭教育支出年均 15,828 元 / 占总消费 17.2%", source: "北大 CIEFR《中国教育财政家庭调查报告（2023）》，2022–2023 学年，全国口径", url: "https://ciefr.pku.edu.cn/", asOf: "2025-11", verified: true },
+  aimei: { label: "志愿填报市场 2025 年约 10.9 亿元 / 2026 年预计 11.6 亿元", source: "艾媒咨询年度报告", url: "https://www.iimedia.cn/", asOf: "2026", verified: true }
 };
 function dataBadge(key){
   var d = DATA_SOURCES[key];
   if(!d) return '';
-  return '<span class="data-badge">' + (d.verified ? '✓ 已核验 · ' : '○ 待核验 · ') + d.source + '（截至 ' + d.asOf + '）</span>';
+  var link = d.url ? ' <a href="' + esc(d.url) + '" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline">原文 ↗</a>' : '';
+  return '<span class="data-badge">' + (d.verified ? '✓ 已核验 · ' : '○ 待核验 · ') + d.source + '（截至 ' + d.asOf + '）' + link + '</span>';
 }
 
 
@@ -1859,6 +1863,15 @@ var NEWS_FEED = [
     "url": ""
   },
   {
+    "t": "阳光高考平台：军校招生军检线与报考流程答疑（演示）",
+    "cat": "升学动态",
+    "src": "阳光高考平台 gaokao.chsi.com.cn",
+    "date": "2026-07-02",
+    "sum": "军检线按科目类与性别分档；意向军校的考生家长可在阳光高考「军校」频道查权威口径。",
+    "body": "平台地址 gaokao.chsi.com.cn；「强基计划」术语条目已与本条互链。",
+    "url": "https://gaokao.chsi.com.cn/"
+  },
+  {
     "t": "2026 年高考特招线公布：历史类 510 / 物理类 496",
     "cat": "政策速递",
     "src": "新华网重庆（2026-06-25）",
@@ -1868,6 +1881,15 @@ var NEWS_FEED = [
     "url": ""
   },
   {
+    "t": "2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496（演示）",
+    "cat": "升学动态",
+    "src": "新华网重庆 xinhuanet.com",
+    "date": "2026-06-25",
+    "sum": "特招线是强基计划、专项计划等的重要参考；平台「位次换算」工具已同步口径。",
+    "body": "报道见新华网（xinhuanet.com）；志愿填报期间请以市教育考试院公布为准。",
+    "url": "https://www.xinhuanet.com/"
+  },
+  {
     "t": "幼升小报名季：三对口材料与网报窗口提示",
     "cat": "政策速递",
     "src": "各区教委当年招生政策（汇总口径）",
@@ -1875,6 +1897,24 @@ var NEWS_FEED = [
     "sum": "「三对口」材料提前收齐：户口本、房产证明、出生证明；网报窗口错过需等统筹。",
     "body": "幼升小报名以各区当年招生入学政策为准。建议把户口本、房产证明、出生证明等材料统一收进一个文件袋，并设置日历提醒盯住网报开始与截止时间。二孩家庭可了解「长幼随学」申请通道。",
     "url": ""
+  },
+  {
+    "t": "艾媒咨询：2025 年高考志愿填报市场付费规模预计 10.9 亿元（演示）",
+    "cat": "行业观察",
+    "src": "艾媒咨询 iimedia.cn",
+    "date": "2026-05-25",
+    "sum": "市场快速扩张的另一面是服务良莠不齐——这正是「求真台」存在的理由：先核验，再付费。",
+    "body": "报告见艾媒咨询官网（iimedia.cn）；平台商业化定位见企划书第六章。",
+    "url": "https://www.iimedia.cn/"
+  },
+  {
+    "t": "重庆市教委发布 2026 年义务教育招生入学工作通知（演示）",
+    "cat": "政策速递",
+    "src": "重庆市教育委员会 jw.cq.gov.cn",
+    "date": "2026-04-23",
+    "sum": "通知明确公民同招、指标到校等全年招生总基调；各区细则陆续跟进。",
+    "body": "原文见重庆市教委官网「招生政策」栏目（jw.cq.gov.cn）。平台摘要不替代原文，以官方发布为准。",
+    "url": "https://jw.cq.gov.cn/"
   },
   {
     "t": "2026 年联招学校约 113 所（新增 10 所）",
@@ -1895,7 +1935,7 @@ var NEWS_FEED = [
     "url": ""
   }
 ];
-var NEWS_META = {"generated": "2026-09-22 10:37", "seed": 26, "collected": 0, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-09-24 12:49", "seed": 30, "collected": 0, "fetchedPending": 2};
 
 
 /* ---------- 10-demo-data ---------- */
@@ -2189,7 +2229,7 @@ function runSearch(){
   var hits = SEARCH_DB.filter(function(x){ return (x.s + ' ' + x.t).toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
   var nhits = [];
   try{
-    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
+    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '') + ' ' + (x.body || '') + ' ' + (x.src || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
       .map(function(x){ return { t: '资讯', s: x.t, k: x._k }; });
   }catch(e){}
   var shits = [];
@@ -2682,7 +2722,8 @@ function renderDataSources(){
   var box = document.getElementById('ds-table'); if(!box) return;
   var rows = Object.keys(DATA_SOURCES).map(function(k, i){
     var d = DATA_SOURCES[k];
-    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + '</td><td>' + esc(d.asOf) + '</td>'
+    var link = d.url ? ' <a class="ds-link" href="' + esc(d.url) + '" target="_blank" rel="noopener">原文入口 ↗</a>' : '';
+    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + link + '</td><td>' + esc(d.asOf) + '</td>'
       + '<td><span class="ds-ver ' + (d.verified ? 'ok">✓ 已核验' : 'pending">○ 待核验') + '</span></td></tr>';
   }).join('');
   var verified = Object.keys(DATA_SOURCES).filter(function(k){ return DATA_SOURCES[k].verified; }).length;
@@ -3590,6 +3631,7 @@ function copyMaterials(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.28</b><span>数据来源与资讯挂真实官方链接（教委/阳光高考/艾媒等）+ 资讯扩至 30 条</span></div>
     <div class="cl-item"><b>v0.27</b><span>上帝视角全站审查优化：打印隐藏交互控件 / 导出补全键 / 公告条与搜索占位更新</span></div>
     <div class="cl-item"><b>v0.26</b><span>搜索键盘导航（↑↓/Enter）＋ 学校库公办/民办筛选</span></div>
     <div class="cl-item"><b>v0.25</b><span>入学材料清单生成器：学段 × 户籍 × 住房 → 材料清单（复制 / 打印）</span></div>

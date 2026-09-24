@@ -33,7 +33,7 @@ function runSearch(){
   var hits = SEARCH_DB.filter(function(x){ return (x.s + ' ' + x.t).toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
   var nhits = [];
   try{
-    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
+    nhits = newsCombined().filter(function(x){ return (x.t + ' ' + (x.sum || '') + ' ' + (x.body || '') + ' ' + (x.src || '')).toLowerCase().indexOf(q) >= 0; }).slice(0, 4)
       .map(function(x){ return { t: '资讯', s: x.t, k: x._k }; });
   }catch(e){}
   var shits = [];

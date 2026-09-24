@@ -5,7 +5,8 @@ function renderDataSources(){
   var box = document.getElementById('ds-table'); if(!box) return;
   var rows = Object.keys(DATA_SOURCES).map(function(k, i){
     var d = DATA_SOURCES[k];
-    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + '</td><td>' + esc(d.asOf) + '</td>'
+    var link = d.url ? ' <a class="ds-link" href="' + esc(d.url) + '" target="_blank" rel="noopener">原文入口 ↗</a>' : '';
+    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + link + '</td><td>' + esc(d.asOf) + '</td>'
       + '<td><span class="ds-ver ' + (d.verified ? 'ok">✓ 已核验' : 'pending">○ 待核验') + '</span></td></tr>';
   }).join('');
   var verified = Object.keys(DATA_SOURCES).filter(function(k){ return DATA_SOURCES[k].verified; }).length;

@@ -54,7 +54,7 @@ function renderKidBar(){
   if(!k.length){
     bar.hidden = false;
     bar.innerHTML = '<span class="kb-label">个性化</span>还没有孩子档案——'
-      + '<a class="kb-go" href="#me">去「我的」添加孩子档案 →</a>';
+      + '<a class="kb-go" href="me.html">去「我的」添加孩子档案 →</a>';
     return;
   }
   var c = k[act];
@@ -65,7 +65,7 @@ function renderKidBar(){
         + esc(x.nick || '孩子') + ' · ' + esc(x.stage) + '</span>';
     }).join('')
     + '<span>' + esc(c.qu) + ' · 日历已按「' + esc(STAGE2CAL[c.stage] || '全部') + '」过滤</span>'
-    + '<a class="kb-go" href="#me">管理档案 →</a>';
+    + '<a class="kb-go" href="me.html">管理档案 →</a>';
   prefillQuiz();
 }
 function markSameDistrictSchools(qu){

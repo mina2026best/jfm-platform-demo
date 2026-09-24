@@ -32,6 +32,7 @@ function printTodoList(){
   w.document.close();
 }
 function favCompare(){
+  if(!document.getElementById('sel-a')) return;
   var u = ['sel-a','sel-b','sel-c'].map(function(id){ return document.getElementById(id).value; }).filter(Boolean)
             .filter(function(x,i,arr){ return arr.indexOf(x) === i; });
   if(!u.length){ toast('先选择学校再收藏'); return; }
@@ -45,6 +46,7 @@ function renderMeFav(){
   box.innerHTML = '<div class="me-item"><span>' + esc(u.join(' · ')) + '</span><button class="mini-btn" onclick="restoreFav()">恢复到对比器</button></div>';
 }
 function restoreFav(){
+  if(!document.getElementById('sel-a')) return;
   var u = []; try{ u = JSON.parse(localStorage.getItem('jfm_cmp_fav') || '[]'); }catch(e){}
   ['sel-a','sel-b','sel-c'].forEach(function(id, i){ document.getElementById(id).value = u[i] || ''; });
   runCompare();

@@ -63,6 +63,7 @@ var PATH_MAP = {
 };
 function renderPath(key){
   var p = PATH_MAP[key]; if(!p) return;
+  if(!document.getElementById('pm-panel')) return;
   document.querySelectorAll('#zy .pm-tabs .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.p === key); });
   document.getElementById('pm-panel').innerHTML =
     '<div class="pm-sum"><span class="pm-tag">起步时间：' + p.start + '</span><span class="pm-tag risk">' + p.warn + '</span></div>'

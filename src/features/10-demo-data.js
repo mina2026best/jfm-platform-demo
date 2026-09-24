@@ -197,6 +197,7 @@ function toast(msg){
 
 var cmpLast = null, cmpDiffOnly = false;
 function runCompare(){
+  if(!document.getElementById("sel-a")) return;
   var a=document.getElementById("sel-a").value,
       b=document.getElementById("sel-b").value,
       c=document.getElementById("sel-c").value;

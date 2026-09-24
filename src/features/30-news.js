@@ -86,8 +86,13 @@ function toggleNewsBody(el){
   body.hidden = !body.hidden;
   el.setAttribute('aria-expanded', String(!body.hidden));
 }
-function goNewsByKey(key){
-  document.getElementById('search-panel').hidden = true;
+function goNewsByKey(key, titleHint){
+  var panel = document.getElementById('search-panel');
+  if(panel) panel.hidden = true;
+  if(!document.getElementById('news-list')){
+    var kw = titleHint || key;
+    location.href = 'news.html?s=' + encodeURIComponent(kw); return;
+  }
   newsFilter = 'all'; renderNews();
   var el = document.querySelector('#news-list .news-item[data-key="' + key + '"]');
   if(!el) return;

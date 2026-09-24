@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
-<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——含升学资讯中心与站内编辑台（MVP 演示站，按企划书 V2.0 第五章规划搭建）。" />
+<title>政策库与人话词典 · 鸡父母</title>
+<meta name="description" content="招生政策原文要点 + 人话版解读 + 18 条高频术语词典，逐条标注文号与生效日期。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
@@ -753,7 +753,7 @@
 
 <div id="readBar" aria-hidden="true"></div>
 
-<a class="skip-link" href="#main">跳到主要内容</a>
+<a class="skip-link" href="index.html">回到首页</a>
 
 <div class="ann-bar" id="annBar" hidden>
   <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">全站改版：17 个独立页面上线，导航与站内链接全部改为真跳转（v0.29 多页架构）</span><a href="news.html">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
@@ -768,7 +768,7 @@
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html" aria-current="page">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
@@ -776,107 +776,98 @@
   </div>
 </div>
 
-<header class="hero" id="main">
+
+<section id="policy" class="alt">
   <div class="wrap">
-    <h1>家长的<b>关键时刻</b>，<br/>值得一份<b>可核验的确定性</b>。</h1>
-    <p class="sub">官方政策原文 + <b>人话解读</b> · 升学节点 <b>不错过</b> · 学校信息<b>可核验</b> · 陪读生活<b>有人管</b>。</p>
-    <div class="cta-row">
-      <a class="btn-primary" href="quiz.html">3 分钟自查「我家能不能报」</a>
-      <a class="btn-ghost" href="calendar.html">看本学期升学节点</a>
-    </div>
-    <div class="cd-bar" id="cd-bar" aria-live="polite"></div>
-    <div class="trust" id="trust">
-      <div class="t-item"><span class="t-num">376.3万</span><span class="t-label">重庆 K12 在校生</span></div>
-      <div class="t-item"><span class="t-num">113所</span><span class="t-label">2026 联招学校</span></div>
-      <div class="t-item"><span class="t-num">70%</span><span class="t-label">重点高中指标到校</span></div>
-      <div class="t-item"><span class="t-num">6,993个</span><span class="t-label">全市护学岗</span></div>
-    </div>
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:6px">
-      <span class="data-version" id="dataVersion"></span>
-      <a href="data-sources.html" style="font-size:12px;color:var(--accent)">查看数据来源与核验状态 →</a>
-    </div>
-    <p class="guide">第一次来？三步上手：<b>① 看升学日历</b>，别错过节点 → <b>② 用入学自查</b>，看看「我家能不能报」→ <b>③ 群里传言别急信</b>，先到求真台对一对。</p>
-    <div id="kid-bar" class="kid-bar" hidden></div>
-    <div class="entries">
-      <a class="entry" href="policy.html">
-        <span class="no">入口 01</span>
-        <h3>找政策</h3>
-        <p>2026 中考/入学/指标到校官方原文与人话对照，标注文号与生效日期。</p>
-        <span class="go">查政策 →</span>
-      </a>
-      <a class="entry" href="schools.html">
-        <span class="no">入口 02</span>
-        <h3>找学校</h3>
-        <p>6 所样例学校档案（办学性质/招生范围/通勤/收费），选 2–3 所一键生成对比，所有字段注明来源。</p>
-        <span class="go">看档案 · 做对比 →</span>
-      </a>
-      <a class="entry" href="fact.html">
-        <span class="no">入口 03</span>
-        <h3>问问题</h3>
-        <p>「内部渠道是真的吗？」——求真台逐条核验，按属实/不实/存疑分级发布。</p>
-        <span class="go">查传言 →</span>
-      </a>
-    </div>
-    <p style="font-size:11.5px;color:var(--muted);margin-top:18px">不承诺升学结果 · 不做学科培训 · 机构合作资质审核、平台不背书 · 数据逐条标注来源与核验日期</p>
-  </div>
-</header>
-<section id="calendar">
-  <div class="wrap">
-    <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
-    <p class="sec-desc">示例展示 5 条（正式版为可订阅的分区×学段节点库，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后按学段自动过滤、支持多孩切换；提醒可导出日历文件，行动清单可打印。</p>
-    <div class="fact-filter cal-filter" style="margin-bottom:14px">
-      <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
-      <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
-      <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
-      <button class="ff" data-cf="初升高" onclick="filterCal('初升高')">初升高</button>
-      <button class="ff" data-cf="高考" onclick="filterCal('高考')">高考</button>
-    </div>
-    <div id="cal-personal" class="cal-personal" hidden></div>
-    <div class="cal-tools">
-      <button class="mini-btn" onclick="printTodoList()">打印行动清单</button>
-      <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF（演示）</span>
-    </div>
-    <div class="cal-grid">
-      <div class="cal" data-stage="幼升小">
-        <span class="date">2027-06</span><span class="stage">幼升小</span>
-        <h4>幼升小报名与材料准备</h4>
-        <p>「三对口」材料清单、六年一户核查、长幼随学申请——以各区当年招生入学政策为准。</p>
-        <div class="src">依据：各区教委当年招生入学政策（示例）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 备齐三对口材料（户口、房产、出生证明）<br/>✓ 二孩家庭了解「长幼随学」申请通道<br/>✓ 盯住网上报名窗口，错过要等统筹</div></details>
-        <button class="alert-btn" data-title="幼升小报名与材料准备（2027-06）" onclick="toggleAlert(this)">设提醒</button>
+    <div class="sec-head"><span class="no">02 · 政策库</span><h2>官方原文，配一份「人话版」</h2></div>
+    <p class="sec-desc">每条政策三件套：原文要点 + 人话解读 + 文号/日期。版本历史保留，政策微调时红点提示。</p>
+    <div class="pol">
+      <div>
+        <div class="pol-item">
+          <h4>2026 年中考政策：联招学校约 113 所</h4>
+          <div class="meta">重庆市教委 · 2026-04-22 发布 · 6 月志愿填报阶段更新至 113 所（新增 10 所）</div>
+          <p>政策要点：公办民办同步招生；指标到校计划占市级重点高中招生计划的 70%；志愿分批次填报。</p>
+          <div class="plain"><b>人话版：</b>孩子能不能上「重点」，先看初中学籍在不在对口辖区——70% 的重点高中名额是分给各初中的，跨区择校反而可能丢掉这条路。</div>
+          <div class="meta">来源：重庆市政府网转载重庆日报；重庆本地宝填报指南（已核验）</div>
+          <details class="vh"><summary>版本历史（2 个版本）</summary>
+            <div>· 2026-04 版：联招学校约 100 所（政策发布口径）</div>
+            <div>· 2026-06 更新：志愿填报阶段实际公布 113 所（新增 10 所，本平台红点提示已推送）</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>优质高中指标到校招生工作通知</h4>
+          <div class="meta">渝教基函〔2025〕21号 · 2025 年发布 · 现行有效</div>
+          <p>政策要点：市级重点（优质）高中招生计划按 70% 比例分配到辖区内初中学校。</p>
+          <div class="plain"><b>人话版：</b>「指标到校」= 重点高中把七成名额直接分到初中。孩子在哪所初中读书，比「户口在哪个区」更影响这条路。</div>
+          <div class="meta">来源：重庆市教委（文号已核验）</div>
+          <details class="vh"><summary>版本历史（现行有效）</summary>
+            <div>· 渝教基函〔2025〕21号 发布，2025 学年起执行；2026-09 本平台复核文号与效力，确认现行有效</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>随迁子女入学：「两为主、两纳入」保障</h4>
+          <div class="meta">义务教育招生入学工作口径（演示条目） · 以各区当年细则为准</div>
+          <p>政策要点：随迁子女入学以流入地为主、以公办学校为主，纳入属地义务教育保障范围；通常需准备居住证、就业或社保等材料，具体清单与受理时间以各区当年公告为准。</p>
+          <div class="plain"><b>人话版：</b>外地户籍在重庆工作，孩子读书不是「没学上」——把居住证、就业材料提前半年备齐，由居住区统筹安排公办学位；热门片区可能跨片调配，材料准备越早越从容。</div>
+          <div class="meta">来源：义务教育招生入学相关工作要求（演示口径）；正式版接入当年区县细则原文</div>
+          <details class="vh"><summary>版本历史（演示条目）</summary>
+            <div>· 演示内容：用于展示「区县细则差异」的阅读方式；正式版将按区县逐年更新</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>中考体育与健康：过程性评价 + 统一测试</h4>
+          <div class="meta">体育与健康考试工作方案（演示条目）</div>
+          <p>政策要点：体育与健康考试由过程性评价与统一测试结合构成；日常体育课参与、体质健康测试与统一测试项目共同计分。</p>
+          <div class="plain"><b>人话版：</b>体育分不是「临考前突击」科目——初一就开始的日常锻炼就在攒分。把每周运动变成家庭习惯，比任何冲刺班都划算。</div>
+          <div class="meta">来源：体育与健康考试相关工作方案（演示口径）；分值构成以当年文件为准</div>
+          <details class="vh"><summary>版本历史（演示条目）</summary>
+            <div>· 演示内容：用于展示「过程性评价」类政策的阅读方式</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>高中阶段学生资助：免学费 + 国家助学金</h4>
+          <div class="meta">学生资助工作口径（演示条目）</div>
+          <p>政策要点：符合条件的家庭经济困难学生可申请免学费与国家助学金（分档）；普高与中职均有对应资助通道，申请一般通过学校统一办理。</p>
+          <div class="plain"><b>人话版：</b>家庭困难不该挡住升学路——资助通道是「申请制」，别不好意思问班主任；把材料按清单备好，学校会走统一流程办理。</div>
+          <div class="meta">来源：学生资助管理相关工作口径（演示条目）；正式版接入当年资助政策原文</div>
+          <details class="vh"><summary>版本历史（演示条目）</summary>
+            <div>· 演示内容：用于展示「资助类」政策的阅读方式</div>
+          </details>
+        </div>
+        <div class="pol-item">
+          <h4>民办义务教育招生：超计划全部摇号</h4>
+          <div class="meta">义务教育招生入学工作口径（演示条目）</div>
+          <p>政策要点：民办义务教育学校与公办同步招生；报名人数超过招生计划时，实行电脑随机录取（全程公证），不得以考试、测评等任何形式选拔。</p>
+          <div class="plain"><b>人话版：</b>「民办要考试」「交钱能锁定名额」都不可信——超计划就是摇号，与成绩、缴费无关；没摇中回公办统筹，双轨准备才稳。</div>
+          <div class="meta">来源：义务教育招生入学相关要求（演示口径）；正式版接入当年文件</div>
+          <details class="vh"><summary>版本历史（演示条目）</summary>
+            <div>· 演示内容：用于展示「招生纪律」类政策的阅读方式</div>
+          </details>
+        </div>
       </div>
-      <div class="cal" data-stage="小升初">
-        <span class="date">2026-09</span><span class="stage">小升初</span>
-        <h4>转学与户籍材料核对</h4>
-        <p>跨区转入家庭核对「三对口」材料与学位占用情况，错过转学的，正式版提供补救路径清单。</p>
-        <div class="src">依据：渝教基函〔2025〕21号 及各区细则</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 核对「三对口」材料：户口本、房产证、出生证明<br/>✓ 查学位占用：问街道或原业主，比问中介靠谱<br/>✓ 新房落户越早越好——部分区对落户年限有要求</div></details>
-        <button class="alert-btn" data-title="转学与户籍材料核对（2026-09）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="初升高">
-        <span class="date">2026-10</span><span class="stage">初升高</span>
-        <h4>指标到校资格摸底</h4>
-        <p>市级重点高中招生计划的 <b>70%</b> 分配到辖区初中（渝教基函〔2025〕21号，已核验文号）；家长可核对学籍与连续就读要求。</p>
-        <div class="src">来源：重庆市教委文件（已核验）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 确认孩子学籍连续（中途转学可能失去资格）<br/>✓ 找班主任了解校内排位的参考口径<br/>✓ 盯区教委当年细则：名额、条件每年微调</div></details>
-        <button class="alert-btn" data-title="指标到校资格摸底（2026-10）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="初升高">
-        <span class="date">2027-04</span><span class="stage">初升高</span>
-        <h4>中考报名与联招志愿准备</h4>
-        <p>2026 年联招学校约 113 所（第一批次市级重点约 94 所）；志愿填报窗口以次年 4 月政策公布为准。</p>
-        <div class="src">来源：重庆日报 2026-04-22 政策口径</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 盯 4 月政策发布：联招校名单、批次设置<br/>✓ 提前拟志愿梯度：冲、稳、保各留 1–2 所<br/>✓ 用平台「位次换算」估位置（正式版接入一分一段）</div></details>
-        <button class="alert-btn" data-title="中考报名与联招志愿准备（2027-04）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="高考">
-        <span class="date">2027-06</span><span class="stage">高考</span>
-        <h4>高考特招线公布后行动清单</h4>
-        <p>示例为 2026 年实际口径：特招线历史类 510 / 物理类 496；军检线（报考军校的体检参考）历史类男 517/女 631、物理类男 533/女 573。正式版自动替换当年口径。</p>
-        <div class="src">来源：新华网重庆 2026-06-25（已核验）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 对照线差定位：过特招线多少分 → 位次区间<br/>✓ 研究 3–5 个专业方向（兴趣 × 就业 × 分数匹配）<br/>✓ 防志愿填报骗局：见求真台「内部渠道」条目</div></details>
-        <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
+      <aside class="term">
+        <h3>高频术语 · 人话词典（18 条）</h3>
+        <dl>
+          <dt>三对口</dt><dd>户籍、居住地、学籍三者对口，是公办小学入学的基本核对逻辑。</dd>
+          <dt>六年一户</dt><dd>同一套住房 6 年内只提供一户家庭的入学学位（小学口径；初中为三年一户）。各区细则有差异，以当年区县口径为准。</dd>
+          <dt>指标到校</dt><dd>市级重点高中把 70% 招生计划分配到辖区初中，校内竞争而非全区竞争。</dd>
+          <dt>联招</dt><dd>重庆主城区统一联合招生中考，2026 年约 113 所学校参与。</dd>
+          <dt>长幼随学</dt><dd>多孩家庭可申请让二孩随大孩就读同一学校；在各区教委入学报名平台提交（通道以当年公告为准）。</dd>
+          <dt>多校划片</dt><dd>一个小区对应多所初中，通过摇号确定录取学校，抑制学区房炒作。</dd>
+          <dt>摇号</dt><dd>报名人数超过计划时，电脑随机录取；全程公证，与成绩、缴费无关。</dd>
+          <dt>特招线</dt><dd>特殊类型招生资格线（2026：历史 510 / 物理 496），强基计划、专项计划等以此为主要参考。</dd>
+          <dt>一分一段</dt><dd>全省每个分数对应的考生位次表，是「位次法」填志愿的核心工具。</dd>
+          <dt>位次</dt><dd>考生成绩在同类考生中的排名位置——填志愿的「坐标系」，比分数本身更稳定。</dd>
+          <dt>对口直升</dt><dd>部分公办小学毕业生可对口直升初中，以各区当年政策为准。</dd>
+          <dt>公民同招</dt><dd>公办与民办学校同步报名招生，未摇中的回公办统筹，防止单独押注民办。</dd>
+          <dt>职教高考</dt><dd>中职学生升入大专/本科的考试通道（「文化素质 + 职业技能」）；中职不是终点。</dd>
+          <dt>强基计划</dt><dd>顶尖高校基础学科招生改革计划：高考成绩为主 + 校考，适合学科意向明确的长线选手。</dd>
+          <dt>军检线</dt><dd>报考军校的体检资格参考线（2026：历史类男 517 / 女 631、物理类男 533 / 女 573）。</dd>
+          <dt>征集志愿</dt><dd>批次录取后未满额学校再次公开征集——「捡漏」机会，但可选专业有限。</dd>
+          <dt>生源地助学贷款</dt><dd>入学前在户籍地学生资助中心办理的国家助学贷款，毕业后按政策还款。</dd>
+          <dt>跨区就读</dt><dd>学籍或户籍不在目标区的就读安排；义务教育阶段按属地区县政策统筹，高中阶段以联招与招生范围为准。</dd>
+        </dl>
+      </aside>
     </div>
   </div>
 </section>

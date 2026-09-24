@@ -2,7 +2,15 @@
 function renderCountdown(){
   var el = document.getElementById('cd-bar'); if(!el) return;
   var nodes = [];
-  document.querySelectorAll('.cal-grid .cal').forEach(function(c){
+  if(!document.querySelector('.cal-grid .cal')){
+    nodes = [
+      { t: new Date(2027, 5, 1), label: '幼升小报名与材料准备' },
+      { t: new Date(2026, 8, 1), label: '转学与户籍材料核对' },
+      { t: new Date(2026, 9, 1), label: '指标到校资格摸底' },
+      { t: new Date(2027, 2, 1), label: '中考报名与体检（示例）' },
+      { t: new Date(2027, 5, 1), label: '高考（示例）' }
+    ];
+  } else document.querySelectorAll('.cal-grid .cal').forEach(function(c){
     var dEl = c.querySelector('.date'), h = c.querySelector('h4');
     if(!dEl || !h) return;
     var m = (dEl.textContent || '').match(/(\d{4})-(\d{2})/);
@@ -21,5 +29,5 @@ function renderCountdown(){
   var days = Math.round((best.t - now) / 86400000);
   var when = best.t.getFullYear() + ' 年 ' + (best.t.getMonth() + 1) + ' 月';
   var timing = days > 0 ? ('约 <b>' + days + '</b> 天') : '就在本月';
-  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="#calendar">看升学日历 →</a> <span class="cd-note">（示例口径，以官方发布为准）</span>';
+  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="calendar.html">看升学日历 →</a> <span class="cd-note">（示例口径，以官方发布为准）</span>';
 }

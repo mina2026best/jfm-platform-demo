@@ -33,7 +33,7 @@ function openSchool(name){
   kv.innerHTML = rows.map(function(r){
     var v = d[r] || '暂缺';
     if(r === '暂缺字段'){
-      v = '录取线类数据按合规不提供；可到 <a href="#zy" onclick="document.getElementById(\'school-modal\').close();setTimeout(function(){document.getElementById(\'zy\').scrollIntoView({behavior:\'smooth\'})},80)" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(v) + '）';
+      v = '录取线类数据按合规不提供；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(v) + '）';
     }
     return '<dt>' + r + '</dt><dd>' + v + '</dd>';
   }).join('');

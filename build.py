@@ -1,20 +1,101 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""鸡父母平台 MVP · 构建脚本
-将 src/ 下的样式 / 数据 / 功能模块 / HTML 骨架拼装为单文件零依赖 index.html。
+"""鸡父母平台 MVP · 多页构建脚本（v0.29 架构改版）
+src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
-import os, re, sys, hashlib, datetime
+import os, re, sys, hashlib
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
+OUT_DIR = ROOT  # 页面直接输出到网站根目录
+
+# ============ 页面定义：文件名 / 标题 / 描述 / 包含 section / 页面主 CSS 钩子 ============
+PAGES = [
+    dict(file="index.html",  title="鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）",
+         desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台（MVP 演示站）。",
+         sections=["calendar"], hero=True),
+    dict(file="news.html",   title="升学资讯中心 · 鸡父母",
+         desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
+         sections=["news"]),
+    dict(file="calendar.html", title="升学日历 · 鸡父母",
+         desc="幼升小到高考的关键节点、行动清单与提醒导出——按孩子学段自动过滤。",
+         sections=["calendar"]),
+    dict(file="policy.html", title="政策库与人话词典 · 鸡父母",
+         desc="招生政策原文要点 + 人话版解读 + 18 条高频术语词典，逐条标注文号与生效日期。",
+         sections=["policy"]),
+    dict(file="quiz.html",   title="入学自查与材料清单 · 鸡父母",
+         desc="3 问自查「我家能不能报」，一键生成入学材料清单（学段 × 户籍 × 住房）。",
+         sections=["quiz"]),
+    dict(file="schools.html", title="学校档案库 · 鸡父母",
+         desc="12 所学校档案：办学性质 / 招生范围 / 通勤参考 / 收费口径，逐字段标注来源与核验日期。",
+         sections=["schools"]),
+    dict(file="compare.html", title="择校对比器 · 鸡父母",
+         desc="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。",
+         sections=["compare"]),
+    dict(file="zy.html",     title="志愿参考与路径地图 · 鸡父母",
+         desc="2026 特招线位次换算 + 六大升学路径地图（普高统招 / 指标到校 / 民办 / 中职 / 艺体 / 国际班）。",
+         sections=["zy"]),
+    dict(file="fact.html",   title="求真辟谣台 · 鸡父母",
+         desc="「内部渠道是真的吗？」——逐条核验，按属实 / 不实 / 存疑分级，附出处与核验日期。",
+         sections=["fact"]),
+    dict(file="community.html", title="家长社区 · 鸡父母",
+         desc="同城家长的实操帖与讨论：长幼随学实测、陪读房选择、跨区联招、复习计划分享。",
+         sections=["community", "learn"]),
+    dict(file="life.html",   title="生活服务 · 鸡父母",
+         desc="陪读租房行情样本 + 陪读成本速算器（房租 + 生活 + 通勤 → 月度区间）；平台不参与居间。",
+         sections=["life"]),
+    dict(file="beans.html",  title="升学豆中心 · 鸡父母",
+         desc="站内权益凭证：不生息、不可提现、不可转让；签到与内容贡献即可获得，发放四道闸门防通胀。",
+         sections=["beans"]),
+    dict(file="me.html",     title="我的 · 孩子档案与数据 · 鸡父母",
+         desc="多孩档案、提醒收藏、升学豆、外观与数据管理（导出 / 导入 / 清空）——本机存储，可跨页联动。",
+         sections=["fund", "me"]),
+    dict(file="plans.html",  title="会员体系 · 鸡父母",
+         desc="信息基础永远免费；工具与提醒付费，服务按权益分配。免费层完整可用。",
+         sections=["plans"]),
+    dict(file="biz.html",    title="B 端合作 · 鸡父母",
+         desc="三类合作形态 + 资质审核 + 平台不背书承诺；意向登记通道。",
+         sections=["biz"]),
+    dict(file="data-sources.html", title="数据来源与核验 · 鸡父母",
+         desc="站上每个数字都有出处：9 项已核验数据点，官方原文入口可点击。",
+         sections=["data-sources"]),
+    dict(file="about.html",  title="关于与联系 · 鸡父母",
+         desc="编辑与审核规范、线索通道、站点地图、边界与承诺。",
+         sections=["how", "about"]),
+    dict(file="sitemap.html", title="站点地图 · 鸦父母",
+         desc="全部页面一览。",
+         sections=[]),
+]
+
+# section 原文提取：从 template.html 抓 <section id="xxx">…</section>（含嵌套 div 的配对）
+def extract_sections(tpl):
+    secs = {}
+    for m in re.finditer(r'<section id="([a-z-]+)"(\s+class="[^"]*")?>', tpl):
+        sid = m.group(1)
+        start = m.start()
+        # 配对 </section>
+        depth = 1
+        idx = m.end()
+        while depth > 0:
+            nxt_open = tpl.find("<section", idx)
+            nxt_close = tpl.find("</section>", idx)
+            if nxt_close == -1:
+                raise SystemExit("[build] section 未闭合：" + sid)
+            if nxt_open != -1 and nxt_open < nxt_close:
+                depth += 1
+                idx = nxt_open + 8
+            else:
+                depth -= 1
+                idx = nxt_close + len("</section>")
+        secs[sid] = tpl[start:idx]
+    return secs
 
 def read(p):
     with open(p, encoding="utf-8") as f:
         return f.read()
 
 def guard(name, body):
-    """防拼装遗漏：每个模块必须非空且无构建占位符残留"""
     if not body.strip():
         sys.exit(f"[build] 空模块：{name}")
     if "/*__BUILD_" in body or "__BUILD_PLACEHOLDER__" in body:
@@ -54,38 +135,171 @@ def build_js():
             sys.exit(f"[build] 模块 {f} 未登记进 _order.txt")
     return data + "\n\n" + "\n\n".join(feats)
 
-def build_html():
-    tpl = read(f"{SRC}/template.html")
-    css, js = build_css(), build_js()
-    out = tpl.replace("/*__BUILD_CSS__*/", lambda_mangle(css)).replace("//__BUILD_JS__", js)
+def nav_html(cur_file, demo_tag, searchbox):
+    """生成顶栏（含真跳转链接）。cur_file 用于 aria-current。"""
+    items = [
+        ("news.html", "资讯"),
+        ("calendar.html", "日历"),
+        ("policy.html", "政策"),
+        ("schools.html", "档案"),
+        ("compare.html", "对比"),
+        ("zy.html", "志愿"),
+        ("fact.html", "求真"),
+        ("community.html", "社区"),
+        ("life.html", "生活"),
+        ("beans.html", "升学豆"),
+        ("me.html", "我的"),
+        ("plans.html", "会员", "cta"),
+    ]
+    def a(item):
+        href, label = item[0], item[1]
+        cls = f' class="{item[2]}"' if len(item) > 2 else ""
+        cur = ' aria-current="page"' if href == cur_file else ""
+        return f'<a href="{href}"{cls}{cur}>{label}</a>'
+    nav = "<nav>" + "".join(a(i) for i in items) + "</nav>"
+    mobile = [
+        ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
+        ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
+        ("zy.html", "志愿参考"), ("fact.html", "求真台"), ("community.html", "家长社区"),
+        ("learn.html", "家长学堂"), ("life.html", "生活服务"), ("beans.html", "升学豆"),
+        ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
+    ]
+    mm = "<a href=\"{}\"{}>{}</a>".format
+    mobile_html = "".join(
+        (f'<a href="{h}" class="{c}">{t}</a>' if c else f'<a href="{h}">{t}</a>')
+        for h, t, *c in [(m[0], m[1], m[2] if len(m) > 2 else "") for m in mobile]
+    )
+    logo_href = "index.html"
+    return f'''<div class="top">
+  <div class="wrap">
+    <a class="logo" href="{logo_href}" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
+    {demo_tag}
+    {searchbox}
+    {nav}
+    <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    {mobile_html}
+  </div>
+</div>'''
+
+def convert_links(html):
+    """站内 #锚点 → 对应 .html 页面（模板正文用）。JS 里 goSearch/goNewsByKey 等已在源码跨页化。"""
+    mapping = {
+        "#news": "news.html", "#calendar": "calendar.html", "#policy": "policy.html",
+        "#quiz": "quiz.html", "#schools": "schools.html", "#compare": "compare.html",
+        "#zy": "zy.html", "#fact": "fact.html", "#community": "community.html",
+        "#learn": "learn.html", "#life": "life.html", "#beans": "beans.html",
+        "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
+        "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
+        "#main": "index.html",
+    }
+    for anchor, page in mapping.items():
+        html = html.replace(f'href="{anchor}"', f'href="{page}"')
+    return html
+
+DIALOGS = None  # 缓存弹窗块
+
+def extract_dialogs(tpl):
+    """从模板尾部抓 4 个 <dialog>…</dialog> 与 toast/toTop。"""
+    global DIALOGS
+    if DIALOGS is not None:
+        return DIALOGS
+    blocks = []
+    for did in ["school-modal", "news-editor", "kbd-modal", "changelog-modal"]:
+        m = re.search(r'<dialog id="' + did + r'">[\s\S]*?</dialog>', tpl)
+        if not m:
+            raise SystemExit("[build] 未找到 dialog：" + did)
+        blocks.append(m.group(0))
+    toast = re.search(r'<div id="toast"[^>]*></div>', tpl)
+    totop = re.search(r'<button class="to-top"[\s\S]*?</button>', tpl)
+    toscript = re.search(r'<script>\s*\(function\(\)\{\s*var btn = document\.getElementById\(\'toTop\'\);[\s\S]*?</script>', tpl)
+    DIALOGS = {
+        "dialogs": "\n".join(blocks),
+        "toast": toast.group(0) if toast else '<div id="toast" role="status" aria-live="polite"></div>',
+        "totop": totop.group(0) if totop else "",
+        "toscript": toscript.group(0) if toscript else "",
+    }
+    return DIALOGS
+
+def page_title_tag(title):
+    return f"<title>{title}</title>"
+
+def build_page(page, tpl, secs, css, js):
+    fname = page["file"]
+    # 1) head：标题与描述替换（首屏页保留原 title/desc；其余用页面专属）
+    head = tpl[: tpl.find("</head>") + len("</head>")]
+    if fname != "index.html":
+        head = re.sub(r"<title>[\s\S]*?</title>", page_title_tag(page["title"]), head, count=1)
+        head = re.sub(r'<meta name="description" content="[^"]*" />',
+                      f'<meta name="description" content="{page["desc"]}" />', head, count=1)
+    # 2) body：三段式（ann+top 头部 / 主内容 / 尾部）
+    body_start = tpl.find("<body>") + len("<body>")
+    footer_start = tpl.find("<footer>")
+    first_dialog = tpl.find('<dialog id="school-modal">')
+    body_tpl = tpl[body_start:footer_start]
+    footer = convert_links(tpl[footer_start:first_dialog])
+    # 头部：ann-bar + .top 块（到 mobile-menu 结束）
+    ann_m = re.search(r'<div class="ann-bar"[^>]*>[\s\S]*?</button>\s*</div>\s*</div>', body_tpl)
+    ann = ann_m.group(0) if ann_m else ""
+    # .top 整块（含 mobile-menu）：从 <div class="top"> 到 mobile-menu 结束的 </div>\n</div>
+    top_m = re.search(r'<div class="top">[\s\S]*?</div>\s*</div>\s*(?=<header|<section|<main)', body_tpl)
+    # 兜底：直接重建头部
+    demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', body_tpl)
+    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">MVP 演示站</span>'
+    search_m = re.search(r'<div class="searchbox">[\s\S]*?<div id="search-panel"[^>]*></div>\s*</div>', body_tpl)
+    searchbox = search_m.group(0) if search_m else ""
+    top_html = nav_html(fname, demo_tag, searchbox)
+    # 3) 主内容
+    if page.get("hero"):
+        hero_m = re.search(r'<header class="hero"[\s\S]*?</header>', body_tpl)
+        hero = convert_links(hero_m.group(0)) if hero_m else ""
+    else:
+        hero = ""
+    content = ""
+    for sid in page["sections"]:
+        if sid in secs:
+            content += "\n" + convert_links(secs[sid])
+    dlg = extract_dialogs(tpl)
+    # 4) 公告条链接改 news.html
+    ann = ann.replace('href="#news"', 'href="news.html"')
+    # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html"," #how":"about.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
+
+    out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
+        + ann + "\n\n" + top_html + "\n\n" + hero + content \
+        + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
+    out = out.replace("/*__BUILD_CSS__*/", css).replace("//__BUILD_JS__", js)
     if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
-        sys.exit("[build] 模板占位符未替换干净")
+        sys.exit(f"[build] 占位符未替换干净：{fname}")
+    # skip-link 目标：无 #main 时指到 body 顶部主内容
+    if 'id="main"' not in out:
+        out = out.replace('<a class="skip-link" href="#main">跳到主要内容</a>',
+                          '<a class="skip-link" href="index.html">回到首页</a>')
     return out
-
-def lambda_mangle(css):
-    # CSS 里可能出现 $& 等替换元字符，用函数式替换避免 re.sub 转义问题
-    return css
-
-def str_replace(tpl, marker, content):
-    return tpl.replace(marker, content)
 
 def main():
     tpl = read(f"{SRC}/template.html")
     css, js = build_css(), build_js()
-    out = str_replace(tpl, "/*__BUILD_CSS__*/", css).replace("//__BUILD_JS__", js)
-    if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
-        sys.exit("[build] 模板占位符未替换干净")
-    out_path = os.path.join(ROOT, "index.html")
-    # 幂等性校验：与现有产物一致则跳过写盘
-    if os.path.exists(out_path) and read(out_path) == out:
-        print("[build] 无变化，跳过")
-    else:
-        with open(out_path, "w", encoding="utf-8") as f:
+    secs = extract_sections(tpl)
+    missing = [p for pg in PAGES for p in pg["sections"] if p not in secs]
+    if missing:
+        sys.exit("[build] 模板缺少 section：" + ",".join(set(missing)))
+    built = []
+    total = 0
+    for pg in PAGES:
+        if pg["file"] == "sitemap.html":
+            continue  # 站点地图由 footer 覆盖，暂不单独生成
+        out = build_page(pg, tpl, secs, css, js)
+        path = os.path.join(OUT_DIR, pg["file"])
+        with open(path, "w", encoding="utf-8") as f:
             f.write(out)
         h = hashlib.sha256(out.encode()).hexdigest()[:12]
-        print(f"[build] OK · {len(out)} bytes · sha256:{h}")
-    kb = len(out) / 1024
-    print(f"[build] 单文件体积 {kb:.1f} KB")
+        built.append(f"{pg['file']} · {len(out)//1024} KB · sha256:{h}")
+        total += len(out)
+    print(f"[build] 多页构建 OK · {len(built)} 页 · 合计 {total//1024} KB")
+    for b in built:
+        print("  · " + b)
 
 if __name__ == "__main__":
     main()

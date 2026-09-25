@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>求真核验：民办学校可以提前考试『占坑』</h1>
     <div class="art-meta"><span>结论：不实</span><span>双人复核后发布</span></div>
     <div class="art-body"><div class="verdict-big false">不实</div><p>义务教育阶段公民同招、超计划全部摇号，任何形式的提前选拔、考试测评均属违规；遇到此类宣传可直接向区教委反映。</p><div class="art-src">核验 2026-09-22 · 出处：义务教育招生入学相关要求（演示条目）</div></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-fact-f41ad288.html"><span class="rel-tag">求真台</span>求真核验：有内部渠道，花钱就能进重点</a><a class="rel-item" href="article-fact-92f5f359.html"><span class="rel-tag">求真台</span>求真核验：指标到校就是 70% 都能上重点</a><a class="rel-item" href="article-fact-539b8dd6.html"><span class="rel-tag">求真台</span>求真核验：普职分流 5:5，一半孩子上不了普高</a><a class="rel-item" href="article-fact-71616d28.html"><span class="rel-tag">求真台</span>求真核验：学位房 ≠ 学区房，买房前要查占用</a><a class="rel-item" href="article-news-f413dbf6.html"><span class="rel-tag">资讯</span>期末临近：各科复习的「家庭分工」建议</a></div><div class="art-foot">
       <a class="art-back" href="fact.html">← 返回求真辟谣台</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

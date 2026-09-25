@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>两江育才中学（两江新区） · 学校档案</h1>
     <div class="art-meta"><span>公办</span><span>两江新区</span><span>校方公示信息口径（演示） · 核验 2026-09-25</span></div>
     <div class="art-body"><p>两江新区直管公办校；新区生源增长快，逐年扩班中。</p><table class="art-table"><tbody><tr><td>办学性质</td><td>公办</td></tr><tr><td>所在区</td><td>两江新区</td></tr><tr><td>招生范围</td><td>两江新区直管区招生（以当年简章为准）</td></tr><tr><td>通勤参考</td><td>轨道 5 号线沿线；人和/鸳鸯片区</td></tr><tr><td>住宿</td><td>部分寄宿</td></tr><tr><td>收费口径</td><td>公办收费标准（以公示为准）</td></tr><tr><td>指标到校</td><td>按两江新区当年政策执行</td></tr><tr><td>数据来源</td><td>校方公示信息口径（演示） · 核验 2026-09-25</td></tr><tr><td>暂缺字段</td><td>近三年录取线（合规不提供）（按合规红线不提供录取线与排名）</td></tr></tbody></table><h3>家长评价（审核制）</h3><div class="art-quote"><span class="badge-ok">已审核</span> 新校区硬件好，社团 choice 多（2026-07 家长投稿，经双人审核）</div><p class="art-tip">想在对比中查看该校？回到 <a class="art-link" href="schools.html?school=两江育才中学（两江新区）">学校档案库</a>，或加入<a class="art-link" href="compare.html">择校对比器</a>。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-6fa32a0b.html"><span class="rel-tag">学校档案</span>重庆一中（渝北） · 学校档案</a><a class="rel-item" href="article-school-10432c02.html"><span class="rel-tag">学校档案</span>巴蜀中学（渝中） · 学校档案</a><a class="rel-item" href="article-school-4dd3d550.html"><span class="rel-tag">学校档案</span>重庆八中（渝北） · 学校档案</a><a class="rel-item" href="article-news-fd72aa23.html"><span class="rel-tag">资讯</span>期中考试后，成绩单应该这样读（家长版）</a></div><div class="art-foot">
       <a class="art-back" href="schools.html">← 返回学校档案库</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

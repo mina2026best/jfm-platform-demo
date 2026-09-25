@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>家庭年度教育支出复盘：先看结构，再看总量</h1>
     <div class="art-meta"><span>编辑部整理（参照 CIEFR 调查）</span><span>2026-09-20</span><span class="art-status">已审核发布</span></div>
     <div class="art-body"><p>全国调查显示校外支出约占生均教育支出 26.2%；建议每年做一次预算复盘。</p><p>把支出分成「课时 / 资料 / 活动 / 设备」四类分别记账，比只看总额更容易发现问题。行业调查显示全国教育支出均值约 15,828 元/年（CIEFR），可用「教育资金规划」工具做对照。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-news-25280274.html"><span class="rel-tag">资讯</span>家庭教育促进法要点：依法带娃，「训诫」不是吓唬</a><a class="rel-item" href="article-news-8bef8675.html"><span class="rel-tag">资讯</span>高一适应期：住校生第一个月的常见问题与对策</a><a class="rel-item" href="article-news-45ad72b1.html"><span class="rel-tag">资讯</span>「双减」后学科培训现状：持证机构名单怎么查</a><a class="rel-item" href="article-news-031fea0f.html"><span class="rel-tag">资讯</span>校园周边交通护学岗升级：家长志愿者报名启动（演示）</a><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a></div><div class="art-foot">
       <a class="art-back" href="news.html">← 返回资讯中心</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

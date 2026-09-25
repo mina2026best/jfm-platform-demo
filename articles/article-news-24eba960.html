@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>接送高峰行车安全：即停即走与护学通道</h1>
     <div class="art-meta"><span>编辑部 · 示范内容</span><span>2026-09-12</span><span class="art-status">已审核发布</span></div>
     <div class="art-body"><p>校门口 50 米内不调头、不长时间停车；听从护学岗指挥。</p><p>开车接送请遵守学校周边交通组织：① 即停即走；② 不乱停；③ 服从护学岗与交警指挥。步行接送固定一条安全路线并教会孩子识别风险点。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-news-25280274.html"><span class="rel-tag">资讯</span>家庭教育促进法要点：依法带娃，「训诫」不是吓唬</a><a class="rel-item" href="article-news-8bef8675.html"><span class="rel-tag">资讯</span>高一适应期：住校生第一个月的常见问题与对策</a><a class="rel-item" href="article-news-45ad72b1.html"><span class="rel-tag">资讯</span>「双减」后学科培训现状：持证机构名单怎么查</a><a class="rel-item" href="article-news-031fea0f.html"><span class="rel-tag">资讯</span>校园周边交通护学岗升级：家长志愿者报名启动（演示）</a><a class="rel-item" href="article-fact-179d7e11.html"><span class="rel-tag">求真台</span>求真核验：中考报名要核对本人身份信息</a></div><div class="art-foot">
       <a class="art-back" href="news.html">← 返回资讯中心</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -935,7 +943,7 @@
             <div>· 2026-06 更新：志愿填报阶段实际公布 113 所（新增 10 所，本平台红点提示已推送）</div>
           </details>
         </div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-policy-12b91131.html"><span class="rel-tag">政策库</span>优质高中指标到校招生工作通知</a><a class="rel-item" href="article-policy-97b9ba86.html"><span class="rel-tag">政策库</span>随迁子女入学：「两为主、两纳入」保障</a><a class="rel-item" href="article-policy-1158f301.html"><span class="rel-tag">政策库</span>中考体育与健康：过程性评价 + 统一测试</a><a class="rel-item" href="article-policy-f14c6d6e.html"><span class="rel-tag">政策库</span>高中阶段学生资助：免学费 + 国家助学金</a><a class="rel-item" href="article-school-6fa32a0b.html"><span class="rel-tag">学校档案</span>重庆一中（渝北） · 学校档案</a></div><div class="art-foot">
       <a class="art-back" href="policy.html">← 返回政策库</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

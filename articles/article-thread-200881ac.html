@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>大学城片区两所重点怎么选？实地探访对比帖</h1>
     <div class="art-meta"><span>31 回复</span></div>
     <div class="art-body"><div class="verdict-big tag">讨论中</div><p>沙坪坝区 · 初二 · 含通勤实测与开放日记录</p><p class="art-tip">本帖为演示社区内容；正式版将开放回帖与同城匹配。更多讨论见<a class="art-link" href="community.html">家长社区</a>。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-thread-abdfbefe.html"><span class="rel-tag">家长社区</span>三对口材料到底要备几份？附清单</a><a class="rel-item" href="article-thread-d67f1bc1.html"><span class="rel-tag">家长社区</span>指标到校的「校内排队」到底怎么排？</a><a class="rel-item" href="article-thread-661147f5.html"><span class="rel-tag">家长社区</span>陪读房换租被涨 15%，最后这样谈下来的</a><a class="rel-item" href="article-thread-4682e79f.html"><span class="rel-tag">家长社区</span>「长幼随学」申请通道实测：3 个工作日受理</a><a class="rel-item" href="article-thread-661147f5.html"><span class="rel-tag">家长社区</span>陪读房换租被涨 15%，最后这样谈下来的</a></div><div class="art-foot">
       <a class="art-back" href="community.html">← 返回家长社区</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

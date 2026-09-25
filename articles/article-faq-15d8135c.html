@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>中考体育是怎么计分的？</h1>
     <div class="art-meta"><span>分类：政策</span></div>
     <div class="art-body"><p>过程性评价 + 统一测试结合；初一就开始的过程分靠平时积累，突击效果有限——<a href="policy.html">政策库</a>有完整口径。</p><p class="art-tip">更多同类问题见<a class="art-link" href="faq.html">家长 FAQ</a>；相关工具与政策已在上文链接中。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-faq-388af38e.html"><span class="rel-tag">家长 FAQ</span>「三对口」到底是什么意思？</a><a class="rel-item" href="article-faq-d9afc626.html"><span class="rel-tag">家长 FAQ</span>六年一户，二孩上学受影响吗？</a><a class="rel-item" href="article-faq-9d123cb4.html"><span class="rel-tag">家长 FAQ</span>随迁子女入学要准备哪些材料？</a><a class="rel-item" href="article-faq-49dc1a3f.html"><span class="rel-tag">家长 FAQ</span>错过网上报名窗口怎么办？</a><a class="rel-item" href="article-news-322b0469.html"><span class="rel-tag">资讯</span>2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴</a></div><div class="art-foot">
       <a class="art-back" href="faq.html">← 返回家长 FAQ</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

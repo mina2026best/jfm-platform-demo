@@ -92,13 +92,23 @@ def extract_template_blocks(tpl, marker, count_expected=None):
     return blocks
 
 def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
+    REG = []  # 全站文章注册表：[title, href, kicker]
     from html.parser import HTMLParser
     made = []
     os.makedirs(out_dir, exist_ok=True)
     header = header_tpl.replace('<span class="demo-tag">', '<span class="demo-tag">')  # 原样
 
     def write(cfg, fname):
+        REG.append([cfg["kicker"], fname, cfg["title"]])
+        # 相关推荐：同类 4 篇 + 全站随机 2 篇（确定性：按 title hash 排序，构建可复现）
+        rel = cfg.get("related") or []
+        extra = ""
+        if rel:
+            extra = '<h3 class="rel-h">相关阅读</h3><div class="rel-grid">' + "".join(
+                '<a class="rel-item" href="%s"><span class="rel-tag">%s</span>%s</a>' % (esc(r[1]), esc(r[0].split(" · ")[0]), esc(r[2] if len(r) > 2 else r[0]))
+                for r in rel[:5]) + '</div>'
         html = article_html(cfg, css, header, footer_html, dialogs, extra_js)
+        html = html.replace('<div class="art-foot">', extra + '<div class="art-foot">')
         with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
             f.write(html)
         made.append(fname)
@@ -264,4 +274,26 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
             "back": "faq.html", "back_label": "家长 FAQ",
         }, f"article-faq-{sl}.html")
 
+    # ---- 第二轮：为每篇补相关推荐并重写 ----
+    by_kicker = {}
+    for k, f, t in REG:
+        by_kicker.setdefault(k.split(" · ")[0], []).append((k, f, t))
+    allreg = sorted(REG, key=lambda r: r[2])
+    for k, f, t in REG:
+        grp = by_kicker.get(k.split(" · ")[0], [])
+        same = [r for r in grp if r[1] != f][:4]
+        pool = [r for r in allreg if r[1] != f and r not in same]
+        i = int(hashlib.md5(f.encode()).hexdigest(), 16)
+        extra = []
+        for j in range(min(2, len(pool))):
+            extra.append(pool[(i + j * 7919) % len(pool)])
+        rel = same + extra
+        fp = os.path.join(out_dir, f)
+        html = open(fp, encoding="utf-8").read()
+        rel_html = '<h3 class="rel-h">相关阅读</h3><div class="rel-grid">' + "".join(
+            '<a class="rel-item" href="%s"><span class="rel-tag">%s</span>%s</a>' % (esc(r[1]), esc(r[0].split(" · ")[0]), esc(r[2]))
+            for r in rel[:5]) + '</div>'
+        html = html.replace('<div class="art-foot">', rel_html + '<div class="art-foot">')
+        with open(fp, "w", encoding="utf-8") as fh:
+            fh.write(html)
     return made

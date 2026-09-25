@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>奥数还值得学吗？</h1>
     <div class="art-meta"><span>教育顾问 · 示范</span><span>分类：小升初</span></div>
     <div class="art-body"><p>如果目标是经批准的少数理科特色活动，系统奥数是基础；但对大多数孩子，把校内数学吃透 + 培养阅读理解更划算。学奥数前先问孩子愿不愿意，再问为什么学。</p><p class="art-tip">回答人：教育顾问 · 示范。更多同类问答见<a class="art-link" href="community.html">家长学堂</a>。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-learn-7f5127fb.html"><span class="rel-tag">家长学堂</span>要不要提前教拼音和算术？</a><a class="rel-item" href="article-learn-18edf1ba.html"><span class="rel-tag">家长学堂</span>指标到校和择校怎么权衡？</a><a class="rel-item" href="article-learn-c460ab76.html"><span class="rel-tag">家长学堂</span>孩子成绩中等，路径怎么规划？</a><a class="rel-item" href="article-learn-ba409771.html"><span class="rel-tag">家长学堂</span>志愿「冲稳保」怎么分配？</a><a class="rel-item" href="article-faq-a0f462e8.html"><span class="rel-tag">家长 FAQ</span>长幼随学怎么申请？</a></div><div class="art-foot">
       <a class="art-back" href="community.html">← 返回家长社区 · 学堂</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

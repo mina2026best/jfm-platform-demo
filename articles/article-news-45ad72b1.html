@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>「双减」后学科培训现状：持证机构名单怎么查</h1>
     <div class="art-meta"><span>全国校外教育培训监管与服务综合平台口径（演示条目）</span><span>2026-09-28</span><span class="art-status">已审核发布</span></div>
     <div class="art-body"><p>合规机构有三证：办学许可证、收费公示、监管账户；名单可在全国监管平台查询，不要相信「特殊渠道」。</p><p>缴费牢记两个数字：不超 3 个月或 60 课时；合同用《中小学生校外培训服务合同（示范文本）》。</p></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-news-25280274.html"><span class="rel-tag">资讯</span>家庭教育促进法要点：依法带娃，「训诫」不是吓唬</a><a class="rel-item" href="article-news-8bef8675.html"><span class="rel-tag">资讯</span>高一适应期：住校生第一个月的常见问题与对策</a><a class="rel-item" href="article-news-031fea0f.html"><span class="rel-tag">资讯</span>校园周边交通护学岗升级：家长志愿者报名启动（演示）</a><a class="rel-item" href="article-news-fd72aa23.html"><span class="rel-tag">资讯</span>期中考试后，成绩单应该这样读（家长版）</a><a class="rel-item" href="article-faq-2995c841.html"><span class="rel-tag">家长 FAQ</span>陪读一个月要花多少钱？</a></div><div class="art-foot">
       <a class="art-back" href="news.html">← 返回资讯中心</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

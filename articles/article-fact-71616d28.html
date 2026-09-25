@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>求真核验：学位房 ≠ 学区房，买房前要查占用</h1>
     <div class="art-meta"><span>结论：属实（提醒）</span><span>双人复核后发布</span></div>
     <div class="art-body"><div class="verdict-big ok">属实（提醒）</div><p>属实。学位存在占用与指标个数限制（小学六年一户、初中三年一户），不核查占用就购房存在无法入学的风险。平台提供核查步骤指引，不做法律判断。</p><div class="art-src">核验 2026-09-15 · 出处：行业内容交叉（[C4-S70/71]，置信度中，以区教委口径为准）</div></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-fact-f41ad288.html"><span class="rel-tag">求真台</span>求真核验：有内部渠道，花钱就能进重点</a><a class="rel-item" href="article-fact-92f5f359.html"><span class="rel-tag">求真台</span>求真核验：指标到校就是 70% 都能上重点</a><a class="rel-item" href="article-fact-539b8dd6.html"><span class="rel-tag">求真台</span>求真核验：普职分流 5:5，一半孩子上不了普高</a><a class="rel-item" href="article-fact-71110266.html"><span class="rel-tag">求真台</span>求真核验：中招办发来短信，点链接填信息</a><a class="rel-item" href="article-learn-ba409771.html"><span class="rel-tag">家长学堂</span>志愿「冲稳保」怎么分配？</a></div><div class="art-foot">
       <a class="art-back" href="fact.html">← 返回求真辟谣台</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

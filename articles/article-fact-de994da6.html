@@ -861,6 +861,14 @@
   html.theme-dark .entry-art svg rect[fill="url(#fg1)"],
   html.theme-dark .entry-art svg rect[fill="url(#ng1)"]{fill:#182130}
   html.theme-dark .pb-sub{color:rgba(255,255,255,.72)}
+  /* v0.35 相关阅读 */
+  .rel-h{font-family:var(--serif);font-size:16px;color:var(--navy);margin:20px 0 10px}
+  .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
+  .rel-item:hover{border-color:var(--accent)}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
+  @media print{ .rel-grid{display:none} }
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
@@ -927,7 +935,7 @@
     <h1>求真核验：复读生不能参加中考</h1>
     <div class="art-meta"><span>结论：存疑 · 提醒</span><span>双人复核后发布</span></div>
     <div class="art-body"><div class="verdict-big warn">存疑 · 提醒</div><p>存疑——往届生可以以社会考生身份报名，但部分区对复读生报考批次/指标到校资格有限制，需逐区核实。平台将持续跟踪各区口径。</p><div class="art-src">核验 2026-09-25 · 出处：各区中考报名细则（演示条目）</div></div>
-    <div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-fact-f41ad288.html"><span class="rel-tag">求真台</span>求真核验：有内部渠道，花钱就能进重点</a><a class="rel-item" href="article-fact-92f5f359.html"><span class="rel-tag">求真台</span>求真核验：指标到校就是 70% 都能上重点</a><a class="rel-item" href="article-fact-539b8dd6.html"><span class="rel-tag">求真台</span>求真核验：普职分流 5:5，一半孩子上不了普高</a><a class="rel-item" href="article-fact-71616d28.html"><span class="rel-tag">求真台</span>求真核验：学位房 ≠ 学区房，买房前要查占用</a><a class="rel-item" href="article-faq-3861b9f4.html"><span class="rel-tag">家长 FAQ</span>孩子在学校吃得好吗？我怎么监督？</a></div><div class="art-foot">
       <a class="art-back" href="fact.html">← 返回求真辟谣台</a>
       <span class="art-note">演示口径，以官方当年发布为准</span>
     </div>

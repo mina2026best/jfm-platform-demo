@@ -405,6 +405,8 @@ def main():
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     site = "https://mina2026best.github.io/jfm-platform-demo/"
     for pg_ in PAGES:
+        if pg_["file"] == "sitemap.html":
+            continue  # sitemap.html 无实体页（站点地图由 footer 覆盖）
         sm.append("<url><loc>" + site + pg_["file"] + "</loc></url>")
     for fn in sorted(os.listdir(art_dir)):
         if fn.endswith(".html"):

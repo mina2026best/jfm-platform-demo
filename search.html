@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>择校对比器 · 鸡父母</title>
-<meta name="description" content="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。" />
+<title>站内搜索 · 鸡父母</title>
+<meta name="description" content="搜全站：学校 / 资讯 / 政策 / 术语一框聚合，附热门搜索词。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
@@ -810,7 +810,7 @@
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html" aria-current="page">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html" aria-current="page">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
@@ -819,39 +819,18 @@
 </div>
 
 
-<section id="compare">
+<section id="searchpage">
   <div class="wrap">
-    <div class="sec-head"><span class="no">03 · 择校对比器</span><h2>把「听群里的」变成「摆在桌面上」</h2></div>
-    <p class="sec-desc">选 2–3 所学校横向对比。数据缺失时如实标注「暂缺」，不制造虚假确定性——这是产品红线之一。</p>
-    <div class="cmp-tools">
-      <select id="sel-a" aria-label="学校一">
-        <option value="">选择学校一</option>
-        <option>南开中学（沙坪坝）</option>
-        <option>重庆一中（渝北）</option>
-        <option>巴蜀中学（渝中）</option>
-      </select>
-      <select id="sel-b" aria-label="学校二">
-        <option value="">选择学校二</option>
-        <option>重庆一中（渝北）</option>
-        <option>南开中学（沙坪坝）</option>
-        <option>巴蜀中学（渝中）</option>
-      </select>
-      <select id="sel-c" aria-label="学校三（可选）">
-        <option value="">选择学校三（可选）</option>
-        <option>巴蜀中学（渝中）</option>
-        <option>南开中学（沙坪坝）</option>
-        <option>重庆一中（渝北）</option>
-      </select>
-      <button id="btn-cmp" onclick="runCompare()">生成对比</button>
-      <button id="btn-clear" class="cmp-alt" onclick="clearCompare()">清空</button>
-      <button id="btn-fav" class="cmp-alt" onclick="favCompare()">收藏本次对比</button>
-      <button id="btn-copy-cmp" class="cmp-alt" onclick="copyCompare()">复制对比文本</button>
-      <button id="btn-diff" class="cmp-alt" onclick="toggleDiffOnly()" aria-pressed="false">仅看差异</button>
-      <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
+    <div class="sec-head"><span class="no">站内检索</span><h2 id="sp-head">搜全站</h2></div>
+    <div class="sp-hero">
+      <div class="sp-box">
+        <input id="sp-input" type="search" placeholder="输入关键词：学校名 / 政策词 / 术语 / 资讯标题…" aria-label="站内搜索" autocomplete="off" oninput="if(event.key==='Enter')location.href='search.html?q='+encodeURIComponent(this.value)" />
+        <button class="btn-main" onclick="location.href='search.html?q='+encodeURIComponent(document.getElementById('sp-input').value)">搜索</button>
+      </div>
+      <div class="sp-hot"><span>热门搜索：</span><span id="sp-hot"></span></div>
     </div>
-    <div id="cmp-result" aria-live="polite">
-      <div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。对比维度：办学性质 / 招生范围 / 通勤参考 / 收费口径 / 指标到校名额 / 数据来源与核验日期。</div>
-    </div>
+    <div class="sp-sec"><div id="sp-out"><div class="sp-empty">正在加载…</div></div></div>
+    <p class="cmp-note sp-go">找不到想要的？到 <a class="sp-back" href="fact.html">求真台提交问题</a>，或到 <a class="sp-back" href="about.html">联系我们</a>。</p>
   </div>
 </section>
 

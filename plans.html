@@ -745,6 +745,48 @@
   .ck2{flex:none;width:12px;height:12px;border:1.5px solid var(--accent);border-radius:2px;transform:translateY(3px)}
   .mat-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
   .mat-note{font-size:12px;color:var(--muted)}
+
+
+/* ============ 28-portal ============ */
+  /* ---------- v0.30：搜索页 / FAQ 页 / 热点榜（门户对齐） ---------- */
+  .sp-hero{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:20px 0 18px}
+  .sp-box{display:flex;gap:10px;flex-wrap:wrap}
+  .sp-box input{flex:1;min-width:220px;font-size:15px;padding:12px 16px;border:1.5px solid var(--line2);border-radius:99px;font-family:var(--sans);background:var(--bg);color:var(--ink)}
+  .sp-box input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .sp-box button{border-radius:99px;padding:12px 26px}
+  .sp-hot{margin-top:12px;font-size:13px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .sp-hot a{color:var(--ink2);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:3px 12px}
+  .sp-hot a:hover{color:var(--accent);border-color:var(--accent)}
+  .sp-sec{margin-top:26px}
+  .sp-sec h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin-bottom:10px}
+  .sp-list{display:grid;gap:8px}
+  .sp-row{display:flex;gap:10px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;text-decoration:none}
+  .sp-row:hover{border-color:var(--accent)}
+  .sp-row .s-badge{flex:none;margin-top:1px}
+  .sp-row .t{font-size:14px;color:var(--ink);line-height:1.5}
+  .sp-row .t small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+  .sp-empty{background:var(--paper);border:1px dashed var(--line2);border-radius:10px;padding:26px;text-align:center;color:var(--muted);font-size:14px}
+  .sp-go a.sp-back{font-size:13px;color:var(--accent);text-decoration:none}
+  /* FAQ */
+  .faq-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .faq-grid{display:grid;gap:10px;max-width:860px}
+  .faq-item{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .faq-item summary{cursor:pointer;padding:14px 16px;font-size:14.5px;color:var(--ink);font-weight:600;list-style:none;display:flex;gap:10px;align-items:baseline}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary .cat{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:2px 8px}
+  .faq-item[open] summary{border-bottom:1px solid var(--line)}
+  .faq-item .a{padding:12px 16px 14px;font-size:13.5px;color:var(--ink2);line-height:1.8}
+  .faq-item .a a{color:var(--accent)}
+  /* 热点榜 */
+  .hot-rank{display:grid;gap:8px}
+  .hot-rank a{display:flex;gap:12px;align-items:baseline;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 14px;text-decoration:none}
+  .hot-rank a:hover{border-color:var(--accent)}
+  .hot-rank .no{flex:none;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:700;width:20px}
+  .hot-rank .no.hot-no3{color:#D9534F}
+  .hot-rank .t{font-size:13.5px;color:var(--ink)}
+  .hot-rank .meta{margin-left:auto;flex:none;font-size:11.5px;color:var(--muted)}
+  .home-grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:start;margin-top:16px}
+  @media (max-width:960px){ .home-grid2{grid-template-columns:1fr} }
 </style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
@@ -762,17 +804,17 @@
 <div class="top">
   <div class="wrap">
     <a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
-    <span class="demo-tag">MVP 演示站 v0.29 · 多页架构</span>
+    <span class="demo-tag">MVP 演示站 v0.30 · 门户对齐</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta" aria-current="page">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta" aria-current="page">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="learn.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
+    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="learn.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
   </div>
 </div>
 
@@ -858,8 +900,11 @@
           <li><a href="community.html">家长社区</a></li>
           <li><a href="learn.html">家长学堂</a></li>
           <li><a href="life.html">生活服务</a></li>
+          <li><a href="search.html">站内搜索</a></li>
+          <li><a href="faq.html">家长 FAQ</a></li>
           <li><a href="beans.html">升学豆</a></li>
           <li><a href="plans.html">会员体系</a></li>
+          <li><a href="data-sources.html">数据来源</a></li>
           <li><a href="about.html">关于与联系</a></li>
           <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
         </ul>
@@ -876,7 +921,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.29（2026-09-24）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.30（2026-09-25）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -2831,6 +2876,13 @@ function qparam(name){
   return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
 }
 function bootPageRoute(){
+  // 首页热点榜
+  if(document.getElementById('hot-rank')) renderHotRank();
+  // 搜索页：填热门词 + 执行查询
+  if(document.getElementById('sp-out')){
+    var hot = document.getElementById('sp-hot'); if(hot) hot.innerHTML = hotWordsHTML();
+    runPageSearch();
+  }
   // 1) news.html?s=关键词 → 筛选并展开定位
   var s = qparam('s');
   if(s && document.getElementById('news-list')){
@@ -2864,9 +2916,87 @@ function bootPageRoute(){
     if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
   }
 }
+
+
+/* ---------- 41-portal ---------- */
+/* ---------- v0.30：搜索页 / FAQ / 热点榜 ---------- */
+var HOT_WORDS = ['指标到校', '三对口', '军检线', '摇号', '随迁子女', '长幼随学', '南开中学', '特招线', '陪读租房', '材料清单'];
+function hotWordsHTML(){
+  return HOT_WORDS.map(function(w){
+    return '<a href="search.html?q=' + encodeURIComponent(w) + '">' + esc(w) + '</a>';
+  }).join('');
+}
+/* 搜索页主逻辑：聚合 SEARCH_DB / 资讯 / 学校 */
+function runPageSearch(){
+  var q = (qparam('q') || '').trim();
+  var box = document.getElementById('sp-input'); if(box) box.value = q;
+  var out = document.getElementById('sp-out'); if(!out) return;
+  var head = document.getElementById('sp-head');
+  if(!q){
+    if(head) head.textContent = '输入关键词，搜全站';
+    out.innerHTML = '<div class="sp-empty">试试上方热门词，或直接输入：学校名 / 政策词 / 术语 / 资讯标题。</div>';
+    return;
+  }
+  if(head) head.textContent = '「' + q + '」的搜索结果';
+  var ql = q.toLowerCase();
+  var rows = [];
+  try{
+    Object.keys(SCHOOL_DB).forEach(function(k){
+      if(k.toLowerCase().indexOf(ql) >= 0){
+        rows.push({ tag: '学校', t: k, s: (SCHOOL_DB[k]['简介'] || '').slice(0, 60), href: 'schools.html?school=' + encodeURIComponent(k) });
+      }
+    });
+  }catch(e){}
+  try{
+    newsCombined().forEach(function(x){
+      var hay = ((x.t || '') + ' ' + (x.sum || '') + ' ' + (x.src || '') + ' ' + (x.body || '')).toLowerCase();
+      if(hay.indexOf(ql) >= 0){
+        rows.push({ tag: '资讯', t: x.t, s: '来源：' + (x.src || '编辑部') + ' · ' + (x.date || ''), href: 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12)) });
+      }
+    });
+  }catch(e){}
+  SEARCH_DB.forEach(function(x){
+    if((x.s + ' ' + x.t).toLowerCase().indexOf(ql) >= 0){
+      var pg = ANCHOR2PAGE[x.a] || 'index.html';
+      rows.push({ tag: x.t, t: x.s, s: '站内专栏', href: pg });
+    }
+  });
+  if(!rows.length){
+    out.innerHTML = '<div class="sp-empty">没有找到与「' + esc(q) + '」相关的内容——换个说法试试，或到<a href="fact.html" style="color:var(--accent)">求真台</a>提交你的问题。</div>';
+    return;
+  }
+  out.innerHTML = '<p class="cmp-note" style="margin-bottom:10px">共命中 ' + rows.length + ' 条（学校 / 资讯 / 政策 / 术语）</p>'
+    + '<div class="sp-list">' + rows.map(function(r){
+      return '<a class="sp-row" href="' + r.href + '"><span class="s-badge">' + esc(r.tag) + '</span>'
+        + '<span class="t">' + esc(r.t) + '<small>' + esc(r.s || '') + '</small></span></a>';
+    }).join('') + '</div>';
+}
+/* FAQ 页筛选 */
+function faqFilter(cat){
+  document.querySelectorAll('.faq-grid .faq-item').forEach(function(d){
+    d.style.display = (cat === 'all' || d.dataset.cat === cat) ? '' : 'none';
+  });
+  document.querySelectorAll('.faq-cats .ff').forEach(function(b){
+    var on = b.dataset.fc === cat;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+}
+/* 首页热点榜（由资讯 seed 生成，取前 8） */
+function renderHotRank(){
+  var box = document.getElementById('hot-rank'); if(!box) return;
+  var items = [];
+  try{ items = newsCombined().slice(0, 8); }catch(e){ return; }
+  if(!items.length){ box.innerHTML = '<div class="empty-mini">资讯加载中…</div>'; return; }
+  box.innerHTML = '<div class="hot-rank">' + items.map(function(x, i){
+    var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));
+    return '<a href="' + href + '"><span class="no' + (i < 3 ? ' hot-no3' : ' hot-no') + '">' + (i + 1) + '</span>'
+      + '<span class="t">' + esc(x.t) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
+  }).join('') + '</div>';
+}
 </script>
 
-<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html"," #how":"about.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
+<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
   <div class="dlg-kicker">学校档案 · 审核制</div>
@@ -2931,6 +3061,7 @@ function bootPageRoute(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.30</b><span>门户对齐：新增站内搜索页（热门词聚合检索）/ 家长 FAQ 20 问 / 首页要闻榜与快捷通道 / 404 页</span></div>
     <div class="cl-item"><b>v0.29</b><span>多页架构改版：单页拆为 17 个独立页面，全站导航真跳转；搜索/收藏/档案跨页参数联动；旧锚点自动重定向</span></div>
     <div class="cl-item"><b>v0.28</b><span>数据来源与资讯挂真实官方链接（教委/阳光高考/艾媒等）+ 资讯扩至 30 条</span></div>
     <div class="cl-item"><b>v0.27</b><span>上帝视角全站审查优化：打印隐藏交互控件 / 导出补全键 / 公告条与搜索占位更新</span></div>

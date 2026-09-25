@@ -27,7 +27,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.29 · 多页架构</span>
+    <span class="demo-tag">MVP 演示站 v0.30 · 门户对齐</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -42,6 +42,8 @@
       <a href="#fact">求真</a>
       <a href="#community">社区</a>
       <a href="#life">生活</a>
+      <a href="#searchpage">搜索</a>
+      <a href="#faq">FAQ</a>
       <a href="#beans">升学豆</a>
       <a href="#me">我的</a>
       <a href="#plans" class="cta">会员</a>
@@ -60,6 +62,8 @@
     <a href="#community">家长社区</a>
     <a href="#learn">家长学堂</a>
     <a href="#life">生活服务</a>
+    <a href="#searchpage">站内搜索</a>
+    <a href="#faq">家长 FAQ</a>
     <a href="#beans">升学豆</a>
     <a href="#me">我的</a>
     <a href="#biz">B端合作</a>
@@ -87,6 +91,24 @@
       <a href="#data-sources" style="font-size:12px;color:var(--accent)">查看数据来源与核验状态 →</a>
     </div>
     <p class="guide">第一次来？三步上手：<b>① 看升学日历</b>，别错过节点 → <b>② 用入学自查</b>，看看「我家能不能报」→ <b>③ 群里传言别急信</b>，先到求真台对一对。</p>
+    <div class="home-grid2">
+      <div>
+        <h3 style="font-family:var(--serif);font-size:18px;color:var(--navy);margin:0 0 10px">要闻与热门 <a href="news.html" style="font-size:12.5px;color:var(--accent);text-decoration:none;margin-left:8px">进入资讯中心 →</a></h3>
+        <div id="hot-rank"><div class="empty-mini">资讯加载中…</div></div>
+      </div>
+      <div>
+        <h3 style="font-family:var(--serif);font-size:18px;color:var(--navy);margin:0 0 10px">快捷通道</h3>
+        <div class="hot-rank">
+          <a href="quiz.html"><span class="no">›</span><span class="t">入学自查：我家能不能报？</span></a>
+          <a href="quiz.html"><span class="no">›</span><span class="t">材料清单生成器</span></a>
+          <a href="compare.html"><span class="no">›</span><span class="t">择校对比器</span></a>
+          <a href="zy.html"><span class="no">›</span><span class="t">位次换算与路径地图</span></a>
+          <a href="life.html"><span class="no">›</span><span class="t">陪读成本速算</span></a>
+          <a href="faq.html"><span class="no">›</span><span class="t">家长 FAQ：20 个最常问</span></a>
+          <a href="search.html"><span class="no">›</span><span class="t">全站搜索</span></a>
+        </div>
+      </div>
+    </div>
     <div id="kid-bar" class="kid-bar" hidden></div>
     <div class="entries">
       <a class="entry" href="#policy">
@@ -293,6 +315,58 @@
           <dt>跨区就读</dt><dd>学籍或户籍不在目标区的就读安排；义务教育阶段按属地区县政策统筹，高中阶段以联招与招生范围为准。</dd>
         </dl>
       </aside>
+    </div>
+  </div>
+</section>
+
+<section id="searchpage">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">站内检索</span><h2 id="sp-head">搜全站</h2></div>
+    <div class="sp-hero">
+      <div class="sp-box">
+        <input id="sp-input" type="search" placeholder="输入关键词：学校名 / 政策词 / 术语 / 资讯标题…" aria-label="站内搜索" autocomplete="off" oninput="if(event.key==='Enter')location.href='search.html?q='+encodeURIComponent(this.value)" />
+        <button class="btn-main" onclick="location.href='search.html?q='+encodeURIComponent(document.getElementById('sp-input').value)">搜索</button>
+      </div>
+      <div class="sp-hot"><span>热门搜索：</span><span id="sp-hot"></span></div>
+    </div>
+    <div class="sp-sec"><div id="sp-out"><div class="sp-empty">正在加载…</div></div></div>
+    <p class="cmp-note sp-go">找不到想要的？到 <a class="sp-back" href="fact.html">求真台提交问题</a>，或到 <a class="sp-back" href="about.html">联系我们</a>。</p>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">家长 FAQ</span><h2>最常被问到的 20 个问题</h2></div>
+    <p class="sec-desc">按主题分类的快问快答；每条答案都标注了详细解读所在的页面，点进去可看完整口径。答案为演示口径，以官方当年发布为准。</p>
+    <div class="faq-cats" id="faq-cats">
+      <button class="ff on" data-fc="all" onclick="faqFilter('all')">全部（20）</button>
+      <button class="ff" data-fc="入学" onclick="faqFilter('入学')">入学（5）</button>
+      <button class="ff" data-fc="择校" onclick="faqFilter('择校')">择校（4）</button>
+      <button class="ff" data-fc="政策" onclick="faqFilter('政策')">政策（5）</button>
+      <button class="ff" data-fc="生活" onclick="faqFilter('生活')">生活（3）</button>
+      <button class="ff" data-fc="会员" onclick="faqFilter('会员')">会员（3）</button>
+    </div>
+    <div class="faq-grid">
+      <details class="faq-item" data-cat="入学"><summary><span class="cat">入学</span>「三对口」到底是什么意思？</summary><div class="a">户籍、居住地、学籍三者对口，是公办小学入学的基本核对逻辑。缺一项都可能被统筹安排——<a href="policy.html">政策库</a>有逐条解读。</div></details>
+      <details class="faq-item" data-cat="入学"><summary><span class="cat">入学</span>六年一户，二孩上学受影响吗？</summary><div class="a">不受影响。同一户主的家庭内部二孩使用同一房产学位不占用「六年一户」额度；但转让给他人使用过则可能受限——详见<a href="policy.html">政策库</a>术语条。</div></details>
+      <details class="faq-item" data-cat="入学"><summary><span class="cat">入学</span>随迁子女入学要准备哪些材料？</summary><div class="a">居住证、社保/就业证明、身份材料三类为主，具体清单因区而异——用<a href="quiz.html">材料清单生成器</a>选「随迁」即可得到定制清单。</div></details>
+      <details class="faq-item" data-cat="入学"><summary><span class="cat">入学</span>错过网上报名窗口怎么办？</summary><div class="a">多数区设有补报名通道但学位选择余地变小；第一时间联系区教委登记——<a href="calendar.html">升学日历</a>设提醒可避免错过。</div></details>
+      <details class="faq-item" data-cat="入学"><summary><span class="cat">入学</span>长幼随学怎么申请？</summary><div class="a">二孩可申请入读与大孩同校；在各区教委报名平台提交，一般 3–5 个工作日受理（社区实测帖见<a href="community.html">家长社区</a>）。</div></details>
+      <details class="faq-item" data-cat="择校"><summary><span class="cat">择校</span>指标到校 70% 是什么意思？</summary><div class="a">市级重点高中把 70% 招生计划分配到辖区初中——在初中校内竞争这些名额，比全区竞争概率大；跨区择校反而可能丢掉资格。<a href="zy.html">志愿参考</a>有完整口径。</div></details>
+      <details class="faq-item" data-cat="择校"><summary><span class="cat">择校</span>怎么科学对比几所学校？</summary><div class="a">用<a href="compare.html">择校对比器</a>：办学性质、招生范围、通勤、收费并排看，差异维度自动标记「●」，避免只听单方说法。</div></details>
+      <details class="faq-item" data-cat="择校"><summary><span class="cat">择校</span>民办摇号没中怎么办？</summary><div class="a">公民同招下未摇中由公办统筹，不影响义务教育学位；建议双轨准备材料（<a href="quiz.html">自查</a>与<a href="policy.html">政策库</a>有路径说明）。</div></details>
+      <details class="faq-item" data-cat="择校"><summary><span class="cat">择校</span>学校的「评价」可信吗？</summary><div class="a">站内评价全部「审核制」：家长投稿 + 双人审核后展示，争议走证据仲裁；无水军无付费排名——机制见<a href="schools.html">学校档案页</a>。</div></details>
+      <details class="faq-item" data-cat="政策"><summary><span class="cat">政策</span>哪里能看政策原文？</summary><div class="a"><a href="data-sources.html">数据来源页</a>的 9 条来源全部可点击跳转官方入口；政策条目均标注文号与日期。</div></details>
+      <details class="faq-item" data-cat="政策"><summary><span class="cat">政策</span>特招线和中招线一样吗？</summary><div class="a">不一样。特招线是强基/专项等特殊招生的资格线（2026：历史 510/物理 496）；<a href="zy.html">位次换算</a>可算线差与参考位次。</div></details>
+      <details class="faq-item" data-cat="政策"><summary><span class="cat">政策</span>中考体育是怎么计分的？</summary><div class="a">过程性评价 + 统一测试结合；初一就开始的过程分靠平时积累，突击效果有限——<a href="policy.html">政策库</a>有完整口径。</div></details>
+      <details class="faq-item" data-cat="政策"><summary><span class="cat">政策</span>家庭困难有资助吗？</summary><div class="a">有免学费与国家助学金（分档），普高与中职都有通道，学校统一办理；别不好意思问班主任——<a href="policy.html">政策库</a>有申请要点。</div></details>
+      <details class="faq-item" data-cat="政策"><summary><span class="cat">政策</span>职教高考是什么？</summary><div class="a">中职生升大专/本科的「文化素质 + 职业技能」考试通道；中职不是终点——<a href="zy.html">路径地图</a>有六条路径对比。</div></details>
+      <details class="faq-item" data-cat="生活"><summary><span class="cat">生活</span>陪读一个月要花多少钱？</summary><div class="a">用<a href="life.html">陪读成本速算器</a>：选片区 × 房型 × 生活档 × 通勤，出月度区间（如沙坪坝两室常规轨交通勤约 4,750–7,100 元/月，不含学费）。</div></details>
+      <details class="faq-item" data-cat="生活"><summary><span class="cat">生活</span>平台会帮我租房吗？</summary><div class="a">不会。平台只提供行情样本与工具，不参与居间、不代收租金、不收撮合费——这是写在红线里的边界（<a href="life.html">生活服务页</a>）。</div></details>
+      <details class="faq-item" data-cat="生活"><summary><span class="cat">生活</span>走读还是住校怎么选？</summary><div class="a">算三笔账：单程通勤（>40 分钟慎选走读）、孩子自理能力、家庭陪伴需求；可先「试住」一个月——<a href="community.html">社区</a>有过来人经验。</div></details>
+      <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span>不充会员能用吗？</summary><div class="a">能。信息基础（政策、求真、监督入口）永远免费且完整；付费只是工具与提醒的增值——<a href="plans.html">会员体系</a>有分档说明。</div></details>
+      <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span>升学豆能提现吗？</summary><div class="a">不能。升学豆不生息、不可提现、不可转让、不兑法币；签到与内容贡献即可获得——<a href="beans.html">升学豆中心</a>有防通胀机制说明。</div></details>
+      <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span>我的数据存在哪？</summary><div class="a">演示版仅存本机浏览器（不上传服务器）；可导出 JSON 备份或换机导入——入口在<a href="me.html">「我的」页</a>。</div></details>
     </div>
   </div>
 </section>
@@ -880,8 +954,11 @@
           <li><a href="#community">家长社区</a></li>
           <li><a href="#learn">家长学堂</a></li>
           <li><a href="#life">生活服务</a></li>
+          <li><a href="#searchpage">站内搜索</a></li>
+          <li><a href="#faq">家长 FAQ</a></li>
           <li><a href="#beans">升学豆</a></li>
           <li><a href="#plans">会员体系</a></li>
+          <li><a href="#data-sources">数据来源</a></li>
           <li><a href="#about">关于与联系</a></li>
           <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
         </ul>
@@ -898,7 +975,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.29（2026-09-24）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.30（2026-09-25）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -980,6 +1057,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.30</b><span>门户对齐：新增站内搜索页（热门词聚合检索）/ 家长 FAQ 20 问 / 首页要闻榜与快捷通道 / 404 页</span></div>
     <div class="cl-item"><b>v0.29</b><span>多页架构改版：单页拆为 17 个独立页面，全站导航真跳转；搜索/收藏/档案跨页参数联动；旧锚点自动重定向</span></div>
     <div class="cl-item"><b>v0.28</b><span>数据来源与资讯挂真实官方链接（教委/阳光高考/艾媒等）+ 资讯扩至 30 条</span></div>
     <div class="cl-item"><b>v0.27</b><span>上帝视角全站审查优化：打印隐藏交互控件 / 导出补全键 / 公告条与搜索占位更新</span></div>

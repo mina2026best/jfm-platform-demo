@@ -63,6 +63,12 @@ PAGES = [
     dict(file="about.html",  title="关于与联系 · 鸡父母",
          desc="编辑与审核规范、线索通道、站点地图、边界与承诺。",
          sections=["how", "about"]),
+    dict(file="search.html", title="站内搜索 · 鸡父母",
+         desc="搜全站：学校 / 资讯 / 政策 / 术语一框聚合，附热门搜索词。",
+         sections=["searchpage"]),
+    dict(file="faq.html",    title="家长 FAQ · 鸡父母",
+         desc="20 个最常被问到的问题：入学 / 择校 / 政策 / 生活 / 会员，快问快答带入口链接。",
+         sections=["faq"]),
     dict(file="sitemap.html", title="站点地图 · 鸦父母",
          desc="全部页面一览。",
          sections=[]),
@@ -147,6 +153,8 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("fact.html", "求真"),
         ("community.html", "社区"),
         ("life.html", "生活"),
+        ("search.html", "搜索"),
+        ("faq.html", "FAQ"),
         ("beans.html", "升学豆"),
         ("me.html", "我的"),
         ("plans.html", "会员", "cta"),
@@ -161,7 +169,8 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
         ("zy.html", "志愿参考"), ("fact.html", "求真台"), ("community.html", "家长社区"),
-        ("learn.html", "家长学堂"), ("life.html", "生活服务"), ("beans.html", "升学豆"),
+        ("learn.html", "家长学堂"), ("life.html", "生活服务"),
+        ("search.html", "站内搜索"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
         ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
     ]
     mm = "<a href=\"{}\"{}>{}</a>".format
@@ -192,7 +201,7 @@ def convert_links(html):
         "#learn": "learn.html", "#life": "life.html", "#beans": "beans.html",
         "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
         "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
-        "#main": "index.html",
+        "#main": "index.html", "#searchpage": "search.html", "#faq": "faq.html",
     }
     for anchor, page in mapping.items():
         html = html.replace(f'href="{anchor}"', f'href="{page}"')
@@ -264,7 +273,7 @@ def build_page(page, tpl, secs, css, js):
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
-    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html"," #how":"about.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + hero + content \
@@ -285,6 +294,33 @@ def main():
     missing = [p for pg in PAGES for p in pg["sections"] if p not in secs]
     if missing:
         sys.exit("[build] 模板缺少 section：" + ",".join(set(missing)))
+    # 404 兜底页（门户标配）
+    demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
+    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">MVP 演示站</span>'
+    nf = (
+        '<!doctype html>\n<html lang="zh-CN">\n<head>\n'
+        '<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
+        '<title>页面未找到 · 鸡父母</title>\n<meta name="theme-color" content="#24344D" />\n'
+        '<style>' + css + '</style>\n</head>\n<body>\n'
+        '<div class="top"><div class="wrap">'
+        '<a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS - CHONGQING</small></a> '
+        + demo_tag +
+        '</div></div>\n'
+        '<section><div class="wrap" style="text-align:center;padding:70px 20px">'
+        '<div style="font-family:var(--mono);font-size:64px;color:var(--accent);font-weight:700">404</div>'
+        '<h1 style="font-family:var(--serif);font-size:26px;color:var(--navy);margin:8px 0 10px">页面走丢了</h1>'
+        '<p style="color:var(--ink2);font-size:14.5px;margin-bottom:22px">你要找的页面不存在或已迁移——多页改版后旧锚点会自动重定向，此处是兜底入口。</p>'
+        '<p style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'
+        '<a class="btn-main" href="index.html" style="text-decoration:none">回首页</a>'
+        '<a class="mini-btn" href="search.html" style="text-decoration:none;padding:10px 18px">去搜索</a>'
+        '<a class="mini-btn" href="faq.html" style="text-decoration:none;padding:10px 18px">看 FAQ</a>'
+        '</p></div></section>'
+        '<footer><div class="wrap"><p style="font-size:12px;color:var(--muted)">鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</p></div></footer>'
+        '</body>\n</html>'
+    )
+    with open(os.path.join(OUT_DIR, "404.html"), "w", encoding="utf-8") as f:
+        f.write(nf)
+
     built = []
     total = 0
     for pg in PAGES:

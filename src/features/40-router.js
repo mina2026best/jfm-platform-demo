@@ -5,6 +5,13 @@ function qparam(name){
   return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
 }
 function bootPageRoute(){
+  // 首页热点榜
+  if(document.getElementById('hot-rank')) renderHotRank();
+  // 搜索页：填热门词 + 执行查询
+  if(document.getElementById('sp-out')){
+    var hot = document.getElementById('sp-hot'); if(hot) hot.innerHTML = hotWordsHTML();
+    runPageSearch();
+  }
   // 1) news.html?s=关键词 → 筛选并展开定位
   var s = qparam('s');
   if(s && document.getElementById('news-list')){

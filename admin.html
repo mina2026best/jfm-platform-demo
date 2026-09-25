@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>内容管理台 · 鸡父母（本地后端）</title>
+<style>
+:root{--bg:#0f1115;--bg2:#151a22;--ink:#e8eaf0;--ink2:#a9b0bd;--mut:#6e7683;--line:rgba(255,255,255,.09);--acc:#2ea3f2;--ok:#7bd88f;--warn:#e8b84b;--bad:#e07b6f;--mono:ui-monospace,Menlo,monospace;--sans:-apple-system,"PingFang SC",sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.6}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 60px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--acc);margin-bottom:10px}
+h1{font-size:24px;margin-bottom:6px}
+.sub{color:var(--ink2);font-size:13px;margin-bottom:20px}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:16px}
+.pt{font-size:13px;color:var(--mut);font-family:var(--mono);letter-spacing:.08em;margin-bottom:10px}
+.stats{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
+.stats b{color:var(--acc);font-family:var(--mono)}
+.row{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.badge{flex:none;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border:1px solid var(--line);border-radius:4px;color:var(--ink2)}
+.badge.pub{color:var(--ok);border-color:rgba(123,216,143,.4)}
+.badge.pend{color:var(--warn);border-color:rgba(232,184,75,.4)}
+.badge.rej{color:var(--bad);border-color:rgba(224,123,111,.4)}
+.t{flex:1;min-width:0}
+.t b{display:block;font-size:13.5px}
+.t small{color:var(--mut);font-size:12px}
+.acts{display:flex;gap:6px;flex:none}
+button{background:transparent;border:1px solid var(--line);color:var(--ink2);font-family:var(--sans);font-size:12px;padding:5px 10px;border-radius:6px;cursor:pointer}
+button:hover{border-color:var(--acc);color:var(--acc)}
+button.ok{border-color:rgba(123,216,143,.4)}button.ok:hover{color:var(--ok);border-color:var(--ok)}
+button.no{border-color:rgba(224,123,111,.4)}button.no:hover{color:var(--bad);border-color:var(--bad)}
+.hint{font-size:12px;color:var(--mut);margin-top:8px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tabs button.on{border-color:var(--acc);color:var(--acc)}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#243348;color:#fff;padding:8px 18px;border-radius:99px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">ADMIN · 本地后端管理台</div>
+  <h1>内容管理台</h1>
+  <p class="sub">对接本地后端（127.0.0.1:8780）。先启动：<code style="font-family:var(--mono)">python3 server.py</code> —— 资讯审核发布 / 线索管理，全部操作真实写库（data/ 目录）。</p>
+  <div class="panel"><div class="pt">STATS</div><div class="stats" id="stats">加载中…</div></div>
+  <div class="panel">
+    <div class="tabs">
+      <button class="on" data-tab="news" onclick="switchTab('news')">资讯审核</button>
+      <button data-tab="tips" onclick="switchTab('tips')">线索登记</button>
+    </div>
+    <div id="list">加载中…</div>
+    <p class="hint">审核规则：普通资讯自动过审；政策速递/办事提醒入待审池人工复核；红线词（保过/内部指标等）直接拒绝入库。</p>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+var API = 'http://127.0.0.1:8780';
+var tab = 'news';
+function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(function(){t.classList.remove('show')},1600); }
+function loadStats(){
+  fetch(API+'/api/stats').then(r=>r.json()).then(function(d){
+    document.getElementById('stats').innerHTML =
+      '<span>资讯总数 <b>'+d.news_total+'</b></span><span>已发布 <b>'+d.news_published+'</b></span><span>待审 <b>'+d.news_pending+'</b></span><span>线索 <b>'+d.tips_total+'</b></span><span>线索待审 <b>'+d.tips_pending+'</b></span>';
+  }).catch(function(){ document.getElementById('stats').textContent='后端未启动——请先运行 python3 server.py'; });
+}
+function badge(st){ return '<span class="badge '+(st==='published'?'pub':st==='pending'?'pend':'rej')+'">'+st+'</span>'; }
+function loadList(){
+  var url = tab==='news' ? API+'/api/news?status=pending&size=50' : API+'/api/tips?status=pending';
+  fetch(url).then(r=>r.json()).then(function(d){
+    var items = d.items || [];
+    if(!items.length){ document.getElementById('list').innerHTML = '<div class="hint">待审队列为空 ✓</div>'; return; }
+    document.getElementById('list').innerHTML = items.map(function(x){
+      if(tab==='news'){
+        return '<div class="row">'+badge(x.status)+'<div class="t"><b>'+x.t+'</b><small>'+x.cat+' · '+x.src+' · '+x.date+' · '+x.id+'</small></div>'
+          +'<div class="acts"><button class="ok" onclick="actNews(\''+x.id+'\',\'published\')">过审发布</button><button class="no" onclick="actNews(\''+x.id+'\',\'rejected\')">驳回</button></div></div>';
+      }
+      return '<div class="row">'+badge(x.status)+'<div class="t"><b>'+x.t+'</b><small>'+(x.detail||'').slice(0,60)+' · '+x.id+'</small></div>'
+        +'<div class="acts"><button class="ok" onclick="actTip(\''+x.id+'\',\'published\')">采纳公开</button><button class="no" onclick="actTip(\''+x.id+'\',\'rejected\')">驳回</button></div></div>';
+    }).join('');
+  }).catch(function(){ document.getElementById('list').innerHTML = '<div class="hint">后端未启动——请先运行 python3 server.py</div>'; });
+}
+function actNews(id, st){
+  fetch(API+'/api/news/'+id, {method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:st})})
+    .then(r=>r.json()).then(function(){ toast(id+' → '+st); loadList(); loadStats(); });
+}
+function actTip(id, st){
+  fetch(API+'/api/tips/'+id, {method:'PATCH', headers:{'Content-Type':'application/json'}, body:JSON.stringify({status:st})})
+    .then(r=>r.json()).then(function(){ toast(id+' → '+st); loadList(); loadStats(); });
+}
+function switchTab(t){ tab=t; document.querySelectorAll('.tabs button').forEach(function(b){ b.classList.toggle('on', b.dataset.tab===t); }); loadList(); }
+loadStats(); loadList();
+</script>
+</body>
+</html>

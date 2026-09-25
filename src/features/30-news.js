@@ -75,7 +75,8 @@ function newsItemHTML(x){
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
-    + '<h4 class="ni-title" role="button" tabindex="0" aria-expanded="false" onclick="toggleNewsBody(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleNewsBody(this);}" title="点击或回车展开/收起">' + esc(x.t) + '</h4>'
+    + '<h4 class="ni-title"><a class="ni-link" href="articles/' + (ARTMAP['N|' + x.t] || '') + '" title="阅读全文">' + esc(x.t) + '</a>'
+    + ' <button class="ni-more" onclick="toggleNewsBody(this)" data-target="self">摘要 ▾</button></h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
     + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'

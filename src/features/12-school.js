@@ -20,6 +20,7 @@ function renderSchools(){
     return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(d['办学性质'].split('（')[0]) + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
+      + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
       + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
   }).join('');
   filterSchools(schoolFilter);

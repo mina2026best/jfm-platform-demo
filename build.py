@@ -4,7 +4,7 @@
 src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
-import os, re, sys, hashlib
+import os, re, sys, hashlib, json
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
@@ -130,6 +130,14 @@ def build_js():
         extra = read(dn)
         guard("data-news.js", extra)
         data = data + "\n\n" + extra
+    am = os.path.join(SRC, "data", "artmap.json")
+    if os.path.exists(am):
+        artmap = json.load(open(am, encoding="utf-8"))
+        data += "\n\nvar ARTMAP = " + json.dumps(artmap, ensure_ascii=False) + ";"
+    ln = os.path.join(SRC, "data", "learn.json")
+    if os.path.exists(ln):
+        learn = json.load(open(ln, encoding="utf-8"))
+        data += "\n\nvar LEARN_QA = " + json.dumps(learn["qa"], ensure_ascii=False) + ";\nvar LEARN_TIPS = " + json.dumps(learn["tips"], ensure_ascii=False) + ";"
     feats = []
     fdir = f"{SRC}/features"
     order = [l.strip() for l in read(f"{fdir}/_order.txt").splitlines() if l.strip() and not l.startswith("#")]
@@ -339,7 +347,80 @@ def main():
         h = hashlib.sha256(out.encode()).hexdigest()[:12]
         built.append(f"{pg['file']} · {len(out)//1024} KB · sha256:{h}")
         total += len(out)
-    print(f"[build] 多页构建 OK · {len(built)} 页 · 合计 {total//1024} KB")
+    # ---------- 文章详情页生成 ----------
+    sys.path.insert(0, SRC)
+    from article_gen import gen_articles
+    art_css = css + """
+  /* 文章详情页样式 */
+  .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  .art{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:34px 36px;margin-top:10px}
+  .art-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+  .art h1{font-family:var(--serif);font-size:27px;color:var(--navy);line-height:1.35;margin:0 0 10px}
+  .art-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  .art-status{color:var(--acc);color:var(--accent)}
+  .art-body{font-size:14.5px;color:var(--ink2);line-height:1.9}
+  .art-body p{margin:0 0 14px}
+  .art-body h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin:18px 0 8px}
+  .art-body a{color:var(--accent)}
+  .art-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .art-table td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:top}
+  .art-table td:first-child{width:110px;color:var(--ink);font-weight:500}
+  .art-quote{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:13.5px;margin:8px 0;color:var(--ink2)}
+  .badge-ok{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-right:6px}
+  .verdict-big{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;border-radius:6px;padding:4px 12px;margin-bottom:14px}
+  .verdict-big.false{background:#F5E0DE;color:#B3261E}
+  .verdict-big.warn{background:#F7EDD9;color:#8A6116}
+  .verdict-big.ok{background:#E2F1EA;color:#0E7C66}
+  .verdict-big.tag{background:var(--accent-soft);color:var(--accent)}
+  .art-src{font-size:12.5px;color:var(--muted);border-left:3px solid var(--accent);padding:6px 12px;margin:12px 0}
+  .art-tip{font-size:13px;color:var(--muted)}
+  .art-link{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+  .art-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .art-back{font-size:13px;color:var(--accent);text-decoration:none;font-weight:600}
+  .art-back:hover{text-decoration:underline}
+  .art-note{font-size:12px;color:var(--muted)}
+  html.theme-dark .art{background:var(--paper)}
+  html.theme-dark .art-body{color:var(--ink2)}
+  @media (max-width:720px){ .art{padding:22px 18px} .art h1{font-size:22px} }
+  """
+    # 文章页共享片段（与 build_page 同源重建）
+    dlg = extract_dialogs(tpl)
+    ann_m = re.search(r'<div class="ann-bar"[^>]*>[\s\S]*?</button>\s*</div>\s*</div>', tpl)
+    ann_frag = (ann_m.group(0) if ann_m else "").replace('href="#news"', 'href="news.html"')
+    search_m = re.search(r'<div class="searchbox">[\s\S]*?<div id="search-panel"[^>]*></div>\s*</div>', tpl)
+    search_frag = search_m.group(0) if search_m else ""
+    demo_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
+    demo_frag = demo_m.group(0) if demo_m else '<span class="demo-tag">MVP 演示站</span>'
+    # nav_html 在上方定义
+    art_header = (
+        '<div id="readBar" aria-hidden="true"></div>\n'
+        '<a class="skip-link" href="index.html">回到首页</a>\n'
+        + ann_frag + "\n" + nav_html("articles/x.html", demo_frag, search_frag) + "\n"
+    )
+    art_footer = convert_links(tpl[tpl.find("<footer>"): tpl.find('<dialog id="school-modal">')])
+    art_dir = os.path.join(ROOT, "articles")
+    articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir)
+    keep = set(articles)
+    stale = 0
+    if os.path.isdir(art_dir):
+        for fn in os.listdir(art_dir):
+            if fn.endswith(".html") and fn not in keep:
+                shell = (
+                    '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">'
+                    '<meta name="robots" content="noindex"><title>内容已更新 · 鸡父母</title>'
+                    '</head><body><p>该内容已更新合并，正在跳转…</p>'
+                    '<script>location.replace("faq.html");</script></body></html>'
+                )
+                with open(os.path.join(art_dir, fn), "w", encoding="utf-8") as f:
+                    f.write(shell)
+                stale += 1
+    if stale:
+        built.append(f"articles/ · {len(articles)} 篇详情页（{stale} 个旧文件已转为跳转）")
+    else:
+        built.append(f"articles/ · {len(articles)} 篇详情页")
+
+    print(f"[build] 多页构建 OK · {len(built)} 项 · 合计 {total//1024} KB")
     for b in built:
         print("  · " + b)
 

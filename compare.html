@@ -528,6 +528,19 @@
     .news-search{flex-basis:100%;max-width:none;order:3}
   }
 
+  /* v0.34 文章链接 */
+  .ni-title{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+  .ni-title .ni-link{color:var(--ink);text-decoration:none;font-weight:600}
+  .ni-title .ni-link:hover{color:var(--accent);text-decoration:underline}
+  .ni-title .ni-more{font-size:11.5px;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:var(--mono)}
+  .ni-title .ni-more:hover{color:var(--accent)}
+  /* v0.34 文章链接统一样式 */
+  .art-t{color:var(--ink);text-decoration:none;font-weight:600}
+  .art-t:hover{color:var(--accent);text-decoration:underline}
+  .lq-link{color:var(--ink);text-decoration:none;font-weight:600}
+  .lq-link:hover{color:var(--accent);text-decoration:underline}
+  .sc-page{font-size:12px;color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent);align-self:center;margin-left:auto}
+
 
 /* ============ 20-learn ============ */
   /* ---------- v0.12：家长学堂 ---------- */
@@ -1410,6 +1423,11 @@ var NEWS_FEED = [
 var NEWS_META = {"generated": "2026-09-25 19:18", "seed": 46, "collected": 0, "fetchedPending": 2};
 
 
+var ARTMAP = {"N|家庭教育促进法要点：依法带娃，「训诫」不是吓唬": "article-news-25280274.html", "N|高一适应期：住校生第一个月的常见问题与对策": "article-news-8bef8675.html", "N|「双减」后学科培训现状：持证机构名单怎么查": "article-news-45ad72b1.html", "N|校园周边交通护学岗升级：家长志愿者报名启动（演示）": "article-news-031fea0f.html", "N|期中考试后，成绩单应该这样读（家长版）": "article-news-fd72aa23.html", "N|高中生选科风向：物理+化学组合占比继续走高（演示）": "article-news-c256091e.html", "N|重庆多个区公布 2026 秋季转学办理窗口（演示）": "article-news-bc263a91.html", "N|期末临近：各科复习的「家庭分工」建议": "article-news-f413dbf6.html", "N|「跨区就读」的三种合法路径与材料差异": "article-news-434176d3.html", "N|住宿安全与作息：寄宿家长每月必查的四件事": "article-news-9788835f.html", "N|指标到校名额是怎么分到初中的？一文看懂分配逻辑": "article-news-08de9c03.html", "N|秋游与研学季：校外活动的安全清单（家长版）": "article-news-a78472e7.html", "N|开学一个月，孩子说「不想上学」怎么办：三步沟通法": "article-news-5edcff32.html", "N|数学不好，还能走「强基」吗？——基础学科路线的三个判断": "article-news-393f8c67.html", "N|「综合素质评价」到底评什么？家长能做什么": "article-news-56491c4e.html", "N|2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴": "article-news-322b0469.html", "N|2026 年联招学校约 113 所（新增 10 所）": "article-news-ae92f623.html", "N|指标到校：市级重点高中 70% 计划分配到辖区初中": "article-news-c2282b52.html", "N|2026 年高考特招线公布：历史类 510 / 物理类 496": "article-news-44a54f04.html", "N|幼升小报名季：三对口材料与网报窗口提示": "article-news-81daf656.html", "N|全市护学岗 6,993 个：接送安全再补一层": "article-news-2f17b376.html", "N|开学季数据：重庆 K12 在校生规模约 376.3 万": "article-news-8fb6230a.html", "N|家庭年度教育支出复盘：先看结构，再看总量": "article-news-f2b57222.html", "N|初中阶段亲子沟通：先处理情绪，再处理问题": "article-news-dc8bcd75.html", "N|秋季流感季：校园防护与请假流程提示": "article-news-d4243bb6.html", "N|接送高峰行车安全：即停即走与护学通道": "article-news-24eba960.html", "N|材料核对月：把「三对口」收进一个文件袋": "article-news-03641436.html", "N|联招志愿梯度怎么排：冲稳保各留 1–2 所": "article-news-5c961a79.html", "N|随迁子女入学：居住证与材料清单提前备": "article-news-0a439449.html", "N|艺体与科技特长生：报名窗口与材料提示": "article-news-333fee44.html", "N|指标到校校内公示：家长需要盯的两件事": "article-news-195fe411.html", "N|新生入学体检与预防接种查验：开学季办事清单": "article-news-17d13d20.html", "N|培训退费纠纷：先看合同，再走属地监管渠道": "article-news-82ec666f.html", "N|周末少儿阅读：图书馆借阅卡办理与亲子共读建议": "article-news-48a72f92.html", "N|初三体育训练季：节奏、防护与营养的平衡": "article-news-555c5aeb.html", "N|高考体检与外语口试：时间节点提示": "article-news-42c20c89.html", "N|2027 年校历发布季启动：寒假安排将随校历公布（演示）": "article-news-492ac156.html", "N|秋季流感防护：校园场景三件事（演示）": "article-news-8826b0c2.html", "N|随迁子女入学材料季：居住证与社保要提前核对（演示）": "article-news-52c40a16.html", "N|主城区多所高中开放日集中举行（演示）": "article-news-86102105.html", "N|家庭教育：把「电子设备公约」写成家庭协议（演示）": "article-news-82d5f691.html", "N|开学后首个家长会：建议问老师的三个问题（演示）": "article-news-0faee66b.html", "N|重庆市教委发布 2026 年义务教育招生入学工作通知（演示）": "article-news-cb87de9e.html", "N|2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496（演示）": "article-news-15856f99.html", "N|阳光高考平台：军校招生军检线与报考流程答疑（演示）": "article-news-96e8fe21.html", "N|艾媒咨询：2025 年高考志愿填报市场付费规模预计 10.9 亿元（演示）": "article-news-4e2a45ef.html", "S|南开中学（沙坪坝）": "article-school-98250a24.html", "S|重庆一中（渝北）": "article-school-6fa32a0b.html", "S|巴蜀中学（渝中）": "article-school-10432c02.html", "S|重庆八中（渝北）": "article-school-4dd3d550.html", "S|育才中学（九龙坡）": "article-school-dbd33ba8.html", "S|西大附中（北碚）": "article-school-1b48d40c.html", "S|重庆十一中（南岸）": "article-school-54671c45.html", "S|重庆十八中（江北）": "article-school-38e4cb1a.html", "S|求精中学（渝中）": "article-school-fcf51a2b.html", "S|杨家坪中学（九龙坡）": "article-school-be27b3c6.html", "S|重庆三十七中（大渡口）": "article-school-e2077b3e.html", "S|巴蜀常春藤学校（两江新区）": "article-school-3b32267e.html", "S|兼善中学（北碚）": "article-school-16ca5f3c.html", "S|巴南中学（巴南）": "article-school-b43ae6cc.html", "S|渝北中学（渝北）": "article-school-51d6bf2d.html", "S|松树桥中学（渝北）": "article-school-153c178a.html", "S|两江育才中学（两江新区）": "article-school-362ce5f6.html", "S|大学城第一中学（沙坪坝）": "article-school-63fbbbbc.html", "S|凤鸣山中学（沙坪坝）": "article-school-ad683d69.html", "S|渝中区复旦中学（渝中）": "article-school-d282ceee.html", "L|要不要提前教拼音和算术？": "article-learn-7f5127fb.html", "L|指标到校和择校怎么权衡？": "article-learn-18edf1ba.html", "L|孩子成绩中等，路径怎么规划？": "article-learn-c460ab76.html", "L|志愿「冲稳保」怎么分配？": "article-learn-ba409771.html", "L|大考前，家长怎么说话不添乱？": "article-learn-c9eb2d89.html", "L|民办摇号没中，是不是就没学上了？": "article-learn-e1eac920.html", "L|住校还是走读，怎么决定？": "article-learn-0f041c0e.html", "L|强基计划值得报吗？": "article-learn-23a1fbd3.html", "L|公立和私立幼儿园，幼升小衔接有差别吗？": "article-learn-abd5a402.html", "L|奥数还值得学吗？": "article-learn-fa47210a.html", "L|家里老人育儿观念不一致，怎么破？": "article-learn-a98a7d05.html", "L|陪考三年，我做对了三件事": "article-experience-ec2dcbbc.html", "L|志愿填报：我们家做了三次模拟": "article-experience-cc52f067.html", "L|租房陪读一年：成本清单与踩坑": "article-experience-f7ddfee9.html", "L|从焦虑到放手：我把家长群取消了置顶": "article-experience-9f5a4396.html", "L|对口材料核对，我们家提前一年就开始了": "article-experience-43ed05df.html", "L|体育中考：我们从初一就开始「攒分」": "article-experience-20e61f26.html", "L|全家搬到学校隔壁，我们后悔了吗？": "article-experience-61d84a2c.html", "L|我把「别人家孩子」从家里请出去了": "article-experience-534eaf28.html"};
+
+var LEARN_QA = [{"s": "幼升小", "q": "要不要提前教拼音和算术？", "a": "不建议系统性提前教学。多数小学实行「零起点教学」，抢跑优势通常在两个月内消失，反而容易让孩子开学后注意力下降。更值得投入的是「上学能力」：作息、握笔、表达需求、整理书包。", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "指标到校和择校怎么权衡？", "a": "先并排看两条路径：指标到校看「学籍连续性 + 校内表现」，择校看目标校招生范围与通勤成本。建议用「升学路径地图」把时间轴并排拉直，再对照孩子实际学籍做选择——不要问「哪个更好」，要问「哪个更适合我家」。", "by": "教育顾问 · 示范"}, {"s": "初升高", "q": "孩子成绩中等，路径怎么规划？", "a": "中等成绩段其实是路径最丰富的区间：普高统招、指标到校（若资格在）、民办、中职职教高考、艺体特长都可以纳入备选。建议逐条核对资格条件，再定主攻方向与保底方案。", "by": "教育顾问 · 示范"}, {"s": "高考", "q": "志愿「冲稳保」怎么分配？", "a": "常见做法是冲 2–3 个、稳 3–4 个、保 1–2 个，具体数量看批次规则与家庭风险承受度。先用「位次换算」做线差参考（演示口径），正式填报以当年一分一段表为准。", "by": "教育顾问 · 示范"}, {"s": "家长心理", "q": "大考前，家长怎么说话不添乱？", "a": "少问「考得怎么样」，多问「今天想吃什么」。把焦虑留在自己这里，把稳定交给孩子。一句示范话术：「不管结果如何，我们都在。」", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "民办摇号没中，是不是就没学上了？", "a": "不是。公民同招下，未摇中的由公办统筹安排；关键是提前把公办对口路径的材料（户籍 / 居住等）逐项核对到位，别把全部筹码押在摇号上。", "by": "教育顾问 · 示范"}, {"s": "初升高", "q": "住校还是走读，怎么决定？", "a": "先算三笔账：单程通勤时间（超过 40 分钟要认真权衡）、孩子自理与作息习惯、家庭陪伴需求。可以先用一个月「试住期」再定；无论哪种，保持固定的沟通节奏。", "by": "教育顾问 · 示范"}, {"s": "高考", "q": "强基计划值得报吗？", "a": "强基适合「基础学科意向明确 + 能接受本硕博衔接培养」的孩子；它锁定的是一条长线路径，不适合「先占坑再说」。建议对照孩子真实的学科兴趣，再做决定。", "by": "教育顾问 · 示范"}, {"s": "幼升小", "q": "公立和私立幼儿园，幼升小衔接有差别吗？", "a": "小学零起点教学下，差别主要在习惯而非知识。重点是作息规律、能坐住 20 分钟、表达清楚需求；这些在家也能练。选择时更该看距离与接送可行性。", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "奥数还值得学吗？", "a": "如果目标是经批准的少数理科特色活动，系统奥数是基础；但对大多数孩子，把校内数学吃透 + 培养阅读理解更划算。学奥数前先问孩子愿不愿意，再问为什么学。", "by": "教育顾问 · 示范"}, {"s": "家长心理", "q": "家里老人育儿观念不一致，怎么破？", "a": "开家庭会议定「底线清单」：写明 3–5 条不可妥协项（如作息、屏幕时间），其余放手。父母是教育决策人，祖辈是执行伙伴——角色先分清，矛盾少一半。", "by": "教育顾问 · 示范"}];
+var LEARN_TIPS = [{"s": "初升高", "q": "陪考三年，我做对了三件事", "a": "一是初一就建「重要节点台账」，每条政策都记文号与日期；二是不拿孩子和别人比，只和上周的他比；三是每次大考后开 20 分钟家庭复盘会：只谈事实，不谈情绪。", "by": "2026 届家长 · 示范"}, {"s": "初升高", "q": "志愿填报：我们家做了三次模拟", "a": "一模后粗排、政策公布后细排、正式填报前只微调。三次模拟让我们提前发现了两处明显失误（保底校梯度不够、通勤没算往返），正式填报时只花了半小时。", "by": "2025 届家长 · 示范"}, {"s": "陪读生活", "q": "租房陪读一年：成本清单与踩坑", "a": "省下的通勤时间约 40 分钟/天，但搬家成本、换租溢价、大人通勤变长都是真实成本。建议先短租两个月试住，再决定要不要长租；合同里把「续租涨幅」写清楚。", "by": "陪读家长 · 示范"}, {"s": "家长心理", "q": "从焦虑到放手：我把家长群取消了置顶", "a": "信息要看，但不必随时在线被带着跑。每天固定 20 分钟看整理好的平台信息就够了；剩下的时间还给自己和家人——家长情绪稳，孩子才稳。", "by": "2024 届家长 · 示范"}, {"s": "小升初", "q": "对口材料核对，我们家提前一年就开始了", "a": "把户籍、房产、居住证明按区教委清单逐项核对，缺什么补什么；每年细则有微调，我们的习惯是「发布当天必读原文」。提前一年准备，临门不慌。", "by": "2026 届家长 · 示范"}, {"s": "初升高", "q": "体育中考：我们从初一就开始「攒分」", "a": "平时体育课和过程性评价的分数，靠突击拿不到。我们从初一就固定每周三次户外运动，既是锻炼也是给大脑放空；到最后统一测试反而是最不用担心的一项。", "by": "2025 届家长 · 示范"}, {"s": "陪读生活", "q": "全家搬到学校隔壁，我们后悔了吗？", "a": "换房半年后复盘：通勤省下 1.5 小时/天是真，但离开了熟悉的玩伴圈也是真。建议先试住再卖房；孩子的社交连续性值得单独评估。", "by": "2024 届家长 · 示范"}, {"s": "家长心理", "q": "我把「别人家孩子」从家里请出去了", "a": "有次脱口而出「你看人家谁谁」，孩子回了一句「那你怎么不看看别人家爸妈」。从那天起我们家只做纵向比较——和他自己上个月比。", "by": "2025 届家长 · 示范"}];
+
 /* ---------- 10-demo-data ---------- */
 /* ---------- 演示数据（正式版来自后台数据库并标注核验日期） ---------- */
 var SCHOOL_DB = {
@@ -1890,6 +1908,7 @@ function renderSchools(){
     return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(d['办学性质'].split('（')[0]) + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
+      + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
       + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
   }).join('');
   filterSchools(schoolFilter);
@@ -2578,7 +2597,8 @@ function newsItemHTML(x){
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
-    + '<h4 class="ni-title" role="button" tabindex="0" aria-expanded="false" onclick="toggleNewsBody(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();toggleNewsBody(this);}" title="点击或回车展开/收起">' + esc(x.t) + '</h4>'
+    + '<h4 class="ni-title"><a class="ni-link" href="articles/' + (ARTMAP['N|' + x.t] || '') + '" title="阅读全文">' + esc(x.t) + '</a>'
+    + ' <button class="ni-more" onclick="toggleNewsBody(this)" data-target="self">摘要 ▾</button></h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
     + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'
@@ -2830,29 +2850,6 @@ function openChangelog(){
 
 /* ---------- 32-learn ---------- */
 /* ---------- v0.12：家长学堂（专家问答 + 过来人经验） ---------- */
-var LEARN_QA = [
- {s:'幼升小', q:'要不要提前教拼音和算术？', a:'不建议系统性提前教学。多数小学实行「零起点教学」，抢跑优势通常在两个月内消失，反而容易让孩子开学后注意力下降。更值得投入的是「上学能力」：作息、握笔、表达需求、整理书包。', by:'教育顾问 · 示范'},
- {s:'小升初', q:'指标到校和择校怎么权衡？', a:'先并排看两条路径：指标到校看「学籍连续性 + 校内表现」，择校看目标校招生范围与通勤成本。建议用「升学路径地图」把时间轴并排拉直，再对照孩子实际学籍做选择——不要问「哪个更好」，要问「哪个更适合我家」。', by:'教育顾问 · 示范'},
- {s:'初升高', q:'孩子成绩中等，路径怎么规划？', a:'中等成绩段其实是路径最丰富的区间：普高统招、指标到校（若资格在）、民办、中职职教高考、艺体特长都可以纳入备选。建议逐条核对资格条件，再定主攻方向与保底方案。', by:'教育顾问 · 示范'},
- {s:'高考', q:'志愿「冲稳保」怎么分配？', a:'常见做法是冲 2–3 个、稳 3–4 个、保 1–2 个，具体数量看批次规则与家庭风险承受度。先用「位次换算」做线差参考（演示口径），正式填报以当年一分一段表为准。', by:'教育顾问 · 示范'},
- {s:'家长心理', q:'大考前，家长怎么说话不添乱？', a:'少问「考得怎么样」，多问「今天想吃什么」。把焦虑留在自己这里，把稳定交给孩子。一句示范话术：「不管结果如何，我们都在。」', by:'教育顾问 · 示范'},
- {s:'小升初', q:'民办摇号没中，是不是就没学上了？', a:'不是。公民同招下，未摇中的由公办统筹安排；关键是提前把公办对口路径的材料（户籍 / 居住等）逐项核对到位，别把全部筹码押在摇号上。', by:'教育顾问 · 示范'},
- {s:'初升高', q:'住校还是走读，怎么决定？', a:'先算三笔账：单程通勤时间（超过 40 分钟要认真权衡）、孩子自理与作息习惯、家庭陪伴需求。可以先用一个月「试住期」再定；无论哪种，保持固定的沟通节奏。', by:'教育顾问 · 示范'},
- {s:'高考', q:'强基计划值得报吗？', a:'强基适合「基础学科意向明确 + 能接受本硕博衔接培养」的孩子；它锁定的是一条长线路径，不适合「先占坑再说」。建议对照孩子真实的学科兴趣，再做决定。', by:'教育顾问 · 示范'},
- {s:'幼升小', q:'公立和私立幼儿园，幼升小衔接有差别吗？', a:'小学零起点教学下，差别主要在习惯而非知识。重点是作息规律、能坐住 20 分钟、表达清楚需求；这些在家也能练。选择时更该看距离与接送可行性。', by:'教育顾问 · 示范'},
- {s:'小升初', q:'奥数还值得学吗？', a:'如果目标是经批准的少数理科特色活动，系统奥数是基础；但对大多数孩子，把校内数学吃透 + 培养阅读理解更划算。学奥数前先问孩子愿不愿意，再问为什么学。', by:'教育顾问 · 示范'},
- {s:'家长心理', q:'家里老人育儿观念不一致，怎么破？', a:'开家庭会议定「底线清单」：写明 3–5 条不可妥协项（如作息、屏幕时间），其余放手。父母是教育决策人，祖辈是执行伙伴——角色先分清，矛盾少一半。', by:'教育顾问 · 示范'}
-];
-var LEARN_TIPS = [
- {s:'初升高', q:'陪考三年，我做对了三件事', a:'一是初一就建「重要节点台账」，每条政策都记文号与日期；二是不拿孩子和别人比，只和上周的他比；三是每次大考后开 20 分钟家庭复盘会：只谈事实，不谈情绪。', by:'2026 届家长 · 示范'},
- {s:'初升高', q:'志愿填报：我们家做了三次模拟', a:'一模后粗排、政策公布后细排、正式填报前只微调。三次模拟让我们提前发现了两处明显失误（保底校梯度不够、通勤没算往返），正式填报时只花了半小时。', by:'2025 届家长 · 示范'},
- {s:'陪读生活', q:'租房陪读一年：成本清单与踩坑', a:'省下的通勤时间约 40 分钟/天，但搬家成本、换租溢价、大人通勤变长都是真实成本。建议先短租两个月试住，再决定要不要长租；合同里把「续租涨幅」写清楚。', by:'陪读家长 · 示范'},
- {s:'家长心理', q:'从焦虑到放手：我把家长群取消了置顶', a:'信息要看，但不必随时在线被带着跑。每天固定 20 分钟看整理好的平台信息就够了；剩下的时间还给自己和家人——家长情绪稳，孩子才稳。', by:'2024 届家长 · 示范'},
- {s:'小升初', q:'对口材料核对，我们家提前一年就开始了', a:'把户籍、房产、居住证明按区教委清单逐项核对，缺什么补什么；每年细则有微调，我们的习惯是「发布当天必读原文」。提前一年准备，临门不慌。', by:'2026 届家长 · 示范'},
- {s:'初升高', q:'体育中考：我们从初一就开始「攒分」', a:'平时体育课和过程性评价的分数，靠突击拿不到。我们从初一就固定每周三次户外运动，既是锻炼也是给大脑放空；到最后统一测试反而是最不用担心的一项。', by:'2025 届家长 · 示范'},
- {s:'陪读生活', q:'全家搬到学校隔壁，我们后悔了吗？', a:'换房半年后复盘：通勤省下 1.5 小时/天是真，但离开了熟悉的玩伴圈也是真。建议先试住再卖房；孩子的社交连续性值得单独评估。', by:'2024 届家长 · 示范'},
- {s:'家长心理', q:'我把「别人家孩子」从家里请出去了', a:'有次脱口而出「你看人家谁谁」，孩子回了一句「那你怎么不看看别人家爸妈」。从那天起我们家只做纵向比较——和他自己上个月比。', by:'2025 届家长 · 示范'}
-];
 var learnFilter = 'all';
 function filterLearn(s){ learnFilter = s; renderLearn(); }
 function renderLearn(){
@@ -2861,10 +2858,10 @@ function renderLearn(){
   var f = function(x){ return learnFilter === 'all' || x.s === learnFilter; };
   var q = LEARN_QA.filter(f), t = LEARN_TIPS.filter(f);
   qa.innerHTML = q.length
-    ? q.map(function(x){ return '<details class="lq"><summary><span class="lq-tag">' + esc(x.s) + '</span>' + esc(x.q) + '</summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
+    ? q.map(function(x){ var h = 'articles/' + (ARTMAP['L|' + x.q] || ''); return '<details class="lq"><summary><span class="lq-tag">' + esc(x.s) + '</span><a class="lq-link" href="' + h + '">' + esc(x.q) + '</a></summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
     : '<div class="empty-mini">该分类暂无问答——试试其他分类。</div>';
   tips.innerHTML = t.length
-    ? t.map(function(x){ return '<details class="lq"><summary><span class="lq-tag gold">' + esc(x.s) + '</span>' + esc(x.q) + '</summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
+    ? t.map(function(x){ return '<details class="lq"><summary><span class="lq-tag gold">' + esc(x.s) + '</span><a class="lq-link" href="articles/' + (ARTMAP['L|' + x.q] || '') + '">' + esc(x.q) + '</a></summary><div class="lq-a">' + x.a + '<span class="lq-by">' + esc(x.by) + '</span></div></details>'; }).join('')
     : '<div class="empty-mini">该分类暂无经验分享——试试其他分类。</div>';
   document.querySelectorAll('#learn-filter .ff').forEach(function(b){ b.classList.toggle('on', b.dataset.ls === learnFilter); b.setAttribute('aria-pressed', String(b.dataset.ls === learnFilter)); });
 }

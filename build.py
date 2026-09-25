@@ -66,6 +66,9 @@ PAGES = [
     dict(file="search.html", title="站内搜索 · 鸡父母",
          desc="搜全站：学校 / 资讯 / 政策 / 术语一框聚合，附热门搜索词。",
          sections=["searchpage"]),
+    dict(file="wiki.html",   title="升学百科 · 鸡父母",
+         desc="幼升小 / 小升初 / 初升高 / 高考四阶段全流程指南：时间轴 + 必办事项 + 常见误区 + 工具入口。",
+         sections=["wiki"]),
     dict(file="faq.html",    title="家长 FAQ · 鸡父母",
          desc="20 个最常被问到的问题：入学 / 择校 / 政策 / 生活 / 会员，快问快答带入口链接。",
          sections=["faq"]),
@@ -201,7 +204,7 @@ def convert_links(html):
         "#learn": "learn.html", "#life": "life.html", "#beans": "beans.html",
         "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
         "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
-        "#main": "index.html", "#searchpage": "search.html", "#faq": "faq.html",
+        "#main": "index.html", "#searchpage": "search.html", "#faq": "faq.html", "#wiki": "wiki.html",
     }
     for anchor, page in mapping.items():
         html = html.replace(f'href="{anchor}"', f'href="{page}"')
@@ -273,7 +276,7 @@ def build_page(page, tpl, secs, css, js):
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
-    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + hero + content \

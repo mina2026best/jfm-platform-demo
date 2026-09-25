@@ -44,6 +44,7 @@ function renderNews(){
     }
     return true;
   });
+  box.setAttribute('data-covers', '1');
   box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
     : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
          : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>');
@@ -68,7 +69,9 @@ function newsItemHTML(x){
   var bodyHTML = (x.body || x.url)
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
-  return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">'
+  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'fact', '安全提醒':'schools', '办事提醒':'policy', '行业观察':'news' }[x.cat] || 'news';
+  var cover = '<div class="ni-cover" aria-hidden="true">' + artSVG(coverKind) + '</div>';
+  return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
@@ -78,7 +81,7 @@ function newsItemHTML(x){
     + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + esc(x._k) + '\')">复制转发</button>'
     + (x._local ? '<button class="mini-btn" onclick="editNewsItem(\'' + esc(x._k) + '\')">编辑</button><button class="mini-btn danger" onclick="delNewsItem(\'' + esc(x._k) + '\')">删除</button>' : '')
     + '</div>'
-    + '</div>';
+    + '</div></div>';
 }
 function toggleNewsBody(el){
   var item = el.closest('.news-item'); if(!item) return;

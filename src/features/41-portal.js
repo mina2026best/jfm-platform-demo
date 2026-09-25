@@ -1,3 +1,15 @@
+/* ---------- v0.31：插画挂载：扫 data-art 占位与 hero 插槽 ---------- */
+function mountArt(){
+  try{
+    var hero = document.getElementById('hero-art-slot');
+    if(hero && !hero.hasChildNodes()) hero.innerHTML = artSVG('hero');
+  }catch(e){}
+  document.querySelectorAll('[data-art]').forEach(function(el){
+    if(el.hasChildNodes()) return;
+    try{ el.innerHTML = artSVG(el.getAttribute('data-art')); }catch(e){}
+  });
+}
+
 /* ---------- v0.30：搜索页 / FAQ / 热点榜 ---------- */
 var HOT_WORDS = ['指标到校', '三对口', '军检线', '摇号', '随迁子女', '长幼随学', '南开中学', '特招线', '陪读租房', '材料清单'];
 function hotWordsHTML(){

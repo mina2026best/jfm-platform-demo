@@ -876,7 +876,7 @@
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="learn.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
+    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="community.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
   </div>
 </div>
 
@@ -960,14 +960,15 @@
           <li><a href="zy.html">志愿与路径</a></li>
           <li><a href="fact.html">求真辟谣台</a></li>
           <li><a href="community.html">家长社区</a></li>
-          <li><a href="learn.html">家长学堂</a></li>
+          <li><a href="community.html">家长学堂</a></li>
           <li><a href="life.html">生活服务</a></li>
           <li><a href="search.html">站内搜索</a></li>
           <li><a href="faq.html">家长 FAQ</a></li>
           <li><a href="beans.html">升学豆</a></li>
           <li><a href="plans.html">会员体系</a></li>
           <li><a href="data-sources.html">数据来源</a></li>
-          <li><a href="about.html">关于与联系</a></li>
+          <li><a href="contact.html">联系与留言</a></li>
+          <li><a href="about.html">关于</a></li>
           <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
         </ul>
       </div>
@@ -1853,7 +1854,7 @@ function runSearch(){
   panel.innerHTML = html;
   panel.hidden = false;
 }
-var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'learn.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
+var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
 function goSearch(anchor){
   var panel = document.getElementById('search-panel');
   if(panel) panel.hidden = true;
@@ -3325,6 +3326,33 @@ function renderHotRank(){
   }).join('') + '</div>';
 }
 
+/* ---------- v0.34：联系页留言提交（写后端 /api/contact） ---------- */
+function submitContact(){
+  var name = (document.getElementById('ct-name')||{}).value || '';
+  var type = (document.getElementById('ct-type')||{}).value || '咨询';
+  var ct = (document.getElementById('ct-contact')||{}).value || '';
+  var msg = (document.getElementById('ct-msg')||{}).value || '';
+  if(!name.trim()){ toast('请填写称呼'); return; }
+  if(msg.trim().length < 5){ toast('留言内容至少 5 个字'); return; }
+  fetch('http://127.0.0.1:8780/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name.trim(), type: type, contact: ct.trim(), message: msg.trim() })
+  }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+    .then(function(res){
+      if(res.ok){
+        toast('留言已登记（' + res.d.item.id + '），感谢！');
+        var m = document.getElementById('ct-msg'); if(m) m.value = '';
+        var note = document.getElementById('ct-note');
+        if(note) note.textContent = '已提交：编号 ' + res.d.item.id + ' · ' + res.d.item.created;
+      } else {
+        toast('提交失败：' + (res.d.error || '未知错误'));
+      }
+    }).catch(function(){
+      toast('本地后端未启动（python3 server.py）——留言暂存失败');
+    });
+}
+
 
 /* ---------- 42-art ---------- */
 /* ---------- v0.31：品牌插画素材库（内联 SVG，零外部依赖） ---------- */
@@ -3574,7 +3602,7 @@ function artSVG(kind){
 }
 </script>
 
-<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"learn.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
+<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
   <div class="dlg-kicker">学校档案 · 审核制</div>

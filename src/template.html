@@ -43,6 +43,7 @@
       <a href="#community">社区</a>
       <a href="#life">生活</a>
       <a href="#wiki">百科</a>
+      <a href="#contact">联系</a>
       <a href="#searchpage">搜索</a>
       <a href="#faq">FAQ</a>
       <a href="#beans">升学豆</a>
@@ -69,6 +70,7 @@
     <a href="#beans">升学豆</a>
     <a href="#me">我的</a>
     <a href="#biz">B端合作</a>
+    <a href="#contact">联系留言</a>
     <a href="#plans" class="cta">会员</a>
   </div>
 </div>
@@ -403,6 +405,33 @@
         </dl>
       </aside>
     </div>
+  </div>
+</section>
+
+<section id="contact" class="alt">
+  <div class="wrap">
+    <div class="page-banner"><div>
+      <div class="pb-kicker">CONTACT · 联系与留言</div>
+      <h2>给我们留言</h2>
+      <p class="pb-sub">内容纠错、功能建议、合作意向都可以在这里说——留言保存在本站后台，按时间可查；内容纠错也可以直接到求真台提交线索。</p>
+    </div><div class="pb-art" data-art="banner-faq" aria-hidden="true"></div></div>
+    <div class="form-card light" style="max-width:720px">
+      <div class="form-row2">
+        <input id="ct-name" placeholder="怎么称呼你（必填）" aria-label="称呼" maxlength="20" />
+        <select id="ct-type" aria-label="留言类型">
+          <option>咨询</option><option>内容纠错</option><option>功能建议</option><option>合作意向</option><option>其他</option>
+        </select>
+      </div>
+      <div class="form-row2">
+        <input id="ct-contact" placeholder="联系方式（选填：邮箱/微信，仅后台可见）" aria-label="联系方式" maxlength="50" />
+      </div>
+      <textarea id="ct-msg" rows="5" placeholder="留言内容（必填，5–500 字）" aria-label="留言内容" maxlength="500" style="width:100%;font-size:14px;padding:10px 12px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);margin-top:10px"></textarea>
+      <div class="me-utils" style="margin-top:12px">
+        <button class="btn-main" onclick="submitContact()">提交留言</button>
+        <span class="cmp-note" id="ct-note">演示环境：留言写入本站后台数据库（data/contacts.json），管理台可按时间查看。</span>
+      </div>
+    </div>
+    <p class="cmp-note" style="margin-top:14px">其他通道：<a href="fact.html">求真台</a>（内容纠错线索）· <a href="biz.html">B 端合作</a>（机构合作登记）· 正式版将公示客服邮箱与备案信息。</p>
   </div>
 </section>
 
@@ -1124,7 +1153,8 @@
           <li><a href="#beans">升学豆</a></li>
           <li><a href="#plans">会员体系</a></li>
           <li><a href="#data-sources">数据来源</a></li>
-          <li><a href="#about">关于与联系</a></li>
+          <li><a href="#contact">联系与留言</a></li>
+          <li><a href="#about">关于</a></li>
           <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
         </ul>
       </div>

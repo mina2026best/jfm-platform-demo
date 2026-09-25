@@ -60,7 +60,7 @@ function toast(m){ var t=document.getElementById('toast'); t.textContent=m; t.cl
 function loadStats(){
   fetch(API+'/api/stats').then(r=>r.json()).then(function(d){
     document.getElementById('stats').innerHTML =
-      '<span>资讯总数 <b>'+d.news_total+'</b></span><span>已发布 <b>'+d.news_published+'</b></span><span>待审 <b>'+d.news_pending+'</b></span><span>线索 <b>'+d.tips_total+'</b></span><span>线索待审 <b>'+d.tips_pending+'</b></span>';
+      '<span>资讯总数 <b>'+d.news_total+'</b></span><span>已发布 <b>'+d.news_published+'</b></span><span>待审 <b>'+d.news_pending+'</b></span><span>线索 <b>'+d.tips_total+'</b></span><span>线索待审 <b>'+d.tips_pending+'</b></span><span>留言 <b>'+(d.contacts_total||0)+'</b></span><span>留言未读 <b>'+(d.contacts_pending||0)+'</b></span>';
   }).catch(function(){ document.getElementById('stats').textContent='后端未启动——请先运行 python3 server.py'; });
 }
 function badge(st){ return '<span class="badge '+(st==='published'?'pub':st==='pending'?'pend':'rej')+'">'+st+'</span>'; }

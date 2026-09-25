@@ -47,6 +47,9 @@ def load_news():
 def load_tips():
     return _load("tips.json", [])
 
+def load_contacts():
+    return _load("contacts.json", [])
+
 # ---- 审核词库（红线词：出现即拒绝入库；演示口径） ----
 BANNED = ["保过", "内部指标", "花钱进", " assure", "保录", "包上", "交钱锁定"]
 def audit_text(t):
@@ -132,18 +135,39 @@ class Handler(BaseHTTPRequestHandler):
             out = out[(page-1)*size : (page-1)*size + size]
             return self._json(200, {"ok": True, "total": total, "page": page, "items": out})
 
+        if path == "/api/contact":
+            name = (d.get("name") or "").strip()
+            msg = (d.get("message") or "").strip()
+            if len(name) < 1 or len(msg) < 5:
+                return self._json(422, {"ok": False, "error": "请填写称呼与至少 5 个字的留言内容"})
+            item = {"id": _next_id("C"), "name": name[:20], "type": d.get("type","咨询"),
+                    "contact": (d.get("contact") or "").strip()[:50],
+                    "message": msg[:500], "status": "pending", "created": now}
+            with LOCK:
+                items = load_contacts(); items.insert(0, item); _save("contacts.json", items)
+            return self._json(201, {"ok": True, "item": item, "note": "留言已登记，我们会在 24 小时内查看（演示）"})
+
         if path == "/api/tips":
             status = (q.get("status") or ["pending"])[0]
             items = [x for x in load_tips() if x.get("status") == status]
             return self._json(200, {"ok": True, "items": items})
 
         if path == "/api/stats":
-            news = load_news(); tips = load_tips()
+            news = load_news(); tips = load_tips(); contacts = load_contacts()
             return self._json(200, {"ok": True, "news_total": len(news),
                 "news_published": sum(1 for x in news if x.get("status")=="published"),
                 "news_pending": sum(1 for x in news if x.get("status")=="pending"),
                 "tips_total": len(tips),
-                "tips_pending": sum(1 for x in tips if x.get("status")=="pending")})
+                "tips_pending": sum(1 for x in tips if x.get("status")=="pending"),
+                "contacts_total": len(contacts),
+                "contacts_pending": sum(1 for x in contacts if x.get("status")=="pending")})
+
+        if path == "/api/contacts":
+            status = (q.get("status") or ["all"])[0]
+            items = load_contacts()
+            if status != "all":
+                items = [x for x in items if x.get("status") == status]
+            return self._json(200, {"ok": True, "items": items})
 
         # 静态文件
         rel = path.lstrip("/") or "index.html"
@@ -189,6 +213,18 @@ class Handler(BaseHTTPRequestHandler):
                 items = load_news(); items.insert(0, item); _save("news.json", items)
             return self._json(201, {"ok": True, "item": item})
 
+        if path == "/api/contact":
+            name = (d.get("name") or "").strip()
+            msg = (d.get("message") or "").strip()
+            if len(name) < 1 or len(msg) < 5:
+                return self._json(422, {"ok": False, "error": "请填写称呼与至少 5 个字的留言内容"})
+            item = {"id": _next_id("C"), "name": name[:20], "type": d.get("type","咨询"),
+                    "contact": (d.get("contact") or "").strip()[:50],
+                    "message": msg[:500], "status": "pending", "created": now}
+            with LOCK:
+                items = load_contacts(); items.insert(0, item); _save("contacts.json", items)
+            return self._json(201, {"ok": True, "item": item, "note": "留言已登记，我们会在 24 小时内查看（演示）"})
+
         if path == "/api/tips":
             ok, why = audit_text(str(d.get("t","")))
             if not ok:
@@ -199,6 +235,17 @@ class Handler(BaseHTTPRequestHandler):
                 items = load_tips(); items.insert(0, item); _save("tips.json", items)
             return self._json(201, {"ok": True, "item": item, "note": "已登记，审核后公开（演示）"})
 
+        return self._json(404, {"ok": False, "error": "unknown endpoint"})
+
+    def do_DELETE(self):
+        u = urlparse(self.path)
+        path = unquote(u.path)
+        m = re.match(r"^/api/contact/([A-Za-z0-9\-]+)$", path)
+        if m:
+            with LOCK:
+                items = [x for x in load_contacts() if x["id"] != m.group(1)]
+                _save("contacts.json", items)
+            return self._json(200, {"ok": True})
         return self._json(404, {"ok": False, "error": "unknown endpoint"})
 
     def do_PATCH(self):
@@ -234,6 +281,20 @@ class Handler(BaseHTTPRequestHandler):
                         return self._json(200, {"ok": True, "item": x})
             return self._json(404, {"ok": False, "error": "not found"})
         return self._json(404, {"ok": False, "error": "unknown endpoint"})
+
+        # contact 状态：/api/contact/<id>
+        m = re.match(r"^/api/contact/([A-Za-z0-9\-]+)$", path)
+        if m:
+            with LOCK:
+                items = load_contacts()
+                for x in items:
+                    if x["id"] == m.group(1):
+                        if "status" in d:
+                            x["status"] = d["status"] if d["status"] in ("read","archived","pending") else x["status"]
+                            x["handled"] = time.strftime("%Y-%m-%d %H:%M:%S")
+                        _save("contacts.json", items)
+                        return self._json(200, {"ok": True, "item": x})
+            return self._json(404, {"ok": False, "error": "not found"})
 
     def do_DELETE(self):
         u = urlparse(self.path)

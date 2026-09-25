@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>求真辟谣台 · 鸡父母</title>
-<meta name="description" content="「内部渠道是真的吗？」——逐条核验，按属实 / 不实 / 存疑分级，附出处与核验日期。" />
+<title>联系与留言 · 鸡父母</title>
+<meta name="description" content="留言必达：内容纠错、功能建议、合作意向——留言写入本站后台，按时间可查。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
@@ -872,7 +872,7 @@
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html" aria-current="page">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
@@ -881,103 +881,30 @@
 </div>
 
 
-<section id="fact" class="alt">
+<section id="contact" class="alt">
   <div class="wrap">
-    <div class="sec-head"><span class="no">04 · 求真辟谣台</span><h2>群里说的，先来这里对一对</h2></div>
-    <p class="sec-desc">按「属实 / 不实 / 存疑 / 无法核实」分级发布；每条标注核验时间与出处；重大传言配合官方通报二次核验。以下为示例条目，每条附出处与核验日期。</p>
-    <div class="fact-filter">
-      <button class="ff on" data-f="all" onclick="filterFact('all')">全部（12）</button>
-      <button class="ff" data-f="false" onclick="filterFact('false')">不实</button>
-      <button class="ff" data-f="warn" onclick="filterFact('warn')">存疑 / 提醒</button>
-      <button class="ff" data-f="ok" onclick="filterFact('ok')">属实</button>
-    </div>
-    <div class="rq">
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「有内部渠道，花钱就能进重点」</h4>
-        <p>市教委明确：全市中小学招生不收取与入学资格挂钩的费用，不与任何机构或个人合作招生。凡承诺「名额」的信息，默认按骗局处理。</p>
-        <div class="src">核验 2026-09-15 · 出处：市教委声明；新京报 2024-11-29（[C4-S52]）</div>
+    <div class="page-banner"><div>
+      <div class="pb-kicker">CONTACT · 联系与留言</div>
+      <h2>给我们留言</h2>
+      <p class="pb-sub">内容纠错、功能建议、合作意向都可以在这里说——留言保存在本站后台，按时间可查；内容纠错也可以直接到求真台提交线索。</p>
+    </div><div class="pb-art" data-art="banner-faq" aria-hidden="true"></div></div>
+    <div class="form-card light" style="max-width:720px">
+      <div class="form-row2">
+        <input id="ct-name" placeholder="怎么称呼你（必填）" aria-label="称呼" maxlength="20" />
+        <select id="ct-type" aria-label="留言类型">
+          <option>咨询</option><option>内容纠错</option><option>功能建议</option><option>合作意向</option><option>其他</option>
+        </select>
       </div>
-      <div class="rq-card">
-        <span class="verdict warn">存疑 · 需本地口径</span>
-        <h4>「指标到校就是 70% 都能上重点」</h4>
-        <p>70% 是「分配到初中」的计划比例，不等于校内所有人都够线；各初中分得的实际名额与人数相关，需以当年区县细则为准。</p>
-        <div class="src">核验 2026-09-16 · 出处：渝教基函〔2025〕21号（已核验文号）</div>
+      <div class="form-row2">
+        <input id="ct-contact" placeholder="联系方式（选填：邮箱/微信，仅后台可见）" aria-label="联系方式" maxlength="50" />
       </div>
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「普职分流 5:5，一半孩子上不了普高」</h4>
-        <p>权威澄清：全国约 65% 学生升入普通高中，「一半上不了普高」是被放大的误读。</p>
-        <div class="src">核验 2026-09-15 · 出处：中国教育在线 2022-04-11（[C4-S12]）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict ok">属实（提醒）</span>
-        <h4>「学位房 ≠ 学区房，买房前要查占用」</h4>
-        <p>属实。学位存在占用与指标个数限制（小学六年一户、初中三年一户），不核查占用就购房存在无法入学的风险。平台提供核查步骤指引，不做法律判断。</p>
-        <div class="src">核验 2026-09-15 · 出处：行业内容交叉（[C4-S70/71]，置信度中，以区教委口径为准）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict warn">存疑 · 高风险</span>
-        <h4>「中招办发来短信，点链接填信息」</h4>
-        <p>高发钓鱼套路：假冒官方名义发送含链接的短信。官方通知<b>不会索要验证码、不会引导转账</b>；收到先核对域名与账号主体——「重庆中招」曾为非官方账号（上海某公司主体）。</p>
-        <div class="src">核验 2026-09-15 · 出处：市教委声明；重庆网络广播电视台（[C4-S51]）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「课后延时服务是强制的，必须参加」</h4>
-        <p>课后服务坚持<b>自愿参加</b>原则；争议集中在服务质量而非强制性。学校不得变相强制，家长可向区教委反映。</p>
-        <div class="src">核验 2026-09-16 · 出处：新华社课后服务报道（[C4-S84]）；「双减」意见</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「民办学校可以提前考试『占坑』」</h4>
-        <p>义务教育阶段公民同招、超计划全部摇号，任何形式的提前选拔、考试测评均属违规；遇到此类宣传可直接向区教委反映。</p>
-        <div class="src">核验 2026-09-22 · 出处：义务教育招生入学相关要求（演示条目）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict warn">存疑 · 提醒</span>
-        <h4>「体育中考临时练两个月就够了」</h4>
-        <p>过程性评价与日常考核占一定权重，突击效果有限；长期运动习惯更稳（也顺带解决久坐问题）。以当年考试方案为准。</p>
-        <div class="src">核验 2026-09-22 · 出处：体育与健康考试工作方案（演示条目）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict ok">属实（提醒）</span>
-        <h4>「中考报名要核对本人身份信息」</h4>
-        <p>属实。多数区县要求核对身份信息并采集照片，具体流程与材料以当年报名通知为准；报名季前把身份证件有效期检查一遍。</p>
-        <div class="src">核验 2026-09-22 · 出处：中考报名相关通知（演示条目）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「买学区房就能直升对应初中」</h4>
-        <p>初中有单校对口与多校划片两种模式，多校划片区摇号定校；且房产需满足落户年限、学位锁定等条件。「买房=直升」是典型简化话术。</p>
-        <div class="src">核验 2026-09-25 · 出处：义务教育招生入学口径（演示条目）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict warn">存疑 · 提醒</span>
-        <h4>「复读生不能参加中考」</h4>
-        <p>存疑——往届生可以以社会考生身份报名，但部分区对复读生报考批次/指标到校资格有限制，需逐区核实。平台将持续跟踪各区口径。</p>
-        <div class="src">核验 2026-09-25 · 出处：各区中考报名细则（演示条目）</div>
-      </div>
-      <div class="rq-card">
-        <span class="verdict false">不实</span>
-        <h4>「某机构与教委合作，可以内部推荐」</h4>
-        <p>教委与任何培训机构不存在「合作招生」关系；凡自称有「内部推荐名额」的，按诈骗处理——这正是求真台存在的意义。</p>
-        <div class="src">核验 2026-09-25 · 出处：市教委历年声明（演示条目）</div>
-      </div>
-      <div class="form-card">
-        <h4>提交待核验线索</h4>
-        <div class="hint">只给结论与依据，不复述未核实传言细节；每条标注核验时间与出处；无法核实的只留档、不发布。</div>
-        <div class="form-row">
-          <select id="clue-stage" aria-label="学段">
-            <option>幼升小</option><option>小升初</option><option>初升高</option><option>高考</option><option>其他</option>
-          </select>
-          <textarea id="clue-text" placeholder="例：群里说今年沙区某校要扩招两个班，求核验……（请写明信息来源，不少于 10 字）" aria-label="线索内容"></textarea>
-        </div>
-        <div class="err" id="clue-err">请写明线索内容（不少于 10 字），我们才能进入核验流程。</div>
-        <div class="ok-box" id="clue-ok"><b>已进入核验队列（演示）。</b><span id="clue-id"></span> 核验三步：线索收集 → 官方比对 → 分级发布；结论将推送回本条留言所留渠道。</div>
-        <div style="margin-top:12px"><button onclick="submitClue()">提交核验</button></div>
+      <textarea id="ct-msg" rows="5" placeholder="留言内容（必填，5–500 字）" aria-label="留言内容" maxlength="500" style="width:100%;font-size:14px;padding:10px 12px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);margin-top:10px"></textarea>
+      <div class="me-utils" style="margin-top:12px">
+        <button class="btn-main" onclick="submitContact()">提交留言</button>
+        <span class="cmp-note" id="ct-note">演示环境：留言写入本站后台数据库（data/contacts.json），管理台可按时间查看。</span>
       </div>
     </div>
+    <p class="cmp-note" style="margin-top:14px">其他通道：<a href="fact.html">求真台</a>（内容纠错线索）· <a href="biz.html">B 端合作</a>（机构合作登记）· 正式版将公示客服邮箱与备案信息。</p>
   </div>
 </section>
 

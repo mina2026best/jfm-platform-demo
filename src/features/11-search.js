@@ -58,7 +58,7 @@ function runSearch(){
   panel.innerHTML = html;
   panel.hidden = false;
 }
-var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'learn.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
+var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
 function goSearch(anchor){
   var panel = document.getElementById('search-panel');
   if(panel) panel.hidden = true;

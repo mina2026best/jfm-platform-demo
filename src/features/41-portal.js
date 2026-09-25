@@ -85,3 +85,30 @@ function renderHotRank(){
       + '<span class="t">' + esc(x.t) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
   }).join('') + '</div>';
 }
+
+/* ---------- v0.34：联系页留言提交（写后端 /api/contact） ---------- */
+function submitContact(){
+  var name = (document.getElementById('ct-name')||{}).value || '';
+  var type = (document.getElementById('ct-type')||{}).value || '咨询';
+  var ct = (document.getElementById('ct-contact')||{}).value || '';
+  var msg = (document.getElementById('ct-msg')||{}).value || '';
+  if(!name.trim()){ toast('请填写称呼'); return; }
+  if(msg.trim().length < 5){ toast('留言内容至少 5 个字'); return; }
+  fetch('http://127.0.0.1:8780/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name.trim(), type: type, contact: ct.trim(), message: msg.trim() })
+  }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+    .then(function(res){
+      if(res.ok){
+        toast('留言已登记（' + res.d.item.id + '），感谢！');
+        var m = document.getElementById('ct-msg'); if(m) m.value = '';
+        var note = document.getElementById('ct-note');
+        if(note) note.textContent = '已提交：编号 ' + res.d.item.id + ' · ' + res.d.item.created;
+      } else {
+        toast('提交失败：' + (res.d.error || '未知错误'));
+      }
+    }).catch(function(){
+      toast('本地后端未启动（python3 server.py）——留言暂存失败');
+    });
+}

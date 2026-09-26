@@ -69,8 +69,8 @@ function newsItemHTML(x){
   var bodyHTML = (x.body || x.url)
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
-  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'learn', '安全提醒':'fact', '办事提醒':'calendar', '行业观察':'wiki' }[x.cat] || 'news';
-  var cover = '<div class="ni-cover" aria-hidden="true">' + artSVG(coverKind) + '</div>';
+  var coverKind = { '政策速递':'office', '升学动态':'classroom', '家庭教育':'study', '安全提醒':'gate1', '办事提醒':'calendar', '行业观察':'city' }[x.cat] || 'city';
+  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind) + '</div>';
   return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'

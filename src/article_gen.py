@@ -145,7 +145,12 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
             if d.get(k): rows += f'<tr><td>{esc(k)}</td><td>{esc(d[k])}</td></tr>'
         if d.get("暂缺字段"):
             rows += f'<tr><td>暂缺字段</td><td>{esc(d["暂缺字段"])}（按合规红线不提供录取线与排名）</td></tr>'
-        body = '<p>' + esc(d.get("简介","")) + '</p>'
+        _pk = ['gate1','gate2','building','playground','library','courtyard','students','panorama']
+        _pf = {'gate1':'school-gate-1.jpg','gate2':'school-gate-2.jpg','building':'school-building.jpg','playground':'school-playground.jpg','library':'school-library.jpg','courtyard':'school-courtyard.jpg','students':'school-students.jpg','panorama':'school-panorama.jpg'}
+        _h = sum(ord(c) for c in name)
+        _key = _pk[((_h * 7) + len(name)) % len(_pk)]
+        body = '<div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/' + _pf[_key] + '" alt=""></div>'
+        body += '<p>' + esc(d.get("简介","")) + '</p>'
         body += '<table class="art-table"><tbody>' + rows + '</tbody></table>'
         evs = d.get("评价") or []
         if evs:

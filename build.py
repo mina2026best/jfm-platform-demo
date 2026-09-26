@@ -382,6 +382,9 @@ def main():
   .art-note{font-size:12px;color:var(--muted)}
   html.theme-dark .art{background:var(--paper)}
   html.theme-dark .art-body{color:var(--ink2)}
+  .art-photo{margin:2px 0 16px;border-radius:12px;overflow:hidden}
+  .art-photo img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover;object-position:center 42%}
+  @media print{ .art-photo{display:none} }
   @media (max-width:720px){ .art{padding:22px 18px} .art h1{font-size:22px} }
   """
     # 文章页共享片段（与 build_page 同源重建）

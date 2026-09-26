@@ -2,11 +2,15 @@
 function mountArt(){
   try{
     var hero = document.getElementById('hero-art-slot');
-    if(hero && !hero.hasChildNodes()) hero.innerHTML = artSVG('hero');
+    if(hero && !hero.hasChildNodes()) hero.innerHTML = photoImg(ART_PHOTO['hero'] || 'gate1', true);
   }catch(e){}
   document.querySelectorAll('[data-art]').forEach(function(el){
     if(el.hasChildNodes()) return;
-    try{ el.innerHTML = artSVG(el.getAttribute('data-art')); }catch(e){}
+    var kind = el.getAttribute('data-art');
+    try{
+      if(typeof ART_PHOTO !== 'undefined' && ART_PHOTO[kind]){ el.innerHTML = photoImg(ART_PHOTO[kind]); }
+      else{ el.innerHTML = artSVG(kind); }
+    }catch(e){}
   });
 }
 

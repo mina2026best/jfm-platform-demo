@@ -76,3 +76,13 @@
   .school-card p{padding:0 16px}
   .school-card .sc-actions{padding:10px 16px 16px;display:flex;gap:8px;align-items:center}
   @media print{ .school-card .sc-art{display:none} .school-card .sc-top{padding-top:0} }
+
+  /* v0.37 实景照片 */
+  .hero-art img{width:100%;display:block;aspect-ratio:10/7;object-fit:cover}
+  .entry-art img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .25s ease}
+  .entry:hover .entry-art img{transform:scale(1.045)}
+  .pb-art img{width:100%;display:block;aspect-ratio:10/7;object-fit:cover}
+  .ni-cover img{width:100%;display:block;aspect-ratio:10/7;object-fit:cover}
+  .sc-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%;transition:transform .25s ease}
+  .school-card:hover .sc-art img{transform:scale(1.05)}
+  html.theme-dark .sc-art img,html.theme-dark .ni-cover img,html.theme-dark .hero-art img,html.theme-dark .entry-art img,html.theme-dark .pb-art img{filter:brightness(.94)}

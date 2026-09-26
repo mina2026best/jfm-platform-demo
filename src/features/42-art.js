@@ -119,3 +119,12 @@ function artSVG(kind){
     default: return svg('<circle cx="100" cy="70" r="40" fill="' + TEAL2 + '"/>');
   }
 }
+
+/* ---------- v0.36：路由到 2.0 插画库（43-art2.js） ---------- */
+(function(){
+  var _old = artSVG;
+  artSVG = function(kind){
+    try{ var v = artSVG2(kind); if(v) return v; }catch(e){}
+    return _old(kind);
+  };
+})();

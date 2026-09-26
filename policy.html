@@ -870,6 +870,17 @@
   .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
   @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
   @media print{ .rel-grid{display:none} }
+
+  /* v0.36 学校卡封面 */
+  .school-card{padding:0;overflow:hidden}
+  .school-card .sc-art{height:96px;overflow:hidden}
+  .school-card .sc-art svg{aspect-ratio:10/7;transition:transform .25s ease}
+  .school-card:hover .sc-art svg{transform:scale(1.05)}
+  .school-card .sc-top{padding:12px 16px 0}
+  .school-card h4{padding:0 16px;margin:6px 0 4px}
+  .school-card p{padding:0 16px}
+  .school-card .sc-actions{padding:10px 16px 16px;display:flex;gap:8px;align-items:center}
+  @media print{ .school-card .sc-art{display:none} .school-card .sc-top{padding-top:0} }
 </style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
@@ -887,7 +898,7 @@
 <div class="top">
   <div class="wrap">
     <a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
-    <span class="demo-tag">MVP 演示站 v0.35 · 扩展增强</span>
+    <span class="demo-tag">MVP 演示站 v0.36 · 视觉丰富化</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -1118,7 +1129,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.35（2026-09-25）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.36（2026-09-26）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
     </div>
   </div>
 </footer>
@@ -2049,7 +2060,7 @@ function renderSchools(){
   var g = document.getElementById('school-grid'); if(!g) return;
   g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
     var d = SCHOOL_DB[k], key = encodeURIComponent(k);
-    return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(d['办学性质'].split('（')[0]) + '"><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
+    return '<div class="school-card' + (QU_FILTER && d['所在区'] === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(d['办学性质'].split('（')[0]) + '"><div class="sc-art" aria-hidden="true">' + artSVG2('schools') + '</div><div class="sc-top"><span class="sc-badge">' + esc(d['办学性质'].split('（')[0]) + '</span><span class="sc-qu">' + esc(d['所在区']) + '</span>' + (QU_FILTER && d['所在区'] === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4><p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
       + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
@@ -2735,7 +2746,7 @@ function newsItemHTML(x){
   var bodyHTML = (x.body || x.url)
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
-  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'fact', '安全提醒':'schools', '办事提醒':'policy', '行业观察':'news' }[x.cat] || 'news';
+  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'learn', '安全提醒':'fact', '办事提醒':'calendar', '行业观察':'wiki' }[x.cat] || 'news';
   var cover = '<div class="ni-cover" aria-hidden="true">' + artSVG(coverKind) + '</div>';
   return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
@@ -3595,6 +3606,204 @@ function artSVG(kind){
   }
 }
 
+/* ---------- v0.36：路由到 2.0 插画库（43-art2.js） ---------- */
+(function(){
+  var _old = artSVG;
+  artSVG = function(kind){
+    try{ var v = artSVG2(kind); if(v) return v; }catch(e){}
+    return _old(kind);
+  };
+})();
+
+
+/* ---------- 43-art2 ---------- */
+/* ---------- v0.36：插画库 2.0（更丰富的场景层次/渐变/细节/人物） ---------- */
+/* 统一规范：宽幅 200x140 场景插画；多层渐变天空 + 地景剪影 + 主体 + 点缀光斑；品牌海军蓝/青绿/暖橙 */
+function artSVG2(kind){
+  var NAVY='#24344D', NAVY2='#2E4368', TEAL='#0E7C66', TEAL2='#4CC2A3', TEAL3='#7ED9C3',
+      ORANGE='#E8A33D', ORANGE2='#F2C879', RED='#D9534F', CREAM='#F7F3EA', INK='#46536B', INK2='#6E7B93';
+  var sky = function(id,c1,c2,c3){
+    return '<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1">'
+      +'<stop offset="0" stop-color="'+c1+'"/><stop offset=".55" stop-color="'+c2+'"/><stop offset="1" stop-color="'+c3+'"/></linearGradient></defs>';
+  };
+  function wrap(inner){ return '<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false" style="width:100%;height:100%;display:block">'+inner+'</svg>'; }
+  function clouds(y,op){ return '<g opacity="'+op+'"><ellipse cx="34" cy="'+y+'" rx="16" ry="5" fill="#fff"/><ellipse cx="48" cy="'+(y-3)+'" rx="10" ry="4" fill="#fff"/><ellipse cx="150" cy="'+(y+8)+'" rx="13" ry="4.5" fill="#fff"/></g>'; }
+  function birds(x,y){ return '<path d="M'+x+' '+y+' q4 -5 8 0 M'+(x+11)+' '+(y-5)+' q4 -5 8 0" stroke="'+INK2+'" stroke-width="1.8" fill="none" stroke-linecap="round"/>'; }
+  function person(x,y,scale,color,walk){
+    var s = scale||1;
+    var leg1 = walk ? 'M'+x+' '+(y+22*s)+' L'+(x-4*s)+' '+(y+40*s) : 'M'+x+' '+(y+22*s)+' L'+(x-2*s)+' '+(y+40*s);
+    var leg2 = walk ? 'M'+(x+3*s)+' '+(y+22*s)+' L'+(x+6*s)+' '+(y+40*s) : 'M'+(x+3*s)+' '+(y+22*s)+' L'+(x+4*s)+' '+(y+40*s);
+    return '<circle cx="'+x+'" cy="'+(y-6*s)+'" r="'+(5.5*s)+'" fill="'+color+'"/>'
+      +'<path d="M'+x+' '+(y)+' q'+(-4*s)+' '+(12*s)+' '+(-1*s)+' '+(22*s)+' l'+(5*s)+' 0 q'+(2*s)+' '+(12*s)+' 0 '+(-22*s)+' Z" fill="'+color+'"/>'
+      +'<path d="'+leg1+' M'+(x+3*s)+' '+(y+22*s)+' l'+(2*s)+' '+(18*s)+'" stroke="'+color+'" stroke-width="'+(3.6*s)+'" stroke-linecap="round" fill="none"/>';
+  }
+  function tree(x,y,r,c){ return '<rect x="'+(x-2)+'" y="'+y+'" width="4" height="'+(r*0.8)+'" fill="'+INK+'"/><circle cx="'+x+'" cy="'+(y-r*0.4)+'" r="'+r+'" fill="'+c+'"/><circle cx="'+(x-r*0.55)+'" cy="'+(y+r*0.1)+'" r="'+(r*0.6)+'" fill="'+c+'" opacity=".85"/><circle cx="'+(x+r*0.55)+'" cy="'+(y)+'" r="'+(r*0.55)+'" fill="'+c+'" opacity=".75"/>'; }
+  function school(x,y,w,h,body,roof,door){
+    var out = '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="'+body+'"/>'
+      +'<path d="M'+(x-6)+' '+(y+2)+' L'+(x+w/2)+' '+(y-h*0.42)+' L'+(x+w+6)+' '+(y+2)+' Z" fill="'+roof+'"/>'
+      +'<rect x="'+(x+w/2-6)+'" y="'+(y+h-16)+'" width="12" height="16" rx="1.5" fill="'+door+'"/>';
+    var winY = y+8, n = Math.floor(w/22);
+    for(var i=0;i<n;i++){ out += '<rect x="'+(x+8+i*22)+'" y="'+winY+'" width="9" height="9" rx="1" fill="'+CREAM+'"/>'; }
+    out += '<circle cx="'+(x+w/2)+'" cy="'+(y-h*0.42-6)+'" r="2.5" fill="'+ORANGE+'"/>';
+    return out;
+  }
+  var M = {};
+  /* ===== 首页主视觉：送学场景 2.0 ===== */
+  M['hero'] = wrap(
+    sky('h2s','#DCEBF7','#EAF2E9','#F6F1E4')
+    + clouds(30,.85) + clouds(58,.6) + birds(24,44) + birds(70,36)
+    + '<rect x="0" y="104" width="200" height="36" fill="#DCE8D8"/>'
+    + '<path d="M0 104 Q50 98 100 102 T200 100 L200 112 L0 112 Z" fill="#CFE0CB"/>'
+    + '<path d="M0 118 L200 114" stroke="#fff" stroke-width="3" stroke-dasharray="8 7" opacity=".9"/>'
+    + tree(16,102,13,TEAL) + tree(186,104,11,'#5BAF8F')
+    + school(136,58,54,46,TEAL,NAVY,CREAM)
+    + '<rect x="160" y="46" width="3" height="10" fill="'+INK+'"/><circle cx="161.5" cy="44" r="3" fill="'+ORANGE+'"/>'
+    /* 妈妈 */
+    + person(46,62,1.15,NAVY,true)
+    + '<path d="M50 72 L62 80" stroke="'+NAVY+'" stroke-width="3.4" stroke-linecap="round"/>'
+    /* 孩子+书包 */
+    + person(70,72,0.82,TEAL,true)
+    + '<rect x="74" y="76" width="8" height="10" rx="2.5" fill="'+ORANGE+'"/>'
+    + '<path d="M12 124 h176" stroke="#fff" stroke-width="0"/>'
+  );
+  /* ===== 政策：文件 + 天平 + 印章 ===== */
+  M['policy'] = wrap(
+    sky('p2s','#EDF1F8','#E4EAF3','#D9E2EE')
+    + '<circle cx="176" cy="22" r="26" fill="#fff" opacity=".45"/>'
+    + '<rect x="40" y="26" width="80" height="100" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="52" y="42" width="46" height="6" rx="3" fill="'+NAVY+'" opacity=".9"/>'
+    + '<rect x="52" y="56" width="58" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="67" width="52" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="78" width="56" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="89" width="40" height="4.5" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="112" cy="100" r="12" fill="'+TEAL+'" opacity=".95"/><path d="M106 100 l4.5 4.5 l9 -10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    /* 天平 */
+    + '<path d="M156 44 v52 M138 56 h36 M126 96 h44" stroke="'+NAVY+'" stroke-width="4" stroke-linecap="round"/>'
+    + '<path d="M132 60 a9 9 0 0 0 12 7 M180 60 a9 9 0 0 1 -12 7" stroke="'+NAVY+'" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<circle cx="132" cy="57" r="3.5" fill="'+ORANGE+'"/><circle cx="168" cy="57" r="3.5" fill="'+ORANGE+'"/>'
+    + '<rect x="150" y="96" width="12" height="8" rx="2" fill="'+NAVY+'"/>'
+  );
+  /* ===== 学校：校门场景 ===== */
+  M['schools'] = wrap(
+    sky('s2s','#E3F0EC','#DCEAE4','#EAF2E6')
+    + clouds(26,.8)
+    + '<rect x="0" y="106" width="200" height="34" fill="#D5E4D0"/>'
+    /* 校门 */
+    + '<rect x="36" y="66" width="6" height="44" fill="'+NAVY+'"/><rect x="86" y="66" width="6" height="44" fill="'+NAVY+'"/>'
+    + '<path d="M30 68 L64 50 L98 68" stroke="'+NAVY+'" stroke-width="5" fill="none"/>'
+    + '<rect x="58" y="52" width="3" height="8" fill="'+INK+'"/><circle cx="59.5" cy="50" r="3" fill="'+RED+'"/>'
+    + '<text x="60" y="80" text-anchor="middle" font-size="7" fill="'+NAVY+'" font-weight="bold">校</text>'
+    /* 教学楼远景 */
+    + school(110,64,62,48,'#5BAF8F',NAVY,CREAM)
+    + tree(14,108,12,'#4FA381') + tree(178,110,10,'#5BAF8F')
+    /* 两个学生走入 */
+    + person(64,80,0.7,TEAL,true) + person(56,82,0.6,ORANGE,true)
+  );
+  /* ===== 求真：放大镜 + 证物板 ===== */
+  M['fact'] = wrap(
+    sky('f2s','#FDF4E3','#FAECD2','#F6E2BC')
+    + '<circle cx="30" cy="30" r="20" fill="#fff" opacity=".5"/>'
+    + '<rect x="34" y="30" width="92" height="72" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="44" y="42" width="30" height="22" rx="2" fill="'+TEAL2+'" opacity=".75"/>'
+    + '<rect x="82" y="42" width="34" height="4.5" rx="2" fill="#C9D2DE"/><rect x="82" y="52" width="30" height="4.5" rx="2" fill="#C9D2DE"/><rect x="44" y="72" width="72" height="4.5" rx="2" fill="#C9D2DE"/><rect x="44" y="82" width="58" height="4.5" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="66" cy="53" r="6" fill="#fff" opacity=".7"/>'
+    /* 大放大镜 */
+    + '<circle cx="128" cy="72" r="26" fill="#fff" opacity=".55" stroke="'+NAVY+'" stroke-width="6"/>'
+    + '<circle cx="128" cy="72" r="26" fill="none" stroke="'+TEAL+'" stroke-width="2" opacity=".6"/>'
+    + '<path d="M147 91 L166 110" stroke="'+NAVY+'" stroke-width="9" stroke-linecap="round"/>'
+    /* 问号 */
+    + '<text x="128" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="'+ORANGE+'">?</text>'
+    + '<circle cx="172" cy="34" r="6" fill="'+RED+'" opacity=".85"/><path d="M169 34 l2.5 2.5 l5 -5.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+  );
+  /* ===== 新闻：报纸 + 飞讯 ===== */
+  M['news'] = wrap(
+    sky('n2s','#EDF1F8','#E4EAF3','#DDE4F0')
+    + '<circle cx="170" cy="24" r="18" fill="#fff" opacity=".5"/>'
+    + '<rect x="38" y="26" width="124" height="92" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="48" y="36" width="70" height="9" rx="2" fill="'+NAVY+'"/>'
+    + '<rect x="124" y="38" width="28" height="5" rx="2" fill="'+ORANGE+'"/>'
+    + '<rect x="48" y="54" width="50" height="34" rx="3" fill="url(#n2g)"/>'
+    + '<rect x="104" y="54" width="48" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="64" width="42" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="74" width="46" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="84" width="38" height="5" rx="2" fill="#C9D2DE"/>'
+    + '<rect x="48" y="96" width="104" height="5" rx="2" fill="#C9D2DE"/><rect x="48" y="106" width="86" height="5" rx="2" fill="#C9D2DE"/>'
+    + '<path d="M20 44 q6 -7 12 0 M38 36 q6 -7 12 0 M158 118 q6 -7 12 0" stroke="'+INK2+'" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    + birds(150,30)
+  ).replace('<svg ', '<svg ');
+  function LINE_D(){ return '#C9D2DE'; }
+  /* 给 news 的渐变注入 */
+  M['news'] = M['news'].replace('<svg viewBox="0 0 200 140"', '<svg viewBox="0 0 200 140" xmlns:xlink="http://www.w3.org/1999/xlink"').replace('<rect x="48" y="54" width="50" height="34" rx="3" fill="url(#n2g)"/>', '<rect x="48" y="54" width="50" height="34" rx="3" fill="'+TEAL2+'" opacity=".8"/>');
+  /* ===== 生命/生活：家庭与房屋 ===== */
+  M['life'] = wrap(
+    sky('l2s','#FDF4E3','#F9EBD0','#F4E0BC')
+    + '<circle cx="164" cy="30" r="16" fill="'+ORANGE2+'" opacity=".9"/>'
+    + '<rect x="0" y="104" width="200" height="36" fill="#EAD9B8"/>'
+    /* 房子 */
+    + '<rect x="60" y="58" width="80" height="50" rx="3" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<path d="M52 60 L100 32 L148 60 Z" fill="'+ORANGE+'"/>'
+    + '<rect x="92" y="80" width="16" height="28" fill="'+TEAL+'"/>'
+    + '<rect x="70" y="70" width="14" height="12" rx="1" fill="'+CREAM+'"/><rect x="116" y="70" width="14" height="12" rx="1" fill="'+CREAM+'"/>'
+    + '<path d="M96 20 v-10" stroke="'+INK2+'" stroke-width="2.5"/><circle cx="96" cy="26" r="6" fill="none" stroke="'+INK2+'" stroke-width="2.5"/>'
+    /* 三口人剪影 */
+    + person(56,74,0.95,NAVY,true) + person(150,74,0.95,TEAL,true) + person(166,78,0.7,ORANGE,true)
+    + tree(20,106,11,'#D9B96E')
+  );
+  /* ===== 日历/时间：日历翻页 ===== */
+  M['calendar'] = wrap(
+    sky('c2s','#EEF1F8','#E6EAF4','#DEE3F0')
+    + '<circle cx="172" cy="28" r="20" fill="#fff" opacity=".5"/>'
+    + '<rect x="46" y="34" width="108" height="84" rx="6" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="46" y="34" width="108" height="24" rx="6" fill="'+RED+'" opacity=".92"/>'
+    + '<text x="100" y="51" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold" font-family="var(--mono),monospace">SEP 25</text>'
+    + '<text x="100" y="88" text-anchor="middle" font-size="30" font-weight="bold" fill="'+NAVY+'" font-family="Georgia,serif">25</text>'
+    + '<rect x="72" y="98" width="56" height="4" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="158" cy="104" r="12" fill="'+TEAL+'"/><path d="M152 104 l4 4 l8 -9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<rect x="56" y="30" width="3" height="10" rx="1.5" fill="'+NAVY+'"/><rect x="140" y="30" width="3" height="10" rx="1.5" fill="'+NAVY+'"/>'
+  );
+  /* ===== 学堂：师生问答 ===== */
+  M['learn'] = wrap(
+    sky('le2s','#EAF2F0','#E1EEE9','#D8E7E0')
+    + '<rect x="0" y="108" width="200" height="32" fill="#D5E4D0"/>'
+    /* 黑板 */
+    + '<rect x="40" y="36" width="76" height="50" rx="4" fill="'+NAVY+'"/>'
+    + '<rect x="46" y="42" width="64" height="38" rx="2" fill="'+NAVY2+'"/>'
+    + '<path d="M54 70 l10 -14 l8 8 l12 -16" stroke="'+TEAL2+'" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<text x="98" y="58" text-anchor="middle" font-size="12" fill="'+CREAM+'" font-family="Georgia,serif">A+</text>'
+    /* 老师指黑板 */
+    + person(136,66,1.05,TEAL,false)
+    + '<path d="M132 74 L118 62" stroke="'+TEAL+'" stroke-width="3.2" stroke-linecap="round"/>'
+    /* 学生举手 */
+    + person(70,84,0.75,ORANGE,false)
+    + '<path d="M72 92 L82 82" stroke="'+ORANGE+'" stroke-width="3" stroke-linecap="round"/>'
+    + person(58,86,0.7,NAVY,false)
+    + tree(182,110,10,'#4FA381')
+  );
+  /* ===== 百科：书塔路径 ===== */
+  M['wiki'] = wrap(
+    sky('w2s','#EEF1F8','#E4EAF3','#E8E2F0')
+    + '<rect x="30" y="88" width="36" height="12" rx="2" fill="'+NAVY+'"/>'
+    + '<rect x="58" y="72" width="36" height="12" rx="2" fill="'+TEAL+'"/>'
+    + '<rect x="86" y="56" width="36" height="12" rx="2" fill="'+ORANGE+'"/>'
+    + '<rect x="114" y="40" width="36" height="12" rx="2" fill="'+RED+'" opacity=".9"/>'
+    + '<path d="M48 84 L76 68 L104 52 L132 36" stroke="'+INK2+'" stroke-width="2" stroke-dasharray="4 4" fill="none"/>'
+    + '<circle cx="132" cy="34" r="5" fill="'+TEAL2+'"/>'
+    + '<circle cx="30" cy="30" r="14" fill="#fff" opacity=".5"/>'
+    + '<text x="52" y="97" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">小</text>'
+    + '<text x="80" y="81" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">初</text>'
+    + '<text x="108" y="65" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">高</text>'
+    + '<text x="136" y="49" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">大</text>'
+    + birds(28,52)
+  );
+  /* ===== 联系：信封/对话 ===== */
+  M['contact'] = wrap(
+    sky('ct2s','#EAF2F0','#E1EEE9','#DCE9E2')
+    + '<path d="M46 44 h84 a10 10 0 0 1 10 10 v42 a10 10 0 0 1 -10 10 h-56 l-20 18 v-18 h-8 a10 10 0 0 1 -10 -10 v-42 a10 10 0 0 1 10 -10 Z" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<path d="M40 50 L88 84 L136 50" stroke="'+TEAL+'" stroke-width="3" fill="none"/>'
+    + '<circle cx="158" cy="42" r="12" fill="'+ORANGE+'"/><text x="158" y="47" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">✉</text>'
+    + '<circle cx="36" cy="118" r="5" fill="'+TEAL2+'"/><circle cx="172" cy="112" r="4" fill="'+TEAL2+'" opacity=".7"/>'
+  );
+  return M[kind] || M['news'];
+}
+function LINE_D(){ return '#C9D2DE'; }
+
 
 /* ---------- 42-art ---------- */
 /* ---------- v0.31：品牌插画素材库（内联 SVG，零外部依赖） ---------- */
@@ -3718,6 +3927,204 @@ function artSVG(kind){
     default: return svg('<circle cx="100" cy="70" r="40" fill="' + TEAL2 + '"/>');
   }
 }
+
+/* ---------- v0.36：路由到 2.0 插画库（43-art2.js） ---------- */
+(function(){
+  var _old = artSVG;
+  artSVG = function(kind){
+    try{ var v = artSVG2(kind); if(v) return v; }catch(e){}
+    return _old(kind);
+  };
+})();
+
+
+/* ---------- 43-art2 ---------- */
+/* ---------- v0.36：插画库 2.0（更丰富的场景层次/渐变/细节/人物） ---------- */
+/* 统一规范：宽幅 200x140 场景插画；多层渐变天空 + 地景剪影 + 主体 + 点缀光斑；品牌海军蓝/青绿/暖橙 */
+function artSVG2(kind){
+  var NAVY='#24344D', NAVY2='#2E4368', TEAL='#0E7C66', TEAL2='#4CC2A3', TEAL3='#7ED9C3',
+      ORANGE='#E8A33D', ORANGE2='#F2C879', RED='#D9534F', CREAM='#F7F3EA', INK='#46536B', INK2='#6E7B93';
+  var sky = function(id,c1,c2,c3){
+    return '<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="0" y2="1">'
+      +'<stop offset="0" stop-color="'+c1+'"/><stop offset=".55" stop-color="'+c2+'"/><stop offset="1" stop-color="'+c3+'"/></linearGradient></defs>';
+  };
+  function wrap(inner){ return '<svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false" style="width:100%;height:100%;display:block">'+inner+'</svg>'; }
+  function clouds(y,op){ return '<g opacity="'+op+'"><ellipse cx="34" cy="'+y+'" rx="16" ry="5" fill="#fff"/><ellipse cx="48" cy="'+(y-3)+'" rx="10" ry="4" fill="#fff"/><ellipse cx="150" cy="'+(y+8)+'" rx="13" ry="4.5" fill="#fff"/></g>'; }
+  function birds(x,y){ return '<path d="M'+x+' '+y+' q4 -5 8 0 M'+(x+11)+' '+(y-5)+' q4 -5 8 0" stroke="'+INK2+'" stroke-width="1.8" fill="none" stroke-linecap="round"/>'; }
+  function person(x,y,scale,color,walk){
+    var s = scale||1;
+    var leg1 = walk ? 'M'+x+' '+(y+22*s)+' L'+(x-4*s)+' '+(y+40*s) : 'M'+x+' '+(y+22*s)+' L'+(x-2*s)+' '+(y+40*s);
+    var leg2 = walk ? 'M'+(x+3*s)+' '+(y+22*s)+' L'+(x+6*s)+' '+(y+40*s) : 'M'+(x+3*s)+' '+(y+22*s)+' L'+(x+4*s)+' '+(y+40*s);
+    return '<circle cx="'+x+'" cy="'+(y-6*s)+'" r="'+(5.5*s)+'" fill="'+color+'"/>'
+      +'<path d="M'+x+' '+(y)+' q'+(-4*s)+' '+(12*s)+' '+(-1*s)+' '+(22*s)+' l'+(5*s)+' 0 q'+(2*s)+' '+(12*s)+' 0 '+(-22*s)+' Z" fill="'+color+'"/>'
+      +'<path d="'+leg1+' M'+(x+3*s)+' '+(y+22*s)+' l'+(2*s)+' '+(18*s)+'" stroke="'+color+'" stroke-width="'+(3.6*s)+'" stroke-linecap="round" fill="none"/>';
+  }
+  function tree(x,y,r,c){ return '<rect x="'+(x-2)+'" y="'+y+'" width="4" height="'+(r*0.8)+'" fill="'+INK+'"/><circle cx="'+x+'" cy="'+(y-r*0.4)+'" r="'+r+'" fill="'+c+'"/><circle cx="'+(x-r*0.55)+'" cy="'+(y+r*0.1)+'" r="'+(r*0.6)+'" fill="'+c+'" opacity=".85"/><circle cx="'+(x+r*0.55)+'" cy="'+(y)+'" r="'+(r*0.55)+'" fill="'+c+'" opacity=".75"/>'; }
+  function school(x,y,w,h,body,roof,door){
+    var out = '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" rx="2" fill="'+body+'"/>'
+      +'<path d="M'+(x-6)+' '+(y+2)+' L'+(x+w/2)+' '+(y-h*0.42)+' L'+(x+w+6)+' '+(y+2)+' Z" fill="'+roof+'"/>'
+      +'<rect x="'+(x+w/2-6)+'" y="'+(y+h-16)+'" width="12" height="16" rx="1.5" fill="'+door+'"/>';
+    var winY = y+8, n = Math.floor(w/22);
+    for(var i=0;i<n;i++){ out += '<rect x="'+(x+8+i*22)+'" y="'+winY+'" width="9" height="9" rx="1" fill="'+CREAM+'"/>'; }
+    out += '<circle cx="'+(x+w/2)+'" cy="'+(y-h*0.42-6)+'" r="2.5" fill="'+ORANGE+'"/>';
+    return out;
+  }
+  var M = {};
+  /* ===== 首页主视觉：送学场景 2.0 ===== */
+  M['hero'] = wrap(
+    sky('h2s','#DCEBF7','#EAF2E9','#F6F1E4')
+    + clouds(30,.85) + clouds(58,.6) + birds(24,44) + birds(70,36)
+    + '<rect x="0" y="104" width="200" height="36" fill="#DCE8D8"/>'
+    + '<path d="M0 104 Q50 98 100 102 T200 100 L200 112 L0 112 Z" fill="#CFE0CB"/>'
+    + '<path d="M0 118 L200 114" stroke="#fff" stroke-width="3" stroke-dasharray="8 7" opacity=".9"/>'
+    + tree(16,102,13,TEAL) + tree(186,104,11,'#5BAF8F')
+    + school(136,58,54,46,TEAL,NAVY,CREAM)
+    + '<rect x="160" y="46" width="3" height="10" fill="'+INK+'"/><circle cx="161.5" cy="44" r="3" fill="'+ORANGE+'"/>'
+    /* 妈妈 */
+    + person(46,62,1.15,NAVY,true)
+    + '<path d="M50 72 L62 80" stroke="'+NAVY+'" stroke-width="3.4" stroke-linecap="round"/>'
+    /* 孩子+书包 */
+    + person(70,72,0.82,TEAL,true)
+    + '<rect x="74" y="76" width="8" height="10" rx="2.5" fill="'+ORANGE+'"/>'
+    + '<path d="M12 124 h176" stroke="#fff" stroke-width="0"/>'
+  );
+  /* ===== 政策：文件 + 天平 + 印章 ===== */
+  M['policy'] = wrap(
+    sky('p2s','#EDF1F8','#E4EAF3','#D9E2EE')
+    + '<circle cx="176" cy="22" r="26" fill="#fff" opacity=".45"/>'
+    + '<rect x="40" y="26" width="80" height="100" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="52" y="42" width="46" height="6" rx="3" fill="'+NAVY+'" opacity=".9"/>'
+    + '<rect x="52" y="56" width="58" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="67" width="52" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="78" width="56" height="4.5" rx="2" fill="#C9D2DE"/>'+
+    '<rect x="52" y="89" width="40" height="4.5" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="112" cy="100" r="12" fill="'+TEAL+'" opacity=".95"/><path d="M106 100 l4.5 4.5 l9 -10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    /* 天平 */
+    + '<path d="M156 44 v52 M138 56 h36 M126 96 h44" stroke="'+NAVY+'" stroke-width="4" stroke-linecap="round"/>'
+    + '<path d="M132 60 a9 9 0 0 0 12 7 M180 60 a9 9 0 0 1 -12 7" stroke="'+NAVY+'" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<circle cx="132" cy="57" r="3.5" fill="'+ORANGE+'"/><circle cx="168" cy="57" r="3.5" fill="'+ORANGE+'"/>'
+    + '<rect x="150" y="96" width="12" height="8" rx="2" fill="'+NAVY+'"/>'
+  );
+  /* ===== 学校：校门场景 ===== */
+  M['schools'] = wrap(
+    sky('s2s','#E3F0EC','#DCEAE4','#EAF2E6')
+    + clouds(26,.8)
+    + '<rect x="0" y="106" width="200" height="34" fill="#D5E4D0"/>'
+    /* 校门 */
+    + '<rect x="36" y="66" width="6" height="44" fill="'+NAVY+'"/><rect x="86" y="66" width="6" height="44" fill="'+NAVY+'"/>'
+    + '<path d="M30 68 L64 50 L98 68" stroke="'+NAVY+'" stroke-width="5" fill="none"/>'
+    + '<rect x="58" y="52" width="3" height="8" fill="'+INK+'"/><circle cx="59.5" cy="50" r="3" fill="'+RED+'"/>'
+    + '<text x="60" y="80" text-anchor="middle" font-size="7" fill="'+NAVY+'" font-weight="bold">校</text>'
+    /* 教学楼远景 */
+    + school(110,64,62,48,'#5BAF8F',NAVY,CREAM)
+    + tree(14,108,12,'#4FA381') + tree(178,110,10,'#5BAF8F')
+    /* 两个学生走入 */
+    + person(64,80,0.7,TEAL,true) + person(56,82,0.6,ORANGE,true)
+  );
+  /* ===== 求真：放大镜 + 证物板 ===== */
+  M['fact'] = wrap(
+    sky('f2s','#FDF4E3','#FAECD2','#F6E2BC')
+    + '<circle cx="30" cy="30" r="20" fill="#fff" opacity=".5"/>'
+    + '<rect x="34" y="30" width="92" height="72" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="44" y="42" width="30" height="22" rx="2" fill="'+TEAL2+'" opacity=".75"/>'
+    + '<rect x="82" y="42" width="34" height="4.5" rx="2" fill="#C9D2DE"/><rect x="82" y="52" width="30" height="4.5" rx="2" fill="#C9D2DE"/><rect x="44" y="72" width="72" height="4.5" rx="2" fill="#C9D2DE"/><rect x="44" y="82" width="58" height="4.5" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="66" cy="53" r="6" fill="#fff" opacity=".7"/>'
+    /* 大放大镜 */
+    + '<circle cx="128" cy="72" r="26" fill="#fff" opacity=".55" stroke="'+NAVY+'" stroke-width="6"/>'
+    + '<circle cx="128" cy="72" r="26" fill="none" stroke="'+TEAL+'" stroke-width="2" opacity=".6"/>'
+    + '<path d="M147 91 L166 110" stroke="'+NAVY+'" stroke-width="9" stroke-linecap="round"/>'
+    /* 问号 */
+    + '<text x="128" y="82" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="'+ORANGE+'">?</text>'
+    + '<circle cx="172" cy="34" r="6" fill="'+RED+'" opacity=".85"/><path d="M169 34 l2.5 2.5 l5 -5.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+  );
+  /* ===== 新闻：报纸 + 飞讯 ===== */
+  M['news'] = wrap(
+    sky('n2s','#EDF1F8','#E4EAF3','#DDE4F0')
+    + '<circle cx="170" cy="24" r="18" fill="#fff" opacity=".5"/>'
+    + '<rect x="38" y="26" width="124" height="92" rx="5" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="48" y="36" width="70" height="9" rx="2" fill="'+NAVY+'"/>'
+    + '<rect x="124" y="38" width="28" height="5" rx="2" fill="'+ORANGE+'"/>'
+    + '<rect x="48" y="54" width="50" height="34" rx="3" fill="url(#n2g)"/>'
+    + '<rect x="104" y="54" width="48" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="64" width="42" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="74" width="46" height="5" rx="2" fill="#C9D2DE"/><rect x="104" y="84" width="38" height="5" rx="2" fill="#C9D2DE"/>'
+    + '<rect x="48" y="96" width="104" height="5" rx="2" fill="#C9D2DE"/><rect x="48" y="106" width="86" height="5" rx="2" fill="#C9D2DE"/>'
+    + '<path d="M20 44 q6 -7 12 0 M38 36 q6 -7 12 0 M158 118 q6 -7 12 0" stroke="'+INK2+'" stroke-width="2" fill="none" stroke-linecap="round"/>'
+    + birds(150,30)
+  ).replace('<svg ', '<svg ');
+  function LINE_D(){ return '#C9D2DE'; }
+  /* 给 news 的渐变注入 */
+  M['news'] = M['news'].replace('<svg viewBox="0 0 200 140"', '<svg viewBox="0 0 200 140" xmlns:xlink="http://www.w3.org/1999/xlink"').replace('<rect x="48" y="54" width="50" height="34" rx="3" fill="url(#n2g)"/>', '<rect x="48" y="54" width="50" height="34" rx="3" fill="'+TEAL2+'" opacity=".8"/>');
+  /* ===== 生命/生活：家庭与房屋 ===== */
+  M['life'] = wrap(
+    sky('l2s','#FDF4E3','#F9EBD0','#F4E0BC')
+    + '<circle cx="164" cy="30" r="16" fill="'+ORANGE2+'" opacity=".9"/>'
+    + '<rect x="0" y="104" width="200" height="36" fill="#EAD9B8"/>'
+    /* 房子 */
+    + '<rect x="60" y="58" width="80" height="50" rx="3" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<path d="M52 60 L100 32 L148 60 Z" fill="'+ORANGE+'"/>'
+    + '<rect x="92" y="80" width="16" height="28" fill="'+TEAL+'"/>'
+    + '<rect x="70" y="70" width="14" height="12" rx="1" fill="'+CREAM+'"/><rect x="116" y="70" width="14" height="12" rx="1" fill="'+CREAM+'"/>'
+    + '<path d="M96 20 v-10" stroke="'+INK2+'" stroke-width="2.5"/><circle cx="96" cy="26" r="6" fill="none" stroke="'+INK2+'" stroke-width="2.5"/>'
+    /* 三口人剪影 */
+    + person(56,74,0.95,NAVY,true) + person(150,74,0.95,TEAL,true) + person(166,78,0.7,ORANGE,true)
+    + tree(20,106,11,'#D9B96E')
+  );
+  /* ===== 日历/时间：日历翻页 ===== */
+  M['calendar'] = wrap(
+    sky('c2s','#EEF1F8','#E6EAF4','#DEE3F0')
+    + '<circle cx="172" cy="28" r="20" fill="#fff" opacity=".5"/>'
+    + '<rect x="46" y="34" width="108" height="84" rx="6" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<rect x="46" y="34" width="108" height="24" rx="6" fill="'+RED+'" opacity=".92"/>'
+    + '<text x="100" y="51" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold" font-family="var(--mono),monospace">SEP 25</text>'
+    + '<text x="100" y="88" text-anchor="middle" font-size="30" font-weight="bold" fill="'+NAVY+'" font-family="Georgia,serif">25</text>'
+    + '<rect x="72" y="98" width="56" height="4" rx="2" fill="#C9D2DE"/>'
+    + '<circle cx="158" cy="104" r="12" fill="'+TEAL+'"/><path d="M152 104 l4 4 l8 -9" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<rect x="56" y="30" width="3" height="10" rx="1.5" fill="'+NAVY+'"/><rect x="140" y="30" width="3" height="10" rx="1.5" fill="'+NAVY+'"/>'
+  );
+  /* ===== 学堂：师生问答 ===== */
+  M['learn'] = wrap(
+    sky('le2s','#EAF2F0','#E1EEE9','#D8E7E0')
+    + '<rect x="0" y="108" width="200" height="32" fill="#D5E4D0"/>'
+    /* 黑板 */
+    + '<rect x="40" y="36" width="76" height="50" rx="4" fill="'+NAVY+'"/>'
+    + '<rect x="46" y="42" width="64" height="38" rx="2" fill="'+NAVY2+'"/>'
+    + '<path d="M54 70 l10 -14 l8 8 l12 -16" stroke="'+TEAL2+'" stroke-width="3" fill="none" stroke-linecap="round"/>'
+    + '<text x="98" y="58" text-anchor="middle" font-size="12" fill="'+CREAM+'" font-family="Georgia,serif">A+</text>'
+    /* 老师指黑板 */
+    + person(136,66,1.05,TEAL,false)
+    + '<path d="M132 74 L118 62" stroke="'+TEAL+'" stroke-width="3.2" stroke-linecap="round"/>'
+    /* 学生举手 */
+    + person(70,84,0.75,ORANGE,false)
+    + '<path d="M72 92 L82 82" stroke="'+ORANGE+'" stroke-width="3" stroke-linecap="round"/>'
+    + person(58,86,0.7,NAVY,false)
+    + tree(182,110,10,'#4FA381')
+  );
+  /* ===== 百科：书塔路径 ===== */
+  M['wiki'] = wrap(
+    sky('w2s','#EEF1F8','#E4EAF3','#E8E2F0')
+    + '<rect x="30" y="88" width="36" height="12" rx="2" fill="'+NAVY+'"/>'
+    + '<rect x="58" y="72" width="36" height="12" rx="2" fill="'+TEAL+'"/>'
+    + '<rect x="86" y="56" width="36" height="12" rx="2" fill="'+ORANGE+'"/>'
+    + '<rect x="114" y="40" width="36" height="12" rx="2" fill="'+RED+'" opacity=".9"/>'
+    + '<path d="M48 84 L76 68 L104 52 L132 36" stroke="'+INK2+'" stroke-width="2" stroke-dasharray="4 4" fill="none"/>'
+    + '<circle cx="132" cy="34" r="5" fill="'+TEAL2+'"/>'
+    + '<circle cx="30" cy="30" r="14" fill="#fff" opacity=".5"/>'
+    + '<text x="52" y="97" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">小</text>'
+    + '<text x="80" y="81" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">初</text>'
+    + '<text x="108" y="65" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">高</text>'
+    + '<text x="136" y="49" text-anchor="middle" font-size="8" fill="#fff" font-weight="bold">大</text>'
+    + birds(28,52)
+  );
+  /* ===== 联系：信封/对话 ===== */
+  M['contact'] = wrap(
+    sky('ct2s','#EAF2F0','#E1EEE9','#DCE9E2')
+    + '<path d="M46 44 h84 a10 10 0 0 1 10 10 v42 a10 10 0 0 1 -10 10 h-56 l-20 18 v-18 h-8 a10 10 0 0 1 -10 -10 v-42 a10 10 0 0 1 10 -10 Z" fill="#fff" stroke="'+LINE_D()+'"/>'
+    + '<path d="M40 50 L88 84 L136 50" stroke="'+TEAL+'" stroke-width="3" fill="none"/>'
+    + '<circle cx="158" cy="42" r="12" fill="'+ORANGE+'"/><text x="158" y="47" text-anchor="middle" font-size="13" fill="#fff" font-weight="bold">✉</text>'
+    + '<circle cx="36" cy="118" r="5" fill="'+TEAL2+'"/><circle cx="172" cy="112" r="4" fill="'+TEAL2+'" opacity=".7"/>'
+  );
+  return M[kind] || M['news'];
+}
+function LINE_D(){ return '#C9D2DE'; }
 </script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
@@ -3785,6 +4192,7 @@ function artSVG(kind){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.36</b><span>视觉丰富化：插画库 2.0（十幅场景插画：渐变天空/人物/建筑细节），六分类差异化封面，20 学校卡彩色头图</span></div>
     <div class="cl-item"><b>v0.35</b><span>扩展增强：详情页相关阅读推荐（同类优先）+ sitemap.xml 全站收录 164 URL（SEO）</span></div>
     <div class="cl-item"><b>v0.33</b><span>内容纵深：学校档案 12→20 所、政策库 6→12 条、术语 18→32 条、求真 12 条、社区 10 帖、学堂 11+8、资讯 46 条、新增升学百科页</span></div>
     <div class="cl-item"><b>v0.32</b><span>决策落地：轻后端启动（内容审核 API）/ 资讯扩至 38 条 / 公众号启动包 / 内容管理台 / D7 数据扩展计划</span></div>

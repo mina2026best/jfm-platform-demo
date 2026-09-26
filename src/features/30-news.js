@@ -69,7 +69,7 @@ function newsItemHTML(x){
   var bodyHTML = (x.body || x.url)
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
-  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'fact', '安全提醒':'schools', '办事提醒':'policy', '行业观察':'news' }[x.cat] || 'news';
+  var coverKind = { '政策速递':'policy', '升学动态':'news', '家庭教育':'learn', '安全提醒':'fact', '办事提醒':'calendar', '行业观察':'wiki' }[x.cat] || 'news';
   var cover = '<div class="ni-cover" aria-hidden="true">' + artSVG(coverKind) + '</div>';
   return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'

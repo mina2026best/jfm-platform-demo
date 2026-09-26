@@ -65,3 +65,14 @@
   .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
   @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
   @media print{ .rel-grid{display:none} }
+
+  /* v0.36 学校卡封面 */
+  .school-card{padding:0;overflow:hidden}
+  .school-card .sc-art{height:96px;overflow:hidden}
+  .school-card .sc-art svg{aspect-ratio:10/7;transition:transform .25s ease}
+  .school-card:hover .sc-art svg{transform:scale(1.05)}
+  .school-card .sc-top{padding:12px 16px 0}
+  .school-card h4{padding:0 16px;margin:6px 0 4px}
+  .school-card p{padding:0 16px}
+  .school-card .sc-actions{padding:10px 16px 16px;display:flex;gap:8px;align-items:center}
+  @media print{ .school-card .sc-art{display:none} .school-card .sc-top{padding-top:0} }

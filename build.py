@@ -138,6 +138,10 @@ def build_js():
     if os.path.exists(ln):
         learn = json.load(open(ln, encoding="utf-8"))
         data += "\n\nvar LEARN_QA = " + json.dumps(learn["qa"], ensure_ascii=False) + ";\nvar LEARN_TIPS = " + json.dumps(learn["tips"], ensure_ascii=False) + ";"
+    sp = os.path.join(SRC, "data", "school_photos.json")
+    if os.path.exists(sp):
+        sphotos = json.load(open(sp, encoding="utf-8"))
+        data += "\n\nvar SCHOOL_PHOTOS = " + json.dumps(sphotos, ensure_ascii=False) + ";"
     feats = []
     fdir = f"{SRC}/features"
     order = [l.strip() for l in read(f"{fdir}/_order.txt").splitlines() if l.strip() and not l.startswith("#")]

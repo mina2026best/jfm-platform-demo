@@ -605,6 +605,10 @@
   .ms-chip{font-size:12px;color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--paper)}
   .ms-chip b{color:var(--accent);font-family:var(--mono)}
 
+  /* 动作按钮（替代占位链接） */
+  button.linkbtn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2.5px}
+  button.linkbtn:hover{color:var(--accent)}
+
 
 /* ============ 23-theme ============ */
   /* ---------- v0.15：深色模式（跟随系统 / 手动切换；仅屏幕生效，打印保持浅色） ---------- */
@@ -931,37 +935,37 @@
 </head>
 <body>
 <div id="readBar" aria-hidden="true"></div>
-<a class="skip-link" href="index.html">回到首页</a>
+<a class="skip-link" href="../index.html">回到首页</a>
 <div class="ann-bar" id="annBar" hidden>
-  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">全站改版：17 个独立页面上线，导航与站内链接全部改为真跳转（v0.29 多页架构）</span><a href="news.html">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
+  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">全站改版：17 个独立页面上线，导航与站内链接全部改为真跳转（v0.29 多页架构）</span><a href="../news.html">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
 </div>
 <div class="top">
   <div class="wrap">
-    <a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
-    <span class="demo-tag">MVP 演示站 v0.38 · 一校一图</span>
+    <a class="logo" href="../index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
+    <span class="demo-tag">重庆升学信息平台 · 每日更新</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="../news.html">资讯</a><a href="../calendar.html">日历</a><a href="../policy.html">政策</a><a href="../schools.html">档案</a><a href="../compare.html">对比</a><a href="../zy.html">志愿</a><a href="../fact.html">求真</a><a href="../community.html">社区</a><a href="../life.html">生活</a><a href="../search.html">搜索</a><a href="../faq.html">FAQ</a><a href="../beans.html">升学豆</a><a href="../me.html">我的</a><a href="../plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="community.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
+    <a href="../news.html" class="['']">升学资讯</a><a href="../quiz.html" class="['']">入学自查</a><a href="../calendar.html" class="['']">升学日历</a><a href="../policy.html" class="['']">政策库</a><a href="../schools.html" class="['']">学校档案</a><a href="../compare.html" class="['']">择校对比</a><a href="../zy.html" class="['']">志愿参考</a><a href="../fact.html" class="['']">求真台</a><a href="../community.html" class="['']">家长社区</a><a href="../community.html" class="['']">家长学堂</a><a href="../life.html" class="['']">生活服务</a><a href="../search.html" class="['']">站内搜索</a><a href="../faq.html" class="['']">家长 FAQ</a><a href="../beans.html" class="['']">升学豆</a><a href="../me.html" class="['']">我的</a><a href="../biz.html" class="['']">B端合作</a><a href="../plans.html" class="['cta']">会员</a>
   </div>
 </div>
 
 <main class="wrap">
-  <nav class="crumb"><a href="news.html">资讯中心</a> <span>›</span> 数学不好，还能走「强基」吗？——基础学科路线…</nav>
+  <nav class="crumb"><a href="../news.html">资讯中心</a> <span>›</span> 数学不好，还能走「强基」吗？——基础学科路线…</nav>
   <article class="art">
     <div class="art-kicker">资讯 · 家庭教育</div>
     <h1>数学不好，还能走「强基」吗？——基础学科路线的三个判断</h1>
     <div class="art-meta"><span>编辑部整理</span><span>2026-09-23</span><span class="art-status">已审核发布</span></div>
     <div class="art-body"><p>强基锁的是本硕博长线路径，判断标准不是「现在数学多少分」，而是孩子是否真心愿意跟基础学科打交道十年。</p><p>三个判断：① 是否主动看课外学科内容；② 遇到难题的兴奋感是否大于挫败感；③ 是否接受相对清贫的科研路线。任一为否，建议看综合路径。</p></div>
-    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-news-25280274.html"><span class="rel-tag">资讯</span>家庭教育促进法要点：依法带娃，「训诫」不是吓唬</a><a class="rel-item" href="article-news-8bef8675.html"><span class="rel-tag">资讯</span>高一适应期：住校生第一个月的常见问题与对策</a><a class="rel-item" href="article-news-45ad72b1.html"><span class="rel-tag">资讯</span>「双减」后学科培训现状：持证机构名单怎么查</a><a class="rel-item" href="article-news-031fea0f.html"><span class="rel-tag">资讯</span>校园周边交通护学岗升级：家长志愿者报名启动（演示）</a><a class="rel-item" href="article-faq-d9afc626.html"><span class="rel-tag">家长 FAQ</span>六年一户，二孩上学受影响吗？</a></div><div class="art-foot">
-      <a class="art-back" href="news.html">← 返回资讯中心</a>
-      <span class="art-note">演示口径，以官方当年发布为准</span>
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-news-25280274.html"><span class="rel-tag">资讯</span>家庭教育促进法要点：依法带娃，「训诫」不是吓唬</a><a class="rel-item" href="article-news-8bef8675.html"><span class="rel-tag">资讯</span>高一适应期：住校生第一个月的常见问题与对策</a><a class="rel-item" href="article-news-45ad72b1.html"><span class="rel-tag">资讯</span>「双减」后学科培训现状：持证机构名单怎么查</a><a class="rel-item" href="article-news-ef22a387.html"><span class="rel-tag">资讯</span>校园周边交通护学岗升级：家长志愿者报名启动</a><a class="rel-item" href="article-faq-d9afc626.html"><span class="rel-tag">家长 FAQ</span>六年一户，二孩上学受影响吗？</a></div><div class="art-foot">
+      <a class="art-back" href="../news.html">← 返回资讯中心</a>
+      <span class="art-note">以官方当年发布为准</span>
     </div>
   </article>
 </main>
@@ -970,31 +974,31 @@
     <div class="cols">
       <div>
         <h5>鸡父母 · 重庆</h5>
-        <p>面向小升初、初升高、高考全链路的家长信息服务与生活服务平台。本站为 MVP 演示版，数据为演示口径；正式版数据按官方公示逐年更新并标注核验日期。</p>
+        <p>面向小升初、初升高、高考全链路的家长信息服务与生活服务平台。本站数据按官方公示持续更新并标注核验日期。</p>
         <p style="margin-top:10px">关联文档：《重庆鸡父母平台企划书》V2.0（208 页）· 经营流程 SOP 执行包</p>
       </div>
       <div>
         <h5>站点地图</h5>
         <ul>
-          <li><a href="news.html">升学资讯</a></li>
-          <li><a href="calendar.html">升学日历</a></li>
-          <li><a href="policy.html">政策库</a></li>
-          <li><a href="quiz.html">入学自查</a></li>
-          <li><a href="schools.html">学校档案</a></li>
-          <li><a href="compare.html">择校对比</a></li>
-          <li><a href="zy.html">志愿与路径</a></li>
-          <li><a href="fact.html">求真辟谣台</a></li>
-          <li><a href="community.html">家长社区</a></li>
-          <li><a href="community.html">家长学堂</a></li>
-          <li><a href="life.html">生活服务</a></li>
-          <li><a href="search.html">站内搜索</a></li>
-          <li><a href="faq.html">家长 FAQ</a></li>
-          <li><a href="beans.html">升学豆</a></li>
-          <li><a href="plans.html">会员体系</a></li>
-          <li><a href="data-sources.html">数据来源</a></li>
-          <li><a href="contact.html">联系与留言</a></li>
-          <li><a href="about.html">关于</a></li>
-          <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
+          <li><a href="../news.html">升学资讯</a></li>
+          <li><a href="../calendar.html">升学日历</a></li>
+          <li><a href="../policy.html">政策库</a></li>
+          <li><a href="../quiz.html">入学自查</a></li>
+          <li><a href="../schools.html">学校档案</a></li>
+          <li><a href="../compare.html">择校对比</a></li>
+          <li><a href="../zy.html">志愿与路径</a></li>
+          <li><a href="../fact.html">求真辟谣台</a></li>
+          <li><a href="../community.html">家长社区</a></li>
+          <li><a href="../community.html">家长学堂</a></li>
+          <li><a href="../life.html">生活服务</a></li>
+          <li><a href="../search.html">站内搜索</a></li>
+          <li><a href="../faq.html">家长 FAQ</a></li>
+          <li><a href="../beans.html">升学豆</a></li>
+          <li><a href="../plans.html">会员体系</a></li>
+          <li><a href="../data-sources.html">数据来源</a></li>
+          <li><a href="../contact.html">联系与留言</a></li>
+          <li><a href="../about.html">关于</a></li>
+          <li><button type="button" class="linkbtn" onclick="openChangelog()">更新日志</button></li>
         </ul>
       </div>
       <div>
@@ -1008,8 +1012,8 @@
       </div>
     </div>
     <div class="legal">
-      © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.38（2026-09-26）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图（20 校独立校门/标志建筑照片） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.39（2026-09-29）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -1021,7 +1025,7 @@
   <div class="dlg-kicker">学校档案 · 审核制</div>
   <h4 id="sm-name"></h4>
   <dl class="dlg-kv" id="sm-kv"></dl>
-  <div class="dlg-sub">评价（经审核展示，示例）· 争议评价走「证据 + 仲裁」流程</div>
+  <div class="dlg-sub">评价（经审核展示）· 争议评价走「证据 + 仲裁」流程</div>
   <div id="sm-evals"></div>
   <div class="dlg-actions"><button class="btn-main" onclick="addToCompareCurrent()">加入对比</button><button class="mini-btn" onclick="copySchoolSummary()">复制摘要</button><span class="hint2" id="sm-note">平台不为其服务背书 · 数据以官方公示为准</span></div>
 </div></dialog>
@@ -1080,6 +1084,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.39</b><span>实景照片升级：20 校全部更换为该校真实校门/校园实拍照片；资讯中心开通「每日自动更新」（每日新增 50 条以上并标注来源）；全站链接有效性核验</span></div>
     <div class="cl-item"><b>v0.38</b><span>一校一图：20 所学校各配独立实景照片（校门/标志性建筑，一校一图不重复），学校卡与详情页同源</span></div>
     <div class="cl-item"><b>v0.37</b><span>实景照片：全站视觉升级为照片级实景素材（校门/教学楼/全景/操场/图书馆等，AI 生成示意），覆盖首页主视觉、学校卡、资讯封面与学校详情页横幅</span></div>
     <div class="cl-item"><b>v0.36</b><span>视觉丰富化：插画库 2.0（十幅场景插画：渐变天空/人物/建筑细节），六分类差异化封面，20 学校卡彩色头图</span></div>
@@ -1114,7 +1119,7 @@
     <div class="cl-item"><b>v0.6</b><span>升学路径地图（6 路径×4 学段）/ 日历「现在该做什么」</span></div>
     <div class="cl-item"><b>v0.5</b><span>三专家评审整改 24 项</span></div>
     <div class="cl-item"><b>v0.4</b><span>入学自查 / 信任指标条 / 移动端导航</span></div>
-    <div class="cl-item"><b>v0.3</b><span>全站搜索 / 学校档案库 / 我的 / 会员开通演示 / B端合作</span></div>
+    <div class="cl-item"><b>v0.3</b><span>全站搜索 / 学校档案库 / 我的 / 会员开通 / B端合作</span></div>
     <div class="cl-item"><b>v0.2</b><span>志愿换算 / 社区 / 升学豆 / 资金规划 / 求真提交 / 租房行情</span></div>
     <div class="cl-item"><b>v0.1</b><span>首版：三入口 / 日历 / 政策库 / 对比器 / 求真台 / 生活服务</span></div>
   </div>

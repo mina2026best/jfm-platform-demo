@@ -56,7 +56,7 @@ function copyNewsItem(k){
   if(!x) return;
   var lines = ['【' + (x.cat || '资讯') + '】' + x.t];
   if(x.sum) lines.push(x.sum);
-  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜鸡父母平台（演示）');
+  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜鸡父母平台');
   copyText(lines.join('\n'));
 }
 function copyCompare(){
@@ -78,7 +78,7 @@ function copySchoolSummary(){
   ['办学性质','所在区','招生范围','通勤参考','住宿','收费口径','指标到校','数据来源'].forEach(function(k){
     if(d[k]) lines.push(k + '：' + d[k]);
   });
-  lines.push('（来源与核验日期以站内档案为准 · 鸡父母平台演示）');
+  lines.push('（来源与核验日期以站内档案为准）');
   copyText(lines.join('\n'));
 }
 function openChangelog(){

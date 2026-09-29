@@ -47,7 +47,7 @@ function renderNews(){
   box.setAttribute('data-covers', '1');
   box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
     : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
-         : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加（演示）。</div>');
+         : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加。</div>');
   var counts = { all: arr.length };
   NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
   var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
@@ -60,7 +60,7 @@ function renderNews(){
   var meta = document.getElementById('news-meta-line');
   if(meta){
     var us = getUserNews().length;
-    meta.textContent = '演示数据：编辑部条目 ' + allNews().length + ' 条' + (us ? ' · 本机编辑 ' + us + ' 条（含草稿）' : '')
+    meta.textContent = '内容条目 ' + allNews().length + ' 条' + (us ? ' · 本机编辑 ' + us + ' 条（含草稿）' : '')
       + (q ? ' · 搜索「' + newsQuery.trim() + '」命中 ' + shown.length + ' 条' : '')
       + ' · 「编辑台」内容保存在本机浏览器，可导出 JSON 交接；正式版接入后台审核发布流程。';
   }
@@ -71,11 +71,16 @@ function newsItemHTML(x){
     : '';
   var coverKind = { '政策速递':'office', '升学动态':'classroom', '家庭教育':'study', '安全提醒':'playground', '办事提醒':'calendar', '行业观察':'city' }[x.cat] || 'city';
   var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind) + '</div>';
+  var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + x.t] || '') : '';
+  var titleLink;
+  if(artKey){ titleLink = '<a class="ni-link" href="articles/' + artKey + '" title="阅读全文">' + esc(x.t) + '</a>'; }
+  else if(x.url){ titleLink = '<a class="ni-link" href="' + esc(x.url) + '" target="_blank" rel="noopener" title="阅读原文">' + esc(x.t) + ' ↗</a>'; }
+  else { titleLink = '<span class="ni-link" role="text">' + esc(x.t) + '</span>'; }
   return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
-    + '<h4 class="ni-title"><a class="ni-link" href="articles/' + (ARTMAP['N|' + x.t] || '') + '" title="阅读全文">' + esc(x.t) + '</a>'
+    + '<h4 class="ni-title">' + titleLink
     + ' <button class="ni-more" onclick="toggleNewsBody(this)" data-target="self">摘要 ▾</button></h4>'
     + (x.sum ? '<p class="ni-sum">' + esc(x.sum) + '</p>' : '')
     + bodyHTML
@@ -84,6 +89,7 @@ function newsItemHTML(x){
     + '</div>'
     + '</div></div>';
 }
+
 function toggleNewsBody(el){
   var item = el.closest('.news-item'); if(!item) return;
   var body = item.querySelector('.ni-body'); if(!body) return;
@@ -116,7 +122,7 @@ function saveNewsItem(){
   var t = (document.getElementById('ne-title').value || '').trim();
   var src = (document.getElementById('ne-src').value || '').trim();
   var err = document.getElementById('ne-err');
-  if(!t || !src){ err.textContent = '标题与来源为必填项（演示校验）。'; err.style.display = 'inline'; return; }
+  if(!t || !src){ err.textContent = '标题与来源为必填项。'; err.style.display = 'inline'; return; }
   err.style.display = 'none';
   var item = {
     cat: document.getElementById('ne-cat').value,
@@ -226,7 +232,7 @@ function importNews(){
   toast(added ? '已导入 ' + added + ' 条（本机）' : '没有解析到有效条目');
 }
 function exportNews(){
-  var payload = { exportedAt: new Date().toISOString(), note: '鸡父母平台资讯导出（演示）', items: newsCombined() };
+  var payload = { exportedAt: new Date().toISOString(), note: '鸡父母平台资讯导出', items: newsCombined() };
   var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-news-export.json';

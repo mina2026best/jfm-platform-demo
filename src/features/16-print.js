@@ -25,9 +25,9 @@ function printTodoList(){
     + '.p-foot{margin-top:24px;padding-top:10px;border-top:1px dashed #C9D1D9;font-size:10.5px;color:#6B7683}'
     + '</style></head><body>'
     + '<h1>升学行动清单</h1>'
-    + '<div class="p-meta">鸡父母 · 重庆（MVP 演示 v0.8）· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
+    + '<div class="p-meta">鸡父母 · 重庆· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
     + rows
-    + '<div class="p-foot">清单由演示站生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
+    + '<div class="p-foot">清单由鸡父母平台生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
     + '<script>window.onload=function(){setTimeout(function(){window.print()},200)}<\/script></body></html>');
   w.document.close();
 }

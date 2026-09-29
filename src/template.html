@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</title>
-<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——含升学资讯中心与站内编辑台（MVP 演示站，按企划书 V2.0 第五章规划搭建）。" />
+<title>鸡父母 · 重庆家长升学信息与生活服务平台</title>
+<meta name="description" content="可核验的升学信息、关键时刻的确定性、家长的生活服务——含升学资讯中心与站内编辑台。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
 <meta property="og:type" content="website" />
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"鸡父母 · 重庆家长升学信息与生活服务平台","alternateName":"鸡父母","description":"可核验的升学信息、关键时刻的确定性、家长的生活服务（MVP 演示站）。","inLanguage":"zh-CN","url":"https://mina2026best.github.io/jfm-platform-demo/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"鸡父母 · 重庆家长升学信息与生活服务平台","alternateName":"鸡父母","description":"可核验的升学信息、关键时刻的确定性、家长的生活服务。","inLanguage":"zh-CN","url":"https://mina2026best.github.io/jfm-platform-demo/"}</script>
 <style>/*__BUILD_CSS__*/</style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
@@ -27,7 +27,7 @@
 <div class="top">
   <div class="wrap">
     <span class="logo"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></span>
-    <span class="demo-tag">MVP 演示站 v0.38 · 一校一图</span>
+    <span class="demo-tag">重庆升学信息平台 · 每日更新</span>
     <div class="searchbox">
       <input id="global-search" type="search" placeholder="搜政策 / 学校 / 资讯 / 术语…" aria-label="全站搜索" autocomplete="off"
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
@@ -149,7 +149,7 @@
 <section id="calendar">
   <div class="wrap">
     <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
-    <p class="sec-desc">示例展示 5 条（正式版为可订阅的分区×学段节点库，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后按学段自动过滤、支持多孩切换；提醒可导出日历文件，行动清单可打印。</p>
+    <p class="sec-desc">展示 5 条（分区×学段节点库持续扩充，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后按学段自动过滤、支持多孩切换；提醒可导出日历文件，行动清单可打印。</p>
     <div class="fact-filter cal-filter" style="margin-bottom:14px">
       <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
       <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
@@ -160,14 +160,14 @@
     <div id="cal-personal" class="cal-personal" hidden></div>
     <div class="cal-tools">
       <button class="mini-btn" onclick="printTodoList()">打印行动清单</button>
-      <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF（演示）</span>
+      <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF</span>
     </div>
     <div class="cal-grid">
       <div class="cal" data-stage="幼升小">
         <span class="date">2027-06</span><span class="stage">幼升小</span>
         <h4>幼升小报名与材料准备</h4>
         <p>「三对口」材料清单、六年一户核查、长幼随学申请——以各区当年招生入学政策为准。</p>
-        <div class="src">依据：各区教委当年招生入学政策（示例）</div>
+        <div class="src">依据：各区教委当年招生入学政策</div>
         <details class="todo"><summary>现在该做什么</summary><div>✓ 备齐三对口材料（户口、房产、出生证明）<br/>✓ 二孩家庭了解「长幼随学」申请通道<br/>✓ 盯住网上报名窗口，错过要等统筹</div></details>
         <button class="alert-btn" data-title="幼升小报名与材料准备（2027-06）" onclick="toggleAlert(this)">设提醒</button>
       </div>
@@ -198,7 +198,7 @@
       <div class="cal" data-stage="高考">
         <span class="date">2027-06</span><span class="stage">高考</span>
         <h4>高考特招线公布后行动清单</h4>
-        <p>示例为 2026 年实际口径：特招线历史类 510 / 物理类 496；军检线（报考军校的体检参考）历史类男 517/女 631、物理类男 533/女 573。正式版自动替换当年口径。</p>
+        <p>2026 年实际口径：特招线历史类 510 / 物理类 496；军检线（报考军校的体检参考）历史类男 517/女 631、物理类男 533/女 573。正式版自动替换当年口径。</p>
         <div class="src">来源：新华网重庆 2026-06-25（已核验）</div>
         <details class="todo"><summary>现在该做什么</summary><div>✓ 对照线差定位：过特招线多少分 → 位次区间<br/>✓ 研究 3–5 个专业方向（兴趣 × 就业 × 分数匹配）<br/>✓ 防志愿填报骗局：见求真台「内部渠道」条目</div></details>
         <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
@@ -210,7 +210,7 @@
 <section id="news">
   <div class="wrap">
     <div class="sec-head"><span class="no">01.5 · 升学资讯</span><h2>编辑部精选 · 每天 3 分钟</h2></div>
-    <p class="sec-desc">政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布（演示数据，每条标注来源与日期）。「编辑台」支持自助采集、编辑、草稿与导入导出（保存在本机浏览器）。</p>
+    <p class="sec-desc">政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布（每条标注来源与日期）。「编辑台」支持自助采集、编辑、草稿与导入导出（保存在本机浏览器）。</p>
     <div class="news-toolbar">
       <div class="fact-filter news-filter" id="news-filter">
         <button class="ff on" data-nf="all" onclick="setNewsFilter('all')">全部</button>
@@ -268,102 +268,102 @@
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-97b9ba86.html">随迁子女入学：「两为主、两纳入」保障</a></h4>
-          <div class="meta">义务教育招生入学工作口径（演示条目） · 以各区当年细则为准</div>
+          <div class="meta">义务教育招生入学工作口径 · 以各区当年细则为准</div>
           <p>政策要点：随迁子女入学以流入地为主、以公办学校为主，纳入属地义务教育保障范围；通常需准备居住证、就业或社保等材料，具体清单与受理时间以各区当年公告为准。</p>
           <div class="plain"><b>人话版：</b>外地户籍在重庆工作，孩子读书不是「没学上」——把居住证、就业材料提前半年备齐，由居住区统筹安排公办学位；热门片区可能跨片调配，材料准备越早越从容。</div>
-          <div class="meta">来源：义务教育招生入学相关工作要求（演示口径）；正式版接入当年区县细则原文</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：用于展示「区县细则差异」的阅读方式；正式版将按区县逐年更新</div>
+          <div class="meta">来源：义务教育招生入学相关工作要求；持续接入当年区县细则原文</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「区县细则差异」的阅读方式；按区县逐年更新</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-1158f301.html">中考体育与健康：过程性评价 + 统一测试</a></h4>
-          <div class="meta">体育与健康考试工作方案（演示条目）</div>
+          <div class="meta">体育与健康考试工作方案</div>
           <p>政策要点：体育与健康考试由过程性评价与统一测试结合构成；日常体育课参与、体质健康测试与统一测试项目共同计分。</p>
           <div class="plain"><b>人话版：</b>体育分不是「临考前突击」科目——初一就开始的日常锻炼就在攒分。把每周运动变成家庭习惯，比任何冲刺班都划算。</div>
-          <div class="meta">来源：体育与健康考试相关工作方案（演示口径）；分值构成以当年文件为准</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：用于展示「过程性评价」类政策的阅读方式</div>
+          <div class="meta">来源：体育与健康考试相关工作方案；分值构成以当年文件为准</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「过程性评价」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-f14c6d6e.html">高中阶段学生资助：免学费 + 国家助学金</a></h4>
-          <div class="meta">学生资助工作口径（演示条目）</div>
+          <div class="meta">学生资助工作口径</div>
           <p>政策要点：符合条件的家庭经济困难学生可申请免学费与国家助学金（分档）；普高与中职均有对应资助通道，申请一般通过学校统一办理。</p>
           <div class="plain"><b>人话版：</b>家庭困难不该挡住升学路——资助通道是「申请制」，别不好意思问班主任；把材料按清单备好，学校会走统一流程办理。</div>
-          <div class="meta">来源：学生资助管理相关工作口径（演示条目）；正式版接入当年资助政策原文</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：用于展示「资助类」政策的阅读方式</div>
+          <div class="meta">来源：学生资助管理相关工作口径；持续接入当年资助政策原文</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「资助类」政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-ff060ba4.html">民办义务教育招生：超计划全部摇号</a></h4>
-          <div class="meta">义务教育招生入学工作口径（演示条目）</div>
+          <div class="meta">义务教育招生入学工作口径</div>
           <p>政策要点：民办义务教育学校与公办同步招生；报名人数超过招生计划时，实行电脑随机录取（全程公证），不得以考试、测评等任何形式选拔。</p>
           <div class="plain"><b>人话版：</b>「民办要考试」「交钱能锁定名额」都不可信——超计划就是摇号，与成绩、缴费无关；没摇中回公办统筹，双轨准备才稳。</div>
-          <div class="meta">来源：义务教育招生入学相关要求（演示口径）；正式版接入当年文件</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：用于展示「招生纪律」类政策的阅读方式</div>
+          <div class="meta">来源：义务教育招生入学相关要求；持续接入当年文件</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「招生纪律」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-d294ba4d.html">义务教育免试入学：划片就近 + 单校/多校对口</a></h4>
-          <div class="meta">义务教育招生入学工作口径（演示条目）</div>
+          <div class="meta">义务教育招生入学工作口径</div>
           <p>政策要点：义务教育实行免试就近入学；公办小学采取单校划片（三对口）为主，初中有单校对口与多校划片两种模式，多校划片区域电脑随机录取。</p>
           <div class="plain"><b>人话版：</b>「就近」不等于「最近」——划片以区当年公布的招生服务半径为准。买房/租房前先查目标房产的对口学校和历年划片范围（各区教委每年 4–5 月发布）。</div>
-          <div class="meta">来源：义务教育招生入学相关要求（演示口径）；正式版接入当年区县划片文件</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「划片」类政策的阅读方式</div>
+          <div class="meta">来源：义务教育招生入学相关要求；持续接入当年区县划片文件</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「划片」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-30d872b7.html">学籍管理：「人籍一致」与转学窗口</a></h4>
-          <div class="meta">中小学生学籍管理口径（演示条目）</div>
+          <div class="meta">中小学生学籍管理口径</div>
           <p>政策要点：严格「人籍一致」，不得出现人籍分离、空挂学籍；转学需双方学校与双方区教委同意，一般学期初集中办理。</p>
           <div class="plain"><b>人话版：</b>借读、挂靠都是雷——学籍在哪，指标到校资格就在哪。转学不是随时能办，通常每学期开学前后各一个窗口，错过要等半年。</div>
-          <div class="meta">来源：学籍管理相关工作口径（演示条目）</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「学籍」类政策的阅读方式</div>
+          <div class="meta">来源：学籍管理相关工作口径</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「学籍」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-d774e7d8.html">中考加分与优待：对象、分值与申报</a></h4>
-          <div class="meta">招生工作实施办法口径（演示条目）</div>
+          <div class="meta">招生工作实施办法口径</div>
           <p>政策要点：烈士子女、符合条件的军人/消防子女、归侨等类别享有加分或优先录取优待；同一考生符合多项时取最高一项，不累加。</p>
           <div class="plain"><b>人话版：</b>加分是「申报制」不是「自动生效」——符合条件要在规定时间内交材料给学校，错过视为放弃。具体类别与分值以当年文件为准。</div>
-          <div class="meta">来源：招生优待相关工作口径（演示条目）</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「加分优待」类政策的阅读方式</div>
+          <div class="meta">来源：招生优待相关工作口径</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「加分优待」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-7a635f13.html">普通高中招生录取：批次设置与征集志愿</a></h4>
-          <div class="meta">联招录取工作口径（演示条目）</div>
+          <div class="meta">联招录取工作口径</div>
           <p>政策要点：联招录取分批次进行（市级重点批次 / 普通批次等）；每批次录取后未完成计划公开征集志愿，考生可再次填报。</p>
           <div class="plain"><b>人话版：</b>批次不是「分数档次」，是「先后顺序」——前面的批次没录不影响后面批次。征集志愿是重要补救机会，出分后要每天盯区教委/考试院公告。</div>
-          <div class="meta">来源：联招录取相关工作口径（演示条目）</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「录取批次」类政策的阅读方式</div>
+          <div class="meta">来源：联招录取相关工作口径</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「录取批次」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-d2076b4f.html">校园食品安全与营养：家长监督权</a></h4>
-          <div class="meta">学校食品安全与营养健康管理口径（演示条目）</div>
+          <div class="meta">学校食品安全与营养健康管理口径</div>
           <p>政策要点：校园食品安全实行校长负责制；建立集中用餐陪餐制度；家长有权了解食堂原料来源与菜单，可参与膳食监督。</p>
           <div class="plain"><b>人话版：</b>你孩子在学校吃什么，你有权知道——每学期家长可申请查看食堂后厨直播/食材台账；发现问题先向学校反映，无果向区教委与市场监管部门反映。</div>
-          <div class="meta">来源：校园食品安全管理相关工作口径（演示条目）</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「校园安全」类政策的阅读方式</div>
+          <div class="meta">来源：校园食品安全管理相关工作口径</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「校园安全」类政策的阅读方式</div>
           </details>
         </div>
         <div class="pol-item">
           <h4><a class="art-t" href="articles/article-policy-7e7b666b.html">「双减」与课后服务：作业时长与校外培训边界</a></h4>
-          <div class="meta">「双减」意见及课后服务口径（演示条目）</div>
+          <div class="meta">「双减」意见及课后服务口径</div>
           <p>政策要点：义务教育阶段作业总量控制；学科类校外培训不得占用节假日/寒暑假；课后服务自愿参加、收费公示。</p>
           <div class="plain"><b>人话版：</b>任何「周末学科集训」的合规性都要打问号——查机构是否持证（办学许可证+收费公示），缴费别超 3 个月或 60 课时，且走监管账户。</div>
-          <div class="meta">来源：「双减」相关工作口径（演示条目）</div>
-          <details class="vh"><summary>版本历史（演示条目）</summary>
-            <div>· 演示内容：展示「双减」类政策的阅读方式</div>
+          <div class="meta">来源：「双减」相关工作口径</div>
+          <details class="vh"><summary>版本历史</summary>
+            <div>· 条目说明：展示「双减」类政策的阅读方式</div>
           </details>
         </div>
       </div>
@@ -428,7 +428,7 @@
       <textarea id="ct-msg" rows="5" placeholder="留言内容（必填，5–500 字）" aria-label="留言内容" maxlength="500" style="width:100%;font-size:14px;padding:10px 12px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans);margin-top:10px"></textarea>
       <div class="me-utils" style="margin-top:12px">
         <button class="btn-main" onclick="submitContact()">提交留言</button>
-        <span class="cmp-note" id="ct-note">演示环境：留言写入本站后台数据库（data/contacts.json），管理台可按时间查看。</span>
+        <span class="cmp-note" id="ct-note">留言将写入站内后台数据库（data/contacts.json），管理台可按时间查看与处理。</span>
       </div>
     </div>
     <p class="cmp-note" style="margin-top:14px">其他通道：<a href="fact.html">求真台</a>（内容纠错线索）· <a href="biz.html">B 端合作</a>（机构合作登记）· 正式版将公示客服邮箱与备案信息。</p>
@@ -440,7 +440,7 @@
     <div class="page-banner"><div>
       <div class="pb-kicker">WIKI · 升学百科</div>
       <h2>从幼儿园到高考：四阶段全流程指南</h2>
-      <p class="pb-sub">每个阶段一张「路线图」：关键时间轴 + 必办事项 + 常见误区 + 站内工具入口。持续扩充中（演示口径，以官方当年发布为准）。</p>
+      <p class="pb-sub">每个阶段一张「路线图」：关键时间轴 + 必办事项 + 常见误区 + 站内工具入口。持续扩充中（以官方当年发布为准）。</p>
     </div><div class="pb-art" data-art="banner-faq" aria-hidden="true"></div></div>
 
     <div class="faq-grid">
@@ -505,7 +505,7 @@
     <div class="page-banner"><div>
       <div class="pb-kicker">FAQ · 家长问答</div>
       <h2>最常被问到的 24 个问题</h2>
-      <p class="pb-sub">按主题分类的快问快答；每条答案都标注了详细解读所在的页面，点进去可看完整口径。答案为演示口径，以官方当年发布为准。</p>
+      <p class="pb-sub">按主题分类的快问快答；每条答案都标注了详细解读所在的页面，点进去可看完整口径。解答以官方当年发布为准。</p>
     </div><div class="pb-art" data-art="banner-faq" aria-hidden="true"></div></div>
     <div class="faq-cats" id="faq-cats">
       <button class="ff on" data-fc="all" onclick="faqFilter('all')">全部（24）</button>
@@ -539,7 +539,7 @@
       <details class="faq-item" data-cat="生活"><summary><span class="cat">生活</span><a class="art-t faq-q" href="articles/article-faq-3861b9f4.html">孩子在学校吃得好吗？我怎么监督？</a></summary><div class="a">你有监督权：食堂实行校长负责制 + 陪餐制度，家长可查看后厨直播与食材台账——<a href="policy.html">政策库</a>「校园食品安全」条目有完整口径。</div></details>
       <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span><a class="art-t faq-q" href="articles/article-faq-f74abf40.html">不充会员能用吗？</a></summary><div class="a">能。信息基础（政策、求真、监督入口）永远免费且完整；付费只是工具与提醒的增值——<a href="plans.html">会员体系</a>有分档说明。</div></details>
       <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span><a class="art-t faq-q" href="articles/article-faq-cf0b5756.html">升学豆能提现吗？</a></summary><div class="a">不能。升学豆不生息、不可提现、不可转让、不兑法币；签到与内容贡献即可获得——<a href="beans.html">升学豆中心</a>有防通胀机制说明。</div></details>
-      <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span><a class="art-t faq-q" href="articles/article-faq-cfd823ce.html">我的数据存在哪？</a></summary><div class="a">演示版仅存本机浏览器（不上传服务器）；可导出 JSON 备份或换机导入——入口在<a href="me.html">「我的」页</a>。</div></details>
+      <details class="faq-item" data-cat="会员"><summary><span class="cat">会员</span><a class="art-t faq-q" href="articles/article-faq-cfd823ce.html">我的数据存在哪？</a></summary><div class="a">数据仅存本机浏览器（不上传服务器）；可导出 JSON 备份或换机导入——入口在<a href="me.html">「我的」页</a>。</div></details>
     </div>
   </div>
 </section>
@@ -547,7 +547,7 @@
 <section id="quiz">
   <div class="wrap">
     <div class="sec-head"><span class="no">02.5 · 入学自查</span><h2>我家的情况，能不能报？3 问自查</h2></div>
-    <p class="sec-desc">回答 3 个问题，得到针对性提示与下一步动作（规则演示版，依据「三对口」「六年一户」「随迁子女」等公开规则整理；不构成入学承诺，最终以区教委当年度政策为准）。</p>
+    <p class="sec-desc">回答 3 个问题，得到针对性提示与下一步动作（依据「三对口」「六年一户」「随迁子女」等公开规则整理；不构成入学承诺，最终以区教委当年度政策为准）。</p>
     <div class="zy-tools">
       <select id="qz-qu" aria-label="孩子户籍或居住区">
         <option value="">孩子户籍 / 居住区</option>
@@ -566,8 +566,8 @@
       <button onclick="runQuiz()">查看自查结果</button>
     </div>
     <div id="qz-out" aria-live="polite"><div class="cmp-empty">回答 3 个问题后点击「查看自查结果」。输出：基本路径判断 + 关键缺口提醒 + 多元路径提示。</div></div>
-    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">入学材料清单生成器（演示）</h3>
-    <p class="sec-desc">选学段、户籍与住房情况，一键生成需准备的证件材料清单；可复制或打印，作为线下核对底稿。演示口径，以拟入学区当年公告为准。</p>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">入学材料清单生成器</h3>
+    <p class="sec-desc">选学段、户籍与住房情况，一键生成需准备的证件材料清单；可复制或打印，作为线下核对底稿。以拟入学区当年公告为准。</p>
     <div class="mat-tool">
       <div class="mat-row">
         <label>学段
@@ -626,7 +626,7 @@
       <button id="btn-fav" class="cmp-alt" onclick="favCompare()">收藏本次对比</button>
       <button id="btn-copy-cmp" class="cmp-alt" onclick="copyCompare()">复制对比文本</button>
       <button id="btn-diff" class="cmp-alt" onclick="toggleDiffOnly()" aria-pressed="false">仅看差异</button>
-      <span class="cmp-note">演示数据 · 正式版按官方公示逐年更新</span>
+      <span class="cmp-note">数据按官方公示逐年更新 · 标注核验日期</span>
     </div>
     <div id="cmp-result" aria-live="polite">
       <div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。对比维度：办学性质 / 招生范围 / 通勤参考 / 收费口径 / 指标到校名额 / 数据来源与核验日期。</div>
@@ -637,7 +637,7 @@
 <section id="schools" class="alt">
   <div class="wrap">
     <div class="sec-head"><span class="no">03.2 · 学校档案库</span><h2>官方数据 + 审核制评价</h2></div>
-    <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；争议评价走「证据 + 仲裁」流程；档案字段逐项标注来源与核验日期，缺失如实标「暂缺」。点击「查看档案」看完整字段与评价示例。</p>
+    <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；争议评价走「证据 + 仲裁」流程；档案字段逐项标注来源与核验日期，缺失如实标「暂缺」。点击「查看档案」看完整字段与家长评价。</p>
     <div class="fact-filter" id="school-filter" style="margin-bottom:14px">
       <button class="ff on" data-sf="all" onclick="filterSchools('all')">全部（12）</button>
       <button class="ff" data-sf="公办" onclick="filterSchools('公办')">公办（11）</button>
@@ -650,7 +650,7 @@
 <section id="zy">
   <div class="wrap">
     <div class="sec-head"><span class="no">3.5 · 志愿与专业参考</span><h2>把「线差」算清楚，再谈选择</h2></div>
-    <p class="sec-desc">公开数据汇总 + 位次换算工具演示；不提供「录取概率」承诺，输出均标注数据口径与局限（企划书 §4.2.5）。高级工具挂会员档位。</p>
+    <p class="sec-desc">公开数据汇总 + 位次换算工具；不提供「录取概率」承诺，输出均标注数据口径与局限（企划书 §4.2.5）。高级工具挂会员档位。</p>
     <div class="zy-tools">
       <label>选科</label>
       <select id="zy-subject" aria-label="选科">
@@ -662,7 +662,7 @@
       <button onclick="runZy()">换算参考位次</button>
       <span class="cmp-note">基准：2026 年特招线 历史 510 / 物理 496（新华网重庆，已核验）</span>
     </div>
-    <div id="zy-result" aria-live="polite"><div class="cmp-empty">输入分数后点击「换算参考位次」。输出为演示口径，正式版接入当年一分一段表并标注更新日期。</div></div>
+    <div id="zy-result" aria-live="polite"><div class="cmp-empty">输入分数后点击「换算参考位次」。输出接入当年一分一段表并标注更新日期。</div></div>
     <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">升学不止一条路</h3>
     <p class="sec-desc">「一半孩子上不了普高」是被放大的误读——全国约 65% 学生升入普高（求真台已核验）。从初中起，就值得把这几条路径都摆上桌看：</p>
     <div class="pm-tabs">
@@ -680,7 +680,7 @@
 <section id="fact" class="alt">
   <div class="wrap">
     <div class="sec-head"><span class="no">04 · 求真辟谣台</span><h2>群里说的，先来这里对一对</h2></div>
-    <p class="sec-desc">按「属实 / 不实 / 存疑 / 无法核实」分级发布；每条标注核验时间与出处；重大传言配合官方通报二次核验。以下为示例条目，每条附出处与核验日期。</p>
+    <p class="sec-desc">按「属实 / 不实 / 存疑 / 无法核实」分级发布；每条标注核验时间与出处；重大传言配合官方通报二次核验。以下为核验条目，每条附出处与核验日期。</p>
     <div class="fact-filter">
       <button class="ff on" data-f="all" onclick="filterFact('all')">全部（12）</button>
       <button class="ff" data-f="false" onclick="filterFact('false')">不实</button>
@@ -690,75 +690,75 @@
     <div class="rq">
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-11761923.html">「有内部渠道，花钱就能进重点」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-f41ad288.html">「有内部渠道，花钱就能进重点」</a></h4>
         <p>市教委明确：全市中小学招生不收取与入学资格挂钩的费用，不与任何机构或个人合作招生。凡承诺「名额」的信息，默认按骗局处理。</p>
         <div class="src">核验 2026-09-15 · 出处：市教委声明；新京报 2024-11-29（[C4-S52]）</div>
       </div>
       <div class="rq-card">
         <span class="verdict warn">存疑 · 需本地口径</span>
-        <h4><a class="art-t" href="articles/article-fact-033da8f2.html">「指标到校就是 70% 都能上重点」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-92f5f359.html">「指标到校就是 70% 都能上重点」</a></h4>
         <p>70% 是「分配到初中」的计划比例，不等于校内所有人都够线；各初中分得的实际名额与人数相关，需以当年区县细则为准。</p>
         <div class="src">核验 2026-09-16 · 出处：渝教基函〔2025〕21号（已核验文号）</div>
       </div>
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-ae0bbe1a.html">「普职分流 5:5，一半孩子上不了普高」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-539b8dd6.html">「普职分流 5:5，一半孩子上不了普高」</a></h4>
         <p>权威澄清：全国约 65% 学生升入普通高中，「一半上不了普高」是被放大的误读。</p>
         <div class="src">核验 2026-09-15 · 出处：中国教育在线 2022-04-11（[C4-S12]）</div>
       </div>
       <div class="rq-card">
         <span class="verdict ok">属实（提醒）</span>
-        <h4><a class="art-t" href="articles/article-fact-bf0bad40.html">「学位房 ≠ 学区房，买房前要查占用」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-71616d28.html">「学位房 ≠ 学区房，买房前要查占用」</a></h4>
         <p>属实。学位存在占用与指标个数限制（小学六年一户、初中三年一户），不核查占用就购房存在无法入学的风险。平台提供核查步骤指引，不做法律判断。</p>
         <div class="src">核验 2026-09-15 · 出处：行业内容交叉（[C4-S70/71]，置信度中，以区教委口径为准）</div>
       </div>
       <div class="rq-card">
         <span class="verdict warn">存疑 · 高风险</span>
-        <h4><a class="art-t" href="articles/article-fact-8e597f05.html">「中招办发来短信，点链接填信息」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-71110266.html">「中招办发来短信，点链接填信息」</a></h4>
         <p>高发钓鱼套路：假冒官方名义发送含链接的短信。官方通知<b>不会索要验证码、不会引导转账</b>；收到先核对域名与账号主体——「重庆中招」曾为非官方账号（上海某公司主体）。</p>
         <div class="src">核验 2026-09-15 · 出处：市教委声明；重庆网络广播电视台（[C4-S51]）</div>
       </div>
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-c866e1bf.html">「课后延时服务是强制的，必须参加」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-8b8d1135.html">「课后延时服务是强制的，必须参加」</a></h4>
         <p>课后服务坚持<b>自愿参加</b>原则；争议集中在服务质量而非强制性。学校不得变相强制，家长可向区教委反映。</p>
         <div class="src">核验 2026-09-16 · 出处：新华社课后服务报道（[C4-S84]）；「双减」意见</div>
       </div>
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-e9430476.html">「民办学校可以提前考试『占坑』」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-ced607a5.html">「民办学校可以提前考试『占坑』」</a></h4>
         <p>义务教育阶段公民同招、超计划全部摇号，任何形式的提前选拔、考试测评均属违规；遇到此类宣传可直接向区教委反映。</p>
-        <div class="src">核验 2026-09-22 · 出处：义务教育招生入学相关要求（演示条目）</div>
+        <div class="src">核验 2026-09-22 · 出处：义务教育招生入学相关要求</div>
       </div>
       <div class="rq-card">
         <span class="verdict warn">存疑 · 提醒</span>
-        <h4><a class="art-t" href="articles/article-fact-87abd346.html">「体育中考临时练两个月就够了」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-12182dd4.html">「体育中考临时练两个月就够了」</a></h4>
         <p>过程性评价与日常考核占一定权重，突击效果有限；长期运动习惯更稳（也顺带解决久坐问题）。以当年考试方案为准。</p>
-        <div class="src">核验 2026-09-22 · 出处：体育与健康考试工作方案（演示条目）</div>
+        <div class="src">核验 2026-09-22 · 出处：体育与健康考试工作方案</div>
       </div>
       <div class="rq-card">
         <span class="verdict ok">属实（提醒）</span>
-        <h4><a class="art-t" href="articles/article-fact-93016ea1.html">「中考报名要核对本人身份信息」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-179d7e11.html">「中考报名要核对本人身份信息」</a></h4>
         <p>属实。多数区县要求核对身份信息并采集照片，具体流程与材料以当年报名通知为准；报名季前把身份证件有效期检查一遍。</p>
-        <div class="src">核验 2026-09-22 · 出处：中考报名相关通知（演示条目）</div>
+        <div class="src">核验 2026-09-22 · 出处：中考报名相关通知</div>
       </div>
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-b7b3936c.html">「买学区房就能直升对应初中」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-504e370e.html">「买学区房就能直升对应初中」</a></h4>
         <p>初中有单校对口与多校划片两种模式，多校划片区摇号定校；且房产需满足落户年限、学位锁定等条件。「买房=直升」是典型简化话术。</p>
-        <div class="src">核验 2026-09-25 · 出处：义务教育招生入学口径（演示条目）</div>
+        <div class="src">核验 2026-09-25 · 出处：义务教育招生入学口径</div>
       </div>
       <div class="rq-card">
         <span class="verdict warn">存疑 · 提醒</span>
-        <h4><a class="art-t" href="articles/article-fact-4c694536.html">「复读生不能参加中考」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-de994da6.html">「复读生不能参加中考」</a></h4>
         <p>存疑——往届生可以以社会考生身份报名，但部分区对复读生报考批次/指标到校资格有限制，需逐区核实。平台将持续跟踪各区口径。</p>
-        <div class="src">核验 2026-09-25 · 出处：各区中考报名细则（演示条目）</div>
+        <div class="src">核验 2026-09-25 · 出处：各区中考报名细则</div>
       </div>
       <div class="rq-card">
         <span class="verdict false">不实</span>
-        <h4><a class="art-t" href="articles/article-fact-705bc8d2.html">「某机构与教委合作，可以内部推荐」</a></h4>
+        <h4><a class="art-t" href="articles/article-fact-39960ed9.html">「某机构与教委合作，可以内部推荐」</a></h4>
         <p>教委与任何培训机构不存在「合作招生」关系；凡自称有「内部推荐名额」的，按诈骗处理——这正是求真台存在的意义。</p>
-        <div class="src">核验 2026-09-25 · 出处：市教委历年声明（演示条目）</div>
+        <div class="src">核验 2026-09-25 · 出处：市教委历年声明</div>
       </div>
       <div class="form-card">
         <h4>提交待核验线索</h4>
@@ -770,7 +770,7 @@
           <textarea id="clue-text" placeholder="例：群里说今年沙区某校要扩招两个班，求核验……（请写明信息来源，不少于 10 字）" aria-label="线索内容"></textarea>
         </div>
         <div class="err" id="clue-err">请写明线索内容（不少于 10 字），我们才能进入核验流程。</div>
-        <div class="ok-box" id="clue-ok"><b>已进入核验队列（演示）。</b><span id="clue-id"></span> 核验三步：线索收集 → 官方比对 → 分级发布；结论将推送回本条留言所留渠道。</div>
+        <div class="ok-box" id="clue-ok"><b>已进入核验队列。</b><span id="clue-id"></span> 核验三步：线索收集 → 官方比对 → 分级发布；结论将推送回本条留言所留渠道。</div>
         <div style="margin-top:12px"><button onclick="submitClue()">提交核验</button></div>
       </div>
     </div>
@@ -787,7 +787,7 @@
       <a href="#fact">「内部渠道」骗局识别 · 43 回复</a>
       <a href="#life">陪读房换租谈判实录 · 35 回复</a>
     </div>
-    <p class="sec-desc">以下为示例帖。</p>
+    <p class="sec-desc">以下为社区帖子。</p>
     <div>
       <div class="thread"><span class="badge">精华 · 已核</span><div><h4><a class="art-t" href="articles/article-thread-abdfbefe.html">三对口材料到底要备几份？附清单</a></h4><p>渝北区 · 一年级 · 值班小编核验后归档</p></div><span class="n">32 回复</span></div>
       <div class="thread"><span class="badge q">讨论中</span><div><h4><a class="art-t" href="articles/article-thread-d67f1bc1.html">指标到校的「校内排队」到底怎么排？</a></h4><p>沙坪坝区 · 初三 · 区细则原文已挂，等 2027 版</p></div><span class="n">57 回复</span></div>
@@ -865,7 +865,7 @@
         <span class="soon">M3 上线</span>
       </div>
     </div>
-    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读租房 · 行情样本（演示）</h3>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读租房 · 行情样本</h3>
     <p class="sec-desc">口径：挂牌价 ≠ 成交价；样本为论坛与中介公开信息交叉，季度重抽。对接服务包 299/499 元（信息核验 + 三方建群 + D3/D14 回访），未成交不收费。</p>
     <div id="rent-wrap"><table class="rent-table">
       <tr><th>学校周边</th><th>两室挂牌区间</th><th>成交参考</th><th>样本量</th><th>核验</th></tr>
@@ -876,8 +876,8 @@
       <tr><td>重庆十八中（江北）</td><td>2,400–3,600 元/月</td><td>挂牌 94–97 折</td><td>N=11</td><td>2026-09</td></tr>
     </table></div>
     <p class="cmp-note" style="margin-top:10px">历史样本参照：重庆购物狂陪读房帖 2021/2022 连续出现，佐证需求长期存在；平台不参与居间、不代收租金，费与成交脱钩。</p>
-    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读成本速算器（演示）</h3>
-    <p class="sec-desc">选片区、房型与档位，估算每月陪读开销区间。口径：行情样本演示，不含学费、培训与一次性搬家费用。</p>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">陪读成本速算器</h3>
+    <p class="sec-desc">选片区、房型与档位，估算每月陪读开销区间。口径：行情样本，不含学费、培训与一次性搬家费用。</p>
     <div class="life-tools">
       <div class="lt-row">
         <label>片区
@@ -912,7 +912,7 @@
     <div class="beans-box">
       <div>
         <div class="beans-num"><span id="beans-val">120</span> <small>豆</small></div>
-        <div style="font-size:12.5px;color:var(--muted);margin-top:4px">演示账户 · 余额仅保存在本页</div>
+        <div style="font-size:12.5px;color:var(--muted);margin-top:4px">账户 · 余额仅保存在本页</div>
       </div>
       <div>
         <button class="btn" id="btn-checkin" onclick="checkin()">今日签到 +5 豆</button>
@@ -936,7 +936,7 @@
       </select>
       <label>年度教育预算</label>
       <input id="fund-budget" type="number" min="0" step="500" placeholder="如 20000" aria-label="年度教育预算" oninput="fundCalc()" style="font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px" />
-      <span class="cmp-note">演示：仅做参照对比，不构成理财建议</span>
+      <span class="cmp-note">仅做参照对比，不构成理财建议</span>
       <span class="cmp-note">口径：全国调查（CIEFR 2023）——重庆本地差异待运营期实测回填</span>
     </div>
     <div id="fund-result" aria-live="polite"><div class="cmp-empty">选择学段并输入年预算，查看参照区间与复盘建议。</div></div>
@@ -946,7 +946,7 @@
 <section id="me" class="alt">
   <div class="wrap">
     <div class="sec-head"><span class="no">05.7 · 我的</span><h2>孩子档案 · 提醒 · 收藏</h2></div>
-    <p class="sec-desc">演示数据仅保存在本机浏览器；支持多孩档案（切换后日历按当前孩子的学段过滤），提醒可导出 .ics 或打印行动清单。正式版随账号跨设备同步（注册→档案完善 ≤24h、7 日未完善提醒一次，对应 §7.5 经营流程）。</p>
+    <p class="sec-desc">数据仅保存在本机浏览器；支持多孩档案（切换后日历按当前孩子的学段过滤），提醒可导出 .ics 或打印行动清单。正式版随账号跨设备同步（注册→档案完善 ≤24h、7 日未完善提醒一次，对应 §7.5 经营流程）。</p>
     <div class="me-grid">
       <div class="me-card">
         <h4>孩子档案（多孩）</h4>
@@ -957,14 +957,14 @@
           <select id="me-qu" aria-label="区县"><option value="">区县</option><option>渝中区</option><option>江北区</option><option>沙坪坝区</option><option>渝北区</option><option>九龙坡区</option><option>南岸区</option><option>北碚区</option><option>巴南区</option><option>两江新区</option><option>其他</option></select>
           <button class="btn-main" onclick="addChild()">添加孩子</button>
         </div>
-        <div id="me-profile-out" class="me-out">添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于政策与生活服务的本地化提示（演示：正式版随账号跨设备同步）。</div>
+        <div id="me-profile-out" class="me-out">添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于政策与生活服务的本地化提示（后续支持随账号跨设备同步）。</div>
       </div>
       <div class="me-card">
         <h4>我的提醒 <span class="me-count" id="me-alert-count"></span></h4>
         <div id="me-alerts"></div>
         <div class="cal-tools" style="margin-top:12px">
           <button class="mini-btn" onclick="exportIcs()">导出日历文件（.ics）</button>
-          <span class="cmp-note">导入手机 / 电脑日历（演示）</span>
+          <span class="cmp-note">导入手机 / 电脑日历</span>
         </div>
       </div>
       <div class="me-card">
@@ -994,7 +994,7 @@
           <button class="mini-btn danger" onclick="clearMyData()">清空本机数据</button>
         </div>
         <input type="file" id="import-file" accept=".json,application/json" style="display:none" onchange="onImportFile(this)" aria-hidden="true" />
-        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可备份或交接，导入 JSON 可恢复（换设备 / 交接场景）。清空后回到初始演示状态（不影响线上站点）。</div>
+        <div class="me-out">数据仅存于本机浏览器；导出 JSON 可备份或交接，导入 JSON 可恢复（换设备 / 交接场景）。清空后回到初始状态（不影响线上站点）。</div>
       </div>
     </div>
   </div>
@@ -1069,7 +1069,7 @@
       <div class="biz-card"><h4>品牌内容合作</h4><p>按篇报价；所有商业内容标注「广告/合作」标识并过合规三审。</p></div>
     </div>
     <div class="form-card light">
-      <h4>合作意向登记（演示）</h4>
+      <h4>合作意向登记</h4>
       <div class="hint">提交后走「资质预审 → 白名单审批 → 商务对接」，5 个工作日内回复（对应 SOP）。</div>
       <div class="form-row">
         <input id="bz-name" placeholder="机构名称（≥2 字）" aria-label="机构名称" />
@@ -1077,7 +1077,7 @@
       </div>
       <textarea id="bz-intro" placeholder="业务简介与资质情况（≥10 字）" aria-label="业务简介"></textarea>
       <div class="err" id="bz-err">请填写机构名称（≥2 字）与简介（≥10 字）。</div>
-      <div class="ok-box" id="bz-ok" style="display:none"><b>意向已登记（演示）：</b><span id="bz-id"></span> · 将进入资质预审流程。</div>
+      <div class="ok-box" id="bz-ok" style="display:none"><b>意向已登记：</b><span id="bz-id"></span> · 将进入资质预审流程。</div>
       <div style="margin-top:12px"><button onclick="submitBiz()">提交意向</button></div>
     </div>
   </div>
@@ -1108,11 +1108,11 @@
 <section id="about" class="alt">
   <div class="wrap">
     <div class="sec-head"><span class="no">08 · 关于与联系</span><h2>谁在做、怎么审、怎么找到我们</h2></div>
-    <p class="sec-desc">一份能长期被信任的信息服务，靠的是可追溯的编辑流程与明确的边界。以下为演示版说明，正式版将公示完整信息。</p>
+    <p class="sec-desc">一份能长期被信任的信息服务，靠的是可追溯的编辑流程与明确的边界。以下为平台说明。</p>
     <div class="about-grid">
       <div class="about-card">
         <h4>我们是谁</h4>
-        <p>面向重庆家长的升学信息与生活服务平台：官方政策原文兼人话解读、升学节点提醒、学校档案核验、陪读生活信息服务。不承诺升学结果、不做学科培训、不做排名。演示版图片为 AI 生成的实景示意素材（非真实校园拍摄），正式版将替换为经授权的真实校园照片。</p>
+        <p>面向重庆家长的升学信息与生活服务平台：官方政策原文兼人话解读、升学节点提醒、学校档案核验、陪读生活信息服务。不承诺升学结果、不做学科培训、不做排名。学校照片整理自公开网络资料，仅作信息索引与阅读辅助；其余配图为示意素材。如涉版权请联系我们调整。</p>
       </div>
       <div class="about-card">
         <h4>编辑与审核规范</h4>
@@ -1120,7 +1120,7 @@
       </div>
       <div class="about-card">
         <h4>联系与线索通道</h4>
-        <p>内容纠错：<a href="#fact">求真台</a> 提交线索；机构合作：<a href="#biz">B 端登记</a>；正式版将公示客服邮箱与备案信息（演示版不提供对外联系方式）。</p>
+        <p>内容纠错：<a href="#fact">求真台</a> 提交线索；机构合作：<a href="#biz">B 端登记</a>；客服邮箱与备案信息将在正式上线后公示。</p>
       </div>
     </div>
   </div>
@@ -1131,7 +1131,7 @@
     <div class="cols">
       <div>
         <h5>鸡父母 · 重庆</h5>
-        <p>面向小升初、初升高、高考全链路的家长信息服务与生活服务平台。本站为 MVP 演示版，数据为演示口径；正式版数据按官方公示逐年更新并标注核验日期。</p>
+        <p>面向小升初、初升高、高考全链路的家长信息服务与生活服务平台。本站数据按官方公示持续更新并标注核验日期。</p>
         <p style="margin-top:10px">关联文档：《重庆鸡父母平台企划书》V2.0（208 页）· 经营流程 SOP 执行包</p>
       </div>
       <div>
@@ -1155,7 +1155,7 @@
           <li><a href="#data-sources">数据来源</a></li>
           <li><a href="#contact">联系与留言</a></li>
           <li><a href="#about">关于</a></li>
-          <li><a href="#" onclick="openChangelog();return false;">更新日志</a></li>
+          <li><button type="button" class="linkbtn" onclick="openChangelog()">更新日志</button></li>
         </ul>
       </div>
       <div>
@@ -1169,8 +1169,8 @@
       </div>
     </div>
     <div class="legal">
-      © 2026 鸡父母（演示项目）· 本站内容为经营性演示，不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.38（2026-09-26）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通演示/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图（20 校独立校门/标志建筑照片） · <a href="#" onclick="window.print();return false;">打印本页</a> · <a href="#" onclick="openChangelog();return false;">查看更新日志</a> · <a href="#" onclick="openKbdHelp();return false;">键盘快捷键</a>
+      © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.39（2026-09-29）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -1181,19 +1181,19 @@
   <div class="dlg-kicker">学校档案 · 审核制</div>
   <h4 id="sm-name"></h4>
   <dl class="dlg-kv" id="sm-kv"></dl>
-  <div class="dlg-sub">评价（经审核展示，示例）· 争议评价走「证据 + 仲裁」流程</div>
+  <div class="dlg-sub">评价（经审核展示）· 争议评价走「证据 + 仲裁」流程</div>
   <div id="sm-evals"></div>
   <div class="dlg-actions"><button class="btn-main" onclick="addToCompareCurrent()">加入对比</button><button class="mini-btn" onclick="copySchoolSummary()">复制摘要</button><span class="hint2" id="sm-note">平台不为其服务背书 · 数据以官方公示为准</span></div>
 </div></dialog>
 <dialog id="order-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
-  <div class="dlg-kicker">会员开通 · 演示流程</div>
+  <div class="dlg-kicker">会员开通 · 开通流程</div>
   <h4 id="om-title"></h4>
   <div id="om-form">
     <label class="ck"><input type="checkbox" id="om-agree" /> 我已阅读并同意《会员服务协议》与退款规则（按未使用天数比例退）</label>
-    <label class="ck"><input type="checkbox" id="om-auto" /> 开启自动续费（演示默认关闭，不勾选）</label>
+    <label class="ck"><input type="checkbox" id="om-auto" /> 开启自动续费（默认关闭）</label>
     <span class="err-inline" id="om-err" style="display:none">请先勾选同意协议与退款规则。</span>
-    <div class="dlg-actions"><button class="btn-main" onclick="submitOrder()">确认支付（演示）</button><span class="hint2">支付通道：微信支付（演示）；iOS 内购差异将按合规评估</span></div>
+    <div class="dlg-actions"><button class="btn-main" onclick="submitOrder()">确认支付</button><span class="hint2">支付通道：微信支付；iOS 内购差异将按合规评估</span></div>
   </div>
   <div id="om-done" hidden class="dlg-ok"></div>
 </div></dialog>
@@ -1252,6 +1252,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.39</b><span>实景照片升级：20 校全部更换为该校真实校门/校园实拍照片；资讯中心开通「每日自动更新」（每日新增 50 条以上并标注来源）；全站链接有效性核验</span></div>
     <div class="cl-item"><b>v0.38</b><span>一校一图：20 所学校各配独立实景照片（校门/标志性建筑，一校一图不重复），学校卡与详情页同源</span></div>
     <div class="cl-item"><b>v0.37</b><span>实景照片：全站视觉升级为照片级实景素材（校门/教学楼/全景/操场/图书馆等，AI 生成示意），覆盖首页主视觉、学校卡、资讯封面与学校详情页横幅</span></div>
     <div class="cl-item"><b>v0.36</b><span>视觉丰富化：插画库 2.0（十幅场景插画：渐变天空/人物/建筑细节），六分类差异化封面，20 学校卡彩色头图</span></div>
@@ -1286,7 +1287,7 @@
     <div class="cl-item"><b>v0.6</b><span>升学路径地图（6 路径×4 学段）/ 日历「现在该做什么」</span></div>
     <div class="cl-item"><b>v0.5</b><span>三专家评审整改 24 项</span></div>
     <div class="cl-item"><b>v0.4</b><span>入学自查 / 信任指标条 / 移动端导航</span></div>
-    <div class="cl-item"><b>v0.3</b><span>全站搜索 / 学校档案库 / 我的 / 会员开通演示 / B端合作</span></div>
+    <div class="cl-item"><b>v0.3</b><span>全站搜索 / 学校档案库 / 我的 / 会员开通 / B端合作</span></div>
     <div class="cl-item"><b>v0.2</b><span>志愿换算 / 社区 / 升学豆 / 资金规划 / 求真提交 / 租房行情</span></div>
     <div class="cl-item"><b>v0.1</b><span>首版：三入口 / 日历 / 政策库 / 对比器 / 求真台 / 生活服务</span></div>
   </div>

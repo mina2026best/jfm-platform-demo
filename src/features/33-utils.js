@@ -19,7 +19,7 @@ function exportMyData(){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();
-  out._note = '鸡父母平台 MVP 演示站 · 本机数据导出（JSON）';
+  out._note = '鸡父母平台 · 本机数据导出（JSON）';
   var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-my-data.json';
@@ -28,7 +28,7 @@ function exportMyData(){
   toast('已导出本机数据（' + Object.keys(out).length + ' 项）');
 }
 function clearMyData(){
-  if(!confirm('确定清空本机全部演示数据吗？（档案/提醒/收藏/资讯编辑/显示设置，不影响线上站点）')) return;
+  if(!confirm('确定清空本机全部数据吗？（档案/提醒/收藏/资讯编辑/显示设置，不影响线上站点）')) return;
   var n = 0;
   ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'].forEach(function(k){
     try{ if(localStorage.getItem(k) !== null){ localStorage.removeItem(k); n++; } }catch(e){}

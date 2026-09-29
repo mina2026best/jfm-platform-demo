@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""鸡父母平台 MVP · 多页构建脚本（v0.29 架构改版）
+"""鸡父母平台 · 多页构建脚本（v0.29 架构改版）
 src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
@@ -12,8 +12,8 @@ OUT_DIR = ROOT  # 页面直接输出到网站根目录
 
 # ============ 页面定义：文件名 / 标题 / 描述 / 包含 section / 页面主 CSS 钩子 ============
 PAGES = [
-    dict(file="index.html",  title="鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）",
-         desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台（MVP 演示站）。",
+    dict(file="index.html",  title="鸡父母 · 重庆家长升学信息与生活服务平台",
+         desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台。",
          sections=["calendar"], hero=True),
     dict(file="news.html",   title="升学资讯中心 · 鸡父母",
          desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
@@ -131,8 +131,29 @@ def build_js():
         guard("data-news.js", extra)
         data = data + "\n\n" + extra
     am = os.path.join(SRC, "data", "artmap.json")
-    if os.path.exists(am):
-        artmap = json.load(open(am, encoding="utf-8"))
+    # 构建时自动重生成 artmap（N|资讯 / S|学校 / L|学堂），与数据文件保持同步
+    try:
+        if SRC not in sys.path: sys.path.insert(0, SRC)
+        from article_gen import slugify as _sg
+        artmap = {}
+        _seed = json.load(open(os.path.join(SRC, "news", "seed.json"), encoding="utf-8"))
+        for x in (_seed if isinstance(_seed, list) else []):
+            t = x.get("t")
+            if t: artmap["N|" + t] = "article-news-" + _sg(t) + ".html"
+        _sch = json.load(open(os.path.join(SRC, "data", "schools.json"), encoding="utf-8"))
+        for name in _sch:
+            artmap["S|" + name] = "article-school-" + _sg(name) + ".html"
+        _learn = json.load(open(os.path.join(SRC, "data", "learn.json"), encoding="utf-8"))
+        for q in _learn.get("qa", []):
+            artmap["L|" + q["q"]] = "article-learn-" + _sg(q["q"]) + ".html"
+        for x in _learn.get("tips", []):
+            artmap["L|" + x["q"]] = "article-experience-" + _sg(x["q"]) + ".html"
+        json.dump(artmap, open(am, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print(f"  · artmap 自动重生成 · {len(artmap)} 键")
+    except Exception as _e:
+        print("[build] artmap 重生成失败，回退读取现有文件:", _e)
+        artmap = json.load(open(am, encoding="utf-8")) if os.path.exists(am) else {}
+    if artmap:
         data += "\n\nvar ARTMAP = " + json.dumps(artmap, ensure_ascii=False) + ";"
     ln = os.path.join(SRC, "data", "learn.json")
     if os.path.exists(ln):
@@ -273,7 +294,7 @@ def build_page(page, tpl, secs, css, js):
     top_m = re.search(r'<div class="top">[\s\S]*?</div>\s*</div>\s*(?=<header|<section|<main)', body_tpl)
     # 兜底：直接重建头部
     demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', body_tpl)
-    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">MVP 演示站</span>'
+    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">重庆升学信息平台</span>'
     search_m = re.search(r'<div class="searchbox">[\s\S]*?<div id="search-panel"[^>]*></div>\s*</div>', body_tpl)
     searchbox = search_m.group(0) if search_m else ""
     top_html = nav_html(fname, demo_tag, searchbox)
@@ -314,7 +335,7 @@ def main():
         sys.exit("[build] 模板缺少 section：" + ",".join(set(missing)))
     # 404 兜底页（门户标配）
     demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
-    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">MVP 演示站</span>'
+    demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">重庆升学信息平台</span>'
     nf = (
         '<!doctype html>\n<html lang="zh-CN">\n<head>\n'
         '<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
@@ -333,7 +354,7 @@ def main():
         '<a class="mini-btn" href="search.html" style="text-decoration:none;padding:10px 18px">去搜索</a>'
         '<a class="mini-btn" href="faq.html" style="text-decoration:none;padding:10px 18px">看 FAQ</a>'
         '</p></div></section>'
-        '<footer><div class="wrap"><p style="font-size:12px;color:var(--muted)">鸡父母 · 重庆家长升学信息与生活服务平台（MVP 演示）</p></div></footer>'
+        '<footer><div class="wrap"><p style="font-size:12px;color:var(--muted)">鸡父母 · 重庆家长升学信息与生活服务平台</p></div></footer>'
         '</body>\n</html>'
     )
     with open(os.path.join(OUT_DIR, "404.html"), "w", encoding="utf-8") as f:
@@ -398,7 +419,7 @@ def main():
     search_m = re.search(r'<div class="searchbox">[\s\S]*?<div id="search-panel"[^>]*></div>\s*</div>', tpl)
     search_frag = search_m.group(0) if search_m else ""
     demo_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
-    demo_frag = demo_m.group(0) if demo_m else '<span class="demo-tag">MVP 演示站</span>'
+    demo_frag = demo_m.group(0) if demo_m else '<span class="demo-tag">重庆升学信息平台</span>'
     # nav_html 在上方定义
     art_header = (
         '<div id="readBar" aria-hidden="true"></div>\n'

@@ -4,7 +4,7 @@ function setAlerts(a){ localStorage.setItem('jfm_alerts', JSON.stringify(a)); }
 function toggleAlert(btn){
   var t = btn.dataset.title, a = getAlerts(), i = a.indexOf(t);
   if(i >= 0){ a.splice(i,1); setAlerts(a); btn.classList.remove('on'); btn.textContent = '设提醒'; btn.setAttribute('aria-pressed','false'); toast('已取消提醒：' + t); }
-  else { a.push(t); setAlerts(a); btn.classList.add('on'); btn.textContent = '已设提醒'; btn.setAttribute('aria-pressed','true'); toast('已设提醒：' + t + '（演示：正式版推送微信服务通知）'); }
+  else { a.push(t); setAlerts(a); btn.classList.add('on'); btn.textContent = '已设提醒'; btn.setAttribute('aria-pressed','true'); toast('已设提醒：' + t + '（微信服务通知即将开放）'); }
   renderAlerts();
 }
 function restoreAlerts(){

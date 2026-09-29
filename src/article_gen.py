@@ -11,6 +11,18 @@ def slugify(text):
     h = hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
     return h
 
+ROOT_PAGES = {"index","news","calendar","policy","quiz","schools","compare","zy","fact","community","life","beans","me","plans","biz","data-sources","about","search","faq","wiki","contact","404"}
+def fix_rel(html):
+    """文章页位于 articles/ 子目录：把指向站点根页面的相对链接改为 ../ 前缀。"""
+    def rep(m):
+        pg, rest = m.group(1), m.group(2)
+        if pg.startswith("article-"):
+            return m.group(0)
+        if pg[:-5] not in ROOT_PAGES:
+            return m.group(0)
+        return 'href="../' + pg + rest + '"'
+    return re.sub(r'href="([a-z0-9\-]+\.html)([^"]*)"', rep, html)
+
 def esc(t):
     return (t or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
@@ -43,7 +55,7 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
     <div class="art-body">{cfg["body_html"]}</div>
     <div class="art-foot">
       <a class="art-back" href="{cfg["back"]}">← 返回{cfg["back_label"]}</a>
-      <span class="art-note">{esc(cfg.get("note", "演示口径，以官方当年发布为准"))}</span>
+      <span class="art-note">{esc(cfg.get("note", "以官方当年发布为准"))}</span>
     </div>
   </article>
 </main>
@@ -108,6 +120,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
                 '<a class="rel-item" href="%s"><span class="rel-tag">%s</span>%s</a>' % (esc(r[1]), esc(r[0].split(" · ")[0]), esc(r[2] if len(r) > 2 else r[0]))
                 for r in rel[:5]) + '</div>'
         html = article_html(cfg, css, header, footer_html, dialogs, extra_js)
+        html = fix_rel(html)
         html = html.replace('<div class="art-foot">', extra + '<div class="art-foot">')
         with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
             f.write(html)
@@ -239,7 +252,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
         n = re.search(r'<span class="n">([^<]*)</span>', blk)
         body = ('<div class="verdict-big tag">' + esc(badge.group(1) if badge else "讨论") + '</div>'
                 + '<p>' + esc(pm.group(1) if pm else '') + '</p>'
-                + '<p class="art-tip">本帖为演示社区内容；正式版将开放回帖与同城匹配。更多讨论见<a class="art-link" href="community.html">家长社区</a>。</p>')
+                + '<p class="art-tip">本帖为社区内容，回帖与同城匹配持续开放中。更多讨论见<a class="art-link" href="community.html">家长社区</a>。</p>')
         write({
             "title": title, "desc": (pm.group(1) if pm else title)[:120],
             "kicker": "家长社区 · " + (badge.group(1) if badge else "讨论"),

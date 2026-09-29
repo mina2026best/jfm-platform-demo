@@ -10,5 +10,5 @@ function submitBiz(){
   document.getElementById('bz-id').textContent = 'BZ-20260916-' + String(100 + BZ_N);
   ok.style.display = 'block';
   document.getElementById('bz-name').value = ''; document.getElementById('bz-intro').value = '';
-  toast('合作意向已提交（演示）');
+  toast('合作意向已提交');
 }

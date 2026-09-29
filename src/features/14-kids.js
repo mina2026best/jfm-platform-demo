@@ -29,7 +29,7 @@ function kidNote(msg){
   var box = document.getElementById('me-profile-out'); if(!box) return;
   if(msg){ box.innerHTML = msg; return; }
   var k = getKids(), act = getActiveIdx();
-  if(act < 0){ box.innerHTML = '添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于本地化提示（演示：正式版随账号跨设备同步）。'; return; }
+  if(act < 0){ box.innerHTML = '添加后支持多孩切换：日历按当前孩子的学段自动过滤，区县用于本地化提示（账号同步即将开放）。'; return; }
   var c = k[act];
   box.innerHTML = '<b>当前：</b>' + esc(c.nick || '孩子') + ' · ' + esc(c.stage) + ' · ' + esc(c.qu)
     + ' —— 日历已按「' + (STAGE2CAL[c.stage] || '全部学段') + '」过滤；点上方孩子条切换，× 删除。';

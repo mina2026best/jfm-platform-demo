@@ -1,4 +1,4 @@
-/* ---------- 资金规划参照（演示） ---------- */
+/* ---------- 资金规划参照 ---------- */
 function fundCalc(){
   var st=document.getElementById("fund-stage").value;
   var b=parseInt(document.getElementById("fund-budget").value,10);

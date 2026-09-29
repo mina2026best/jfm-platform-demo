@@ -1,5 +1,87 @@
 [
-  {"name": "重庆市政府网", "url": "https://www.cq.gov.cn/", "cat": "政策速递"},
-  {"name": "教育部", "url": "http://www.moe.gov.cn/", "cat": "政策速递"},
-  {"name": "新华网重庆频道", "url": "http://www.cq.xinhuanet.com/", "cat": "升学动态"}
+  {
+    "name": "重庆市教育委员会",
+    "url": "http://jw.cq.gov.cn/",
+    "cat": "政策速递"
+  },
+  {
+    "name": "重庆市教育考试院",
+    "url": "https://www.cqksy.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "重庆招考网",
+    "url": "https://www.cqzk.com.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "华龙网",
+    "url": "https://www.cqnews.net/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "上游新闻",
+    "url": "https://www.cqcb.com/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "重庆日报",
+    "url": "https://www.cqrb.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "人民网重庆",
+    "url": "http://cq.people.com.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "新华网重庆",
+    "url": "http://www.cq.xinhuanet.com/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "中国教育在线",
+    "url": "https://www.eol.cn/",
+    "cat": "行业观察"
+  },
+  {
+    "name": "教育部",
+    "url": "http://www.moe.gov.cn/",
+    "cat": "政策速递"
+  },
+  {
+    "name": "重庆市政府网",
+    "url": "https://www.cq.gov.cn/",
+    "cat": "政策速递"
+  },
+  {
+    "name": "中国教育新闻网",
+    "url": "http://www.jyb.cn/",
+    "cat": "行业观察"
+  },
+  {
+    "name": "渝中区教委",
+    "url": "http://www.cqyz.gov.cn/bm_229/qjyj/",
+    "cat": "政策速递"
+  },
+  {
+    "name": "华龙网教育",
+    "url": "http://education.cqnews.net/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "重庆大学新闻网",
+    "url": "https://news.cqu.edu.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "重庆网络广播电视台",
+    "url": "https://www.cbg.cn/",
+    "cat": "升学动态"
+  },
+  {
+    "name": "大渝网",
+    "url": "https://cq.qq.com/",
+    "cat": "升学动态"
+  }
 ]

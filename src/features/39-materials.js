@@ -30,19 +30,19 @@ function genMaterials(){
   var stage = document.getElementById('mat-stage').value;
   var hk = document.getElementById('mat-hukou').value;
   var house = document.getElementById('mat-house').value;
-  window._matResult = '鸡父母平台 · 入学材料清单（演示）\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
+  window._matResult = '鸡父母平台 · 入学材料清单\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
     + '\n\n【学段材料（' + stage + '）】\n- ' + MAT_STAGE[stage].join('\n- ')
     + '\n\n【户籍相关（' + hk + '）】\n- ' + MAT_HUKOU[hk].join('\n- ')
     + '\n\n【住房相关（' + house + '）】\n- ' + MAT_HOUSE[house].join('\n- ')
     + '\n\n【如有特殊情况】\n- ' + MAT_EXTRA.join('\n- ')
-    + '\n\n（口径：演示条目，以拟入学区当年公告为准；不替代官方清单）';
+    + '\n\n（口径：以拟入学区当年公告为准；不替代官方清单）';
   box.innerHTML =
     '<h4 class="mat-h">通用材料</h4><ul class="mat-list">' + fmtList(MAT_COMMON) + '</ul>'
     + '<h4 class="mat-h">学段材料（' + esc(stage) + '）</h4><ul class="mat-list">' + fmtList(MAT_STAGE[stage]) + '</ul>'
     + '<h4 class="mat-h">户籍相关（' + esc(hk) + '）</h4><ul class="mat-list">' + fmtList(MAT_HUKOU[hk]) + '</ul>'
     + '<h4 class="mat-h">住房相关（' + esc(house) + '）</h4><ul class="mat-list">' + fmtList(MAT_HOUSE[house]) + '</ul>'
     + '<h4 class="mat-h">如有特殊情况</h4><ul class="mat-list">' + fmtList(MAT_EXTRA) + '</ul>'
-    + '<div class="mat-actions"><button class="mini-btn" onclick="copyMaterials()">复制清单</button><button class="mini-btn" onclick="window.print()">打印清单</button><span class="mat-note">演示口径，以拟入学区当年公告为准；不替代官方清单</span></div>';
+    + '<div class="mat-actions"><button class="mini-btn" onclick="copyMaterials()">复制清单</button><button class="mini-btn" onclick="window.print()">打印清单</button><span class="mat-note">以拟入学区当年公告为准；不替代官方清单</span></div>';
 }
 function copyMaterials(){
   if(!window._matResult){ toast('先生成清单'); return; }

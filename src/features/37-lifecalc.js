@@ -19,7 +19,7 @@ function calcLifeCost(){
   if(!r){ toast('请选择片区'); return; }
   var l = LT_LIFE[life], c = LT_COMMUTE[com];
   var lo = r[0] + l[0] + c[0], hi = r[1] + l[1] + c[1];
-  window._ltResult = '鸡父母平台 · 陪读成本估算（演示）\n片区：' + area + ' · ' + room + '\n房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元/月\n生活（' + life + '档）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元/月\n通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元/月\n合计约 ' + ltNum(lo) + '–' + ltNum(hi) + ' 元/月\n（不含学费与培训费用；口径为样本演示）';
+  window._ltResult = '鸡父母平台 · 陪读成本估算\n片区：' + area + ' · ' + room + '\n房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元/月\n生活（' + life + '档）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元/月\n通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元/月\n合计约 ' + ltNum(lo) + '–' + ltNum(hi) + ' 元/月\n（不含学费与培训费用；口径为行情样本）';
   out.innerHTML = '<div class="lt-total">每月合计约 <b>' + ltNum(lo) + '–' + ltNum(hi) + ' 元</b>（不含学费与培训）</div>'
     + '<div class="lt-detail"><span>房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元</span><span>生活（' + life + '）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元</span><span>通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元</span></div>'
     + '<div class="lt-actions"><button class="mini-btn" onclick="copyLifeCost()">复制结果</button></div>';

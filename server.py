@@ -237,17 +237,6 @@ class Handler(BaseHTTPRequestHandler):
 
         return self._json(404, {"ok": False, "error": "unknown endpoint"})
 
-    def do_DELETE(self):
-        u = urlparse(self.path)
-        path = unquote(u.path)
-        m = re.match(r"^/api/contact/([A-Za-z0-9\-]+)$", path)
-        if m:
-            with LOCK:
-                items = [x for x in load_contacts() if x["id"] != m.group(1)]
-                _save("contacts.json", items)
-            return self._json(200, {"ok": True})
-        return self._json(404, {"ok": False, "error": "unknown endpoint"})
-
     def do_PATCH(self):
         u = urlparse(self.path)
         path = unquote(u.path)
@@ -280,9 +269,6 @@ class Handler(BaseHTTPRequestHandler):
                         _save("tips.json", items)
                         return self._json(200, {"ok": True, "item": x})
             return self._json(404, {"ok": False, "error": "not found"})
-        return self._json(404, {"ok": False, "error": "unknown endpoint"})
-
-        # contact 状态：/api/contact/<id>
         m = re.match(r"^/api/contact/([A-Za-z0-9\-]+)$", path)
         if m:
             with LOCK:
@@ -291,10 +277,11 @@ class Handler(BaseHTTPRequestHandler):
                     if x["id"] == m.group(1):
                         if "status" in d:
                             x["status"] = d["status"] if d["status"] in ("read","archived","pending") else x["status"]
-                            x["handled"] = time.strftime("%Y-%m-%d %H:%M:%S")
+                        x["handled"] = time.strftime("%Y-%m-%d %H:%M:%S")
                         _save("contacts.json", items)
                         return self._json(200, {"ok": True, "item": x})
             return self._json(404, {"ok": False, "error": "not found"})
+        return self._json(404, {"ok": False, "error": "unknown endpoint"})
 
     def do_DELETE(self):
         u = urlparse(self.path)
@@ -310,6 +297,12 @@ class Handler(BaseHTTPRequestHandler):
             with LOCK:
                 items = [x for x in load_tips() if x["id"] != m.group(1)]
                 _save("tips.json", items)
+            return self._json(200, {"ok": True})
+        m = re.match(r"^/api/contact/([A-Za-z0-9\-]+)$", path)
+        if m:
+            with LOCK:
+                items = [x for x in load_contacts() if x["id"] != m.group(1)]
+                _save("contacts.json", items)
             return self._json(200, {"ok": True})
         return self._json(404, {"ok": False, "error": "unknown endpoint"})
 

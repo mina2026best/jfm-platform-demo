@@ -7,7 +7,7 @@ var NEWS_FEED = [
     "date": "2026-09-29",
     "sum": "家庭教育从「家事」上升为「国事」：家长失职可被训诫、责令接受家庭教育指导——法律的立场是「帮家长」而非「罚家长」。",
     "body": "核心条款：父母承担家庭教育主体责任；学校/社区可提供指导；涉及未成年人权益受侵害时公权可介入。",
-    "url": ""
+    "url": "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_qtxgfl/202110/t20211025_574749.html"
   },
   {
     "t": "高一适应期：住校生第一个月的常见问题与对策",
@@ -1251,17 +1251,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "烽火弦歌 文脉西行⑦｜抗战时期国立交通大学迁渝办学之路 原创 推荐 2026-09-29 08:00",
-    "url": "https://www.cqrb.cn/topics/fenghuoxiange wenmaixixing——《zhongqingjiyi》xiliedanganweijilupian/2026-09-28/2785893_pc.html",
-    "src": "重庆日报",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "重庆市2026年全国硕士研究生招生考试温馨提醒",
     "url": "https://www.cqksy.cn/web/article/2025-12/12/content_6841.html",
     "src": "重庆市教育考试院",
@@ -1658,61 +1647,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "秋季学期临近，中国留学生准备好了吗？",
-    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1609.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中外合作办学日渐增多 考生和家长该如何选择",
-    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1600.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于取消《留学回国人员证明》的公告",
-    "url": "http://jsj.moe.gov.cn/n2/1/12116/1532.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于批准2020年下半年中外合作办学项目的通...",
-    "url": "http://jsj.moe.gov.cn/n2/1/1/1606.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于批准2020年上半年中外合作办学项目的通...",
-    "url": "http://jsj.moe.gov.cn/n2/1/1002/1530.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "梁平：“4321”工作法全力保障教师资格考试安全平稳",
     "url": "https://www.cqzk.com.cn/news_districts/2102248878531112960.html",
     "src": "重庆招考网",
@@ -1999,17 +1933,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "国新办举行“开局起步‘十五五’”系列主题新闻发布会：介绍贯彻落实“十五五”规划，加快推进教育强国建设有关情况",
-    "url": "http://www.scio.gov.cn/live/2026/39547/index.html",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "丁薛祥接见“向国旗敬礼”港澳青少年升旗队代表访京团",
     "url": "http://www.moe.gov.cn/jyb_xwfb/s6052/moe_838/202609/t20260922_1451626.html",
     "src": "教育部",
@@ -2037,17 +1960,6 @@ var NEWS_FEED = [
     "src": "教育部",
     "cat": "政策速递",
     "sum": "教育部政府门户网站由教育部办公厅主办，是教育部机关实施信息公开、新闻宣传、在线互动的线上窗口，提供标准版、手机版、客户端等访问形式。",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "国新办中外记者见面会：优秀教师代表围绕“弘...",
-    "url": "http://www.scio.gov.cn/live/2026/38518/index.html",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
     "date": "2026-09-29",
     "body": "",
     "reviewed": true,
@@ -2879,17 +2791,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "头条号 搜狐号 网易号 百家号 抖音号 --> 教育在线",
-    "url": "https://www.toutiao.com/c/user/token/MS4wLjABAAAAOEB3yyoIMZXjTK2kgFM8J89Aeqd2flM1bcsEPoWYBhs/?",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "基础教育 高等教育",
     "url": "https://chuzhong.eol.cn/",
     "src": "中国教育在线",
@@ -3182,7 +3083,7 @@ var NEWS_FEED = [
     "date": "2026-09-28",
     "sum": "合规机构有三证：办学许可证、收费公示、监管账户；名单可在全国监管平台查询，不要相信「特殊渠道」。",
     "body": "缴费牢记两个数字：不超 3 个月或 60 课时；合同用《中小学生校外培训服务合同（示范文本）》。",
-    "url": ""
+    "url": "https://www.gov.cn/zhengce/2021-07/24/content_5627132.htm"
   },
   {
     "t": "校园周边交通护学岗升级：家长志愿者报名启动",
@@ -3191,7 +3092,7 @@ var NEWS_FEED = [
     "date": "2026-09-28",
     "sum": "护学岗是家校共治样本：家长志愿者每学期服务 2–4 次即可报名，各校家委会组织。",
     "body": "报名找本班家委会；职责是上下学时段校门口交通疏导，不需专业培训。",
-    "url": ""
+    "url": "https://www.cq.gov.cn/"
   },
   {
     "t": "期中考试后，成绩单应该这样读（家长版）",
@@ -3570,6 +3471,61 @@ var NEWS_FEED = [
     "sum": "市级重点高中招生计划的 70% 分配到辖区初中；保持学籍连续是参与前提。",
     "body": "指标到校名额分配到各初中后在校内竞争；中途转学可能影响资格。建议：① 确认学籍连续性；② 向班主任了解校内参考口径；③ 关注区教委当年细则（名额与条件每年微调）。",
     "url": ""
+  },
+  {
+    "t": "秋季学期临近，中国留学生准备好了吗？",
+    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1609.shtml",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "教育部涉外监管网/留学相关历史公告存档。",
+    "date": "2020–2021（历史文件）",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中外合作办学日渐增多 考生和家长该如何选择",
+    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1600.shtml",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "教育部涉外监管网/留学相关历史公告存档。",
+    "date": "2020–2021（历史文件）",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部关于取消《留学回国人员证明》的公告",
+    "url": "http://jsj.moe.gov.cn/n2/1/12116/1532.shtml",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "教育部涉外监管网/留学相关历史公告存档。",
+    "date": "2020–2021（历史文件）",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部关于批准2020年下半年中外合作办学项目的通...",
+    "url": "http://jsj.moe.gov.cn/n2/1/1/1606.shtml",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "教育部涉外监管网/留学相关历史公告存档。",
+    "date": "2020–2021（历史文件）",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部关于批准2020年上半年中外合作办学项目的通...",
+    "url": "http://jsj.moe.gov.cn/n2/1/1002/1530.shtml",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "教育部涉外监管网/留学相关历史公告存档。",
+    "date": "2020–2021（历史文件）",
+    "body": "",
+    "reviewed": true,
+    "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-09-29 11:57", "seed": 46, "collected": 287, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-09-29 22:57", "seed": 46, "collected": 283, "fetchedPending": 2};

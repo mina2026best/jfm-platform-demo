@@ -22,13 +22,13 @@ PAGES = [
          desc="幼升小到高考的关键节点、行动清单与提醒导出——按孩子学段自动过滤。",
          sections=["calendar"]),
     dict(file="policy.html", title="政策库与人话词典 · 鸡父母",
-         desc="招生政策原文要点 + 人话版解读 + 18 条高频术语词典，逐条标注文号与生效日期。",
+         desc="招生政策原文要点 + 人话版解读 + 32 条高频术语词典，逐条标注文号与生效日期。",
          sections=["policy"]),
     dict(file="quiz.html",   title="入学自查与材料清单 · 鸡父母",
          desc="3 问自查「我家能不能报」，一键生成入学材料清单（学段 × 户籍 × 住房）。",
          sections=["quiz"]),
     dict(file="schools.html", title="学校档案库 · 鸡父母",
-         desc="12 所学校档案：办学性质 / 招生范围 / 通勤参考 / 收费口径，逐字段标注来源与核验日期。",
+         desc="20 所学校档案：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
          sections=["schools"]),
     dict(file="compare.html", title="择校对比器 · 鸡父母",
          desc="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。",
@@ -163,6 +163,11 @@ def build_js():
     if os.path.exists(sp):
         sphotos = json.load(open(sp, encoding="utf-8"))
         data += "\n\nvar SCHOOL_PHOTOS = " + json.dumps(sphotos, ensure_ascii=False) + ";"
+    # v0.40：学校档案单一数据源——前端 SCHOOL_DB 由构建时从 src/data/schools.json 注入
+    sj = os.path.join(SRC, "data", "schools.json")
+    if os.path.exists(sj):
+        _schools = json.load(open(sj, encoding="utf-8"))
+        data += "\n\nvar SCHOOL_DB = " + json.dumps(_schools, ensure_ascii=False) + ";"
     feats = []
     fdir = f"{SRC}/features"
     order = [l.strip() for l in read(f"{fdir}/_order.txt").splitlines() if l.strip() and not l.startswith("#")]

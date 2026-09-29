@@ -148,33 +148,131 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
             "back": "news.html", "back_label": "资讯中心",
         }, f"article-news-{sl}.html")
 
-    # ===== 2) 学校 20 =====
+    # ===== 2) 学校 20（v0.40 门户化：信息速览 / 概况 / 师资 / 特色 / 来源 / 相关资讯 / 同区学校） =====
     sch_path = os.path.join(os.path.dirname(out_dir), "src", "data", "schools.json")
     sch = json.load(open(sch_path, encoding="utf-8"))
     _sph_path = os.path.join(os.path.dirname(out_dir), "src", "data", "school_photos.json")
     _sph = json.load(open(_sph_path, encoding="utf-8")) if os.path.exists(_sph_path) else {}
+    from urllib.parse import quote as _quote
+    # 资讯池（种子 + 已审核采集），供学校页「相关资讯」匹配
+    _news_pool = []
+    try:
+        _seed_items = json.load(open(os.path.join(os.path.dirname(out_dir), "src", "news", "seed.json"), encoding="utf-8"))
+        for x in (_seed_items if isinstance(_seed_items, list) else []):
+            _t = x.get("t", "")
+            if _t: _news_pool.append({"t": _t, "sum": x.get("sum", ""), "date": x.get("date", ""), "url": x.get("url", ""), "art": "article-news-" + slugify(_t) + ".html"})
+    except Exception:
+        pass
+    try:
+        _col_items = json.load(open(os.path.join(os.path.dirname(out_dir), "src", "news", "collected.json"), encoding="utf-8"))
+        for x in (_col_items if isinstance(_col_items, list) else []):
+            if not x.get("reviewed"): continue
+            _t = x.get("t", "")
+            if _t: _news_pool.append({"t": _t, "sum": x.get("sum", ""), "date": x.get("date", ""), "url": x.get("url", ""), "art": ""})
+    except Exception:
+        pass
+
+    def _rel_news_for(name, limit=4):
+        base = re.sub(r'（[^）]*）', '', name)
+        variants = [base]
+        for p in ["重庆市", "重庆", "渝中区"]:
+            if base.startswith(p) and len(base) - len(p) >= 4:
+                variants.append(base[len(p):])
+        seen = set(); out = []
+        for x in _news_pool:
+            hay = x["t"] + " " + x["sum"]
+            if any((v and v in hay) for v in variants):
+                if x["t"] in seen: continue
+                seen.add(x["t"]); out.append(x)
+                if len(out) >= limit: break
+        return out
+
     for name, d in sch.items():
         sl = slugify(name)
+        # —— 信息速览（门户式速览卡）——
+        facts = []
+        if d.get("创办"): facts.append(("创办", esc(d["创办"]), False))
+        if d.get("校训"): facts.append(("校训", esc(d["校训"]), False))
+        if d.get("校区地址"): facts.append(("校区地址", esc(d["校区地址"]), True))
+        if d.get("校园规模"): facts.append(("校园规模", esc(d["校园规模"]), True))
+        if d.get("官网"):
+            _u = d["官网"]
+            facts.append(("官网", '<a href="' + esc(_u) + '" target="_blank" rel="noopener">' + esc(re.sub(r'^https?://', '', _u).rstrip('/')) + ' ↗</a>', False))
+        _file = _sph.get(name, "school-gate-1.jpg")
+        body = '<div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/' + _file + '" alt=""></div>'
+        if facts:
+            body += '<div class="art-facts">' + "".join(
+                '<div class="af-item' + (' af-wide' if w else '') + '"><span class="af-l">' + l + '</span><span class="af-v">' + v + '</span></div>'
+                for l, v, w in facts) + '</div>'
+        # —— 学校概况 ——
+        intro = d.get("概况") or d.get("简介") or ""
+        if intro:
+            body += '<h3 class="art-h3">学校概况</h3><p>' + esc(intro) + '</p>'
+        # —— 师资力量 ——
+        if d.get("师资概况"):
+            body += '<h3 class="art-h3">师资力量</h3><p>' + esc(d["师资概况"]) + '</p>'
+        # —— 办学特色与荣誉 ——
+        if d.get("办学特色"):
+            body += '<h3 class="art-h3">办学特色与荣誉</h3><p>' + esc(d["办学特色"]) + '</p>'
+        # —— 招生与通勤 ——
         rows = ""
-        for k in ["办学性质","所在区","招生范围","通勤参考","住宿","收费口径","指标到校","数据来源"]:
+        for k in ["办学性质", "所在区", "招生范围", "通勤参考", "住宿", "收费口径", "指标到校"]:
             if d.get(k): rows += f'<tr><td>{esc(k)}</td><td>{esc(d[k])}</td></tr>'
         if d.get("暂缺字段"):
             rows += f'<tr><td>暂缺字段</td><td>{esc(d["暂缺字段"])}（按合规红线不提供录取线与排名）</td></tr>'
-        _file = _sph.get(name, "school-gate-1.jpg")
-        body = '<div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/' + _file + '" alt=""></div>'
-        body += '<p>' + esc(d.get("简介","")) + '</p>'
-        body += '<table class="art-table"><tbody>' + rows + '</tbody></table>'
+        body += '<h3 class="art-h3">招生与通勤</h3><table class="art-table"><tbody>' + rows + '</tbody></table>'
+        # —— 家长评价 ——
         evs = d.get("评价") or []
         if evs:
-            body += '<h3>家长评价（审核制）</h3>'
+            body += '<h3 class="art-h3">家长评价（审核制）</h3>'
             for e in evs:
                 body += f'<div class="art-quote"><span class="badge-ok">{esc(e["badge"])}</span> {esc(e["text"])}</div>'
+        # —— 相关资讯（按校名匹配站内资讯）——
+        rel_news = _rel_news_for(name)
+        if rel_news:
+            body += '<h3 class="art-h3">相关资讯</h3><div class="art-rel-grid">'
+            for x in rel_news:
+                if x["art"]:
+                    href, ext = x["art"], ""
+                elif x["url"]:
+                    href, ext = x["url"], ' target="_blank" rel="noopener"'
+                else:
+                    href, ext = "news.html?s=" + _quote(x["t"][:12]), ""
+                body += '<a class="art-rel-item" href="' + esc(href) + '"' + ext + '><span class="rtag">' + esc(x["date"] or "资讯") + '</span><span class="t">' + esc(x["t"]) + '</span></a>'
+            body += '</div>'
+        # —— 同区学校 ——
+        same_qu = [k2 for k2, v2 in sch.items() if v2.get("所在区") and v2.get("所在区") == d.get("所在区") and k2 != name][:4]
+        if same_qu:
+            body += '<h3 class="art-h3">同区学校</h3><div class="art-rel-grid">'
+            for k2 in same_qu:
+                body += '<a class="art-rel-item" href="article-school-' + slugify(k2) + '.html"><span class="rtag">' + esc(d.get("所在区", "")) + '</span><span class="t">' + esc(k2) + '</span></a>'
+            body += '</div>'
+        # —— 数据来源与核验 ——
+        body += '<h3 class="art-h3">数据来源与核验</h3>'
+        if d.get("数据来源"):
+            body += '<p>' + esc(d["数据来源"]) + '</p>'
+        if d.get("资料采集"):
+            body += '<p class="art-tip">' + esc(d["资料采集"]) + '</p>'
+        if d.get("资料来源"):
+            body += '<ul class="art-src-list">' + "".join(
+                '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u) + '</a></li>'
+                for u in d["资料来源"]) + '</ul>'
+        # —— JSON-LD 结构化数据（SEO 门户标配）——
+        _ld = {"@context": "https://schema.org", "@type": "School", "name": d.get("全称") or name}
+        if d.get("官网"): _ld["url"] = d["官网"]
+        if d.get("校区地址"): _ld["address"] = d["校区地址"]
+        _ym = re.search(r'\d{4}', str(d.get("创办", "")))
+        if _ym: _ld["foundingDate"] = _ym.group(0)
+        body += '<script type="application/ld+json">' + json.dumps(_ld, ensure_ascii=False).replace("</", "<\\/") + '</script>'
         body += '<p class="art-tip">想在对比中查看该校？回到 <a class="art-link" href="schools.html?school=' + esc(name) + '">学校档案库</a>，或加入<a class="art-link" href="compare.html">择校对比器</a>。</p>'
+        _meta_spans = ''
+        if d.get("全称"): _meta_spans += '<span>' + esc(d["全称"]) + '</span>'
+        _meta_spans += '<span>' + esc(d.get("办学性质", "")) + '</span><span>' + esc(d.get("所在区", "")) + '</span><span>' + esc(d.get("数据来源", "")) + '</span>'
         write({
-            "title": name + " · 学校档案", "desc": (d.get("简介") or name)[:120],
-            "kicker": "学校档案 · " + d.get("所在区",""),
+            "title": name + " · 学校档案", "desc": (d.get("概况") or d.get("简介") or name)[:120],
+            "kicker": "学校档案 · " + d.get("所在区", ""),
             "body_html": body,
-            "meta_line": '<span>' + esc(d.get("办学性质","")) + '</span><span>' + esc(d.get("所在区","")) + '</span><span>' + esc(d.get("数据来源","")) + '</span>',
+            "meta_line": _meta_spans,
             "back": "schools.html", "back_label": "学校档案库",
         }, f"article-school-{sl}.html")
 

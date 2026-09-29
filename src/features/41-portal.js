@@ -37,8 +37,10 @@ function runPageSearch(){
   var rows = [];
   try{
     Object.keys(SCHOOL_DB).forEach(function(k){
-      if(k.toLowerCase().indexOf(ql) >= 0){
-        rows.push({ tag: '学校', t: k, s: (SCHOOL_DB[k]['简介'] || '').slice(0, 60), href: 'schools.html?school=' + encodeURIComponent(k) });
+      var d = SCHOOL_DB[k] || {};
+      var hay = (k + ' ' + (d['全称']||'') + ' ' + (d['简介']||'') + ' ' + (d['概况']||'') + ' ' + (d['校训']||'') + ' ' + (d['校区地址']||'') + ' ' + (d['创办']||'') + ' ' + (d['办学特色']||'')).toLowerCase();
+      if(hay.indexOf(ql) >= 0){
+        rows.push({ tag: '学校', t: k, s: (typeof _schoolHint === 'function' ? _schoolHint(k, ql) : (d['简介'] || '').slice(0, 60)), href: 'schools.html?school=' + encodeURIComponent(k) });
       }
     });
   }catch(e){}

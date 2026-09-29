@@ -75,7 +75,7 @@ function copySchoolSummary(){
   var d = (typeof SCHOOL_DB !== 'undefined' && currentOpenSchool) ? SCHOOL_DB[currentOpenSchool] : null;
   if(!d){ toast('未打开档案'); return; }
   var lines = ['【学校档案】' + currentOpenSchool];
-  ['办学性质','所在区','招生范围','通勤参考','住宿','收费口径','指标到校','数据来源'].forEach(function(k){
+  ['办学性质','所在区','创办','校训','校区地址','校园规模','师资概况','办学特色','招生范围','通勤参考','住宿','收费口径','指标到校','官网','数据来源'].forEach(function(k){
     if(d[k]) lines.push(k + '：' + d[k]);
   });
   lines.push('（来源与核验日期以站内档案为准）');

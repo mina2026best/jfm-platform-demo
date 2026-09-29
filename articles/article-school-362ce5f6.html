@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>两江育才中学（两江新区） · 学校档案</title>
-<meta name="description" content="两江新区直管公办校；新区生源增长快，逐年扩班中。">
+<meta name="description" content="重庆市两江育才中学校前身为创办于 1956 年的江北县人和区鸳鸯初级中学校，2007 年更名为“重庆市经开育才中学校”并成为重庆市联招学校，2013 年被重庆市人民政府命名为重庆市重点中学，2016 年 5 月更为现名，由两江新区管理委员会">
 <meta name="theme-color" content="#24344D">
 <meta property="og:title" content="两江育才中学（两江新区） · 学校档案">
-<meta property="og:description" content="两江新区直管公办校；新区生源增长快，逐年扩班中。">
+<meta property="og:description" content="重庆市两江育才中学校前身为创办于 1956 年的江北县人和区鸳鸯初级中学校，2007 年更名为“重庆市经开育才中学校”并成为重庆市联招学校，2013 年被重庆市人民政府命名为重庆市重点中学，2016 年 5 月更为现名，由两江新区管理委员会">
 <meta property="og:type" content="article">
 <style>/* ============ base ============ */
 
@@ -895,6 +895,46 @@
   .school-card:hover .sc-art img{transform:scale(1.05)}
   html.theme-dark .sc-art img,html.theme-dark .ni-cover img,html.theme-dark .hero-art img,html.theme-dark .entry-art img,html.theme-dark .pb-art img{filter:brightness(.94)}
 
+
+/* ============ 30-school ============ */
+/* ---------- v0.40：学校档案门户化（概况事实条 / 区域筛选 / 详情页版式） ---------- */
+  /* 学校卡片：概况事实条 */
+  .sc-facts{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px;margin:2px 0 8px}
+  .sc-facts span{font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:3px 10px;line-height:1.35}
+  .sc-facts span.sc-quiet{color:var(--muted);background:transparent;border:1px dashed var(--line2)}
+  /* 区域筛选行（动态渲染） */
+  #school-region-filter{margin-bottom:10px}
+  #school-region-filter .ff{padding:6px 13px;font-size:12.5px}
+  .sc-stats{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  /* 详情页：信息速览 */
+  .art-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:16px 0 20px}
+  .af-item{background:var(--accent-soft);border-radius:10px;padding:11px 14px}
+  .af-item.af-wide{grid-column:1/-1}
+  .af-l{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:4px}
+  .af-v{font-size:13.5px;color:var(--ink);line-height:1.65}
+  /* 详情页：区块标题 */
+  .art-h3{font-family:var(--serif);font-size:18px;color:var(--navy);margin:24px 0 9px;padding-left:11px;border-left:3px solid var(--accent);line-height:1.3}
+  .art-body > .art-h3:first-child{margin-top:6px}
+  /* 详情页：来源列表 */
+  .art-src-list{list-style:none;padding:0;margin:6px 0 4px}
+  .art-src-list li{font-size:12.5px;color:var(--ink2);padding:7px 0;border-bottom:1px dashed var(--line);line-height:1.6}
+  .art-src-list a{color:var(--accent);text-decoration:none;word-break:break-all}
+  .art-src-list a:hover{text-decoration:underline}
+  /* 详情页：相关条目（相关资讯 / 同区学校） */
+  .art-rel-grid{display:grid;gap:8px;margin:8px 0 14px}
+  .art-rel-item{display:flex;gap:10px;align-items:baseline;background:var(--accent-soft);border-radius:9px;padding:10px 13px;text-decoration:none}
+  .art-rel-item .rtag{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--paper);border-radius:4px;padding:2px 8px}
+  .art-rel-item .t{font-size:13px;color:var(--ink);line-height:1.55}
+  .art-rel-item:hover .t{color:var(--accent)}
+  .dlg-kv dd a{color:var(--accent)}
+  /* 打印：速览卡去底色，保留信息 */
+  @media print{
+    .af-item{background:none;border:1px solid #CCC}
+    .art-h3{color:#000;border-left-color:#666}
+    .art-rel-item{background:none;border:1px solid #CCC}
+    #school-region-filter{display:none}
+  }
+
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
   .crumb a{color:var(--accent);text-decoration:none}
@@ -937,7 +977,7 @@
 <div id="readBar" aria-hidden="true"></div>
 <a class="skip-link" href="../index.html">回到首页</a>
 <div class="ann-bar" id="annBar" hidden>
-  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">全站改版：17 个独立页面上线，导航与站内链接全部改为真跳转（v0.29 多页架构）</span><a href="../news.html">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
+  <div class="wrap"><span class="ab-tag">更新</span><span class="ab-text">学校档案上新：20 所学校公开概况（创办 / 校训 / 规模 / 师资，逐项标来源）+ 区县筛选上线</span><a href="../schools.html">去看看 →</a><button class="ab-x" onclick="closeAnn()" aria-label="关闭公告">×</button></div>
 </div>
 <div class="top">
   <div class="wrap">
@@ -961,9 +1001,9 @@
   <article class="art">
     <div class="art-kicker">学校档案 · 两江新区</div>
     <h1>两江育才中学（两江新区） · 学校档案</h1>
-    <div class="art-meta"><span>公办</span><span>两江新区</span><span>校方公示信息口径 · 核验 2026-09-25</span></div>
-    <div class="art-body"><div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/schools/ljyc.jpg" alt=""></div><p>两江新区直管公办校；新区生源增长快，逐年扩班中。</p><table class="art-table"><tbody><tr><td>办学性质</td><td>公办</td></tr><tr><td>所在区</td><td>两江新区</td></tr><tr><td>招生范围</td><td>两江新区直管区招生（以当年简章为准）</td></tr><tr><td>通勤参考</td><td>轨道 5 号线沿线；人和/鸳鸯片区</td></tr><tr><td>住宿</td><td>部分寄宿</td></tr><tr><td>收费口径</td><td>公办收费标准（以公示为准）</td></tr><tr><td>指标到校</td><td>按两江新区当年政策执行</td></tr><tr><td>数据来源</td><td>校方公示信息口径 · 核验 2026-09-25</td></tr><tr><td>暂缺字段</td><td>近三年录取线（合规不提供）（按合规红线不提供录取线与排名）</td></tr></tbody></table><h3>家长评价（审核制）</h3><div class="art-quote"><span class="badge-ok">已审核</span> 新校区硬件好，社团 choice 多（2026-07 家长投稿，经双人审核）</div><p class="art-tip">想在对比中查看该校？回到 <a class="art-link" href="../schools.html?school=两江育才中学（两江新区）">学校档案库</a>，或加入<a class="art-link" href="../compare.html">择校对比器</a>。</p></div>
-    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-6fa32a0b.html"><span class="rel-tag">学校档案</span>重庆一中（渝北） · 学校档案</a><a class="rel-item" href="article-school-10432c02.html"><span class="rel-tag">学校档案</span>巴蜀中学（渝中） · 学校档案</a><a class="rel-item" href="article-school-4dd3d550.html"><span class="rel-tag">学校档案</span>重庆八中（渝北） · 学校档案</a><a class="rel-item" href="article-news-fd72aa23.html"><span class="rel-tag">资讯</span>期中考试后，成绩单应该这样读（家长版）</a></div><div class="art-foot">
+    <div class="art-meta"><span>重庆市两江育才中学校</span><span>公办</span><span>两江新区</span><span>校方公示信息口径 · 核验 2026-09-25</span></div>
+    <div class="art-body"><div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/schools/ljyc.jpg" alt=""></div><div class="art-facts"><div class="af-item"><span class="af-l">创办</span><span class="af-v">1956 年创办，前身为重庆市江北县人和区鸳鸯初级中学校；2007 年更名重庆市经开育才中学校，2016 年 5 月更为现名</span></div><div class="af-item"><span class="af-l">校训</span><span class="af-v">立大志，做大事</span></div><div class="af-item af-wide"><span class="af-l">校区地址</span><span class="af-v">渝北区鸳鸯北路 23 号</span></div><div class="af-item af-wide"><span class="af-l">校园规模</span><span class="af-v">在校学生近 3,000 人（截至 2016 年）</span></div></div><h3 class="art-h3">学校概况</h3><p>重庆市两江育才中学校前身为创办于 1956 年的江北县人和区鸳鸯初级中学校，2007 年更名为“重庆市经开育才中学校”并成为重庆市联招学校，2013 年被重庆市人民政府命名为重庆市重点中学，2016 年 5 月更为现名，由两江新区管理委员会举办。学校 2014 年起与重庆巴蜀中学建立捆绑发展关系，开设“巴蜀班”，开发 73 门校本课程、组建 28 个学生社团。据 2016 年公开资料，学校有在校学生近 3,000 人；获评全国消防安全示范学校、全国和谐校园先进学校、重庆市文明单位标兵等称号。</p><h3 class="art-h3">师资力量</h3><p>在职教职工 246 人，其中专任教师 233 人、高级教师 44 人；有全国优秀教师 1 人、市级骨干校长 1 人、市级骨干教师 9 人、区级骨干教师 26 人（截至 2016 年）</p><h3 class="art-h3">办学特色与荣誉</h3><p>重庆市重点中学（2013 年 3 月由重庆市人民政府命名）、重庆市联招学校（2007）；2014 年起与重庆巴蜀中学建立捆绑发展关系，开设“巴蜀班”；开发 73 门校本课程、组建 28 个学生社团；获评全国消防安全示范学校、全国和谐校园先进学校、重庆市文明单位标兵等</p><h3 class="art-h3">招生与通勤</h3><table class="art-table"><tbody><tr><td>办学性质</td><td>公办</td></tr><tr><td>所在区</td><td>两江新区</td></tr><tr><td>招生范围</td><td>两江新区直管区招生（以当年简章为准）</td></tr><tr><td>通勤参考</td><td>轨道 5 号线沿线；人和/鸳鸯片区</td></tr><tr><td>住宿</td><td>部分寄宿</td></tr><tr><td>收费口径</td><td>公办收费标准（以公示为准）</td></tr><tr><td>指标到校</td><td>按两江新区当年政策执行</td></tr><tr><td>暂缺字段</td><td>近三年录取线（合规不提供）（按合规红线不提供录取线与排名）</td></tr></tbody></table><h3 class="art-h3">家长评价（审核制）</h3><div class="art-quote"><span class="badge-ok">已审核</span> 新校区硬件好，社团 choice 多（2026-07 家长投稿，经双人审核）</div><h3 class="art-h3">同区学校</h3><div class="art-rel-grid"><a class="art-rel-item" href="article-school-3b32267e.html"><span class="rtag">两江新区</span><span class="t">巴蜀常春藤学校（两江新区）</span></a></div><h3 class="art-h3">数据来源与核验</h3><p>校方公示信息口径 · 核验 2026-09-25</p><p class="art-tip">资料采集：公开渠道（百科 / 校方官网 / 政府公开信息）· 2026-09-29，来源链接见《资料来源》</p><ul class="art-src-list"><li><a href="https://wapbaike.baidu.com/item/重庆市两江育才中学校" target="_blank" rel="noopener">https://wapbaike.baidu.com/item/重庆市两江育才中学校</a></li></ul><script type="application/ld+json">{"@context": "https://schema.org", "@type": "School", "name": "重庆市两江育才中学校", "address": "渝北区鸳鸯北路 23 号", "foundingDate": "1956"}</script><p class="art-tip">想在对比中查看该校？回到 <a class="art-link" href="../schools.html?school=两江育才中学（两江新区）">学校档案库</a>，或加入<a class="art-link" href="../compare.html">择校对比器</a>。</p></div>
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-57cbac3a.html"><span class="rel-tag">学校档案</span>重庆一中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-10432c02.html"><span class="rel-tag">学校档案</span>巴蜀中学（渝中） · 学校档案</a><a class="rel-item" href="article-school-a9decd04.html"><span class="rel-tag">学校档案</span>重庆八中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-news-fd72aa23.html"><span class="rel-tag">资讯</span>期中考试后，成绩单应该这样读（家长版）</a></div><div class="art-foot">
       <a class="art-back" href="../schools.html">← 返回学校档案库</a>
       <span class="art-note">以官方当年发布为准</span>
     </div>
@@ -1013,7 +1053,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.39（2026-09-29）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.40（2026-09-29）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -1084,6 +1124,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.40</b><span>学校档案门户化：20 所学校公开概况采集上线（创办 / 校训 / 校区地址 / 规模 / 师资 / 办学特色 / 官网，逐项标注来源）；档案库新增区县筛选与统计条；学校详情页升级门户式版式（信息速览 / 概况 / 师资 / 特色 / 来源与核验 / 相关资讯 / 同区学校）；择校对比新增「创办 / 校区地址」维度</span></div>
     <div class="cl-item"><b>v0.39</b><span>实景照片升级：20 校全部更换为该校真实校门/校园实拍照片；资讯中心开通「每日自动更新」（每日新增 50 条以上并标注来源）；全站链接有效性核验</span></div>
     <div class="cl-item"><b>v0.38</b><span>一校一图：20 所学校各配独立实景照片（校门/标志性建筑，一校一图不重复），学校卡与详情页同源</span></div>
     <div class="cl-item"><b>v0.37</b><span>实景照片：全站视觉升级为照片级实景素材（校门/教学楼/全景/操场/图书馆等，AI 生成示意），覆盖首页主视觉、学校卡、资讯封面与学校详情页横幅</span></div>

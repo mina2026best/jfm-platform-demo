@@ -1,0 +1,37 @@
+/* ---------- v0.40：学校档案门户化（概况事实条 / 区域筛选 / 详情页版式） ---------- */
+  /* 学校卡片：概况事实条 */
+  .sc-facts{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px;margin:2px 0 8px}
+  .sc-facts span{font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:3px 10px;line-height:1.35}
+  .sc-facts span.sc-quiet{color:var(--muted);background:transparent;border:1px dashed var(--line2)}
+  /* 区域筛选行（动态渲染） */
+  #school-region-filter{margin-bottom:10px}
+  #school-region-filter .ff{padding:6px 13px;font-size:12.5px}
+  .sc-stats{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin:0 0 14px}
+  /* 详情页：信息速览 */
+  .art-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:16px 0 20px}
+  .af-item{background:var(--accent-soft);border-radius:10px;padding:11px 14px}
+  .af-item.af-wide{grid-column:1/-1}
+  .af-l{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:4px}
+  .af-v{font-size:13.5px;color:var(--ink);line-height:1.65}
+  /* 详情页：区块标题 */
+  .art-h3{font-family:var(--serif);font-size:18px;color:var(--navy);margin:24px 0 9px;padding-left:11px;border-left:3px solid var(--accent);line-height:1.3}
+  .art-body > .art-h3:first-child{margin-top:6px}
+  /* 详情页：来源列表 */
+  .art-src-list{list-style:none;padding:0;margin:6px 0 4px}
+  .art-src-list li{font-size:12.5px;color:var(--ink2);padding:7px 0;border-bottom:1px dashed var(--line);line-height:1.6}
+  .art-src-list a{color:var(--accent);text-decoration:none;word-break:break-all}
+  .art-src-list a:hover{text-decoration:underline}
+  /* 详情页：相关条目（相关资讯 / 同区学校） */
+  .art-rel-grid{display:grid;gap:8px;margin:8px 0 14px}
+  .art-rel-item{display:flex;gap:10px;align-items:baseline;background:var(--accent-soft);border-radius:9px;padding:10px 13px;text-decoration:none}
+  .art-rel-item .rtag{flex:none;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--paper);border-radius:4px;padding:2px 8px}
+  .art-rel-item .t{font-size:13px;color:var(--ink);line-height:1.55}
+  .art-rel-item:hover .t{color:var(--accent)}
+  .dlg-kv dd a{color:var(--accent)}
+  /* 打印：速览卡去底色，保留信息 */
+  @media print{
+    .af-item{background:none;border:1px solid #CCC}
+    .art-h3{color:#000;border-left-color:#666}
+    .art-rel-item{background:none;border:1px solid #CCC}
+    #school-region-filter{display:none}
+  }

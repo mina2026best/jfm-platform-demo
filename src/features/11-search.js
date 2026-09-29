@@ -38,15 +38,15 @@ function runSearch(){
   }catch(e){}
   var shits = [];
   try{
-    shits = Object.keys(SCHOOL_DB).filter(function(k){ return k.toLowerCase().indexOf(q) >= 0; }).slice(0, 3)
-      .map(function(k){ return { s: k, k: k }; });
+    shits = Object.keys(SCHOOL_DB).filter(function(k){ return _schoolHay(k).indexOf(q) >= 0; }).slice(0, 3)
+      .map(function(k){ return { s: k, hint: _schoolHint(k, q), k: k }; });
   }catch(e){}
   var html = '';
   if(nhits.length){
     html += nhits.map(function(x){ return '<div class="s-item" onclick="goNewsByKey(\'' + x.k + '\', \'' + String(x.s).replace(/'/g, "\\'") + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
   }
   if(shits.length){
-    html += shits.map(function(x){ return '<div class="s-item" onclick="goSchoolByName(\'' + esc(x.k) + '\')"><span class="s-badge">学校</span>' + esc(x.s) + '</div>'; }).join('');
+    html += shits.map(function(x){ return '<div class="s-item" onclick="goSchoolByName(\'' + esc(x.k) + '\')"><span class="s-badge">学校</span>' + esc(x.s) + (x.hint ? '<span class="s-hint">' + esc(x.hint) + '</span>' : '') + '</div>'; }).join('');
   }
   if(hits.length){
     html += hits.map(function(x){ return '<div class="s-item" onclick="goSearch(\'' + x.a + '\')"><span class="s-badge">' + x.t + '</span>' + esc(x.s) + '</div>'; }).join('');
@@ -59,6 +59,23 @@ function runSearch(){
   panel.hidden = false;
 }
 var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
+/* v0.40：学校档案检索增强（概况字段全量入库） */
+function _schoolHay(name){
+  var d = SCHOOL_DB[name] || {};
+  return (name + ' ' + (d['全称']||'') + ' ' + (d['简介']||'') + ' ' + (d['概况']||'') + ' ' + (d['校训']||'') + ' ' + (d['校区地址']||'') + ' ' + (d['创办']||'') + ' ' + (d['办学特色']||'')).toLowerCase();
+}
+function _schoolHint(name, q){
+  var d = SCHOOL_DB[name] || {};
+  var fields = [['校训','校训'],['创办','创办'],['校区地址','地址'],['办学特色','特色'],['概况','概况']];
+  for(var i = 0; i < fields.length; i++){
+    var v = d[fields[i][0]];
+    if(v && String(v).toLowerCase().indexOf(q) >= 0){
+      var sv = String(v);
+      return fields[i][1] + '：' + sv.slice(0, 36) + (sv.length > 36 ? '…' : '');
+    }
+  }
+  return (d['简介'] || '').slice(0, 40);
+}
 function goSearch(anchor){
   var panel = document.getElementById('search-panel');
   if(panel) panel.hidden = true;

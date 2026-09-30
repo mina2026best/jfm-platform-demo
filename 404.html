@@ -980,6 +980,34 @@
   @media print{ .pb-card{box-shadow:none;border-color:#CCC} }
   html.theme-dark .pb-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
 
+  /* —— v0.45：线差专题 + 路径深度解读（Fathom 严谨数据风）—— */
+  .zy-out table{margin-top:10px}
+  .zy-out .mono{font-family:var(--mono);font-weight:600}
+  .zy-out .ok{color:var(--accent)}
+  .zy-out .warn{color:var(--warn)}
+  .path-deep{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px}
+  .pd-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .pd-head h4{font-family:var(--serif);font-size:19px;color:var(--navy);margin:0}
+  .pd-tag{font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:3px 12px}
+  .pd-def{font-size:14px;color:var(--ink);line-height:1.9;max-width:44em}
+  .pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .pd-item{background:var(--accent-soft);border-radius:10px;padding:12px 15px}
+  .pd-item p,.pd-item ul{font-size:13px;color:var(--ink2);line-height:1.8;margin:4px 0 0}
+  .pd-item ul{margin-left:16px}
+  .pd-l{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:6px}
+  .pd-l.ok{color:var(--accent)}
+  .pd-l.warn{color:var(--warn)}
+  .pd-pc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .pd-pc>div{border:1px solid var(--line);border-radius:10px;padding:12px 15px}
+  .pd-pc ul{margin-left:16px;font-size:13px;color:var(--ink2);line-height:1.8}
+  .pd-h{font-family:var(--serif);font-size:15px;color:var(--navy);margin:14px 0 8px}
+  .pd-links{font-size:13px;line-height:2;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px;margin-top:12px}
+  .pd-links a{color:var(--accent);word-break:break-all}
+  @media (max-width:720px){ .pd-grid,.pd-pc{grid-template-columns:1fr} .path-deep{padding:18px 16px} }
+  @media print{ .path-deep{box-shadow:none;border-color:#CCC} }
+  html.theme-dark .path-deep{background:var(--paper)}
+  html.theme-dark .pd-item{background:var(--accent-soft)}
+
 
 /* ============ 31-aesthetics ============ */
 /* ---------- v0.41：排版审美升级（统一字阶 / 卡片层次 / 呼吸感 / 微交互） ---------- */

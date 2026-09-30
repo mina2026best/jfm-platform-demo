@@ -985,6 +985,34 @@
   @media print{ .pb-card{box-shadow:none;border-color:#CCC} }
   html.theme-dark .pb-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
 
+  /* —— v0.45：线差专题 + 路径深度解读（Fathom 严谨数据风）—— */
+  .zy-out table{margin-top:10px}
+  .zy-out .mono{font-family:var(--mono);font-weight:600}
+  .zy-out .ok{color:var(--accent)}
+  .zy-out .warn{color:var(--warn)}
+  .path-deep{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px}
+  .pd-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .pd-head h4{font-family:var(--serif);font-size:19px;color:var(--navy);margin:0}
+  .pd-tag{font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:3px 12px}
+  .pd-def{font-size:14px;color:var(--ink);line-height:1.9;max-width:44em}
+  .pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .pd-item{background:var(--accent-soft);border-radius:10px;padding:12px 15px}
+  .pd-item p,.pd-item ul{font-size:13px;color:var(--ink2);line-height:1.8;margin:4px 0 0}
+  .pd-item ul{margin-left:16px}
+  .pd-l{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;margin-bottom:6px}
+  .pd-l.ok{color:var(--accent)}
+  .pd-l.warn{color:var(--warn)}
+  .pd-pc{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .pd-pc>div{border:1px solid var(--line);border-radius:10px;padding:12px 15px}
+  .pd-pc ul{margin-left:16px;font-size:13px;color:var(--ink2);line-height:1.8}
+  .pd-h{font-family:var(--serif);font-size:15px;color:var(--navy);margin:14px 0 8px}
+  .pd-links{font-size:13px;line-height:2;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px;margin-top:12px}
+  .pd-links a{color:var(--accent);word-break:break-all}
+  @media (max-width:720px){ .pd-grid,.pd-pc{grid-template-columns:1fr} .path-deep{padding:18px 16px} }
+  @media print{ .path-deep{box-shadow:none;border-color:#CCC} }
+  html.theme-dark .path-deep{background:var(--paper)}
+  html.theme-dark .pd-item{background:var(--accent-soft)}
+
 
 /* ============ 31-aesthetics ============ */
 /* ---------- v0.41：排版审美升级（统一字阶 / 卡片层次 / 呼吸感 / 微交互） ---------- */
@@ -1296,7 +1324,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.44（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · v0.44 问题速查（10 场景 → 政策+术语+工具组合答案）/ 政策详情真链映射 P| · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.45（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · v0.44 问题速查（10 场景 → 政策+术语+工具组合答案）/ 政策详情真链映射 P| · v0.45 志愿板块深化（2025 官方批次线精确线差换算三线对照 / 六大升学路径深度解读 / 官方参考链接逐条核验） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -7129,22 +7157,49 @@ function initSelects(){
 
 
 /* ---------- 26-zy ---------- */
-/* ---------- 志愿位次换算 ---------- */
+/* ---------- 志愿位次换算 v0.45：2025 官方线 + 三线差对照（精确到个位） ---------- */
+/* 2025 年重庆市官方批次线（重庆市教委发布；多源交叉核验 2026-09-30）：
+   历史类 本科批 438 / 特殊类型资格线 515 / 专科批 180
+   物理类 本科批 425 / 特殊类型资格线 498 / 专科批 180 */
+var ZY2025 = {
+  ls: { name:"历史类", ben:438, te:515, zhuan:180 },
+  wl: { name:"物理类", ben:425, te:498, zhuan:180 }
+};
 var ZY = { ls:{line:510,name:"历史类",src:"tezhao"}, wl:{line:496,name:"物理类",src:"tezhao"} };
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\\":"&#39;"}[c] || c; }); }
 function runZy(){
   var sub=document.getElementById("zy-subject").value;
   var v=parseInt(document.getElementById("zy-score").value,10);
   var box=document.getElementById("zy-result");
-  if(!v||v<200||v>750){
-    box.innerHTML='<div class="cmp-empty">请输入 200–750 之间的分数。</div>';return;
+  if(!v||v<160||v>750){
+    box.innerHTML='<div class="cmp-empty">请输入 160–750 之间的分数（专科批 180 分起，低于该值无法参与普通类投档）。</div>';return;
   }
-  var cfg=ZY[sub], diff=v-cfg.line;
+  var cfg = ZY2025[sub];
+  var dBen = v - cfg.ben, dTe = v - cfg.te, dZh = v - cfg.zhuan;
+  function row(label, line, d){
+    var sgn = d >= 0 ? '+' : '';
+    var cls = d >= 0 ? 'ok' : 'warn';
+    return '<tr><td>' + label + '</td><td class="mono">' + line + '</td><td class="mono ' + cls + '">' + sgn + d + '</td></tr>';
+  }
+  // 位次参考（沿用既有区间口径，基准更新为 2025 特招线）
+  var oldTe = ZY[sub].line;
   var band;
-  if(diff>=80) band="特招线上 80 分以上 · 参考位次前 8,000 名区间";
-  else if(diff>=40) band="特招线上 40–79 分 · 参考位次 8,000–18,000 名区间";
-  else if(diff>=0) band="特招线上 0–39 分 · 参考位次 18,000–32,000 名区间";
-  else band="特招线下 "+Math.abs(diff)+" 分 · 建议同步看本科批策略与指标到校/艺体等路径";
-  box.innerHTML='<div class="zy-out"><b>'+cfg.name+' '+v+' 分</b>：线差 '+ (diff>=0?"+":"") +diff+' 分（相对 2026 年特招线 '+cfg.line+'，'+DATA_SOURCES[cfg.src].source.split('（')[0]+'）。<br/>参考位次区间：'+band+'。<br/>'+dataBadge(cfg.src)+'<br/><span style="font-size:12px;color:var(--muted)">口径：2026 年特招线 + 位次区间参考；将接入当年一分一段表（位次法）。本工具不构成录取预测。</span></div>';
+  var dOld = v - oldTe;
+  if(dOld >= 80) band = "特招线上 80 分以上 · 参考位次前 8,000 名区间";
+  else if(dOld >= 40) band = "特招线上 40–79 分 · 参考位次 8,000–18,000 名区间";
+  else if(dOld >= 0) band = "特招线上 0–39 分 · 参考位次 18,000–32,000 名区间";
+  else band = "特招线下 " + Math.abs(dOld) + " 分 · 建议同步看本科批策略与指标到校/艺体等路径";
+  var fmt = cfg.name + ' ' + v + ' 分（公式：线差 = 分数 − 控制线，逐条可验算）';
+  box.innerHTML = '<div class="zy-out"><b>' + fmt + '</b>'
+    + '<table class="art-table" style="margin-top:10px"><thead><tr><th>控制线（2025 官方）</th><th>分数线</th><th>线差</th></tr></thead><tbody>'
+    + row('本科批', cfg.ben, dBen)
+    + row('特殊类型资格线', cfg.te, dTe)
+    + row('高职专科批', cfg.zhuan, dZh)
+    + '</tbody></table>'
+    + '<div style="margin-top:10px">参考位次区间：' + band + '。</div>'
+    + '<div style="margin-top:6px">分步示例（照此可自行验算）：你的分数 ' + v + ' − 本科线 ' + cfg.ben + ' = 线差 <b class="mono">' + (dBen>=0?'+':'') + dBen + '</b>；' + v + ' − 特招线 ' + cfg.te + ' = <b class="mono">' + (dTe>=0?'+':'') + dTe + '</b>；' + v + ' − 专科线 ' + cfg.zhuan + ' = <b class="mono">' + (dZh>=0?'+':'') + dZh + '</b>。</div>'
+    + '<div class="cmp-note" style="margin-top:8px">数据口径：重庆市2025年全国普通高等学校招生录取最低控制分数线（重庆市教委 2025-06 发布）；历史类本科 438 / 特招 515 / 专科 180，物理类本科 425 / 特招 498 / 专科 180——全部为官方公布原值，精确到个位。跨年比较请改用位次法；本工具不构成录取预测。</div>'
+    + '</div>';
 }
 
 
@@ -8805,6 +8860,54 @@ function filterProblems(cat){
   });
 }
 
+
+/* ---------- 48-xiancha ---------- */
+/* ---------- v0.45：2025 官方批次线 + 线差换算（精确到个位，逐条可验算） ---------- */
+var CQ2025 = {"year": "2025", "province": "重庆市", "source": "重庆市教委发布（重庆市2025年全国普通高等学校招生录取最低控制分数线）", "verified": "2026-09-30", "rows": [["普通类 · 历史类", "本科批", 438], ["普通类 · 历史类", "特殊类型资格线", 515], ["普通类 · 历史类", "高职专科批", 180], ["普通类 · 物理类", "本科批", 425], ["普通类 · 物理类", "特殊类型资格线", 498], ["普通类 · 物理类", "高职专科批", 180]]};
+var XIANCHA = {"历史类": [[650, 438, 212, 515, 135, 180, 470], [600, 438, 162, 515, 85, 180, 420], [550, 438, 112, 515, 35, 180, 370], [538, 438, 100, 515, 23, 180, 358], [515, 438, 77, 515, 0, 180, 335], [488, 438, 50, 515, -27, 180, 308], [438, 438, 0, 515, -77, 180, 258], [418, 438, -20, 515, -97, 180, 238], [180, 438, -258, 515, -335, 180, 0], [160, 438, -278, 515, -355, 180, -20]], "物理类": [[650, 425, 225, 498, 152, 180, 470], [600, 425, 175, 498, 102, 180, 420], [550, 425, 125, 498, 52, 180, 370], [525, 425, 100, 498, 27, 180, 345], [498, 425, 73, 498, 0, 180, 318], [475, 425, 50, 498, -23, 180, 295], [425, 425, 0, 498, -73, 180, 245], [405, 425, -20, 498, -93, 180, 225], [180, 425, -245, 498, -318, 180, 0], [160, 425, -265, 498, -338, 180, -20]]};
+
+/* ---------- v0.45：六大路径深度解读渲染 ---------- */
+var PATH_DEEP = [
+ {key:"putong", name:"普高统招（联招）", tag:"最主流 · 联招体系"},
+ {key:"zhibiao", name:"指标到校", tag:"校内竞争 · 70% 名额"},
+ {key:"minban", name:"民办高中", tag:"自费择校 · 摇号与自主"},
+ {key:"zhiye", name:"中职 · 职教高考", tag:"另一条上升通道"},
+ {key:"yiti", name:"艺体特长", tag:"专业测试 + 文化双线"},
+ {key:"guoji", name:"出国 / 国际班", tag:"双轨规划 · 费用最高"}
+];
+
+var PATHS = [{"key": "putong", "name": "普高统招", "tag": "最主流 · 联招体系", "def": "参加重庆市初中毕业暨高中招生考试（中考，联招），按志愿批次由高到低统一录取进入公办普通高中。全市联招学校 2026 年约 113 所，是重庆家庭最主流的高中入学路径。", "cond": ["具有重庆初中学籍并参加中考（联招区域户籍或符合随迁政策）", "志愿分批次填报：指标到校批次先行（资格生）→ 统招批次", "体艺特长生经专业测试可在统招中按政策录取"], "timeline": "初三上期中定位 → 3 月中考报名+体检 → 4 月体育统一测试 → 5 月志愿宣讲与模拟填报 → 6 月中考 → 6 月底出分填志愿 → 7 月分批录取（含征集志愿）。", "fee": "公办高中学费按市定标准执行（一般每学期数百元至千元级），另有课本资料与住宿费；民办高中学费自定（见民办路径）。", "who": "中考成绩达到联招批次线的绝大多数考生；追求公办普惠、住家走读的家庭。", "pros": ["公办收费低、办学稳定", "志愿批次规则透明，出分后填志愿", "覆盖全市 113 所联招学校，选择面广"], "cons": ["热门校竞争激烈，需校内位次过硬", "跨区择校受招生范围限制", "一考定批次，志愿策略影响大"], "faq": [["联招和区县中考是一回事吗？", "主城区及部分区县实行统一联招；未入联招的区县由本区县自行组织录取。志愿规则以本区当年公告为准。"], ["出分后还能改志愿吗？", "志愿在出分后规定时间内填报确认，截止后不可修改；征集志愿是最后的补救机会。"]], "links": [["重庆市教委：2026 年中考招生通知（渝教基函〔2026〕21号）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院（中考栏目）", "https://www.cqksy.cn/site/techield/zhongkao/"], ["站内：志愿参考与位次换算", "zy.html"], ["站内：升学日历（中考节点）", "calendar.html"]]}, {"key": "zhibiao", "name": "指标到校", "tag": "校内竞争 · 70% 名额", "def": "市级重点高中把招生计划的 70% 直接分配到辖区内各初中（渝教基函口径），符合资格的学生在本校内部竞争这些名额，录取线通常低于全校统招线。", "cond": ["学籍与户籍一致（人籍一致），且在所在初中连续就读", "中途转学可能清零资格", "达到校内排序要求（名额分配到校后按成绩排队）"], "timeline": "初一入学即建立资格基础 → 初二末关注资格摸底 → 初三上资格名单公示 → 4–5 月名额分配与志愿填报 → 与中考同批录取。", "fee": "录取后为公办普高，费用与普高统招一致。", "who": "中上等成绩、所在初中里有指标名额的学生——「校内排名」比「全区排名」更有利；成绩在本校前列的家庭重点研究这条路。", "pros": ["录取线通常低于统招线，中上等生的黄金通道", "名额直接分到本校，避开全区高分段竞争", "政策连续多年稳定（70% 比例）"], "cons": ["资格条件严格（学籍连续性硬约束）", "名额到校后竞争依然存在", "中途转学代价极高"], "faq": [["指标到校是不是「稳上重点」？", "不是。名额分到校后仍按成绩排序，达到名额线才被录取；它降低的是「全区竞争」烈度，不是取消竞争。"], ["转学后指标资格还在吗？", "通常清零或重算。动迁家庭务必先向区教委核实资格连续性规则。"]], "links": [["站内：指标到校政策条目（官方原文链接）", "policy.html"], ["重庆市教委：2026 年中考招生通知（指标到校章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["站内：择校对比器（比较校内名额竞争）", "compare.html"]]}, {"key": "minban", "name": "民办高中", "tag": "自费择校 · 摇号与自主", "def": "由社会力量举办的普通高中，招生计划与收费自主报备，录取方式分「超计划电脑摇号」与自主招生两类；巴蜀常春藤等民办校已收录本站学校档案库。", "cond": ["参加重庆中考（民办高中录取也以中考成绩为基础）", "民办报名超计划时电脑随机录取（全程公证）", "家庭需评估三年学费承受力（民办高中学费普遍每学年数万元）"], "timeline": "5–6 月关注民办校招生简章 → 中考后按简章报名（超计划摇号）→ 录取签约缴费 → 与公办同步注册学籍。", "fee": "学费每学年约 3–15 万元不等（各校差异大），另有住宿、杂费；以各校在物价部门备案的公示为准。", "who": "中考成绩略低于公办目标线、家庭可承担民办学费；或认可某民办校办学特色（小班/国际化课程）的家庭。", "pros": ["为临界分数提供普高学位兜底", "办学机制灵活，部分学校小班化/特色课程", "摇号规则公开透明（超计划即摇号）"], "cons": ["学费显著高于公办", "教学质量两极分化，需实地考察", "「交钱锁定名额」说法不可信——超计划必须摇号"], "faq": [["民办高中可以「交钱买名额」吗？", "不可以。超计划全部电脑摇号、全程公证，与缴费无关；任何「内部名额费」都是诈骗。"], ["民办高中学籍和公办一样吗？", "一样。民办高中同样注册普通高中学籍，参加统一高考；关键是确认学校具备招生资质。"]], "links": [["站内：巴蜀常春藤学校档案（民办样本）", "schools.html?school="], ["站内：民办摇号政策条目", "policy.html"], ["站内：求真台 · 摇号传言核验", "fact.html"], ["重庆市教委：2026 年义务教育招生通知（摇号机制口径）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html"]]}, {"key": "zhiye", "name": "中职 · 职教高考", "tag": "另一条上升通道", "def": "进入中等职业学校（中专/职高/技校），通过「文化素质 + 职业技能」的职教高考（分类考试招生）升入高职或应用型本科——中职不是终点，而是一条并行上升通道。", "cond": ["应届初中毕业生，按志愿报考中职学校（含「五年制高职」贯通班）", "职教高考升学方向：中职在读期间备考文化课+专业技能", "部分专业有身体条件要求（如学前教育）"], "timeline": "中考后填报中职志愿（含五年制高职批次）→ 9 月入学 → 三年内「文化+技能」并修 → 三年级参加高职分类考试 → 升入高职（3 年）或应用型本科（4 年）。", "fee": "中职阶段：国家免学费政策覆盖绝大多数专业（民办超出部分自付）；高职/本科阶段按公办标准收费；家庭困难学生另有国家助学金。", "who": "动手能力强、文化课中等的孩子；目标明确想早就业或走技能升学线的家庭。重庆 2025 年「职教高考」本科扩容持续进行中。", "pros": ["免学费+资助政策覆盖广", "升学通道打通：中职→高职→应用型本科", "技能就业两不误，部分专业就业率高"], "cons": ["社会认可度仍在提升中", "优质中职与热门专业竞争同样激烈", "职教高考本科名额仍少于普通高考"], "faq": [["中职还能考本科吗？", "能。通过高职分类考试升入高职后可「专升本」，部分应用型本科直接面向中职招生；「职教高考」本科通道逐年扩容。"], ["五年制高职是什么？", "初中毕业后进入高职院校连续培养五年，毕业获大专学历——中职家庭的「直升」选项之一。"]], "links": [["《中华人民共和国职业教育法》（教育部政策库全文）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620064.html"], ["站内：五年制高职/职教高考术语", "policy.html"], ["站内：升学百科 · 全流程", "wiki.html"]]}, {"key": "yiti", "name": "艺体特长", "tag": "专业测试 + 文化双线", "def": "有体育、艺术特长的学生经专业测试后，以特长生身份被高中（中考段）或高校（高考段）降分/专项录取——需要「专业」与「文化课」两条线同时过。", "cond": ["中考段：经批准的高中招收体育/艺术特长生，需参加学校或区级专业测试", "高考段：艺体类考生需省级专业统考（+部分校考），文化课也有底线要求", "体育类需运动员等级或赛事成绩者更有优势"], "timeline": "初中段：初一初二确定特长方向并持续训练 → 中考前参加目标高中专业测试 → 中考达线按特长录取。高考段：高一高二定方向 → 高三上专业统考 → 12 月高考报名（艺体类）→ 次年 4 月校考 → 6 月高考（文化课）→ 综合分录取。", "fee": "训练与器材投入较高（体育私教/艺术培训每学期数千至数万元）；艺考集训高三整年通常数万元起；公办校学费与普高一致。", "who": "有真实特长且能长期投入训练的孩子；家庭需评估时间与费用双投入。「低分上名校」是误解——文化课底线逐年提高。", "pros": ["为特长生打开专项通道，与文化课考生分轨竞争", "部分学校/项目降分幅度可观", "高考综合分改革后规则更透明"], "cons": ["专业+文化双线压力大", "集训费用高、时间不可逆", "填报受限（艺体批与普通批规则不同）"], "faq": [["艺体特长生文化课要求低很多吗？", "不是。文化课有逐年提高的底线要求，综合分改革后文化课权重上升——「低分通道」是误区。"], ["区级比赛奖项有用吗？", "中考特长生资格通常看学校/区级专业测试；高考艺体以省级统考成绩为主，赛事成绩是加分项不是入场券。"]], "links": [["重庆市教委：2026 年中考通知（体育/艺体特长章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院 · 高考栏目（艺体统考安排）", "https://www.cqksy.cn/site/techield/gkzs/"], ["站内：艺体特长生术语", "policy.html"], ["阳光高考平台（特殊类型招生；反爬站点请用浏览器打开）", "https://gaokao.chsi.com.cn/"]]}, {"key": "guoji", "name": "出国 / 国际班", "tag": "双轨规划 · 费用最高", "def": "就读高中「国际课程班」（如 AP/A-Level/IB/DSE 课程）或直接申请海外高中，以海外大学为升学目标；部分国际班学生也可参加国内高考（双轨）。", "cond": ["多数国际班参考中考成绩+校内测试/面试", "需确认学校国际课程资质与外方课程认证", "出国方向需规划语言考试（托福/雅思）与标化"], "timeline": "初三确定方向 → 中考后入读国际班 → 高一定课程体系与目标国家 → 高二语言与标化首考 → 高三上递交申请 → 次年春获录取。双轨学生同时保留高考线。", "fee": "国际班学费每学年约 8–20 万元；海外本科每年总费用（学费+生活费）约 25–60 万元（国家差异大）。是六条路里费用最高的路径。", "who": "家庭财务充裕、孩子英语能力强、目标海外大学的家庭；双轨家庭需极强的时间管理。「逃避高考」不是好理由——国际课程同样繁重。", "pros": ["升学路径全球化，不挤国内高考独木桥", "课程评价多元（不唯一次考试）", "部分双轨项目保留国内高考选项"], "cons": ["总费用最高（三年 30–60 万+）", "海外学历认证与就业认可度需提前研究", "疫情与国际关系的长期规划风险"], "faq": [["国际班学生能参加国内高考吗？", "部分双轨项目可以（保留国内学籍与课程）；纯国际课程班可能无法参加国内高考——入读前必须确认学籍政策。"], ["怎么核对国际课程班的资质？", "查学校是否具备中外合作办学或国际课程备案（教育部教育涉外监管信息网 jsj.moe.gov.cn 可查合作办学名单）。"]], "links": [["教育部教育涉外监管信息网（中外合作办学名单查询）", "https://jsj.moe.gov.cn/"], ["《中华人民共和国民办教育促进法》（教育部政策库）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620261.html"], ["站内：巴蜀常春藤学校（国际课程样本）", "schools.html?school="]]}];
+
+function renderPathDeep(){
+  var box = document.getElementById('path-deep'); if(!box) return;
+  box.innerHTML = PATHS.map(function(p, i){
+    var faq = (p.faq||[]).map(function(f){
+      return '<div class="pb-row"><span class="pb-tag">问</span><b>' + esc(f[0]) + '</b><br/>' + esc(f[1]) + '</div>';
+    }).join('');
+    var links = (p.links||[]).map(function(l){
+      var ext = l[1].indexOf('http') === 0;
+      return '<a href="' + l[1] + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + esc(l[0]) + (ext ? ' ↗' : '') + '</a>';
+    }).join('<br/>');
+    var pros = (p.pros||[]).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('');
+    var cons = (p.cons||[]).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('');
+    var cond = (p.cond||[]).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('');
+    return '<article class="path-deep" id="path-' + p.key + '">'
+      + '<div class="pd-head"><h4>' + esc(p.name) + '</h4><span class="pd-tag">' + esc(p.tag) + '</span></div>'
+      + '<p class="pd-def">' + esc(p["def"]) + '</p>'
+      + '<div class="pd-grid">'
+      + '<div class="pd-item"><span class="pd-l">报考条件</span><ul>' + cond + '</ul></div>'
+      + '<div class="pd-item"><span class="pd-l">流程与时间线</span><p>' + esc(p.timeline) + '</p></div>'
+      + '<div class="pd-item"><span class="pd-l">费用与学制</span><p>' + esc(p.fee) + '</p></div>'
+      + '<div class="pd-item"><span class="pd-l">适合人群</span><p>' + esc(p.who) + '</p></div>'
+      + '</div>'
+      + '<div class="pd-pc"><div><span class="pd-l ok">优势</span><ul>' + pros + '</ul></div><div><span class="pd-l warn">注意</span><ul>' + cons + '</ul></div></div>'
+      + (faq ? '<h5 class="pd-h">常见问题</h5>' + faq : '')
+      + '<div class="pd-links"><span class="pd-l">参考链接（官方来源优先 · 2026-09-30 逐一打开核验）</span><br/>' + links + '</div>'
+      + '</article>';
+  }).join('');
+}
+document.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('path-deep')) renderPathDeep(); });
+
 ;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html"}){ ARTMAP[k] = {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html"}[k]; } } })();</script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
@@ -8872,6 +8975,7 @@ function filterProblems(cat){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.45</b><span>志愿板块深化：「线差」换算升级——基准切换为 2025 年重庆市官方批次线（历史 438/515/180 · 物理 425/498/180，教委发布多源核验），输入分数即时得到本科/特招/专科三线差值对照表（精确到个位，逐条可验算）+ 分步示例；「六条路径」新增深度解读区（普高统招/指标到校/民办高中/中职职教高考/艺体特长/出国国际班，每条含定义·条件·流程·费用·人群·优劣势·FAQ·官方参考链接）</span></div>
     <div class="cl-item"><b>v0.44</b><span>新增「问题速查」页（problems.html）：10 个高频场景（幼升小/转学/摇号/指标到校/志愿/资助/培训/食品安全/选科/随迁），每个场景组合给出相关政策条目（详情真链）+ 术语 + 工具 + 一句要点；分类筛选；导航与站点地图收录；P| 政策详情映射入 ARTMAP</span></div>
     <div class="cl-item"><b>v0.43</b><span>双专家评估整改（10 项全落地）：全站 21 页注入页面级 h1（文档大纲合规）；460+ 图片补齐 alt（学校卡=校名/资讯封面=分类）；资讯默认渲染 60 条 + 加载更多（移动端 DOM 7940→2717）；政策库分类筛选（入学/中考/资助/安全/培训）；术语词典四组 tab + 快搜；微信分享封面 og:image；学校弹窗↔区县指南交叉引用；详情页三级面包屑</span></div>
     <div class="cl-item"><b>v0.42</b><span>区县入学指南：11 个区县官方入口（区政府/区教委/渝快办）逐条 HTTP 实测后上线，含每区办理要点；术语词典 32→40 条（新增多校划片 QA/民转公/科教/体艺后备等高频词）；求真台 12→14 条（新增「摇号可花钱买名额」「九年一贯直升占指标」核验）；阅读版式优化（正文 66 字行距节奏/栏宽收敛）</span></div>

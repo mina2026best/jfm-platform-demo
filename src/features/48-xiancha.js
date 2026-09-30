@@ -43,3 +43,34 @@ function renderPathDeep(){
   }).join('');
 }
 document.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('path-deep')) renderPathDeep(); });
+/* ---------- v0.46：近三年分数区间段（2023–2025 官方批次线，多源核验） ---------- */
+var YEARS3 = {"2023": {"历史类": {"本科": 407, "特招": 480, "专科": 180}, "物理类": {"本科": 406, "特招": 468, "专科": 180}}, "2024": {"历史类": {"本科": 428, "特招": 506, "专科": 180}, "物理类": {"本科": 427, "特招": 499, "专科": 180}}, "2025": {"历史类": {"本科": 438, "特招": 515, "专科": 180}, "物理类": {"本科": 425, "特招": 498, "专科": 180}}};
+var YEARS3_SRC = {"2023": "重庆市教委 2023-06-24 公布；网易新闻/万盛发布/河南经济报等多源转载一致", "2024": "重庆市教委 2024-06-24 公布；搜狐/新浪财经/中国教育在线等多源转载一致", "2025": "重庆市教委 2025-06-24 公布；腾讯新闻(重庆教育官微转载)/凤凰网等多源一致"};
+var YEARS3_VERIFIED = "2026-09-30";
+
+function renderYears3(score, clsName){
+  var box = document.getElementById('zy-years3');
+  if(!box) return;
+  if(!score || !clsName){ box.innerHTML = ''; return; }
+  var rows = [];
+  ["2023","2024","2025"].forEach(function(y){
+    var L = YEARS3[y][clsName];
+    rows.push({y:y, ben:L["本科"], te:L["特招"], zhuan:L["专科"],
+      dBen: score - L["本科"], dTe: score - L["特招"], dZhuan: score - L["专科"]});
+  });
+  function sgn(d){ return d >= 0 ? '+' + d : String(d); }
+  var html = '<h5 class="pd-h" style="margin-top:18px">同分在近三年是什么位置（' + clsName + ' ' + score + ' 分）</h5>'
+    + '<div class="cmp-note" style="margin-bottom:8px">读法：同一张试卷难度不同，直接跨年比分数会失真；正确用法是看「分数 − 控制线」的差值在三年里是否稳定。下表线差为逐年独立计算，精确到个位。</div>'
+    + '<table class="art-table"><thead><tr><th>年份</th><th>本科线</th><th>线差</th><th>特招线</th><th>线差</th><th>专科线</th><th>线差</th></tr></thead><tbody>'
+    + rows.map(function(r){
+        return '<tr><td>' + r.y + '</td>'
+          + '<td class="mono">' + r.ben + '</td><td class="mono ' + (r.dBen>=0?'ok':'warn') + '">' + sgn(r.dBen) + '</td>'
+          + '<td class="mono">' + r.te + '</td><td class="mono ' + (r.dTe>=0?'ok':'warn') + '">' + sgn(r.dTe) + '</td>'
+          + '<td class="mono">' + r.zhuan + '</td><td class="mono ' + (r.dZhuan>=0?'ok':'warn') + '">' + sgn(r.dZhuan) + '</td></tr>';
+      }).join('')
+    + '</tbody></table>'
+    + '<div class="cmp-note" style="margin-top:8px">三年趋势小结：历史类本科线上涨 407→428→438（三年 +31）；物理类本科线 406→427→425（先升后微降）。物理类两年本科线几乎持平（427→425），跨年对比可用；历史类逐年上行，直接搬分数会高估自己——建议同时参考位次与招生计划变化。各年批次线来源：' 
+    + ['2023','2024','2025'].map(function(y){ return y + '（' + YEARS3_SRC[y].split('；')[0].split('，')[0] + '）'; }).join('、')
+    + '，均经 2026-09-30 多源交叉核验。</div>';
+  box.innerHTML = html;
+}

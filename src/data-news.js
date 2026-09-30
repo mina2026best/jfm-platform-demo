@@ -1,17 +1,6 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
-    "t": "重庆荣昌：校园里的非遗课",
-    "url": "https://app.guangmingdaily.cn/as/opened/n/5de7fb93d84047bcba94c9657c4349d0",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "重庆：“数据督导”推动学生全面发展",
     "url": "http://jw.cq.gov.cn/zwxx_209/bmdt/ddxx/202605/t20260522_15696419.html",
     "src": "重庆市教育委员会",
@@ -78,17 +67,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "头条号 搜狐号 网易号 百家号 抖音号 --> 教育在线",
-    "url": "https://www.toutiao.com/c/user/token/MS4wLjABAAAAOEB3yyoIMZXjTK2kgFM8J89Aeqd2flM1bcsEPoWYBhs/?",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "王永民任北京工商大学党委常委、副校长",
     "url": "https://www.eol.cn/news/dongtai/gxrs/202609/t20260929_2778849.shtml",
     "src": "中国教育在线",
@@ -149,28 +127,6 @@ var NEWS_FEED = [
     "src": "中国教育在线",
     "cat": "行业观察",
     "sum": "教育部汇总备案的2026年高等学历继续教育拟招生专业882个(其中，本科专业465个、专科专业417个)，专业点22939个(其中，本科专业点13033个、专科专业点9906个)。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "福建省基础教育教研工作研讨会召开",
-    "url": "https://chuzhong.eol.cn/news/202609/t20260929_2778726.shtml",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "9月22日，全省基础教育教研工作研讨会在福州召开。会议贯彻落实省领导关于加强教研工作的工作要求，全面分析当前教研工作面临的形势，部署推进教研工作提质增效，以高质量教研支撑引领基础教育高质量发展。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "河南：2030年中小学全面普及人工智能教育",
-    "url": "https://chuzhong.eol.cn/news/202609/t20260928_2778245.shtml",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "近日，河南省教育厅、河南省科学技术厅、河南省工业和信息化厅、河南省科学技术协会联合印发《关于推进中小学人工智能教育与应用的实施意见》",
     "date": "2026-09-30",
     "body": "",
     "reviewed": true,
@@ -353,28 +309,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "国新办举行“开局起步‘十五五’”系列主题新闻发布会：介绍贯彻落实“十五五”规划，加快推进教育强国建设有关情况",
-    "url": "http://www.scio.gov.cn/live/2026/39547/index.html",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "国新办中外记者见面会：优秀教师代表围绕“弘...",
-    "url": "http://www.scio.gov.cn/live/2026/38518/index.html",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "校外教育培训监管司",
     "url": "http://www.moe.gov.cn/s78/A29/",
     "src": "教育部",
@@ -430,220 +364,11 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "教育部机关服务中心",
-    "url": "http://www.jgfwzx.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "中华人民共和国教育部机关服务中心（局）,中华人民共和国教育部门户网站",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "国家教育行政学院",
-    "url": "https://www.naea.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中国教育科学研究院",
-    "url": "https://www.cnaes.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部高等学校科学研究发展中心",
-    "url": "http://www.cutech.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "教育部 高等学校 科技",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部职业教育发展中心",
-    "url": "http://www.civte.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部中外语言交流合作中心",
-    "url": "http://www.chinese.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部教育技术与资源发展中心（中央电化教育馆）",
-    "url": "https://www.ncet.edu.cn/zhuzhan/index.html",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部宣传教育中心",
-    "url": "http://www.cpipe.edu.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部教育管理信息中心",
-    "url": "http://www.emic.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部经费监管事务中心",
-    "url": "https://fsac.cee.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "教育部经费监管事务中心",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部民族教育发展中心",
-    "url": "http://mjzx.moe.edu.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部留学服务中心",
-    "url": "https://portal.cscse.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "全国学生资助管理中心",
-    "url": "https://www.xszz.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部学生服务与素质发展中心",
-    "url": "https://chesicc.chsi.com.cn/index.jsp",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "教育部学生服务与素质发展中心（简称学生发展中心）是教育部直属事业单位。经过多年努力，学生发展中心建成了学信网、阳光高考平台、研招网、国家大学生就业服务平台、大学生创业网和征兵网等多个信息化技术支持平台，开展了招生、就业、学籍管理、学历认证等一系列高校学生信息咨询服务与就业指导工作。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部学位与研究生教育发展中心",
-    "url": "http://www.cdgdc.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部教育质量评估中心",
-    "url": "https://www.eqea.edu.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "教育部教育质量评估中心",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部学校规划建设发展中心",
-    "url": "https://www.csdp.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中国地质大学 （北京）",
-    "url": "https://www.cugb.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "中国地质大学（北京）",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "让残疾人就业“有位”更“有为”！重庆这场培训班为用人单位解读助残就业政策",
     "url": "https://www.cqnews.net/web/content_1554487412659142656.html",
     "src": "华龙网",
     "cat": "升学动态",
     "sum": "2026年重庆市带头按比例安排残疾人就业用人单位就业政策培训班举办。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆少年儿童图书馆",
-    "url": "https://www.cqst.org.cn/",
-    "src": "华龙网",
-    "cat": "升学动态",
-    "sum": "",
     "date": "2026-09-30",
     "body": "",
     "reviewed": true,
@@ -688,17 +413,6 @@ var NEWS_FEED = [
     "src": "重庆大学新闻网",
     "cat": "升学动态",
     "sum": "9月21日，国际建筑与建设研究创新理事会（CIB）中国学者交流研讨会在重庆大学管理科学与房地产学院（以下简称“管科学院”）举办。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "“腾讯AI创新基金·AI Agent技能培训”在重庆大学举行",
-    "url": "https://news.cqu.edu.cn/archives/news2/content/2026/09/21/230c22c9274bec9726fea6ded3c48c63beb60245.html",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "9月21日，重庆大学继续教育学院与腾讯基金联合举办“腾讯AI创新基金·AI Agent技能培训”，面向全校教职工实操培训。腾讯专家杨金讲解WorkBuddy、SkillHub并演示全流程，学员反馈良好。10至12月将分行政、教学、科研三线推出更多AI培训，助力学校发展。",
     "date": "2026-09-30",
     "body": "",
     "reviewed": true,
@@ -870,28 +584,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "树立和践行正确政绩观学习教育",
-    "url": "https://zjg.cqu.edu.cn/",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "深入贯彻中央八项规定精神学习教育",
-    "url": "https://xxjy.cqu.edu.cn",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "化学化工学院开展新生中秋慰问活动",
     "url": "https://news.cqu.edu.cn/archives/xynews/content/2026/09/24/e4b85e61dbc08711e429b4e595eae9dfa9710c0f.html",
     "src": "重庆大学新闻网",
@@ -1057,17 +749,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "全国教育辟谣平台",
-    "url": "http://jypy.jyb.cn",
-    "src": "中国教育新闻网",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "庆祝电子科技大学建校70周年大会在成都举行",
     "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202609/t20260929_2111526916.html",
     "src": "中国教育新闻网",
@@ -1123,99 +804,11 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "教育部教育考试院",
-    "url": "http://www.neea.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中国矿业大学 （北京）",
-    "url": "http://www.cumtb.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中国石油大学 （北京）",
-    "url": "http://www.cup.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "对外经济贸易大学",
-    "url": "http://www.uibe.edu.cn/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部教育涉外监管信息网",
-    "url": "http://jsj.moe.gov.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部中国大学生在线网",
-    "url": "http://dxs.moe.gov.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "“中国大学生在线”网站是由国家教育部主导并推动，全国大学生参与，全国高校依照“共创、共建、共享”的原则，以“栏目共建、活动联办、服务共享”的方式合作共建的公益性、综合性门户网站。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部全国青少年普法网",
-    "url": "http://qspfw.moe.gov.cn",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "教育部办公厅关于开展2026年“基础教育精品课”遴...",
     "url": "https://www.eol.cn/zhengce/wenjian/202609/t20260917_2774911.shtml",
     "src": "中国教育在线",
     "cat": "行业观察",
     "sum": "为深化教育教学改革，促进基础教育高质量发展，根据2026年工作安排，教育部决定继续组织开展“基础教育精品课”遴选工作。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部办公厅关于公布第三届全国儿童青少年近视防...",
-    "url": "https://chuzhong.eol.cn/zhengce/202609/t20260914_2773565.shtml",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "教育部办公厅关于公布第三届全国儿童青少年近视防控宣讲团成员名单的通知",
     "date": "2026-09-30",
     "body": "",
     "reviewed": true,
@@ -1370,83 +963,6 @@ var NEWS_FEED = [
     "src": "中国教育在线",
     "cat": "行业观察",
     "sum": "2024年是深入贯彻落实党的二十大、二十届三中全会精神及全国教育大会精神的关键一年，是组织实施教育强国建设规划纲要的开局之年。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育热点回顾｜2026第37周",
-    "url": "https://mp.weixin.qq.com/s/0wiLUME8_7MzZ2n0dbvIZw",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育热点回顾｜2026第36周",
-    "url": "https://mp.weixin.qq.com/s/_npNVnS4nmGDSdpMzITfGQ",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育热点回顾｜2026第35周",
-    "url": "https://mp.weixin.qq.com/s/7_CvJf-BX6WOOYELqB9VSg",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育热点回顾｜2026第34周",
-    "url": "https://mp.weixin.qq.com/s/HDS6PxJPLHFBoefxznls4A",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育热点回顾｜2026第32周",
-    "url": "https://mp.weixin.qq.com/s/kMSJsER0Z1o3LE0qV8IYgw",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "不同层次的同学，志愿填报是不同的策略",
-    "url": "https://v.eol.cn/video/detail?videoid=67447",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "作为中国教育的联结者和赋能者，教育在线致力于成为推动中国教育前行的力量。",
-    "date": "2026-09-30",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "填报志愿时，与专业相比 学校可能更为重要！",
-    "url": "https://v.eol.cn/video/detail?videoid=67448",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "作为中国教育的联结者和赋能者，教育在线致力于成为推动中国教育前行的力量。",
     "date": "2026-09-30",
     "body": "",
     "reviewed": true,
@@ -2340,17 +1856,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "刘宴兵到重庆市特殊教育中心看望慰问少年儿童",
-    "url": "https://mp.weixin.qq.com/s/H4UaOqJq5qu1a1Q8Ra-GIw",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "贯彻落实全国基础教育大会精神，重庆基础教育秋季学期这样干",
     "url": "http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202609/t20260924_16130098.html",
     "src": "重庆市教育委员会",
@@ -2593,30 +2098,8 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "重庆市2026年全国成人高校招生统一考试报名... /",
-    "url": "https://ck.cqksy.cn",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "重庆市2026年全国成人高校招生统一考试报名公告 2026-09-04",
     "url": "https://www.cqzk.com.cn/CRKS/CRKS_news/2095692510240940032.html",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆市2026年全国成人高校招生专业目录 2026-09-04",
-    "url": "https://ck.cqksy.cn/czPage/info_zszy_show",
     "src": "重庆招考网",
     "cat": "升学动态",
     "sum": "",
@@ -2846,17 +2329,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "2026年普通高考综合查询 点击进入",
-    "url": "https://gkcj.cqksy.cn/user/login/1230",
-    "src": "重庆市教育考试院",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "2027年拟在渝招生普通高校招生专业（类）选考科目说明及要求",
     "url": "https://www.cqksy.cn/web/article/2025-02/21/content_6474.html",
     "src": "重庆市教育考试院",
@@ -3044,17 +2516,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "重庆市2025年成人高校招生专业目录",
-    "url": "https://ck.cqksy.cn/czPage/info_zszy_show",
-    "src": "重庆市教育考试院",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "重庆市2026年上半年高等教育自学考试毕业申请办理有关事宜的公告",
     "url": "https://www.cqksy.cn/web/article/2026-05/27/content_6984.html",
     "src": "重庆市教育考试院",
@@ -3181,17 +2642,6 @@ var NEWS_FEED = [
     "src": "重庆市教育委员会",
     "cat": "政策速递",
     "sum": "一、出台背景与政策依据研究生教育是国民教育体系的顶端，是科技第一生产力、人才第一资源、创新第一动力的重要结合点。为深入贯彻落实科教兴国战略、人才强国战略、创新驱动发展战略，加快推进教育科技人才一体发展，全面提升拔尖创新人才自主培养质量，增强研究生教育服务支撑国家战略和重庆高质量发展的能力，根据教育部相关部署要求，依据《教育强国建设规划纲要（2024—2035年）》和《重庆加快建设教育强市推进教育现",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆市中小学春秋假政策解读",
-    "url": "https://mp.weixin.qq.com/s/xYJ5Y9oS6obohvqkNp9L3Q",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
     "date": "2026-09-29",
     "body": "",
     "reviewed": true,
@@ -3990,28 +3440,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "义务教育入学一件事",
-    "url": "https://zwfw.cq.gov.cn/cqnew/icity/chain/guide/details-matter?uniteItemCode=U500000000016",
-    "src": "重庆市政府网",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆社会主义学院",
-    "url": "https://www.cqsy.net.cn/",
-    "src": "重庆市政府网",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "展馆变课堂 产业前沿成“活教材”",
     "url": "http://cq.people.com.cn/n2/2026/0924/c365416-41707106.html",
     "src": "人民网重庆",
@@ -4047,17 +3475,6 @@ var NEWS_FEED = [
   {
     "t": "大力弘扬教育家精神",
     "url": "http://www.moe.gov.cn/jyb_xwfb/xw_zt/moe_357/2024/2024_zt06_56833/",
-    "src": "教育部",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "国家智慧教育公共服务平台",
-    "url": "https://www.smartedu.cn/",
     "src": "教育部",
     "cat": "政策速递",
     "sum": "",
@@ -4540,39 +3957,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "全力守护“少年的你”！来看重庆强化法治保障制度建设、维护校园安全",
-    "url": "https://mp.weixin.qq.com/s/sdhXlgc1z5diBoHHjnFgFg",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆市云阳县构筑优质教育生态——库区县中的攀登之路",
-    "url": "https://paper.jyb.cn/zgjyb/h5/html5/2026-09/05/content_144742_19847633.htm?sn=a3369f32e8a7e605&ts=1788559277",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "仝小林院士开讲“开学第一课”：带2000余名新生“观苔藓、悟舌诊”",
-    "url": "https://wap.cqrb.cn/xcq/NewsDetail?classId=1551&newsId=2768524&staticUrl=https%3A%2F%2Ft.cqrb.cn%2F4nOQ1",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "开学在即！今年重庆已完成45所学校周边环境焕新→",
     "url": "https://www.cqrb.cn/fuwuzixun/2026-08-28/2761715_pc.html",
     "src": "重庆市教育委员会",
@@ -4608,28 +3992,6 @@ var NEWS_FEED = [
   {
     "t": "市委常委会举行会议 深入学习贯彻习近平总书记重要讲话精神 研究部署群防群治除险固安百日攻坚行动等工作 市委书记袁家军主持并讲话",
     "url": "https://www.cqrb.cn/topics/swsjyjjbdj/news/2026-08-17/2753053_pc.html",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "重庆新闻联播丨2026软科世界大学学术排名发布 重庆5所高校上榜",
-    "url": "https://cqxyh5.cbgcloud.com/pages/details/details.html?companyId=cqxwzx&productId=6B1BEE01515143AFAF290F6044E54A89&docid=86FD7FD2A55741508C206AEBCDAF285B&isNew=yes&downloadTips=true",
-    "src": "重庆市教育委员会",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "切实减轻教师非教育教学任务负担 ——教育部全力推动教师减负工作落地见效、走深走实",
-    "url": "https://paper.people.com.cn/rmrb/pc/content/202608/08/content_30173750.html",
     "src": "重庆市教育委员会",
     "cat": "政策速递",
     "sum": "",
@@ -4688,17 +4050,6 @@ var NEWS_FEED = [
     "src": "重庆市教育委员会",
     "cat": "政策速递",
     "sum": "5月19日上午，市教委召开2026年国家义务教育质量监测暨优质均衡督导评估认定教育质量监测视导工作布置会。会议全面落实教育部关于2026年国家义务教育质量监测工作的部署要求，进一步动员和部署我市“双测”视导工作，确保现场测试环节高标准、高质量完成。市委教育工委委员、市教委总督学吴边出席会议并讲话。教育部基础教育质量监测中心监测实施业务指导与支持工作专家组组长杨永、专家组成员常颖昊到会指导。会议指出",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "校馆弦歌丨晒出你的大学图书馆",
-    "url": "https://www.peopleapp.com/column/30053242915-500007719773",
-    "src": "上游新闻",
-    "cat": "升学动态",
-    "sum": "在大学你去得最多的地方是哪里？晒出你的大学图书馆吧！",
     "date": "2026-09-29",
     "body": "",
     "reviewed": true,
@@ -4980,28 +4331,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "掌上高考 掌上考研 学 术 桥",
-    "url": "https://www.gaokao.cn",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "基础教育 高等教育",
-    "url": "https://chuzhong.eol.cn/",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "基础教育频道是教育在线专注于义务教育阶段的信息平台，主要为广大学生及家长提供小学招生、初中招生、高中招生的报名及招生划片等政策信息，为学校提供宣传展示的窗口，为中小学校长以及教师提供学习与交流的阵地。",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "2027年全国硕士研究生招生工作管理规定",
     "url": "https://www.eol.cn/zhengce/wenjian/202609/t20260924_2777677.shtml",
     "src": "中国教育在线",
@@ -5134,28 +4463,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "关于“第五届教育评价学术年会”参会报名的通知",
-    "url": "https://gj.eol.cn/gjyw/202609/t20260923_2777221.shtml",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "2026年剑南春特约·大咖教你填志愿",
-    "url": "https://gaokao.eol.cn/e_html/gk/2026/2026dkjzy/index.html",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "中科院陈宝钦教授携“魔方”走进信阳工程职业学院 为千名学子解锁微电子奥秘",
     "url": "https://www.eol.cn/news/zjyw/202609/t20260923_2777278.shtml",
     "src": "中国教育在线",
@@ -5172,17 +4479,6 @@ var NEWS_FEED = [
     "src": "中国教育在线",
     "cat": "行业观察",
     "sum": "国家战略与广西“以场景引应用、以人才促产业”的发展路径，对中职人工智能专业建设提出产线同步的刚性要求。",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育厅公示！山西拟认定职业教育专业教学资源库10个！",
-    "url": "https://zhijiao.eol.cn/detail/2026/09/21/1789976712_28558.html",
-    "src": "中国教育在线",
-    "cat": "行业观察",
-    "sum": "9月20日，山西省教育厅发布《山西省教育厅关于2026年度省级职业教育专业教学资源库拟认定名单的公示》，拟认定2026年度省级职业教育专业教学资源库12个。",
     "date": "2026-09-29",
     "body": "",
     "reviewed": true,
@@ -5671,61 +4967,6 @@ var NEWS_FEED = [
     "sum": "市级重点高中招生计划的 70% 分配到辖区初中；保持学籍连续是参与前提。",
     "body": "指标到校名额分配到各初中后在校内竞争；中途转学可能影响资格。建议：① 确认学籍连续性；② 向班主任了解校内参考口径；③ 关注区教委当年细则（名额与条件每年微调）。",
     "url": ""
-  },
-  {
-    "t": "秋季学期临近，中国留学生准备好了吗？",
-    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1609.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "教育部涉外监管网/留学相关历史公告存档。",
-    "date": "2020–2021（历史文件）",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "中外合作办学日渐增多 考生和家长该如何选择",
-    "url": "http://jsj.moe.gov.cn/n2/7001/7001/1600.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "教育部涉外监管网/留学相关历史公告存档。",
-    "date": "2020–2021（历史文件）",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于取消《留学回国人员证明》的公告",
-    "url": "http://jsj.moe.gov.cn/n2/1/12116/1532.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "教育部涉外监管网/留学相关历史公告存档。",
-    "date": "2020–2021（历史文件）",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于批准2020年下半年中外合作办学项目的通...",
-    "url": "http://jsj.moe.gov.cn/n2/1/1/1606.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "教育部涉外监管网/留学相关历史公告存档。",
-    "date": "2020–2021（历史文件）",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
-    "t": "教育部关于批准2020年上半年中外合作办学项目的通...",
-    "url": "http://jsj.moe.gov.cn/n2/1/1002/1530.shtml",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "教育部涉外监管网/留学相关历史公告存档。",
-    "date": "2020–2021（历史文件）",
-    "body": "",
-    "reviewed": true,
-    "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-09-30 08:12", "seed": 46, "collected": 483, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-09-30 08:39", "seed": 46, "collected": 414, "fetchedPending": 2};

@@ -30,6 +30,7 @@
 39-materials.js
 40-router.js
 41-portal.js
+45-quguide.js
 42-art.js
 43-art2.js
 44-photos.js

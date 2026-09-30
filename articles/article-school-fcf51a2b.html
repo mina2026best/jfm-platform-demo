@@ -935,6 +935,33 @@
     #school-region-filter{display:none}
   }
 
+  /* —— v0.42：区县入学指南卡片 —— */
+  .qug-h{font-family:var(--serif);font-size:20px;color:var(--navy);margin:34px 0 6px}
+  .qug-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .qug-item{display:flex;flex-direction:column;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-decoration:none;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+  .qug-item:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(23,33,46,.10);border-color:var(--accent)}
+  .qug-qu{font-family:var(--serif);font-size:16.5px;font-weight:700;color:var(--navy)}
+  .qug-org{font-size:12.5px;color:var(--accent);line-height:1.6}
+  .qug-note{font-size:12.5px;color:var(--muted);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .qug-go{margin-top:auto;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em}
+  @media (max-width:960px){ .qug-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:620px){ .qug-grid{grid-template-columns:1fr} }
+
+  /* —— v0.42：阅读版式优化（iA 内容优先 · 66 字行节奏）—— */
+  .sec-desc,.pb-sub,.cmp-note,.art-tip{max-width:46em}
+  .pol-item p,.thread .a,.rq-card p,.faq-item .a,.news-item .ni-sum{line-height:1.9;letter-spacing:.005em;max-width:44em}
+  .art-body{max-width:44em}
+  .term dd{max-width:34em}
+  h4{letter-spacing:.01em}
+  .ni-title{letter-spacing:.005em}
+  /* 求真新卡 verdict 色彩（沿用现有类） */
+  .rq-card .src{line-height:1.7}
+  /* 打印隐藏交互容器 */
+  @media print{ .qug-grid{gap:6px} .qug-item{box-shadow:none;border-color:#CCC} .qug-go{display:none} }
+  /* 深色 */
+  html.theme-dark .qug-item:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
+  html.theme-dark .qug-qu{color:#DCE4EE}
+
 
 /* ============ 31-aesthetics ============ */
 /* ---------- v0.41：排版审美升级（统一字阶 / 卡片层次 / 呼吸感 / 微交互） ---------- */
@@ -1105,7 +1132,7 @@
     <h1>求精中学（渝中） · 学校档案</h1>
     <div class="art-meta"><span>重庆市求精中学校</span><span>公办（市级重点）</span><span>渝中区</span><span>校方公示 + 区教委公开信息 · 核验 2026-09-15</span></div>
     <div class="art-body"><div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/schools/qiujing.jpg" alt=""></div><div class="art-facts"><div class="af-item"><span class="af-l">创办</span><span class="af-v">1891 年，由美国基督教 MEM 会创建，初名“重庆求精学堂”；1951 年收归公办并定名重庆市求精中学校</span></div><div class="af-item"><span class="af-l">校训</span><span class="af-v">求实、求真、求精、求新</span></div><div class="af-item af-wide"><span class="af-l">校区地址</span><span class="af-v">渝中区上清寺中山四路 69 号</span></div><div class="af-item af-wide"><span class="af-l">校园规模</span><span class="af-v">据 2016 年 3 月学校官网信息：占地 38800 平方米，71 个教学班、学生 4000 余名，图书馆藏书近 8 万册</span></div></div><h3 class="art-h3">学校概况</h3><p>重庆市求精中学校位于渝中区上清寺，1891 年由美国基督教 MEM 会创建，初名“重庆求精学堂”；1929 年改称重庆市私立求精中学校，1951 年收归公办、定名重庆市求精中学校，其后一度更名为重庆市第六中学校，1998 年复名。学校校训为“求实、求真、求精、求新”，1981 年被列为四川省首批重点中学，1999 年被确认为重庆直辖市首批重点中学。据 2016 年 3 月学校官网信息，学校占地 38800 平方米，设 71 个教学班、学生 4000 余名。学校先后获评第二批全国文明单位（2009）、第三届全国文明校园（2025）。</p><h3 class="art-h3">师资力量</h3><p>在职教工 265 人，其中特级教师 3 名、研究员级教师 2 名、渝中名师 2 名、高级教师 68 名、国家级骨干教师 2 名，市区级骨干教师及学科带头人 30 多名（截至 2016 年 3 月学校官网数据）</p><h3 class="art-h3">办学特色与荣誉</h3><p>1981 年被列为四川省首批重点中学，1999 年被确认为重庆直辖市首批重点中学；2009 年获“第二批全国文明单位”；2025 年被认定为“第三届全国文明校园”；系联合国教科文组织中国教育学术交流中心实验基地、重庆市现代教育技术示范学校</p><h3 class="art-h3">招生与通勤</h3><table class="art-table"><tbody><tr><td>办学性质</td><td>公办（市级重点）</td></tr><tr><td>所在区</td><td>渝中区</td></tr><tr><td>招生范围</td><td>指标到校 + 联招（全市）</td></tr><tr><td>通勤参考</td><td>轨道 1/2 号线换乘；上清寺片区</td></tr><tr><td>住宿</td><td>寄宿限额</td></tr><tr><td>收费口径</td><td>公办收费标准（以公示为准）</td></tr><tr><td>指标到校</td><td>有（同上口径）</td></tr><tr><td>暂缺字段</td><td>近三年录取线（同上）（按合规红线不提供录取线与排名）</td></tr></tbody></table><h3 class="art-h3">家长评价（审核制）</h3><div class="art-quote"><span class="badge-ok">已审核</span> 社团种类多，选课流程公开（2026-07 家长投稿，经双人审核）</div><h3 class="art-h3">同区学校</h3><div class="art-rel-grid"><a class="art-rel-item" href="article-school-10432c02.html"><span class="rtag">渝中区</span><span class="t">巴蜀中学（渝中）</span></a><a class="art-rel-item" href="article-school-d282ceee.html"><span class="rtag">渝中区</span><span class="t">渝中区复旦中学（渝中）</span></a></div><h3 class="art-h3">数据来源与核验</h3><p>校方公示 + 区教委公开信息 · 核验 2026-09-15</p><p class="art-tip">资料采集：公开渠道（百科 / 校方官网 / 政府公开信息）· 2026-09-29，来源链接见《资料来源》</p><ul class="art-src-list"><li><a href="https://wapbaike.baidu.com/item/重庆市求精中学校" target="_blank" rel="noopener">https://wapbaike.baidu.com/item/重庆市求精中学校</a></li></ul><script type="application/ld+json">{"@context": "https://schema.org", "@type": "School", "name": "重庆市求精中学校", "address": "渝中区上清寺中山四路 69 号", "foundingDate": "1891"}</script><p class="art-tip">想在对比中查看该校？回到 <a class="art-link" href="../schools.html?school=求精中学（渝中）">学校档案库</a>，或加入<a class="art-link" href="../compare.html">择校对比器</a>。</p></div>
-    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-57cbac3a.html"><span class="rel-tag">学校档案</span>重庆一中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-10432c02.html"><span class="rel-tag">学校档案</span>巴蜀中学（渝中） · 学校档案</a><a class="rel-item" href="article-school-a9decd04.html"><span class="rel-tag">学校档案</span>重庆八中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-faq-cfd823ce.html"><span class="rel-tag">家长 FAQ</span>我的数据存在哪？</a></div><div class="art-foot">
+    <h3 class="rel-h">相关阅读</h3><div class="rel-grid"><a class="rel-item" href="article-school-98250a24.html"><span class="rel-tag">学校档案</span>南开中学（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-57cbac3a.html"><span class="rel-tag">学校档案</span>重庆一中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-school-10432c02.html"><span class="rel-tag">学校档案</span>巴蜀中学（渝中） · 学校档案</a><a class="rel-item" href="article-school-a9decd04.html"><span class="rel-tag">学校档案</span>重庆八中（沙坪坝） · 学校档案</a><a class="rel-item" href="article-policy-7e7b666b.html"><span class="rel-tag">政策库</span>「双减」与课后服务：作业时长与校外培训边界</a></div><div class="art-foot">
       <a class="art-back" href="../schools.html">← 返回学校档案库</a>
       <span class="art-note">以官方当年发布为准</span>
     </div>
@@ -1155,7 +1182,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.41（2026-09-29）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.42（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -1226,6 +1253,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.42</b><span>区县入学指南：11 个区县官方入口（区政府/区教委/渝快办）逐条 HTTP 实测后上线，含每区办理要点；术语词典 32→40 条（新增多校划片 QA/民转公/科教/体艺后备等高频词）；求真台 12→14 条（新增「摇号可花钱买名额」「九年一贯直升占指标」核验）；阅读版式优化（正文 66 字行距节奏/栏宽收敛）</span></div>
     <div class="cl-item"><b>v0.41</b><span>链接真实化与排版升级：全站 335 条外部链接逐一 HTTP 实测（死链清零：清理国新办失效页/坏链/账号页噪音，渝北中学失效官网改为暂缺）；政策库 12 条全部挂官方原文链接（教委/教育部/中国政府网，实测可达）；资讯编辑内容挂原文；全站视觉体系升级（统一卡片语言/悬浮层次/等高截断/微交互/深色与打印适配）</span></div>
     <div class="cl-item"><b>v0.40</b><span>学校档案门户化：20 所学校公开概况采集上线（创办 / 校训 / 校区地址 / 规模 / 师资 / 办学特色 / 官网，逐项标注来源）；档案库新增区县筛选与统计条；学校详情页升级门户式版式（信息速览 / 概况 / 师资 / 特色 / 来源与核验 / 相关资讯 / 同区学校）；择校对比新增「创办 / 校区地址」维度</span></div>
     <div class="cl-item"><b>v0.39</b><span>实景照片升级：20 校全部更换为该校真实校门/校园实拍照片；资讯中心开通「每日自动更新」（每日新增 50 条以上并标注来源）；全站链接有效性核验</span></div>

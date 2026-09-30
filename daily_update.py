@@ -77,6 +77,11 @@ def extract_links(base, html):
         if not any(k in txt for k in EDU_KEYS): continue
         full = urljoin(base, href)
         if not full.startswith("http"): continue
+        # 仅收录与源站同域的链接（避免把导航/友链等外站入口当资讯）
+        try:
+            from urllib.parse import urlparse as _up
+            if _up(full).netloc != _up(base).netloc: continue
+        except Exception: continue
         if re.search(r"\.(jpg|png|gif|pdf|doc|docx|xls|xlsx|zip|mp4|mp3)$", full, re.I): continue
         out.append((txt, full))
     return out

@@ -11,7 +11,7 @@ def slugify(text):
     h = hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
     return h
 
-ROOT_PAGES = {"index","news","calendar","policy","quiz","schools","compare","zy","fact","community","life","beans","me","plans","biz","data-sources","about","search","faq","wiki","contact","404"}
+ROOT_PAGES = {"index","news","calendar","policy","quiz","schools","compare","zy","fact","community","life","beans","me","plans","biz","data-sources","about","search","faq","wiki","contact","problems","404"}
 def fix_rel(html):
     """文章页位于 articles/ 子目录：把指向站点根页面的相对链接改为 ../ 前缀。"""
     def rep(m):

@@ -69,3 +69,18 @@
 
   /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
   .sr-only-h1{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* —— v0.44：问题速查（组合卡）—— */
+  .pb-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .pb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .pb-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:9px;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+  .pb-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(23,33,46,.10);border-color:var(--accent)}
+  .pb-q{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);line-height:1.55}
+  .pb-row{font-size:13px;line-height:1.75;color:var(--ink2)}
+  .pb-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 8px;margin-right:8px}
+  .pb-row a{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+  .pb-row a:hover{border-bottom-style:solid}
+  .pb-tip{font-size:12.5px;color:var(--muted);background:var(--accent-soft);border-radius:8px;padding:8px 12px;line-height:1.75;margin-top:auto}
+  @media (max-width:860px){ .pb-grid{grid-template-columns:1fr} }
+  @media print{ .pb-card{box-shadow:none;border-color:#CCC} }
+  html.theme-dark .pb-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}

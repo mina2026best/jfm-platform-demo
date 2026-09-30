@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>B 端合作 · 鸡父母</title>
-<meta name="description" content="三类合作形态 + 资质审核 + 平台不背书承诺；意向登记通道。" />
+<title>问题速查 · 鸡父母</title>
+<meta name="description" content="「我遇到 X 问题」组合速查：场景 → 政策条目 + 高频术语 + 站内工具，答案可点进原文核验。" />
 <meta name="theme-color" content="#24344D" />
 <meta property="og:title" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta property="og:description" content="可核验的升学信息 · 多孩档案个性化 · 提醒可导出可打印。" />
@@ -1090,7 +1090,7 @@
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
 <meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />
-<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/biz.html" />
+<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/problems.html" />
 <meta property="og:site_name" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
 <meta name="twitter:card" content="summary_large_image" />
 </head>
@@ -1113,7 +1113,7 @@
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="problems.html">速查</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html">搜索</a><a href="problems.html" aria-current="page">速查</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
@@ -1121,29 +1121,16 @@
   </div>
 </div>
 
-<div class="wrap"><h1 class="page-h1">B 端合作</h1></div>
 
-<section id="biz">
+<section id="problems" class="alt">
   <div class="wrap">
-    <div class="sec-head"><span class="no">05.8 · B 端合作</span><h2>机构入驻 · 活动联办 · 品牌内容</h2></div>
-    <p class="sec-desc">资质审核白名单（营业执照 / 行业资质 / 年检 / 无重大投诉），平台统一标注「已通过资质审核，平台不为其服务背书」；不承接学科培训导流、不使用结果承诺类话术、商业内容标注「广告/合作」。定价：入驻年费 0.5–2 万元（起盘期可资源置换）。</p>
-    <div class="biz-grid">
-      <div class="biz-card"><h4>机构入驻展示</h4><p>非学科、资质合规机构；页面标注资质审核状态与复核日期。</p></div>
-      <div class="biz-card"><h4>活动联办</h4><p>探校团、公益讲座、校园开放日信息联合发布；0.3–1 万元/场。</p></div>
-      <div class="biz-card"><h4>品牌内容合作</h4><p>按篇报价；所有商业内容标注「广告/合作」标识并过合规三审。</p></div>
-    </div>
-    <div class="form-card light">
-      <h4>合作意向登记</h4>
-      <div class="hint">提交后走「资质预审 → 白名单审批 → 商务对接」，5 个工作日内回复（对应 SOP）。</div>
-      <div class="form-row">
-        <input id="bz-name" placeholder="机构名称（≥2 字）" aria-label="机构名称" />
-        <select id="bz-type" aria-label="合作类型"><option>机构入驻</option><option>活动联办</option><option>品牌内容</option></select>
-      </div>
-      <textarea id="bz-intro" placeholder="业务简介与资质情况（≥10 字）" aria-label="业务简介"></textarea>
-      <div class="err" id="bz-err">请填写机构名称（≥2 字）与简介（≥10 字）。</div>
-      <div class="ok-box" id="bz-ok" style="display:none"><b>意向已登记：</b><span id="bz-id"></span> · 将进入资质预审流程。</div>
-      <div style="margin-top:12px"><button onclick="submitBiz()">提交意向</button></div>
-    </div>
+    <div class="page-banner"><div>
+      <div class="pb-kicker">GUIDE · 问题速查</div>
+      <h1 class="sr-only-h1">问题速查</h1>
+      <h2>「我遇到 X 问题」——一步到位的组合答案</h2>
+      <p class="pb-sub">选一个最像你的场景，直接给出：相关政策条目 + 高频术语 + 站内工具。答案均可点进原文核验。</p>
+    </div><div class="pb-art" data-art="banner-faq" aria-hidden="true"></div></div>
+    <div id="pb-guide"></div>
   </div>
 </section>
 

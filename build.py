@@ -72,6 +72,9 @@ PAGES = [
     dict(file="wiki.html",   title="升学百科 · 鸡父母",
          desc="幼升小 / 小升初 / 初升高 / 高考四阶段全流程指南：时间轴 + 必办事项 + 常见误区 + 工具入口。",
          sections=["wiki"]),
+    dict(file="problems.html", title="问题速查 · 鸡父母",
+         desc="「我遇到 X 问题」组合速查：场景 → 政策条目 + 高频术语 + 站内工具，答案可点进原文核验。",
+         sections=["problems"]),
     dict(file="faq.html",    title="家长 FAQ · 鸡父母",
          desc="20 个最常被问到的问题：入学 / 择校 / 政策 / 生活 / 会员，快问快答带入口链接。",
          sections=["faq"]),
@@ -143,6 +146,7 @@ def build_js():
         _sch = json.load(open(os.path.join(SRC, "data", "schools.json"), encoding="utf-8"))
         for name in _sch:
             artmap["S|" + name] = "article-school-" + _sg(name) + ".html"
+
         _learn = json.load(open(os.path.join(SRC, "data", "learn.json"), encoding="utf-8"))
         for q in _learn.get("qa", []):
             artmap["L|" + q["q"]] = "article-learn-" + _sg(q["q"]) + ".html"
@@ -198,7 +202,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("community.html", "社区"),
         ("life.html", "生活"),
         ("search.html", "搜索"),
-        ("faq.html", "FAQ"),
+        ("problems.html", "速查"), ("faq.html", "FAQ"),
         ("beans.html", "升学豆"),
         ("me.html", "我的"),
         ("plans.html", "会员", "cta"),
@@ -214,7 +218,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
         ("zy.html", "志愿参考"), ("fact.html", "求真台"), ("community.html", "家长社区"),
         ("community.html", "家长学堂"), ("life.html", "生活服务"),
-        ("search.html", "站内搜索"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
+        ("search.html", "站内搜索"), ("problems.html", "问题速查"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
         ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
     ]
     mm = "<a href=\"{}\"{}>{}</a>".format
@@ -245,7 +249,7 @@ def convert_links(html):
         "#learn": "community.html", "#life": "life.html", "#beans": "beans.html",
         "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
         "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
-        "#main": "index.html", "#searchpage": "search.html", "#faq": "faq.html", "#wiki": "wiki.html", "#contact": "contact.html",
+        "#main": "index.html", "#searchpage": "search.html", "#faq": "faq.html", "#problems": "problems.html", "#wiki": "wiki.html", "#contact": "contact.html",
     }
     for anchor, page in mapping.items():
         html = html.replace(f'href="{anchor}"', f'href="{page}"')
@@ -335,7 +339,7 @@ def build_page(page, tpl, secs, css, js):
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
-    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + hero + content \
@@ -352,6 +356,12 @@ def build_page(page, tpl, secs, css, js):
 def main():
     tpl = read(f"{SRC}/template.html")
     css, js = build_css(), build_js()
+    # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
+    _pmap = {}
+    for _m in re.finditer(r'<div class="pol-item"[^>]*>\s*<h4><a class="art-t" href="articles/(article-policy-[a-z0-9]+\.html)">([^<]+)</a>', tpl):
+        _pmap["P|" + _m.group(2).strip()] = _m.group(1)
+    if _pmap:
+        js += "\n;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in " + json.dumps(_pmap, ensure_ascii=False) + "){ ARTMAP[k] = " + json.dumps(_pmap, ensure_ascii=False) + "[k]; } } })();"
     secs = extract_sections(tpl)
     missing = [p for pg in PAGES for p in pg["sections"] if p not in secs]
     if missing:

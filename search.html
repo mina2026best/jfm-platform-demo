@@ -970,6 +970,21 @@
   /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
   .sr-only-h1{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
+  /* —— v0.44：问题速查（组合卡）—— */
+  .pb-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .pb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .pb-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:9px;transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease}
+  .pb-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(23,33,46,.10);border-color:var(--accent)}
+  .pb-q{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy);line-height:1.55}
+  .pb-row{font-size:13px;line-height:1.75;color:var(--ink2)}
+  .pb-tag{display:inline-block;font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 8px;margin-right:8px}
+  .pb-row a{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+  .pb-row a:hover{border-bottom-style:solid}
+  .pb-tip{font-size:12.5px;color:var(--muted);background:var(--accent-soft);border-radius:8px;padding:8px 12px;line-height:1.75;margin-top:auto}
+  @media (max-width:860px){ .pb-grid{grid-template-columns:1fr} }
+  @media print{ .pb-card{box-shadow:none;border-color:#CCC} }
+  html.theme-dark .pb-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
+
 
 /* ============ 31-aesthetics ============ */
 /* ---------- v0.41：排版审美升级（统一字阶 / 卡片层次 / 呼吸感 / 微交互） ---------- */
@@ -1098,11 +1113,11 @@
              oninput="runSearch()" onkeydown="searchKeydown(event)" onblur="setTimeout(function(){var p=document.getElementById('search-panel');if(p)p.hidden=true;},180)" />
       <div id="search-panel" class="search-panel" hidden></div>
     </div>
-    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html" aria-current="page">搜索</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
+    <nav><a href="news.html">资讯</a><a href="calendar.html">日历</a><a href="policy.html">政策</a><a href="schools.html">档案</a><a href="compare.html">对比</a><a href="zy.html">志愿</a><a href="fact.html">求真</a><a href="community.html">社区</a><a href="life.html">生活</a><a href="search.html" aria-current="page">搜索</a><a href="problems.html">速查</a><a href="faq.html">FAQ</a><a href="beans.html">升学豆</a><a href="me.html">我的</a><a href="plans.html" class="cta">会员</a></nav>
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="community.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
+    <a href="news.html" class="['']">升学资讯</a><a href="quiz.html" class="['']">入学自查</a><a href="calendar.html" class="['']">升学日历</a><a href="policy.html" class="['']">政策库</a><a href="schools.html" class="['']">学校档案</a><a href="compare.html" class="['']">择校对比</a><a href="zy.html" class="['']">志愿参考</a><a href="fact.html" class="['']">求真台</a><a href="community.html" class="['']">家长社区</a><a href="community.html" class="['']">家长学堂</a><a href="life.html" class="['']">生活服务</a><a href="search.html" class="['']">站内搜索</a><a href="problems.html" class="['']">问题速查</a><a href="faq.html" class="['']">家长 FAQ</a><a href="beans.html" class="['']">升学豆</a><a href="me.html" class="['']">我的</a><a href="biz.html" class="['']">B端合作</a><a href="plans.html" class="['cta']">会员</a>
   </div>
 </div>
 
@@ -1167,7 +1182,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.43（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.44（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · v0.44 问题速查（10 场景 → 政策+术语+工具组合答案）/ 政策详情真链映射 P| · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -7073,7 +7088,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); renderQuGuide(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); bootPageRoute();
+  initSelects(); renderSchools(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); bootPageRoute();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -8437,9 +8452,248 @@ function applyTermFilter(){
     if(q) q.addEventListener('input', applyTermFilter);
   });
 })();
-</script>
 
-<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
+
+/* ---------- 47-problems ---------- */
+/* ---------- v0.44：问题反查表（我遇到 X 问题 → 政策/术语/工具组合卡） ---------- */
+var PROBLEMS = [
+ {
+  "q": "孩子明年幼升小，房子刚买，能上对口小学吗？",
+  "cat": "入学",
+  "policies": [
+   "义务教育免试入学：划片就近 + 单校/多校对口"
+  ],
+  "terms": [
+   "三对口",
+   "六年一户",
+   "学位锁定",
+   "划片范围"
+  ],
+  "tools": [
+   [
+    "入学材料清单生成器",
+    "quiz.html"
+   ],
+   [
+    "升学日历 · 设报名提醒",
+    "calendar.html"
+   ]
+  ],
+  "tip": "买房≠立刻有学位：先查该房产是否处于学位锁定/落户年限限制，再对照当年划片范围。"
+ },
+ {
+  "q": "外地户籍，能在重庆读公办小学吗？",
+  "cat": "入学",
+  "policies": [
+   "随迁子女入学：「两为主、两纳入」保障"
+  ],
+  "terms": [
+   "随迁子女",
+   "积分入学",
+   "统筹安排"
+  ],
+  "tools": [
+   [
+    "入学材料清单生成器",
+    "quiz.html"
+   ]
+  ],
+  "tip": "居住证 + 就业/社保材料提前半年备齐；热门片区可能统筹安排到附近公办。"
+ },
+ {
+  "q": "想给孩子转学，什么时候能办、影响指标到校吗？",
+  "cat": "学籍",
+  "policies": [
+   "学籍管理：「人籍一致」与转学窗口"
+  ],
+  "terms": [
+   "中途转入",
+   "人籍一致",
+   "指标资格"
+  ],
+  "tools": [
+   [
+    "升学日历 · 学期窗口提醒",
+    "calendar.html"
+   ]
+  ],
+  "tip": "转学窗口在学期初；初中段转学可能影响指标到校资格连续性——先向两所学校与区教委确认。"
+ },
+ {
+  "q": "民办初中摇号没摇中，会不会没学上？",
+  "cat": "入学",
+  "policies": [
+   "民办义务教育招生：超计划全部摇号"
+  ],
+  "terms": [
+   "公民同招",
+   "摇号",
+   "统筹安排"
+  ],
+  "tools": [
+   [
+    "政策库 · 摇号条款",
+    "policy.html"
+   ],
+   [
+    "求真台 · 摇号传言核验",
+    "fact.html"
+   ]
+  ],
+  "tip": "公民同招：摇号未中回公办统筹，双轨准备材料才稳；「花钱买名额」都是诈骗。"
+ },
+ {
+  "q": "初三了，指标到校资格怎么核对？",
+  "cat": "中考",
+  "policies": [
+   "优质高中指标到校招生工作通知"
+  ],
+  "terms": [
+   "指标到校",
+   "指标资格",
+   "人籍一致"
+  ],
+  "tools": [
+   [
+    "入学自查 · 能不能报",
+    "quiz.html"
+   ],
+   [
+    "志愿参考 · 位次换算",
+    "zy.html"
+   ]
+  ],
+  "tip": "学籍连续 + 人籍一致是前提；向班主任确认校内排序口径，名额分配到校后是校内竞争。"
+ },
+ {
+  "q": "中考志愿怎么填才不浪费分数？",
+  "cat": "中考",
+  "policies": [
+   "2026 年中考政策：联招学校约 113 所",
+   "普通高中招生录取：批次设置与征集志愿"
+  ],
+  "terms": [
+   "平行志愿",
+   "批次线",
+   "征集志愿",
+   "位次"
+  ],
+  "tools": [
+   [
+    "志愿参考 · 位次换算",
+    "zy.html"
+   ],
+   [
+    "择校对比器",
+    "compare.html"
+   ]
+  ],
+  "tip": "用位次不用绝对分；批次是顺序不是档次；出分后每天盯征集志愿公告。"
+ },
+ {
+  "q": "家里经济困难，高中有什么资助？",
+  "cat": "费用",
+  "policies": [
+   "高中阶段学生资助：免学费 + 国家助学金"
+  ],
+  "terms": [
+   "生源地助学贷款"
+  ],
+  "tools": [
+   [
+    "政策库 · 资助条目原文",
+    "policy.html"
+   ]
+  ],
+  "tip": "资助是申请制：向学校提交材料走统一流程；普高与中职各有通道，别不好意思问班主任。"
+ },
+ {
+  "q": "怎么判断校外培训机构靠不靠谱？",
+  "cat": "培训",
+  "policies": [
+   "「双减」与课后服务：作业时长与校外培训边界"
+  ],
+  "terms": [
+   "监管账户",
+   "课后服务"
+  ],
+  "tools": [
+   [
+    "求真台 · 培训传言核验",
+    "fact.html"
+   ]
+  ],
+  "tip": "查办学许可证与收费公示；一次性缴费不超 3 个月或 60 课时，且必须走监管账户。"
+ },
+ {
+  "q": "孩子在学校吃得好不好，家长能监督吗？",
+  "cat": "安全",
+  "policies": [
+   "校园食品安全与营养：家长监督权"
+  ],
+  "terms": [],
+  "tools": [
+   [
+    "联系与留言 · 提交线索",
+    "contact.html"
+   ]
+  ],
+  "tip": "校长负责制 + 陪餐制度；家长有权查后厨直播与食材台账，发现问题逐级反映。"
+ },
+ {
+  "q": "孩子成绩中等，选科怎么选不吃亏？",
+  "cat": "高考",
+  "policies": [],
+  "terms": [
+   "强基计划",
+   "一分一段",
+   "位次"
+  ],
+  "tools": [
+   [
+    "志愿参考 · 位次换算",
+    "zy.html"
+   ],
+   [
+    "升学百科 · 高考全流程",
+    "wiki.html"
+   ]
+  ],
+  "tip": "先定专业大方向再定选科组合；物理+化学覆盖面最广，但要看孩子学科能力分布。"
+ }
+];
+
+var PROBLEM_CATS = ['all','入学','学籍','中考','费用','培训','安全','高考'];
+function renderProblems(){
+  var box = document.getElementById('pb-guide'); if(!box) return;
+  box.innerHTML = '<div class="pb-cats">' + PROBLEM_CATS.map(function(c){
+      return '<button class="ff on" data-bf="' + c + '" onclick="filterProblems(\'' + c + '\')">' + (c==='all' ? '全部（'+PROBLEMS.length+'）' : c+'（'+PROBLEMS.filter(function(p){return p.cat===c;}).length+'）') + '</button>';
+    }).join('') + '</div><div class="pb-grid">' + PROBLEMS.map(function(p, i){
+    return '<div class="pb-card" data-bcat="' + p.cat + '">'
+      + '<div class="pb-q">' + esc(p.q) + '</div>'
+      + (p.policies.length ? '<div class="pb-row"><span class="pb-tag">政策</span>' + p.policies.map(function(x){
+          var pk = (typeof ARTMAP !== 'undefined') ? ARTMAP['P|' + x] : '';
+          return '<a href="' + (pk ? 'articles/' + pk : 'policy.html') + '">' + esc(x) + '</a>';
+        }).join('、') + '</div>' : '')
+      + (p.terms.length ? '<div class="pb-row"><span class="pb-tag">术语</span>' + p.terms.map(function(x){ return '<a href="policy.html#policy" title="见政策库词典">' + esc(x) + '</a>'; }).join('、') + '</div>' : '')
+      + (p.tools.length ? '<div class="pb-row"><span class="pb-tag">工具</span>' + p.tools.map(function(t){ return '<a href="' + t[1] + '">' + esc(t[0]) + ' →</a>'; }).join('、') + '</div>' : '')
+      + '<div class="pb-tip">' + esc(p.tip) + '</div></div>';
+  }).join('') + '</div>';
+}
+function filterProblems(cat){
+  document.querySelectorAll('.pb-cats .ff').forEach(function(b){
+    var on = b.dataset.bf === cat;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  document.querySelectorAll('.pb-card').forEach(function(card){
+    card.style.display = (cat === 'all' || card.getAttribute('data-bcat') === cat) ? '' : 'none';
+  });
+}
+
+;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html"}){ ARTMAP[k] = {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html"}[k]; } } })();</script>
+
+<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
   <div class="dlg-kicker">学校档案 · 审核制</div>
@@ -8504,6 +8758,7 @@ function applyTermFilter(){
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.44</b><span>新增「问题速查」页（problems.html）：10 个高频场景（幼升小/转学/摇号/指标到校/志愿/资助/培训/食品安全/选科/随迁），每个场景组合给出相关政策条目（详情真链）+ 术语 + 工具 + 一句要点；分类筛选；导航与站点地图收录；P| 政策详情映射入 ARTMAP</span></div>
     <div class="cl-item"><b>v0.43</b><span>双专家评估整改（10 项全落地）：全站 21 页注入页面级 h1（文档大纲合规）；460+ 图片补齐 alt（学校卡=校名/资讯封面=分类）；资讯默认渲染 60 条 + 加载更多（移动端 DOM 7940→2717）；政策库分类筛选（入学/中考/资助/安全/培训）；术语词典四组 tab + 快搜；微信分享封面 og:image；学校弹窗↔区县指南交叉引用；详情页三级面包屑</span></div>
     <div class="cl-item"><b>v0.42</b><span>区县入学指南：11 个区县官方入口（区政府/区教委/渝快办）逐条 HTTP 实测后上线，含每区办理要点；术语词典 32→40 条（新增多校划片 QA/民转公/科教/体艺后备等高频词）；求真台 12→14 条（新增「摇号可花钱买名额」「九年一贯直升占指标」核验）；阅读版式优化（正文 66 字行距节奏/栏宽收敛）</span></div>
     <div class="cl-item"><b>v0.41</b><span>链接真实化与排版升级：全站 335 条外部链接逐一 HTTP 实测（死链清零：清理国新办失效页/坏链/账号页噪音，渝北中学失效官网改为暂缺）；政策库 12 条全部挂官方原文链接（教委/教育部/中国政府网，实测可达）；资讯编辑内容挂原文；全站视觉体系升级（统一卡片语言/悬浮层次/等高截断/微交互/深色与打印适配）</span></div>

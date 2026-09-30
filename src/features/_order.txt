@@ -35,3 +35,4 @@
 43-art2.js
 44-photos.js
 46-filter.js
+47-problems.js

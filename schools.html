@@ -7968,13 +7968,17 @@ var QU_GUIDE = [
 
 function renderQuGuide(){
   var box = document.getElementById('qu-guide'); if(!box) return;
-  box.innerHTML = QU_GUIDE.map(function(g){
+  var html = '<div class="qug-grid">';
+  html += QU_GUIDE.map(function(g){
     return '<a class="qug-item" href="' + g.url + '" target="_blank" rel="noopener">'
       + '<span class="qug-qu">' + esc(g.qu) + '</span>'
       + '<span class="qug-org">' + esc(g.org) + '</span>'
       + '<span class="qug-note">' + esc(g.note) + '</span>'
       + '<span class="qug-go">官方入口 ↗</span></a>';
-  }).join('') + '<p class="cmp-note">以上 ' + QU_GUIDE.length + ' 条官方入口于 2026-09-30 逐一 HTTP 实测可达（2xx）；招生细则以各区当年公告为准。江北/渝北两区经「渝快办」统一入口办理义务教育入学。</p>';
+  }).join('');
+  html += '</div>';
+  html += '<p class="cmp-note">以上 ' + QU_GUIDE.length + ' 条官方入口于 2026-09-30 逐一 HTTP 实测可达（2xx）；招生细则以各区当年公告为准。江北/渝北两区经「渝快办」统一入口办理义务教育入学。</p>';
+  box.innerHTML = html;
 }
 
 

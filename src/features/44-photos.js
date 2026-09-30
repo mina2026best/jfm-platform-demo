@@ -8,8 +8,8 @@ var PHOTO_FILES = {
   calendar:'calendar-desk.jpg', city:'city-scape.jpg'
 };
 function photoURL(key){ return PHOTO_BASE + (PHOTO_FILES[key] || PHOTO_FILES.city); }
-function photoImg(key, eager){
-  return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURL(key) + '" alt="">';
+function photoImg(key, eager, alt){
+  return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURL(key) + '" alt="' + (alt || '') + '">';
 }
 /* 学校→照片：一校一图固定映射（SCHOOL_PHOTOS 由构建注入，与 article_gen.py 同源） */
 var SCHOOL_PHOTO_KEYS = ['gate1','gate2','building','playground','library','courtyard','students','panorama'];
@@ -23,7 +23,7 @@ function schoolPhotoFile(name){
   return PHOTO_FILES[schoolPhotoKey(name)];
 }
 function schoolPhotoImg(name){
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="">';
+  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园实景照片">';
 }
 /* 插画 kind → 实景照片（hero / 入口卡 / 页眉横幅） */
 var ART_PHOTO = {

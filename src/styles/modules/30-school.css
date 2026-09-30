@@ -62,3 +62,10 @@
   /* 深色 */
   html.theme-dark .qug-item:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
   html.theme-dark .qug-qu{color:#DCE4EE}
+
+  /* —— v0.43：页面级 h1（与 sec-head 视觉协调，h1 包裹原 h2 文案由 build 注入）—— */
+  .page-h1{font-family:var(--serif);font-size:15px;color:var(--navy);font-weight:700;margin:20px 0 -14px;letter-spacing:.01em}
+  @media print{ .page-h1{font-size:14pt} }
+
+  /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
+  .sr-only-h1{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

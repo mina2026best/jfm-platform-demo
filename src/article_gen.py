@@ -47,7 +47,7 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
 <body>
 {header}
 <main class="wrap">
-  <nav class="crumb"><a href="{cfg["back"]}">{cfg["back_label"]}</a> <span>›</span> {esc(cfg["title"])[:22]}{'…' if len(cfg["title"])>22 else ''}</nav>
+  <nav class="crumb"><a href="index.html">首页</a> <span>›</span> <a href="{cfg["back"]}">{cfg["back_label"]}</a> <span>›</span> {esc(cfg["title"])[:22]}{'…' if len(cfg["title"])>22 else ''}</nav>
   <article class="art">
     <div class="art-kicker">{esc(cfg["kicker"])}</div>
     <h1>{esc(cfg["title"])}</h1>
@@ -90,7 +90,7 @@ try{{ if(typeof initDialogFocusTrap==='function') initDialogFocusTrap(); }}catch
 def extract_template_blocks(tpl, marker, count_expected=None):
     """按 class 标记抓取 <div class="marker">…（配对 div）"""
     blocks = []
-    for m in re.finditer(r'<div class="' + marker + r'">', tpl):
+    for m in re.finditer(r'<div class="' + marker + r'"[^>]*>', tpl):
         start = m.start()
         idx = m.end(); depth = 1
         while depth > 0:
@@ -199,7 +199,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
             _u = d["官网"]
             facts.append(("官网", '<a href="' + esc(_u) + '" target="_blank" rel="noopener">' + esc(re.sub(r'^https?://', '', _u).rstrip('/')) + ' ↗</a>', False))
         _file = _sph.get(name, "school-gate-1.jpg")
-        body = '<div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/' + _file + '" alt=""></div>'
+        body = '<div class="art-photo"><img loading="lazy" decoding="async" src="../assets/photos/' + _file + '" alt="' + esc(name) + '校园实景照片"></div>'
         if facts:
             body += '<div class="art-facts">' + "".join(
                 '<div class="af-item' + (' af-wide' if w else '') + '"><span class="af-l">' + l + '</span><span class="af-v">' + v + '</span></div>'
@@ -304,7 +304,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
         if not tm: continue
         title = tm.group(1)
         sl = slugify(title)
-        inner = blk[len('<div class="pol-item">'):-len("</div>")]
+        inner = blk[re.search(r'<div class="pol-item"[^>]*>', blk).end():-len("</div>")]
         meta = re.search(r'<div class="meta">([\s\S]*?)</div>', inner)
         body = '<div class="art-meta-inline">' + (meta.group(1) if meta else "") + '</div>'
         rest = inner[inner.find("</div>", inner.find('<div class="meta">'))+6:] if meta else inner

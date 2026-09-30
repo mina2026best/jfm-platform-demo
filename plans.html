@@ -963,6 +963,13 @@
   html.theme-dark .qug-item:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
   html.theme-dark .qug-qu{color:#DCE4EE}
 
+  /* —— v0.43：页面级 h1（与 sec-head 视觉协调，h1 包裹原 h2 文案由 build 注入）—— */
+  .page-h1{font-family:var(--serif);font-size:15px;color:var(--navy);font-weight:700;margin:20px 0 -14px;letter-spacing:.01em}
+  @media print{ .page-h1{font-size:14pt} }
+
+  /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
+  .sr-only-h1{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
 
 /* ============ 31-aesthetics ============ */
 /* ---------- v0.41：排版审美升级（统一字阶 / 卡片层次 / 呼吸感 / 微交互） ---------- */
@@ -1067,6 +1074,10 @@
 </style>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2324344D'/><circle cx='32' cy='24' r='8' fill='%230E7C66'/><text x='32' y='52' font-size='28' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>鸡</text></svg>" />
+<meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />
+<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/plans.html" />
+<meta property="og:site_name" content="鸡父母 · 重庆家长升学信息与生活服务平台" />
+<meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
 
@@ -1095,6 +1106,7 @@
   </div>
 </div>
 
+<div class="wrap"><h1 class="page-h1">会员体系</h1></div>
 
 <section id="plans" class="alt">
   <div class="wrap">
@@ -1199,7 +1211,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.42（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.43（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -6522,6 +6534,12 @@ function openSchool(name){
   }).join('');
   var art = (typeof ARTMAP !== 'undefined') ? (ARTMAP['S|' + name] || '') : '';
   if(art){ kv.innerHTML += '<dt>完整档案</dt><dd><a href="articles/' + art + '">学校详情页（概况 / 师资 / 来源）→</a></dd>'; }
+  // v0.43：区县交叉引用（该区入学政策与官方入口）
+  var qu = d['所在区'] || '';
+  if(qu && typeof QU_GUIDE !== 'undefined'){
+    var qg = QU_GUIDE.find(function(g){ return g.qu === qu; });
+    if(qg){ kv.innerHTML += '<dt>区县入学</dt><dd><a href="schools.html#qu-guide">' + esc(qu) + '入学政策与官方入口 →</a></dd>'; }
+  }
   var ev = document.getElementById('sm-evals');
   ev.innerHTML = (d['评价'] || []).map(function(e){ return '<div class="dlg-ev"><span class="sc-badge" style="margin-right:6px">' + esc(e.badge) + '</span>' + esc(e.text) + '</div>'; }).join('') || '<div class="dlg-ev">暂无评价（评价须经审核后展示）</div>';
   document.getElementById('sm-note').textContent = '';
@@ -7117,10 +7135,14 @@ function clearCompare(){
 
 /* ---------- 30-news ---------- */
 /* ---------- v0.10：资讯中心（信息流 + 站内编辑台） ---------- */
+var NEWS_PHOTO_ALT = {'政策速递':'政策文件主题配图','升学动态':'校园新闻主题配图','家庭教育':'家庭教育主题配图','安全提醒':'校园安全主题配图','办事提醒':'日历办事主题配图'};
 var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','办事提醒'];
 var newsFilter = 'all';
 var newsQuery = '';
 var neEditingId = null;
+var NEWS_PAGE_SIZE = 60;      // v0.43：默认渲染条数（加载更多每次 +60）
+var newsShown = NEWS_PAGE_SIZE;
+function moreNews(){ newsShown += NEWS_PAGE_SIZE; renderNews(); }
 
 function todayStr(){
   var d = new Date();
@@ -7163,9 +7185,20 @@ function renderNews(){
     return true;
   });
   box.setAttribute('data-covers', '1');
-  box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
+  // v0.43：筛选/搜索时全量，默认浏览时分页渲染
+  var pageShown = (q || newsFilter !== 'all') ? shown.length : Math.min(newsShown, shown.length);
+  var pageItems = shown.slice(0, pageShown);
+  box.innerHTML = pageItems.length ? pageItems.map(newsItemHTML).join('')
     : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
          : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加。</div>');
+  // 「加载更多」按钮（仅默认浏览态且还有剩余时显示）
+  var moreBox = document.getElementById('news-more');
+  if(moreBox){
+    if(!q && newsFilter === 'all' && pageShown < shown.length){
+      moreBox.hidden = false;
+      moreBox.innerHTML = '<button class="mini-btn" style="padding:10px 22px" onclick="moreNews()">加载更多（已显示 ' + pageShown + ' / ' + shown.length + ' 条）</button>';
+    } else { moreBox.hidden = true; moreBox.innerHTML = ''; }
+  }
   var counts = { all: arr.length };
   NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
   var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
@@ -7188,7 +7221,7 @@ function newsItemHTML(x){
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
   var coverKind = { '政策速递':'office', '升学动态':'classroom', '家庭教育':'study', '安全提醒':'playground', '办事提醒':'calendar', '行业观察':'city' }[x.cat] || 'city';
-  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind) + '</div>';
+  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind, false, NEWS_PHOTO_ALT[x.cat] || '教育资讯主题配图') + '</div>';
   var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + x.t] || '') : '';
   var titleLink;
   if(artKey){ titleLink = '<a class="ni-link" href="articles/' + artKey + '" title="阅读全文">' + esc(x.t) + '</a>'; }
@@ -8356,8 +8389,8 @@ var PHOTO_FILES = {
   calendar:'calendar-desk.jpg', city:'city-scape.jpg'
 };
 function photoURL(key){ return PHOTO_BASE + (PHOTO_FILES[key] || PHOTO_FILES.city); }
-function photoImg(key, eager){
-  return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURL(key) + '" alt="">';
+function photoImg(key, eager, alt){
+  return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURL(key) + '" alt="' + (alt || '') + '">';
 }
 /* 学校→照片：一校一图固定映射（SCHOOL_PHOTOS 由构建注入，与 article_gen.py 同源） */
 var SCHOOL_PHOTO_KEYS = ['gate1','gate2','building','playground','library','courtyard','students','panorama'];
@@ -8371,13 +8404,83 @@ function schoolPhotoFile(name){
   return PHOTO_FILES[schoolPhotoKey(name)];
 }
 function schoolPhotoImg(name){
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="">';
+  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园实景照片">';
 }
 /* 插画 kind → 实景照片（hero / 入口卡 / 页眉横幅） */
 var ART_PHOTO = {
   'hero':'students', 'policy':'office', 'schools':'building', 'fact':'study',
   'banner-policy':'office', 'banner-faq':'classroom'
 };
+
+
+/* ---------- 46-filter ---------- */
+/* ---------- v0.43：政策分类筛选 + 术语分组与快搜 ---------- */
+function filterPolicy(cat){
+  cat = cat || 'all';
+  document.querySelectorAll('#pol-filter .ff').forEach(function(b){
+    var on = b.dataset.pf === cat;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  var shown = 0;
+  document.querySelectorAll('#policy .pol-item').forEach(function(card){
+    var ok = cat === 'all' || (card.getAttribute('data-pc') || '') === cat;
+    card.style.display = ok ? '' : 'none';
+    if(ok) shown++;
+  });
+  var emptyEl = document.getElementById('pol-empty');
+  if(shown === 0){
+    if(!emptyEl){
+      emptyEl = document.createElement('div');
+      emptyEl.id = 'pol-empty'; emptyEl.className = 'empty-mini';
+      emptyEl.textContent = '该分类暂无条目。';
+      var pol = document.querySelector('#policy .pol > div');
+      if(pol) pol.appendChild(emptyEl);
+    }
+  } else if(emptyEl){ emptyEl.remove(); }
+}
+function filterTerms(cat){
+  cat = cat || 'all';
+  document.querySelectorAll('#term-filter .ff').forEach(function(b){
+    var on = b.dataset.tf === cat;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  applyTermFilter();
+}
+function applyTermFilter(){
+  var qEl = document.getElementById('term-q');
+  var q = qEl ? qEl.value.trim().toLowerCase() : '';
+  var cat = 'all';
+  var onBtn = document.querySelector('#term-filter .ff.on');
+  if(onBtn) cat = onBtn.dataset.tf || 'all';
+  var shown = 0;
+  document.querySelectorAll('#policy .term dt').forEach(function(dt){
+    var dd = dt.nextElementSibling;
+    var okCat = cat === 'all' || (dt.getAttribute('data-tg') || '') === cat;
+    var okQ = !q || (dt.textContent + ' ' + (dd ? dd.textContent : '')).toLowerCase().indexOf(q) >= 0;
+    var ok = okCat && okQ;
+    dt.style.display = ok ? '' : 'none';
+    if(dd) dd.style.display = ok ? '' : 'none';
+    if(ok) shown++;
+  });
+  var term = document.querySelector('#policy .term');
+  var emptyEl = document.getElementById('term-empty');
+  if(shown === 0){
+    if(!emptyEl && term){
+      emptyEl = document.createElement('p');
+      emptyEl.id = 'term-empty'; emptyEl.className = 'empty-mini';
+      emptyEl.textContent = '没有匹配的术语——换个关键词试试。';
+      term.appendChild(emptyEl);
+    }
+  } else if(emptyEl){ emptyEl.remove(); }
+}
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var q = document.getElementById('term-q');
+    if(q) q.addEventListener('input', applyTermFilter);
+  });
+})();
 </script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
@@ -8445,6 +8548,7 @@ var ART_PHOTO = {
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.43</b><span>双专家评估整改（10 项全落地）：全站 21 页注入页面级 h1（文档大纲合规）；460+ 图片补齐 alt（学校卡=校名/资讯封面=分类）；资讯默认渲染 60 条 + 加载更多（移动端 DOM 7940→2717）；政策库分类筛选（入学/中考/资助/安全/培训）；术语词典四组 tab + 快搜；微信分享封面 og:image；学校弹窗↔区县指南交叉引用；详情页三级面包屑</span></div>
     <div class="cl-item"><b>v0.42</b><span>区县入学指南：11 个区县官方入口（区政府/区教委/渝快办）逐条 HTTP 实测后上线，含每区办理要点；术语词典 32→40 条（新增多校划片 QA/民转公/科教/体艺后备等高频词）；求真台 12→14 条（新增「摇号可花钱买名额」「九年一贯直升占指标」核验）；阅读版式优化（正文 66 字行距节奏/栏宽收敛）</span></div>
     <div class="cl-item"><b>v0.41</b><span>链接真实化与排版升级：全站 335 条外部链接逐一 HTTP 实测（死链清零：清理国新办失效页/坏链/账号页噪音，渝北中学失效官网改为暂缺）；政策库 12 条全部挂官方原文链接（教委/教育部/中国政府网，实测可达）；资讯编辑内容挂原文；全站视觉体系升级（统一卡片语言/悬浮层次/等高截断/微交互/深色与打印适配）</span></div>
     <div class="cl-item"><b>v0.40</b><span>学校档案门户化：20 所学校公开概况采集上线（创办 / 校训 / 校区地址 / 规模 / 师资 / 办学特色 / 官网，逐项标注来源）；档案库新增区县筛选与统计条；学校详情页升级门户式版式（信息速览 / 概况 / 师资 / 特色 / 来源与核验 / 相关资讯 / 同区学校）；择校对比新增「创办 / 校区地址」维度</span></div>

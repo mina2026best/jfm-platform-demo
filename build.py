@@ -278,6 +278,11 @@ def extract_dialogs(tpl):
 def page_title_tag(title):
     return f"<title>{title}</title>"
 
+OG_TAGS = ('<meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />\n'
+           '<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
+           '<meta property="og:site_name" content="鸡父母 · 重庆家长升学信息与生活服务平台" />\n'
+           '<meta name="twitter:card" content="summary_large_image" />')
+
 def build_page(page, tpl, secs, css, js):
     fname = page["file"]
     # 1) head：标题与描述替换（首屏页保留原 title/desc；其余用页面专属）
@@ -286,6 +291,8 @@ def build_page(page, tpl, secs, css, js):
         head = re.sub(r"<title>[\s\S]*?</title>", page_title_tag(page["title"]), head, count=1)
         head = re.sub(r'<meta name="description" content="[^"]*" />',
                       f'<meta name="description" content="{page["desc"]}" />', head, count=1)
+    # v0.43：全页注入分享标签
+    head = head.replace('</head>', OG_TAGS.replace('{fname}', fname) + '\n</head>')
     # 2) body：三段式（ann+top 头部 / 主内容 / 尾部）
     body_start = tpl.find("<body>") + len("<body>")
     footer_start = tpl.find("<footer>")
@@ -313,6 +320,17 @@ def build_page(page, tpl, secs, css, js):
     for sid in page["sections"]:
         if sid in secs:
             content += "\n" + convert_links(secs[sid])
+    # v0.43：内容页注入页面级 h1（无障碍文档大纲 + SEO；首屏页跳过）
+    # 有 page-banner 的页面：h1 以视觉隐藏方式并入 banner（避免与 banner 标题重复）；无 banner：显示 page-h1
+    if not page.get("hero") and content and '<h1' not in content:
+        page_h1 = re.sub(r'\s*·\s*鸡父母$', '', page.get("title", "")) or page.get("title", "")
+        if 'class="page-banner"' in content:
+            content = content.replace('class="page-banner"',
+                'class="page-banner"', 1)
+            content = re.sub(r'(<div class="page-banner">)',
+                r'\1<h1 class="sr-only-h1">' + page_h1 + '</h1>', content, count=1)
+        else:
+            content = '<div class="wrap"><h1 class="page-h1">' + page_h1 + '</h1></div>\n' + content
     dlg = extract_dialogs(tpl)
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')

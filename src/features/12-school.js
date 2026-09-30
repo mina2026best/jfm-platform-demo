@@ -121,6 +121,12 @@ function openSchool(name){
   }).join('');
   var art = (typeof ARTMAP !== 'undefined') ? (ARTMAP['S|' + name] || '') : '';
   if(art){ kv.innerHTML += '<dt>完整档案</dt><dd><a href="articles/' + art + '">学校详情页（概况 / 师资 / 来源）→</a></dd>'; }
+  // v0.43：区县交叉引用（该区入学政策与官方入口）
+  var qu = d['所在区'] || '';
+  if(qu && typeof QU_GUIDE !== 'undefined'){
+    var qg = QU_GUIDE.find(function(g){ return g.qu === qu; });
+    if(qg){ kv.innerHTML += '<dt>区县入学</dt><dd><a href="schools.html#qu-guide">' + esc(qu) + '入学政策与官方入口 →</a></dd>'; }
+  }
   var ev = document.getElementById('sm-evals');
   ev.innerHTML = (d['评价'] || []).map(function(e){ return '<div class="dlg-ev"><span class="sc-badge" style="margin-right:6px">' + esc(e.badge) + '</span>' + esc(e.text) + '</div>'; }).join('') || '<div class="dlg-ev">暂无评价（评价须经审核后展示）</div>';
   document.getElementById('sm-note').textContent = '';

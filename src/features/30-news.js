@@ -1,8 +1,12 @@
 /* ---------- v0.10：资讯中心（信息流 + 站内编辑台） ---------- */
+var NEWS_PHOTO_ALT = {'政策速递':'政策文件主题配图','升学动态':'校园新闻主题配图','家庭教育':'家庭教育主题配图','安全提醒':'校园安全主题配图','办事提醒':'日历办事主题配图'};
 var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','办事提醒'];
 var newsFilter = 'all';
 var newsQuery = '';
 var neEditingId = null;
+var NEWS_PAGE_SIZE = 60;      // v0.43：默认渲染条数（加载更多每次 +60）
+var newsShown = NEWS_PAGE_SIZE;
+function moreNews(){ newsShown += NEWS_PAGE_SIZE; renderNews(); }
 
 function todayStr(){
   var d = new Date();
@@ -45,9 +49,20 @@ function renderNews(){
     return true;
   });
   box.setAttribute('data-covers', '1');
-  box.innerHTML = shown.length ? shown.map(newsItemHTML).join('')
+  // v0.43：筛选/搜索时全量，默认浏览时分页渲染
+  var pageShown = (q || newsFilter !== 'all') ? shown.length : Math.min(newsShown, shown.length);
+  var pageItems = shown.slice(0, pageShown);
+  box.innerHTML = pageItems.length ? pageItems.map(newsItemHTML).join('')
     : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
          : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加。</div>');
+  // 「加载更多」按钮（仅默认浏览态且还有剩余时显示）
+  var moreBox = document.getElementById('news-more');
+  if(moreBox){
+    if(!q && newsFilter === 'all' && pageShown < shown.length){
+      moreBox.hidden = false;
+      moreBox.innerHTML = '<button class="mini-btn" style="padding:10px 22px" onclick="moreNews()">加载更多（已显示 ' + pageShown + ' / ' + shown.length + ' 条）</button>';
+    } else { moreBox.hidden = true; moreBox.innerHTML = ''; }
+  }
   var counts = { all: arr.length };
   NEWS_CATS.forEach(function(c){ counts[c] = arr.filter(function(x){ return x.cat === c; }).length; });
   var labels = { all: '全部', '政策速递': '政策速递', '升学动态': '升学动态', '家庭教育': '家庭教育', '安全提醒': '安全提醒', '办事提醒': '办事提醒' };
@@ -70,7 +85,7 @@ function newsItemHTML(x){
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
   var coverKind = { '政策速递':'office', '升学动态':'classroom', '家庭教育':'study', '安全提醒':'playground', '办事提醒':'calendar', '行业观察':'city' }[x.cat] || 'city';
-  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind) + '</div>';
+  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind, false, NEWS_PHOTO_ALT[x.cat] || '教育资讯主题配图') + '</div>';
   var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + x.t] || '') : '';
   var titleLink;
   if(artKey){ titleLink = '<a class="ni-link" href="articles/' + artKey + '" title="阅读全文">' + esc(x.t) + '</a>'; }

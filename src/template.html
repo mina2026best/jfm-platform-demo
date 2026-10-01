@@ -149,13 +149,14 @@
 <section id="calendar">
   <div class="wrap">
     <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
-    <p class="sec-desc">展示 5 条（分区×学段节点库持续扩充，支持微信服务通知与日历订阅双通道提醒）。节点每年微调，以当年官方发布为准。保存「孩子档案」后按学段自动过滤、支持多孩切换；提醒可导出日历文件，行动清单可打印。</p>
+    <p class="sec-desc">16 个全年关键节点（覆盖幼升小 → 高考全学段），每条附「现在该做什么」行动清单与官方来源链接；节点每年微调，以官方发布为准。保存「孩子档案」后按学段自动过滤；支持提醒设置与行动清单打印。</p>
     <div class="fact-filter cal-filter" style="margin-bottom:14px">
       <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
       <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
       <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
       <button class="ff" data-cf="初升高" onclick="filterCal('初升高')">初升高</button>
       <button class="ff" data-cf="高考" onclick="filterCal('高考')">高考</button>
+      <button class="ff" data-cf="全阶段" onclick="filterCal('全阶段')">全阶段</button>
     </div>
     <div id="cal-personal" class="cal-personal" hidden></div>
     <div class="cal-tools">
@@ -203,7 +204,120 @@
         <details class="todo"><summary>现在该做什么</summary><div>✓ 对照线差定位：过特招线多少分 → 位次区间<br/>✓ 研究 3–5 个专业方向（兴趣 × 就业 × 分数匹配）<br/>✓ 防志愿填报骗局：见求真台「内部渠道」条目</div></details>
         <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
       </div>
+      <div class="cal" data-stage="幼升小">
+        <span class="date">2027-03</span><span class="stage">幼升小</span>
+        <h4>招生政策发布月：盯住区教委公告</h4>
+        <p>每年 3–4 月各区教委发布义务教育招生入学工作通知（划片范围、材料清单、报名窗口）。这是全年最重要的「信息节点」——错过官方发布，只能靠二手信息。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">重庆市教委政策文件库 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 收藏本区教委官网「招生入学」栏目<br/>✓ 对照去年划片范围初判对口学校<br/>✓ 有疑问直接打教委咨询电话（官方公布）</div></details>
+        <button class="alert-btn" data-title="招生政策发布月（2027-03）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="幼升小">
+        <span class="date">2027-06</span><span class="stage">幼升小</span>
+        <h4>网上信息采集与报名（义务教育入学「一件事」）</h4>
+        <p>重庆义务教育入学已接入「渝快办」网上办理通道，幼升小信息采集集中在 6 月；材料线上核验，现场确认以各区安排为准。</p>
+        <div class="src">官方入口：<a href="https://zwykb.cq.gov.cn/" target="_blank" rel="noopener">渝快办 · 重庆市政务服务网 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 提前注册渝快办账号并实名认证<br/>✓ 备齐户口/房产/出生证明扫描件<br/>✓ 报名窗口开启当日提交，避开最后一天拥堵</div></details>
+        <button class="alert-btn" data-title="网上信息采集与报名（2027-06）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="小升初">
+        <span class="date">2026-11</span><span class="stage">小升初</span>
+        <h4>期中考后定位：校内排位决定指标到校筹码</h4>
+        <p>小升初已定，真正的变量是初中三年。期中考后关注孩子在年级的排位趋势——「指标到校」按校内排序分配，三年稳定在年级前列是最实在的筹码。</p>
+        <div class="src">依据：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html" target="_blank" rel="noopener">市教委中考招生通知（指标到校 70% 口径）↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 建立三年成绩曲线（别只看一次考试）<br/>✓ 与班主任沟通年级排名口径<br/>✓ 慎重对待转学：可能影响指标到校资格</div></details>
+        <button class="alert-btn" data-title="期中考后定位（2026-11）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="小升初">
+        <span class="date">2027-04</span><span class="stage">小升初</span>
+        <h4>初中招生政策发布与报名窗口</h4>
+        <p>小升初与幼升小同窗口期（4 月政策、6 月报名）：民办超计划摇号、公办划片对口；「公民同招」下未摇中回公办统筹。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html" target="_blank" rel="noopener">市教委义务教育入学通知 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 民办意向校查资质与往年摇号中签率<br/>✓ 公办对口校实地走一遍通勤路线<br/>✓ 摇号未中预案：确认统筹接收校情况</div></details>
+        <button class="alert-btn" data-title="初中招生政策发布（2027-04）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="初升高">
+        <span class="date">2026-12</span><span class="stage">初升高</span>
+        <h4>期末备考与体育项目冬训窗口</h4>
+        <p>中考体育占分且过程性评价贯穿三年；冬季是耐力项目训练黄金期。期末成绩直接影响区统考排位与指标到校筹码。</p>
+        <div class="src">官方入口：<a href="https://www.cqksy.cn/site/techield/zhongkao/" target="_blank" rel="noopener">重庆市教育考试院 · 中考栏目 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 体育弱项（长跑/跳绳）制定冬训计划<br/>✓ 期末后对照区统考排位修正目标校<br/>✓ 关注中考体育当年测试项目是否有调整</div></details>
+        <button class="alert-btn" data-title="期末备考与冬训（2026-12）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="初升高">
+        <span class="date">2027-06</span><span class="stage">初升高</span>
+        <h4>中考与出分：志愿窗口只有 3–5 天</h4>
+        <p>中考 6 月中旬举行，出分后志愿填报窗口极短。冲稳保梯度要提前拟好——出分当天才知道线，没有时间从头研究。</p>
+        <div class="src">官方入口：<a href="https://www.cqksy.cn/" target="_blank" rel="noopener">重庆市教育考试院 ↗</a>（成绩查询与录取动态）</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 出分前完成志愿草表（冲稳保各 1–2 所）<br/>✓ 用「位次换算」工具交叉验证目标校<br/>✓ 录取期间每天查考试院录取动态与征集志愿</div></details>
+        <button class="alert-btn" data-title="中考与志愿窗口（2027-06）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="高考">
+        <span class="date">2026-11</span><span class="stage">高考</span>
+        <h4>高考报名月（高三第一件事）</h4>
+        <p>重庆高考报名通常在 11 月进行（应届生在学校统一办理）；随迁子女、社会考生需关注专项报名通道与材料。错过报名没有补报。</p>
+        <div class="src">官方入口：<a href="https://www.cqksy.cn/site/techield/gkzs/" target="_blank" rel="noopener">重庆市教育考试院 · 高考栏目 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 确认报名资格与所需证件（身份证有效期！）<br/>✓ 艺体生同步确认统考报名<br/>✓ 关注空军/民航招飞等专项报名时间</div></details>
+        <button class="alert-btn" data-title="高考报名月（2026-11）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="高考">
+        <span class="date">2027-01</span><span class="stage">高考</span>
+        <h4>期末统考（一模）：全市排位参考</h4>
+        <p>高三上期末多区联考/全市统考，是一模定位的主要依据。用「线差 + 位次」双法对照目标院校近三年投档位次，校准志愿池。</p>
+        <div class="src">站内工具：<a href="zy.html">线差换算与位次查询（2025 官方一分一段）</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 统考后用位次法对照目标校近三年投档位次<br/>✓ 志愿池按「冲稳保」整理成表格<br/>✓ 强基计划/综合评价关注高校报名窗口</div></details>
+        <button class="alert-btn" data-title="一模定位（2027-01）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="高考">
+        <span class="date">2027-04</span><span class="stage">高考</span>
+        <h4>强基计划 / 综合评价 / 高校专项报名季</h4>
+        <p>强基计划报名一般在 4 月（阳光高考平台统一入口），高校专项与综合评价窗口紧随其后；各校截止日不同，错过不补。</p>
+        <div class="src">官方入口：<a href="https://gaokao.chsi.com.cn/" target="_blank" rel="noopener">阳光高考平台（浏览器打开）↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 梳理孩子符合条件的专项类型<br/>✓ 报名材料：成绩单/自荐信/获奖证明<br/>✓ 逐校登记报名截止日（勿信最后一天）</div></details>
+        <button class="alert-btn" data-title="专项计划报名季（2027-04）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="高考">
+        <span class="date">2027-02</span><span class="stage">高考</span>
+        <h4>艺体统考成绩与校考季</h4>
+        <p>艺术类统考成绩 1–2 月公布；校考院校在此期间组织专业考试。文化课不能停——综合分改革后文化课权重逐年上升。</p>
+        <div class="src">官方入口：<a href="https://www.cqksy.cn/site/techield/gkzs/" target="_blank" rel="noopener">重庆市教育考试院 · 艺体统考通知 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 统考成绩出来立即对照往年录取位次<br/>✓ 校考行程提前规划（跨省考试留缓冲）<br/>✓ 文化课复习计划不因校考中断</div></details>
+        <button class="alert-btn" data-title="艺体统考与校考（2027-02）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="全阶段">
+        <span class="date">全年</span><span class="stage">全阶段</span>
+        <h4>资助申请窗口：别错过免学费与助学金</h4>
+        <p>高中阶段城乡低保/特困学生免教科书等资助按学年申请（秋季学期集中受理）；中职免学费与国家助学金覆盖面更广。资助是申请制——不申请就没有。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202502/t20250207_14265633.html" target="_blank" rel="noopener">市教委高中免教科书通知 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 开学两周内向学校提交资助申请<br/>✓ 低保证/特困证等材料准备<br/>✓ 中职家庭了解「中职国家助学金」覆盖范围</div></details>
+        <button class="alert-btn" data-title="资助申请窗口（全年）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+      <div class="cal" data-stage="全阶段">
+        <span class="date">全年</span><span class="stage">全阶段</span>
+        <h4>转学窗口：学期初集中受理</h4>
+        <p>义务教育阶段转学一般在学期初集中办理（政策依据：人籍一致与转学窗口管理）。注意：初中转学可能影响指标到校资格连续性——动迁家庭先算这笔账。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">市教委政策文件库（学籍管理类）↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 先问转入校有无学位（官网公布咨询电话）<br/>✓ 指标到校资格连续性先与区教委确认<br/>✓ 材料备齐再跑流程，避免两头跑</div></details>
+        <button class="alert-btn" data-title="转学窗口（学期初）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
     </div>
+    <h3 style="font-family:var(--serif);font-size:20px;color:var(--navy);margin:40px 0 4px">过来人说 · 关键节点经验分享</h3>
+    <p class="sec-desc">审核制展示：家长提交亲身经验 → 人工核验（不收广告、不带联系方式）→ 标注学段与时间展示。点击「我也来分享」提交你的踩坑记录。</p>
+    <div class="exp-grid" id="exp-grid"></div>
+    <div class="exp-tools">
+      <button class="mini-btn" onclick="openExpForm()">我也来分享</button>
+      <span class="cmp-note">提交后经人工核验展示（1–3 天）；请勿包含广告、联系方式与未核实的升学承诺。</span>
+    </div>
+    <dialog id="exp-modal" class="dlg">
+      <div class="dlg-head"><b>分享你的经验</b><button class="dlg-x" onclick="document.getElementById('exp-modal').close()" aria-label="关闭">×</button></div>
+      <div class="dlg-body">
+        <label class="f-l">孩子学段<select id="exp-stage" style="width:100%"><option>幼升小</option><option>小升初</option><option>初升高</option><option>高考</option><option>全阶段通用</option></select></label>
+        <label class="f-l">节点/场景<input id="exp-title" maxlength="40" style="width:100%" placeholder="一句话概括经验主题，如：幼升小材料一次过"></label>
+        <label class="f-l">经验内容（300 字内）<textarea id="exp-body" rows="5" maxlength="300" style="width:100%" placeholder="例：我们是渝北的，幼升小报名前先在渝快办做了实名认证，材料一次过……"></textarea></label>
+        <label class="f-l">称呼（可选）<input id="exp-name" maxlength="12" style="width:100%" placeholder="如：一年级豆豆妈"></label>
+        <div class="dlg-actions"><button class="mini-btn" onclick="submitExp()">提交（经人工核验后展示）</button><span id="exp-note" style="font-size:12px;color:var(--muted)"></span></div>
+      </div>
+    </dialog>
   </div>
 </section>
 
@@ -245,10 +359,10 @@
       <p class="pb-sub">每条政策三件套：原文要点 + 人话解读 + 文号/日期。版本历史保留，政策微调时红点提示。</p>
     </div><div class="pb-art" data-art="banner-policy" aria-hidden="true"></div></div>
     <div class="fact-filter" id="pol-filter" style="margin-bottom:14px">
-      <button class="ff on" data-pf="all" onclick="filterPolicy('all')">全部（12）</button>
-      <button class="ff" data-pf="入学" onclick="filterPolicy('入学')">入学（4）</button>
+      <button class="ff on" data-pf="all" onclick="filterPolicy('all')">全部（14）</button>
+      <button class="ff" data-pf="入学" onclick="filterPolicy('入学')">入学（5）</button>
       <button class="ff" data-pf="中考" onclick="filterPolicy('中考')">中考（5）</button>
-      <button class="ff" data-pf="费用资助" onclick="filterPolicy('费用资助')">费用资助（1）</button>
+      <button class="ff" data-pf="费用资助" onclick="filterPolicy('费用资助')">费用资助（2）</button>
       <button class="ff" data-pf="安全" onclick="filterPolicy('安全')">安全（1）</button>
       <button class="ff" data-pf="培训" onclick="filterPolicy('培训')">培训（1）</button>
     </div>
@@ -374,6 +488,18 @@
           <details class="vh"><summary>版本历史</summary>
             <div>· 条目说明：展示「双减」类政策的阅读方式</div>
           </details>
+        </div>
+        <div class="pol-item" data-pc="费用资助">
+          <h4><a class="art-t" href="articles/article-policy-mianfei.html">义务教育经费保障：「两免一补」落到每个孩子头上</a></h4>
+          <p>公办义务教育免学杂费、免费教科书，家庭经济困难学生另有生活补助——这是法定保障，学校不得收取与学位挂钩的费用。民办校就读学生按政策享受「两免」抵减。</p>
+          <div class="plain"><b>人话版：</b>义务教育阶段公办校学杂费本就该免；任何以「赞助费」「建校费」「占位费」名义与入学绑定的收费，都可以拒缴并举报。</div>
+          <div class="meta">原文依据：国发〔2015〕67号（gov.cn 政策库改版后旧链失效）——查阅入口：<a class="art-link" href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">重庆市教委政策文件库 ↗</a>（2026-10-01 实测可达）；配套法规：<a class="art-link" href="http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620261.html" target="_blank" rel="noopener">《民办教育促进法》（义务教育免费条款衔接） ↗</a></div>
+        </div>
+        <div class="pol-item" data-pc="入学">
+          <h4><a class="art-t" href="articles/article-policy-zhsz.html">初中综合素质评价：指标到校与录取的真实一环</a></h4>
+          <p>综合素质评价覆盖思想品德、学业水平、身心健康、艺术素养、社会实践五个维度，写实记录、公示留痕，作为指标到校与高中录取的参考依据之一。</p>
+          <div class="plain"><b>人话版：</b>不是走过场——校级以上荣誉、社团与社会实践记录都会进档案。初三发现「无记录可写」就晚了，初一初二就要留意积累。</div>
+          <div class="meta">来源：<a class="art-link" href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">重庆市教委政策文件库（评价与入学类）↗</a>（官方入口，2026-10-01 实测可达）</div>
         </div>
       </div>
       <aside class="term">
@@ -667,6 +793,27 @@
     <div id="cmp-result" aria-live="polite">
       <div class="cmp-empty">选择 2–3 所学校后点击「生成对比」。对比维度：办学性质 / 招生范围 / 通勤参考 / 收费口径 / 指标到校名额 / 数据来源与核验日期。</div>
     </div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;color:var(--navy);margin:38px 0 4px">家长最关心的六个对比点</h3>
+    <p class="sec-desc">表格里是数据，这里是「数据怎么影响决策」——每一点都写清它在实际择校中的分量。</p>
+    <div class="cf-grid" id="cf-grid"></div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;color:var(--navy);margin:38px 0 4px">三年费用测算器</h3>
+    <p class="sec-desc">公办与民办的三年总账差距惊人——学费只是起点，加上通勤、住宿、课外投入才算完整。填两个数字，看看三年的真实差距。</p>
+    <div class="fund-calc">
+      <label>学费类型
+        <select id="fc-type"><option value="gong">公办（按学期估算）</option><option value="min3">民办（3 万/年）</option><option value="min6">民办（6 万/年）</option><option value="min10">民办（10 万/年）</option><option value="min15">民办（15 万/年）</option></select></label>
+      <label>单程通勤（分钟）
+        <input id="fc-commute" type="number" min="5" max="120" value="30"></label>
+      <label>是否住宿
+        <select id="fc-board"><option value="no">走读</option><option value="yes">住宿</option></select></label>
+      <button class="mini-btn" onclick="calcFundCompare()">测算三年总账</button>
+      <div id="fc-out" aria-live="polite" style="margin-top:12px"></div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:20px;color:var(--navy);margin:38px 0 4px">择校决策检查清单</h3>
+    <p class="sec-desc">签协议/交定金之前，把这份清单过一遍——任何一项答不上来，就再等等。清单来自过来人踩过的坑（见日历板块「过来人说」）。</p>
+    <div class="chk-list" id="chk-list"></div>
   </div>
 </section>
 
@@ -1227,7 +1374,7 @@
     </div>
     <div class="legal">
       © 2026 鸡父母 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 ·
-      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.47（2026-09-30）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · v0.44 问题速查（10 场景 → 政策+术语+工具组合答案）/ 政策详情真链映射 P| · v0.45 志愿板块深化（2025 官方批次线精确线差换算三线对照 / 六大升学路径深度解读 / 官方参考链接逐条核验） · v0.46 线差工具纠正（移除无数据支撑的固定位次区间 / 新增 2023–2025 三年同分位置对照，逐格可验算） · v0.47 线差+位次并举（接入 2025 官方一分一段表：输入分数即出全市精确位次，官方锚点核对通过） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
+      监管对齐：全国涉教育自媒体整治 + 重庆「清朗巴渝」专项行动五条红线（渲染焦虑/虚假人设/歪曲政策/违规引流等）已纳入内容词库与审核三查 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 · 未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 · 站内版本 v0.48（2026-10-01）：v0.29 多页架构改版（17 页/真跳转/跨页参数） · v0.3 全站搜索/学校档案/会员开通/B端合作 · v0.4 入学自查/信任条/移动导航 · v0.5 三专家评审整改 24 项 · v0.6 升学路径地图与日历行动清单 · v0.7 真实数据包与来源核验 · v0.8 多孩档案/日历个性化/提醒导出与行动清单 · v0.9 模块化工程/首屏孩子快切条/同区学校徽标 · v0.10 升学资讯中心（站内采集与编辑）/关于与联系/站点地图 · v0.11 资讯扩容 20 条/公告条/搜索快捷键/导航高亮 · v0.12 家长学堂（专家问答/过来人经验） · v0.13 打印优化/一键复制分享/更新日志 · v0.14 大字版无障碍/本机数据管理 · v0.15 深色模式（跟随系统/手动切换，本机记忆） · v0.16 资讯快搜/返回顶部/阅读进度 · v0.17 键盘与无障碍（焦点描边/快捷键帮助/aria 状态） · v0.18 择校对比差异标记/仅看差异 · v0.19 学校档案扩容至 12 所（搜索直达） · v0.20 政策库与术语词典扩充 · v0.21 学堂/求真/社区/资讯扩充 · v0.22 陪读成本速算器（生活服务） · v0.23 本机数据导入/统计条 · v0.24 关键节点倒计时条 · v0.25 入学材料清单生成器 · v0.26 搜索键盘导航/学校库筛选 · v0.27 全站审查优化 · v0.28 数据来源链接真实化/资讯 30 条 · v0.29 多页架构改版（17 页/真跳转） · v0.30 门户对齐（搜索页/FAQ/热点榜/404） · v0.31 视觉升级（品牌插画/资讯封面/页眉横幅） · v0.32 决策落地（轻后端启动/资讯 38 条/公众号启动包/管理台/D7 计划） · v0.33 内容纵深（学校 20 所/政策 12 条/术语 32 条/资讯 46 条/百科页） · v0.35 扩展（相关阅读推荐/sitemap.xml 全站收录） · v0.36 视觉丰富化（插画库 2.0） · v0.37 实景照片 · v0.38 一校一图 · v0.39 学校实景照片全覆盖 · v0.40 学校档案门户化（20 校公开概况逐项标来源 / 区县筛选 / 详情页升级） · v0.41 链接真实化与排版升级（335 条外链全量实测 / 政策库 12 条官方原文 / 视觉体系升级） · v0.42 区县入学指南（11 区官方入口逐条实测）/ 词典 32→40 / 求真 12→14 / 阅读版式优化 · v0.43 双专家整改（全页 h1 / img 可访问性 / 资讯分页 / 政策分类 / 术语检索 / 分享封面） · v0.44 问题速查（10 场景 → 政策+术语+工具组合答案）/ 政策详情真链映射 P| · v0.45 志愿板块深化（2025 官方批次线精确线差换算三线对照 / 六大升学路径深度解读 / 官方参考链接逐条核验） · v0.46 线差工具纠正（移除无数据支撑的固定位次区间 / 新增 2023–2025 三年同分位置对照，逐格可验算） · v0.47 线差+位次并举（接入 2025 官方一分一段表：输入分数即出全市精确位次，官方锚点核对通过） · v0.48 三大板块深化（日历 5→17 节点全带官方入口 / 家长经验分享上线 / 政策 12→14 条 / 对比器新增费用测算器与决策清单） · 每日资讯自动更新 · <button type="button" class="linkbtn" onclick="window.print()">打印本页</button> · <button type="button" class="linkbtn" onclick="openChangelog()">查看更新日志</button> · <button type="button" class="linkbtn" onclick="openKbdHelp()">键盘快捷键</button>
     </div>
   </div>
 </footer>
@@ -1309,6 +1456,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.48</b><span>三大板块深化：①升学日历 5→17 个全年节点（幼升小→高考全学段，含政策发布月/网上报名/高考报名/专项计划/艺体统考/资助窗口/转学窗口），每条附「现在该做什么」与教委/考试院/渝快办官方入口链接；②新增「过来人说」家长经验分享（审核制提交）；③政策库 12→14 条（新增「两免一补」经费保障、综合素质评价），全部带可达官方链接；④择校对比新增三个子模块——家长最关心的六个对比点、三年费用测算器（学费+通勤+时间成本）、8 项择校决策检查清单；⑤资讯采集新增弱相关噪音过滤</span></div>
     <div class="cl-item"><b>v0.47</b><span>「线差 + 位次」并举：接入 2025 年重庆市官方一分一段表（教育考试院公布、中国教育在线转载；物理类 183 档 / 历史类 473 档），输入分数即出全市精确位次（如物理 600 分 → 11,716 名）；官方锚点核对通过（物理 425 分=103,219 名、498 分=63,323 名，历史 438 分=35,253 名、515 分=14,156 名，与公布的上线人数完全一致）；页面同时给出位次法与线差法两种用法说明</span></div>
     <div class="cl-item"><b>v0.46</b><span>线差工具准确度纠正：移除原「参考位次区间」（区间数字无官方一分一段数据支撑，属误导性输出），改为正确的两种用法——①院校投档线差对比法（说明线差的正确用法）＋②新增「同分在近三年是什么位置」对照表（2023–2025 官方批次线逐年计算线差：历史本科 407→428→438、物理本科 406→427→425，逐年独立可验算，附三年趋势解读与位次法指引）；按钮更新为「算线差 · 看三年位置」</span></div>
     <div class="cl-item"><b>v0.45</b><span>志愿板块深化：「线差」换算升级——基准切换为 2025 年重庆市官方批次线（历史 438/515/180 · 物理 425/498/180，教委发布多源核验），输入分数即时得到本科/特招/专科三线差值对照表（精确到个位，逐条可验算）+ 分步示例；「六条路径」新增深度解读区（普高统招/指标到校/民办高中/中职职教高考/艺体特长/出国国际班，每条含定义·条件·流程·费用·人群·优劣势·FAQ·官方参考链接）</span></div>

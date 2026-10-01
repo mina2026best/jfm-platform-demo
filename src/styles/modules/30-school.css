@@ -112,3 +112,38 @@
   @media print{ .path-deep{box-shadow:none;border-color:#CCC} }
   html.theme-dark .path-deep{background:var(--paper)}
   html.theme-dark .pd-item{background:var(--accent-soft)}
+
+  /* —— v0.48：家长经验分享卡 —— */
+  .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .exp-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:transform .22s ease, box-shadow .22s ease}
+  .exp-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(23,33,46,.10)}
+  .exp-head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+  .exp-stage{font-family:var(--mono);font-size:10.5px;color:var(--accent);background:var(--accent-soft);border-radius:99px;padding:2px 10px}
+  .exp-name{font-size:12px;color:var(--ink2);font-weight:600}
+  .exp-time{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:auto}
+  .exp-card h5{font-size:14.5px;color:var(--navy);margin:4px 0 6px;line-height:1.55}
+  .exp-card p{font-size:13px;color:var(--ink2);line-height:1.8;max-width:44em}
+  .exp-tools{margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  @media (max-width:960px){ .exp-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:620px){ .exp-grid{grid-template-columns:1fr} }
+  @media print{ .exp-tools{display:none} .exp-card{box-shadow:none;border-color:#CCC} }
+  html.theme-dark .exp-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
+
+  /* —— v0.48：对比板块子模块 —— */
+  .cf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+  .cf-card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:transform .22s ease, box-shadow .22s ease}
+  .cf-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(23,33,46,.10)}
+  .cf-l{font-family:var(--serif);font-size:15.5px;color:var(--navy);font-weight:700;margin-bottom:6px}
+  .cf-card p{font-size:13px;color:var(--ink2);line-height:1.8}
+  .fund-calc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+  .fund-calc label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)}
+  .fund-calc select,.fund-calc input{min-width:150px;padding:8px 12px;border:1.5px solid var(--line2);border-radius:8px;font-family:var(--sans);font-size:13.5px;background:var(--bg);color:var(--ink)}
+  .chk-list{display:grid;gap:8px}
+  .chk-item{display:flex;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 15px;cursor:pointer;font-size:13.5px;color:var(--ink2)}
+  .chk-item:hover{border-color:var(--accent)}
+  .chk-item input{accent-color:var(--accent);width:16px;height:16px}
+  .chk-no{font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:2px 8px}
+  @media (max-width:860px){ .cf-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:620px){ .cf-grid{grid-template-columns:1fr} .fund-calc{flex-direction:column;align-items:stretch} }
+  @media print{ .fund-calc button,.chk-item input{display:none} }
+  html.theme-dark .cf-card:hover,html.theme-dark .exp-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}

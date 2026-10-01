@@ -232,17 +232,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "“腾讯AI创新基金·AI Agent技能培训”在重庆大学举行",
-    "url": "https://news.cqu.edu.cn/archives/news2/content/2026/09/21/230c22c9274bec9726fea6ded3c48c63beb60245.html",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "9月21日，重庆大学继续教育学院与腾讯基金联合举办“腾讯AI创新基金·AI Agent技能培训”，面向全校教职工实操培训。腾讯专家杨金讲解WorkBuddy、SkillHub并演示全流程，学员反馈良好。10至12月将分行政、教学、科研三线推出更多AI培训，助力学校发展。",
-    "date": "2026-10-01",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "化学化工学院召开2026级本科新生年级大会",
     "url": "https://news.cqu.edu.cn/archives/xynews/content/2026/09/29/41a4d8fbaed9284d0f7647697a6701f05a56c536.html",
     "src": "重庆大学新闻网",
@@ -5662,4 +5651,4 @@ var NEWS_FEED = [
     "url": ""
   }
 ];
-var NEWS_META = {"generated": "2026-10-01 12:58", "seed": 46, "collected": 477, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-01 13:23", "seed": 46, "collected": 476, "fetchedPending": 2};

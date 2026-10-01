@@ -105,3 +105,25 @@ function chkProgress(){
   document.getElementById('chk-progress').textContent = '已确认 ' + done.length + ' / ' + all.length + ' 项' + (done.length === all.length ? ' —— 全部确认，可以更放心地做决定了。' : '');
 }
 document.addEventListener('DOMContentLoaded', function(){ renderCmpFocus(); renderChk(); });
+
+
+/* ---------- v0.49：官方求助与办事入口 ---------- */
+var GOV_ENTRIES = [
+ {name:"渝快办 · 政务服务一网通办", desc:"入学报名、转学申请、居住证办理等高频事项线上办", url:"https://zwykb.cq.gov.cn/", tag:"办事"},
+ {name:"重庆市教育委员会", desc:"招生政策原文、政策文件库、各区入学工作通知", url:"https://jw.cq.gov.cn/", tag:"政策"},
+ {name:"重庆市教育考试院", desc:"中/高考报名、成绩查询、录取动态、一分一段表", url:"https://www.cqksy.cn/", tag:"考试"},
+ {name:"重庆市卫生健康委", desc:"学校卫生标准、疫苗接种门诊查询、心理援助资源", url:"https://wsjkw.cq.gov.cn/", tag:"卫生"},
+ {name:"重庆市政府门户网站", desc:"全市政策发布、区县动态、政民互动（含教育咨询渠道）", url:"https://www.cq.gov.cn/", tag:"综合"},
+ {name:"市政府「听你说」互动平台", desc:"教育类诉求提交与答复查询——比群里抱怨更有用", url:"https://www.cq.gov.cn/hdjl/", tag:"求助"}
+];
+function renderGov(){
+  var box = document.getElementById('gov-grid'); if(!box) return;
+  box.innerHTML = GOV_ENTRIES.map(function(g){
+    return '<a class="gov-item" href="' + g.url + '" target="_blank" rel="noopener">'
+      + '<span class="gov-tag">' + g.tag + '</span>'
+      + '<span class="gov-name">' + esc(g.name) + '</span>'
+      + '<span class="gov-desc">' + esc(g.desc) + '</span>'
+      + '<span class="gov-go">直达 ↗</span></a>';
+  }).join('') + '<p class="cmp-note">以上 6 个入口于 2026-10-01 逐一实测可达（HTTP 200）；12345 政务服务热线为电话渠道，同样受理教育类咨询与投诉。</p>';
+}
+document.addEventListener('DOMContentLoaded', renderGov);

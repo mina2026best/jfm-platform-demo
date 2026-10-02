@@ -221,7 +221,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
             body += '<h3 class="art-h3">办学特色与荣誉</h3><p>' + esc(d["办学特色"]) + '</p>'
         # —— 招生与通勤 ——
         rows = ""
-        for k in ["办学性质", "所在区", "招生范围", "通勤参考", "住宿", "收费口径", "指标到校"]:
+        for k in ["办学性质", "所在区", "区划说明", "招生范围", "通勤参考", "住宿", "收费口径", "指标到校"]:
             if d.get(k): rows += f'<tr><td>{esc(k)}</td><td>{esc(d[k])}</td></tr>'
         if d.get("暂缺字段"):
             rows += f'<tr><td>暂缺字段</td><td>{esc(d["暂缺字段"])}（按合规红线不提供录取线与排名）</td></tr>'

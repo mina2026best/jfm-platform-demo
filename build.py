@@ -14,7 +14,7 @@ OUT_DIR = ROOT  # 页面直接输出到网站根目录
 PAGES = [
     dict(file="index.html",  title="家长屿 · 重庆家长升学信息与生活服务平台",
          desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台。",
-         sections=["calendar"], hero=True),
+         sections=["daohang", "calendar"], hero=True),
     dict(file="news.html",   title="升学资讯中心 · 家长屿",
          desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
          sections=["news"]),
@@ -60,6 +60,9 @@ PAGES = [
     dict(file="data-sources.html", title="数据来源与核验 · 家长屿",
          desc="站上每个数字都有出处：9 项已核验数据点，官方原文入口可点击。",
          sections=["data-sources"]),
+    dict(file="daohang.html", title="常用网址导航 · 家长屿",
+         desc="69 个家长常用入口，逐条实测可打开：报名查分、区县划片、政策办事、学习资源、同城社区、健康心理、生活出行，分类导航 + 实时筛选。",
+         sections=["daohang"]),
     dict(file="about.html",  title="关于与联系 · 家长屿",
          desc="编辑与审核规范、线索通道、站点地图、边界与承诺。",
          sections=["how", "about"]),
@@ -115,6 +118,11 @@ def guard(name, body):
         sys.exit(f"[build] 空模块：{name}")
     if "/*__BUILD_" in body or "__BUILD_PLACEHOLDER__" in body:
         sys.exit(f"[build] 模块含未解析占位符：{name}")
+    # v0.54 防回归：bundle 用 defer 加载，执行期 readyState='interactive'，
+    # 任何"非 loading 就同步 boot"的写法都会在 bundle 中段提前触发 boot，
+    # 导致其后续模块的顶层 var 尚未赋值 → boot 链在 renderNews() 抛错中断。
+    if "; bootOnce();" in body and "readyState !== 'loading'" in body:
+        sys.exit(f"[build] {name}：禁止在 defer bundle 中同步 boot（须交由 DOMContentLoaded）")
 
 def build_css():
     parts = ["/* ============ base ============ */\n" + read(f"{SRC}/styles/base.css")]
@@ -192,6 +200,7 @@ def build_js():
 def nav_html(cur_file, demo_tag, searchbox):
     """生成顶栏（含真跳转链接）。cur_file 用于 aria-current。"""
     items = [
+        ("daohang.html", "导航"),
         ("news.html", "资讯"),
         ("calendar.html", "日历"),
         ("policy.html", "政策"),
@@ -214,7 +223,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         return f'<a href="{href}"{cls}{cur}>{label}</a>'
     nav = "<nav>" + "".join(a(i) for i in items) + "</nav>"
     mobile = [
-        ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
+        ("daohang.html", "网址导航"), ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
         ("zy.html", "志愿参考"), ("fact.html", "求真台"), ("community.html", "家长社区"),
         ("community.html", "家长学堂"), ("life.html", "生活服务"),

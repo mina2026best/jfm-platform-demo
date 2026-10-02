@@ -10,10 +10,9 @@ var CMP_FOCUS = [
   {label:"学段衔接", icon:"过渡", desc:"民办初中直升体系、公办对口初中——影响小升初策略", key:"招生范围"}
 ];
 
-function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
 /* v0.53：URL 进 href 前统一 encodeURI——中文路径（百科等）在任何浏览器都能打开 */
 function hrefEnc(u){ try{ return esc(encodeURI(String(u))); }catch(e){ return esc(u); } }
-[c];}); }
 var _toastTimer = null;
 function toast(msg){
   var t = document.getElementById('toast');

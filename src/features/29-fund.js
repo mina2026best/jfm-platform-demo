@@ -19,13 +19,17 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); bootPageRoute();
+  initSelects(); renderSchools(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); initDao(); bootPageRoute();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
 function bootOnce(){ if(window.__booted) return; window.__booted = true; bootV3(); }
+/* v0.54 修复（P0）：bundle 以 defer 加载，脚本执行期间 document.readyState 已是 'interactive'，
+   若在此处同步 boot，紧接其后的文件 30–51 顶层 var（PHOTO_POOL / NEWS_PAGE_SIZE / DAO_CATS…）尚未赋值，
+   boot 链会在 renderNews() 处抛 TypeError 中断，导致主题切换、数据来源表、页面路由等全部失效。
+   统一交给 DOMContentLoaded（defer 执行完立即触发，此时全 bundle 顶层语句已执行完毕）。 */
 document.addEventListener('DOMContentLoaded', bootOnce);
-if(document.readyState !== 'loading') bootOnce();
+if(document.readyState === 'complete') setTimeout(bootOnce, 0);   // 兜底：DOMContentLoaded 已错过的场景
 function clearCompare(){
   ["sel-a","sel-b","sel-c"].forEach(function(id){document.getElementById(id).value="";});
   cmpLast = null; cmpDiffOnly = false;

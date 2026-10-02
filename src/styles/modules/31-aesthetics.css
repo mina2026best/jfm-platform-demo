@@ -159,3 +159,37 @@ html.theme-dark .today-bar .tb-links a{color:var(--blue);border-bottom-color:var
 html.theme-dark .today-bar .tb-links a:hover{color:var(--accent);border-bottom-color:var(--accent)}
 html.theme-dark .dao-cat{background:var(--paper)}
 html.theme-dark .dao-list span{color:#93A3B8}
+
+/* ---------- v0.59 全站视觉分区与权重（解决"灰白长条"：底灰与白卡明度差不足 3%） ---------- */
+/* 1. 底色压深一档：白卡/白带立刻"浮起来"，分区可辨（不改品牌色，只改明度关系） */
+:root{--bg:#EDF1F5;--line:#DEE4EB}
+html.theme-dark{--bg:#0A1017}
+/* 2. 栏目带：白底段给顶部一条极细的强调线（大标题左上的短标尺已经有，这里给整段定场） */
+section.alt{box-shadow:inset 0 1px 0 rgba(36,52,77,.04)}
+/* 3. 首屏：加品牌渐层，让第一屏有"门户门面"的分量（文字对比不变） */
+.hero{background:linear-gradient(180deg,#E4EFEC 0%,#EAF1F4 46%,var(--bg) 100%);
+  border-bottom:1px solid var(--line)}
+.hero::before{content:"";display:block;height:3px;margin:-58px 0 55px;
+  background:linear-gradient(90deg,var(--accent) 0%,var(--navy) 55%,transparent 100%);opacity:.85}
+.hero{padding:58px 0 44px}
+.hero h1{text-wrap:balance}
+/* 4. 权重：数据卡与信任条给出层次（数字用强调色、卡片淡阴影） */
+.trust .t-item,.hero .trust{background:var(--paper)}
+.trust .t-item{border-radius:12px;padding:14px 16px;box-shadow:0 1px 0 rgba(36,52,77,.04),0 6px 18px -12px rgba(36,52,77,.35)}
+.trust .t-num{color:var(--navy);font-weight:700}
+/* 5. 区块标题：加一条短强调线，强化栏目入口的视觉锚点 */
+.sec-head h2{position:relative;padding-left:0}
+.sec-head .no{color:var(--accent)}
+/* 6. 密度：收一点上下留白（桌面 60→54，移动端 44→40），内容更聚拢 */
+section{padding:54px 0}
+@media (max-width:720px){ section{padding:40px 0} }
+/* 7. 卡片权重：统一"白卡 + 细边 + 轻阴影"，让可点区域一眼可辨 */
+.school-card,.news-item,.pol-item,.term,.dao-cat,.about-card,.plan,.life-card{
+  box-shadow:0 1px 2px rgba(36,52,77,.05),0 10px 24px -20px rgba(36,52,77,.5)}
+/* 8. 深色模式：分区靠亮度差而非边框，避免深色下发灰 */
+html.theme-dark section.alt{background:#0F1620;border-color:#1C2635}
+html.theme-dark .trust .t-item{box-shadow:0 10px 24px -20px #000}
+
+/* 首屏主行动按钮：略放大，成为第一屏的视觉焦点 */
+.hero .cta-row .btn-primary{padding:13px 24px;font-size:15.5px}
+.hero .cta-row .btn-ghost{padding:12px 20px}

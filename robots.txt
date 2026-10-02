@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mina2026best.github.io/jfm-platform-demo/sitemap.xml

@@ -114,6 +114,17 @@ def cat_of(title):
 def norm_title(t):
     return re.sub(r"[^\u4e00-\u9fffA-Za-z0-9]", "", t)
 
+def real_date(url):
+    """从 URL 路径提取原文真实发布日期（如 /2026/09/30/ 或 t20260930_）；取不到返回 None。
+    ponytail: 只覆盖常见 CMS URL 模式，其他源回落为抓取日（标注代理口径）。"""
+    m = re.search(r"/(\d{4})/(\d{2})/(\d{2})/", url)
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    m = re.search(r"t(\d{4})(\d{2})(\d{2})_", url)  # gov.cn: t20260930_xxx.html
+    if m:
+        return f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+    return None
+
 def main():
     dry = "--dry" in sys.argv
     sources = load(SOURCES, [])
@@ -174,7 +185,7 @@ def main():
     # 3) 写入 collected.json（reviewed=true 自动发布）
     for c in cands:
         c["cat"] = c.get("cat") or cat_of(c["t"])
-        c["date"] = today
+        c["date"] = real_date(c["url"]) or today
         c["sum"] = c.get("sum") or ""
         c["body"] = ""
         c["reviewed"] = True

@@ -4,7 +4,7 @@
 src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
-import os, re, sys, hashlib, json
+import os, re, sys, hashlib, json, datetime
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
@@ -284,6 +284,7 @@ def page_title_tag(title):
 
 OG_TAGS = ('<meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />\n'
            '<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
+           '<link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
            '<meta property="og:site_name" content="鸡父母 · 重庆家长升学信息与生活服务平台" />\n'
            '<meta name="twitter:card" content="summary_large_image" />')
 
@@ -462,22 +463,25 @@ def main():
     art_footer = convert_links(tpl[tpl.find("<footer>"): tpl.find('<dialog id="school-modal">')])
     art_dir = os.path.join(ROOT, "articles")
     articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir)
-    # sitemap 生成（GitHub Pages 域名）
+    # sitemap 生成（GitHub Pages 域名，带 lastmod）
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     site = "https://mina2026best.github.io/jfm-platform-demo/"
+    lastmod = datetime.date.today().isoformat()
     for pg_ in PAGES:
         if pg_["file"] == "sitemap.html":
             continue  # sitemap.html 无实体页（站点地图由 footer 覆盖）
-        sm.append("<url><loc>" + site + pg_["file"] + "</loc></url>")
+        sm.append(f"<url><loc>{site}{pg_['file']}</loc><lastmod>{lastmod}</lastmod></url>")
     for fn in sorted(os.listdir(art_dir)):
         if fn.endswith(".html"):
             content_head = open(os.path.join(art_dir, fn), encoding="utf-8").read()[:300]
             if "内容已更新" in content_head:
                 continue
-            sm.append("<url><loc>" + site + "articles/" + fn + "</loc></url>")
+            sm.append(f"<url><loc>{site}articles/{fn}</loc><lastmod>{lastmod}</lastmod></url>")
     sm.append("</urlset>")
     with open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8") as f:
         f.write("\n".join(sm))
+    with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8") as f:
+        f.write("User-agent: *\nAllow: /\nSitemap: " + site + "sitemap.xml\n")
     keep = set(articles)
     stale = 0
     if os.path.isdir(art_dir):

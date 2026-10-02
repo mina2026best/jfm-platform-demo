@@ -93,6 +93,7 @@ function renderHotRank(){
 }
 
 /* ---------- v0.34：联系页留言提交（写后端 /api/contact） ---------- */
+/* ponytail: 线上为静态托管，后端仅在本地可用——公网提交失败时落 mailto 兜底，接入正式表单服务后替换 */
 function submitContact(){
   var name = (document.getElementById('ct-name')||{}).value || '';
   var type = (document.getElementById('ct-type')||{}).value || '咨询';
@@ -100,10 +101,12 @@ function submitContact(){
   var msg = (document.getElementById('ct-msg')||{}).value || '';
   if(!name.trim()){ toast('请填写称呼'); return; }
   if(msg.trim().length < 5){ toast('留言内容至少 5 个字'); return; }
+  var payload = JSON.stringify({ name: name.trim(), type: type, contact: ct.trim(), message: msg.trim() });
+  var isLocal = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:';
   fetch('http://127.0.0.1:8780/api/contact', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: name.trim(), type: type, contact: ct.trim(), message: msg.trim() })
+    body: payload
   }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
     .then(function(res){
       if(res.ok){
@@ -115,6 +118,14 @@ function submitContact(){
         toast('提交失败：' + (res.d.error || '未知错误'));
       }
     }).catch(function(){
-      toast('本地后端未启动（python3 server.py）——留言暂存失败');
+      if(isLocal){
+        toast('本地后端未启动（python3 server.py）——留言暂存失败');
+      } else {
+        // 公网静态托管：mailto 兜底，不丢用户输入
+        var body = encodeURIComponent('称呼：' + name + '\n类型：' + type + '\n联系方式：' + ct + '\n\n' + msg);
+        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【鸡父母留言】' + type) + '&body=' + body;
+        var note = document.getElementById('ct-note');
+        if(note) note.textContent = '当前为演示环境，已为你唤起邮件客户端发送同内容留言。';
+      }
     });
 }

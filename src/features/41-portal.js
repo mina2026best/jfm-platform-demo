@@ -123,7 +123,7 @@ function submitContact(){
       } else {
         // 公网静态托管：mailto 兜底，不丢用户输入
         var body = encodeURIComponent('称呼：' + name + '\n类型：' + type + '\n联系方式：' + ct + '\n\n' + msg);
-        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【鸡父母留言】' + type) + '&body=' + body;
+        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【家长屿留言】' + type) + '&body=' + body;
         var note = document.getElementById('ct-note');
         if(note) note.textContent = '当前为演示环境，已为你唤起邮件客户端发送同内容留言。';
       }

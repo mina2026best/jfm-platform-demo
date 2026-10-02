@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""鸡父母平台 · 多页构建脚本（v0.29 架构改版）
+"""家长屿平台 · 多页构建脚本（v0.29 架构改版）
 src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
@@ -12,70 +12,70 @@ OUT_DIR = ROOT  # 页面直接输出到网站根目录
 
 # ============ 页面定义：文件名 / 标题 / 描述 / 包含 section / 页面主 CSS 钩子 ============
 PAGES = [
-    dict(file="index.html",  title="鸡父母 · 重庆家长升学信息与生活服务平台",
+    dict(file="index.html",  title="家长屿 · 重庆家长升学信息与生活服务平台",
          desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台。",
          sections=["calendar"], hero=True),
-    dict(file="news.html",   title="升学资讯中心 · 鸡父母",
+    dict(file="news.html",   title="升学资讯中心 · 家长屿",
          desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
          sections=["news"]),
-    dict(file="calendar.html", title="升学日历 · 鸡父母",
+    dict(file="calendar.html", title="升学日历 · 家长屿",
          desc="幼升小到高考的关键节点、行动清单与提醒导出——按孩子学段自动过滤。",
          sections=["calendar"]),
-    dict(file="policy.html", title="政策库与人话词典 · 鸡父母",
+    dict(file="policy.html", title="政策库与人话词典 · 家长屿",
          desc="招生政策原文要点 + 人话版解读 + 32 条高频术语词典，逐条标注文号与生效日期。",
          sections=["policy"]),
-    dict(file="quiz.html",   title="入学自查与材料清单 · 鸡父母",
+    dict(file="quiz.html",   title="入学自查与材料清单 · 家长屿",
          desc="3 问自查「我家能不能报」，一键生成入学材料清单（学段 × 户籍 × 住房）。",
          sections=["quiz"]),
-    dict(file="schools.html", title="学校档案库 · 鸡父母",
+    dict(file="schools.html", title="学校档案库 · 家长屿",
          desc="20 所学校档案：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
          sections=["schools"]),
-    dict(file="compare.html", title="择校对比器 · 鸡父母",
+    dict(file="compare.html", title="择校对比器 · 家长屿",
          desc="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。",
          sections=["compare"]),
-    dict(file="zy.html",     title="志愿参考与路径地图 · 鸡父母",
+    dict(file="zy.html",     title="志愿参考与路径地图 · 家长屿",
          desc="2026 特招线位次换算 + 六大升学路径地图（普高统招 / 指标到校 / 民办 / 中职 / 艺体 / 国际班）。",
          sections=["zy"]),
-    dict(file="fact.html",   title="求真辟谣台 · 鸡父母",
+    dict(file="fact.html",   title="求真辟谣台 · 家长屿",
          desc="「内部渠道是真的吗？」——逐条核验，按属实 / 不实 / 存疑分级，附出处与核验日期。",
          sections=["fact"]),
-    dict(file="community.html", title="家长社区 · 鸡父母",
+    dict(file="community.html", title="家长社区 · 家长屿",
          desc="同城家长的实操帖与讨论：长幼随学实测、陪读房选择、跨区联招、复习计划分享。",
          sections=["community", "learn"]),
-    dict(file="life.html",   title="生活服务 · 鸡父母",
+    dict(file="life.html",   title="生活服务 · 家长屿",
          desc="陪读租房行情样本 + 陪读成本速算器（房租 + 生活 + 通勤 → 月度区间）；平台不参与居间。",
          sections=["life"]),
-    dict(file="beans.html",  title="升学豆中心 · 鸡父母",
+    dict(file="beans.html",  title="升学豆中心 · 家长屿",
          desc="站内权益凭证：不生息、不可提现、不可转让；签到与内容贡献即可获得，发放四道闸门防通胀。",
          sections=["beans"]),
-    dict(file="me.html",     title="我的 · 孩子档案与数据 · 鸡父母",
+    dict(file="me.html",     title="我的 · 孩子档案与数据 · 家长屿",
          desc="多孩档案、提醒收藏、升学豆、外观与数据管理（导出 / 导入 / 清空）——本机存储，可跨页联动。",
          sections=["fund", "me"]),
-    dict(file="plans.html",  title="会员体系 · 鸡父母",
+    dict(file="plans.html",  title="会员体系 · 家长屿",
          desc="信息基础永远免费；工具与提醒付费，服务按权益分配。免费层完整可用。",
          sections=["plans"]),
-    dict(file="biz.html",    title="B 端合作 · 鸡父母",
+    dict(file="biz.html",    title="B 端合作 · 家长屿",
          desc="三类合作形态 + 资质审核 + 平台不背书承诺；意向登记通道。",
          sections=["biz"]),
-    dict(file="data-sources.html", title="数据来源与核验 · 鸡父母",
+    dict(file="data-sources.html", title="数据来源与核验 · 家长屿",
          desc="站上每个数字都有出处：9 项已核验数据点，官方原文入口可点击。",
          sections=["data-sources"]),
-    dict(file="about.html",  title="关于与联系 · 鸡父母",
+    dict(file="about.html",  title="关于与联系 · 家长屿",
          desc="编辑与审核规范、线索通道、站点地图、边界与承诺。",
          sections=["how", "about"]),
-    dict(file="search.html", title="站内搜索 · 鸡父母",
+    dict(file="search.html", title="站内搜索 · 家长屿",
          desc="搜全站：学校 / 资讯 / 政策 / 术语一框聚合，附热门搜索词。",
          sections=["searchpage"]),
-    dict(file="contact.html", title="联系与留言 · 鸡父母",
+    dict(file="contact.html", title="联系与留言 · 家长屿",
          desc="留言必达：内容纠错、功能建议、合作意向——留言写入本站后台，按时间可查。",
          sections=["contact"]),
-    dict(file="wiki.html",   title="升学百科 · 鸡父母",
+    dict(file="wiki.html",   title="升学百科 · 家长屿",
          desc="幼升小 / 小升初 / 初升高 / 高考四阶段全流程指南：时间轴 + 必办事项 + 常见误区 + 工具入口。",
          sections=["wiki"]),
-    dict(file="problems.html", title="问题速查 · 鸡父母",
+    dict(file="problems.html", title="问题速查 · 家长屿",
          desc="「我遇到 X 问题」组合速查：场景 → 政策条目 + 高频术语 + 站内工具，答案可点进原文核验。",
          sections=["problems"]),
-    dict(file="faq.html",    title="家长 FAQ · 鸡父母",
+    dict(file="faq.html",    title="家长 FAQ · 家长屿",
          desc="20 个最常被问到的问题：入学 / 择校 / 政策 / 生活 / 会员，快问快答带入口链接。",
          sections=["faq"]),
     dict(file="sitemap.html", title="站点地图 · 鸦父母",
@@ -229,7 +229,7 @@ def nav_html(cur_file, demo_tag, searchbox):
     logo_href = "index.html"
     return f'''<div class="top">
   <div class="wrap">
-    <a class="logo" href="{logo_href}" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS · 重庆</small></a>
+    <a class="logo" href="{logo_href}" style="color:inherit;text-decoration:none"><span class="dot"></span>家长屿<small>PARENT ISLE · 重庆</small></a>
     {demo_tag}
     {searchbox}
     {nav}
@@ -285,7 +285,7 @@ def page_title_tag(title):
 OG_TAGS = ('<meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />\n'
            '<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
            '<link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
-           '<meta property="og:site_name" content="鸡父母 · 重庆家长升学信息与生活服务平台" />\n'
+           '<meta property="og:site_name" content="家长屿 · 重庆家长升学信息与生活服务平台" />\n'
            '<meta name="twitter:card" content="summary_large_image" />')
 
 def build_page(page, tpl, secs, css, js):
@@ -328,7 +328,7 @@ def build_page(page, tpl, secs, css, js):
     # v0.43：内容页注入页面级 h1（无障碍文档大纲 + SEO；首屏页跳过）
     # 有 page-banner 的页面：h1 以视觉隐藏方式并入 banner（避免与 banner 标题重复）；无 banner：显示 page-h1
     if not page.get("hero") and content and '<h1' not in content:
-        page_h1 = re.sub(r'\s*·\s*鸡父母$', '', page.get("title", "")) or page.get("title", "")
+        page_h1 = re.sub(r'\s*·\s*家长屿$', '', page.get("title", "")) or page.get("title", "")
         if 'class="page-banner"' in content:
             content = content.replace('class="page-banner"',
                 'class="page-banner"', 1)
@@ -429,10 +429,10 @@ def main():
     nf = (
         '<!doctype html>\n<html lang="zh-CN">\n<head>\n'
         '<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
-        '<title>页面未找到 · 鸡父母</title>\n<meta name="theme-color" content="#24344D" />\n'
+        '<title>页面未找到 · 家长屿</title>\n<meta name="theme-color" content="#24344D" />\n'
         '<link rel="stylesheet" href="assets/' + css_file + '" />\n</head>\n<body>\n'
         '<div class="top"><div class="wrap">'
-        '<a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS - CHONGQING</small></a> '
+        '<a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>家长屿<small>PARENT ISLE - CHONGQING</small></a> '
         + demo_tag +
         '</div></div>\n'
         '<section><div class="wrap" style="text-align:center;padding:70px 20px">'
@@ -444,7 +444,7 @@ def main():
         '<a class="mini-btn" href="search.html" style="text-decoration:none;padding:10px 18px">去搜索</a>'
         '<a class="mini-btn" href="faq.html" style="text-decoration:none;padding:10px 18px">看 FAQ</a>'
         '</p></div></section>'
-        '<footer><div class="wrap"><p style="font-size:12px;color:var(--muted)">鸡父母 · 重庆家长升学信息与生活服务平台</p></div></footer>'
+        '<footer><div class="wrap"><p style="font-size:12px;color:var(--muted)">家长屿 · 重庆家长升学信息与生活服务平台</p></div></footer>'
         '</body>\n</html>'
     )
     with open(os.path.join(OUT_DIR, "404.html"), "w", encoding="utf-8") as f:
@@ -549,7 +549,7 @@ def main():
             if fn.endswith(".html") and fn not in keep:
                 shell = (
                     '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">'
-                    '<meta name="robots" content="noindex"><title>内容已更新 · 鸡父母</title>'
+                    '<meta name="robots" content="noindex"><title>内容已更新 · 家长屿</title>'
                     '</head><body><p>该内容已更新合并，正在跳转…</p>'
                     '<script>location.replace("faq.html");</script></body></html>'
                 )

@@ -8,7 +8,7 @@ function exportIcs(){
   var a = getAlerts();
   if(!a.length){ toast('还没有提醒——到「升学日历」给节点点「设提醒」再导出'); return; }
   var stamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
-  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:鸡父母 · 升学节点提醒'];
+  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:家长屿 · 升学节点提醒'];
   a.forEach(function(t, i){
     var ds = icsDate(t);
     var d = new Date(parseInt(ds.slice(0,4),10), parseInt(ds.slice(4,6),10) - 1, 1);
@@ -20,7 +20,7 @@ function exportIcs(){
     L.push('DTSTART;VALUE=DATE:' + ds);
     L.push('DTEND;VALUE=DATE:' + de);
     L.push('SUMMARY:' + icsEsc(t));
-    L.push('DESCRIPTION:鸡父母平台 · 升学节点导出；节点以当年官方发布为准');
+    L.push('DESCRIPTION:家长屿平台 · 升学节点导出；节点以当年官方发布为准');
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');

@@ -37,7 +37,9 @@
   .top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .top .wrap{display:flex;align-items:center;gap:26px;height:60px}
   .logo{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--navy);letter-spacing:.02em}
-  .logo .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+  .logo .dot{position:relative;display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-1px}
+  .logo .dot::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,var(--accent),var(--blue))}
+  .logo .dot::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:var(--accent);opacity:.22}
   .logo small{font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:.12em}
   .top nav{display:flex;gap:4px;margin-left:auto}
   .top nav a{padding:7px 11px;border-radius:6px;font-size:14px;color:var(--ink2);text-decoration:none}
@@ -67,6 +69,15 @@
   .entry .go{display:inline-block;margin-top:14px;font-size:13px;color:var(--accent);font-weight:600}
   .entry:hover .go{text-decoration:underline}
 
+  /* ---------- v0.52 品牌（家长屿） ---------- */
+  .hero-kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:5px 14px;margin-bottom:14px}
+  .hero-kicker .hk-mark{position:relative;width:11px;height:11px;flex:0 0 auto}
+  .hero-kicker .hk-mark::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,var(--accent),var(--blue))}
+  .hero-kicker .hk-mark::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:var(--accent);opacity:.22}
+  .brand-card{border-color:var(--accent)!important;background:linear-gradient(180deg,var(--accent-soft),var(--paper))!important}
+  .brand-claim{display:inline-block;margin-top:10px;font-family:var(--serif);font-size:14.5px;color:var(--accent);font-weight:700}
+  .brand-mean{color:var(--ink2)}
+  @media (max-width:720px){ .hero-kicker{font-size:10.5px;letter-spacing:.08em;padding:4px 11px} }
 
 
 /* ============ 03-section ============ */
@@ -422,6 +433,11 @@
   footer a{color:#C6D0DC;text-decoration:none}
   footer a:hover{color:#fff}
   .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:11.5px;color:#8395AB;line-height:1.9}
+  /* ---------- v0.52 页脚品牌寓意 ---------- */
+  footer .brand-mean{color:#C6D0DC;border-left:2px solid var(--accent);padding-left:10px;margin:0 0 10px}
+  footer .logo-dot{position:relative;display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-1px}
+  footer .logo-dot::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,#3FC6A6,var(--blue))}
+  footer .logo-dot::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:#3FC6A6;opacity:.28}
 
 
 

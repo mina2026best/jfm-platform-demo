@@ -7314,7 +7314,7 @@ function exportIcs(){
   var a = getAlerts();
   if(!a.length){ toast('还没有提醒——到「升学日历」给节点点「设提醒」再导出'); return; }
   var stamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
-  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:鸡父母 · 升学节点提醒'];
+  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:家长屿 · 升学节点提醒'];
   a.forEach(function(t, i){
     var ds = icsDate(t);
     var d = new Date(parseInt(ds.slice(0,4),10), parseInt(ds.slice(4,6),10) - 1, 1);
@@ -7326,7 +7326,7 @@ function exportIcs(){
     L.push('DTSTART;VALUE=DATE:' + ds);
     L.push('DTEND;VALUE=DATE:' + de);
     L.push('SUMMARY:' + icsEsc(t));
-    L.push('DESCRIPTION:鸡父母平台 · 升学节点导出；节点以当年官方发布为准');
+    L.push('DESCRIPTION:家长屿平台 · 升学节点导出；节点以当年官方发布为准');
     L.push('END:VEVENT');
   });
   L.push('END:VCALENDAR');
@@ -7356,7 +7356,7 @@ function printTodoList(){
   }).join('');
   var w = window.open('', '_blank');
   if(!w){ toast('浏览器拦截了打印窗口——请允许弹出窗口后重试'); return; }
-  w.document.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>升学行动清单 · 鸡父母</title><style>'
+  w.document.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>升学行动清单 · 家长屿</title><style>'
     + 'body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:#17212E;max-width:720px;margin:32px auto;padding:0 20px;font-size:14px;line-height:1.7}'
     + 'h1{font-family:"Songti SC","Noto Serif SC",serif;font-size:22px;margin:0 0 4px}'
     + '.p-meta{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6B7683;margin-bottom:18px}'
@@ -7367,9 +7367,9 @@ function printTodoList(){
     + '.p-foot{margin-top:24px;padding-top:10px;border-top:1px dashed #C9D1D9;font-size:10.5px;color:#6B7683}'
     + '</style></head><body>'
     + '<h1>升学行动清单</h1>'
-    + '<div class="p-meta">鸡父母 · 重庆· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
+    + '<div class="p-meta">家长屿 · 重庆· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
     + rows
-    + '<div class="p-foot">清单由鸡父母平台生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
+    + '<div class="p-foot">清单由家长屿平台生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
     + '<script>window.onload=function(){setTimeout(function(){window.print()},200)}<\/script></body></html>');
   w.document.close();
 }
@@ -8002,7 +8002,7 @@ function importNews(){
   toast(added ? '已导入 ' + added + ' 条（本机）' : '没有解析到有效条目');
 }
 function exportNews(){
-  var payload = { exportedAt: new Date().toISOString(), note: '鸡父母平台资讯导出', items: newsCombined() };
+  var payload = { exportedAt: new Date().toISOString(), note: '家长屿平台资讯导出', items: newsCombined() };
   var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-news-export.json';
@@ -8071,7 +8071,7 @@ function copyNewsItem(k){
   if(!x) return;
   var lines = ['【' + (x.cat || '资讯') + '】' + x.t];
   if(x.sum) lines.push(x.sum);
-  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜鸡父母平台');
+  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜家长屿平台');
   copyText(lines.join('\n'));
 }
 function copyCompare(){
@@ -8084,7 +8084,7 @@ function copyCompare(){
     tr.querySelectorAll('th,td').forEach(function(td){ cells.push(td.textContent.trim()); });
     if(cells.length) rows.push(cells.join(' ｜ '));
   });
-  copyText('鸡父母平台 · 择校对比\n' + rows.join('\n') + '\n（口径详见站内「数据来源与核验」）');
+  copyText('家长屿平台 · 择校对比\n' + rows.join('\n') + '\n（口径详见站内「数据来源与核验」）');
 }
 function copySchoolSummary(){
   var d = (typeof SCHOOL_DB !== 'undefined' && currentOpenSchool) ? SCHOOL_DB[currentOpenSchool] : null;
@@ -8143,7 +8143,7 @@ function exportMyData(){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();
-  out._note = '鸡父母平台 · 本机数据导出（JSON）';
+  out._note = '家长屿平台 · 本机数据导出（JSON）';
   var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-my-data.json';
@@ -8315,7 +8315,7 @@ function calcLifeCost(){
   if(!r){ toast('请选择片区'); return; }
   var l = LT_LIFE[life], c = LT_COMMUTE[com];
   var lo = r[0] + l[0] + c[0], hi = r[1] + l[1] + c[1];
-  window._ltResult = '鸡父母平台 · 陪读成本估算\n片区：' + area + ' · ' + room + '\n房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元/月\n生活（' + life + '档）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元/月\n通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元/月\n合计约 ' + ltNum(lo) + '–' + ltNum(hi) + ' 元/月\n（不含学费与培训费用；口径为行情样本）';
+  window._ltResult = '家长屿平台 · 陪读成本估算\n片区：' + area + ' · ' + room + '\n房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元/月\n生活（' + life + '档）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元/月\n通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元/月\n合计约 ' + ltNum(lo) + '–' + ltNum(hi) + ' 元/月\n（不含学费与培训费用；口径为行情样本）';
   out.innerHTML = '<div class="lt-total">每月合计约 <b>' + ltNum(lo) + '–' + ltNum(hi) + ' 元</b>（不含学费与培训）</div>'
     + '<div class="lt-detail"><span>房租：' + ltNum(r[0]) + '–' + ltNum(r[1]) + ' 元</span><span>生活（' + life + '）：' + ltNum(l[0]) + '–' + ltNum(l[1]) + ' 元</span><span>通勤（' + com + '）：' + ltNum(c[0]) + '–' + ltNum(c[1]) + ' 元</span></div>'
     + '<div class="lt-actions"><button class="mini-btn" onclick="copyLifeCost()">复制结果</button></div>';
@@ -8395,7 +8395,7 @@ function genMaterials(){
   var stage = document.getElementById('mat-stage').value;
   var hk = document.getElementById('mat-hukou').value;
   var house = document.getElementById('mat-house').value;
-  window._matResult = '鸡父母平台 · 入学材料清单\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
+  window._matResult = '家长屿平台 · 入学材料清单\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
     + '\n\n【学段材料（' + stage + '）】\n- ' + MAT_STAGE[stage].join('\n- ')
     + '\n\n【户籍相关（' + hk + '）】\n- ' + MAT_HUKOU[hk].join('\n- ')
     + '\n\n【住房相关（' + house + '）】\n- ' + MAT_HOUSE[house].join('\n- ')
@@ -8591,7 +8591,7 @@ function submitContact(){
       } else {
         // 公网静态托管：mailto 兜底，不丢用户输入
         var body = encodeURIComponent('称呼：' + name + '\n类型：' + type + '\n联系方式：' + ct + '\n\n' + msg);
-        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【鸡父母留言】' + type) + '&body=' + body;
+        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【家长屿留言】' + type) + '&body=' + body;
         var note = document.getElementById('ct-note');
         if(note) note.textContent = '当前为演示环境，已为你唤起邮件客户端发送同内容留言。';
       }

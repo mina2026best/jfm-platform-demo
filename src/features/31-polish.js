@@ -56,7 +56,7 @@ function copyNewsItem(k){
   if(!x) return;
   var lines = ['【' + (x.cat || '资讯') + '】' + x.t];
   if(x.sum) lines.push(x.sum);
-  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜鸡父母平台');
+  lines.push('来源：' + (x.src || '未标注') + (x.date ? ' · ' + x.date : '') + '｜家长屿平台');
   copyText(lines.join('\n'));
 }
 function copyCompare(){
@@ -69,7 +69,7 @@ function copyCompare(){
     tr.querySelectorAll('th,td').forEach(function(td){ cells.push(td.textContent.trim()); });
     if(cells.length) rows.push(cells.join(' ｜ '));
   });
-  copyText('鸡父母平台 · 择校对比\n' + rows.join('\n') + '\n（口径详见站内「数据来源与核验」）');
+  copyText('家长屿平台 · 择校对比\n' + rows.join('\n') + '\n（口径详见站内「数据来源与核验」）');
 }
 function copySchoolSummary(){
   var d = (typeof SCHOOL_DB !== 'undefined' && currentOpenSchool) ? SCHOOL_DB[currentOpenSchool] : null;

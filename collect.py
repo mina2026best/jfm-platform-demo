@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""鸡父母平台 · 信息采集脚本（资讯中心数据源）
+"""家长屿平台 · 信息采集脚本（资讯中心数据源）
 用法：
   python3 collect.py                 # 从种子 + 已审核采集条目生成 src/data-news.js
   python3 collect.py --fetch         # 先尝试抓取 src/news/sources.json 中的公开页面（best-effort），再生成

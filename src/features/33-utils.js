@@ -19,7 +19,7 @@ function exportMyData(){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();
-  out._note = '鸡父母平台 · 本机数据导出（JSON）';
+  out._note = '家长屿平台 · 本机数据导出（JSON）';
   var blob = new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-my-data.json';

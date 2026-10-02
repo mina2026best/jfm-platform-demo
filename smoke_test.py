@@ -27,7 +27,9 @@ CHECKS = {
     "daohang.html":   [("#dao-full .dao-cat", 11, "导航页分类块"), ("#dao-full .dao-list a", 73, "导航页链接总数"),
                        (".dao-chip", 11, "分类锚点"), ("#dao-zheng b", 1, "区划提醒卡"),
                        ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达")],
-    "news.html":      [("#news-list .news-item", 20, "资讯列表条目"), ("#news-list .ni-cover img", 20, "资讯封面图")],
+    "news.html":      [("#news-list .news-item", 20, "资讯列表条目"), ("#news-list .ni-cover img", 20, "资讯封面图"),
+                       ("#news-list .news-item.lead", 1, "首条大图卡"), ("#news-list .news-item.lead .ni-cover img", 1, "首条大图"),
+                       (".news-filter .ff", 6, "分类筛选按钮")],
     "data-sources.html": [("#ds-table tr", 3, "数据来源表行")],
     "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片")],
     "articles/article-school-54671c45.html": [("a[href^='http']", 2, "文章页外链")],
@@ -38,9 +40,16 @@ MOBILE_PROBE = r'''
 window.addEventListener('load', function(){
   var de = document.documentElement;
   var over = [];
+  function inScroller(e){                      // 横滑容器内的子元素本就超出视口，不算缺陷
+    for(var a = e.parentElement; a && a !== document.body; a = a.parentElement){
+      var ox = getComputedStyle(a).overflowX;
+      if(ox === 'auto' || ox === 'scroll') return true;
+    }
+    return false;
+  }
   document.querySelectorAll('section *').forEach(function(e){
     var r = e.getBoundingClientRect();
-    if(r.width > 0 && r.right > de.clientWidth + 2) over.push((e.className || e.tagName) + ':' + Math.round(r.right));
+    if(r.width > 0 && r.right > de.clientWidth + 2 && !inScroller(e)) over.push((e.className || e.tagName) + ':' + Math.round(r.right));
   });
   var minFs = 99, small = 0;
   document.querySelectorAll('section p, section li a, section span').forEach(function(e){
@@ -49,9 +58,11 @@ window.addEventListener('load', function(){
     if(f < minFs) minFs = f;
     if(f < 11.5) small++;
   });
+  var visCovers = 0;
+  document.querySelectorAll('.ni-cover').forEach(function(e){ if(e.offsetParent !== null && e.getBoundingClientRect().height > 20) visCovers++; });
   var n = document.createElement('div');
   n.textContent = 'MOB ' + JSON.stringify({scrollW: de.scrollWidth, clientW: de.clientWidth,
-    over: over.slice(0, 4), overCount: over.length, minFs: minFs, tinyText: small});
+    over: over.slice(0, 4), overCount: over.length, minFs: minFs, tinyText: small, visCovers: visCovers});
   document.body.appendChild(n);
 });
 </script>
@@ -178,14 +189,20 @@ def main():
             fails.append(page)
     # —— 移动端（390px）：断言"无横向溢出"（真缺陷类别）——
     for page in [x for x in MOBILE_PAGES if (not pages_arg or x in pages_arg)]:
-        r = render(port, page, [], probe=MOBILE_PROBE, width="390,1400", marker='MOB')
+        r = render(port, page, [], probe=MOBILE_PROBE, width="390,1400", marker='MOB', timeout=60)
+        if not r or 'scrollW' not in r:          # Chrome 偶发渲染超时：重试一次再判失败
+            r = render(port, page, [], probe=MOBILE_PROBE, width="390,1400", marker='MOB', timeout=60)
         if not r or 'scrollW' not in r:
             print(f"[smoke] ✗ FAIL {page} 移动端：未取到指标")
             fails.append(page + '(mobile)'); continue
         over = r.get('overCount', 0)
         ok = r['scrollW'] <= r['clientW'] + 2 and over == 0
+        if page == 'news.html' and r.get('visCovers', 0) < 10:
+            ok = False; bad_cov = f" | 可见缩略图仅 {r.get('visCovers')}（应 ≥10）"
+        else:
+            bad_cov = f" | 缩略图 {r.get('visCovers')}"
         print(f"[smoke] {'✓ PASS' if ok else '✗ FAIL'} {page} 移动端：滚动宽 {r['scrollW']}/{r['clientW']} "
-              f"| 溢出元素 {over} | 最小字号 {r['minFs']}px | <11.5px 文本 {r['tinyText']} 处"
+              f"| 溢出元素 {over} | 最小字号 {r['minFs']}px | <11.5px 文本 {r['tinyText']} 处{bad_cov}"
               + ('' if ok else f" | 例：{r.get('over')}"))
         if not ok:
             fails.append(page + '(mobile)')

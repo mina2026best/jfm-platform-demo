@@ -7814,7 +7814,7 @@ function renderNews(){
   // v0.43：筛选/搜索时全量，默认浏览时分页渲染
   var pageShown = (q || newsFilter !== 'all') ? shown.length : Math.min(newsShown, shown.length);
   var pageItems = shown.slice(0, pageShown);
-  box.innerHTML = pageItems.length ? pageItems.map(newsItemHTML).join('')
+  box.innerHTML = pageItems.length ? pageItems.map(function(x, i){ return newsItemHTML(x, i === 0); }).join('')
     : (q ? '<div class="empty-mini">没有匹配「' + esc(newsQuery.trim()) + '」的条目——换个关键词试试，或清空搜索框。</div>'
          : '<div class="empty-mini">该分类暂无条目——可点「编辑台」添加。</div>');
   // 「加载更多」按钮（仅默认浏览态且还有剩余时显示）
@@ -7842,7 +7842,7 @@ function renderNews(){
       + ' · 「编辑台」内容保存在本机浏览器，可导出 JSON 交接；正式版接入后台审核发布流程。';
   }
 }
-function newsItemHTML(x){
+function newsItemHTML(x, lead){
   var bodyHTML = (x.body || x.url)
     ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + hrefEnc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
@@ -7852,7 +7852,7 @@ function newsItemHTML(x){
   if(artKey){ titleLink = '<a class="ni-link" href="articles/' + artKey + '" title="阅读全文">' + esc(x.t) + '</a>'; }
   else if(x.url){ titleLink = '<a class="ni-link" href="' + hrefEnc(x.url) + '" target="_blank" rel="noopener" title="阅读原文">' + esc(x.t) + ' ↗</a>'; }
   else { titleLink = '<span class="ni-link" role="text">' + esc(x.t) + '</span>'; }
-  return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
+  return '<div class="news-item' + (lead ? ' lead' : '') + '" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'

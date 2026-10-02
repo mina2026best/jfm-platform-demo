@@ -86,3 +86,30 @@
   .sc-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 42%;transition:transform .25s ease}
   .school-card:hover .sc-art img{transform:scale(1.05)}
   html.theme-dark .sc-art img,html.theme-dark .ni-cover img,html.theme-dark .hero-art img,html.theme-dark .entry-art img,html.theme-dark .pb-art img{filter:brightness(.94)}
+
+/* ---------- v0.58 门户式信息流（参考本地生活门户：图片前置 / 首条大图 / 横滑分类） ---------- */
+/* 1. 首条 lead：通栏大图 + 大标题（门户首屏节奏） */
+.news-grid[data-covers="1"] .news-item.lead{grid-column:1/-1;grid-template-columns:1fr;gap:0}
+.news-grid[data-covers="1"] .news-item.lead .ni-cover img{aspect-ratio:16/9}
+.news-grid[data-covers="1"] .news-item.lead .ni-title{font-size:18px;margin-top:10px}
+.news-grid[data-covers="1"] .news-item.lead .ni-sum{font-size:13.5px}
+.news-grid[data-covers="1"] .news-item.lead .ni-body{font-size:13.5px}
+/* 2. 移动端保留缩略图（原实现整块隐藏 → 信息流变成纯文字，失去门户观感） */
+@media (max-width:720px){
+  .news-grid[data-covers="1"] .news-item{grid-template-columns:104px 1fr;gap:12px}
+  .news-grid[data-covers="1"] .news-item .ni-cover{display:block !important}
+  .news-grid[data-covers="1"] .news-item.lead{grid-template-columns:1fr;gap:0}
+  .news-grid[data-covers="1"] .news-item .ni-title{font-size:15.5px}
+}
+/* 3. 分类筛选：窄屏横向滑动（触屏门户惯例），避免换行成两排 */
+@media (max-width:720px){
+  .news-toolbar{gap:10px}
+  .news-filter{display:flex;flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .news-filter::-webkit-scrollbar{display:none}
+  .news-filter .ff{flex:none}
+}
+/* 4. 密度微调：hover 位移收敛、圆角统一到 12px（向扁平信息型门户靠拢） */
+.news-item{border-radius:12px}
+.news-item:hover{transform:translateY(-2px)}
+html.theme-dark .news-grid[data-covers="1"] .news-item.lead .ni-cover img{filter:brightness(.94)}

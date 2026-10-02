@@ -32,6 +32,32 @@ CHECKS = {
     "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片")],
     "articles/article-school-54671c45.html": [("a[href^='http']", 2, "文章页外链")],
 }
+MOBILE_PAGES = ["index.html", "daohang.html", "news.html", "schools.html", "policy.html"]
+MOBILE_PROBE = r'''
+<script>
+window.addEventListener('load', function(){
+  var de = document.documentElement;
+  var over = [];
+  document.querySelectorAll('section *').forEach(function(e){
+    var r = e.getBoundingClientRect();
+    if(r.width > 0 && r.right > de.clientWidth + 2) over.push((e.className || e.tagName) + ':' + Math.round(r.right));
+  });
+  var minFs = 99, small = 0;
+  document.querySelectorAll('section p, section li a, section span').forEach(function(e){
+    if(!e.textContent.trim()) return;
+    var f = parseFloat(getComputedStyle(e).fontSize);
+    if(f < minFs) minFs = f;
+    if(f < 11.5) small++;
+  });
+  var n = document.createElement('div');
+  n.textContent = 'MOB ' + JSON.stringify({scrollW: de.scrollWidth, clientW: de.clientWidth,
+    over: over.slice(0, 4), overCount: over.length, minFs: minFs, tinyText: small});
+  document.body.appendChild(n);
+});
+</script>
+'''
+
+
 PROBE = r'''
 <script>
 window.__errs = [];
@@ -68,13 +94,13 @@ def serve(port):
     return httpd
 
 
-def render(port, page, selectors, timeout=45):
+def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SMOKE'):
     """复制页面 → 注入探针 → chrome dump-dom → 解析"""
     src = os.path.join(ROOT, page)
     if not os.path.exists(src):
         return {"errs": ["页面不存在"], "counts": {}}
     raw = open(src, encoding='utf-8').read()
-    probe = PROBE.replace('window.__SMOKE_SEL || []', json.dumps(selectors))
+    probe = (probe or PROBE).replace('window.__SMOKE_SEL || []', json.dumps(selectors))
     tmpname = '_smoke_tmp_' + os.path.basename(page).replace('/', '_')
     tmp = os.path.join(ROOT, tmpname)
     rel = os.path.relpath(ROOT, os.path.dirname(src))
@@ -87,14 +113,15 @@ def render(port, page, selectors, timeout=45):
         proc = subprocess.Popen(
             [CHROME, '--headless=new', '--disable-gpu', '--no-sandbox', '--no-first-run',
              '--disable-extensions', '--user-data-dir=/tmp/chrome-smoke-' + os.path.basename(page).replace('.', '_'),
-             '--virtual-time-budget=6000', '--dump-dom', f'http://127.0.0.1:{port}/{tmpname}'],
+             '--virtual-time-budget=6000'] + (['--window-size=' + width] if width else []) +
+            ['--dump-dom', f'http://127.0.0.1:{port}/{tmpname}'],
             stdout=fh, stderr=subprocess.DEVNULL)
         deadline = time.time() + timeout
         while time.time() < deadline:
             if proc.poll() is not None:
                 break
             try:
-                if 'SMOKE {' in open(outfile, encoding='utf-8', errors='ignore').read():
+                if marker + ' {' in open(outfile, encoding='utf-8', errors='ignore').read():
                     break
             except Exception:
                 pass
@@ -105,7 +132,8 @@ def render(port, page, selectors, timeout=45):
     for f in (tmp, outfile):
         if os.path.exists(f):
             os.remove(f)
-    m = re.search(r'SMOKE (\{.*?\})</div>', out, re.S)
+    m = re.search(marker.replace('SMOKE', 'SMOKE') + r' (\{.*?\})</div>', out, re.S) if marker == 'SMOKE' \
+        else re.search(marker + r' (\{.*?\})</div>', out, re.S)
     if not m:
         return {"errs": ["探针未执行（页面可能未加载完）"], "counts": {}}
     try:
@@ -115,7 +143,8 @@ def render(port, page, selectors, timeout=45):
 
 
 def main():
-    pages = sys.argv[1:] or list(CHECKS.keys())
+    pages_arg = sys.argv[1:]
+    pages = pages_arg or list(CHECKS.keys())
     if not os.path.exists(CHROME):
         print("[smoke] 未找到 Chrome，跳过渲染冒烟测试"); return 0
     port = free_port(); httpd = serve(port); time.sleep(0.5)
@@ -140,6 +169,19 @@ def main():
             print(f"          ✗ {b}")
         if bad:
             fails.append(page)
+    # —— 移动端（390px）：断言"无横向溢出"（真缺陷类别）——
+    for page in [x for x in MOBILE_PAGES if (not pages_arg or x in pages_arg)]:
+        r = render(port, page, [], probe=MOBILE_PROBE, width="390,1400", marker='MOB')
+        if not r or 'scrollW' not in r:
+            print(f"[smoke] ✗ FAIL {page} 移动端：未取到指标")
+            fails.append(page + '(mobile)'); continue
+        over = r.get('overCount', 0)
+        ok = r['scrollW'] <= r['clientW'] + 2 and over == 0
+        print(f"[smoke] {'✓ PASS' if ok else '✗ FAIL'} {page} 移动端：滚动宽 {r['scrollW']}/{r['clientW']} "
+              f"| 溢出元素 {over} | 最小字号 {r['minFs']}px | <11.5px 文本 {r['tinyText']} 处"
+              + ('' if ok else f" | 例：{r.get('over')}"))
+        if not ok:
+            fails.append(page + '(mobile)')
     print(f"[smoke] 结果：{len(pages) - len(fails)}/{len(pages)} 通过" + (f"，失败页：{'、'.join(fails)}" if fails else ""))
     return 1 if fails else 0
 

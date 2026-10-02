@@ -1224,6 +1224,12 @@
 html.theme-dark .today-bar{background:linear-gradient(90deg,rgba(76,194,163,.10),rgba(76,194,163,0))}
 html.theme-dark .dao-quick a{background:var(--paper);color:var(--ink)}
 
+/* 深色模式：站内速达链接改用更亮的 --blue（深色下 --navy2 对比不足）*/
+html.theme-dark .today-bar .tb-links a{color:var(--blue);border-bottom-color:var(--line2)}
+html.theme-dark .today-bar .tb-links a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+html.theme-dark .dao-cat{background:var(--paper)}
+html.theme-dark .dao-list span{color:#93A3B8}
+
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
   .crumb a{color:var(--accent);text-decoration:none}

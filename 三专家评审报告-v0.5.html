@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>三专家评审报告 · 鸡父母平台 MVP 网站（v0.4→v0.5）</title>
+<style>
+  :root{--bg:#F6F7F9;--ink:#17212E;--ink2:#3C4858;--muted:#6B7683;--navy:#24344D;--line:#E3E7EC;--accent:#0E7C66;--accent-soft:#E8F2EF;--warn:#B45309;--warn-soft:#FCF3E3;--bad:#B3261E;
+  --serif:"Songti SC","Noto Serif SC",serif;--sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.75}
+  .page{max-width:1020px;margin:0 auto;padding:48px 32px 72px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted)}
+  h1{font-family:var(--serif);font-size:30px;color:var(--navy);margin:12px 0 8px;line-height:1.3}
+  .sub{color:var(--ink2);max-width:52em}
+  .meta{display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;margin:18px 0 8px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .meta b{color:var(--ink)}
+  section{margin-top:44px}
+  h2{font-family:var(--serif);font-size:21px;color:var(--navy);margin-bottom:4px;display:flex;gap:12px;align-items:baseline}
+  h2 .no{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400}
+  .rule{border:none;border-top:2px solid var(--navy);width:56px;margin:8px 0 18px}
+  p{color:var(--ink2);margin-bottom:10px;max-width:50em}
+  .verdict-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+  .vc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+  .vc .role{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .vc h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin:6px 0 8px}
+  .vc ul{list-style:none}
+  .vc li{font-size:13px;color:var(--ink2);padding:6px 0;border-bottom:1px dashed var(--line)}
+  .vc li:last-child{border:none}
+  .vc li b{color:var(--ink)}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;margin:14px 0 20px}
+  th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-weight:600;font-size:12.5px}
+  td{padding:10px 12px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  td:first-child{color:var(--ink)}
+  .pri{font-family:var(--mono);font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:4px}
+  .p0{background:#FDECEC;color:var(--bad)}
+  .p1{background:var(--warn-soft);color:var(--warn)}
+  .p2{background:#EDF0F3;color:var(--muted)}
+  .done{background:var(--accent-soft);color:var(--accent)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .card h3{font-family:var(--serif);font-size:16px;color:var(--navy);margin-bottom:8px}
+  .card p{font-size:13px;margin-bottom:6px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center}
+  .kpi .n{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--accent)}
+  .kpi .l{font-size:11.5px;color:var(--muted);margin-top:4px}
+  .note{background:var(--warn-soft);border-left:3px solid var(--warn);padding:12px 16px;border-radius:0 6px 6px 0;font-size:13px;color:var(--ink2);margin:14px 0;max-width:50em}
+  footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.9}
+  @media(max-width:820px){.verdict-cards,.grid2{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.page{padding:32px 18px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="kicker">EXPERT REVIEW · THREE-PANEL · V0.4 → V0.5</div>
+  <h1>三专家评审报告 · 鸡父母平台 MVP 网站</h1>
+  <p class="sub">由「教育政策专家 / 资深网站设计专家 / 成功家长」三方独立评审 14 区块全码，产出 12 条发现（P0×4 / P1×5 / P2×3）；本轮已合并执行 11 条（含主线自查先行落地的 13 项），全部整改经 24 项浏览器自动化回归验证。</p>
+  <div class="meta">
+    <span>评审对象 <b>MVP 演示站 index.html（v0.3，62KB）</b></span>
+    <span>评审方式 <b>逐区块核读（约 1250 行）</b></span>
+    <span>整改后版本 <b>v0.5（76KB）</b></span>
+    <span>日期 <b>2026-09-17</b></span>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span>三方结论速览</h2>
+    <hr class="rule"/>
+    <div class="verdict-cards">
+      <div class="vc"><div class="role">教育政策专家</div><h3>合规硬，年份软肋</h3>
+        <ul><li><b>✓</b> 合规边界反复自证清晰</li><li><b>✗</b> 军检线 2026 数据放在 2027 节点</li><li><b>✗</b> 升学路径叙事单一，强化焦虑</li><li><b>✗</b> 术语严谨度不齐（六年一户/长幼随学）</li></ul></div>
+      <div class="vc"><div class="role">资深网站设计专家</div><h3>模块好，动线断</h3>
+        <ul><li><b>✓</b> 可核验贯穿全链路（文号+核验日期）</li><li><b>✗</b> 档案库三处断链（导航/搜索/入口）</li><li><b>✗</b> 「2–4 所」与 3 个对比位口径矛盾</li><li><b>✗</b> 平板/手机端无导航替代</li></ul></div>
+      <div class="vc"><div class="role">成功家长</div><h3>有用，但被内行话劝退</h3>
+        <ul><li><b>✓</b> 人话版+术语词典降低门槛</li><li><b>✗</b> 「销量目标/变现挂点」暴露经营视角</li><li><b>✗</b> 「见详情」是死胡同文案</li><li><b>✗</b> 档案藏太深，承诺过滤未兑现</li></ul></div>
+    </div>
+    <p>三方交叉指向同一核心：<b>专业可信是本站最值钱的资产，而「内行话外露 + 口径不一致」正在悄悄损耗它。</b>本轮整改围绕这一主线。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>12 条发现与整改对照</h2>
+    <hr class="rule"/>
+    <table>
+      <tr><th>#</th><th>视角</th><th>发现（简述）</th><th>优先级</th><th>整改状态</th></tr>
+      <tr><td>①</td><td>设计</td><td>学校档案库三处断链：导航无入口、搜索索引无学校、Hero「找学校」指向对比而非档案</td><td><span class="pri p0">P0</span></td><td><span class="pri done">已改</span> 导航加「档案」；Hero 入口02改指 #schools；对比器内保留「加入对比」</td></tr>
+      <tr><td>②</td><td>设计</td><td>经营语言外露：「变现挂点」「销量组合 100:20:9:1」「佣金 10–20%」出现在家长界面</td><td><span class="pri p0">P0</span></td><td><span class="pri done">已改</span> 4 处全部改写为用户价值语言；定价说明改为协议口径</td></tr>
+      <tr><td>③</td><td>教育</td><td>军检线 2026 数据放在 2027-06 节点无标注；标题中英混杂（"action"）</td><td><span class="pri p0">P0</span></td><td><span class="pri done">已改</span> 标题统一「高考特招线公布后行动清单」；卡内标注「示例为 2026 年实际口径，正式版自动替换」；军检线补用途说明</td></tr>
+      <tr><td>④</td><td>设计</td><td>「选择 2–4 所学校」×2 处 vs 实际 3 个对比位；入口维度词与表头不对齐</td><td><span class="pri p0">P0</span></td><td><span class="pri done">已改</span> 全文统一「2–3 所」；入口描述与对比维度对齐</td></tr>
+      <tr><td>⑤</td><td>家长</td><td>档案承诺「按学段过滤」未实现；日历混跨 3 学段、stage 口径不一（"指标到校"是政策类型非学段）</td><td><span class="pri p1">P1</span></td><td><span class="pri done">已改</span> 保存档案→日历真实过滤（初中=2 卡验证）；stage 统一学段口径；新增学段筛选按钮组 + 幼升小卡</td></tr>
+      <tr><td>⑥</td><td>设计</td><td>移动端无导航替代；对比表/租房表无横向滚动容器</td><td><span class="pri p1">P1</span></td><td><span class="pri done">已改</span> 汉堡菜单 13 项（v0.4 已建）；表格包 overflow-x 容器（min-width 560/520px）</td></tr>
+      <tr><td>⑦</td><td>教育</td><td>术语严谨度不齐：「六年一户」未注区县差异；「长幼随学」不说通道；内部检索编号 [C4-Sxx] 外露</td><td><span class="pri p1">P1</span></td><td><span class="pri done">已改</span> 两条补严谨度说明；编号替换为可读出处（如「新京报 2024-11-29」）；术语扩至 13 条（+公民同招/职教高考/多校划片/摇号/特招线/一分一段）</td></tr>
+      <tr><td>⑧</td><td>家长</td><td>「错过的补救路径见详情」是死胡同文案，无任何可点对象</td><td><span class="pri p1">P1</span></td><td><span class="pri done">已改</span> 改为「错过转学的，正式版提供补救路径清单」（诚实披露规划中）</td></tr>
+      <tr><td>⑨</td><td>家长</td><td>B 端招商定价横插家长主流程；「平台如何运转」暴露内部 SOP（对账/结算单）</td><td><span class="pri p1">P1</span></td><td><span class="pri done">已改</span> B 端整段移到会员之后；「平台如何运转」改写为家长视角「我们的服务承诺」（响应/开通/核验三承诺）</td></tr>
+      <tr><td>⑩</td><td>教育</td><td>升学路径叙事单一；无幼升小节点</td><td><span class="pri p2">P2</span></td><td><span class="pri done">部分已改</span> v0.4 已落「升学不止一条路」6 路径卡（含中职/职教高考/艺体）；日历补幼升小卡；「升学路径地图」完整模块留正式版</td></tr>
+      <tr><td>⑪</td><td>家长</td><td>档案「暂缺字段：录取线」无替代路径指引，与位次换算工具零互链</td><td><span class="pri p2">P2</span></td><td><span class="pri done">已改</span> 弹窗内加互链：「可到志愿参考·位次换算替代」</td></tr>
+      <tr><td>⑫</td><td>教育</td><td>首屏免责三连位置过冲淡主信息；尊享版「不承诺录取」用 off 样式造成合规歧义</td><td><span class="pri p2">P2</span></td><td><span class="pri done">已改</span> 首屏免责移至三入口下方弱化小字；尊享条目改为正常样式的合规承诺文案</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>主线自查先行落地的 13 项（合并说明）</h2>
+    <hr class="rule"/>
+    <p>评审进行期间，主线已按初判先行执行并回归通过 13 项：favicon、信任指标条（376.3 万在校生/113 所联招/70% 指标到校/6,993 护学岗，全部带来源）、新手三步引导、双 CTA、移动端汉堡导航（13 项锚点菜单，修复了按钮嵌套在隐藏 nav 内导致的不可见缺陷）、入学自查问答器（3 问→路径判断+缺口提醒+多元提示，覆盖落户/租房随迁/隔代三类情形）、升学路径 6 卡、术语 5→11 条、求真 +2 条与筛选器、社区热议榜、返回顶部、搜索索引扩充。与评审 12 条合并后，本轮实际整改 <b>24 项</b>。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>回归验证</h2>
+    <hr class="rule"/>
+    <div class="kpis">
+      <div class="kpi"><div class="n">24</div><div class="l">自动化用例全通过</div></div>
+      <div class="kpi"><div class="n">12</div><div class="l">评审发现处理</div></div>
+      <div class="kpi"><div class="n">13</div><div class="l">主线自查整改</div></div>
+      <div class="kpi"><div class="n">0</div><div class="l">控制台报错</div></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h3>评审整改项验证（抽样）</h3>
+        <p>· 经营语言清零：变现挂点/销量组合/佣金口径在页面源码中 0 残留</p>
+        <p>· 学段筛选：幼升小→1 卡；档案保存初中→2 卡（指标到校+中考）；筛选按钮态互斥正确</p>
+        <p>· 区块顺序：plans → biz → how（B 端不再夹在生活服务与会员之间）</p>
+        <p>· 录取线弹窗互链：位次换算入口可达且弹窗正常关闭</p></div>
+      <div class="card"><h3>旧功能回归（抽样）</h3>
+        <p>· 全站搜索 / 对比器 / 志愿换算 / 求真提交 / 会员开通 / 升学豆同步 全部通过</p>
+        <p>· 移动端 390px 全页滚动无横向溢出</p>
+        <p>· 汉堡菜单开合、锚点跳转、菜单自动收起</p>
+        <p>· 控制台 0 报错（pageerror + console.error 双监听）</p></div>
+    </div>
+    <div class="note"><b>诚实说明：</b>①三专家评审基于 v0.3 代码，其「移动端无导航」「表格挤压破版」两条在评审期间已被 v0.4 汉堡菜单与响应式修复覆盖（重复发现）；②P2 中「升学路径地图」完整模块超出本轮范围，已落最小版（6 路径卡+幼升小节点），完整版建议随正式版规划；③30 条域名级来源仍如实披露（上一轮已说明）。</div>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>总评与后续建议</h2>
+    <hr class="rule"/>
+    <p><b>总评：</b>本站最大的差异化资产是「可核验的专业可信感」。本轮整改后，家长界面已看不到任何经营视角的内行话，口径矛盾清零，教育敏感点（年份标注、路径多元、术语严谨度）全部补齐；剩余的 3 条 P2 均属「正式版结构性机会」而非缺陷。</p>
+    <div class="grid2">
+      <div class="card"><h3>建议随正式版落地</h3>
+        <p>· 「升学路径地图」独立模块（6 路径 × 学段 × 时间轴）</p>
+        <p>· 日历卡 details 折叠「现在该做什么」清单</p>
+        <p>· 剩余 30 条域名级来源补全 URL</p></div>
+      <div class="card"><h3>建议运营期持续做</h3>
+        <p>· 每季度以三专家视角复评一次（教育合规 / 交互体验 / 家长视角）</p>
+        <p>· 「已核验」来源清单随政策更新滚动维护</p>
+        <p>· 用实测数据回填「演示口径」标注处</p></div>
+    </div>
+  </section>
+
+  <footer>
+    评审：三专家评审团（教育政策 / 网站设计 / 成功家长）· 执行与验证：设计专家主线<br/>
+    评审对象：index.html v0.3（2026-09-16）· 整改后版本：v0.5（2026-09-17）· 本报告生成于 2026-09-17
+  </footer>
+</div>
+</body>
+</html>

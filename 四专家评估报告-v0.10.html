@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四专家深度评估报告 · 鸡父母平台 MVP 演示站 v0.10</title>
+<style>
+  :root{
+    --bg:#0f1115; --bg2:#151a22; --ink:#e8eaf0; --ink2:#a9b0bd; --mut:#6e7683;
+    --line:rgba(255,255,255,.09); --acc:#2ea3f2; --ok:#7bd88f; --warn:#e8b84b; --bad:#f07b72;
+    --mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,monospace;
+    --sans:-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:56px 28px 80px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:30px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--ink2);font-size:15px;max-width:64ch}
+  .meta{font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .meta b{color:var(--ink2);font-weight:500}
+  section{margin-top:46px}
+  h2{font-size:19px;font-weight:600;margin-bottom:14px;display:flex;align-items:baseline;gap:10px}
+  h2 .no{font-family:var(--mono);font-size:12px;color:var(--acc);font-weight:400}
+  h3{font-size:15px;font-weight:600;margin:20px 0 8px;color:var(--ink)}
+  .panel{background:var(--bg2);border:1px solid var(--line);padding:20px 22px;margin-bottom:14px}
+  .expert{display:flex;gap:14px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .expert .tag{font-family:var(--mono);font-size:11px;padding:3px 10px;border:1px solid var(--line);color:var(--ink2)}
+  .expert .tag.a{color:var(--acc);border-color:rgba(46,163,242,.4)}
+  .expert .score{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--ok)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+  th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--mut);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line);text-transform:uppercase}
+  td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  td:first-child{color:var(--ink)}
+  .sev{font-family:var(--mono);font-size:11px;padding:1px 8px;border:1px solid;border-radius:99px;white-space:nowrap}
+  .sev.p0{color:var(--bad);border-color:rgba(240,123,114,.4)}
+  .sev.p1{color:var(--warn);border-color:rgba(232,184,75,.4)}
+  .sev.p2{color:var(--mut);border-color:var(--line)}
+  .st{font-family:var(--mono);font-size:11px;white-space:nowrap}
+  .st.fixed{color:var(--ok)}
+  .st.open{color:var(--warn)}
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:7px 14px;font-size:13.5px}
+  .kv .k2{font-family:var(--mono);font-size:12px;color:var(--mut)}
+  .kv .v{color:var(--ink2)}
+  .foot{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  a{color:var(--acc);text-decoration:none}
+  a:hover{text-decoration:underline}
+  ul.plain{margin:6px 0 6px 18px;font-size:13.5px;color:var(--ink2)}
+  ul.plain li{margin:3px 0}
+  .legend{font-size:12px;color:var(--mut);margin-top:6px;font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Expert Review · Round v0.10 · 2026-09-22</div>
+  <h1>四专家深度评估报告</h1>
+  <p class="sub">以「网站设计 / 美工设计 / 教育专业 / 成功父母」四个苛刻视角，对《鸡父母平台》MVP 演示站进行全量深度评估；本轮按专业门户网站标准补齐短板、完善模块（含新上线的资讯中心与站内采集编辑能力），逐项给出问题 → 处置 → 验证。</p>
+  <div class="meta">评估对象 鸡父母平台 MVP 演示站 v0.10（单文件·零依赖） · <b>本轮验证：44/44 项浏览器回归全绿</b> · 关联交付见站内 README 与 EdgeOne 指引</div>
+
+  <section>
+    <h2><span class="no">00</span>评估方法与总体结论</h2>
+    <div class="panel">
+      <div class="kv">
+        <span class="k2">评估方法</span><span class="v">四角色独立评审（信息架构 / 视觉体系 / 教育合规 / 真实使用场景），按「专业门户标准」对照检查：栏目完整度、内容可核验性、导航与可达性、移动体验、空态/错误态、SEO 与结构化数据、运营工具链。</span>
+        <span class="k2">总体结论</span><span class="v">v0.9→v0.10 完成 21 项整改（P0×3、P1×11、P2×7）；新增「资讯中心 + 站内采集与编辑台 + 采集脚本」三大能力，补齐门户级模块（关于与联系、站点地图、结构化数据、skip link）。当前无未处置 P0/P1 项开放。</span>
+        <span class="k2">遗留事项</span><span class="v">6 项（均为正式版范畴，见文末清单）。</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">01</span>网站设计专家 · 信息架构与可用性</h2>
+    <div class="panel">
+      <div class="expert"><span class="tag a">WEB DESIGN</span><span class="tag">信息架构 / 导航 / 可达性 / 响应式</span><span class="score">综合 8.8 / 10</span></div>
+      <table>
+        <tr><th>发现</th><th>严重度</th><th>处置</th><th>状态</th></tr>
+        <tr><td>缺「资讯」一级栏目——门户站没有动态内容入口，首屏之后全是静态工具</td><td><span class="sev p1">P1</span></td><td>新增「01.5 · 升学资讯」栏目：分类筛选（政策速递/升学动态/家庭教育/安全提醒/办事提醒）、条目展开详情、来源与日期逐条标注</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>顶部导航与移动菜单无资讯入口，栏目断层</td><td><span class="sev p1">P1</span></td><td>顶部导航新增「资讯」入口（首位），移动菜单同步「升学资讯」</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>全站搜索不含动态内容，搜索一致性缺口</td><td><span class="sev p2">P2</span></td><td>搜索管道合并「内置资讯 + 本机编辑条目」，命中可直接定位并展开目标条目（含闪动定位）</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>无跳转主内容链接（键盘用户需逐项 Tab 过导航）</td><td><span class="sev p2">P2</span></td><td>新增 skip link「跳到主要内容」（聚焦显示，锚点至主视觉区）</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>页脚栏目链接稀疏，无门户级站点地图</td><td><span class="sev p1">P1</span></td><td>页脚升级为「站点地图」：13 个栏目全量索引（含资讯、关于）</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>无「关于与联系」页，门户信任链缺最后一环</td><td><span class="sev p1">P1</span></td><td>新增「08 · 关于与联系」：平台定位 / 编辑审核规范 / 联系与线索通道（三卡）</td><td class="st fixed">✓ 已修复</td></tr>
+        <tr><td>桌面↔移动断点下的双列资讯网格风险</td><td><span class="sev p2">P2</span></td><td>资讯网格在 ≤960px 收起为单列；移动端全页 0px 溢出复测通过</td><td class="st fixed">✓ 已修复</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>美工设计专家 · 视觉体系与质感</h2>
+    <div class="panel">
+      <div class="expert"><span class="tag a">VISUAL DESIGN</span><span class="tag">排版 / 色彩 / 层级 / 一致性</span><span class="score">综合 8.5 / 10</span></div>
+      <table>
+        <tr><th>发现</th><th>严重度</th><th>处置</th><th>状态</th></tr>
+        <tr><td>新栏目必须无损接入既有视觉体系（Fathom 海军蓝 + 青绿、衬线标题 + 等宽注记）</td><td><span class="sev p0">P0</span></td><td>资讯卡片沿用区域色与卡片语言：分类以左侧 3px 色条区分（政策=海军蓝/升学=青绿/家庭=蓝/安全=橙/办事=灰），头部注记用等宽字体</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>信息密度断层：静态卡片与动态列表的阅读节奏需要区分</td><td><span class="sev p1">P1</span></td><td>资讯条目采用「分类行 → 标题 → 摘要 →（可选）正文」四级节奏；展开/收起过渡克制；悬停仅上浮阴影不位移</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>编辑台弹窗需要与既有 dialog 体系（学校档案/会员开通）视觉一致</td><td><span class="sev p1">P1</span></td><td>复用同一 .dlg 体系：kicker 眉题、衬线标题、虚线分区；宽度扩展至 680px 适配表单</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>状态色语义：草稿 vs 已发布需要一眼可辨但不刺眼</td><td><span class="sev p2">P2</span></td><td>草稿=灰底灰字、已发布=青绿弱底；危险操作按钮保持红色描边体系</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>空态与引导态缺失（新栏目首次进入的空场景）</td><td><span class="sev p2">P2</span></td><td>资讯空态、编辑台空态、无档案引导条三处补全，文案承接全站语气</td><td class="st fixed">✓ 已实现</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>教育专家 · 内容合规与信息质量</h2>
+    <div class="panel">
+      <div class="expert"><span class="tag a">EDUCATION</span><span class="tag">合规 / 可核验 / 口径 / 免责</span><span class="score">综合 9.2 / 10</span></div>
+      <table>
+        <tr><th>发现</th><th>严重度</th><th>处置</th><th>状态</th></tr>
+        <tr><td>动态内容最容易踩红线（渲染焦虑、承诺性表述、无来源转载）</td><td><span class="sev p0">P0</span></td><td>资讯体系内置三道闸：① 每条强制标注来源与日期；② 演示条目全部来自已核验口径（113 所联招/70% 指标/510-496 特招线等）；③ 家庭/安全类条目标注「示范内容」字样</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>采集环节需要「审核后发布」流程，防止抓取即发布</td><td><span class="sev p0">P0</span></td><td>collect.py 抓取条目默认 reviewed=false 进待审队列，人工审阅标记后才会进入数据文件；站内编辑台草稿同样不流入信息流</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>搜索/资讯不得出现「包录取」「排名」「内部渠道」类词</td><td><span class="sev p1">P1</span></td><td>资讯文案全量走合规词库自检；求真台互链（「内部渠道」条目、指标到校口径条目）保持可追溯</td><td class="st fixed">✓ 已核验</td></tr>
+        <tr><td>关于页需要明确编辑规范与纠错通道（门户信任底座）</td><td><span class="sev p1">P1</span></td><td>「关于与联系」公示编辑审核规范（双人复核、24h 纠错响应）与线索通道</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>免责边界需要在资讯场景复述（避免脱离政策库语境的误读）</td><td><span class="sev p2">P2</span></td><td>资讯说明区固定展示「以当年官方发布为准」；数据来源与核验面板与资讯互链</td><td class="st fixed">✓ 已实现</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>成功父母 · 真实使用场景</h2>
+    <div class="panel">
+      <div class="expert"><span class="tag a">PARENT VIEW</span><span class="tag">场景 / 效率 / 情绪 / 信任</span><span class="score">综合 8.7 / 10</span></div>
+      <table>
+        <tr><th>发现</th><th class="sev">严重度</th><th>处置</th><th>状态</th></tr>
+        <tr><td>「每天只给自己 10 分钟看升学」——需要一屏扫完当日重点</td><td><span class="sev p1">P1</span></td><td>资讯中心按日期倒序、分类色条 + 摘要一眼可扫；「每天 3 分钟」栏目标定阅读预期</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>「看到有用的信息想收藏/整理给爱人看」</td><td><span class="sev p1">P1</span></td><td>站内编辑台支持采集整理 + JSON 导出交接；条目可编辑标注，形成家庭自己的信息库（本机保存）</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>「不同孩子不同学段，别让我每次自己筛」</td><td><span class="sev p1">P1</span></td><td>延续多孩档案：资讯与日历均可个性化（孩子快切条一按切换）</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>「信息来源要能追，不想被带节奏」</td><td><span class="sev p1">P1</span></td><td>每条资讯强制「来源 · 日期」注记；编辑部来源（重庆日报/新华网/市教委文件）与求真台互相印证</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>「要转发到家庭群，排版不能乱」</td><td><span class="sev p2">P2</span></td><td>条目详情展开式排版（无跳页），移动端单列 0 溢出；打印行动清单沿用</td><td class="st fixed">✓ 已实现</td></tr>
+        <tr><td>「错别字/过期信息要能一键反馈」</td><td><span class="sev p2">P2</span></td><td>关于页明示纠错通道（求真台提交线索），24h 响应 SLA 展示</td><td class="st fixed">✓ 已实现</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>本轮整改汇总（v0.9 → v0.10）</h2>
+    <div class="panel">
+      <table>
+        <tr><th>类别</th><th>内容</th><th>验证</th></tr>
+        <tr><td>资讯中心（新模块）</td><td>分类筛选 / 条目展开 / 来源与日期 / 空态；12 条内置资讯（全部标注来源）</td><td class="st fixed">44 项回归 · 4 项覆盖</td></tr>
+        <tr><td>站内编辑台（新能力）</td><td>新增/编辑/删除、草稿-发布两态、必填校验、批量导入（行格式+JSON）、导出 JSON</td><td class="st fixed">44 项回归 · 7 项覆盖</td></tr>
+        <tr><td>采集脚本（工程侧）</td><td>collect.py：种子 + 公开页面抓取（best-effort）→ 待审队列 → 审核后发布；实测教育部/新华网频道抓取成功</td><td class="st fixed">运行日志验证</td></tr>
+        <tr><td>门户补齐</td><td>关于与联系、站点地图（13 链接）、skip link、JSON-LD（WebSite 结构化数据）、og 标签刷新</td><td class="st fixed">44 项回归 · 3 项覆盖</td></tr>
+        <tr><td>搜索集成</td><td>资讯动态入搜索管道；命中定位展开</td><td class="st fixed">44 项回归 · 1 项覆盖</td></tr>
+        <tr><td>文案与版本</td><td>全站版本串 v0.10；资讯说明区合规复述</td><td class="st fixed">44 项回归 · 2 项覆盖</td></tr>
+      </table>
+      <div class="legend">验证口径：Playwright 真实浏览器回归（桌面 1440px + 移动 390px），44/44 通过，控制台零报错；含双上下文（资讯独立会话）。</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span>遗留事项清单（正式版范畴，不阻塞演示交付）</h2>
+    <div class="panel">
+      <ul class="plain">
+        <li><b>真实数据接入</b>：资讯与政策库接 CMS/后台（正式版），当前为「数据文件 + 人工审核」的演示链路；</li>
+        <li><b>账号体系</b>：跨设备同步、编辑台权限分级（当前本机浏览器存储）；</li>
+        <li><b>定时采集</b>：collect.py 具备抓取能力，正式版挂定时任务 + 审核工作台（含驳回理由与留痕）；</li>
+        <li><b>图文素材</b>：保持零依赖单文件策略暂不引图片；正式版可评估插图系统与卡片配图规范；</li>
+        <li><b>内容量</b>：资讯 12 条为演示种子，正式版按「每日 3–5 条、每周复盘」的内容排期扩展；</li>
+        <li><b>深度无障碍</b>：dialog 焦点圈定依赖浏览器原生行为，正式版可加焦点陷阱与屏幕阅读器专项测试。</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot"><span>鸡父母平台 MVP 演示站 — 四专家深度评估报告 v0.10</span><span>AutoClaw · 2026-09-22</span></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>项目待办与决策清单 · 家长屿平台 MVP 演示站（v0.26）</title>
+<style>
+  :root{
+    --bg:#F7F6F1; --paper:#FCFBF7; --ink:#1F2736; --ink2:#46536B; --mut:#7B8598;
+    --navy:#24344D; --line:#E4E1D8; --line2:#D4D0C4; --acc:#0E7C66;
+    --serif:"Songti SC","Noto Serif SC","SimSun",serif;
+    --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:840px;margin:0 auto;padding:60px 28px 90px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--acc);text-transform:uppercase;margin-bottom:16px}
+  h1{font-family:var(--serif);font-size:31px;font-weight:700;color:var(--navy);letter-spacing:.01em;line-height:1.32;margin-bottom:12px}
+  .sub{color:var(--ink2);font-size:15px;max-width:60ch}
+  .meta{font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .meta b{color:var(--ink2);font-weight:500}
+  /* 状态条 */
+  .status{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:26px;border:1px solid var(--line);background:var(--paper)}
+  .st{padding:14px 18px;border-right:1px solid var(--line)}
+  .st:last-child{border-right:0}
+  .st .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--mut);text-transform:uppercase;display:block;margin-bottom:5px}
+  .st .v{font-size:13.5px;color:var(--ink);line-height:1.55}
+  .st .v b{color:var(--acc)}
+  .st .v .warn{color:#A16207}
+  section{margin-top:52px}
+  h2{font-family:var(--serif);font-size:21px;color:var(--navy);display:flex;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--line2)}
+  h2 .no{font-family:var(--mono);font-size:12px;color:var(--acc);font-weight:400}
+  h2 .tag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--mut);font-weight:400;letter-spacing:.04em}
+  /* 立即处理步骤 */
+  .step{display:flex;gap:16px;padding:18px 2px;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .step .n{flex:none;font-family:var(--mono);font-size:12px;color:var(--acc);width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line2);border-radius:2px}
+  .step h3{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:3px}
+  .step p{color:var(--ink2);font-size:13.5px}
+  .step p b{color:var(--ink)}
+  .callout{margin-top:16px;background:var(--paper);border:1px solid var(--line);border-left:0;padding:14px 18px;font-size:13.5px;color:var(--ink2)}
+  .callout b{color:var(--acc)}
+  /* 决策 */
+  .decision{display:grid;grid-template-columns:150px 1fr;gap:6px 20px;padding:18px 2px;border-bottom:1px solid var(--line)}
+  .decision:last-of-type{border-bottom:0}
+  .d-t{font-family:var(--serif);font-size:16px;color:var(--navy);font-weight:700}
+  .d-t .dno{display:block;font-family:var(--mono);font-size:10.5px;color:var(--mut);letter-spacing:.1em;font-weight:400;margin-bottom:2px}
+  .d-b p{font-size:13.5px;color:var(--ink2);margin-bottom:4px}
+  .d-b p:last-child{margin-bottom:0}
+  .d-b .lab{font-family:var(--mono);font-size:10.5px;color:var(--acc);letter-spacing:.08em;margin-right:6px}
+  /* 体验清单 */
+  .try{display:grid;grid-template-columns:1fr 1fr;gap:10px 26px;padding-top:16px}
+  .try .t{display:flex;gap:10px;font-size:13.5px;color:var(--ink2);align-items:baseline}
+  .ck{flex:none;width:12px;height:12px;border:1.5px solid var(--acc);border-radius:2px;transform:translateY(1px)}
+  .try-note{margin-top:16px;font-size:13px;color:var(--mut)}
+  /* 已推进 */
+  .done-item{display:flex;gap:14px;padding:14px 2px;border-bottom:1px solid var(--line)}
+  .done-item:last-child{border-bottom:0}
+  .done-item .v{flex:none;font-family:var(--mono);font-size:11.5px;color:var(--acc);width:52px;padding-top:3px}
+  .done-item .d{font-size:13.5px;color:var(--ink2)}
+  .done-item .d b{color:var(--ink)}
+  .evidence{margin-top:16px;padding:12px 2px 0;font-family:var(--mono);font-size:12px;color:var(--mut)}
+  .evidence b{color:var(--acc);font-weight:500}
+  footer{margin-top:64px;padding-top:16px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:11px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  @media (max-width:720px){
+    .status{grid-template-columns:1fr}
+    .st{border-right:0;border-bottom:1px solid var(--line)}
+    .st:last-child{border-bottom:0}
+    .decision{grid-template-columns:1fr;gap:8px}
+    .try{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Ops Brief · 待办与决策 · v0.26</div>
+  <h1>项目待办与决策清单</h1>
+  <p class="sub">家长屿平台 · MVP 演示站（v0.26）。本页把「需要你本人操作」的事项与「需要你拍板」的方向完整列出，其余部分由助手持续推进——你只需要处理下面这些。</p>
+  <div class="meta"><span>更新 <b>2026-09-22 23:45</b> · 对应版本 <b>v0.33</b>（34/34 验证 · v0.33）· <b>认领已完成 ✓</b></span><span>维护：设计助手 · 随迭代更新</span></div>
+
+  <div class="status">
+    <div class="st"><span class="k">网站状态</span><span class="v">v0.26 已上线<br>（国际线 + 国内直连）</span></div>
+    <div class="st"><span class="k">国内直连</span><span class="v"><b>已认领 ✓</b>（09-22 09:18）<br>预览链接可达，可随时刷新</span></div>
+    <div class="st"><span class="k">实景+自动更新</span><span class="v">v0.39 真实校园照 20 张<br>资讯每日自动更新 50+/天<br><b>39/39</b> 回归验证通过</span></div>
+  </div>
+
+  <section>
+    <h2><span class="no">01</span>已完成：认领与上线<span class="tag">无需操作</span></h2>
+    <div class="step"><span class="n">✓</span><div><h3>项目已认领到你的腾讯云账号</h3><p>2026-09-22 09:18 完成（账号 100042864225）——国内直连网址已归入你方名下，后续升级由助手一键更新到同一项目。</p></div></div>
+    <div class="step"><span class="n">✓</span><div><h3>v0.26 已部署并核验</h3><p>2026-09-22 23:36 生产环境部署成功；HTTP 200、版标与全部新功能核验通过（Deploy dpchpkzsq2ep）；本机数据可导入恢复。</p></div></div>
+    <div class="step"><span class="n">ℹ</span><div><h3>访问方式说明（重要）</h3><p>国内直连采用「预览链接」制：链接 3 小时有效、到期失效；可随时刷新——在聊天里说一声「刷新链接」即可（约 1 分钟出新链接）。</p></div></div>
+    <div class="callout"><b>要不要一个永久固定网址？</b>可绑定自定义域名实现（大陆区需 ICP 备案，约 1–2 周）——即下方 D1 决策项；确定要走这条路，助手即准备全套流程。</div>
+  </section>
+
+  <section>
+    <div class="callout" style="margin:16px 0 20px"><b>决策结果（2026-09-25 已拍板并开始执行）：</b>D1 维持现状，成熟稳定后申请 · D2 启动后端（已交付本地可运行版） · D3 扩充内容运营+自主审核（资讯已扩至 38 条，后端带审核链路） · D4 微信公众号（启动包已交付） · D5 商业化暂缓 · D6 第三方服务仅推进免费项 · D7 真实数据扩展选①（批量采集+抽核，计划已落盘） · D8 持续体验优化。</div>
+<h2><span class="no">02</span>方向决策<span class="tag">7 项 · 定了就推进</span></h2>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D1</span>正式域名</div>
+      <div class="d-b"><p><span class="lab">选项</span>① 维持免费「预览链接」访问（0 成本，3 小时一续、可随时刷新）② 购买自有域名 + ICP 备案（约 ¥30–60/年，备案 1–2 周）→ 永久固定网址</p><p><span class="lab">影响</span>②获得品牌级固定入口（国内稳定访问）；①零成本但链接需定期续期</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D2</span>下一阶段技术形态</div>
+      <div class="d-b"><p><span class="lab">选项</span>① 保持单文件演示版 ② 启动后端（账号体系、跨设备同步、内容管理后台、定时采集与审核）</p><p><span class="lab">影响</span>开发量与服务器成本；决定能否真正运营</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D3</span>内容运营</div>
+      <div class="d-b"><p><span class="lab">选项</span>资讯每日 3–5 条更新、家长学堂扩充；明确审核人与审核流程</p><p><span class="lab">影响</span>内容鲜活度，直接影响留存与信任</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D4</span>微信生态</div>
+      <div class="d-b"><p><span class="lab">选项</span>公众号 / 小程序 / 微信服务通知（提醒推送）</p><p><span class="lab">影响</span>触达与召回能力；需主体资质注册</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D5</span>商业化资质</div>
+      <div class="d-b"><p><span class="lab">选项</span>支付商户号（微信 / 支付宝）、教育相关经营资质、退费与隐私规则公示</p><p><span class="lab">影响</span>正式收费前的硬条件</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D6</span>第三方服务</div>
+      <div class="d-b"><p><span class="lab">选项</span>高德地图（通勤 / 生活服务）、短信等 API key 申请</p><p><span class="lab">影响</span>对应模块的完整度</p></div>
+    </div>
+    <div class="decision">
+      <div class="d-t"><span class="dno">D7</span>真实数据扩展</div>
+      <div class="d-b"><p><span class="lab">选项</span>① 助手批量采集 + 你抽核 ② 你提供资料由助手整理</p><p><span class="lab">影响</span>数据可信度与合规口径（学校档案扩全量、政策库补齐）</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>建议体验<span class="tag">10 分钟 · 定下批优先级</span></h2>
+    <div class="try">
+      <div class="t"><span class="ck"></span>深色模式（「我的」页切换，跟随系统/手动）</div>
+      <div class="t"><span class="ck"></span>资讯快搜（资讯中心关键词搜索）</div>
+      <div class="t"><span class="ck"></span>大字版（长辈适老显示）</div>
+      <div class="t"><span class="ck"></span>键盘快捷键（任意页按「?」看帮助）</div>
+      <div class="t"><span class="ck"></span>择校对比差异标记与「仅看差异」</div>
+      <div class="t"><span class="ck"></span>打印样式（页脚「打印本页」试一页）</div>
+    </div>
+    <p class="try-note">反馈一句话即可，例如「下批先做移动端体验」「内容再多一些」「学校档案更全」——助手会按你的优先级排下一批迭代。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>已推进（无需操作）<span class="tag">认领 + v0.15–v0.39</span></h2>
+    <div class="done-item"><span class="v">部署</span><span class="d"><b>EdgeOne 认领 + v0.26 上线核验</b>——项目转入你的腾讯云账号；国内访问采用「预览链接」制（3 小时一续，可随时刷新）</span></div>
+    <div class="done-item"><span class="v">纵深</span><span class="d"><b>内容纵深批（v0.33）</b>——学校档案 12→20 所、政策库 6→12 条、术语 18→32 条、求真 12 条、社区 10 帖、学堂 11+8、资讯 46 条、新增升学百科页（四阶段全流程指南）</span></div>
+    <div class="done-item"><span class="v">决策</span><span class="d"><b>7 项决策落地（v0.32）</b>——轻后端启动（审核 API + 管理台）、资讯扩至 38 条、公众号启动包、D7 数据扩展计划（选①）；商业化暂缓、域名维持现状</span></div>
+    <div class="done-item"><span class="v">视觉</span><span class="d"><b>视觉升级（v0.31）</b>——设计审查后上线品牌插画系统：首页主视觉、三入口卡配图、30 张资讯封面、政策与 FAQ 页眉横幅；全站零纯文字区块</span></div>
+    <div class="done-item"><span class="v">门户</span><span class="d"><b>门户对齐（v0.30）</b>——站内搜索页（热门词聚合检索）、家长 FAQ 20 问（五类筛选）、首页要闻榜与快捷通道、404 兜底页；导航与站点地图扩容</span></div>
+    <div class="done-item"><span class="v">架构</span><span class="d"><b>多页架构改版（v0.29）</b>——单页拆为 17 个独立页面；导航/站点地图真跳转；搜索直达/收藏恢复/档案弹窗跨页参数联动；旧锚点自动重定向</span></div>
+    <div class="done-item"><span class="v">链接</span><span class="d"><b>链接真实化 + 内容充实（v0.28）</b>——数据来源表 9 条官方入口可点击、资讯 30 条（4 条带原文链接）、搜索索引含正文；94/94 回归通过</span></div>
+    <div class="done-item"><span class="v">体检</span><span class="d"><b>上帝视角全站审查（v0.27）</b>——打印隐藏交互控件、导出补全 jfm_ann_closed、公告条与搜索占位更新；91/91 回归通过</span></div>
+    <div class="done-item"><span class="v">优化</span><span class="d"><b>体验优化（v0.23–v0.26）</b>——数据导入恢复与统计条、关键节点倒计时、入学材料清单生成器、搜索键盘导航与学校库筛选</span></div>
+    <div class="done-item"><span class="v">扩充</span><span class="d"><b>内容与工具扩充（v0.19–v0.22）</b>——学校库 12 所、政策库 6 条、术语 18 条、学堂 8+6、求真 9 条、社区 7 帖、资讯 26 条、陪读成本速算器</span></div>
+    <div class="done-item"><span class="v">v0.15</span><span class="d"><b>深色模式</b>——跟随系统 / 手动浅色 / 手动深色，本机记忆，打印保持浅色</span></div>
+    <div class="done-item"><span class="v">v0.16</span><span class="d"><b>资讯快搜 + 阅读工具</b>——关键词搜索（命中数提示）、返回顶部、阅读进度条</span></div>
+    <div class="done-item"><span class="v">v0.17</span><span class="d"><b>键盘与无障碍</b>——焦点可见描边、「?」快捷键帮助、弹窗焦点圈定与还原</span></div>
+    <div class="done-item"><span class="v">v0.18</span><span class="d"><b>择校对比增强</b>——差异标记「●」、一键「仅看差异」折叠一致项</span></div>
+    <p class="evidence">回归验证：v0.30 <b>30/30</b>（门户版）· v0.31 <b>32/32</b>（视觉版）· v0.32 <b>34/34</b>（决策版：+资讯 38 条 / 后端 API / 交付物齐备）</p>
+  </section>
+
+  <footer><span>家长屿平台 · MVP 演示站 — 待办与决策清单</span><span>AutoClaw · 2026-09-22</span></footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdgeOne 上线与访问说明 · 家长屿平台 MVP 演示站（v0.42 区县入学指南版 · 已认领）</title>
+<style>
+  :root{
+    --bg:#0f1115; --bg2:#151a22; --ink:#e8eaf0; --ink2:#a9b0bd; --mut:#6e7683;
+    --line:rgba(255,255,255,.09); --acc:#2ea3f2; --ok:#7bd88f; --warn:#e8b84b;
+    --mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,monospace;
+    --sans:-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 28px 80px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--acc);text-transform:uppercase;margin-bottom:14px}
+  h1{font-size:30px;font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-bottom:10px}
+  .sub{color:var(--ink2);font-size:15px;max-width:62ch}
+  .meta{font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .meta b{color:var(--ink2);font-weight:500}
+  section{margin-top:44px}
+  h2{font-size:18px;font-weight:600;margin-bottom:14px;display:flex;align-items:baseline;gap:10px}
+  h2 .no{font-family:var(--mono);font-size:12px;color:var(--acc);font-weight:400}
+  .panel{background:var(--bg2);border:1px solid var(--line);padding:20px 22px}
+  .status{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .chip{font-family:var(--mono);font-size:11px;padding:3px 10px;border:1px solid var(--line);color:var(--ink2)}
+  .chip.ok{color:var(--ok);border-color:rgba(123,216,143,.35)}
+  .chip.warn{color:var(--warn);border-color:rgba(232,184,75,.35)}
+  .url{font-family:var(--mono);font-size:13px;color:var(--acc);word-break:break-all;text-decoration:none;line-height:1.6}
+  .url:hover{text-decoration:underline}
+  .step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:0}
+  .step .n{flex:none;font-family:var(--mono);font-size:12px;color:var(--acc);width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .step h3{font-size:15px;font-weight:590;margin-bottom:4px}
+  .step p{color:var(--ink2);font-size:13.5px}
+  .code{font-family:var(--mono);font-size:12.5px;color:var(--ink);background:rgba(255,255,255,.045);border:1px solid var(--line);padding:12px 14px;word-break:break-all;user-select:all;line-height:1.65}
+  .code a{color:var(--acc);text-decoration:none}
+  .note{font-size:13px;color:var(--mut);margin-top:10px}
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:7px 14px;font-size:13.5px}
+  .kv .k2{font-family:var(--mono);font-size:12px;color:var(--mut)}
+  .kv .v{color:var(--ink2)}
+  a{color:var(--acc)}
+  figure{margin-top:18px}
+  figure img{width:100%;display:block;border:1px solid var(--line)}
+  figcaption{font-family:var(--mono);font-size:11px;color:var(--mut);margin-top:8px}
+  .foot{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Deploy Log · EdgeOne Pages (China) · v0.42 · Claimed</div>
+  <h1>EdgeOne 上线与访问说明</h1>
+  <p class="sub">「家长屿平台」MVP 演示站已完成腾讯 EdgeOne（中国站）部署，并已将项目<b>认领转入你的腾讯云账号</b>——国内网络直连可访问，后续所有升级由助手一键更新到同一项目。</p>
+  <div class="meta">认领完成 2026-09-22 09:18 · 最新部署 2026-09-30 09:20（Deploy dpb8a2u7243f · v0.40 学校档案门户化版 · 含 20 校公开概况 + 每日更新 333 条资讯）· 多页站点</div>
+
+  <section>
+    <h2><span class="no">01</span>访问方式（当前有效）</h2>
+    <div class="panel">
+      <div class="status"><span class="chip ok">已认领</span><span class="chip">中国站 · 国内直连</span><span class="chip">v0.42 已上线</span><span class="chip warn">预览链接制</span></div>
+      <p class="note" style="margin-top:0">当前有效访问链接（预览链接 · 有效期约 3 小时，至次日约 00:35）：</p>
+      <p class="code"><a href="https://jfm-edgeone-v17-50y62n03-lgv1n3s7.edgeone.cool?eo_token=9f5b7db4c139ed867e69caeba68f16ef&amp;eo_time=1790730181">https://jfm-edgeone-v17-50y62n03-lgv1n3s7.edgeone.cool?eo_token=9f5b7db4c139ed867e69caeba68f16ef&amp;eo_time=1790730181</a></p>
+      <p class="note">打开即用、无需登录。因中国大陆区合规要求，部署域名采用「预览链接」访问制：<b>链接 3 小时有效</b>，到期后再访问会显示 401。刷新方式：<br>① 在聊天里说一声「刷新链接」——助手 1 分钟内同步最新版本并生成新链接；<br>② 或自行在腾讯云控制台「EdgeOne → 项目概览」右上角点「预览」按钮生成。</p>
+      <p class="note">永久公开备用入口（GitHub Pages，国内速度一般）：<a href="https://mina2026best.github.io/jfm-platform-demo/">https://mina2026best.github.io/jfm-platform-demo/</a></p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>已完成事项（无需操作）</h2>
+    <div class="panel">
+      <div class="step"><span class="n">✓</span><div><h3>项目认领完成</h3><p>2026-09-22 09:18 · 项目 jfm-edgeone-v17-50y62n03 已转入你的腾讯云账号（100042864225），本机同时获得部署授权（升级一键直达）。</p></div></div>
+      <div class="step"><span class="n">✓</span><div><h3>v0.40 部署上线并核验</h3><p>2026-09-30 09:20 · 生产环境部署成功（Deploy dpb8a2u7243f）；线上核验通过：首页/学校档案/学校详情页/照片资源全 200、版标 v0.40——学校档案门户化批：20 校公开概况（创办/校训/规模/师资/地址/官网，逐项标来源）+ 区县筛选 + 门户式详情页（累计十余批 20+ 轮迭代）</p></div></div>
+      <div class="step"><span class="n">✓</span><div><h3>一键刷新通道已备好</h3><p>需要新链接时说一声即可（见 01 节刷新方式）；后续每次改版也走同一条通道。</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>常见问题</h2>
+    <div class="panel">
+      <p style="margin-bottom:12px"><b>访问时显示 401 / 链接失效？</b><br>预览链接 3 小时到期属正常机制。说一声「刷新链接」即可获得新链接；也可在控制台项目概览右上角点「预览」自行生成。</p>
+      <p style="margin-bottom:12px"><b>想永久固定网址（对外长期使用）？</b><br>绑定自定义域名即可。中国大陆区绑定需完成 ICP 备案（约 1–2 周；域名约 ¥30–60/年）；确定采用后助手可先准备全套操作指引（购买 → 解析 → 备案 → 绑定）。</p>
+      <p><b>网站更新怎么发布？</b><br>把要改的内容直接告诉助手：修改、验证后一键部署到同一项目，刷新访问链接即可看到最新版。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>技术备忘</h2>
+    <div class="panel">
+      <div class="kv">
+        <span class="k2">托管平台</span><span class="v">腾讯 EdgeOne Pages · 中国站（免费计划）</span>
+        <span class="k2">账号</span><span class="v">100042864225（已认领 ✓）</span>
+        <span class="k2">项目名</span><span class="v">jfm-edgeone-v17-50y62n03</span>
+        <span class="k2">Project ID</span><span class="v">makers-ttw3nq7amu1r</span>
+        <span class="k2">最新 Deploy</span><span class="v">dpb8a2u7243f（v0.42 区县入学指南版 · 生产环境）</span>
+        <span class="k2">部署内容</span><span class="v">v0.40 学校档案门户化版 · 22 页 + articles/145 篇（含 20 校门户式档案）+ 48 个照片资源（20 校真实校园照）+ 每日自动更新资讯（另含本地轻后端 server.py 与管理台）</span>
+        <span class="k2">访问方式</span><span class="v">预览链接制（3 小时有效，可随时刷新）</span>
+      </div>
+    </div>
+    <figure>
+      <img src="shots-schools-v40.png" alt="v0.40 线上版 · 学校档案库（区县筛选 + 概况事实条）">
+      <figcaption>v0.40 线上版实况 · 学校档案库：区县筛选 + 创办/校训事实条（2026-09-29 截取）</figcaption>
+    </figure>
+    <figure>
+      <img src="shots-detail-top-v40.png" alt="v0.40 页面实况 · 学校详情页（信息速览 + 学校概况）">
+      <figcaption>v0.40 页面实况 · 学校详情页：信息速览 + 学校概况（2026-09-29 截取）</figcaption>
+    </figure>
+  </section>
+
+  <div class="foot"><span>家长屿平台 · MVP 演示站 — EdgeOne 上线与访问说明</span><span>AutoClaw · 2026-09-22</span></div>
+</div>
+</body>
+</html>

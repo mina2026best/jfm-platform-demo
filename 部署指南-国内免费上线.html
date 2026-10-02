@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>国内免费上线部署指南 · 家长屿平台 MVP 演示站</title>
+<style>
+  :root{
+    --bg:#0f1115; --bg2:#151820; --ink:#e8eaf0; --ink2:#a8adba; --mut:#6b7280;
+    --line:rgba(255,255,255,.09); --acc:#2ea3f2; --acc2:#7bd88f;
+    --mono:"SF Mono","JetBrains Mono","Cascadia Code",Consolas,monospace;
+    --sans:-apple-system,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 24px 80px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--acc);text-transform:uppercase}
+  h1{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin:14px 0 10px}
+  .lede{color:var(--ink2);font-size:16px;max-width:62ch}
+  .meta{font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .meta b{color:var(--ink2);font-weight:500}
+  section{margin-top:52px}
+  h2{font-size:21px;font-weight:600;letter-spacing:-.01em;margin-bottom:6px}
+  h2 .no{font-family:var(--mono);font-size:12px;color:var(--acc);margin-right:10px;font-weight:400}
+  .sec-note{color:var(--mut);font-size:13px;margin-bottom:22px}
+  .panel{background:var(--bg2);border:1px solid var(--line);padding:22px 24px}
+  /* 结论卡 */
+  .verdict{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);background:var(--bg2);padding:20px 22px}
+  .verdict .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--acc2);margin-top:9px}
+  .verdict b{font-weight:590}
+  .verdict p{color:var(--ink2);font-size:14px;margin-top:4px}
+  /* 方案矩阵 */
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+  td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+  td:first-child{color:var(--ink);font-weight:510;white-space:nowrap}
+  tr.hl td{background:rgba(46,163,242,.06)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border:1px solid var(--line);color:var(--ink2);white-space:nowrap}
+  .tag.ok{color:var(--acc2);border-color:rgba(123,216,143,.35)}
+  .tag.no{color:#e08585;border-color:rgba(224,133,133,.35)}
+  /* 步骤 */
+  .step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .n{flex:none;font-family:var(--mono);font-size:13px;color:var(--acc);width:30px;height:30px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:15.5px;font-weight:590;margin-bottom:4px}
+  .step p{color:var(--ink2);font-size:13.5px}
+  .step .kw{font-family:var(--mono);font-size:12.5px;color:var(--ink);background:rgba(255,255,255,.05);padding:1px 6px}
+  .human{border:1px solid rgba(123,216,143,.4);background:rgba(123,216,143,.05);padding:2px 8px;font-size:11.5px;color:var(--acc2);font-family:var(--mono)}
+  code.cmd{display:block;font-family:var(--mono);font-size:12.5px;color:var(--ink);background:rgba(255,255,255,.04);border:1px solid var(--line);padding:12px 16px;margin-top:8px;overflow-x:auto}
+  code.cmd .c{color:var(--mut)}
+  /* 备案说明 */
+  .icp{border-left:2px solid var(--acc);padding:2px 0 2px 18px;color:var(--ink2);font-size:13.5px}
+  .icp b{color:var(--ink)}
+  footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  a{color:var(--acc);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Deployment Runbook · CN-Free Hosting</div>
+  <h1>国内免费上线部署指南</h1>
+  <p class="lede">把「家长屿平台 MVP 演示站」从 GitHub Pages 迁移/并行部署到国内可快速访问的免费托管。结论先行：<b>腾讯 EdgeOne Pages</b>——免费计划官方承诺长期提供、国内 CDN 直连、托管在 edgeone.app 二级域名下无需个人备案、自动 HTTPS、支持从 GitHub 仓库一键导入。</p>
+  <div class="meta">适用对象：<b>mina2026best/jfm-platform-demo</b>（v0.7 单文件站点）· 编制日期：2026-09-17 · 依据：EdgeOne Pages 官方定价页与公开报道（见文末来源）</div>
+
+  <section>
+    <h2><span class="no">01</span>结论</h2>
+    <div class="verdict">
+      <span class="dot"></span>
+      <div>
+        <b>推荐方案：腾讯 EdgeOne Pages（edgeone.app 二级域名）</b>
+        <p>唯一需要你本人完成的是「浏览器里登录 + 点几次按钮」的授权动作（约 3 分钟）；之后的部署触发、内容更新可交回给我。整个方案 ¥0 成本。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">02</span>为什么是这个方案</h2>
+    <p class="sec-note">候选方案横向核验结果（2026-09）</p>
+    <table>
+      <tr><th>方案</th><th>费用</th><th>国内直连</th><th>需要个人备案</th><th>状态核验</th></tr>
+      <tr class="hl"><td>EdgeOne Pages</td><td>免费计划 $0/月</td><td><span class="tag ok">腾讯国内节点</span></td><td><span class="tag ok">不需要</span> edgeone.app 子域统一备案</td><td>官方确认免费计划长期提供；付费版上线前超限不中断</td></tr>
+      <tr><td>Gitee Pages</td><td>—</td><td>—</td><td>—</td><td><span class="tag no">已排除</span> 2024-05 全线停服，87 万+ 项目受影响，无恢复公告</td></tr>
+      <tr><td>腾讯云 COS / 阿里云 OSS 静态站</td><td>低（非免费）</td><td><span class="tag ok">快</span></td><td><span class="tag no">需要</span> 自有域名 ICP 备案</td><td>可用但非免费、需备案，不满足本轮约束</td></tr>
+      <tr><td>Cloudflare Pages</td><td>免费</td><td><span class="tag no">一般</span> 无国内节点</td><td><span class="tag ok">不需要</span></td><td>作为 GitHub Pages 的备用出海方案</td></tr>
+      <tr><td>GitHub Pages（现状）</td><td>免费</td><td><span class="tag no">不稳</span></td><td><span class="tag ok">不需要</span></td><td>已上线，保留作为回源仓库与备份入口</td></tr>
+    </table>
+    <p class="sec-note" style="margin-top:14px">免费额度具体数字（流量/请求次数）以 EdgeOne 控制台公示为准——官方定价页只确认「免费计划长期存在、超限不中断」；网上流传的「10GB/14 天」是 EdgeOne 安全加速试用套餐的口径，与 Pages 免费版无关，不采信。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">03</span>你需要亲手做的 5 步（全程唯一人工环节）</h2>
+    <p class="sec-note">浏览器操作，约 3 分钟；无需绑卡、无需服务器</p>
+    <div class="panel">
+      <div class="step">
+        <span class="n">1</span>
+        <div><h3>登录 EdgeOne Pages 控制台 <span class="human">需你本人</span></h3>
+        <p>打开 <a href="https://pages.edgeone.ai/">pages.edgeone.ai</a> → Sign Up / Log In → 用微信扫码或邮箱注册腾讯云账号（国内平台实名要求，只能由你本人完成）。建议直接用「GitHub 账号登录」，可省掉仓库授权一步。</p></div>
+      </div>
+      <div class="step">
+        <span class="n">2</span>
+        <div><h3>新建项目并导入仓库</h3>
+        <p>控制台首页选 <span class="kw">Import Git Repository</span> → 授权 GitHub → 选择 <span class="kw">mina2026best/jfm-platform-demo</span>（公开仓库，只读授权即可）。</p></div>
+      </div>
+      <div class="step">
+        <span class="n">3</span>
+        <div><h3>构建设置（本站是纯静态单文件）</h3>
+        <p>Framework Preset 选 <span class="kw">None / 静态</span>；Build Command <b>留空</b>；Output Directory 填 <span class="kw">./</span>（仓库根目录就是站点）。确认后点部署。</p></div>
+      </div>
+      <div class="step">
+        <span class="n">4</span>
+        <div><h3>拿到国内可访问的正式地址</h3>
+        <p>部署完成后获得 <span class="kw">https://&lt;你的项目名&gt;.edgeone.app</span> 形式的地址（前缀可在项目设置里改），自动 HTTPS，手机/电脑国内直连。</p></div>
+      </div>
+      <div class="step">
+        <span class="n">5</span>
+        <div><h3>把后续更新交回给我（可选但推荐）</h3>
+        <p>部署完成后告诉我一声即可——我会把新地址写进 README 并验证线上内容。若希望以后「我改完代码→自动更新线上」，可在控制台生成一个 API Token 发我（只授 Pages 权限），之后每次 git push 后我直接触发重新部署。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">04</span>上线后的日常更新流程</h2>
+    <p class="sec-note">内容迭代不再需要重复部署动作</p>
+    <code class="cmd"><span class="c"># 我在本机改 index.html → 本地 Playwright 回归验证通过后：</span>
+git push origin main          <span class="c"># 推送即触发 EdgeOne 自动重新部署（Git 集成模式）</span>
+<span class="c"># 网络阻断时改走 GitHub Contents API 通道，效果相同</span></code>
+    <p class="sec-note" style="margin-top:12px">EdgeOne Pages 对接 GitHub 仓库后，main 分支的每次推送都会自动构建发布，无需人工干预——这与现有「git push 即上线」的迭代方式完全一致，网站更新节奏不变。</p>
+  </section>
+
+  <section>
+    <h2><span class="no">05</span>备案问题，一次说清</h2>
+    <div class="icp">
+      <p><b>使用 edgeone.app 免费二级域名：不需要任何备案。</b>该域名由腾讯统一备案并持有，你只是在其下开子路径/子域。<br>
+      <b>将来要绑自有域名（如 jfm.example.cn）做国内加速时：</b>才需要以你的名义做 ICP 备案（免费但需 1–2 周审核）。当前演示阶段用官方二级域名即可，备案这步暂时不存在。</p>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">06</span>来源与核验口径</h2>
+    <table>
+      <tr><th>事实</th><th>来源</th><th>时间</th></tr>
+      <tr><td>EdgeOne Pages 免费计划 $0/月、官方 FAQ 确认长期提供、超限暂不中断</td><td>pages.edgeone.ai/pricing（官方定价页）</td><td>2026-09 抓取</td></tr>
+      <tr><td>Gitee Pages 全线停服、无恢复公告</td><td>知乎/Juejin/Youzan Issue #12846 等多方交叉</td><td>2024-05 起持续</td></tr>
+      <tr><td>「Gitee Pages 下线影响 87 万+ 项目、GitHub Pages 为主要替代」</td><td>百度 Comate 迁移指南</td><td>2026-02</td></tr>
+      <tr><td>EdgeOne 安全加速试用套餐 10GB/14 天（与 Pages 免费版无关，已剔除）</td><td>edgeone.ai 试用页</td><td>2026-09 抓取</td></tr>
+    </table>
+  </section>
+
+  <footer>
+    <span>家长屿平台 · MVP 演示站 部署手册</span>
+    <span>AutoClaw · 2026-09-17</span>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>门户对齐对照表 · 家长屿网站（v0.34）</title>
+<style>
+:root{--bg:#F7F6F1;--paper:#FCFBF7;--ink:#1F2736;--ink2:#46536B;--mut:#7B8598;--navy:#24344D;--line:#E4E1D8;--line2:#D4D0C4;--acc:#0E7C66;--serif:"Songti SC","Noto Serif SC",serif;--sans:"PingFang SC","Microsoft YaHei",sans-serif;--mono:ui-monospace,Menlo,monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:56px 26px 80px}
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--acc);text-transform:uppercase;margin-bottom:14px}
+h1{font-family:var(--serif);font-size:30px;color:var(--navy);line-height:1.3;margin-bottom:10px}
+.sub{color:var(--ink2);font-size:14.5px;max-width:64ch}
+.meta{font-family:var(--mono);font-size:11.5px;color:var(--mut);margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-size:20px;color:var(--navy);margin:40px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line2)}
+table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);margin:12px 0 8px}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 12px;font-size:12.5px;font-weight:600}
+td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink2);vertical-align:top}
+td:first-child{color:var(--ink);font-weight:500;white-space:nowrap}
+.ok{color:var(--acc);font-weight:600}
+.ck{font-family:var(--mono);color:var(--acc)}
+.note{font-size:12.5px;color:var(--mut);margin:8px 0 0}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:11px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Portal Alignment · 对照表 · v0.34</div>
+  <h1>门户对齐对照表</h1>
+  <p class="sub">基准：通用中文门户标准结构（首页 / 资讯 / 专栏 / 工具 / 社区 / 关于 / 联系 + 站内搜索 + 404）。逐项对照本站结构与处理方式；✅ = 已对齐。</p>
+  <div class="meta">版本 v0.34 · 2026-09-25 · 站点 21 页 + 404 兜底页</div>
+
+  <h2>一、栏目与导航对齐</h2>
+  <table>
+    <tr><th>门户标准栏目</th><th>本站对应</th><th>差异与处理</th><th>状态</th></tr>
+    <tr><td>首页</td><td>index.html</td><td>门户首页要素齐备：要闻榜 / 快捷通道 / 倒计时 / 三入口卡（含插画）</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>资讯频道</td><td>news.html（46 条）</td><td>分类筛选 + 快搜 + 编辑台 + 原文链接；每条带分类封面图</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>专题/专栏</td><td>wiki.html 升学百科 + policy.html 政策库 + 术语词典</td><td>四阶段全流程指南 + 12 条政策三件套 + 32 条术语</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>工具频道</td><td>quiz / compare / zy / life.html 四工具 + 快捷通道</td><td>自查 / 对比 / 位次换算 / 速算器，全部可交互</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>数据频道</td><td>schools.html（20 所档案）/ data-sources.html（9 项核验）</td><td>逐字段标注来源与核验日期</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>社区频道</td><td>community.html（社区 10 帖 + 学堂 11+8）</td><td>门户将社区与学堂并列，本站合并为「社区学堂」页</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>站内搜索</td><td>search.html（聚合检索 + 热门词）</td><td>门户标配，独立搜索页 + 顶栏快捷搜索</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>FAQ/帮助</td><td>faq.html（24 问五类筛选）</td><td>每问带站内深链</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>联系/留言</td><td>contact.html（表单 → 后端 /api/contact）</td><td>门户标配的「可触达」入口；留言入库可查</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>关于我们</td><td>about.html（服务承诺 SLA + 编辑审核规范）</td><td>含「边界与承诺」（不承诺升学 / 不做培训 / 不做排名）</td><td class="ok">✅ 对齐</td></tr>
+    <tr><td>404 兜底</td><td>404.html</td><td>回首页 / 搜索 / FAQ 三出路</td><td class="ok">✅ 对齐</td></tr>
+  </table>
+  <p class="note">差异说明：门户常见的「登录/注册」「电商下单」按用户决策（D5 商业化暂缓）不纳入；「会员体系」「升学豆」「B 端合作」以演示形态保留，不加支付。</p>
+
+  <h2>二、导航层级</h2>
+  <table>
+    <tr><th>层级</th><th>内容</th></tr>
+    <tr><td>顶栏主导航（14 项）</td><td>资讯 · 日历 · 政策 · 档案 · 对比 · 志愿 · 求真 · 社区 · 生活 · 百科 · 联系 · 搜索 · FAQ · 升学豆 · 我的 · 会员(CTA)——当前页 aria-current 高亮，全部 .html 真跳转</td></tr>
+    <tr><td>移动端菜单（17 项）</td><td>汉堡展开，覆盖全部页面 + FAQ/搜索/联系</td></tr>
+    <tr><td>页脚站点地图（19 项）</td><td>全站页面 + 更新日志/快捷键辅助入口；与实际页面一一对应</td></tr>
+    <tr><td>页内关联</td><td>各栏目页底部「关联入口」互链；工具页与内容页双向引用</td></tr>
+  </table>
+
+  <h2>三、SEO 基础对齐</h2>
+  <table>
+    <tr><th>项</th><th>状态</th><th>证据</th></tr>
+    <tr><td>每页唯一标题</td><td class="ok">✅</td><td>21 页标题全部唯一（程序扫描，无重复）</td></tr>
+    <tr><td>每页唯一 description</td><td class="ok">✅</td><td>21 个内容页全部有 meta description（admin 与 404 兜底页按惯例无）</td></tr>
+    <tr><td>语义化标签</td><td class="ok">✅</td><td>header/nav/section/footer/dialog/aria-current 全站使用</td></tr>
+    <tr><td>死链</td><td class="ok">✅ 0 条</td><td>全站程序扫描：站内 .html 链接 0 死链（修复 learn.html 88 处后归零）</td></tr>
+    <tr><td>结构化数据</td><td class="ok">✅</td><td>首页 JSON-LD WebSite 标记</td></tr>
+  </table>
+
+  <h2>四、性能对齐</h2>
+  <table>
+    <tr><th>项</th><th>数值（实测）</th><th>说明</th></tr>
+    <tr><td>首页加载（均值）</td><td class="ck">≈1.1s</td><td>本地 3 次均值（load 事件）；单文件自包含无外部请求</td></tr>
+    <tr><td>单页体积</td><td class="ck">150–190 KB</td><td>每页 HTML+CSS+JS 自包含；插画为内联 SVG 零请求</td></tr>
+    <tr><td>阻断渲染</td><td class="ok">无</td><td>CSS 内联、JS 置底、无远程字体/大图</td></tr>
+    <tr><td>移动端</td><td class="ok">✅ 无溢出</td><td>390px 宽度 6 页抽查无横向滚动</td></tr>
+  </table>
+
+  <h2>五、表单数据留痕对齐</h2>
+  <table>
+    <tr><th>表单</th><th>提交端点</th><th>存储</th><th>后台查看</th></tr>
+    <tr><td>联系/留言</td><td>POST /api/contact</td><td>data/contacts.json</td><td>admin.html 统计栏（留言/未读数）+ GET /api/contacts 按状态查询</td></tr>
+    <tr><td>资讯发布</td><td>POST /api/news</td><td>data/news.json</td><td>admin.html 待审队列过审/驳回</td></tr>
+    <tr><td>求真线索</td><td>POST /api/tips</td><td>data/tips.json</td><td>admin.html 线索待审</td></tr>
+  </table>
+  <p class="note">端到端验证记录：提交留言「验收测试留言」→ 返回编号 C-0001 → GET /api/contacts 查到该记录 → 清理测试数据（1→0）。见验收报告。</p>
+
+  <footer>家长屿 · 门户对齐对照表 — 随版本更新 · 2026-09-25</footer>
+</div>
+</body>
+</html>

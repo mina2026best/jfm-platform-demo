@@ -345,9 +345,6 @@ def build_page(page, tpl, secs, css, js):
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + hero + content \
         + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
-    out = out.replace("/*__BUILD_CSS__*/", css).replace("//__BUILD_JS__", js)
-    if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
-        sys.exit(f"[build] 占位符未替换干净：{fname}")
     # skip-link 目标：无 #main 时指到 body 顶部主内容
     if 'id="main"' not in out:
         out = out.replace('<a class="skip-link" href="#main">跳到主要内容</a>',
@@ -367,6 +364,65 @@ def main():
     missing = [p for pg in PAGES for p in pg["sections"] if p not in secs]
     if missing:
         sys.exit("[build] 模板缺少 section：" + ",".join(set(missing)))
+    # ---------- v0.51：CSS/JS 拆为外链资源（内容哈希命名，跨页长缓存） ----------
+    # 文章页样式 = 主 css + art 附加段，两个使用方共享同一份 app.css
+    built = []
+    total = 0
+    ART_CSS_EXTRA = """
+  /* 文章详情页样式 */
+  .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
+  .crumb a{color:var(--accent);text-decoration:none}
+  .art{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:34px 36px;margin-top:10px}
+  .art-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:10px}
+  .art h1{font-family:var(--serif);font-size:27px;color:var(--navy);line-height:1.35;margin:0 0 10px}
+  .art-meta{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--muted);padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+  .art-status{color:var(--acc);color:var(--accent)}
+  .art-body{font-size:14.5px;color:var(--ink2);line-height:1.9}
+  .art-body p{margin:0 0 14px}
+  .art-body h3{font-family:var(--serif);font-size:17px;color:var(--navy);margin:18px 0 8px}
+  .art-body a{color:var(--accent)}
+  .art-table{width:100%;border-collapse:collapse;margin:12px 0}
+  .art-table td{padding:9px 12px;border-bottom:1px solid var(--line);font-size:13.5px;vertical-align:top}
+  .art-table td:first-child{width:110px;color:var(--ink);font-weight:500}
+  .art-quote{background:var(--accent-soft);border-radius:8px;padding:10px 14px;font-size:13.5px;margin:8px 0;color:var(--ink2)}
+  .badge-ok{font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-right:6px}
+  .verdict-big{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;border-radius:6px;padding:4px 12px;margin-bottom:14px}
+  .verdict-big.false{background:#F5E0DE;color:#B3261E}
+  .verdict-big.warn{background:#F7EDD9;color:#8A6116}
+  .verdict-big.ok{background:#E2F1EA;color:#0E7C66}
+  .verdict-big.tag{background:var(--accent-soft);color:var(--accent)}
+  .art-src{font-size:12.5px;color:var(--muted);border-left:3px solid var(--accent);padding:6px 12px;margin:12px 0}
+  .art-tip{font-size:13px;color:var(--muted)}
+  .art-link{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent)}
+  .art-foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .art-back{font-size:13px;color:var(--accent);text-decoration:none;font-weight:600}
+  .art-back:hover{text-decoration:underline}
+  .art-note{font-size:12px;color:var(--muted)}
+  html.theme-dark .art{background:var(--paper)}
+  html.theme-dark .art-body{color:var(--ink2)}
+  .art-photo{margin:2px 0 16px;border-radius:12px;overflow:hidden}
+  .art-photo img{width:100%;display:block;aspect-ratio:21/9;object-fit:cover;object-position:center 42%}
+  @media print{ .art-photo{display:none} }
+  @media (max-width:720px){ .art{padding:22px 18px} .art h1{font-size:22px} }
+  """
+    full_css = css + ART_CSS_EXTRA
+    assets_dir = os.path.join(ROOT, "assets")
+    os.makedirs(assets_dir, exist_ok=True)
+    css_hash = hashlib.sha256(full_css.encode()).hexdigest()[:8]
+    js_hash = hashlib.sha256(js.encode()).hexdigest()[:8]
+    css_file = f"app.{css_hash}.css"
+    js_file = f"app.{js_hash}.js"
+    with open(os.path.join(assets_dir, css_file), "w", encoding="utf-8") as f:
+        f.write(full_css)
+    with open(os.path.join(assets_dir, js_file), "w", encoding="utf-8") as f:
+        f.write(js)
+    # 清理旧哈希产物，防 assets/ 膨胀
+    for fn in os.listdir(assets_dir):
+        if fn.startswith("app.") and fn not in (css_file, js_file):
+            os.remove(os.path.join(assets_dir, fn))
+    built.append(f"assets/{css_file} · {len(full_css)//1024} KB")
+    built.append(f"assets/{js_file} · {len(js)//1024} KB")
+
     # 404 兜底页（门户标配）
     demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
     demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">重庆升学信息平台</span>'
@@ -374,7 +430,7 @@ def main():
         '<!doctype html>\n<html lang="zh-CN">\n<head>\n'
         '<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />\n'
         '<title>页面未找到 · 鸡父母</title>\n<meta name="theme-color" content="#24344D" />\n'
-        '<style>' + css + '</style>\n</head>\n<body>\n'
+        '<link rel="stylesheet" href="assets/' + css_file + '" />\n</head>\n<body>\n'
         '<div class="top"><div class="wrap">'
         '<a class="logo" href="index.html" style="color:inherit;text-decoration:none"><span class="dot"></span>鸡父母<small>CHICKEN PARENTS - CHONGQING</small></a> '
         + demo_tag +
@@ -394,12 +450,14 @@ def main():
     with open(os.path.join(OUT_DIR, "404.html"), "w", encoding="utf-8") as f:
         f.write(nf)
 
-    built = []
-    total = 0
     for pg in PAGES:
         if pg["file"] == "sitemap.html":
             continue  # 站点地图由 footer 覆盖，暂不单独生成
         out = build_page(pg, tpl, secs, css, js)
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />')
+        out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
+        if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
+            sys.exit(f"[build] 占位符未替换干净：{pg['file']}")
         path = os.path.join(OUT_DIR, pg["file"])
         with open(path, "w", encoding="utf-8") as f:
             f.write(out)
@@ -460,9 +518,11 @@ def main():
         '<a class="skip-link" href="index.html">回到首页</a>\n'
         + ann_frag + "\n" + nav_html("articles/x.html", demo_frag, search_frag) + "\n"
     )
-    art_footer = convert_links(tpl[tpl.find("<footer>"): tpl.find('<dialog id="school-modal">')])
+    art_footer_raw = tpl[tpl.find("<footer>"): tpl.find('<dialog id="school-modal">')]
+    art_footer_raw = art_footer_raw.replace('<script>//__BUILD_JS__</script>', '')  # 外链JS已单独注入
+    art_footer = convert_links(art_footer_raw)
     art_dir = os.path.join(ROOT, "articles")
-    articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir)
+    articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
     # sitemap 生成（GitHub Pages 域名，带 lastmod）
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     site = "https://mina2026best.github.io/jfm-platform-demo/"

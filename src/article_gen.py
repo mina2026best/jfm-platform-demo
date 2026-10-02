@@ -42,7 +42,7 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
 <meta property="og:description" content="{esc(cfg["desc"])}">
 <meta property="og:type" content="article">
 <link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/articles/{cfg["fname"]}">
-<style>{css}</style>
+<link rel="stylesheet" href="../assets/{cfg["css_file"]}">
 <script>try{{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){{document.documentElement.classList.add('theme-dark')}}}}catch(e){{}}</script>
 </head>
 <body>
@@ -63,6 +63,7 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
 {footer_html}
 {dialogs}
 <div id="toast" role="status" aria-live="polite"></div>
+<script src="../assets/{cfg["js_file"]}" defer></script>
 <script>{extra_js}</script>
 <script>
 (function(){{
@@ -104,7 +105,9 @@ def extract_template_blocks(tpl, marker, count_expected=None):
         blocks.append(tpl[start:idx])
     return blocks
 
-def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
+def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, css_file=None, js_file=None):
+    CSS_FILE = css_file or ""
+    JS_FILE = js_file or ""
     REG = []  # 全站文章注册表：[title, href, kicker]
     from html.parser import HTMLParser
     made = []
@@ -113,7 +116,7 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir):
 
     def write(cfg, fname):
         REG.append([cfg["kicker"], fname, cfg["title"]])
-        cfg = dict(cfg, fname=fname)  # canonical 用
+        cfg = dict(cfg, fname=fname, css_file=CSS_FILE, js_file=JS_FILE)  # canonical/外链资源用
         # 相关推荐：同类 4 篇 + 全站随机 2 篇（确定性：按 title hash 排序，构建可复现）
         rel = cfg.get("related") or []
         extra = ""

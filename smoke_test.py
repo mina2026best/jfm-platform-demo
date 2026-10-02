@@ -142,6 +142,13 @@ def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SM
         return {"errs": ["探针解析失败: " + str(e)], "counts": {}}
 
 
+def cleanup_chrome():
+    """headless Chrome 常不退出（子进程会累积），收尾统一清掉本工具起的实例。
+    ponytail: 只杀带本工具 user-data-dir 前缀的进程，不碰用户自己的浏览器。"""
+    subprocess.run(['pkill', '-f', 'user-data-dir=/tmp/chrome-smoke'], capture_output=True)
+    subprocess.run(['pkill', '-f', 'user-data-dir=/tmp/chrome-inv'], capture_output=True)
+
+
 def main():
     pages_arg = sys.argv[1:]
     pages = pages_arg or list(CHECKS.keys())
@@ -182,6 +189,7 @@ def main():
               + ('' if ok else f" | 例：{r.get('over')}"))
         if not ok:
             fails.append(page + '(mobile)')
+    cleanup_chrome()
     print(f"[smoke] 结果：{len(pages) - len(fails)}/{len(pages)} 通过" + (f"，失败页：{'、'.join(fails)}" if fails else ""))
     return 1 if fails else 0
 

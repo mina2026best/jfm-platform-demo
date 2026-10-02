@@ -14,7 +14,7 @@
     .nav-burger{display:block}
   }
   @media (max-width:620px){
-    .hero h1{font-size:29px}
+    .hero h1{font-size:26px}
     .entries,.cal-grid,.plans,.life,.flow,.school-grid,.me-grid,.biz-grid,.path-grid{grid-template-columns:1fr}
     .trust{grid-template-columns:1fr 1fr}
     .form-row textarea{min-width:0}

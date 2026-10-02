@@ -3,5 +3,5 @@
   .cd-bar b{color:var(--accent);font-family:var(--mono);font-size:16px;margin:0 2px}
   .cd-bar a{color:var(--accent);text-decoration:none;font-weight:600}
   .cd-bar a:hover{text-decoration:underline}
-  .cd-note{color:var(--muted);font-size:12px;margin-left:6px}
-  @media (max-width:720px){ .cd-bar{display:block;font-size:13px} }
+  .cd-note{color:var(--muted);font-size:12.5px;margin-left:6px}
+  @media (max-width:720px){ .cd-bar{display:block;font-size:13.5px} }

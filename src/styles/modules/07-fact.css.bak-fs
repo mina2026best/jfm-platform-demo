@@ -1,0 +1,11 @@
+  /* ---------- 求真台 ---------- */
+  .rq{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .rq-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .rq-card .verdict{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:4px;margin-bottom:10px}
+  .verdict.false{background:#FDECEC;color:#B3261E}
+  .verdict.warn{background:var(--warn-soft);color:var(--warn)}
+  .verdict.ok{background:var(--accent-soft);color:var(--accent)}
+  .rq-card h4{font-size:15px;margin-bottom:8px;color:var(--ink)}
+  .rq-card p{font-size:13px;color:var(--ink2);margin-bottom:8px}
+  .rq-card .src{font-family:var(--mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
+

@@ -4,10 +4,10 @@
   .cmp-tools button{font-family:var(--sans);font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer}
   .cmp-tools button:hover{background:var(--navy2)}
   .cmp-tools button.cmp-alt{background:#fff;color:var(--navy)}
-  .cmp-note{font-size:12px;color:var(--muted)}
+  .cmp-note{font-size:12.5px;color:var(--muted)}
   #cmp-result,#rent-wrap{overflow-x:auto}
   .cmp-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13.5px;min-width:560px}
-  .cmp-table th{background:var(--navy);color:#fff;font-weight:600;padding:11px 14px;text-align:left;font-size:13px}
+  .cmp-table th{background:var(--navy);color:#fff;font-weight:600;padding:11px 14px;text-align:left;font-size:13.5px}
   .cmp-table th:first-child{width:150px}
   .cmp-table td{padding:11px 14px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
   .cmp-table td:first-child{color:var(--ink);font-weight:500}

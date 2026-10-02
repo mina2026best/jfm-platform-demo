@@ -11,5 +11,5 @@
   .top nav a:hover{background:var(--accent-soft);color:var(--accent)}
   .top nav a.cta{background:var(--navy);color:#fff}
   .top nav a.cta:hover{background:var(--navy2);color:#fff}
-  .demo-tag{font-family:var(--mono);font-size:10px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:2px 7px;letter-spacing:.08em}
+  .demo-tag{font-family:var(--mono);font-size:11px;color:var(--warn);border:1px solid var(--warn);border-radius:4px;padding:2px 7px;letter-spacing:.08em}
 

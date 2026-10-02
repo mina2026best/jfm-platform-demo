@@ -21,10 +21,12 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 
 # 每个页面要断言的渲染结果：{页面: [(选择器或JS表达式, 期望下限, 说明)]}
 CHECKS = {
-    "index.html":     [("#dao-home .dao-cat", 5, "首页导航分类块"), ("#dao-home .dao-list a", 25, "首页导航链接"),
-                       ("#hot-rank a", 3, "热门榜条目")],
-    "daohang.html":   [("#dao-full .dao-cat", 10, "导航页分类块"), ("#dao-full .dao-list a", 69, "导航页链接总数"),
-                       (".dao-chip", 10, "分类锚点"), ("#dao-zheng b", 1, "区划提醒卡")],
+    "index.html":     [("#dao-home .dao-cat", 6, "首页导航分类块"), ("#dao-home .dao-list a", 33, "首页导航链接（5类×6 + 在线课程3）"),
+                       ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达"),
+                       ("#dao-zheng b", 1, "区划提醒卡"), ("#hot-rank a", 3, "热门榜条目")],
+    "daohang.html":   [("#dao-full .dao-cat", 11, "导航页分类块"), ("#dao-full .dao-list a", 73, "导航页链接总数"),
+                       (".dao-chip", 11, "分类锚点"), ("#dao-zheng b", 1, "区划提醒卡"),
+                       ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达")],
     "news.html":      [("#news-list .news-item", 20, "资讯列表条目"), ("#news-list .ni-cover img", 20, "资讯封面图")],
     "data-sources.html": [("#ds-table tr", 3, "数据来源表行")],
     "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片")],

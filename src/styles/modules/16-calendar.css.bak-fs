@@ -1,0 +1,24 @@
+  /* ---------- v0.8：多孩档案 / 日历个性化 ---------- */
+  .kid-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+  .kid-chip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);border-radius:99px;padding:5px 12px;font-size:12.5px;color:var(--ink2);background:var(--paper);cursor:pointer}
+  .kid-chip:hover{border-color:var(--accent)}
+  .kid-chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .kid-chip .x{color:var(--muted);font-size:13px;line-height:1;cursor:pointer}
+  .kid-chip .x:hover{color:#B3261E}
+  .cal-personal{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:7px 12px;font-size:12.5px;margin-bottom:14px}
+  .cal-personal[hidden]{display:none}
+  .cal-personal b{color:var(--accent)}
+  .cal-personal button{border:none;background:none;color:var(--accent);font-size:12.5px;cursor:pointer;text-decoration:underline;padding:0}
+  .cal-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 14px}
+
+
+  /* ---------- v0.9：首屏孩子快切条 / 同区徽标 ---------- */
+  .kid-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin-top:18px;font-size:13px;color:var(--ink2)}
+  .kid-bar .kb-label{font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:.08em}
+  .kid-bar .kb-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);border-radius:99px;padding:4px 12px;font-size:12.5px;cursor:pointer;background:#fff;color:var(--ink2)}
+  .kid-bar .kb-chip:hover{border-color:var(--accent)}
+  .kid-bar .kb-chip.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:600}
+  .kid-bar .kb-go{margin-left:auto;font-size:12.5px;color:var(--accent);text-decoration:none;font-weight:600}
+  .kid-bar .kb-go:hover{text-decoration:underline}
+  .school-card.qu-match{border-color:var(--accent)}
+  .school-card .qu-badge{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}

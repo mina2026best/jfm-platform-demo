@@ -1,0 +1,19 @@
+  /* ---------- v0.14：大字版 / 数据管理 ---------- */
+  html.fs-large{zoom:1.12}
+  html.fs-large .searchbox input{height:auto}
+  html.fs-large .wrap{max-width:1180px}
+  html.fs-large .mini-btn,html.fs-large .ff{font-size:14px;padding:7px 15px}
+  @media print{ html.fs-large{zoom:1} }
+  .me-utils{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+  .me-utils .mini-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  /* ---------- v0.16：阅读进度条 ---------- */
+  #readBar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:90;pointer-events:none}
+  @media print{ #readBar{display:none} }
+  /* ---------- v0.23：我的页统计条 ---------- */
+  .me-stats{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 10px}
+  .ms-chip{font-size:12px;color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:3px 10px;background:var(--paper)}
+  .ms-chip b{color:var(--accent);font-family:var(--mono)}
+
+  /* 动作按钮（替代占位链接） */
+  button.linkbtn{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2.5px}
+  button.linkbtn:hover{color:var(--accent)}

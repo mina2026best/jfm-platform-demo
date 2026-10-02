@@ -1,0 +1,27 @@
+  /* ---------- 响应式 ---------- */
+  @media (max-width:960px){
+    .entries,.cal-grid,.plans{grid-template-columns:repeat(2,1fr)}
+    .life{grid-template-columns:repeat(3,1fr)}
+    .flow{grid-template-columns:repeat(3,1fr)}
+    .pol{grid-template-columns:1fr}
+    .school-grid{grid-template-columns:repeat(2,1fr)}
+    .me-grid{grid-template-columns:1fr}
+    .biz-grid{grid-template-columns:repeat(2,1fr)}
+    .trust{grid-template-columns:repeat(2,1fr)}
+    .path-grid{grid-template-columns:repeat(2,1fr)}
+    .top nav{display:none}
+    .searchbox{max-width:180px}
+    .nav-burger{display:block}
+  }
+  @media (max-width:620px){
+    .hero h1{font-size:29px}
+    .entries,.cal-grid,.plans,.life,.flow,.school-grid,.me-grid,.biz-grid,.path-grid{grid-template-columns:1fr}
+    .trust{grid-template-columns:1fr 1fr}
+    .form-row textarea{min-width:0}
+    .rq{grid-template-columns:1fr}
+    .wrap{padding:0 16px}
+    .searchbox{max-width:none;flex:1;min-width:0}
+    .top .wrap{gap:10px}
+    .demo-tag{display:none}
+    dialog{width:96%}
+  }

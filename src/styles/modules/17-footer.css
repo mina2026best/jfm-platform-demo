@@ -6,7 +6,7 @@
   footer ul{list-style:none}
   footer a{color:#C6D0DC;text-decoration:none}
   footer a:hover{color:#fff}
-  .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:11.5px;color:#8395AB;line-height:1.9}
+  .legal{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:11px;color:#8395AB;line-height:1.9}
   /* ---------- v0.52 页脚品牌寓意 ---------- */
   footer .brand-mean{color:#C6D0DC;border-left:2px solid var(--accent);padding-left:10px;margin:0 0 10px}
   footer .logo-dot{position:relative;display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-1px}

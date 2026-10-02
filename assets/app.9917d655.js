@@ -9631,6 +9631,12 @@ var DAO_ZHENG = {
   d: '2025-11-07 重庆市人民政府公告（渝府发〔2025〕15号）：撤销江北区、渝北区，设立两江新区，2026-01-25 正式挂牌；水土、复兴、蔡家岗、施家梁、童家溪划归两江新区，原渝北区大湾镇、统景镇、大盛镇、兴隆镇、茨竹镇划归北碚区。凡以「江北区/渝北区」旧口径发布的划片与入学信息，请以新公告与对应区教育部门为准。',
   u: 'https://www.cq.gov.cn/ywdt/tzgg/202511/t20251110_15152219.html'
 };
+/* 热门直达：从 DAO_CATS 按名取（单一数据源，避免两处维护） */
+var DAO_QUICK_NAMES = ['重庆招考信息网','重庆市教育委员会','学信网','国家中小学智慧教育平台','汉典',
+                       '国家心理健康和精神卫生防治中心','中国铁路12306','重庆图书馆'];
+/* 站内速达：家长最常回访的工具页 */
+var DAO_SITE_LINKS = [['入学自查','quiz.html'],['择校对比','compare.html'],['志愿参考','zy.html'],
+                      ['求真台','fact.html'],['升学日历','calendar.html'],['数据来源','data-sources.html']];
 var DAO_CATS = [
   { n:'升学官方入口', s:'报名 / 查分 / 录取，家长最先要打开的 13 个口子', items:[
     ['重庆市教育委员会','https://jw.cq.gov.cn/','全市招生政策原文与公示公告第一手'],
@@ -9708,6 +9714,12 @@ var DAO_CATS = [
     ['重庆医科大学附属第一医院','https://www.hospital-cqmu.com/','综合医院预约与科室查询'],
     ['中国文明网（未成年人）','http://www.wenming.cn/','未成年人思想道德与权益']
   ]},
+  { n:'本地场馆与亲子科普', s:'周末与假期带孩子去哪——官方场馆，多需提前预约', items:[
+    ['重庆科技馆','https://www.cqkjg.cn/','亲子科普场馆，展项与预约'],
+    ['重庆中国三峡博物馆','https://www.3gmuseum.cn/','免费开放，青少年教育活动'],
+    ['重庆自然博物馆','http://www.cmnh.org.cn/','恐龙与古生物展，亲子常去'],
+    ['红岩革命历史博物馆','http://www.hongyan.info/','红色教育基地与研学实践']
+  ]},
   { n:'生活与出行', s:'通勤实测、天气、车票——择校离不开', items:[
     ['中国铁路12306','https://www.12306.cn/','车票查询与购票'],
     ['中国天气网','https://www.weather.com.cn/','出行与考试日天气'],
@@ -9722,6 +9734,65 @@ var DAO_CATS = [
     ['生源地助学贷款·学生在线系统','https://www.csls.cdb.com.cn/','贷款申请、续贷与还款']
   ]}
 ];
+
+
+/* 从分类数据里按名取出速达项（找不到就跳过，不造条目） */
+function daoQuickItems(){
+  var out = [], i, j;
+  for(i = 0; i < DAO_QUICK_NAMES.length; i++){
+    for(j = 0; j < DAO_CATS.length; j++){
+      var hit = null, its = DAO_CATS[j].items;
+      for(var k = 0; k < its.length; k++){ if(its[k][0] === DAO_QUICK_NAMES[i]) { hit = its[k]; break; } }
+      if(hit){ out.push(hit); break; }
+    }
+  }
+  return out;
+}
+/* 今日条：日期/星期（本机时间）+ 今日新增资讯条数 + 下一个升学节点（月精度，来自站内日历 DOM） */
+function renderTodayBar(){
+  var box = document.getElementById('today-bar'); if(!box) return;
+  var d = new Date();
+  var WD = ['日','一','二','三','四','五','六'];
+  var today = d.getFullYear() + '-' + (d.getMonth() + 1 < 10 ? '0' : '') + (d.getMonth() + 1) + '-' + (d.getDate() < 10 ? '0' : '') + d.getDate();
+  var dateTxt = d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日 · 星期' + WD[d.getDay()];
+  var fresh = 0;
+  if(typeof NEWS_FEED !== 'undefined' && NEWS_FEED.length){
+    for(var i = 0; i < NEWS_FEED.length; i++){ if(String(NEWS_FEED[i].date) === today) fresh++; }
+  }
+  if(typeof getUserNews === 'function'){
+    var un = getUserNews();
+    for(var u = 0; u < un.length; u++){ if(String(un[u].date) === today) fresh++; }
+  }
+  var cm = d.getFullYear() * 12 + d.getMonth(), next = null;
+  var cals = document.querySelectorAll('.cal-grid .cal');
+  for(var c = 0; c < cals.length; c++){
+    var dm = (cals[c].querySelector('.date') || {}).textContent || '';
+    var mm = dm.match(/(\d{4})-(\d{2})/);
+    if(!mm) continue;
+    var v = parseInt(mm[1], 10) * 12 + (parseInt(mm[2], 10) - 1);
+    if(v >= cm && (!next || v < next.v)){
+      next = { v: v, txt: dm, t: ((cals[c].querySelector('h4') || {}).textContent || '').trim() };
+    }
+  }
+  var parts = ['<span class="tb-date">' + esc(dateTxt) + '</span>'];
+  parts.push('<span class="tb-i">今日新增资讯 <b>' + fresh + '</b> 条</span>');
+  if(next){
+    var gap = next.v - cm;
+    parts.push('<span class="tb-i">最近节点 <b>' + esc(next.txt) + '</b> · ' + esc(next.t.slice(0, 16)) + (gap === 0 ? '（本月）' : '（' + gap + ' 个月后）') + '</span>');
+  }
+  parts.push('<span class="tb-links">站内速达：' + DAO_SITE_LINKS.map(function(x){
+    return '<a href="' + x[1] + '">' + esc(x[0]) + '</a>';
+  }).join('') + '</span>');
+  box.innerHTML = parts.join('');
+}
+function renderDaoQuick(){
+  var box = document.getElementById('dao-quick'); if(!box) return;
+  var items = daoQuickItems();
+  box.innerHTML = '<span class="dq-label">热门直达</span>'
+    + items.map(function(it){
+        return '<a href="' + hrefEnc(it[1]) + '" target="_blank" rel="noopener" title="' + esc(it[2] || '') + '">' + esc(it[0]) + '</a>';
+      }).join('');
+}
 
 function daoTotal(){ var n = 0; for(var i=0;i<DAO_CATS.length;i++) n += DAO_CATS[i].items.length; return n; }
 function daoItemHTML(it){
@@ -9738,12 +9809,12 @@ function daoCatHTML(c, idx){
 /* 首页精简版：前 5 类 × 每类 5 条 + 全量入口指引 */
 function renderDaoHome(){
   var box = document.getElementById('dao-home'); if(!box) return;
-  var cats = DAO_CATS.slice(0, 5), html = '';
+  var cats = DAO_CATS.slice(0, 6), html = '';
   for(var i = 0; i < cats.length; i++){
     var c = cats[i];
     html += '<div class="dao-cat" data-cat="' + esc(c.n) + '">'
       + '<h3><b>' + ('0' + (i + 1)) + '</b>' + esc(c.n) + '<em>' + c.items.length + '</em></h3>'
-      + '<ul class="dao-list">' + c.items.slice(0, 5).map(daoItemHTML).join('') + '</ul></div>';
+      + '<ul class="dao-list">' + c.items.slice(0, 6).map(daoItemHTML).join('') + '</ul></div>';
   }
   box.innerHTML = html;
   var all = document.getElementById('dao-all-count');
@@ -9809,6 +9880,8 @@ function initDao(){
   var tt = daoTotal();
   var es = document.querySelectorAll('.dao-total, #dao-all-count');
   for(var k = 0; k < es.length; k++) es[k].textContent = tt;
+  renderTodayBar();
+  renderDaoQuick();
   renderDaoZheng();
   renderDaoHome();
   renderDaoFull();

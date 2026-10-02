@@ -16,7 +16,7 @@
   .entry-body .no{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.14em}
   .entry-body h3{font-family:var(--serif);font-size:20px;color:var(--navy);margin:6px 0 6px}
   .entry-body p{font-size:13.5px;color:var(--muted)}
-  .entry-body .go{display:inline-block;margin-top:10px;font-size:13px;color:var(--accent);font-weight:600}
+  .entry-body .go{display:inline-block;margin-top:10px;font-size:13.5px;color:var(--accent);font-weight:600}
   /* 内容页页眉横幅（policy/faq） */
   .page-banner{position:relative;background:
     radial-gradient(900px 300px at 88% -20%, rgba(76,194,163,.25) 0%, transparent 55%),
@@ -62,7 +62,7 @@
   .rel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .rel-item{display:flex;gap:8px;align-items:baseline;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:9px 12px;text-decoration:none;font-size:12.5px;color:var(--ink2)}
   .rel-item:hover{border-color:var(--accent)}
-  .rel-tag{flex:none;font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
+  .rel-tag{flex:none;font-family:var(--mono);font-size:11px;color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:1px 6px}
   @media (max-width:720px){ .rel-grid{grid-template-columns:1fr} }
   @media print{ .rel-grid{display:none} }
 

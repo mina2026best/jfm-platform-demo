@@ -19,7 +19,7 @@
 
   /* —— 3. 字阶收敛：条目标题 / 正文 / 元信息的层级强化 —— */
   .pol-item h4,.thread h4,.rq-card h4{font-size:16px;line-height:1.55;letter-spacing:.005em}
-  .news-item .ni-title{font-size:15.5px;line-height:1.6}
+  .news-item .ni-title{font-size:16px;line-height:1.6}
   .news-item .ni-sum,.pol-item p{line-height:1.8}
   .term{padding:22px 24px;border-radius:12px}
   .term dl{row-gap:12px;column-gap:16px}
@@ -100,19 +100,20 @@
 
 
 /* ---------- v0.54 常用网址导航 ---------- */
-.dao-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));margin-top:14px}
+.dao-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));margin-top:14px;align-items:stretch}
 .dao-cat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px 10px}
-.dao-cat h3{display:flex;align-items:baseline;gap:8px;margin:0 0 4px;font-size:15px;color:var(--navy);font-family:var(--serif)}
-.dao-cat h3 b{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--accent);font-weight:600}
-.dao-cat h3 em{margin-left:auto;font-family:var(--mono);font-style:normal;font-size:10.5px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:1px 7px}
-.dao-sub{margin:0 0 8px;font-size:12px;color:var(--muted);line-height:1.5}
+.dao-cat h3{display:flex;align-items:baseline;gap:8px;margin:0 0 4px;font-size:16px;color:var(--navy);font-family:var(--serif)}
+.dao-cat h3 b{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);font-weight:600}
+.dao-cat h3 em{margin-left:auto;font-family:var(--mono);font-style:normal;font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:1px 7px}
+.dao-sub{margin:0 0 8px;font-size:12.5px;color:var(--muted);line-height:1.5}
 .dao-list{list-style:none;margin:0;padding:0}
-.dao-list li{padding:5px 0;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:1px}
+.dao-list li{padding:6px 0;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:1px}
 .dao-list li:first-child{border-top:0}
-.dao-list a{font-size:13.5px;color:var(--navy);text-decoration:none;font-weight:600;line-height:1.35}
+.dao-list a{font-size:14px;color:var(--navy);text-decoration:none;font-weight:600;line-height:1.4;
+  overflow-wrap:anywhere;word-break:break-word}
 .dao-list a:hover{color:var(--accent)}
-.dao-list a i{font-style:normal;font-size:10px;color:var(--muted);margin-left:4px}
-.dao-list span{font-size:11.5px;color:var(--muted);line-height:1.45}
+.dao-list a i{font-style:normal;font-size:11px;color:var(--muted);margin-left:4px}
+.dao-list span{font-size:11px;color:var(--muted);line-height:1.45}
 .dao-zheng{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 15px}
 .dao-zheng b{display:block;font-size:13.5px;color:var(--navy);margin-bottom:5px}
 .dao-zheng p{margin:0 0 7px;font-size:12.5px;color:var(--ink2);line-height:1.7}
@@ -120,9 +121,35 @@
 .dao-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 0}
 .dao-chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink2);text-decoration:none;border:1px solid var(--line);background:var(--paper);border-radius:20px;padding:4px 11px}
 .dao-chip:hover{border-color:var(--accent);color:var(--accent)}
-.dao-chip em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.dao-chip em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
 .dao-searchwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
 #dao-search{flex:1;min-width:240px;font:inherit;font-size:13.5px;padding:9px 13px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink)}
 #dao-search:focus{outline:none;border-color:var(--accent)}
 .dao-result{font-size:12.5px;color:var(--accent);font-family:var(--mono)}
-@media (max-width:640px){.dao-grid{grid-template-columns:1fr}.dao-list a{font-size:14px}}
+@media (max-width:1024px){ .dao-grid{grid-template-columns:repeat(auto-fill,minmax(224px,1fr))} }
+@media (max-width:720px){ .dao-grid{grid-template-columns:repeat(2,1fr);gap:11px} }
+@media (max-width:520px){ .dao-grid{grid-template-columns:1fr}.dao-list a{font-size:15px}.dao-list span{font-size:13px} }
+
+
+/* ---------- v0.55 门户式信息条与速达区 ---------- */
+.today-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin:12px 0 0;padding:11px 15px;
+  background:linear-gradient(90deg,rgba(14,124,102,.055),rgba(14,124,102,0));border:1px solid var(--line);
+  border-left:3px solid var(--accent);border-radius:10px;font-size:12.5px;color:var(--ink2)}
+.today-bar .tb-date{font-weight:600;color:var(--navy);letter-spacing:.01em}
+.today-bar .tb-i b{color:var(--accent);font-family:var(--mono);font-weight:600}
+.today-bar .tb-links{display:flex;flex-wrap:wrap;gap:4px 10px;margin-left:auto;color:var(--muted)}
+.today-bar .tb-links a{color:var(--navy2);text-decoration:none;border-bottom:1px dashed var(--line2)}
+.today-bar .tb-links a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.dao-quick{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:10px}
+.dao-quick .dq-label{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.12em}
+.dao-quick a{font-size:13.5px;color:var(--navy);text-decoration:none;background:var(--paper);
+  border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-weight:600}
+.dao-quick a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.dao-quick a{transition:transform .15s ease,border-color .15s ease,color .15s ease}
+@media (max-width:720px){
+  .today-bar{font-size:12.5px;gap:5px 12px}
+  .today-bar .tb-links{margin-left:0}
+  .dao-quick a{font-size:13.5px;padding:6px 11px}
+}
+html.theme-dark .today-bar{background:linear-gradient(90deg,rgba(76,194,163,.10),rgba(76,194,163,0))}
+html.theme-dark .dao-quick a{background:var(--paper);color:var(--ink)}

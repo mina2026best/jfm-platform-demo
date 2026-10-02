@@ -1,0 +1,8 @@
+  /* ---------- 生活服务 ---------- */
+  .life{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .life-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 16px}
+  .life-card .ico{width:38px;height:38px;border-radius:8px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .life-card h4{font-size:14.5px;color:var(--ink);margin-bottom:4px}
+  .life-card p{font-size:12px;color:var(--muted)}
+  .life-card .soon{font-family:var(--mono);font-size:10px;color:var(--blue);margin-top:8px;display:block}
+

@@ -1,0 +1,37 @@
+  /* ---------- 表单与新增模块 ---------- */
+  .form-card{grid-column:1/-1;background:var(--navy);color:#DCE4EE;border-radius:10px;padding:20px 22px}
+  .form-card h4{color:#fff;font-size:15px;margin-bottom:4px}
+  .form-card .hint{font-size:12px;color:#9FADC0;margin-bottom:12px}
+  .form-row{display:flex;gap:10px;flex-wrap:wrap}
+  .form-row textarea{flex:1;min-height:84px;background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-family:var(--sans);font-size:14px;padding:10px 12px;resize:vertical}
+  .form-row select{background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-size:14px;padding:8px 12px}
+  .form-card .err{color:#F2B8B5;font-size:12.5px;margin-top:8px;display:none}
+  .form-card .ok-box{display:none;background:#0F3D33;border:1px solid var(--accent);border-radius:8px;padding:14px 16px;margin-top:12px}
+  .form-card .ok-box b{color:#7FD8C4}
+  .form-card button{background:var(--accent);border:none;color:#fff;font-size:14px;padding:10px 22px;border-radius:7px;cursor:pointer;font-family:var(--sans)}
+  .form-card button:hover{background:#0A6151}
+  .thread{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 18px;display:flex;gap:14px;align-items:flex-start;margin-bottom:10px}
+  .thread .badge{flex:none;font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;background:var(--accent-soft);color:var(--accent);margin-top:2px}
+  .thread .badge.q{background:var(--warn-soft);color:var(--warn)}
+  .thread h4{font-size:14.5px;color:var(--ink)}
+  .thread p{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .thread .n{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+  .beans-box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+  .beans-num{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--navy)}
+  .beans-num small{font-size:13px;color:var(--muted);font-weight:400}
+  .beans-box .btn{background:var(--accent);border:none;color:#fff;font-size:14px;padding:10px 22px;border-radius:7px;cursor:pointer;font-family:var(--sans)}
+  .beans-box .btn:disabled{background:#A8C3BE;cursor:not-allowed}
+  .beans-box .done{font-size:12px;color:var(--accent);margin-top:8px}
+  .beans-rules{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:14px;grid-column:1/-1}
+  .rent-table{width:100%;border-collapse:collapse;background:var(--paper);font-size:13px;margin-top:14px;min-width:520px}
+  .rent-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:12.5px}
+  .rent-table td{padding:10px 14px;border-bottom:1px solid var(--line);color:var(--ink2)}
+  .fund-out{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:14px;font-size:13.5px;color:var(--ink2)}
+  .fund-out b{color:var(--accent)}
+  .zy-out{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-top:14px;font-size:14px;color:var(--ink2)}
+  .zy-out b{color:var(--accent)}
+  .zy-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .zy-tools input,.zy-tools select{font-size:14px;padding:8px 12px;border:1px solid var(--line2);border-radius:6px;font-family:var(--sans)}
+  .zy-tools button{font-size:14px;padding:8px 18px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;cursor:pointer;font-family:var(--sans)}
+  .zy-tools label{font-size:13px;color:var(--ink2)}
+

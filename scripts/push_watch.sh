@@ -12,7 +12,7 @@ for i in $(seq 1 60); do
     echo "$(date +%H:%M:%S) 第${i}次 github=$code push后ahead=$ahead2 | $(echo "$out" | tr '\n' ' ' | cut -c1-100)"
     [ "$ahead2" = "0" ] && { echo "PUSH_OK"; exit 0; }
   else
-    echo "$(date +%H:%M:%S) 第${i}次 github不可达($code)，20s 后重试"
+    echo "$(date +%H:%M:%S) 第${i}次 github不可达($code)"
   fi
   sleep 60
 done

@@ -4,7 +4,7 @@ var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','�
 var newsFilter = 'all';
 var newsQuery = '';
 var neEditingId = null;
-var NEWS_PAGE_SIZE = 60;      // v0.43：默认渲染条数（加载更多每次 +60）
+var NEWS_PAGE_SIZE = 24;      // v0.53：与照片池（28 张）匹配——一屏之内封面不重复；加载更多每次 +24
 var newsShown = NEWS_PAGE_SIZE;
 function moreNews(){ newsShown += NEWS_PAGE_SIZE; renderNews(); }
 
@@ -38,6 +38,7 @@ function clearNewsQuery(){
 }
 function renderNews(){
   var box = document.getElementById('news-list'); if(!box) return;
+  if(typeof resetPhotoUsage === 'function') resetPhotoUsage();   // v0.53：本页照片去重计数从零开始
   var arr = newsCombined();
   var q = newsQuery.trim().toLowerCase();
   var shown = arr.filter(function(x){
@@ -82,14 +83,13 @@ function renderNews(){
 }
 function newsItemHTML(x){
   var bodyHTML = (x.body || x.url)
-    ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + esc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
+    ? '<div class="ni-body" hidden>' + esc(x.body || '') + (x.url ? '<div style="margin-top:6px"><a href="' + hrefEnc(x.url) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' : '') + '</div>'
     : '';
-  var coverKind = { '政策速递':'office', '升学动态':'classroom', '家庭教育':'study', '安全提醒':'playground', '办事提醒':'calendar', '行业观察':'city' }[x.cat] || 'city';
-  var cover = '<div class="ni-cover" aria-hidden="true">' + photoImg(coverKind, false, NEWS_PHOTO_ALT[x.cat] || '教育资讯主题配图') + '</div>';
+  var cover = '<div class="ni-cover" aria-hidden="true">' + photoItemImg(x._k + '|' + (x.t || ''), false, NEWS_PHOTO_ALT[x.cat] || '教育资讯主题配图') + '</div>';
   var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + x.t] || '') : '';
   var titleLink;
   if(artKey){ titleLink = '<a class="ni-link" href="articles/' + artKey + '" title="阅读全文">' + esc(x.t) + '</a>'; }
-  else if(x.url){ titleLink = '<a class="ni-link" href="' + esc(x.url) + '" target="_blank" rel="noopener" title="阅读原文">' + esc(x.t) + ' ↗</a>'; }
+  else if(x.url){ titleLink = '<a class="ni-link" href="' + hrefEnc(x.url) + '" target="_blank" rel="noopener" title="阅读原文">' + esc(x.t) + ' ↗</a>'; }
   else { titleLink = '<span class="ni-link" role="text">' + esc(x.t) + '</span>'; }
   return '<div class="news-item" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'

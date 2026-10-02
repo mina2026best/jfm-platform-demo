@@ -113,7 +113,7 @@ function openSchool(name){
     if(r === '暂缺字段'){
       v = '录取线类数据按合规不提供；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(raw || '') + '）';
     } else if(r === '官网'){
-      v = raw ? '<a href="' + esc(raw) + '" target="_blank" rel="noopener">' + esc(String(raw).replace(/^https?:\/\//, '').replace(/\/$/, '')) + ' ↗</a>' : '暂缺';
+      v = raw ? '<a href="' + hrefEnc(raw) + '" target="_blank" rel="noopener">' + esc(String(raw).replace(/^https?:\/\//, '').replace(/\/$/, '')) + ' ↗</a>' : '暂缺';
     } else {
       v = esc(raw || '暂缺');
     }

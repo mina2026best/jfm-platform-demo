@@ -259,8 +259,15 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
         if d.get("资料采集"):
             body += '<p class="art-tip">' + esc(d["资料采集"]) + '</p>'
         if d.get("资料来源"):
+            def _src_label(u):
+                _m = re.match(r'https?://([^/]+)', str(u))
+                host = (_m.group(1) if _m else '').lower().lstrip('www.')
+                if 'baike.baidu.com' in host: return '百科词条 ↗'
+                if host.endswith('.gov.cn'): return '政府公开信息 ↗'
+                if 'swu.edu.cn' in host: return '校方官网（西南大学）↗'
+                return host + ' ↗'
             body += '<ul class="art-src-list">' + "".join(
-                '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u) + '</a></li>'
+                '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(_src_label(u)) + '</a></li>'
                 for u in d["资料来源"]) + '</ul>'
         # —— JSON-LD 结构化数据（SEO 门户标配）——
         _ld = {"@context": "https://schema.org", "@type": "School", "name": d.get("全称") or name}

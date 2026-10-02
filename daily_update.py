@@ -90,6 +90,7 @@ def extract_links(base, html):
     return out
 
 def meta_desc(url, timeout=6):
+    """返回 (可达, 描述)。v0.53：可达性同时作为链接存活门禁，避免入库死链。"""
     try:
         req = urllib.request.Request(url, headers=UA)
         with urllib.request.urlopen(req, context=CTX, timeout=timeout) as r:
@@ -101,9 +102,9 @@ def meta_desc(url, timeout=6):
         m = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']{10,200})', t, re.I)
         if not m:
             m = re.search(r'<meta[^>]+property=["\']og:description["\'][^>]+content=["\']([^"\']{10,200})', t, re.I)
-        return strip_tags(m.group(1)) if m else ""
+        return True, (strip_tags(m.group(1)) if m else "")
     except Exception:
-        return ""
+        return False, ""
 
 def cat_of(title):
     for cat, kws in CAT_RULES:
@@ -177,10 +178,18 @@ def main():
     # 2) 抓 meta 描述（并行，限 100 条）
     cands = cands[:100]
     def desc_job(c):
-        c["sum"] = meta_desc(c["url"]) or ""
+        ok, desc = meta_desc(c["url"])
+        c["sum"] = desc or ""
+        c["_alive"] = bool(ok)
         return c
     with ThreadPoolExecutor(max_workers=12) as ex:
         cands = list(ex.map(desc_job, cands))
+    _dead = [c for c in cands if not c.get("_alive")]
+    if _dead:
+        print(f"[link-guard] 丢弃不可达链接 {len(_dead)} 条：" + "; ".join(x["url"][:60] for x in _dead[:3]))
+    cands = [c for c in cands if c.get("_alive")]
+    for c in cands:
+        c.pop("_alive", None)
 
     # 3) 写入 collected.json（reviewed=true 自动发布）
     for c in cands:

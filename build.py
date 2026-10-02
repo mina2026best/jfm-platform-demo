@@ -288,6 +288,17 @@ OG_TAGS = ('<meta property="og:image" content="https://mina2026best.github.io/jf
            '<meta property="og:site_name" content="家长屿 · 重庆家长升学信息与生活服务平台" />\n'
            '<meta name="twitter:card" content="summary_large_image" />')
 
+def encode_hrefs(html):
+    """v0.53：href 中的非 ASCII（如中文百科链接）统一百分号编码，保证任何浏览器/环境都能打开。"""
+    import urllib.parse as _up
+
+    def _rep(m):
+        u = m.group(1)
+        if all(ord(ch) < 128 for ch in u):
+            return m.group(0)
+        return 'href="' + _up.quote(u, safe=":/?#[]@!$&'()*+,;=%~") + '"'
+    return re.sub(r'href="([^"]+)"', _rep, html)
+
 def build_page(page, tpl, secs, css, js):
     fname = page["file"]
     # 1) head：标题与描述替换（首屏页保留原 title/desc；其余用页面专属）
@@ -349,7 +360,7 @@ def build_page(page, tpl, secs, css, js):
     if 'id="main"' not in out:
         out = out.replace('<a class="skip-link" href="#main">跳到主要内容</a>',
                           '<a class="skip-link" href="index.html">回到首页</a>')
-    return out
+    return encode_hrefs(out)
 
 def main():
     tpl = read(f"{SRC}/template.html")
@@ -523,6 +534,13 @@ def main():
     art_footer = convert_links(art_footer_raw)
     art_dir = os.path.join(ROOT, "articles")
     articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
+    for _fn in os.listdir(art_dir):
+        if _fn.endswith(".html"):
+            _p = os.path.join(art_dir, _fn)
+            _h = open(_p, encoding="utf-8").read()
+            _h2 = encode_hrefs(_h)
+            if _h2 != _h:
+                open(_p, "w", encoding="utf-8").write(_h2)
     # sitemap 生成（GitHub Pages 域名，带 lastmod）
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     site = "https://mina2026best.github.io/jfm-platform-demo/"

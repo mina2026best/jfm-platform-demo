@@ -1,14 +1,20 @@
 /* ---------- v0.31：插画挂载：扫 data-art 占位与 hero 插槽 ---------- */
+/* v0.53：固定图位先登记（artPhotoURL 会记入已用集合），列表再从中避让，全页不撞图 */
 function mountArt(){
   try{
     var hero = document.getElementById('hero-art-slot');
-    if(hero && !hero.hasChildNodes()) hero.innerHTML = photoImg(ART_PHOTO['hero'] || 'gate1', true);
+    if(hero && !hero.hasChildNodes()){
+      var hu = artPhotoURL('hero');
+      if(hu) hero.innerHTML = '<img decoding="async" src="' + hu + '" alt="重庆校园实景照片">';
+      else hero.innerHTML = artSVG('hero');
+    }
   }catch(e){}
   document.querySelectorAll('[data-art]').forEach(function(el){
     if(el.hasChildNodes()) return;
     var kind = el.getAttribute('data-art');
     try{
-      if(typeof ART_PHOTO !== 'undefined' && ART_PHOTO[kind]){ el.innerHTML = photoImg(ART_PHOTO[kind]); }
+      var u = (typeof artPhotoURL === 'function') ? artPhotoURL(kind) : '';
+      if(u){ el.innerHTML = '<img loading="lazy" decoding="async" src="' + u + '" alt="重庆校园实景照片">'; }
       else{ el.innerHTML = artSVG(kind); }
     }catch(e){}
   });

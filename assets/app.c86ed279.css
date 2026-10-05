@@ -38,9 +38,9 @@
   .top .wrap{display:flex;align-items:center;gap:26px;height:60px}
   .logo{font-family:var(--serif);font-size:21px;font-weight:700;color:var(--navy);letter-spacing:.02em}
   /* v0.60：品牌标记改为「搭伙双圆」——两个相叠的圆，呼应「搭子」 */
-  .logo .dot{position:relative;display:inline-block;width:20px;height:11px;margin-right:8px;vertical-align:-1px}
-  .logo .dot::before{content:"";position:absolute;left:0;top:1px;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-  .logo .dot::after{content:"";position:absolute;left:8px;top:1px;width:9px;height:9px;border-radius:50%;background:var(--blue);opacity:.85}
+  .logo .dot{position:relative;display:inline-block;width:15px;height:15px;margin-right:8px;vertical-align:-2px}
+.logo .dot::before{content:"";position:absolute;left:0;top:2px;width:10px;height:13px;border-radius:2px 5px 5px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+.logo .dot::after{content:"";position:absolute;right:0;top:0;width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
   .logo small{font-family:var(--mono);font-size:10px;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:.12em}
   .top nav{display:flex;gap:4px;margin-left:auto}
   .top nav a{padding:7px 11px;border-radius:6px;font-size:14px;color:var(--ink2);text-decoration:none}
@@ -72,9 +72,9 @@
 
   /* ---------- v0.52 品牌（家长屿） ---------- */
   .hero-kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:5px 14px;margin-bottom:14px}
-  .hero-kicker .hk-mark{position:relative;width:11px;height:11px;flex:0 0 auto}
-  .hero-kicker .hk-mark::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,var(--accent),var(--blue))}
-  .hero-kicker .hk-mark::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:var(--accent);opacity:.22}
+  .hero-kicker .hk-mark{position:relative;width:12px;height:12px;flex:0 0 auto}
+.hero-kicker .hk-mark::before{content:"";position:absolute;left:0;top:1px;width:8px;height:11px;border-radius:2px 4px 4px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+.hero-kicker .hk-mark::after{content:"";position:absolute;right:0;top:0;width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
   .brand-card{border-color:var(--accent)!important;background:linear-gradient(180deg,var(--accent-soft),var(--paper))!important}
   .brand-claim{display:inline-block;margin-top:10px;font-family:var(--serif);font-size:16px;color:var(--accent);font-weight:700}
   .brand-mean{color:var(--ink2)}
@@ -437,10 +437,10 @@
   /* ---------- v0.52 页脚品牌寓意 ---------- */
   footer .brand-mean{color:#C6D0DC;border-left:2px solid var(--accent);padding-left:10px;margin:0 0 10px}
   footer .logo-dot{position:relative;display:inline-block;width:18px;height:9px;margin-right:7px;vertical-align:0}
-  .logo-dot::before{content:"";position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-  .logo-dot::after{content:"";position:absolute;left:7px;top:0;width:9px;height:9px;border-radius:50%;background:var(--blue);opacity:.85}
-  footer .logo-dot::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,#3FC6A6,var(--blue))}
-  footer .logo-dot::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:#3FC6A6;opacity:.28}
+  .logo-dot::before{content:"";position:absolute;left:0;top:2px;width:10px;height:13px;border-radius:2px 5px 5px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+.logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  footer .logo-dot::before{content:"";position:absolute;left:0;top:1px;width:9px;height:12px;border-radius:2px 4px 4px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+footer .logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
 
 
@@ -1293,6 +1293,58 @@ html.theme-dark .trust .t-item{box-shadow:0 10px 24px -20px #000}
 /* 首屏主行动按钮：略放大，成为第一屏的视觉焦点 */
 .hero .cta-row .btn-primary{padding:13px 24px;font-size:15.5px}
 .hero .cta-row .btn-ghost{padding:12px 20px}
+
+
+/* ==================== v0.61 「花期册」册页质感与秩序 ==================== */
+
+/* 1) 首屏页纹：极淡横向稿纸线，做出「册页」的触感（叠在原渐变之上） */
+.hero{background:
+  repeating-linear-gradient(180deg,transparent 0 33px,rgba(36,52,77,.045) 33px 34px),
+  radial-gradient(1200px 400px at 85% -10%, #E9EEF5 0%, transparent 60%),
+  var(--bg)}
+
+/* 2) 区块标题刻度：每个区块编号前一道品牌色细刻度，形成「册页边栏」的秩序 */
+.sec-head .no{position:relative;padding-left:12px}
+.sec-head .no::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:3px;height:12px;border-radius:2px;background:var(--accent)}
+.sec-head h2{letter-spacing:-.01em}
+
+/* 3) 卡片圆角与描边统一（与数据卡 .t-item 同族） */
+.entry{border-radius:12px}
+.entry:hover{border-color:var(--accent)!important}
+
+/* 4) 册页目录：首页新增区块 */
+.toc{margin-top:34px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:26px 24px 22px}
+.toc-head{margin-bottom:16px}
+.toc-head .no{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:4px 12px;margin-bottom:10px}
+.toc-head h3{font-family:var(--serif);font-size:20px;color:var(--navy);margin:0 0 6px}
+.toc-head p{font-size:13.5px;color:var(--muted);margin:0}
+.toc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.toc-grid a{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto;column-gap:10px;
+  padding:13px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:var(--paper);
+  transition:border-color .15s,background .15s,transform .15s}
+.toc-grid a:hover{border-color:var(--accent);background:var(--accent-soft);transform:translateY(-1px)}
+.toc-grid a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toc-no{grid-row:1 / span 2;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;
+  padding-top:2px;border-right:1px solid var(--line);padding-right:9px}
+.toc-grid b{font-size:14px;color:var(--navy);font-weight:700}
+.toc-grid a>span:last-child{font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:3px}
+
+@media (max-width:900px){ .toc-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:640px){
+  .toc{padding:20px 16px 16px;border-radius:12px}
+  .toc-grid{grid-template-columns:1fr;gap:8px}
+  .toc-grid a{padding:12px}
+}
+
+/* 5) 深色模式：页纹与目录卡单独核对对比度 */
+html.theme-dark .hero{background:
+  repeating-linear-gradient(180deg,transparent 0 33px,rgba(255,255,255,.035) 33px 34px),
+  radial-gradient(1200px 400px at 85% -10%, #16202E 0%, transparent 60%),
+  var(--bg)}
+html.theme-dark .toc-grid a:hover{background:#1B2635}
+html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""家长屿平台 · 每日资讯自动更新
+"""花期册平台 · 每日资讯自动更新
 抓取配置源的列表页 → 提取教育相关条目 → 自动发布到资讯中心（collect.py 机制）。
 用法：
   python3 daily_update.py --dry     # 试跑：只统计不发布

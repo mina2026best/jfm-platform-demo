@@ -10,8 +10,8 @@
   /* ---------- v0.52 页脚品牌寓意 ---------- */
   footer .brand-mean{color:#C6D0DC;border-left:2px solid var(--accent);padding-left:10px;margin:0 0 10px}
   footer .logo-dot{position:relative;display:inline-block;width:18px;height:9px;margin-right:7px;vertical-align:0}
-  .logo-dot::before{content:"";position:absolute;left:0;top:0;width:9px;height:9px;border-radius:50%;background:var(--accent)}
-  .logo-dot::after{content:"";position:absolute;left:7px;top:0;width:9px;height:9px;border-radius:50%;background:var(--blue);opacity:.85}
-  footer .logo-dot::before{content:"";position:absolute;left:1px;top:0;width:9px;height:9px;border-radius:52% 52% 44% 44%;background:linear-gradient(155deg,#3FC6A6,var(--blue))}
-  footer .logo-dot::after{content:"";position:absolute;left:-2px;bottom:-2px;width:15px;height:4px;border-radius:50%;background:#3FC6A6;opacity:.28}
+  .logo-dot::before{content:"";position:absolute;left:0;top:2px;width:10px;height:13px;border-radius:2px 5px 5px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+.logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  footer .logo-dot::before{content:"";position:absolute;left:0;top:1px;width:9px;height:12px;border-radius:2px 4px 4px 2px;background:linear-gradient(160deg,var(--blue),var(--accent))}
+footer .logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 

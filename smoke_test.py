@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""家长屿 · 渲染级冒烟测试（v0.54）
+"""花期册 · 渲染级冒烟测试（v0.54）
 
 为什么需要它：本站是「数据 + JS 渲染」架构，构建成功 ≠ 页面可用。
 本次两个真实故障（boot 提前执行致 boot 链中断、hrefEnc 被注入进 esc 函数体）都能通过
@@ -23,13 +23,15 @@ CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 CHECKS = {
     "index.html":     [("#dao-home .dao-cat", 6, "首页导航分类块"), ("#dao-home .dao-list a", 33, "首页导航链接（5类×6 + 在线课程3）"),
                        ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达"),
-                       ("#dao-zheng b", 1, "区划提醒卡"), ("#hot-rank a", 3, "热门榜条目")],
+                       ("#dao-zheng b", 1, "区划提醒卡"), ("#hot-rank a", 3, "热门榜条目"),
+                       (".toc-grid a", 9, "册页目录条目"), (".toc-head h3", 1, "册页目录标题")],
     "daohang.html":   [("#dao-full .dao-cat", 11, "导航页分类块"), ("#dao-full .dao-list a", 73, "导航页链接总数"),
                        (".dao-chip", 11, "分类锚点"), ("#dao-zheng b", 1, "区划提醒卡"),
                        ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达")],
     "news.html":      [("#news-list .news-item", 20, "资讯列表条目"), ("#news-list .ni-cover img", 20, "资讯封面图"),
                        ("#news-list .news-item.lead", 1, "首条大图卡"), ("#news-list .news-item.lead .ni-cover img", 1, "首条大图"),
                        (".news-filter .ff", 6, "分类筛选按钮")],
+    "about.html":     [(".toc-grid a", 9, "册页目录条目（关于页）")],
     "data-sources.html": [("#ds-table tr", 3, "数据来源表行")],
     "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片")],
     "articles/article-school-54671c45.html": [("a[href^='http']", 2, "文章页外链")],

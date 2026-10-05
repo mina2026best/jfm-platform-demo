@@ -8211,7 +8211,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); initDao(); bootPageRoute();
+  initSelects(); renderSchools(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); initDao(); bootPageRoute(); initStageDeepLink();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -8735,6 +8735,24 @@ function initPageUI(){
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   onScroll();
+}
+
+/* ---------- v0.62：学段深链 ----------
+   首页「按学段直达」把家长送到 wiki.html#初升高 / calendar.html#初升高 这类地址，
+   但 details 不会因 hash 自动展开、日历也不会自动按学段过滤——这里做落地处理。 */
+var STAGE_HASH_KEYS = ['幼升小', '小升初', '初升高', '高考'];
+function initStageDeepLink(){
+  var h = location.hash || '';
+  if(h.length < 2) return;
+  var key;
+  try { key = decodeURIComponent(h.slice(1)); } catch(e) { key = h.slice(1); }
+  if(STAGE_HASH_KEYS.indexOf(key) < 0) return;      // 白名单：hash 不参与选择器拼接
+  var btn = document.querySelector('#calendar .cal-filter .ff[data-cf="' + key + '"]');
+  if(btn) filterCal(key);                            // 日历页：按学段过滤
+  var d = document.querySelector('#wiki details[data-cat="' + key + '"]');
+  if(d) d.open = true;                               // 百科页：展开对应阶段
+  var target = btn ? document.querySelector('#calendar .cal-filter') : d;
+  if(target && target.scrollIntoView) target.scrollIntoView({ block: 'center' });
 }
 
 

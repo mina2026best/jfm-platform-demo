@@ -24,7 +24,9 @@ CHECKS = {
     "index.html":     [("#dao-home .dao-cat", 6, "首页导航分类块"), ("#dao-home .dao-list a", 33, "首页导航链接（5类×6 + 在线课程3）"),
                        ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达"),
                        ("#dao-zheng b", 1, "区划提醒卡"), ("#hot-rank a", 3, "热门榜条目"),
-                       (".toc-grid a", 9, "册页目录条目"), (".toc-head h3", 1, "册页目录标题")],
+                       (".toc-grid a", 9, "册页目录条目"), (".toc-head h3", 1, "册页目录标题"),
+                       (".stage-doors .sd", 3, "三场景关口卡（小升初/初升高/大学与专业选报）"),
+                       ("#stage-chips a", 4, "首屏按学段直达胶囊")],
     "daohang.html":   [("#dao-full .dao-cat", 11, "导航页分类块"), ("#dao-full .dao-list a", 73, "导航页链接总数"),
                        (".dao-chip", 11, "分类锚点"), ("#dao-zheng b", 1, "区划提醒卡"),
                        ("#today-bar .tb-date", 1, "今日信息条"), ("#dao-quick a", 6, "热门直达")],
@@ -37,6 +39,12 @@ CHECKS = {
     "articles/article-school-54671c45.html": [("a[href^='http']", 2, "文章页外链")],
 }
 MOBILE_PAGES = ["index.html", "daohang.html", "news.html", "schools.html", "policy.html"]
+# v0.62：学段深链（首页「按学段直达」→ 目标页按 hash 落地）需要带 hash 渲染才能验证
+# (页面, hash, 选择器, 下限, 上限, 说明)
+DEEPLINK = [
+    ("calendar.html", "#初升高", "#calendar .cal:not([style*='display: none'])", 1, 6, "日历学段深链：只留初升高节点"),
+    ("wiki.html", "#高考", "#wiki details[open][data-cat='高考']", 1, 1, "百科学段深链：高考阶段自动展开"),
+]
 MOBILE_PROBE = r'''
 <script>
 window.addEventListener('load', function(){
@@ -107,7 +115,7 @@ def serve(port):
     return httpd
 
 
-def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SMOKE'):
+def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SMOKE', frag=''):
     """复制页面 → 注入探针 → chrome dump-dom → 解析"""
     src = os.path.join(ROOT, page)
     if not os.path.exists(src):
@@ -127,7 +135,7 @@ def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SM
             [CHROME, '--headless=new', '--disable-gpu', '--no-sandbox', '--no-first-run',
              '--disable-extensions', '--user-data-dir=/tmp/chrome-smoke-' + os.path.basename(page).replace('.', '_'),
              '--virtual-time-budget=6000'] + (['--window-size=' + width] if width else []) +
-            ['--dump-dom', f'http://127.0.0.1:{port}/{tmpname}'],
+            ['--dump-dom', f'http://127.0.0.1:{port}/{tmpname}{frag}'],
             stdout=fh, stderr=subprocess.DEVNULL)
         deadline = time.time() + timeout
         while time.time() < deadline:
@@ -177,12 +185,14 @@ def main():
         if not r.get("booted"):
             bad.append("boot 未完成（window.__booted=false）")
         detail = []
-        for s, minimum, label in specs:
+        for spec in specs:
+            s, minimum, label = spec[0], spec[1], spec[2]
+            maximum = spec[3] if len(spec) > 3 else None      # 可选上限：用于「筛选后不该还有 N 条」这类断言
             n = int(r.get("counts", {}).get(s, 0))
-            ok = n >= minimum
+            ok = n >= minimum and (maximum is None or n <= maximum)
             detail.append(f"{label} {n}/{minimum}{'✓' if ok else '✗'}")
             if not ok:
-                bad.append(f"{label} 渲染不足：{n} < {minimum}")
+                bad.append(f"{label} 渲染不符：{n}（期望 ≥{minimum}" + (f"、≤{maximum}" if maximum else "") + "）")
         status = "✓ PASS" if not bad else "✗ FAIL"
         print(f"[smoke] {status} {page}  " + " | ".join(detail))
         for b in bad:
@@ -208,8 +218,23 @@ def main():
               + ('' if ok else f" | 例：{r.get('over')}"))
         if not ok:
             fails.append(page + '(mobile)')
+    # —— 学段深链（带 hash 渲染）：首页「按学段直达」的落地点，坏了不会影响页面外观 ——
+    dl_fails = []
+    for page, frag, sel, lo, hi, label in DEEPLINK:
+        if pages_arg and page not in pages_arg:
+            continue
+        r = render(port, page, [sel], frag=frag)
+        n = int(r.get("counts", {}).get(sel, 0))
+        ok = bool(r.get("booted")) and lo <= n <= hi
+        print(f"[smoke] {'✓ PASS' if ok else '✗ FAIL'} {page}{frag}：{label} → {n}（期望 {lo}–{hi}）")
+        if not ok:
+            dl_fails.append(page + frag)
+            fails.append(page + frag)
+    if not pages_arg:
+        print(f"[smoke] 深链结果：{len(DEEPLINK) - len(dl_fails)}/{len(DEEPLINK)} 通过")
     cleanup_chrome()
-    print(f"[smoke] 结果：{len(pages) - len(fails)}/{len(pages)} 通过" + (f"，失败页：{'、'.join(fails)}" if fails else ""))
+    print(f"[smoke] 结果：{len(pages) - len([f for f in fails if f in pages])}/{len(pages)} 页面通过"
+          + (f"，失败项：{'、'.join(fails)}" if fails else ""))
     return 1 if fails else 0
 
 

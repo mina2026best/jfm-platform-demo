@@ -12,9 +12,9 @@ OUT_DIR = ROOT  # 页面直接输出到网站根目录
 
 # ============ 页面定义：文件名 / 标题 / 描述 / 包含 section / 页面主 CSS 钩子 ============
 PAGES = [
-    dict(file="index.html",  title="花期册 · 重庆家长升学信息与生活服务平台",
-         desc="可核验的升学信息、关键时刻的确定性、家长的生活服务——升学日历、政策库、学校档案、择校对比、求真台。",
-         sections=["daohang", "calendar", "how"], hero=True),
+    dict(file="index.html",  title="花期册 · 重庆家长升学指南（小升初 / 初升高 / 高考志愿）",
+         desc="小升初对口与摇号、初升高指标到校与中考志愿、大学与专业选报的位次法——官方原文＋人话解读、升学日历、学校档案、择校对比，逐条标注来源。",
+         sections=["stages", "daohang", "calendar", "how"], hero=True),
     dict(file="news.html",   title="升学资讯中心 · 花期册",
          desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
          sections=["news"]),
@@ -81,7 +81,7 @@ PAGES = [
     dict(file="faq.html",    title="家长 FAQ · 花期册",
          desc="20 个最常被问到的问题：入学 / 择校 / 政策 / 生活 / 会员，快问快答带入口链接。",
          sections=["faq"]),
-    dict(file="sitemap.html", title="站点地图 · 鸦父母",
+    dict(file="sitemap.html", title="站点地图 · 花期册",
          desc="全部页面一览。",
          sections=[]),
 ]

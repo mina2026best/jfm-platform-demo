@@ -1346,6 +1346,49 @@ html.theme-dark .hero{background:
 html.theme-dark .toc-grid a:hover{background:#1B2635}
 html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 
+
+/* ==================== v0.62 三场景分流（小升初 / 初升高 / 大学与专业选报） ==================== */
+/* 1) 首屏「按学段直达」：与主 CTA 形成主次，家长在一屏内即可自定位学段 */
+.stage-chips{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:14px}
+.stage-chips .sc-lead{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.stage-chips a{font-size:13.5px;color:var(--navy);text-decoration:none;background:var(--paper);
+  border:1px solid var(--line);border-radius:999px;padding:5px 13px;
+  transition:border-color .15s,background .15s,color .15s}
+.stage-chips a:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.stage-chips a:focus-visible,.sd-acts a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* 2) 三关口卡：与册页目录同族（白卡 + 品牌刻度），但每张卡给出「时间窗 + 三个可用工具」 */
+.stage-doors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sd{position:relative;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:22px 20px 18px;
+  box-shadow:0 1px 2px rgba(36,52,77,.05),0 12px 26px -22px rgba(36,52,77,.55);
+  transition:border-color .15s,transform .15s,box-shadow .15s}
+.sd:hover{border-color:var(--accent);transform:translateY(-2px);
+  box-shadow:0 1px 2px rgba(36,52,77,.05),0 18px 32px -24px rgba(36,52,77,.6)}
+.sd::before{content:"";position:absolute;left:20px;top:-1px;width:34px;height:3px;border-radius:0 0 3px 3px;background:var(--accent)}
+.sd-top{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:9px}
+.sd-tag{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--navy)}
+.sd-who{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft);
+  border-radius:999px;padding:3px 9px}
+.sd h3{font-size:15px;line-height:1.5;color:var(--ink);margin:0 0 8px}
+.sd-line{font-size:13.5px;line-height:1.75;color:var(--ink2);margin:0 0 11px}
+.sd-when{font-size:12.5px;line-height:1.7;color:var(--ink2);background:var(--bg);border-radius:8px;padding:9px 11px;margin:0 0 12px}
+.sd-when b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent);margin-bottom:3px}
+.sd-acts{list-style:none;display:flex;flex-direction:column;gap:6px;margin:auto 0 0;padding:0}
+.sd-acts a{font-size:13.5px;color:var(--accent);text-decoration:none;border-bottom:1px dashed rgba(14,124,102,.45)}
+.sd-acts a:hover{border-bottom-style:solid}
+.sd-gap{font-size:12px;line-height:1.65;color:var(--muted);margin:12px 0 0;padding-top:9px;border-top:1px dashed var(--line)}
+
+@media (max-width:960px){ .stage-doors{grid-template-columns:1fr} }
+@media (max-width:720px){
+  .stage-chips{gap:6px;margin-top:12px}
+  .stage-chips a{font-size:13px;padding:5px 11px}
+  .sd{padding:20px 18px 16px}
+  .sd h3{font-size:14.5px}
+}
+/* 3) 深色模式：本组件的配色全部走主题变量（card/line/navy/accent），深色下自动成立；
+   实测核对对比度由验证脚本读取计算样式完成，不额外硬编码颜色。 */
+
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}
   .crumb a{color:var(--accent);text-decoration:none}

@@ -44,6 +44,7 @@ MOBILE_PAGES = ["index.html", "daohang.html", "news.html", "schools.html", "poli
 DEEPLINK = [
     ("calendar.html", "#初升高", "#calendar .cal:not([style*='display: none'])", 1, 6, "日历学段深链：只留初升高节点"),
     ("wiki.html", "#高考", "#wiki details[open][data-cat='高考']", 1, 1, "百科学段深链：高考阶段自动展开"),
+    ("wiki.html", "#高考", "#wiki details[open]", 1, 1, "百科学段深链：只展开命中的那一个阶段（默认展开的幼升小已收起）"),
 ]
 MOBILE_PROBE = r'''
 <script>
@@ -129,11 +130,15 @@ def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SM
     probe2 = probe.replace('assets/', prefix + 'assets/')
     open(tmp, 'w', encoding='utf-8').write(raw.replace('<head>', '<head>' + probe2, 1))
     # Chrome 的 --dump-dom 常写完 DOM 后不退出：轮询产物，命中探针标记即收工，超时则杀进程
+    # v0.62 修复（实测踩到）：headless Chrome 不退出 → 同一个 user-data-dir 起第二次时，
+    # 新进程会把请求转交给仍在跑的老实例、自己立刻退出，dump 产物为空 → 断言假失败（深链第 3 条实测 0/1）。
+    # 故每次渲染用独立 profile 目录，并保证本进程结束后立刻回收。
     outfile = tmp + '.out'
+    udir = '/tmp/chrome-smoke-%s-%d' % (os.path.basename(page).replace('.', '_'), int(time.time() * 1000) % 1000000)
     with open(outfile, 'w') as fh:
         proc = subprocess.Popen(
             [CHROME, '--headless=new', '--disable-gpu', '--no-sandbox', '--no-first-run',
-             '--disable-extensions', '--user-data-dir=/tmp/chrome-smoke-' + os.path.basename(page).replace('.', '_'),
+             '--disable-extensions', '--user-data-dir=' + udir,
              '--virtual-time-budget=6000'] + (['--window-size=' + width] if width else []) +
             ['--dump-dom', f'http://127.0.0.1:{port}/{tmpname}{frag}'],
             stdout=fh, stderr=subprocess.DEVNULL)
@@ -149,6 +154,11 @@ def render(port, page, selectors, timeout=45, probe=None, width=None, marker='SM
             time.sleep(0.6)
         if proc.poll() is None:
             proc.kill()
+        try:
+            proc.wait(timeout=5)
+        except Exception:
+            pass
+    shutil.rmtree(udir, ignore_errors=True)
     out = open(outfile, encoding='utf-8', errors='ignore').read()
     for f in (tmp, outfile):
         if os.path.exists(f):
@@ -199,7 +209,11 @@ def main():
             print(f"          ✗ {b}")
         if bad:
             fails.append(page)
-    # —— 移动端（390px）：断言"无横向溢出"（真缺陷类别）——
+    # —— 窄屏：断言"无横向溢出"（真缺陷类别）——
+    # 实测口径修正（v0.62）：headless Chrome 在 macOS 有窗口宽度下限，--window-size=390 实际渲染宽度是
+    # 485 CSS px（探针实测 innerW=500/clientW=485；--headless=old、--force-device-scale-factor 都改不动）。
+    # 也就是说本段验证的是"≤485px 窄屏"，不是真 390px；要测 390 需 CDP Emulation.setDeviceMetricsOverride。
+    print("[smoke] 移动端口径：实测视口 485 CSS px（macOS headless 下限），非真 390px")
     for page in [x for x in MOBILE_PAGES if (not pages_arg or x in pages_arg)]:
         r = render(port, page, [], probe=MOBILE_PROBE, width="390,1400", marker='MOB', timeout=60)
         if not r or 'scrollW' not in r:          # Chrome 偶发渲染超时：重试一次再判失败

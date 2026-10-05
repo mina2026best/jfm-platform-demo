@@ -8750,7 +8750,10 @@ function initStageDeepLink(){
   var btn = document.querySelector('#calendar .cal-filter .ff[data-cf="' + key + '"]');
   if(btn) filterCal(key);                            // 日历页：按学段过滤
   var d = document.querySelector('#wiki details[data-cat="' + key + '"]');
-  if(d) d.open = true;                               // 百科页：展开对应阶段
+  if(d){
+    document.querySelectorAll('#wiki details[open]').forEach(function(x){ if(x !== d) x.open = false; });
+    d.open = true;                                   // 百科页：只展开命中的那一阶段
+  }
   var target = btn ? document.querySelector('#calendar .cal-filter') : d;
   if(target && target.scrollIntoView) target.scrollIntoView({ block: 'center' });
 }

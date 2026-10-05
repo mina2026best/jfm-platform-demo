@@ -14,7 +14,7 @@ function printTodoList(){
   }).join('');
   var w = window.open('', '_blank');
   if(!w){ toast('浏览器拦截了打印窗口——请允许弹出窗口后重试'); return; }
-  w.document.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>升学行动清单 · 家长屿</title><style>'
+  w.document.write('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>升学行动清单 · 家长搭子</title><style>'
     + 'body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;color:#17212E;max-width:720px;margin:32px auto;padding:0 20px;font-size:14px;line-height:1.7}'
     + 'h1{font-family:"Songti SC","Noto Serif SC",serif;font-size:22px;margin:0 0 4px}'
     + '.p-meta{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6B7683;margin-bottom:18px}'
@@ -25,9 +25,9 @@ function printTodoList(){
     + '.p-foot{margin-top:24px;padding-top:10px;border-top:1px dashed #C9D1D9;font-size:10.5px;color:#6B7683}'
     + '</style></head><body>'
     + '<h1>升学行动清单</h1>'
-    + '<div class="p-meta">家长屿 · 重庆· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
+    + '<div class="p-meta">家长搭子 · 重庆· 生成于 ' + new Date().toLocaleDateString('zh-CN') + ' · 适用：' + who + ' · 节点 ' + cards.length + ' 条</div>'
     + rows
-    + '<div class="p-foot">清单由家长屿平台生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
+    + '<div class="p-foot">清单由家长搭子平台生成；节点与要求以重庆市教委及各区当年官方发布为准，不承诺升学结果。</div>'
     + '<script>window.onload=function(){setTimeout(function(){window.print()},200)}<\/script></body></html>');
   w.document.close();
 }

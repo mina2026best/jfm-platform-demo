@@ -30,7 +30,7 @@ function genMaterials(){
   var stage = document.getElementById('mat-stage').value;
   var hk = document.getElementById('mat-hukou').value;
   var house = document.getElementById('mat-house').value;
-  window._matResult = '家长屿平台 · 入学材料清单\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
+  window._matResult = '家长搭子平台 · 入学材料清单\n学段：' + stage + ' · 户籍：' + hk + ' · 住房：' + house + '\n\n【通用】\n- ' + MAT_COMMON.join('\n- ')
     + '\n\n【学段材料（' + stage + '）】\n- ' + MAT_STAGE[stage].join('\n- ')
     + '\n\n【户籍相关（' + hk + '）】\n- ' + MAT_HUKOU[hk].join('\n- ')
     + '\n\n【住房相关（' + house + '）】\n- ' + MAT_HOUSE[house].join('\n- ')

@@ -247,7 +247,7 @@ function importNews(){
   toast(added ? '已导入 ' + added + ' 条（本机）' : '没有解析到有效条目');
 }
 function exportNews(){
-  var payload = { exportedAt: new Date().toISOString(), note: '家长屿平台资讯导出', items: newsCombined() };
+  var payload = { exportedAt: new Date().toISOString(), note: '家长搭子平台资讯导出', items: newsCombined() };
   var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
   var u = URL.createObjectURL(blob), a = document.createElement('a');
   a.href = u; a.download = 'jfm-news-export.json';

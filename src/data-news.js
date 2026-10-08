@@ -78,6 +78,17 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "两所教育部直属高校迎来新任党委副书记",
+    "url": "https://www.eol.cn/news/dongtai/gxrs/202610/t20261008_2779936.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "文永红任北京化工大学党委副书记、纪委书记；郭俊任西南交通大学党委副书记",
+    "date": "2026-10-08",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "2027年研考10月9日预报名 重庆设34个报考点",
     "url": "https://www.cq.gov.cn/ywdt/jrcq/202610/t20261006_16189750.html",
     "src": "重庆市政府网",
@@ -7642,4 +7653,4 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-08 09:46", "seed": 46, "collected": 657, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-08 09:56", "seed": 46, "collected": 658, "fetchedPending": 2};

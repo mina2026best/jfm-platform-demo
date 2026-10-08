@@ -67,6 +67,17 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "重庆市人民政府教育督导室关于开展县域义务教育优质均衡发展市级评估的公告",
+    "url": "http://jw.cq.gov.cn/zwxx_209/gggs/202610/t20261008_16196831.html",
+    "src": "重庆市教育委员会",
+    "cat": "政策速递",
+    "sum": "根据教育部《县域义务教育优质均衡发展督导评估办法》和重庆市人民政府办公厅《关于做好县域义务教育优质均衡发展督导评估工作的通知》要求，经研究，定于2026年10月12日至16日对涪陵区、城口县、忠县、酉阳县和彭水县开展义务教育优质均衡发展市级评估。欢迎社会各界监督。重庆市人民政府教育督导室监督举报电话：023-60393059；电子邮箱：cqsjwdds@126.com。教育部教育督导局监督举报电话",
+    "date": "2026-10-08",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "2027年研考10月9日预报名 重庆设34个报考点",
     "url": "https://www.cq.gov.cn/ywdt/jrcq/202610/t20261006_16189750.html",
     "src": "重庆市政府网",
@@ -7631,4 +7642,4 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-08 09:37", "seed": 46, "collected": 656, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-08 09:46", "seed": 46, "collected": 657, "fetchedPending": 2};

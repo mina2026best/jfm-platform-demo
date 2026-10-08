@@ -1,6 +1,39 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "中国民族教育杂志",
+    "url": "http://www.jyb.cn/zgmzjy/",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-08",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中国高等教育杂志",
+    "url": "http://www.jyb.cn/zggdjy/",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-08",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "重庆入境消费青年志愿者：想让外国游客更好感受重庆魅力",
+    "url": "http://www.cq.xinhuanet.com/20261008/91b5a762a9aa486da7bf38d1dffb669f/c.html",
+    "src": "新华网重庆",
+    "cat": "升学动态",
+    "sum": "重庆入境消费青年志愿者：想让外国游客更好感受重庆魅力-\" 周欢说，希望自己的工作，能让外国游客更好地感受重庆这座城市的魅力。\"",
+    "date": "2026-10-08",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "2027年研考10月9日预报名 重庆设34个报考点",
     "url": "https://www.cq.gov.cn/ywdt/jrcq/202610/t20261006_16189750.html",
     "src": "重庆市政府网",
@@ -3777,6 +3810,17 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "厦门大学抓组织强队伍严规范 推动基层党建提质...",
+    "url": "http://www.moe.gov.cn/jyb_xwfb/s6192/s133/s193/202609/t20260928_1452283.html",
+    "src": "教育部",
+    "cat": "政策速递",
+    "sum": "",
+    "date": "2026-09-28",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "期中考试后，成绩单应该这样读（家长版）",
     "cat": "家庭教育",
     "src": "编辑部整理",
@@ -7530,6 +7574,17 @@ var NEWS_FEED = [
     "body": "",
     "reviewed": true,
     "auto": true
+  },
+  {
+    "t": "《中国教育报》广告刊例",
+    "url": "http://www.jyb.cn/rmtxwwyyq/jyxx1306/202301/t20230106_2110990352.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "◆ 《中国教育报》广告实行“款到刊发”原则；广告订版：稿件定、合同到、手续齐。 ◆ 除一、四版外，其他版面全国套彩加收30000元；全国套红加收8000元； 指定非广告版加收10000元，指定版位加收...",
+    "date": "2023-01-06",
+    "body": "",
+    "reviewed": true,
+    "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-06 11:18", "seed": 46, "collected": 647, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-08 08:35", "seed": 46, "collected": 652, "fetchedPending": 2};

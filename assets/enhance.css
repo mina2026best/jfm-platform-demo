@@ -389,3 +389,18 @@ html.theme-dark .page-banner{background:var(--panel) !important;border-color:var
 .ff{background:var(--bg);border:1px solid var(--line2);color:var(--ink2)}
 .ff:hover{border-color:var(--accent);color:var(--accent)}
 .ff.on{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}
+
+/* ---------- 19. v0.75：内页横幅实照片 / 人话版图标 / 资讯来源徽标 ---------- */
+/* 页头横幅右侧照片槽 */
+.page-banner .pb-photo{flex:none;width:220px;height:150px;border-radius:10px;object-fit:cover;display:block}
+@media (max-width:860px){.page-banner .pb-photo{display:none}}
+/* 人话版卡片：绿色左缘 + 「译」徽标 */
+div.plain{position:relative;border-left:3px solid var(--accent) !important;border-radius:0 8px 8px 0 !important}
+div.plain::before{content:"译";position:absolute;right:10px;top:10px;
+  width:22px;height:22px;border-radius:6px;background:var(--accent);color:#fff;
+  font-size:12px;display:grid;place-items:center;font-weight:600}
+/* 资讯来源徽标：分类绿点 + 来源置灰 */
+.ni-head span:first-child{position:relative;padding-left:14px}
+.ni-head span:first-child::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.ni-head span+span{color:var(--muted)}

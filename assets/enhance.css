@@ -55,8 +55,9 @@ body{
   text-rendering:optimizeLegibility;
 }
 h1,h2,h3{font-family:var(--display);font-weight:600;color:var(--ink)}
-h1{font-size:clamp(30px,3.2vw,36px);line-height:1.4;letter-spacing:.02em}
+h1{font-size:clamp(32px,3.4vw,40px);line-height:1.35;letter-spacing:.02em}
 h2{font-size:22px;line-height:1.5;letter-spacing:.03em}
+.sec-desc{font-size:15px !important;color:var(--ink2)}
 h3{font-size:17px;line-height:1.55;letter-spacing:.02em}
 h4,h5{font-family:var(--sans);font-weight:600;color:var(--ink)}
 h4{font-size:15.5px;line-height:1.7}
@@ -123,7 +124,7 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
   display:grid;grid-template-columns:repeat(4,1fr)}
 .trust .t-item{background:none;border:none;border-radius:0;padding:0 24px 0 0;text-align:left}
 .trust .t-item + .t-item{border-left:1px solid var(--line);padding-left:24px}
-.trust .t-num{display:block;font-family:var(--display);font-size:26px;font-weight:600;color:var(--ink);
+.trust .t-num{display:block;font-family:var(--display);font-size:30px;font-weight:600;color:var(--ink);
   line-height:1.3;font-variant-numeric:tabular-nums}
 .trust .t-label{color:var(--muted);font-size:12.5px;letter-spacing:.04em}
 .stage-chips{margin-top:28px;display:flex;align-items:center;flex-wrap:wrap}
@@ -134,7 +135,13 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
 /* ---------- 5. 区块骨架：眉题 + 衬线标题 + 点状引导线 ---------- */
 section.alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-.sec-head .no{display:none}
+.sec-head{display:block;border-bottom:1px solid var(--line2);padding-bottom:16px}
+.sec-head .no{display:block;background:none;border:none;padding:0;margin:0 0 8px;
+  color:var(--accent);font-size:12px;font-weight:600;letter-spacing:.28em}
+.sec-head .no::before,.sec-head .no::after{display:none !important}
+.sec-head h2::before{display:none}
+.sec-head h2{padding-left:0;font-size:23px}
+.sec-head::after{display:none}
 .sec-head{border-bottom:1px solid var(--line2);padding-bottom:14px}
 .sec-head h2{margin:0;flex:none;font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:.02em;
   padding-left:14px;position:relative}
@@ -177,7 +184,7 @@ section.alt{background:var(--paper);border-top:1px solid var(--line);border-bott
 .cal .date{display:inline-block;color:var(--accent);font-size:12.5px;font-weight:600;
   letter-spacing:.08em;font-variant-numeric:tabular-nums}
 .cal .stage{display:inline-block;background:none;color:var(--muted);padding:0;margin-left:10px;font-size:12.5px}
-.cal h4{margin:10px 0 8px;font-size:16px;font-weight:600}
+.cal h4{margin:10px 0 8px;font-size:17px;font-weight:600;letter-spacing:.01em}
 .cal p{color:var(--ink2);font-size:13.5px;line-height:1.85}
 .cal .src{color:var(--faint);font-size:12px;line-height:1.8;margin-top:10px;padding-top:10px;border-top:1px dotted var(--line)}
 .cal .src a{color:var(--accent)}
@@ -197,29 +204,35 @@ details.todo summary:hover{color:var(--accent)}
 .entries .entry:hover .entry-art img{transform:scale(1.04)}
 .entry-body{display:block;padding:20px 24px 24px}
 .entries .no{color:var(--faint);font-size:11px;letter-spacing:.24em}
-.entries .entry h3{margin:8px 0 8px}
+.entries .entry h3{margin:8px 0 8px;font-size:18px}
 .entries .entry p{color:var(--ink2);font-size:13.5px;line-height:1.85}
 .entries .go{display:inline-block;margin-top:12px;color:var(--accent);font-size:13.5px;font-weight:500}
 
 /* ---------- 9. 高频六问 ---------- */
 .faq-quick{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
-.faq-quick a.fq{display:flex;gap:16px;padding:22px 26px}
+.faq-quick a.fq{display:flex;gap:16px;padding:18px}
+.faq-quick .fq-thumb{flex:none;width:88px;height:88px;border-radius:10px;object-fit:cover}
+.faq-quick a.fq:hover .fq-thumb{transform:scale(1.03)}
 .faq-quick .fq-mark{display:none}
-.faq-quick .fq-body b{display:block;font-weight:600;color:var(--accent);
-  font-size:15.5px;margin-bottom:6px;letter-spacing:.01em}
+.faq-quick .fq-body b{display:block;font-weight:600;color:var(--ink);
+  font-size:16px;margin-bottom:6px;letter-spacing:.01em}
 .faq-quick .fq-body b::before{content:"Q ";color:var(--accent);font-family:var(--sans);font-size:13px;font-weight:700;margin-right:2px}
 .faq-quick .fq-body span{display:block;color:var(--ink2);font-size:13.5px;line-height:1.85}
 .faq-quick .fq-go{display:none}
 
 /* ---------- 10. CTA 深绿锚点带 + 数据带 ---------- */
-.cta-band{background:var(--accent-deep);border:none;border-radius:14px;color:#D9E8E3}
+.cta-band{background:var(--accent-deep);border:none;border-radius:16px;color:#fff;
+  position:relative;overflow:hidden}
+.cta-band .cb-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:.22;filter:saturate(.7)}
+.cta-band .cb-inner{position:relative;z-index:1}
 html.theme-dark .cta-band{background:#14332C}
 .cta-band::before{display:none}
 .cta-band .cb-inner{padding:36px 40px;gap:24px}
 .cta-band .cb-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:12px;
   background:rgba(255,255,255,.1);font-size:22px}
 .cta-band .cb-body{flex:1;min-width:260px}
-.cta-band .cb-body h3{font-size:19px;color:#fff;letter-spacing:.02em}
+.cta-band .cb-body h3{font-family:var(--display);font-size:22px;color:#fff;letter-spacing:.03em}
 .cta-band .cb-body p{color:#BFD8D0;font-size:13.5px;line-height:1.9;margin-top:8px;max-width:620px}
 .cta-band .cb-actions{gap:12px}
 .cta-band .cb-btn{border-radius:8px;font-weight:500;font-size:14px;padding:11px 26px}
@@ -250,6 +263,8 @@ html.theme-dark .cta-band{background:#14332C}
 .hot-rank a:hover{background:none}
 .hot-rank a .no{color:var(--faint);font-variant-numeric:tabular-nums;font-size:12.5px}
 .hot-rank a .t{color:var(--accent);font-size:13.5px}
+#hot-rank .hot-rank a:first-child .t{font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.6}
+#hot-rank .hot-rank a:first-child{padding:14px 2px}
 .hot-rank a:hover .t{color:var(--accent-hover)}
 .fstep{padding:24px 28px}
 .fstep h5{font-size:15px;color:var(--ink);margin-bottom:8px}

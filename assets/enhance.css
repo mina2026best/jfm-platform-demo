@@ -75,7 +75,8 @@ p + p{margin-top:24px}
 ::marker{color:var(--faint)}
 
 /* ---------- 3. 首屏：纯排版的高级感 ---------- */
-.hero{background:var(--bg);border-bottom:1px solid var(--line);padding:56px 0 48px}
+.hero{background:var(--brand-band,#EDF4F0);border-bottom:1px solid var(--line);padding:48px 0 40px}
+html.theme-dark .hero{background:var(--panel)}
 .hero::before,.hero::after{display:none}
 .hero h1{max-width:640px;font-size:30px}
 .hero .sub{font-size:15px;color:var(--ink2);max-width:640px;margin-top:16px}
@@ -100,7 +101,8 @@ p + p{margin-top:24px}
 .stage-chips a:hover{border-color:var(--accent);color:var(--accent)}
 
 /* ---------- 4. 顶栏 ---------- */
-.ann-bar{background:var(--panel);color:var(--ink2);border-bottom:1px solid var(--line);font-size:12.5px}
+.ann-bar{background:var(--brand-band,#EDF4F0);color:var(--ink2);border-bottom:1px solid var(--line);font-size:12.5px}
+html.theme-dark .ann-bar{background:var(--panel)}
 .ann-bar .ab-tag{border:1px solid var(--line2);color:var(--muted);border-radius:2px}
 .ann-bar a{color:var(--accent)}
 .top{background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
@@ -111,9 +113,10 @@ html.theme-dark .top{background:rgba(21,21,21,.96)}
 .logo .dot::after{display:none}
 .logo small{color:var(--faint);font-weight:400;font-size:10px;letter-spacing:.18em}
 .demo-tag{color:var(--faint);font-size:11px;letter-spacing:.06em}
-.top nav a{color:var(--ink2);font-size:13px;border-radius:0;background:none;padding:4px 2px;margin:0 4px}
-.top nav a:hover{color:var(--ink)}
-.top nav a.on{color:var(--accent);font-weight:500}
+.top nav a{color:var(--accent);font-size:13.5px;border-radius:0;background:none;padding:4px 2px;margin:0 6px;letter-spacing:.02em}
+.top nav a:hover{color:var(--accent-hover);text-decoration:none}
+.top nav a.on{color:var(--accent-hover);font-weight:500;border-bottom:2px solid var(--accent);padding-bottom:3px}
+.top nav a.cta{color:#fff}
 .top nav a.cta{background:var(--accent);color:#fff;border-radius:2px;padding:4px 12px}
 .top nav a.cta:hover{background:var(--accent-hover);color:#fff}
 .searchbox input{border:1px solid var(--line2);border-radius:2px;background:var(--bg);
@@ -131,6 +134,14 @@ section.alt{background:var(--bg)}
 }
 .sec-head .no::before,.sec-head .no::after{display:none}
 .sec-head h2{margin-top:0}
+/* 豆瓣式标题引导线：标题后接点状虚线直至行尾 */
+.sec-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.sec-head h2{flex:none}
+.sec-head h2::after{content:"";display:inline-block;width:120px;max-width:32vw;
+  border-bottom:1px dotted #C9CFCB;margin-left:16px;transform:translateY(-4px)}
+html.theme-dark .sec-head h2::after{border-bottom-color:#3A3A3A}
+.sec-head .no{margin-bottom:0;margin-right:8px}
+.sec-head .no + h2{margin-left:0}
 .sec-desc{color:var(--ink2);font-size:14px;margin-top:8px;margin-bottom:32px}
 .sec-desc b{font-weight:500;color:var(--ink)}
 
@@ -151,14 +162,18 @@ section.alt{background:var(--bg)}
 .sd-acts{margin-top:12px}
 .sd-acts li a{color:var(--accent);font-size:13px}
 .sd-acts li::marker{color:var(--faint)}
-.cal-grid .cal{position:relative}
-.cal-grid .cal::before{display:none}
-.cal .date{color:var(--muted);font-size:12px;letter-spacing:.08em;font-variant-numeric:tabular-nums}
-.cal .stage{background:none;color:var(--accent);padding:0;font-size:12px;letter-spacing:.04em}
-.cal h4{margin:8px 0 6px;font-size:14.5px;line-height:1.7}
-.cal p{color:var(--ink2);font-size:13px;line-height:1.8}
+/* 豆瓣式「条目流」：日历节点去卡片化，改为 hairline 分隔的信息流 */
+.cal-grid{display:grid;grid-template-columns:1fr;gap:0;max-width:720px}
+.cal-grid .cal{background:var(--bg);border:none;border-radius:0;border-top:1px solid var(--line);padding:24px 0}
+.cal-grid .cal:first-child{border-top:none;padding-top:8px}
+.cal .date{color:var(--faint);font-size:12px;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.cal .stage{background:none;color:var(--muted);padding:0;font-size:12px}
+.cal .stage::before{content:" · ";color:var(--faint)}
+.cal h4{margin:6px 0;font-size:15.5px;line-height:1.7;color:var(--ink);font-weight:500}
+.cal p{color:var(--ink2);font-size:13.5px;line-height:1.85}
 .cal .src{color:var(--faint);font-size:11.5px;line-height:1.7;margin-top:8px}
 .cal .src a{color:var(--accent)}
+.cal .todo{margin-top:10px}
 .entries .entry-art{filter:grayscale(1);opacity:.5}
 .entries .no{color:var(--faint);font-size:11px;letter-spacing:.2em}
 .entries .entry h3{margin:8px 0 6px}
@@ -262,8 +277,8 @@ html.theme-dark input:not([type]),html.theme-dark textarea,html.theme-dark selec
 html.theme-dark .searchbox input{background:var(--paper)}
 
 /* ---------- 12. 桌面适配 / 滚动条 / 打印 ---------- */
-.wrap{max-width:960px;padding:0 40px}
-@media (min-width:1440px){.wrap{max-width:1024px}}
+.wrap{max-width:880px;padding:0 40px}        /* 豆瓣式窄内容列 */
+@media (min-width:1440px){.wrap{max-width:920px}}
 @media (min-width:1024px){
   ::-webkit-scrollbar{width:8px;height:8px}
   ::-webkit-scrollbar-thumb{background:#D8D8D8;border-radius:4px}

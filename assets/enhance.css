@@ -339,3 +339,38 @@ html.theme-dark .btn-ghost{background:transparent}
   .js .rv{opacity:1}
   section[id],header[id]{padding:0}
 }
+
+/* ---------- 15. 内页页头横幅：背景图已被移除，改为浅绿色带 + 深色文字 ---------- */
+.page-banner{background:var(--brand-band,#EDF5EF) !important;color:var(--ink);
+  border:1px solid var(--line);border-radius:12px;padding:36px 40px}
+html.theme-dark .page-banner{background:var(--panel) !important;border-color:var(--line)}
+.page-banner .pb-kicker{color:var(--accent) !important;letter-spacing:.2em}
+.page-banner h2{font-family:var(--display);font-size:26px;font-weight:600;color:var(--ink);letter-spacing:.02em}
+.page-banner .pb-sub{color:var(--ink2) !important;max-width:660px}
+.page-banner .pb-art{filter:grayscale(1);opacity:.6}
+.page-banner .pb-art{display:none}
+
+/* ---------- 16. 学校卡按钮主次：主操作实心，次操作描边 ---------- */
+.sc-actions{display:flex;align-items:center;gap:10px;margin-top:14px}
+.sc-actions .mini-btn:last-of-type{background:var(--bg);color:var(--ink2);border:1px solid var(--line2)}
+.sc-actions .mini-btn:last-of-type:hover{border-color:var(--accent);color:var(--accent);background:var(--bg)}
+.sc-page{color:var(--ink2);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.sc-page:hover{color:var(--accent)}
+/* 图片缺载时的兜底底色 */
+.sc-card img,.school-card img{background:var(--panel)}
+
+/* ---------- 17. 资讯页：修复绿底绿字隐形按钮 + 复制转发降噪 ---------- */
+.news-actions .mini-btn:first-of-type{color:#fff !important}
+.news-actions .mini-btn:last-of-type{background:var(--bg);color:var(--ink2);border:1px solid var(--line2)}
+.news-actions .mini-btn:last-of-type:hover{background:var(--bg);border-color:var(--accent);color:var(--accent)}
+.ni-actions .mini-btn,.news-card .mini-btn,.nc-actions .mini-btn{
+  background:var(--bg);color:var(--ink2);border:1px solid var(--line2);font-size:12px;padding:5px 14px}
+.ni-actions .mini-btn:hover,.news-card .mini-btn:hover,.nc-actions .mini-btn:hover{
+  background:var(--bg);border-color:var(--accent);color:var(--accent)}
+
+/* ---------- 18. 补漏：工具条按钮与路径标签统一强调色（原为 navy 近黑） ---------- */
+.zy-tools button{background:var(--accent);border-color:var(--accent);color:#fff;border-radius:8px}
+.zy-tools button:hover{background:var(--accent-hover)}
+.ff{background:var(--bg);border:1px solid var(--line2);color:var(--ink2)}
+.ff:hover{border-color:var(--accent);color:var(--accent)}
+.ff.on{background:var(--accent) !important;border-color:var(--accent) !important;color:#fff !important}

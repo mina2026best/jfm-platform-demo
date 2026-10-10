@@ -25,6 +25,149 @@ function dataBadge(key){
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "重庆青年职业技术学院世校赛斩获1金2铜",
+    "url": "http://cq.people.com.cn/n2/2026/1009/c365416-41717306.html",
+    "src": "人民网重庆",
+    "cat": "升学动态",
+    "sum": "近日，2026年世界职业院校技能大赛（以下简称“世校赛”）总决赛争夺赛各赛道赛事陆续收官，重庆青年职业技术学院斩获1枚金奖、2枚铜奖，实现该校参加该项赛事金牌“零的突破”。在公共安全、管理与服务赛道高",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "5岁男童吃药致肝损伤！这些用药误区很多家长还在犯",
+    "url": "https://www.cqnews.net/web/content_1558160321298644992.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "5岁男童吃药致肝损伤！这些用药误区很多家长还在犯",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "2026年启动招生！哈工大获批国内首个“空天科学与工程”交叉学科博士学位授予点",
+    "url": "https://www.eol.cn/news/dongtai/202610/t20261010_2780788.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "近日，哈尔滨工业大学正式获批“空天科学与工程”交叉学科博士学位授予点，成为国内首个设立该交叉学科博士学位授予点的高校。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "任友群访问德国 深化中德教育交流合作",
+    "url": "https://www.eol.cn/news/yaowen/202610/t20261010_2780787.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "当地时间10月6日至8日，教育部副部长任友群率团访问德国。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中共中央、国务院：推动高等教育提质扩容，发展新型研究型大学",
+    "url": "https://www.eol.cn/news/yaowen/202610/t20261010_2780785.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "《意见》明确，培养新质生产力发展急需人才。推动高等教育提质扩容，发展新型研究型大学，根据产业和科技发展趋势，优化高等学校学科专业设置调整机制。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "天津市委书记陈敏尔到天津大学调研",
+    "url": "https://www.eol.cn/news/dongtai/202610/t20261010_2780794.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "10月9日，天津市委书记陈敏尔到天津大学调研基础研究。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "2026年启动招生！哈工大获批国内首个“空天科学与...",
+    "url": "https://www.eol.cn/news/dongtai/202610/t20261010_2780788.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "近日，哈尔滨工业大学正式获批“空天科学与工程”交叉学科博士学位授予点，成为国内首个设立该交叉学科博士学位授予点的高校。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "马克思主义学院举办赵世炎精神宣讲活动",
+    "url": "https://news.cqu.edu.cn/info/1006/1269651.htm",
+    "src": "重庆大学新闻网",
+    "cat": "升学动态",
+    "sum": "9月28日下午，重庆大学马克思主义学院邀请赵世炎烈士纪念馆田娟副主任讲授《早期共产党人赵世炎的优秀品质》专题红色思政课，马院师生积极到场学习，并开展互动交流。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "石河子大学来校交流",
+    "url": "https://news.cqu.edu.cn/info/1002/1269631.htm",
+    "src": "重庆大学新闻网",
+    "cat": "升学动态",
+    "sum": "10月8日，石河子大学副校长朱龙付一行到访学校，就持续推进对口支援合作事项进行交流座谈。校党委副书记冯业栋出席座谈会。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "禁止中小学生携带手机进校",
+    "url": "http://www.jyb.cn/rmtzgjyb/202610/t20261010_2111528618.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "一位俄罗斯教师的中原“琴缘”",
+    "url": "http://www.jyb.cn/rmtzgjyb/202610/t20261010_2111528612.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "让科学教育接地气有活力",
+    "url": "http://www.jyb.cn/rmtzgjyb/202610/t20261010_2111528608.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "青崖书声启新程：青木关中学建校80周年高质量发展大会举行",
+    "url": "https://www.cbg.cn/a/94395/20261009/5afad657bde848c28abfe9a1ef291aa3.html",
+    "src": "重庆网络广播电视台",
+    "cat": "升学动态",
+    "sum": "“母校，今天您的孩子向您报到，青中人向您报到。”10月8日，重庆市青木关中学校建校80周年高质量发展大会举行。校史陈列馆揭幕、校友毕业照片墙、书画展同步亮相，泛黄照片与丹青墨宝串联起八秩青中的时光记忆，为大会营造了浓厚的人文氛围。",
+    "date": "2026-10-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "2026—2027学年度第一学期普通高中学业水平合格性考试及报名有关安排的公... 2026-10-08",
     "url": "https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html",
     "src": "重庆招考网",
@@ -118,6 +261,149 @@ var NEWS_FEED = [
     "src": "重庆大学新闻网",
     "cat": "升学动态",
     "sum": "近日，产业党委、艺术学院党委以“深入学习领会习近平总书记关于教育的重要论述和视察重庆重要讲话重要指示精神”为主题，在重庆大学国家大学科技园成果转化展厅开展理论学习中心组联合学习。学校党委宣传部副部长徐方正及有关同志列席旁听。",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部公布自设二级学科和交叉学科名单",
+    "url": "https://www.eol.cn/zhengce/wenjian/202610/t20261009_2780408.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "根据工作安排，现将截至2026年6月30日完成备案的学位授予单位自设二级学科和交叉学科名单公布如下。",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "华南理工大学集中揭牌一批新型教学科研机构！",
+    "url": "https://www.eol.cn/news/dongtai/202610/t20261009_2780494.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "10月8日下午，华南理工大学举行新型教学科研机构成立大会暨揭牌仪式。",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部公示2026年度高校思想政治工作质量提升综合改革与精品建设项目遴选结果",
+    "url": "https://www.eol.cn/sizheng/dongtai/202610/t20261009_2780634.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "根据工作安排，经组织推荐、资格审核、专家遴选等程序，现将2026年度高校思想政治工作质量提升综合改革与精品建设项目遴选结果予以公示。",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "2026年“三区”人才支持计划教师专项计划实施",
+    "url": "http://www.jyb.cn/rmtzgjyb/202610/t20261009_2111528177.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "“万名学子乡村大调研”交齐“暑期作业”",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528532.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（通讯员 费思迎 莫可宜 记者 刘盾）近日，华南农业大学（以下简称“华南农大”）举行2026年暑期“万名学子乡村大调研行动”（下称“大调研”）成果展示交流会。 据了解，大调研实行...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "海南召开全省基础教育工作会议",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528533.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（特约通讯员 金浩田）10月8日，海南召开全省基础教育工作会议，深入学习贯彻习近平总书记对基础教育工作作出的重要指示精神和全国基础教育工作会议精神，研究部署下一步工作。省委书...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "大连理工大学打造全场景AI学伴智能体平台",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528534.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 张菁）日前，大连理工大学联合腾讯集团共同打造的“连小理”全场景AI学伴智能体平台，面向全体2026级本科新生投入启用。配套的校园宣讲、能力实训、专门课程、创新竞赛等系列...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中国政法大学发布MBA“纵横精博网型”培养体系",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528499.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 柴葳）日前在京举办的AI时代政法商治理创新论坛暨中国政法大学MBA“纵横精博网型”培养体系发布会上，政法商融合MBA培养体系正式发布。 “人工智能、大数据正深刻改变社会治理...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "数据“跑路” 智脑“决策”——广西职业技术大学数智治理让校园办公效率提升",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528501.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "又到一年助学金评定季，与以往复杂的人工审核材料不同，今年，广西职业技术大学的辅导员轻点鼠标，“广职大脑”数据决策舱自动从数据中台抽取学生成绩、家庭经济情况等多维量化数据，内置算法模型迅速分析，一份...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "复旦大学多学科交叉合作为烈士“寻名”",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528503.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 任朝霞 通讯员 孙芯芸）多提取一段DNA，就可能多一次亲缘比对的机会；多还原一张面容，就多一个亲人相认的可能……为无名烈士找到姓名，为长眠的忠骨找回身份，这是复旦大学“...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中国科学技术大学团队首次观测到临界拓扑",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528441.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 方梦宇）近日，记者从中国科学技术大学获悉，该校蒋建华教授团队联合香港大学、宁波东方理工大学、苏州大学等单位的科研人员，在拓扑量子物理领域实现“从0到1”的重大突破：...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "福建理工大学举行办学130周年高质量发展大会",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528443.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 黄星 通讯员 黄小龙）日前，福建理工大学办学130周年高质量发展大会举行。福建省直有关单位负责同志，院士专家、国内外高校代表、企业嘉宾、校友代表及师生员工代表等千余人现...",
+    "date": "2026-10-09",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "2026 中古（山东）教育国际合作联盟会议在聊城大学举行",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261009_2111528446.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 魏海政 通讯员 王黎）日前，2026中古（山东）教育国际合作联盟会议暨聊城大学哈瓦那学院开学典礼在聊城大学举行。 会议的主题为“深化中古教育合作，共促联盟高质量发展”。会...",
     "date": "2026-10-09",
     "body": "",
     "reviewed": true,
@@ -8139,7 +8425,7 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-09 08:57", "seed": 46, "collected": 700, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-10 10:22", "seed": 46, "collected": 726, "fetchedPending": 2};
 
 
 var ARTMAP = {"N|家庭教育促进法要点：依法带娃，「训诫」不是吓唬": "article-news-25280274.html", "N|高一适应期：住校生第一个月的常见问题与对策": "article-news-8bef8675.html", "N|「双减」后学科培训现状：持证机构名单怎么查": "article-news-45ad72b1.html", "N|校园周边交通护学岗升级：家长志愿者报名启动": "article-news-ef22a387.html", "N|期中考试后，成绩单应该这样读（家长版）": "article-news-fd72aa23.html", "N|高中生选科风向：物理+化学组合占比继续走高": "article-news-b184d140.html", "N|重庆多个区公布 2026 秋季转学办理窗口": "article-news-0b829b59.html", "N|期末临近：各科复习的「家庭分工」建议": "article-news-f413dbf6.html", "N|「跨区就读」的三种合法路径与材料差异": "article-news-434176d3.html", "N|住宿安全与作息：寄宿家长每月必查的四件事": "article-news-9788835f.html", "N|指标到校名额是怎么分到初中的？一文看懂分配逻辑": "article-news-08de9c03.html", "N|秋游与研学季：校外活动的安全清单（家长版）": "article-news-a78472e7.html", "N|开学一个月，孩子说「不想上学」怎么办：三步沟通法": "article-news-5edcff32.html", "N|数学不好，还能走「强基」吗？——基础学科路线的三个判断": "article-news-393f8c67.html", "N|「综合素质评价」到底评什么？家长能做什么": "article-news-56491c4e.html", "N|2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴": "article-news-322b0469.html", "N|2026 年联招学校约 113 所（新增 10 所）": "article-news-ae92f623.html", "N|指标到校：市级重点高中 70% 计划分配到辖区初中": "article-news-c2282b52.html", "N|2026 年高考特招线公布：历史类 510 / 物理类 496": "article-news-44a54f04.html", "N|幼升小报名季：三对口材料与网报窗口提示": "article-news-81daf656.html", "N|全市护学岗 6,993 个：接送安全再补一层": "article-news-2f17b376.html", "N|开学季数据：重庆 K12 在校生规模约 376.3 万": "article-news-8fb6230a.html", "N|家庭年度教育支出复盘：先看结构，再看总量": "article-news-f2b57222.html", "N|初中阶段亲子沟通：先处理情绪，再处理问题": "article-news-dc8bcd75.html", "N|秋季流感季：校园防护与请假流程提示": "article-news-d4243bb6.html", "N|接送高峰行车安全：即停即走与护学通道": "article-news-24eba960.html", "N|材料核对月：把「三对口」收进一个文件袋": "article-news-03641436.html", "N|联招志愿梯度怎么排：冲稳保各留 1–2 所": "article-news-5c961a79.html", "N|随迁子女入学：居住证与材料清单提前备": "article-news-0a439449.html", "N|艺体与科技特长生：报名窗口与材料提示": "article-news-333fee44.html", "N|指标到校校内公示：家长需要盯的两件事": "article-news-195fe411.html", "N|新生入学体检与预防接种查验：开学季办事清单": "article-news-17d13d20.html", "N|培训退费纠纷：先看合同，再走属地监管渠道": "article-news-82ec666f.html", "N|周末少儿阅读：图书馆借阅卡办理与亲子共读建议": "article-news-48a72f92.html", "N|初三体育训练季：节奏、防护与营养的平衡": "article-news-555c5aeb.html", "N|高考体检与外语口试：时间节点提示": "article-news-42c20c89.html", "N|2027 年校历发布季启动：寒假安排将随校历公布": "article-news-44d7dd4c.html", "N|秋季流感防护：校园场景三件事": "article-news-6166dd90.html", "N|随迁子女入学材料季：居住证与社保要提前核对": "article-news-fadc6284.html", "N|主城区多所高中开放日集中举行": "article-news-bd3ce26b.html", "N|家庭教育：把「电子设备公约」写成家庭协议": "article-news-f387cf90.html", "N|开学后首个家长会：建议问老师的三个问题": "article-news-309819fe.html", "N|重庆市教委发布 2026 年义务教育招生入学工作通知": "article-news-f1b1f745.html", "N|2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496": "article-news-29b4d3d3.html", "N|阳光高考平台：军校招生军检线与报考流程答疑": "article-news-6beca3bf.html", "N|艾媒咨询：2025 年高考志愿填报市场付费规模预计 10.9 亿元": "article-news-391c4e83.html", "S|南开中学（沙坪坝）": "article-school-98250a24.html", "S|重庆一中（沙坪坝）": "article-school-57cbac3a.html", "S|巴蜀中学（渝中）": "article-school-10432c02.html", "S|重庆八中（沙坪坝）": "article-school-a9decd04.html", "S|育才中学（九龙坡）": "article-school-dbd33ba8.html", "S|西大附中（北碚）": "article-school-1b48d40c.html", "S|重庆十一中（南岸）": "article-school-54671c45.html", "S|重庆十八中（江北）": "article-school-38e4cb1a.html", "S|求精中学（渝中）": "article-school-fcf51a2b.html", "S|杨家坪中学（九龙坡）": "article-school-be27b3c6.html", "S|重庆三十七中（大渡口）": "article-school-e2077b3e.html", "S|巴蜀常春藤学校（两江新区）": "article-school-3b32267e.html", "S|兼善中学（北碚）": "article-school-16ca5f3c.html", "S|巴南中学（巴南）": "article-school-b43ae6cc.html", "S|渝北中学（渝北）": "article-school-51d6bf2d.html", "S|松树桥中学（渝北）": "article-school-153c178a.html", "S|两江育才中学（两江新区）": "article-school-362ce5f6.html", "S|大学城第一中学（沙坪坝）": "article-school-63fbbbbc.html", "S|凤鸣山中学（沙坪坝）": "article-school-ad683d69.html", "S|渝中区复旦中学（渝中）": "article-school-d282ceee.html", "L|要不要提前教拼音和算术？": "article-learn-7f5127fb.html", "L|指标到校和择校怎么权衡？": "article-learn-18edf1ba.html", "L|孩子成绩中等，路径怎么规划？": "article-learn-c460ab76.html", "L|志愿「冲稳保」怎么分配？": "article-learn-ba409771.html", "L|大考前，家长怎么说话不添乱？": "article-learn-c9eb2d89.html", "L|民办摇号没中，是不是就没学上了？": "article-learn-e1eac920.html", "L|住校还是走读，怎么决定？": "article-learn-0f041c0e.html", "L|强基计划值得报吗？": "article-learn-23a1fbd3.html", "L|公立和私立幼儿园，幼升小衔接有差别吗？": "article-learn-abd5a402.html", "L|奥数还值得学吗？": "article-learn-fa47210a.html", "L|家里老人育儿观念不一致，怎么破？": "article-learn-a98a7d05.html", "L|陪考三年，我做对了三件事": "article-experience-ec2dcbbc.html", "L|志愿填报：我们家做了三次模拟": "article-experience-cc52f067.html", "L|租房陪读一年：成本清单与踩坑": "article-experience-f7ddfee9.html", "L|从焦虑到放手：我把家长群取消了置顶": "article-experience-9f5a4396.html", "L|对口材料核对，我们家提前一年就开始了": "article-experience-43ed05df.html", "L|体育中考：我们从初一就开始「攒分」": "article-experience-20e61f26.html", "L|全家搬到学校隔壁，我们后悔了吗？": "article-experience-61d84a2c.html", "L|我把「别人家孩子」从家里请出去了": "article-experience-534eaf28.html", "L|报名前两个月，我们做对了四件小事": "article-experience-1c22e158.html", "L|高三一年，家长只做三件事": "article-experience-fc4236cb.html", "L|家长群信息太多？我的「三分钟过滤法」": "article-experience-dd419bcb.html", "L|给陪读家长的 5 条「少花钱」清单": "article-experience-8d4c5a92.html"};

@@ -424,3 +424,4 @@ footer .cols{margin-bottom:32px}
 dialog{border-radius:12px}
 /* 深色模式下的横幅照片降低存在感 */
 html.theme-dark .page-banner .pb-photo{opacity:.75}
+footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1 !important}

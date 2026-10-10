@@ -3,3 +3,5 @@ _tmp*.html
 _*_tmp*.html
 _dark_tmp.html
 .DS_Store
+__pycache__/
+*.pyc

@@ -1,183 +1,232 @@
 /* ============================================================
-   花期册 · 视觉增强层 v0.66「文字与排版」（教育级克制版）
-   叠加在 app.*.css 之后；不改动原有文件、配色与任何模块结构。
-   原则：不动品牌色。只优化——字体层级 / 行宽行距 / 留白节奏 / 对齐。
+   花期册 · 视觉增强层 v0.67「克制极简」（豆瓣式 · 内容至上）
+   纯视觉层重构：不动任何功能、内容、交互与导航结构。
+   手段：全局压平（去渐变/投影/动效）→ 变量级换为三级灰度
+        → 排版规范（620–680px 行宽 / 1.7 行高 / 8px 网格）。
    ============================================================ */
 
-/* ---------- 0. 字体栈微调：中文排版优先 ---------- */
+/* ---------- 0. 变量级换肤：三级灰度 + 单一低饱和强调色 ---------- */
 :root{
-  --serif:"Source Han Serif SC","Noto Serif SC","Songti SC","SimSun",serif;
-  --sans:"PingFang SC","Hiragino Sans GB","Source Han Sans SC","Noto Sans SC","Microsoft YaHei",sans-serif;
-  --lh-body:1.85;            /* 正文行高：长文阅读更稳 */
-  --track-tight:.01em;
+  --bg:#FFFFFF;              /* 页面基底：纯白 */
+  --paper:#F5F5F5;           /* 唯一可用模块底色 */
+  --ink:#333333;             /* 一级标题 / 核心正文 */
+  --ink2:#666666;            /* 二级标题 / 次要信息 */
+  --muted:#999999;           /* 辅助说明 / 置灰 */
+  --navy:#333333;            /* 原深蓝 → 深灰 */
+  --navy2:#4D4D4D;
+  --blue:#666666;
+  --accent:#0E7C66;          /* 唯一强调色：低饱和墨绿（仅链接/主按钮/选中/关键提示） */
+  --accent-soft:#F5F5F5;     /* 选中底色归灰 */
+  --warn:#8A6D3B; --warn-soft:#F5F5F5;
+  --line:#EEEEEE;            /* 唯一分隔线色 */
+  --line2:#DDDDDD;
+  --radius:2px;              /* 圆角 ≤2px */
+  --sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --serif:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; /* 禁艺术字体 */
+}
+html.theme-dark{             /* 深色模式：中性灰映射，保持功能可用 */
+  --bg:#111111; --paper:#1A1A1A;
+  --ink:#E0E0E0; --ink2:#AAAAAA; --muted:#777777;
+  --navy:#E0E0E0; --navy2:#CCCCCC; --blue:#999999;
+  --accent:#4FA390; --accent-soft:#1F2624;
+  --line:#2A2A2A; --line2:#333333;
 }
 
-/* ---------- 1. 全局文字节奏 ---------- */
+/* ---------- 1. 全局压平：移除一切立体效果与动效 ---------- */
+*,*::before,*::after{
+  box-shadow:none !important;
+  text-shadow:none !important;
+  background-image:none !important;   /* 去全部渐变与装饰性背景图 */
+  backdrop-filter:none !important;
+  animation:none !important;
+  transition:none !important;
+}
+.js .rv{opacity:1 !important;transform:none !important}   /* 入场动画失效，内容直达 */
+::selection{background:#E8E8E8}
+
+/* ---------- 2. 排版系统 ---------- */
 body{
-  font-size:15px;
-  line-height:var(--lh-body);
+  background:var(--bg);color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;line-height:1.7;
   -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
 }
-p{text-align:justify}              /* 中文两端对齐，段落更齐整 */
-/* 标题统一：紧字距 + 严格行高 + 换行平衡 */
-h1,h2,h3,h4,h5{
-  letter-spacing:var(--track-tight);
-  line-height:1.35;
-  text-wrap:balance;
-}
-h2{font-size:25px;line-height:1.4}
-h3{line-height:1.45}
-b,strong{font-weight:650}          /* 加粗不糊团，层级更清晰 */
-a{text-underline-offset:3px;text-decoration-thickness:1px}
+h1,h2,h3,h4,h5{font-family:var(--sans)}
+h1{font-weight:500;color:var(--ink)}          /* 仅一级标题中等字重 */
+h2{font-weight:400;font-size:20px;color:var(--ink)}
+h3{font-weight:400;font-size:17px;color:var(--ink)}
+h4{font-weight:400;font-size:16px;color:var(--ink)}
+h5{font-weight:400;font-size:15px;color:var(--ink2)}
+b,strong{font-weight:400;color:var(--ink)}    /* 禁粗体强调正文，仅以色阶区分 */
+p{font-weight:400;text-align:left;letter-spacing:.01em}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:#0A5F4F}                        /* 悬停仅颜色加深 */
+section[id],header[id]{padding:32px 0}        /* 8px 网格：区块留白 */
 
-/* ---------- 2. 区块标题：报系排版（眉题 + 主标 + 导语） ---------- */
-.sec-head{margin-bottom:6px}
+/* 正文阅读宽度 620–680px：导语 / 说明 / 段落限宽 */
+.sec-desc,.guide,.cmp-note,.hero .sub{
+  max-width:660px;
+  line-height:1.7;
+}
+p + p{margin-top:24px}                        /* 段距 1.5em ＞ 行距 */
+
+/* ---------- 3. 首屏：纯白 + 纯排版 ---------- */
+.hero{background:var(--bg);border-bottom:1px solid var(--line);padding:48px 0 40px}
+.hero::before,.hero::after{display:none}      /* 去渐变横条与光斑 */
+.hero h1{font-size:32px;line-height:1.5;letter-spacing:.01em;max-width:660px}
+.hero .sub{font-size:15px;color:var(--ink2);max-width:660px;line-height:1.7}
+.hero-kicker{background:none;border:none;padding:0;color:var(--muted);font-size:13px}
+.hero-kicker .hk-mark{display:none}
+.hero .cta-row{margin-top:32px}
+.guide{margin-top:32px;color:var(--ink2);font-size:14px;max-width:660px}
+.trust{margin-top:40px}
+.trust .t-item{background:none;border:none;border-left:1px solid var(--line);border-radius:0;
+  padding:0 24px;box-shadow:none}
+.trust .t-num{font-size:22px;font-weight:500;color:var(--ink)}
+.trust .t-label{color:var(--muted);font-size:12px}
+.stage-chips .sc-lead{color:var(--muted)}
+.stage-chips a{border:1px solid var(--line);border-radius:2px;background:none;padding:4px 12px}
+.stage-chips a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ---------- 4. 顶栏 / 公告 / 导航 ---------- */
+.ann-bar{background:var(--paper);color:var(--ink2);border-bottom:1px solid var(--line)}
+.ann-bar .ab-tag{border:1px solid var(--line2);color:var(--muted)}
+.ann-bar a{color:var(--accent)}
+.top{background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{height:56px}
+.logo{font-family:var(--sans);color:var(--ink);font-weight:500;font-size:18px}
+.logo .dot::before{background:var(--accent)}
+.logo .dot::after{display:none}
+.logo small{color:var(--muted);font-weight:400}
+.demo-tag{color:var(--muted)}
+.top nav a{color:var(--ink2);font-size:13px;border-radius:0;background:none}
+.top nav a:hover{color:var(--accent)}
+.top nav a.on{color:var(--accent);background:none}
+.top nav a.cta{background:var(--accent);color:#FFFFFF;border-radius:2px}
+.mobile-menu{background:var(--bg);border-bottom:1px solid var(--line)}
+.searchbox input{border:1px solid var(--line2);border-radius:2px;background:#FFFFFF;font-family:var(--sans)}
+.searchbox input:focus{border-color:var(--accent);outline:none}
+
+/* ---------- 5. 区块标题：去徽章，回归文字层级 ---------- */
+section.alt{background:var(--bg);box-shadow:none}
 .sec-head .no{
-  font-family:var(--sans);font-size:12px;font-weight:600;
-  letter-spacing:.22em;color:var(--accent);   /* 眉题小字距，编辑部气质 */
+  background:none;border:none;padding:0;
+  color:var(--muted);font-size:12px;letter-spacing:.2em;
 }
-.sec-head h2{margin-top:8px;max-width:24em}
-.sec-desc{
-  max-width:44em;                    /* 导语限宽：约 66 字换行节奏 */
-  font-size:14.5px;color:var(--ink2);
-  margin-top:10px;margin-bottom:26px;
+.sec-head .no::before{display:none}
+.sec-head h2{margin-top:8px}
+.sec-desc{color:var(--ink2);font-size:14px}
+
+/* ---------- 6. 卡片全部压平：无边框无阴影直角，仅浅底或留白 ---------- */
+.stage-doors .sd,.cal-grid .cal,.entries .entry,.dao-grid a,.toc-grid a,
+.faq-quick a.fq,.caps .cap,.fstep,.hot-rank a{
+  background:var(--paper);
+  border:none;border-radius:2px;
+  box-shadow:none;
+  padding:24px;
 }
-section{padding-top:26px;padding-bottom:34px}   /* 区块间呼吸感 */
-
-/* ---------- 3. 首屏：字号层级与栏宽（不动配色与结构） ---------- */
-.hero{padding:64px 0 48px}
-.hero h1{font-size:clamp(32px,4.2vw,44px);line-height:1.3;letter-spacing:.015em;max-width:20em}
-.hero .sub{max-width:34em;margin-top:14px;font-size:15.5px;line-height:1.9;color:var(--ink2)}
-.hero .cta-row{margin-top:28px}
-.guide{max-width:40em;margin-top:22px;line-height:1.9}
-.trust{margin-top:36px}
-.trust .t-item{padding:15px 18px}
-.trust .t-num{font-size:22px;font-weight:700;letter-spacing:.01em;font-variant-numeric:tabular-nums;line-height:1.3}
-.trust .t-label{font-size:12px;letter-spacing:.04em;color:var(--muted)}
-
-/* ---------- 4. 卡片内文字：留白与信息层级 ---------- */
-.stage-doors .sd{padding:22px 22px 20px}
-.sd h3{font-size:16.5px;margin:10px 0 8px}
-.sd-line{font-size:13.5px;line-height:1.8;color:var(--ink2)}
-.sd-when{font-size:12.5px;line-height:1.8}
-.sd-when b{letter-spacing:.06em}
-.cal-grid .cal{padding:18px 18px 16px}
-.cal h4{font-size:15px;line-height:1.5;letter-spacing:0}
-.cal p{font-size:13px;line-height:1.8;color:var(--ink2)}
-.cal .src{font-size:11.5px;line-height:1.7;letter-spacing:.02em}
-.cal .date{font-weight:700;letter-spacing:.08em;font-variant-numeric:tabular-nums}
-.entries .entry p{font-size:13px;line-height:1.8}
-.toc-grid a span:last-child{line-height:1.7}
-.toc-head h3{font-size:19px}
-
-/* ---------- 5. 数字对齐：日期 / 指标等宽 ---------- */
-.date,.sla,.t-num,[data-count]{font-variant-numeric:tabular-nums}
-
-/* ---------- 6. 列表与勾选清单：对齐优化 ---------- */
-details.todo div{line-height:2.0;letter-spacing:.01em}   /* 行动清单行距拉开，逐行可扫读 */
-details.todo summary{letter-spacing:.03em;font-weight:600}
-.fact-filter .ff{letter-spacing:.04em}
-
-/* ---------- 7. 导航与页眉文字 ---------- */
-.top nav a{font-size:13px;letter-spacing:.05em}
-.logo{letter-spacing:.06em}
-.logo small{letter-spacing:.12em;font-weight:500}
-.ann-bar .ab-text{letter-spacing:.02em}
-
-/* ---------- 8. 页脚：小字排版规范 ---------- */
-footer,.site-foot{font-size:12.5px;line-height:1.9}
-footer h5,.site-foot h5{letter-spacing:.08em;margin-bottom:10px}
-footer .cols p,.site-foot .cols p{line-height:1.9;text-align:left}
-
-/* ---------- 9. 微质感（克制版）：极浅阴影与统一圆角 ---------- */
-:root{--radius:12px}
-.stage-doors .sd,.cal-grid .cal,.entries .entry,.dao-grid a,.toc-grid a,.faq-quick a.fq,.caps .cap{
-  border-radius:var(--radius);
-}
-.stage-doors .sd:hover,.cal-grid .cal:hover,.entries .entry:hover,.dao-grid a:hover,.toc-grid a:hover{
-  border-color:var(--line2);
-  box-shadow:0 2px 4px rgba(36,52,77,.04),0 10px 26px -14px rgba(36,52,77,.25);
-  transition:box-shadow .25s ease,border-color .25s ease,transform .25s ease;
-}
+.stage-doors .sd{background:var(--bg);border-top:1px solid var(--line);padding:24px 0 0}
+.sd-tag{background:none;color:var(--accent);padding:0;font-weight:400}
+.sd h3{margin:8px 0}
+.sd-when b{color:var(--muted);font-weight:400;margin-right:8px}
+.sd-acts li a{color:var(--accent)}
 .cal-grid .cal{position:relative}
-.cal-grid .cal::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:2px;background:var(--line2);opacity:.9}
-.cal-grid .cal[data-stage="幼升小"]::before{background:#0E7C66}
-.cal-grid .cal[data-stage="小升初"]::before{background:#5D77A3}
-.cal-grid .cal[data-stage="初升高"]::before{background:#B98A2F}
-.cal-grid .cal[data-stage="高考"]::before{background:#B45309}
-.cal-grid .cal[data-stage="全阶段"]::before{background:#7A8AA0}
+.cal-grid .cal::before{display:none}          /* 去彩色阶段色签 */
+.cal .date{color:var(--muted);letter-spacing:.05em}
+.cal .stage{background:none;color:var(--accent);padding:0}
+.cal .src{color:var(--muted)}
+.cal .src a{color:var(--accent)}
+.entries .entry-art{filter:grayscale(1);opacity:.85}   /* 装饰插画去色降存在感 */
+.entries .no{color:var(--muted)}
+.entries .go{color:var(--accent)}
+.toc-no{background:none;color:var(--muted);padding:0}
+.ff{transition:none}
 
-/* ---------- 10. 滚动渐入（enhance.js 控制，无 JS 时不受影响） ---------- */
-.js .rv{opacity:0;transform:translateY(12px);transition:opacity .55s ease,transform .55s ease}
-.js .rv.rv-in{opacity:1;transform:none}
-.js .rv-d1{transition-delay:.07s}
-.js .rv-d2{transition-delay:.14s}
-.js .rv-d3{transition-delay:.21s}
-@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}}
-
-/* ---------- 11. 高频六问 / CTA / 数字带（沿用模块，收敛配色） ---------- */
-.faq-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:20px}
-.faq-quick a.fq{display:flex;gap:14px;align-items:flex-start;background:var(--paper);
-  border:1px solid var(--line);padding:16px 18px;text-decoration:none;color:inherit;
-  transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease}
-.faq-quick a.fq:hover{border-color:var(--accent);transform:translateY(-3px);
-  box-shadow:0 10px 26px -14px rgba(36,52,77,.25)}
-.faq-quick .fq-mark{flex:none;width:32px;height:32px;border-radius:8px;display:grid;place-items:center;
-  font-family:var(--serif);font-weight:700;font-size:15px;color:#fff;background:var(--navy)}
-.faq-quick .fq-body b{display:block;font-size:14.5px;color:var(--navy);margin-bottom:3px;letter-spacing:.01em}
-.faq-quick .fq-body span{font-size:12.5px;color:var(--muted);line-height:1.75;display:block;text-align:justify}
-.faq-quick .fq-go{margin-left:auto;align-self:center;color:var(--accent);font-size:15px;opacity:0;transform:translateX(-4px);transition:.2s ease}
-.faq-quick a.fq:hover .fq-go{opacity:1;transform:none}
-
-.cta-band{margin-top:28px;border-radius:14px;background:var(--navy);color:#DCE4EE;
-  border:1px solid rgba(255,255,255,.06)}
-.cta-band .cb-inner{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:26px 30px}
-.cta-band .cb-mark{flex:none;width:44px;height:44px;border-radius:11px;display:grid;place-items:center;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);font-size:21px}
-.cta-band .cb-body{flex:1;min-width:240px}
-.cta-band .cb-body h3{font-family:var(--serif);font-size:18px;color:#fff;letter-spacing:.03em;margin-bottom:5px}
-.cta-band .cb-body p{font-size:13px;color:#B9C4D4;line-height:1.85;margin:0;text-align:left}
-.cta-band .cb-actions{display:flex;gap:10px;flex-wrap:wrap}
-.cta-band .cb-btn{display:inline-block;padding:10px 20px;border-radius:9px;font-size:13.5px;font-weight:600;
-  letter-spacing:.03em;text-decoration:none;transition:transform .18s ease,background .18s ease}
-.cta-band .cb-btn-main{background:var(--accent);color:#fff}
-.cta-band .cb-btn-main:hover{transform:translateY(-2px);filter:brightness(1.06)}
-.cta-band .cb-btn-ghost{border:1px solid rgba(255,255,255,.35);color:#DCE4EE}
-.cta-band .cb-btn-ghost:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
-
-.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:20px}
-.caps .cap{background:var(--paper);border:1px solid var(--line);padding:16px 14px;text-align:center;
-  transition:border-color .2s ease,box-shadow .2s ease}
-.caps .cap:hover{border-color:var(--line2);box-shadow:0 8px 22px -14px rgba(36,52,77,.25)}
-.caps .cap b{display:block;font-size:23px;font-weight:700;color:var(--navy);line-height:1.25;
-  font-variant-numeric:tabular-nums;letter-spacing:.01em}
-.caps .cap b i{font-style:normal;font-size:13px;color:var(--muted);font-weight:500}
-.caps .cap span{display:block;font-size:12px;color:var(--muted);margin-top:4px;line-height:1.6;letter-spacing:.02em}
-
-/* ---------- 12. 打印：保持排版层级 ---------- */
-@media print{
-  section{padding-top:0;padding-bottom:12px}
-  .js .rv{opacity:1;transform:none}
+/* ---------- 7. 控件：扁平直角按钮 ---------- */
+.btn-primary,.btn-main,.mini-btn{
+  background:var(--accent);color:#FFFFFF;
+  border:none;border-radius:2px;
+  box-shadow:none;font-weight:400;
 }
+.btn-primary:hover,.btn-main:hover{background:#0A5F4F}
+.btn-ghost{background:transparent;color:var(--ink2);
+  border:1px solid var(--line2);border-radius:2px;box-shadow:none;font-weight:400}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.mini-btn:hover{background:#0A5F4F}
+.alert-btn{border:1px solid var(--line2);border-radius:2px;background:#FFFFFF;color:var(--ink2)}
+.alert-btn:hover{border-color:var(--accent);color:var(--accent)}
+.fact-filter .ff{border-radius:2px;background:var(--bg);border:1px solid var(--line);color:var(--ink2)}
+.fact-filter .ff.on{background:var(--accent);border-color:var(--accent);color:#FFFFFF}
+input[type="search"],input[type="text"],input:not([type]),textarea,select{
+  border:1px solid var(--line2);border-radius:2px;background:#FFFFFF;box-shadow:none;font-family:var(--sans)}
+input:focus,textarea:focus,select:focus{border-color:var(--accent);outline:none}
+dialog{border:1px solid var(--line);border-radius:2px;box-shadow:none}
+dialog::backdrop{background:rgba(0,0,0,.3)}
+details.todo{border:none;background:var(--paper);border-radius:2px;padding:8px 16px}
+details.todo summary{color:var(--ink2)}
+details.todo div{color:var(--ink2);line-height:1.9}
 
-/* ---------- 13. 移动端：行宽与字号再收敛 ---------- */
+/* ---------- 8. 图片：直角、无边框 ---------- */
+img{border-radius:2px;border:none}
+
+/* ---------- 9. v0.64 新增模块：同步压平 ---------- */
+.faq-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;margin-top:16px}
+.faq-quick a.fq{background:var(--bg);border:none;border-top:1px solid var(--line);border-radius:0;padding:16px 0}
+.faq-quick a.fq:hover{background:var(--bg)}
+.faq-quick .fq-mark{display:none}             /* 去装饰性「问」字章 */
+.faq-quick .fq-body b{color:var(--ink);font-weight:400;margin-bottom:4px}
+.faq-quick .fq-body b::before{content:"· ";color:var(--accent)}
+.faq-quick .fq-body span{color:var(--muted);font-size:13px;max-width:620px}
+.faq-quick .fq-go{color:var(--accent);opacity:1;transform:none}
+.cta-band{background:var(--paper);border:none;border-radius:2px;color:var(--ink2)}
+.cta-band::before{display:none}
+.cta-band .cb-inner{padding:24px}
+.cta-band .cb-mark{display:none}              /* 去装饰图标 */
+.cta-band .cb-body h3{font-family:var(--sans);font-size:17px;color:var(--ink);font-weight:400}
+.cta-band .cb-body p{color:var(--ink2);max-width:660px}
+.cta-band .cb-btn{border-radius:2px;font-weight:400}
+.cta-band .cb-btn-main{background:var(--accent);color:#FFFFFF}
+.cta-band .cb-btn-main:hover{background:#0A5F4F}
+.cta-band .cb-btn-ghost{background:transparent;border:1px solid var(--line2);color:var(--ink2)}
+.cta-band .cb-btn-ghost:hover{background:transparent;border-color:var(--accent);color:var(--accent)}
+.caps{gap:0;margin-top:16px}
+.caps .cap{background:var(--bg);border:none;border-top:1px solid var(--line);border-radius:0;
+  padding:16px 8px;text-align:left}
+.caps .cap::before{display:none}
+.caps .cap b{font-size:22px;font-weight:500;color:var(--ink)}
+.caps .cap b i{color:var(--muted)}
+.caps .cap span{color:var(--muted);text-align:left}
+
+/* ---------- 10. 页脚与杂项 ---------- */
+footer,.site-foot{background:var(--bg);border-top:1px solid var(--line);
+  font-size:12px;line-height:1.7;color:var(--muted)}
+footer h5,.site-foot h5{color:var(--ink2)}
+footer a,.site-foot a{color:var(--ink2)}
+footer a:hover,.site-foot a:hover{color:var(--accent)}
+.logo-dot{background:var(--accent)}
+.data-version{color:var(--muted)}
+.cd-bar{background:var(--paper);border-radius:2px}
+#readBar{background:var(--accent);height:2px}
+
+/* ---------- 11. 深色模式微调（保持功能，整体中性灰） ---------- */
+html.theme-dark .trust .t-item{border-left-color:var(--line)}
+html.theme-dark .faq-quick a.fq,html.theme-dark .caps .cap{background:var(--bg)}
+html.theme-dark .cta-band{background:var(--paper);color:var(--ink2)}
+html.theme-dark .cta-band .cb-body h3{color:var(--ink)}
+html.theme-dark .btn-ghost{background:transparent}
+html.theme-dark input[type="search"],html.theme-dark input[type="text"],
+html.theme-dark input:not([type]),html.theme-dark textarea,html.theme-dark select,
+html.theme-dark .searchbox input,html.theme-dark .alert-btn{background:var(--paper);border-color:var(--line2);color:var(--ink)}
+
+/* ---------- 12. 桌面端适配与打印 ---------- */
+.wrap{max-width:960px;padding:0 32px}         /* 固定内容宽 + 两侧大留白 */
+@media (min-width:1440px){.wrap{max-width:1024px}}
 @media (max-width:640px){
-  body{font-size:14.5px}
-  .hero h1{font-size:28px}
-  .hero .sub{font-size:14.5px}
-  h2,.sec-head h2{font-size:20px}
-  .sec-desc{font-size:13.5px}
-  .cta-band .cb-inner{padding:20px 18px}
-  .faq-quick{grid-template-columns:1fr}
-  .faq-quick .fq-go{opacity:1;transform:none}
-  p{text-align:left}                 /* 小屏两端对齐易出空隙，回退左对齐 */
+  .wrap{padding:0 16px}
+  .trust .t-item{padding:0 12px}
+  section[id],header[id]{padding:24px 0}
 }
-
-/* ---------- 14. 深色模式：仅文字层适配（配色沿用原站） ---------- */
-html.theme-dark .faq-quick a.fq{background:transparent}
-html.theme-dark .faq-quick .fq-body b{color:var(--navy)}
-html.theme-dark .caps .cap{background:transparent}
-html.theme-dark .caps .cap b{color:var(--navy)}
-html.theme-dark .cta-band{background:#141D2B;border-color:#223143}
-html.theme-dark p{text-align:left}
+@media print{
+  .js .rv{opacity:1}
+  section[id],header[id]{padding:0}
+}

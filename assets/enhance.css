@@ -404,3 +404,23 @@ div.plain::before{content:"译";position:absolute;right:10px;top:10px;
 .ni-head span:first-child::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
   width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .ni-head span+span{color:var(--muted)}
+
+/* ---------- 20. v0.76 排版总校准：间距 / 字号 / 页脚 ---------- */
+/* 区块节奏统一：56px 主节奏 */
+section[id],header[id]{padding:56px 0}
+@media (max-width:640px){section[id],header[id]{padding:40px 0}}
+/* 导语与正文的层级差再拉大 */
+.sec-desc{margin-bottom:36px;font-size:15px;line-height:1.9}
+/* 卡片内边距统一 28px，信息更从容 */
+.stage-doors .sd,.cal-grid .cal,.entries .entry,.dao-grid a,.toc-grid a,.faq-quick a.fq,.fstep{padding:28px}
+.entries .entry{padding:0}
+.entry-body{padding:22px 26px 26px}
+/* 按钮字号统一 14px、字距 .02em */
+.btn-primary,.btn-ghost,.btn-main{font-size:14px;letter-spacing:.02em}
+/* 页脚法务小字：更小更淡，不再抢视线 */
+footer,.site-foot{font-size:12px;line-height:1.9;color:var(--muted);padding:48px 0 40px}
+footer .cols{margin-bottom:32px}
+/* 弹窗与输入圆角统一 */
+dialog{border-radius:12px}
+/* 深色模式下的横幅照片降低存在感 */
+html.theme-dark .page-banner .pb-photo{opacity:.75}

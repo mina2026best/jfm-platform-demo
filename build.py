@@ -36,9 +36,9 @@ PAGES = [
     dict(file="zy.html",     title="志愿参考与路径地图 · 花期册",
          desc="2026 特招线位次换算 + 六大升学路径地图（普高统招 / 指标到校 / 民办 / 中职 / 艺体 / 国际班）。",
          sections=["zy"]),
-    dict(file="fact.html",   title="求真辟谣台 · 花期册",
-         desc="「内部渠道是真的吗？」——逐条核验，按属实 / 不实 / 存疑分级，附出处与核验日期。",
-         sections=["fact"]),
+    dict(file="forum.html",  title="家长论坛 · 花期册",
+         desc="幼升小 / 小升初 / 初升高 / 高考志愿 / 陪读生活分区讨论：择校对比、材料办理、政策疑问，同区家长一起交流；禁广告、涉政策需注明官方来源。",
+         sections=["forum"]),
     dict(file="community.html", title="家长社区 · 花期册",
          desc="同城家长的实操帖与讨论：长幼随学实测、陪读房选择、跨区联招、复习计划分享。",
          sections=["community", "learn"]),
@@ -207,7 +207,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("schools.html", "档案"),
         ("compare.html", "对比"),
         ("zy.html", "志愿"),
-        ("fact.html", "求真"),
+        ("forum.html", "论坛"),
         ("community.html", "社区"),
         ("life.html", "生活"),
         ("search.html", "搜索"),
@@ -225,7 +225,7 @@ def nav_html(cur_file, demo_tag, searchbox):
     mobile = [
         ("daohang.html", "网址导航"), ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
-        ("zy.html", "志愿参考"), ("fact.html", "求真台"), ("community.html", "家长社区"),
+        ("zy.html", "志愿参考"), ("forum.html", "家长论坛"), ("community.html", "家长社区"),
         ("community.html", "家长学堂"), ("life.html", "生活服务"),
         ("search.html", "站内搜索"), ("problems.html", "问题速查"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
         ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
@@ -254,7 +254,7 @@ def convert_links(html):
     mapping = {
         "#news": "news.html", "#calendar": "calendar.html", "#policy": "policy.html",
         "#quiz": "quiz.html", "#schools": "schools.html", "#compare": "compare.html",
-        "#zy": "zy.html", "#fact": "fact.html", "#community": "community.html",
+        "#zy": "zy.html", "#forum": "forum.html", "#community": "community.html",
         "#learn": "community.html", "#life": "life.html", "#beans": "beans.html",
         "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
         "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
@@ -360,7 +360,7 @@ def build_page(page, tpl, secs, css, js):
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
-    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#fact":"fact.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + hero + content \

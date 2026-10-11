@@ -8533,10 +8533,6 @@ var SEARCH_DB = [
  {t:'日历',s:'指标到校资格摸底（2026-10）',a:'#calendar'},
  {t:'日历',s:'中考报名与联招志愿准备（2027-04）',a:'#calendar'},
  {t:'日历',s:'高考特招线公布后行动清单（2027-06）',a:'#calendar'},
- {t:'求真',s:'「有内部渠道，花钱就能进重点」——不实',a:'#fact'},
- {t:'求真',s:'「指标到校 70% 都能上重点」——存疑',a:'#fact'},
- {t:'求真',s:'「普职分流 5:5」——不实（约 65% 升普高）',a:'#fact'},
- {t:'求真',s:'「学位房 ≠ 学区房」——属实提醒',a:'#fact'},
  {t:'志愿',s:'位次换算工具（线差法）',a:'#zy'},
  {t:'生活',s:'陪读租房行情样本 / 护学岗 6,993 个',a:'#life'},
  {t:'工具',s:'陪读成本速算器（房租+生活+通勤区间估算）',a:'#life'},
@@ -8582,7 +8578,7 @@ function runSearch(){
   panel.innerHTML = html;
   panel.hidden = false;
 }
-var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
+var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#forum':'forum.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
 /* v0.40：学校档案检索增强（概况字段全量入库） */
 function _schoolHay(name){
   var d = SCHOOL_DB[name] || {};
@@ -9102,22 +9098,6 @@ document.addEventListener('click', function(e){
 });
 
 
-/* ---------- 20-fact-filter ---------- */
-/* ---------- v0.4：求真筛选 ---------- */
-function filterFact(mode){
-  document.querySelectorAll('#fact .rq-card').forEach(function(c){
-    var v = c.querySelector('.verdict');
-    var k = 'other';
-    if(v){ k = v.classList.contains('false') ? 'false' : v.classList.contains('warn') ? 'warn' : v.classList.contains('ok') ? 'ok' : 'other'; }
-    c.style.display = (mode === 'all' || k === mode) ? '' : 'none';
-  });
-  document.querySelectorAll('#fact .fact-filter .ff').forEach(function(b){
-    b.classList.toggle('on', b.dataset.f === mode);
-    b.setAttribute('aria-pressed', String(b.dataset.f === mode));
-  });
-}
-
-
 /* ---------- 21-cal-filter ---------- */
 /* ---------- v0.5：日历学段筛选 ---------- */
 function filterCal(mode){
@@ -9320,22 +9300,6 @@ function runZy(){
     + '</div>';
   // 近三年同分位置对照（2023–2025）
   if(typeof renderYears3 === 'function') renderYears3(v, cfg.name);
-}
-
-
-/* ---------- 27-fact-submit ---------- */
-/* ---------- 求真线索提交 ---------- */
-var CLUE_N = 0;
-function submitClue(){
-  var t=document.getElementById("clue-text").value.trim();
-  var err=document.getElementById("clue-err"), ok=document.getElementById("clue-ok");
-  if(t.length<10){ err.style.display="block"; ok.style.display="none"; return; }
-  err.style.display="none";
-  CLUE_N++;
-  var id="FQ-20260916-"+String(100+CLUE_N);
-  document.getElementById("clue-id").textContent=" 编号 "+id+"，";
-  ok.style.display="block";
-  document.getElementById("clue-text").value="";
 }
 
 
@@ -10089,6 +10053,8 @@ function qparam(name){
   return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
 }
 function bootPageRoute(){
+  // 论坛页（v0.80）
+  if(document.getElementById('forum-list')) initForum();
   // 首页热点榜
   if(document.getElementById('hot-rank')) renderHotRank();
   // 搜索页：填热门词 + 执行查询
@@ -10199,7 +10165,7 @@ function runPageSearch(){
     }
   });
   if(!rows.length){
-    out.innerHTML = '<div class="sp-empty">没有找到与「' + esc(q) + '」相关的内容——换个说法试试，或到<a href="fact.html" style="color:var(--accent)">求真台</a>提交你的问题。</div>';
+    out.innerHTML = '<div class="sp-empty">没有找到与「' + esc(q) + '」相关的内容——换个说法试试，或到<a href="forum.html" style="color:var(--accent)">家长论坛</a>发帖讨论。</div>';
     return;
   }
   out.innerHTML = '<p class="cmp-note" style="margin-bottom:10px">共命中 ' + rows.length + ' 条（学校 / 资讯 / 政策 / 术语）</p>'
@@ -10907,8 +10873,8 @@ var PROBLEMS = [
     "policy.html"
    ],
    [
-    "求真台 · 摇号传言核验",
-    "fact.html"
+    "家长论坛 · 摇号讨论",
+    "forum.html"
    ]
   ],
   "tip": "公民同招：摇号未中回公办统筹，双轨准备材料才稳；「花钱买名额」都是诈骗。"
@@ -10990,8 +10956,8 @@ var PROBLEMS = [
   ],
   "tools": [
    [
-    "求真台 · 培训传言核验",
-    "fact.html"
+    "家长论坛 · 培训选择讨论",
+    "forum.html"
    ]
   ],
   "tip": "查办学许可证与收费公示；一次性缴费不超 3 个月或 60 课时，且必须走监管账户。"
@@ -11078,7 +11044,7 @@ var PATH_DEEP = [
  {key:"guoji", name:"出国 / 国际班", tag:"双轨规划 · 费用最高"}
 ];
 
-var PATHS = [{"key": "putong", "name": "普高统招", "tag": "最主流 · 联招体系", "def": "参加重庆市初中毕业暨高中招生考试（中考，联招），按志愿批次由高到低统一录取进入公办普通高中。全市联招学校 2026 年约 113 所，是重庆家庭最主流的高中入学路径。", "cond": ["具有重庆初中学籍并参加中考（联招区域户籍或符合随迁政策）", "志愿分批次填报：指标到校批次先行（资格生）→ 统招批次", "体艺特长生经专业测试可在统招中按政策录取"], "timeline": "初三上期中定位 → 3 月中考报名+体检 → 4 月体育统一测试 → 5 月志愿宣讲与模拟填报 → 6 月中考 → 6 月底出分填志愿 → 7 月分批录取（含征集志愿）。", "fee": "公办高中学费按市定标准执行（一般每学期数百元至千元级），另有课本资料与住宿费；民办高中学费自定（见民办路径）。", "who": "中考成绩达到联招批次线的绝大多数考生；追求公办普惠、住家走读的家庭。", "pros": ["公办收费低、办学稳定", "志愿批次规则透明，出分后填志愿", "覆盖全市 113 所联招学校，选择面广"], "cons": ["热门校竞争激烈，需校内位次过硬", "跨区择校受招生范围限制", "一考定批次，志愿策略影响大"], "faq": [["联招和区县中考是一回事吗？", "主城区及部分区县实行统一联招；未入联招的区县由本区县自行组织录取。志愿规则以本区当年公告为准。"], ["出分后还能改志愿吗？", "志愿在出分后规定时间内填报确认，截止后不可修改；征集志愿是最后的补救机会。"]], "links": [["重庆市教委：2026 年中考招生通知（渝教基函〔2026〕21号）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院（中考栏目）", "https://www.cqksy.cn/site/techield/zhongkao/"], ["站内：志愿参考与位次换算", "zy.html"], ["站内：升学日历（中考节点）", "calendar.html"]]}, {"key": "zhibiao", "name": "指标到校", "tag": "校内竞争 · 70% 名额", "def": "市级重点高中把招生计划的 70% 直接分配到辖区内各初中（渝教基函口径），符合资格的学生在本校内部竞争这些名额，录取线通常低于全校统招线。", "cond": ["学籍与户籍一致（人籍一致），且在所在初中连续就读", "中途转学可能清零资格", "达到校内排序要求（名额分配到校后按成绩排队）"], "timeline": "初一入学即建立资格基础 → 初二末关注资格摸底 → 初三上资格名单公示 → 4–5 月名额分配与志愿填报 → 与中考同批录取。", "fee": "录取后为公办普高，费用与普高统招一致。", "who": "中上等成绩、所在初中里有指标名额的学生——「校内排名」比「全区排名」更有利；成绩在本校前列的家庭重点研究这条路。", "pros": ["录取线通常低于统招线，中上等生的黄金通道", "名额直接分到本校，避开全区高分段竞争", "政策连续多年稳定（70% 比例）"], "cons": ["资格条件严格（学籍连续性硬约束）", "名额到校后竞争依然存在", "中途转学代价极高"], "faq": [["指标到校是不是「稳上重点」？", "不是。名额分到校后仍按成绩排序，达到名额线才被录取；它降低的是「全区竞争」烈度，不是取消竞争。"], ["转学后指标资格还在吗？", "通常清零或重算。动迁家庭务必先向区教委核实资格连续性规则。"]], "links": [["站内：指标到校政策条目（官方原文链接）", "policy.html"], ["重庆市教委：2026 年中考招生通知（指标到校章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["站内：择校对比器（比较校内名额竞争）", "compare.html"]]}, {"key": "minban", "name": "民办高中", "tag": "自费择校 · 摇号与自主", "def": "由社会力量举办的普通高中，招生计划与收费自主报备，录取方式分「超计划电脑摇号」与自主招生两类；巴蜀常春藤等民办校已收录本站学校档案库。", "cond": ["参加重庆中考（民办高中录取也以中考成绩为基础）", "民办报名超计划时电脑随机录取（全程公证）", "家庭需评估三年学费承受力（民办高中学费普遍每学年数万元）"], "timeline": "5–6 月关注民办校招生简章 → 中考后按简章报名（超计划摇号）→ 录取签约缴费 → 与公办同步注册学籍。", "fee": "学费每学年约 3–15 万元不等（各校差异大），另有住宿、杂费；以各校在物价部门备案的公示为准。", "who": "中考成绩略低于公办目标线、家庭可承担民办学费；或认可某民办校办学特色（小班/国际化课程）的家庭。", "pros": ["为临界分数提供普高学位兜底", "办学机制灵活，部分学校小班化/特色课程", "摇号规则公开透明（超计划即摇号）"], "cons": ["学费显著高于公办", "教学质量两极分化，需实地考察", "「交钱锁定名额」说法不可信——超计划必须摇号"], "faq": [["民办高中可以「交钱买名额」吗？", "不可以。超计划全部电脑摇号、全程公证，与缴费无关；任何「内部名额费」都是诈骗。"], ["民办高中学籍和公办一样吗？", "一样。民办高中同样注册普通高中学籍，参加统一高考；关键是确认学校具备招生资质。"]], "links": [["站内：巴蜀常春藤学校档案（民办样本）", "schools.html?school="], ["站内：民办摇号政策条目", "policy.html"], ["站内：求真台 · 摇号传言核验", "fact.html"], ["重庆市教委：2026 年义务教育招生通知（摇号机制口径）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html"]]}, {"key": "zhiye", "name": "中职 · 职教高考", "tag": "另一条上升通道", "def": "进入中等职业学校（中专/职高/技校），通过「文化素质 + 职业技能」的职教高考（分类考试招生）升入高职或应用型本科——中职不是终点，而是一条并行上升通道。", "cond": ["应届初中毕业生，按志愿报考中职学校（含「五年制高职」贯通班）", "职教高考升学方向：中职在读期间备考文化课+专业技能", "部分专业有身体条件要求（如学前教育）"], "timeline": "中考后填报中职志愿（含五年制高职批次）→ 9 月入学 → 三年内「文化+技能」并修 → 三年级参加高职分类考试 → 升入高职（3 年）或应用型本科（4 年）。", "fee": "中职阶段：国家免学费政策覆盖绝大多数专业（民办超出部分自付）；高职/本科阶段按公办标准收费；家庭困难学生另有国家助学金。", "who": "动手能力强、文化课中等的孩子；目标明确想早就业或走技能升学线的家庭。重庆 2025 年「职教高考」本科扩容持续进行中。", "pros": ["免学费+资助政策覆盖广", "升学通道打通：中职→高职→应用型本科", "技能就业两不误，部分专业就业率高"], "cons": ["社会认可度仍在提升中", "优质中职与热门专业竞争同样激烈", "职教高考本科名额仍少于普通高考"], "faq": [["中职还能考本科吗？", "能。通过高职分类考试升入高职后可「专升本」，部分应用型本科直接面向中职招生；「职教高考」本科通道逐年扩容。"], ["五年制高职是什么？", "初中毕业后进入高职院校连续培养五年，毕业获大专学历——中职家庭的「直升」选项之一。"]], "links": [["《中华人民共和国职业教育法》（教育部政策库全文）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620064.html"], ["站内：五年制高职/职教高考术语", "policy.html"], ["站内：升学百科 · 全流程", "wiki.html"]]}, {"key": "yiti", "name": "艺体特长", "tag": "专业测试 + 文化双线", "def": "有体育、艺术特长的学生经专业测试后，以特长生身份被高中（中考段）或高校（高考段）降分/专项录取——需要「专业」与「文化课」两条线同时过。", "cond": ["中考段：经批准的高中招收体育/艺术特长生，需参加学校或区级专业测试", "高考段：艺体类考生需省级专业统考（+部分校考），文化课也有底线要求", "体育类需运动员等级或赛事成绩者更有优势"], "timeline": "初中段：初一初二确定特长方向并持续训练 → 中考前参加目标高中专业测试 → 中考达线按特长录取。高考段：高一高二定方向 → 高三上专业统考 → 12 月高考报名（艺体类）→ 次年 4 月校考 → 6 月高考（文化课）→ 综合分录取。", "fee": "训练与器材投入较高（体育私教/艺术培训每学期数千至数万元）；艺考集训高三整年通常数万元起；公办校学费与普高一致。", "who": "有真实特长且能长期投入训练的孩子；家庭需评估时间与费用双投入。「低分上名校」是误解——文化课底线逐年提高。", "pros": ["为特长生打开专项通道，与文化课考生分轨竞争", "部分学校/项目降分幅度可观", "高考综合分改革后规则更透明"], "cons": ["专业+文化双线压力大", "集训费用高、时间不可逆", "填报受限（艺体批与普通批规则不同）"], "faq": [["艺体特长生文化课要求低很多吗？", "不是。文化课有逐年提高的底线要求，综合分改革后文化课权重上升——「低分通道」是误区。"], ["区级比赛奖项有用吗？", "中考特长生资格通常看学校/区级专业测试；高考艺体以省级统考成绩为主，赛事成绩是加分项不是入场券。"]], "links": [["重庆市教委：2026 年中考通知（体育/艺体特长章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院 · 高考栏目（艺体统考安排）", "https://www.cqksy.cn/site/techield/gkzs/"], ["站内：艺体特长生术语", "policy.html"], ["阳光高考平台（特殊类型招生；反爬站点请用浏览器打开）", "https://gaokao.chsi.com.cn/"]]}, {"key": "guoji", "name": "出国 / 国际班", "tag": "双轨规划 · 费用最高", "def": "就读高中「国际课程班」（如 AP/A-Level/IB/DSE 课程）或直接申请海外高中，以海外大学为升学目标；部分国际班学生也可参加国内高考（双轨）。", "cond": ["多数国际班参考中考成绩+校内测试/面试", "需确认学校国际课程资质与外方课程认证", "出国方向需规划语言考试（托福/雅思）与标化"], "timeline": "初三确定方向 → 中考后入读国际班 → 高一定课程体系与目标国家 → 高二语言与标化首考 → 高三上递交申请 → 次年春获录取。双轨学生同时保留高考线。", "fee": "国际班学费每学年约 8–20 万元；海外本科每年总费用（学费+生活费）约 25–60 万元（国家差异大）。是六条路里费用最高的路径。", "who": "家庭财务充裕、孩子英语能力强、目标海外大学的家庭；双轨家庭需极强的时间管理。「逃避高考」不是好理由——国际课程同样繁重。", "pros": ["升学路径全球化，不挤国内高考独木桥", "课程评价多元（不唯一次考试）", "部分双轨项目保留国内高考选项"], "cons": ["总费用最高（三年 30–60 万+）", "海外学历认证与就业认可度需提前研究", "疫情与国际关系的长期规划风险"], "faq": [["国际班学生能参加国内高考吗？", "部分双轨项目可以（保留国内学籍与课程）；纯国际课程班可能无法参加国内高考——入读前必须确认学籍政策。"], ["怎么核对国际课程班的资质？", "查学校是否具备中外合作办学或国际课程备案（教育部教育涉外监管信息网 jsj.moe.gov.cn 可查合作办学名单）。"]], "links": [["教育部教育涉外监管信息网（中外合作办学名单查询）", "https://jsj.moe.gov.cn/"], ["《中华人民共和国民办教育促进法》（教育部政策库）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620261.html"], ["站内：巴蜀常春藤学校（国际课程样本）", "schools.html?school="]]}];
+var PATHS = [{"key": "putong", "name": "普高统招", "tag": "最主流 · 联招体系", "def": "参加重庆市初中毕业暨高中招生考试（中考，联招），按志愿批次由高到低统一录取进入公办普通高中。全市联招学校 2026 年约 113 所，是重庆家庭最主流的高中入学路径。", "cond": ["具有重庆初中学籍并参加中考（联招区域户籍或符合随迁政策）", "志愿分批次填报：指标到校批次先行（资格生）→ 统招批次", "体艺特长生经专业测试可在统招中按政策录取"], "timeline": "初三上期中定位 → 3 月中考报名+体检 → 4 月体育统一测试 → 5 月志愿宣讲与模拟填报 → 6 月中考 → 6 月底出分填志愿 → 7 月分批录取（含征集志愿）。", "fee": "公办高中学费按市定标准执行（一般每学期数百元至千元级），另有课本资料与住宿费；民办高中学费自定（见民办路径）。", "who": "中考成绩达到联招批次线的绝大多数考生；追求公办普惠、住家走读的家庭。", "pros": ["公办收费低、办学稳定", "志愿批次规则透明，出分后填志愿", "覆盖全市 113 所联招学校，选择面广"], "cons": ["热门校竞争激烈，需校内位次过硬", "跨区择校受招生范围限制", "一考定批次，志愿策略影响大"], "faq": [["联招和区县中考是一回事吗？", "主城区及部分区县实行统一联招；未入联招的区县由本区县自行组织录取。志愿规则以本区当年公告为准。"], ["出分后还能改志愿吗？", "志愿在出分后规定时间内填报确认，截止后不可修改；征集志愿是最后的补救机会。"]], "links": [["重庆市教委：2026 年中考招生通知（渝教基函〔2026〕21号）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院（中考栏目）", "https://www.cqksy.cn/site/techield/zhongkao/"], ["站内：志愿参考与位次换算", "zy.html"], ["站内：升学日历（中考节点）", "calendar.html"]]}, {"key": "zhibiao", "name": "指标到校", "tag": "校内竞争 · 70% 名额", "def": "市级重点高中把招生计划的 70% 直接分配到辖区内各初中（渝教基函口径），符合资格的学生在本校内部竞争这些名额，录取线通常低于全校统招线。", "cond": ["学籍与户籍一致（人籍一致），且在所在初中连续就读", "中途转学可能清零资格", "达到校内排序要求（名额分配到校后按成绩排队）"], "timeline": "初一入学即建立资格基础 → 初二末关注资格摸底 → 初三上资格名单公示 → 4–5 月名额分配与志愿填报 → 与中考同批录取。", "fee": "录取后为公办普高，费用与普高统招一致。", "who": "中上等成绩、所在初中里有指标名额的学生——「校内排名」比「全区排名」更有利；成绩在本校前列的家庭重点研究这条路。", "pros": ["录取线通常低于统招线，中上等生的黄金通道", "名额直接分到本校，避开全区高分段竞争", "政策连续多年稳定（70% 比例）"], "cons": ["资格条件严格（学籍连续性硬约束）", "名额到校后竞争依然存在", "中途转学代价极高"], "faq": [["指标到校是不是「稳上重点」？", "不是。名额分到校后仍按成绩排序，达到名额线才被录取；它降低的是「全区竞争」烈度，不是取消竞争。"], ["转学后指标资格还在吗？", "通常清零或重算。动迁家庭务必先向区教委核实资格连续性规则。"]], "links": [["站内：指标到校政策条目（官方原文链接）", "policy.html"], ["重庆市教委：2026 年中考招生通知（指标到校章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["站内：择校对比器（比较校内名额竞争）", "compare.html"]]}, {"key": "minban", "name": "民办高中", "tag": "自费择校 · 摇号与自主", "def": "由社会力量举办的普通高中，招生计划与收费自主报备，录取方式分「超计划电脑摇号」与自主招生两类；巴蜀常春藤等民办校已收录本站学校档案库。", "cond": ["参加重庆中考（民办高中录取也以中考成绩为基础）", "民办报名超计划时电脑随机录取（全程公证）", "家庭需评估三年学费承受力（民办高中学费普遍每学年数万元）"], "timeline": "5–6 月关注民办校招生简章 → 中考后按简章报名（超计划摇号）→ 录取签约缴费 → 与公办同步注册学籍。", "fee": "学费每学年约 3–15 万元不等（各校差异大），另有住宿、杂费；以各校在物价部门备案的公示为准。", "who": "中考成绩略低于公办目标线、家庭可承担民办学费；或认可某民办校办学特色（小班/国际化课程）的家庭。", "pros": ["为临界分数提供普高学位兜底", "办学机制灵活，部分学校小班化/特色课程", "摇号规则公开透明（超计划即摇号）"], "cons": ["学费显著高于公办", "教学质量两极分化，需实地考察", "「交钱锁定名额」说法不可信——超计划必须摇号"], "faq": [["民办高中可以「交钱买名额」吗？", "不可以。超计划全部电脑摇号、全程公证，与缴费无关；任何「内部名额费」都是诈骗。"], ["民办高中学籍和公办一样吗？", "一样。民办高中同样注册普通高中学籍，参加统一高考；关键是确认学校具备招生资质。"]], "links": [["站内：巴蜀常春藤学校档案（民办样本）", "schools.html?school="], ["站内：民办摇号政策条目", "policy.html"], ["站内：家长论坛 · 摇号讨论", "forum.html"], ["重庆市教委：2026 年义务教育招生通知（摇号机制口径）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html"]]}, {"key": "zhiye", "name": "中职 · 职教高考", "tag": "另一条上升通道", "def": "进入中等职业学校（中专/职高/技校），通过「文化素质 + 职业技能」的职教高考（分类考试招生）升入高职或应用型本科——中职不是终点，而是一条并行上升通道。", "cond": ["应届初中毕业生，按志愿报考中职学校（含「五年制高职」贯通班）", "职教高考升学方向：中职在读期间备考文化课+专业技能", "部分专业有身体条件要求（如学前教育）"], "timeline": "中考后填报中职志愿（含五年制高职批次）→ 9 月入学 → 三年内「文化+技能」并修 → 三年级参加高职分类考试 → 升入高职（3 年）或应用型本科（4 年）。", "fee": "中职阶段：国家免学费政策覆盖绝大多数专业（民办超出部分自付）；高职/本科阶段按公办标准收费；家庭困难学生另有国家助学金。", "who": "动手能力强、文化课中等的孩子；目标明确想早就业或走技能升学线的家庭。重庆 2025 年「职教高考」本科扩容持续进行中。", "pros": ["免学费+资助政策覆盖广", "升学通道打通：中职→高职→应用型本科", "技能就业两不误，部分专业就业率高"], "cons": ["社会认可度仍在提升中", "优质中职与热门专业竞争同样激烈", "职教高考本科名额仍少于普通高考"], "faq": [["中职还能考本科吗？", "能。通过高职分类考试升入高职后可「专升本」，部分应用型本科直接面向中职招生；「职教高考」本科通道逐年扩容。"], ["五年制高职是什么？", "初中毕业后进入高职院校连续培养五年，毕业获大专学历——中职家庭的「直升」选项之一。"]], "links": [["《中华人民共和国职业教育法》（教育部政策库全文）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620064.html"], ["站内：五年制高职/职教高考术语", "policy.html"], ["站内：升学百科 · 全流程", "wiki.html"]]}, {"key": "yiti", "name": "艺体特长", "tag": "专业测试 + 文化双线", "def": "有体育、艺术特长的学生经专业测试后，以特长生身份被高中（中考段）或高校（高考段）降分/专项录取——需要「专业」与「文化课」两条线同时过。", "cond": ["中考段：经批准的高中招收体育/艺术特长生，需参加学校或区级专业测试", "高考段：艺体类考生需省级专业统考（+部分校考），文化课也有底线要求", "体育类需运动员等级或赛事成绩者更有优势"], "timeline": "初中段：初一初二确定特长方向并持续训练 → 中考前参加目标高中专业测试 → 中考达线按特长录取。高考段：高一高二定方向 → 高三上专业统考 → 12 月高考报名（艺体类）→ 次年 4 月校考 → 6 月高考（文化课）→ 综合分录取。", "fee": "训练与器材投入较高（体育私教/艺术培训每学期数千至数万元）；艺考集训高三整年通常数万元起；公办校学费与普高一致。", "who": "有真实特长且能长期投入训练的孩子；家庭需评估时间与费用双投入。「低分上名校」是误解——文化课底线逐年提高。", "pros": ["为特长生打开专项通道，与文化课考生分轨竞争", "部分学校/项目降分幅度可观", "高考综合分改革后规则更透明"], "cons": ["专业+文化双线压力大", "集训费用高、时间不可逆", "填报受限（艺体批与普通批规则不同）"], "faq": [["艺体特长生文化课要求低很多吗？", "不是。文化课有逐年提高的底线要求，综合分改革后文化课权重上升——「低分通道」是误区。"], ["区级比赛奖项有用吗？", "中考特长生资格通常看学校/区级专业测试；高考艺体以省级统考成绩为主，赛事成绩是加分项不是入场券。"]], "links": [["重庆市教委：2026 年中考通知（体育/艺体特长章节）", "https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html"], ["重庆市教育考试院 · 高考栏目（艺体统考安排）", "https://www.cqksy.cn/site/techield/gkzs/"], ["站内：艺体特长生术语", "policy.html"], ["阳光高考平台（特殊类型招生；反爬站点请用浏览器打开）", "https://gaokao.chsi.com.cn/"]]}, {"key": "guoji", "name": "出国 / 国际班", "tag": "双轨规划 · 费用最高", "def": "就读高中「国际课程班」（如 AP/A-Level/IB/DSE 课程）或直接申请海外高中，以海外大学为升学目标；部分国际班学生也可参加国内高考（双轨）。", "cond": ["多数国际班参考中考成绩+校内测试/面试", "需确认学校国际课程资质与外方课程认证", "出国方向需规划语言考试（托福/雅思）与标化"], "timeline": "初三确定方向 → 中考后入读国际班 → 高一定课程体系与目标国家 → 高二语言与标化首考 → 高三上递交申请 → 次年春获录取。双轨学生同时保留高考线。", "fee": "国际班学费每学年约 8–20 万元；海外本科每年总费用（学费+生活费）约 25–60 万元（国家差异大）。是六条路里费用最高的路径。", "who": "家庭财务充裕、孩子英语能力强、目标海外大学的家庭；双轨家庭需极强的时间管理。「逃避高考」不是好理由——国际课程同样繁重。", "pros": ["升学路径全球化，不挤国内高考独木桥", "课程评价多元（不唯一次考试）", "部分双轨项目保留国内高考选项"], "cons": ["总费用最高（三年 30–60 万+）", "海外学历认证与就业认可度需提前研究", "疫情与国际关系的长期规划风险"], "faq": [["国际班学生能参加国内高考吗？", "部分双轨项目可以（保留国内学籍与课程）；纯国际课程班可能无法参加国内高考——入读前必须确认学籍政策。"], ["怎么核对国际课程班的资质？", "查学校是否具备中外合作办学或国际课程备案（教育部教育涉外监管信息网 jsj.moe.gov.cn 可查合作办学名单）。"]], "links": [["教育部教育涉外监管信息网（中外合作办学名单查询）", "https://jsj.moe.gov.cn/"], ["《中华人民共和国民办教育促进法》（教育部政策库）", "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202204/t20220421_620261.html"], ["站内：巴蜀常春藤学校（国际课程样本）", "schools.html?school="]]}];
 
 function renderPathDeep(){
   var box = document.getElementById('path-deep'); if(!box) return;
@@ -11296,7 +11262,7 @@ var DAO_QUICK_NAMES = ['重庆招考信息网','重庆市教育委员会','学�
                        '国家心理健康和精神卫生防治中心','中国铁路12306','重庆图书馆'];
 /* 站内速达：家长最常回访的工具页 */
 var DAO_SITE_LINKS = [['入学自查','quiz.html'],['择校对比','compare.html'],['志愿参考','zy.html'],
-                      ['求真台','fact.html'],['升学日历','calendar.html'],['数据来源','data-sources.html']];
+                      ['家长论坛','forum.html'],['升学日历','calendar.html'],['数据来源','data-sources.html']];
 var DAO_CATS = [
   { n:'升学官方入口', s:'报名 / 查分 / 录取，家长最先要打开的 13 个口子', items:[
     ['重庆市教育委员会','https://jw.cq.gov.cn/','全市招生政策原文与公示公告第一手'],
@@ -11545,6 +11511,166 @@ function initDao(){
   renderDaoZheng();
   renderDaoHome();
   renderDaoFull();
+}
+
+
+/* ---------- 52-forum ---------- */
+/* ---------- v0.80：家长论坛（版块 × 区县 · 本机存储演示） ---------- */
+/* 数据说明：种子帖为编辑整理的示例帖（标注「示例」），用户发帖保存在 localStorage（jfm_forum_threads）。
+   正式版接入账号后端后，仅替换 load/save 两层，UI 与数据结构不变。 */
+var FORUM_BOARDS = [
+  { key: 'xsx',   name: '幼升小',   desc: '划片、落户年限、学位占用、入学材料' },
+  { key: 'xsc',   name: '小升初',   desc: '对口与摇号、民办选择、跨区就读' },
+  { key: 'csg',   name: '初升高',   desc: '指标到校、联招志愿、择校对比' },
+  { key: 'gk',    name: '高考志愿', desc: '位次换算、专业方向、批次策略' },
+  { key: 'life',  name: '陪读生活', desc: '陪读房、通勤、课后安排与家长心理' },
+  { key: 'meta',  name: '站务反馈', desc: '功能建议、内容纠错、问题求助' }
+];
+var FORUM_SEED = [
+  { id: 'seed-1', board: 'csg', title: '指标到校的「校内排队」到底怎么排？', district: '沙坪坝', nick: '初三家长', date: '2026-10-08', likes: 21, seed: true,
+    body: '名额分到本校后按什么顺序定？校内排名看几次考试？有了解当年细则的家长吗——我们已核对渝教基函指标到校口径，主要差区县细则的执行细节。',
+    replies: [{ nick: '值班编辑', date: '2026-10-08', body: '分配规则以各区当年实施细则为准，本站政策库已收录市级口径原文；区县细则建议同步向所在区教委核实。' }] },
+  { id: 'seed-2', board: 'xsc', title: '两次派位之间还能改志愿吗？', district: '渝北', nick: '小六家长', date: '2026-10-07', likes: 14, seed: true,
+    body: '民办摇号未中回公办统筹，中间的时间窗怎么安排材料双轨准备？',
+    replies: [] },
+  { id: 'seed-3', board: 'life', title: '南岸弹子石片区陪读房怎么选？求同区家长交流', district: '南岸', nick: '高一家长', date: '2026-10-06', likes: 9, seed: true,
+    body: '已看了 3 个小区，通勤与价格各有取舍，想听听已入住家庭的实测。',
+    replies: [{ nick: '高二家长', date: '2026-10-06', body: '优先核算通勤时间而不是直线距离，早高峰差异很大；租房合同注意与房东约定学位无关事项。' }] },
+  { id: 'seed-4', board: 'xsx', title: '「长幼随学」申请实测：3 个工作日受理', district: '江北', nick: '二年级家长', date: '2026-10-05', likes: 17, seed: true,
+    body: '把申请通道、材料清单和受理时间线完整记录了一遍，供参考。',
+    replies: [] },
+  { id: 'seed-5', board: 'gk', title: '用官方一分一段换算位次后，志愿梯度怎么留？', district: '沙坪坝', nick: '高三家长', date: '2026-10-04', likes: 12, seed: true,
+    body: '用本站位次换算核对了全市位次，接下来冲稳保的比例想听听过来人意见。',
+    replies: [] }
+];
+var forumBoard = 'all';
+var forumSort = 'new';
+function getForumThreads(){
+  try{ return JSON.parse(localStorage.getItem('jfm_forum_threads') || '[]'); }catch(e){ return []; }
+}
+function saveForumThreads(l){ try{ localStorage.setItem('jfm_forum_threads', JSON.stringify(l)); }catch(e){} }
+function forumAllThreads(){
+  return FORUM_SEED.map(function(x){ var o={}; for(var k in x) o[k]=x[k]; return o; }).concat(getForumThreads());
+}
+function boardName(key){
+  for(var i=0;i<FORUM_BOARDS.length;i++){ if(FORUM_BOARDS[i].key===key) return FORUM_BOARDS[i].name; }
+  return '其他';
+}
+function setForumBoard(k){ forumBoard = k; renderForumBoards(); renderForumList(); }
+function setForumSort(k){
+  forumSort = k;
+  var box = document.getElementById('forum-sort'); if(!box) return;
+  var btns = box.querySelectorAll('.ff');
+  for(var i=0;i<btns.length;i++){ btns[i].classList.toggle('on', btns[i].getAttribute('data-sort')===k); }
+  renderForumList();
+}
+function forumReplyCount(t){ return (t.replies || []).length; }
+function renderForumBoards(){
+  var box = document.getElementById('forum-boards'); if(!box) return;
+  var all = forumAllThreads();
+  var html = '<button class="fb' + (forumBoard==='all'?' on':'') + '" onclick="setForumBoard(\'all\')">全部讨论<span>' + all.length + '</span></button>';
+  FORUM_BOARDS.forEach(function(b){
+    var n = all.filter(function(t){ return t.board===b.key; }).length;
+    html += '<button class="fb' + (forumBoard===b.key?' on':'') + '" onclick="setForumBoard(\'' + b.key + '\')" title="' + b.desc + '">' + b.name + '<span>' + n + '</span></button>';
+  });
+  box.innerHTML = html;
+  var sel = document.getElementById('fp-board');
+  if(sel && !sel.options.length){
+    var opts = '<option value="">选择版块（必选）</option>';
+    FORUM_BOARDS.forEach(function(b){ opts += '<option value="' + b.key + '">' + b.name + ' — ' + b.desc + '</option>'; });
+    sel.innerHTML = opts;
+  }
+}
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function renderForumList(){
+  var box = document.getElementById('forum-list'); if(!box) return;
+  var arr = forumAllThreads();
+  if(forumBoard !== 'all') arr = arr.filter(function(t){ return t.board===forumBoard; });
+  if(forumSort === 'hot') arr.sort(function(a,b){ return (b.likes||0)-(a.likes||0) || String(b.date).localeCompare(String(a.date)); });
+  else if(forumSort === 'unanswered') arr = arr.filter(function(t){ return forumReplyCount(t)===0; });
+  else arr.sort(function(a,b){ return String(b.date).localeCompare(String(a.date)); });
+  if(!arr.length){
+    box.innerHTML = '<div class="empty-mini">这个版块还没有待回复的讨论——你可以发第一帖。</div>';
+    return;
+  }
+  box.innerHTML = arr.map(function(t){
+    var badges = (t.seed ? '<span class="badge">示例帖</span>' : '<span class="badge q">本机发布</span>')
+      + (forumReplyCount(t) ? '' : '<span class="badge">待回复</span>');
+    var replies = (t.replies || []).map(function(r){
+      return '<div class="forum-reply"><b>' + esc(r.nick) + '</b><span class="fr-date">' + esc(r.date) + '</span><p>' + esc(r.body) + '</p></div>';
+    }).join('');
+    return '<div class="thread forum-thread" data-id="' + esc(t.id) + '">'
+      + '<span class="forum-vote"><button class="fv-btn" onclick="forumLike(\'' + esc(t.id) + '\')" aria-label="点赞">▲</button><span class="fv-n">' + (t.likes||0) + '</span></span>'
+      + '<div>' + badges + '<h4>' + esc(t.title) + '</h4>'
+      + '<p class="forum-meta">' + boardName(t.board) + (t.district ? ' · ' + esc(t.district) : '') + (t.nick ? ' · ' + esc(t.nick) : '') + ' · ' + esc(t.date) + '</p>'
+      + '<p class="forum-body">' + esc(t.body) + '</p>'
+      + (replies ? '<div class="forum-replies">' + replies + '</div>' : '')
+      + '<button class="mini-btn forum-reply-btn" onclick="forumToggleReply(\'' + esc(t.id) + '\')">回复 (' + forumReplyCount(t) + ')</button>'
+      + '<div class="forum-reply-box" id="frb-' + esc(t.id) + '" hidden>'
+      + '<input id="frn-' + esc(t.id) + '" maxlength="12" placeholder="称呼（可选）" aria-label="回复称呼" />'
+      + '<textarea id="frt-' + esc(t.id) + '" rows="2" placeholder="友善讨论；涉政策请附官方来源" aria-label="回复内容"></textarea>'
+      + '<button class="mini-btn" onclick="forumSubmitReply(\'' + esc(t.id) + '\')">提交回复</button>'
+      + '</div></div></div>';
+  }).join('');
+}
+function forumToggleReply(id){
+  var el = document.getElementById('frb-' + id); if(el) el.hidden = !el.hidden;
+}
+function _forumMutate(id, fn){
+  var arr = getForumThreads();
+  var idx = -1;
+  for(var i=0;i<arr.length;i++){ if(arr[i].id===id){ idx=i; break; } }
+  if(idx === -1){ return false; }
+  fn(arr[idx]); saveForumThreads(arr); renderForumList(); return true;
+}
+function forumLike(id){
+  if(!_forumMutate(id, function(t){ t.likes=(t.likes||0)+1; })){
+    var arr = forumAllThreads(); var t=null;
+    for(var i=0;i<arr.length;i++){ if(arr[i].id===id){ t=arr[i]; break; } }
+    if(t && t.seed){ t.likes=(t.likes||0)+1; var local=getForumThreads(); t.seed=false; local.push(t); saveForumThreads(local); renderForumList(); }
+  }
+}
+function forumSubmitReply(id){
+  var tEl = document.getElementById('frt-' + id); if(!tEl || !tEl.value.trim()) return;
+  var nEl = document.getElementById('frn-' + id);
+  var reply = { nick: (nEl && nEl.value.trim()) || '本机家长', date: new Date().toISOString().slice(0,10), body: tEl.value.trim().slice(0, 500) };
+  if(!_forumMutate(id, function(t){ (t.replies = t.replies || []).push(reply); })){
+    var arr = forumAllThreads(); var t=null;
+    for(var i=0;i<arr.length;i++){ if(arr[i].id===id){ t=arr[i]; break; } }
+    if(t && t.seed){ t.seed=false; (t.replies = t.replies || []).push(reply); var local=getForumThreads(); local.push(t); saveForumThreads(local); renderForumList(); }
+  }
+}
+function submitForumPost(e){
+  if(e && e.preventDefault) e.preventDefault();
+  var board = document.getElementById('fp-board');
+  var title = document.getElementById('fp-title');
+  var district = document.getElementById('fp-district');
+  var nick = document.getElementById('fp-nick');
+  var body = document.getElementById('fp-body');
+  var err = document.getElementById('fp-err');
+  var ok = document.getElementById('fp-ok');
+  var valid = board && board.value && title && title.value.trim().length >= 4 && body && body.value.trim().length >= 10;
+  if(err) err.style.display = valid ? 'none' : 'block';
+  if(!valid) return false;
+  if(ok) ok.style.display = 'block';
+  var arr = getForumThreads();
+  arr.unshift({
+    id: 'u' + Date.now(), board: board.value, title: title.value.trim(),
+    district: district ? district.value : '', nick: (nick && nick.value.trim()) || '本机家长',
+    date: new Date().toISOString().slice(0,10), likes: 0, body: body.value.trim(), replies: []
+  });
+  saveForumThreads(arr);
+  if(title) title.value=''; if(body) body.value='';
+  forumBoard = board.value;
+  renderForumBoards(); renderForumList();
+  var box = document.getElementById('forum-list');
+  if(box){ var first = box.querySelector('.forum-thread'); if(first) first.scrollIntoView({behavior:'smooth', block:'center'}); }
+  return false;
+}
+function initForum(){
+  var form = document.getElementById('forum-post-form');
+  if(form){ form.addEventListener('submit', submitForumPost); }
+  renderForumBoards(); renderForumList();
 }
 
 ;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}){ ARTMAP[k] = {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}[k]; } } })();

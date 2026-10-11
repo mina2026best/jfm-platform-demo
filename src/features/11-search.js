@@ -9,10 +9,6 @@ var SEARCH_DB = [
  {t:'日历',s:'指标到校资格摸底（2026-10）',a:'#calendar'},
  {t:'日历',s:'中考报名与联招志愿准备（2027-04）',a:'#calendar'},
  {t:'日历',s:'高考特招线公布后行动清单（2027-06）',a:'#calendar'},
- {t:'求真',s:'「有内部渠道，花钱就能进重点」——不实',a:'#fact'},
- {t:'求真',s:'「指标到校 70% 都能上重点」——存疑',a:'#fact'},
- {t:'求真',s:'「普职分流 5:5」——不实（约 65% 升普高）',a:'#fact'},
- {t:'求真',s:'「学位房 ≠ 学区房」——属实提醒',a:'#fact'},
  {t:'志愿',s:'位次换算工具（线差法）',a:'#zy'},
  {t:'生活',s:'陪读租房行情样本 / 护学岗 6,993 个',a:'#life'},
  {t:'工具',s:'陪读成本速算器（房租+生活+通勤区间估算）',a:'#life'},
@@ -58,7 +54,7 @@ function runSearch(){
   panel.innerHTML = html;
   panel.hidden = false;
 }
-var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#fact':'fact.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
+var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'policy.html','#quiz':'quiz.html','#schools':'schools.html','#compare':'compare.html','#zy':'zy.html','#forum':'forum.html','#community':'community.html','#learn':'community.html','#life':'life.html','#beans':'beans.html','#me':'me.html','#plans':'plans.html','#biz':'biz.html','#data-sources':'data-sources.html','#about':'about.html','#how':'about.html'};
 /* v0.40：学校档案检索增强（概况字段全量入库） */
 function _schoolHay(name){
   var d = SCHOOL_DB[name] || {};

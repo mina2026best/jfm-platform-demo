@@ -13,7 +13,7 @@ var DAO_QUICK_NAMES = ['重庆招考信息网','重庆市教育委员会','学�
                        '国家心理健康和精神卫生防治中心','中国铁路12306','重庆图书馆'];
 /* 站内速达：家长最常回访的工具页 */
 var DAO_SITE_LINKS = [['入学自查','quiz.html'],['择校对比','compare.html'],['志愿参考','zy.html'],
-                      ['求真台','fact.html'],['升学日历','calendar.html'],['数据来源','data-sources.html']];
+                      ['家长论坛','forum.html'],['升学日历','calendar.html'],['数据来源','data-sources.html']];
 var DAO_CATS = [
   { n:'升学官方入口', s:'报名 / 查分 / 录取，家长最先要打开的 13 个口子', items:[
     ['重庆市教育委员会','https://jw.cq.gov.cn/','全市招生政策原文与公示公告第一手'],

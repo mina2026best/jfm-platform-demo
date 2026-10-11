@@ -5,6 +5,8 @@ function qparam(name){
   return m ? decodeURIComponent(m[1].replace(/\+/g, ' ')) : '';
 }
 function bootPageRoute(){
+  // 论坛页（v0.80）
+  if(document.getElementById('forum-list')) initForum();
   // 首页热点榜
   if(document.getElementById('hot-rank')) renderHotRank();
   // 搜索页：填热门词 + 执行查询

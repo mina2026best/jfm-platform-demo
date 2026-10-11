@@ -379,7 +379,7 @@ def extract_dialogs(tpl):
     if DIALOGS is not None:
         return DIALOGS
     blocks = []
-    for did in ["school-modal", "order-modal", "news-editor", "kbd-modal", "changelog-modal"]:
+    for did in ["school-modal", "order-modal", "news-editor", "kbd-modal"]:
         m = re.search(r'<dialog id="' + did + r'">[\s\S]*?</dialog>', tpl)
         if not m:
             raise SystemExit("[build] 未找到 dialog：" + did)

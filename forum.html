@@ -132,7 +132,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', a
               </select>
               <input id="fp-nick" maxlength="12" placeholder="称呼（可选，如：初一家长）" aria-label="称呼（可选）" />
             </div>
-            <textarea id="fp-body" rows="4" placeholder="补充说明：孩子学段、具体情况、你已经查过哪些官方来源……（不少于 10 字）" aria-label="帖子内容"></textarea>
+            <textarea id="fp-body" rows="4" placeholder="补充说明：孩子学段、具体情况、你已经查过哪些官方来源……（不少于 10 字）" aria-label="帖子内容" oninput="if(this.value.trim().length>=10){document.getElementById('fp-err').style.display='none'}"></textarea>
             <div class="err" id="fp-err">请填写标题和内容（内容不少于 10 字），方便其他家长帮你。</div>
             <div class="ok-box" id="fp-ok"><b>已发布。</b>帖子保存在本机浏览器；正式版接入账号后将同步到全站，并支持同区推送。</div>
             <div style="margin-top:12px"><button type="submit" class="btn-main">发布讨论</button></div>
@@ -154,7 +154,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', a
           <option value="幼升小">幼升小</option><option value="小升初">小升初</option>
           <option value="初升高" selected>初升高</option><option value="高考">高考</option>
         </select>
-        <button type="submit" class="btn-primary">生成节点提醒日历</button>
+        <button type="submit" class="btn-primary">免费领「重庆升学节点清单」(.ics)</button>
         <button type="button" class="sub-share" onclick="copySubscribeLink()">复制本页，推荐给同年级家长</button>
         <span class="sub-ok" id="sub-ok" hidden>已生成并开始下载 .ics 文件；也可在「升学日历」页随时重新导出。</span>
       </form>
@@ -213,7 +213,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', a
   </div>
 </footer>
 
-<script src="assets/app.63c827a6.js" defer></script>
+<script src="assets/app.7b9c297d.js" defer></script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">

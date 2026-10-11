@@ -10653,9 +10653,10 @@ function hotWordsHTML(){
   }).join('');
 }
 /* 搜索页主逻辑：聚合 SEARCH_DB / 资讯 / 学校 */
-function runPageSearch(){
-  var q = (qparam('q') || '').trim();
-  var box = document.getElementById('sp-input'); if(box) box.value = q;
+function runPageSearch(qOverride){
+  var q = (qOverride != null ? qOverride : (qparam('q') || ''));
+  q = String(q).trim();
+  var box = document.getElementById('sp-input'); if(box && qOverride == null) box.value = q;
   var out = document.getElementById('sp-out'); if(!out) return;
   var head = document.getElementById('sp-head');
   if(!q){

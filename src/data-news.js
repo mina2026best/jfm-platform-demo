@@ -133,6 +133,17 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "2图 设计到飞翔全自主！这群大学生把“手搓”飞行器送上蓝天 精选 推荐 2026-10-11 08:55",
+    "url": "https://www.cqrb.cn/shishi/2026-10-11/2793340_pc.html",
+    "src": "重庆日报",
+    "cat": "升学动态",
+    "sum": "10月9日，2026中国大学生飞行器设计创新大赛在自贡开幕，200余所高校、6000余名师生参赛，军地高校同台竞技，聚焦空天科技创新与工程实践能力培养。",
+    "date": "2026-10-11",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆青年职业技术学院世校赛斩获1金2铜",
     "url": "http://cq.people.com.cn/n2/2026/1009/c365416-41717306.html",
     "src": "人民网重庆",
@@ -8852,4 +8863,4 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-11 10:06", "seed": 46, "collected": 767, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-11 10:11", "seed": 46, "collected": 768, "fetchedPending": 2};

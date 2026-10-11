@@ -14,7 +14,7 @@
 <style>/*__BUILD_CSS__*/</style>
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
-window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', attach: '' } };
+window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'https://hm.baidu.com/hm.js?{ID}', attach: 'd5b4ec19065d37c4b60c31c2e3e84f7d' } };
 /* custom：任意其它统计（如百度统计/GoatCounter）——script 为统计脚本 URL，attach 为 URL 中的 ID 占位符（用 {ID} 表示），两者都填才会注入 */
 (function(c){
   function jfmTrack(event, props){

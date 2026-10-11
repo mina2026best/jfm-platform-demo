@@ -1,3 +1,15 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+
+# AI 搜索爬虫：明确允许（教育问答是 AI 搜索高频场景，被引用即低成本高质量流量）
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Baiduspider
+Allow: /
+
 Sitemap: https://mina2026best.github.io/jfm-platform-demo/sitemap.xml

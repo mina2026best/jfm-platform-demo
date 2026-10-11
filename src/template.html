@@ -26,6 +26,9 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', a
     }catch(e){}
     if(window.gtag && c.ga4Id){ try{ gtag('event', event, props || {}); }catch(e){} }
     if(window.plausible && c.plausibleDomain){ try{ plausible(event, { props: props || {} }); }catch(e){} }
+    if(c.custom && c.custom._baidu && window._hmt){
+      try{ window._hmt.push(['_trackEvent', 'jfm', event, JSON.stringify(props || {}).slice(0, 60)]); }catch(e){}
+    }
   }
   window.jfmTrack = jfmTrack;
   if(c.ga4Id){
@@ -42,6 +45,10 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', a
     document.head.appendChild(p);
   }
   if(c.custom && c.custom.script && c.custom.attach){
+    if(c.custom.script.indexOf('hm.baidu.com') !== -1){
+      window._hmt = window._hmt || [];
+      c.custom._baidu = true;
+    }
     var x = document.createElement('script'); x.defer = true;
     x.src = c.custom.script.replace('{ID}', encodeURIComponent(c.custom.attach));
     document.head.appendChild(x);

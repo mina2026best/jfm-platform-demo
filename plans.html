@@ -6,12 +6,11 @@
 <title>会员体系 · 花期册</title>
 <meta name="description" content="信息基础永远免费；工具与提醒付费，服务按权益分配。免费层完整可用。" />
 <meta name="theme-color" content="#24344D" />
-<meta property="og:title" content="花期册 · 重庆家长升学指南（小升初 / 初升高 / 高考志愿）" />
+<meta property="og:title" content="花期册 - 重庆升学政策与志愿指南" />
 <meta property="og:description" content="小升初 / 初升高 / 高考志愿三条主线：可核验的政策原文、节点日历与工具，逐条标注来源。" />
 <meta property="og:type" content="website" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"花期册 · BLOOM ALMANAC","url":"https://mina2026best.github.io/jfm-platform-demo/","logo":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg","areaServed":"重庆市","knowsAbout":["重庆小升初","重庆中考","指标到校","高考志愿填报"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学指南","url":"https://mina2026best.github.io/jfm-platform-demo/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mina2026best.github.io/jfm-platform-demo/search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学信息与生活服务平台","alternateName":"花期册","description":"可核验的升学信息、关键时刻的确定性、家长的生活服务。","inLanguage":"zh-CN","url":"https://mina2026best.github.io/jfm-platform-demo/"}</script>
 <link rel="stylesheet" href="assets/app.1c25f969.css" />
 <link rel="stylesheet" href="assets/enhance.css" />
 <script>
@@ -45,6 +44,9 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
 })(window.JFM_ANALYTICS);
 </script>
 <script>/* 深色模式防闪烁：尽早应用本机主题记忆 */try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
+<link rel="dns-prefetch" href="https://jw.cq.gov.cn" />
+<link rel="dns-prefetch" href="https://www.cqksy.cn" />
+<link rel="dns-prefetch" href="https://www.cq.gov.cn" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%2324344D'/><rect x='16' y='13' width='32' height='38' rx='5' fill='%23E8EEF7'/><rect x='16' y='13' width='8' height='38' rx='4' fill='%230E7C66'/><circle cx='38' cy='26' r='6' fill='%230E7C66'/><path d='M38 32v11' stroke='%230E7C66' stroke-width='2.6' stroke-linecap='round'/></svg>" />
 <meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />
 <meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/plans.html" />
@@ -139,7 +141,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
     <div class="sub-band">
       <div>
         <h3>关键节点，提前提醒</h3>
-        <p>选择孩子学段，把报名、材料、考试等关键节点生成<b>本机日历订阅文件（.ics）</b>——导入手机日历即可自动提醒。演示阶段不收集手机号与邮箱；正式版将提供公众号与短信提醒通道。</p>
+        <p>选择孩子学段，一键生成<b>升学节点日历（.ics）</b>，导入手机日历自动提醒；也可复制页面推荐给同年级家长。</p>
       </div>
       <form class="sub-form" action="#" onsubmit="return subscribeNode()" aria-label="节点提醒订阅">
         <select id="sub-stage" aria-label="孩子学段">
@@ -147,6 +149,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
           <option value="初升高" selected>初升高</option><option value="高考">高考</option>
         </select>
         <button type="submit" class="btn-primary">生成节点提醒日历</button>
+        <button type="button" class="sub-share" onclick="copySubscribeLink()">复制本页，推荐给同年级家长</button>
         <span class="sub-ok" id="sub-ok" hidden>已生成并开始下载 .ics 文件；也可在「升学日历」页随时重新导出。</span>
       </form>
     </div>
@@ -204,9 +207,9 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
   </div>
 </footer>
 
-<script src="assets/app.9a56845e.js" defer></script>
+<script src="assets/app.63c827a6.js" defer></script>
 
-<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>
+<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
   <div class="dlg-kicker">学校档案 · 审核制</div>
@@ -218,7 +221,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
 </div></dialog>
 <dialog id="order-modal"><div class="dlg">
   <button class="dlg-x" onclick="this.closest('dialog').close()">×</button>
-  <div class="dlg-kicker">会员开通 · 演示环境</div>
+  <div class="dlg-kicker">会员开通</div>
   <h4 id="om-title"></h4>
   <div id="om-form">
     <label class="ck"><input type="checkbox" id="om-agree" /> 我已阅读并同意《会员服务协议》与退款规则（按未使用天数比例退）</label>

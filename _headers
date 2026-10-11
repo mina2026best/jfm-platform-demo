@@ -1,0 +1,11 @@
+# EdgeOne / Cloudflare Pages 长缓存策略（GitHub Pages 不读取此文件，静态资源文件名已带内容哈希）
+/assets/app.*.js
+  Cache-Control: public, max-age=31536000, immutable
+/assets/app.*.css
+  Cache-Control: public, max-age=31536000, immutable
+/assets/photos/*
+  Cache-Control: public, max-age=2592000
+/assets/og-cover.jpg
+  Cache-Control: public, max-age=2592000
+/*
+  Cache-Control: no-cache

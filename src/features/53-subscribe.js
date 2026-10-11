@@ -39,3 +39,17 @@ function subscribeNode(){
   if(typeof toast === 'function') toast('已生成 ' + stage + ' 节点提醒日历（.ics）');
   return false;
 }
+function copySubscribeLink(){
+  var url = location.origin + location.pathname;
+  var done = function(){ if(typeof toast==='function') toast('链接已复制——发给同年级的家长吧'); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done, function(){ fallbackCopy(url); done(); });
+  } else { fallbackCopy(url); done(); }
+  if(typeof jfmTrack === 'function') jfmTrack('subscribe_share', {});
+}
+function fallbackCopy(text){
+  var ta = document.createElement('textarea'); ta.value = text;
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
+}

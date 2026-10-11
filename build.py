@@ -6,6 +6,10 @@ src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页�
 """
 import os, re, sys, hashlib, json, datetime
 
+# v0.85：站点 URL 单源配置——切换正式域名时只改这一行（canonical/OG/JSON-LD/sitemap/robots 全站生效）
+import os as _os
+SITE_BASE = _os.environ.get('SITE_BASE', "https://mina2026best.github.io/jfm-platform-demo")
+_os.environ.setdefault('SITE_BASE', SITE_BASE)
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
 OUT_DIR = ROOT  # 页面直接输出到网站根目录
@@ -398,9 +402,9 @@ def extract_dialogs(tpl):
 def page_title_tag(title):
     return f"<title>{title}</title>"
 
-OG_TAGS = ('<meta property="og:image" content="https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg" />\n'
-           '<meta property="og:url" content="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
-           '<link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/{fname}" />\n'
+OG_TAGS = ('<meta property="og:image" content="' + SITE_BASE + '/assets/og-cover.jpg" />\n'
+           '<meta property="og:url" content="' + SITE_BASE + '/{fname}" />\n'
+           '<link rel="canonical" href="' + SITE_BASE + '/{fname}" />\n'
            '<meta property="og:site_name" content="花期册 · 重庆家长升学信息与生活服务平台" />\n'
            '<meta name="twitter:card" content="summary_large_image" />')
 
@@ -427,7 +431,7 @@ def build_page(page, tpl, secs, css, js):
     head = head.replace('</head>', OG_TAGS.replace('{fname}', fname) + '\n</head>')
     # v0.80：每页 BreadcrumbList 结构化数据（首页 > 当前页）
     if fname != 'index.html':
-        _base = 'https://mina2026best.github.io/jfm-platform-demo/'
+        _base = SITE_BASE + '/'
         _pt = page.get('title', fname)
         _crumb = {"@context": "https://schema.org", "@type": "BreadcrumbList",
                   "itemListElement": [
@@ -723,7 +727,7 @@ def main():
                 open(_p, "w", encoding="utf-8").write(_h2)
     # sitemap 生成（GitHub Pages 域名，带 lastmod）
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    site = "https://mina2026best.github.io/jfm-platform-demo/"
+    site = SITE_BASE + "/"
     lastmod = datetime.date.today().isoformat()
     for pg_ in PAGES:
         if pg_["file"] == "sitemap.html":

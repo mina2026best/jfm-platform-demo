@@ -14,7 +14,8 @@
 <style>/*__BUILD_CSS__*/</style>
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
-window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
+window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: '', attach: '' } };
+/* custom：任意其它统计（如百度统计/GoatCounter）——script 为统计脚本 URL，attach 为 URL 中的 ID 占位符（用 {ID} 表示），两者都填才会注入 */
 (function(c){
   function jfmTrack(event, props){
     try{
@@ -39,6 +40,11 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
     var p = document.createElement('script'); p.defer = true; p.dataset.domain = c.plausibleDomain;
     p.src = 'https://plausible.io/js/script.manual.js';
     document.head.appendChild(p);
+  }
+  if(c.custom && c.custom.script && c.custom.attach){
+    var x = document.createElement('script'); x.defer = true;
+    x.src = c.custom.script.replace('{ID}', encodeURIComponent(c.custom.attach));
+    document.head.appendChild(x);
   }
 })(window.JFM_ANALYTICS);
 </script>

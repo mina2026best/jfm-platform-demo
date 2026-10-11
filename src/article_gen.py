@@ -1,3 +1,5 @@
+import os
+SITE_BASE = os.environ.get("SITE_BASE", "https://mina2026best.github.io/jfm-platform-demo")
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """文章详情页生成器（build.py 调用）
@@ -41,8 +43,8 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
 <meta property="og:title" content="{esc(cfg["title"])}">
 <meta property="og:description" content="{esc(cfg["desc"])}">
 <meta property="og:type" content="article">
-<link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/articles/{cfg["fname"]}">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":{cfg.get("schema_type", chr(34)+"Article"+chr(34))},"headline":"{esc(cfg["title"])}","description":"{esc(cfg["desc"])}","inLanguage":"zh-CN","datePublished":"{cfg.get("date", "2026-09-16")}","dateModified":"{cfg.get("date", "2026-09-16")}","author":{{"@type":"Organization","name":"{cfg.get("author", "花期册编辑部")}"}},"publisher":{{"@type":"Organization","name":"花期册 · BLOOM ALMANAC","logo":{{"@type":"ImageObject","url":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg"}}}},"mainEntityOfPage":"https://mina2026best.github.io/jfm-platform-demo/articles/{cfg["fname"]}"}}</script>{cfg.get("extra_ld","")}
+<link rel="canonical" href="{SITE_BASE}/articles/{cfg["fname"]}">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":{cfg.get("schema_type", chr(34)+"Article"+chr(34))},"headline":"{esc(cfg["title"])}","description":"{esc(cfg["desc"])}","inLanguage":"zh-CN","datePublished":"{cfg.get("date", "2026-09-16")}","dateModified":"{cfg.get("date", "2026-09-16")}","author":{{"@type":"Organization","name":"{cfg.get("author", "花期册编辑部")}"}},"publisher":{{"@type":"Organization","name":"花期册 · BLOOM ALMANAC","logo":{{"@type":"ImageObject","url":{SITE_BASE}+"/assets/og-cover.jpg"}}}},"mainEntityOfPage":{SITE_BASE}+"/articles/{cfg["fname"]}"}}</script>{cfg.get("extra_ld","")}
 <link rel="stylesheet" href="../assets/{cfg["css_file"]}">
 <link rel="stylesheet" href="../assets/enhance.css">
 <script>try{{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){{document.documentElement.classList.add('theme-dark')}}}}catch(e){{}}</script>

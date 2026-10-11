@@ -86,24 +86,50 @@ function faqFilter(cat){
   });
 }
 /* 首页热点榜（由资讯 seed 生成，取前 8） */
+function jfmCleanTitle(t){
+  var x = String(t || '');
+  x = x.replace(/\s*\.\.\.\s*$/,'').replace(/…$/,'');
+  x = x.replace(/\s*20\d{2}-\d{2}-\d{2}\s*$/,'');
+  return x;
+}
 function renderHotRank(){
   var box = document.getElementById('hot-rank'); if(!box) return;
   var items = [];
   try{
     var all = newsCombined();
     if(typeof jfmRelevance === 'function'){
-      var local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      var local = all.filter(function(x){ return jfmRelevance(x) >= 8; });
+      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
       all = (local.length >= 4 ? local : all);
     }
-    items = all.slice(0, 8);
+    items = all.slice(0, 7);
   }catch(e){ return; }
   if(!items.length){ box.innerHTML = '<div class="empty-mini">资讯加载中…</div>'; return; }
-  box.innerHTML = '<div class="hot-rank">' + items.map(function(x, i){
-    var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));
-    return '<a href="' + href + '"><span class="no' + (i < 3 ? ' hot-no3' : ' hot-no') + '">' + (i + 1) + '</span>'
-      + '<span class="t">' + esc(x.t) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
-  }).join('') + '</div>';
+  /* 澎湃头版式：第 1 条做头条大卡（大图 + 衬线大标题 + 摘要），2-7 做序号榜单 */
+  var lead = items[0];
+  var leadKey = jfmCleanTitle(lead.t).slice(0, 14);
+  var rest = items.slice(1).filter(function(x){ return jfmCleanTitle(x.t).slice(0, 14) !== leadKey; });
+  var leadHref = 'news.html?s=' + encodeURIComponent((lead.t || '').slice(0, 12));
+  var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + lead.t] || '') : '';
+  if(artKey) leadHref = 'articles/' + artKey;
+  var html = '<div class="hr-editorial">'
+    + '<a class="hr-lead" href="' + leadHref + '">'
+    + '<span class="hr-lead-tag">今日头条</span>'
+    + '<span class="hr-lead-img"><img loading="lazy" decoding="async" src="' + (typeof photoURLForItem === "function" ? photoURLForItem((lead._k||"") + "|" + (lead.t||"")) : "") + '" alt="' + (typeof NEWS_PHOTO_ALT !== "undefined" ? (NEWS_PHOTO_ALT[lead.cat] || "教育资讯主题配图") : "教育资讯配图") + '"></span>'
+    + '<span class="hr-lead-main"><span class="hr-lead-title">' + esc(lead.t) + '</span>'
+    + (lead.sum ? '<span class="hr-lead-sum">' + esc(lead.sum).slice(0, 80) + '…</span>' : '')
+    + '<span class="hr-lead-meta">' + esc(lead.cat || '') + ' · ' + esc(lead.src || '') + ' · ' + esc(lead.date || '') + '</span></span></a>';
+  if(rest.length){
+    html += '<div class="hot-rank hr-list">' + rest.map(function(x, i){
+      var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));
+      return '<a href="' + href + '"><span class="no' + (i < 2 ? ' hot-no3' : ' hot-no') + '">' + (i + 2) + '</span>'
+        + '<span class="t">' + esc(x.t) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
+    }).join('') + '</div>';
+  }
+  html += '</div>';
+  box.innerHTML = html;
 }
+
 
 /* ---------- v0.34 联系页留言 · v0.81 诚实化 ----------
    后端可用（本地/自部署）时真实写库；静态托管环境如实告知"保存在本机"，绝不假装成功。 */

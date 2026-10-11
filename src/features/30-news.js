@@ -39,15 +39,23 @@ function clearNewsQuery(){
 
 /* ---------- v0.80：重庆 K12 相关性优先（要闻榜与资讯流排序） ---------- */
 var JFM_LOCAL_SOURCES = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙'];
-var JFM_LOCAL_KEYWORDS = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州','中考','高考','小升初','幼升小','联招','指标到校','摇号','划片','志愿','录取','招生','自主命题','一分一段','特招线','普高','中职','转学','学区','学位','入学'];
+var JFM_LOCAL_KEYWORDS = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州'];
+var JFM_K12_KEYWORDS = ['小升初','幼升小','中考','高考','划片','摇号','指标到校','志愿','招生','学位','学区','转学','中小学','义务教育','双减','课后服务','教材','校园','家长','教委','普高','联招','考试','报名','录取','入学','K12','中小学校','区县'];   /* K12 家长核心痛点词：命中才算强相关 */
+var JFM_NEG_KEYWORDS = ['职业','职教','高校','大学','学院','研究生','考研','雅思','托福','留学','党建','思政','国际交流','世校赛','技能大赛','双一流','就业','科研','论文','竞赛','本科'];   /* 高教/职教/考试培优类：K12 家长不关注，重罚 */
 var newsLocalFirst = true;
 function jfmRelevance(x){
   var hay = ((x.t||'') + ' ' + (x.sum||'') + ' ' + (x.src||''));
   var score = 0;
   for(var i=0;i<JFM_LOCAL_SOURCES.length;i++){ if((x.src||'').indexOf(JFM_LOCAL_SOURCES[i]) !== -1){ score += 5; break; } }
   var hits = 0;
-  for(var j=0;j<JFM_LOCAL_KEYWORDS.length;j++){ if(hay.indexOf(JFM_LOCAL_KEYWORDS[j]) !== -1){ hits++; if(hits>=4) break; } }
-  score += Math.min(hits, 4) * 2;
+  for(var j=0;j<JFM_LOCAL_KEYWORDS.length;j++){ if(hay.indexOf(JFM_LOCAL_KEYWORDS[j]) !== -1){ hits++; if(hits>=3) break; } }
+  score += Math.min(hits, 3) * 2;
+  /* K12 核心词：每命中 +2（封顶 6），命中不到 1 个则无法进入强相关组 */
+  var k12 = 0;
+  for(var k=0;k<JFM_K12_KEYWORDS.length;k++){ if(hay.indexOf(JFM_K12_KEYWORDS[k]) !== -1){ k12++; if(k12>=3) break; } }
+  score += Math.min(k12, 3) * 2;
+  /* 负关键词：一票重罚（职业/高校/考研/留学等与 K12 家长无关） */
+  for(var n=0;n<JFM_NEG_KEYWORDS.length;n++){ if(hay.indexOf(JFM_NEG_KEYWORDS[n]) !== -1){ score -= 6; break; } }
   return score;
 }
 function setNewsLocalFirst(on){

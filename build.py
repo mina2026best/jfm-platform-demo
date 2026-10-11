@@ -309,15 +309,25 @@ def _photo_pool_assign(items):
 
 def _news_relevance(x):
     srcs = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙']
-    kws = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州','中考','高考','小升初','幼升小','联招','指标到校','摇号','划片','志愿','录取','招生','自主命题','一分一段','特招线','普高','中职','转学','学区','学位','入学']
-    hay = (x.get('t','') + ' ' + x.get('sum','') + ' ' + x.get('src',''))
+    local_kw = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州']
+    k12_kw = ['小升初','幼升小','中考','高考','划片','摇号','指标到校','志愿','招生','学位','学区','转学','中小学','义务教育','双减','课后服务','教材','校园','家长','教委','普高','联招','考试','报名','录取','入学','K12','中小学校','区县']
+    neg_kw = ['职业','职教','高校','大学','学院','研究生','考研','雅思','托福','留学','党建','思政','国际交流','世校赛','技能大赛','双一流','就业','科研','论文','竞赛','本科']
+    hay = x.get('t','') + ' ' + x.get('sum','') + ' ' + x.get('src','')
     score = 5 if any(k in x.get('src','') for k in srcs) else 0
     hits = 0
-    for k in kws:
+    for k in local_kw:
         if k in hay:
             hits += 1
-            if hits >= 4: break
-    return score + min(hits, 4) * 2
+            if hits >= 3: break
+    score += min(hits, 3) * 2
+    k12 = 0
+    for k in k12_kw:
+        if k in hay:
+            k12 += 1
+            if k12 >= 3: break
+    score += min(k12, 3) * 2
+    if any(k in hay for k in neg_kw): score -= 6
+    return score
 
 def build_news_static(artmap, limit=12):
     dn = os.path.join(SRC, "data-news.js")
@@ -591,9 +601,51 @@ def main():
 
     for pg in PAGES:
         if pg["file"] == "sitemap.html":
-            continue  # 站点地图由 footer 覆盖，暂不单独生成
+            # v0.82：分组目录式站点地图（替代遗留旧版）
+            groups = [
+                ("升学工具", "#0E7C66", [("quiz.html","入学自查"),("schools.html","学校档案"),("compare.html","择校对比"),("zy.html","志愿参考"),("calendar.html","升学日历"),("problems.html","问题速查"),("daohang.html","网址导航")]),
+                ("政策资料", "#24344D", [("policy.html","政策库与人话词典"),("wiki.html","升学百科"),("faq.html","家长 FAQ"),("data-sources.html","数据来源与核验")]),
+                ("资讯与社区", "#C8342B", [("news.html","升学资讯"),("forum.html","家长论坛"),("community.html","家长社区"),("life.html","生活服务"),("beans.html","升学豆")]),
+                ("会员与服务", "#B45309", [("plans.html","会员体系"),("biz.html","B 端合作"),("me.html","孩子档案"),("contact.html","联系留言")]),
+                ("关于", "#6B7683", [("about.html","关于与联系"),("search.html","站内搜索"),("index.html","首页")]),
+            ]
+            import datetime as _dt
+            _today = _dt.date.today().isoformat()
+            ghtml = ""
+            for gname, gcolor, links in groups:
+                ghtml += '<div class="sm-group"><h3 style="border-left:4px solid %s;padding-left:10px">%s</h3><div class="sm-links">' % (gcolor, gname)
+                for h, t in links:
+                    ghtml += '<a href="%s">%s</a>' % (h, t)
+                ghtml += '</div></div>'
+            _art_n = len([f for f in os.listdir(os.path.join(ROOT, "articles")) if f.endswith(".html")]) if os.path.isdir(os.path.join(ROOT, "articles")) else 0
+            import datetime as _dt2
+            ghtml += ('<div class="sm-group"><h3 style="border-left:4px solid #8B95A0;padding-left:10px">文章库（自动生成）</h3>'
+                      '<p class="cmp-note" style="margin-top:8px">资讯 / 政策 / 学校档案 / 学堂 / FAQ 详情页共 ' + str(_art_n) + ' 篇，由各列表页进入；'
+                      '全量 URL 见 <a href="sitemap.xml">sitemap.xml</a>（最后更新 ' + _dt.date.today().isoformat() + '）。</p></div>')
+            sm_head = '<title>站点地图 · 花期册</title><meta name="description" content="花期册全站页面分组导航：升学工具、政策资料、资讯社区、会员服务与文章库。" />'
+            sm_body = ('<div class="wrap"><div class="sec-head"><span class="no">SITEMAP</span><h2>站点地图</h2></div>'
+                       '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
+                       '<div class="sm-grid">' + ghtml + '</div></div>') if False else ('<div class="wrap"><div class="sec-head"><span class="no">SITEMAP</span><h2>站点地图</h2></div>'
+                       '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
+                       '<div class="sm-grid">' + ghtml + '</div></div>')
+            out = build_page(pg, tpl, secs, css, js)
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css" />')
+            out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
+            # 替换主内容：定位 <main>…</main>
+            import re as _re
+            out = _re.sub(r'<main id="main">[\s\S]*?</main>', '<main id="main">' + sm_body + '</main>', out, count=1)
+            out = _re.sub(r'<title>[\s\S]*?</title>', sm_head, out, count=1)
+            if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
+                sys.exit(f"[build] 占位符未替换干净：{pg['file']}")
+            path = os.path.join(OUT_DIR, pg["file"])
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(out)
+            h = hashlib.sha256(out.encode()).hexdigest()[:12]
+            built.append(f"{pg['file']} · {len(out)//1024} KB · sha256:{h}")
+            total += len(out)
+            continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css" />')
         out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")

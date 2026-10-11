@@ -14,15 +14,9 @@
   --ink:#26303B;             /* 正文深灰（带一丝蓝，比纯灰更精神） */
   --ink2:#5A6672;            /* 次要 */
   --muted:#8B95A0;           /* 辅助 */
-<<<<<<< HEAD
   --faint:#5E6A75;           /* 最弱 */
   --navy:#26303B; --navy2:#3D4A57; --blue:#5D77A3;
   --accent:#1B7A44; --accent-hover:#156638; --accent-deep:#114F2A;
-=======
-  --faint:#AEB6BE;           /* 最弱 */
-  --navy:#26303B; --navy2:#3D4A57; --blue:#5D77A3;
-  --accent:#2E9E5B; --accent-hover:#26884D; --accent-deep:#1F6B40;
->>>>>>> 072fff9de7628abca3fccee8adc848fd7a4b3a5b
   --accent-soft:#E9F4EC;
   --warn:#B45309; --warn-soft:#FCF3E3;
   --line:#ECEEEC; --line2:#DDE2DF;
@@ -90,10 +84,10 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
 .top .wrap{height:auto;min-height:64px;padding:10px 0;gap:20px;align-items:center}
 .logo{white-space:nowrap}
 .logo small{white-space:nowrap}
-.logo{font-family:var(--display);color:var(--ink);font-weight:600;font-size:20px;letter-spacing:.06em}
+.logo{font-family:var(--display);color:var(--ink);font-weight:700;font-size:30px;letter-spacing:.04em}
 .logo .dot::before{background:var(--accent)}
 .logo .dot::after{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-.logo small{color:var(--faint);font-weight:400;font-size:10px;letter-spacing:.2em;font-family:var(--sans)}
+.logo small{color:var(--faint);font-weight:400;font-size:10.5px;letter-spacing:.22em;font-family:var(--mono);vertical-align:4px}
 .top .wrap{flex-wrap:nowrap}
 .top nav{display:flex;flex-wrap:wrap;white-space:nowrap;min-width:0}
 .top nav a{color:var(--accent);font-size:13px;padding:4px 3px;margin:0 5px;border-radius:0;white-space:nowrap}
@@ -147,7 +141,7 @@ section.alt{background:var(--paper);border-top:1px solid var(--line);border-bott
   font-family:var(--mono);color:var(--accent);font-size:11.5px;font-weight:600;letter-spacing:.3em}
 .sec-head .no::before,.sec-head .no::after{display:none !important}
 .sec-head h2::before{display:none}
-.sec-head h2{padding-left:0;font-size:23px}
+.sec-head h2{padding-left:0;font-size:26px;font-family:var(--display);font-weight:700;letter-spacing:.01em}
 .sec-head::after{display:none}
 .sec-head{border-bottom:1px solid var(--line2);padding-bottom:14px}
 .sec-head h2{margin:0;flex:none;font-family:var(--display);font-size:21px;font-weight:600;color:var(--ink);letter-spacing:.02em;
@@ -440,12 +434,54 @@ footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1
 .stage-doors .sd::after{content:"0" counter(sd);position:absolute;right:0;top:6px;
   font-family:var(--display);font-size:52px;font-weight:600;line-height:1;
   color:var(--accent);opacity:.13;pointer-events:none}
-<<<<<<< HEAD
 
 /* v0.81：修复与 app.css 响应式规则的加载顺序覆盖——960px 以下必须隐藏桌面导航 */
 @media (max-width:960px){
   .top nav.nav-main{display:none !important}
   .top nav{display:none !important}
 }
-=======
->>>>>>> 072fff9de7628abca3fccee8adc848fd7a4b3a5b
+
+/* ---------- v0.82 澎湃式资讯红点缀（仅资讯语境使用，品牌主色仍为豆瓣绿） ---------- */
+:root{ --news-red:#C8342B; --news-red-soft:#FBEAE8; }
+.sec-head .no[style*="资讯"], .home-top-kicker{color:var(--news-red)}
+.hot-rank .no{color:var(--news-red)}
+.hot-rank .no.hot-no3{color:var(--news-red);font-weight:800}
+.hot-rank a:hover .t{color:var(--news-red)}
+
+/* ---------- v0.82 头条大卡样式 ---------- */
+.hr-editorial{display:grid;grid-template-columns:1fr;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.hr-lead{display:grid;grid-template-columns:200px 1fr;gap:16px;padding:16px;text-decoration:none;border-bottom:1px solid var(--line);align-items:center}
+.hr-lead-img{display:block;border-radius:8px;overflow:hidden;aspect-ratio:16/10;background:var(--bg)}
+.hr-lead-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hr-lead-tag{position:absolute;font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:#fff;background:var(--news-red);border-radius:4px;padding:3px 8px;margin:8px 0 0 8px}
+.hr-lead-main{display:flex;flex-direction:column;gap:6px;min-width:0}
+.hr-lead-title{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.4;color:var(--ink)}
+.hr-lead:hover .hr-lead-title{color:var(--news-red)}
+.hr-lead-sum{font-size:13px;color:var(--ink2);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hr-lead-meta{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hr-lead{position:relative}
+.hr-list{border:none !important;border-radius:0 !important;background:none !important;padding:0 6px !important}
+@media (max-width:720px){
+  .hr-lead{grid-template-columns:104px 1fr;padding:12px}
+  .hr-lead-title{font-size:15.5px}
+  .hr-lead-sum{display:none}
+}
+/* v0.82b：移动端溢出修复——栅格子项 min-width 收敛 + 图片约束 */
+.hr-editorial{min-width:0;max-width:100%}
+.hr-lead{min-width:0}
+.hr-lead-img{min-width:0;max-width:100%;width:100%}
+.hr-lead-img img{width:100%;max-width:100%;height:100%;object-fit:cover}
+.hr-lead-main{min-width:0;max-width:100%}
+.hot-rank.hr-list{min-width:0}
+/* v0.82b2：图片轨固定像素宽度（内容无法撑破） */
+.hr-lead-img{width:200px !important;flex:none}
+@media (max-width:720px){ .hr-lead-img{width:104px !important} }
+.hr-lead{display:grid}
+
+/* ---------- v0.82 站点地图分组目录 ---------- */
+.sm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.sm-group{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.sm-group h3{font-family:var(--display);font-size:17px;color:var(--ink);margin:0 0 12px}
+.sm-links{display:flex;flex-direction:column;gap:2px}
+.sm-links a{padding:7px 10px;border-radius:7px;color:var(--ink2);text-decoration:none;font-size:13.5px}
+.sm-links a:hover{background:var(--accent-soft);color:var(--accent)}

@@ -12,6 +12,7 @@
 <link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/articles/article-news-b184d140.html">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"高中生选科风向：物理+化学组合占比继续走高","description":"选科别只看「专业覆盖面」，要看孩子单科排名与兴趣稳定性——覆盖面大不代表你孩子的竞争力强。","inLanguage":"zh-CN","datePublished":"2026-09-27","dateModified":"2026-09-27","author":{"@type":"Organization","name":"公开报道口径"},"publisher":{"@type":"Organization","name":"花期册 · BLOOM ALMANAC","logo":{"@type":"ImageObject","url":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg"}},"mainEntityOfPage":"https://mina2026best.github.io/jfm-platform-demo/articles/article-news-b184d140.html"}</script>
 <link rel="stylesheet" href="../assets/app.f75a76f5.css">
+<link rel="stylesheet" href="../assets/enhance.css">
 <script>try{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('theme-dark')}}catch(e){}</script>
 </head>
 <body>
@@ -174,6 +175,7 @@
   <div class="dlg-kicker">站点更新 · CHANGELOG</div>
   <h4>更新日志</h4>
   <div class="cl-list">
+    <div class="cl-item"><b>v0.82</b><span>视觉对齐豆瓣×澎湃（第二轮大改版）：①修复重大遗留——远端 v0.64-v0.78 的「豆瓣×澎湃视觉增强层 enhance.css」从未被任何页面加载（且合并冲突标记未解决），本版解决冲突并全站接入，衬线标题×无衬线正文×等宽标签三轨制真正生效；②Logo 字号 20→30px 衬线字重 700；③资讯全面聚焦 K12 家长痛点——负关键词重罚（职业/职教/高校/大学/考研/雅思/留学/就业等一票 -6），K12 核心词（招生/划片/摇号/指标到校/志愿/学位/考试…）加权，首页要闻榜只出强相关条目；④首页要闻区澎湃头版式改版：第 1 条升级为「今日头条」大卡（大图+衬线标题+摘要+红色标签），2-7 序号榜单，自动去重；⑤资讯语境引入澎湃红点缀（#C8342B，仅资讯 kicker/热榜序号）；⑥站点地图页重建为分组目录式（升学工具/政策资料/资讯社区/会员服务/关于/文章库，含 170 篇文章库计数），替代遗留旧版</span></div>
     <div class="cl-item"><b>v0.81</b><span>Minimax 评估整改：①购买链路修复——order-modal 此前未注入页面导致「选择会员」点击无任何反应（P0），已注入；订单流程诚实化为「开通意向登记」，明确演示阶段不扣款、不生成假订单；②留言/合作意向修复——移除 127.0.0.1 硬编码与 .example 死邮箱，后端可用时真实写库，静态托管下如实提示「保存在本机」，终结「假成功」；③移动端导航破版修复——enhance.css 无条件 display:flex 覆盖了 960px 以下隐藏规则（双导航打架），已补强制隐藏；④对比度整改——强调色豆瓣绿加深（3.41→5.37:1）、弱文字色 #AEB6BE→#5E6A75（2.05→5.53:1），全站文字对比度达 WCAG AA；⑤资讯列表静态预渲染（前 12 条直出 HTML，百度等不执行 JS 的爬虫可收录，CLS 归因的 JS 注入位移消除）+ 首条大图限高；⑥文章页补 Article 结构化数据、24 篇 FAQ 补 FAQPage（百度富摘要）；⑦admin 管理台加 noindex + robots Disallow + 品牌名更正；⑧robots.txt 明确允许 GPTBot/ClaudeBot/PerplexityBot/Baiduspider；⑨移动端菜单 class="['cta']" 模板残留修复（会员 CTA 样式恢复）；公告栏改为静态直出（消除 JS 注入位移）</span></div>
     <div class="cl-item"><b>v0.80</b><span>板块调整（经运营决策）：求真辟谣台下线，原「内容纠错」通道并入联系留言，社区讨论整合升级为<b>家长论坛</b>（幼升小/小升初/初升高/高考志愿/陪读生活/站务反馈六版块，发帖·回复·点赞·最新/最热/待回复排序，演示期帖子保存在本机）；导航归并为 6 个一级入口+下拉分组（全部子页保留可达）；资讯流与首页要闻榜按「重庆本地来源+升学关键词」相关性优先（可一键开关）；全站搜索/留言/经验/论坛表单补齐 form 语义与无 JS 降级；正文包 main 地标；新增页脚「节点提醒订阅」（按学段导出 .ics）；接入可配置统计埋点（GA4/Plausible 配置位，留空仅本机事件日志）；SEO 补 Organization/SearchAction/每页 BreadcrumbList；配图口径更正：学校外观图为 AI 示意图（非实拍），v0.39 日志中「真实实拍」误述已更正</span></div>
     <div class="cl-item"><b>v0.63</b><span>首屏结构收敛：把 hero 里「要闻与热门 / 快捷通道 / 三个任务入口」下沉为独立区块（#home-top），信任数据之后立刻接「三个关口」——桌面实测三关口带从 y1837 提到 y843（提前 994px），首屏底部即可看到区块标题；要闻与任务入口紧随其后，未丢内容。同步：smoke 新增「首屏尾部下移后的任务入口 / 要闻榜」两条断言</span></div>
@@ -234,7 +236,7 @@
   </div>
 </div></dialog>
 <div id="toast" role="status" aria-live="polite"></div>
-<script src="../assets/app.a51835e1.js" defer></script>
+<script src="../assets/app.f04e9c00.js" defer></script>
 <script></script>
 <script>
 (function(){

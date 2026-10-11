@@ -9035,47 +9035,72 @@ function restoreFav(){
 
 
 /* ---------- 17-order ---------- */
-/* ---------- v0.3：会员开通 ---------- */
-var ORDER_N = 0;
+/* ---------- v0.3 会员开通 · v0.81 诚实化改版 ----------
+   演示阶段未接入支付通道：不收款、不生成假订单号、不承诺"已交付"。
+   用户提交的是「开通意向」，保存在本机浏览器；正式版接入支付后凭此优先开通。 */
 function openOrder(name, price, beans){
-  document.getElementById('om-title').textContent = '开通 · ' + name + (price ? '（¥' + price + '/年）' : '（免费）');
-  document.getElementById('om-form').hidden = false;
-  document.getElementById('om-done').hidden = true;
-  document.getElementById('om-agree').checked = false;
-  document.getElementById('om-auto').checked = false;
-  document.getElementById('om-err').style.display = 'none';
+  var t = document.getElementById('om-title'); if(t) t.textContent = '开通意向 · ' + name + (price ? '（¥' + price + '/年）' : '（免费）');
+  var f = document.getElementById('om-form'); if(f) f.hidden = false;
+  var d = document.getElementById('om-done'); if(d) d.hidden = true;
+  var a = document.getElementById('om-agree'); if(a) a.checked = false;
+  var au = document.getElementById('om-auto'); if(au) au.checked = false;
+  var e = document.getElementById('om-err'); if(e) e.style.display = 'none';
   window._omBeans = beans || 0; window._omName = name;
-  document.getElementById('order-modal').showModal();
+  var m = document.getElementById('order-modal'); if(m) m.showModal();
 }
 function submitOrder(){
   if(!document.getElementById('om-agree').checked){
     document.getElementById('om-err').style.display = 'block'; return;
   }
-  ORDER_N++;
-  var id = 'DD-20260916-' + String(100 + ORDER_N);
+  var id = 'YY-' + new Date().toISOString().slice(0,10) + '-' + String(Date.now()).slice(-6);
+  try{
+    var arr = JSON.parse(localStorage.getItem('jfm_order_intents') || '[]');
+    arr.unshift({ id: id, plan: window._omName, beans: window._omBeans || 0, auto: document.getElementById('om-auto').checked, date: new Date().toISOString() });
+    localStorage.setItem('jfm_order_intents', JSON.stringify(arr));
+  }catch(e){}
   document.getElementById('om-form').hidden = true;
   var ok = document.getElementById('om-done'); ok.hidden = false;
-  ok.innerHTML = '<b>订单已创建：</b>' + id + '<br/>权益开通 SLA ≤2h（已即时开通）→ 状态：<b>已交付</b>'
-    + (window._omBeans ? '；赠送升学豆 ' + window._omBeans : '')
-    + '。<br/><span class="hint2">合规说明：自动续费默认关闭；退款按未使用天数比例（协议明示）；未交付不确认收入。</span>';
-  toast('订单创建成功：' + id);
+  ok.innerHTML = '<b>开通意向已记录：</b>' + id
+    + '<br/><span class="hint2">演示阶段未接入支付，本次<b>不会产生任何扣款</b>；意向保存在本机浏览器，正式版上线后凭记录优先开通'
+    + (window._omBeans ? '，并预挂升学豆 ' + window._omBeans + ' 权益' : '')
+    + '。自动续费默认关闭；退款按未使用天数比例（协议明示）。</span>';
+  toast('开通意向已记录（未扣款）：' + id);
+  if(typeof jfmTrack === 'function') jfmTrack('order_intent', { plan: window._omName });
 }
 
 
 /* ---------- 18-biz ---------- */
-/* ---------- v0.3：B 端意向 ---------- */
-var BZ_N = 0;
+/* ---------- v0.3 B 端意向 · v0.81 诚实化 ----------
+   修复评估报告指出的"假成功"：此前仅前端提示、数据被静默丢弃。
+   现在先尝试真实提交（/api/contact，类型=合作意向）；不可用时如实告知"保存在本机"。 */
 function submitBiz(){
   var n = document.getElementById('bz-name').value.trim();
   var it = document.getElementById('bz-intro').value.trim();
   var err = document.getElementById('bz-err'), ok = document.getElementById('bz-ok');
   if(n.length < 2 || it.length < 10){ err.style.display = 'block'; ok.style.display = 'none'; return; }
   err.style.display = 'none';
-  BZ_N++;
-  document.getElementById('bz-id').textContent = 'BZ-20260916-' + String(100 + BZ_N);
-  ok.style.display = 'block';
-  document.getElementById('bz-name').value = ''; document.getElementById('bz-intro').value = '';
-  toast('合作意向已提交');
+  var item = { id: 'BZ-' + new Date().toISOString().slice(0,10) + '-' + String(Date.now()).slice(-6),
+               name: n, message: it, type: '合作意向', date: new Date().toISOString() };
+  var done = function(remote){
+    document.getElementById('bz-id').textContent = item.id;
+    ok.style.display = 'block';
+    var note = document.getElementById('bz-note');
+    if(note && !remote) note.textContent = '当前为演示环境（静态托管）：意向已保存在本机浏览器，正式版接入后端后将自动同步并进入资质预审。';
+    document.getElementById('bz-name').value = ''; document.getElementById('bz-intro').value = '';
+    toast(remote ? '合作意向已提交' : '合作意向已保存到本机（演示环境）');
+    if(typeof jfmTrack === 'function') jfmTrack('biz_submit', { local: !remote });
+  };
+  fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: n, type: '合作意向', contact: '', message: it }) })
+    .then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+    .then(function(){ done(true); })
+    .catch(function(){
+      try{
+        var out = JSON.parse(localStorage.getItem('jfm_biz_outbox') || '[]');
+        out.unshift(item); localStorage.setItem('jfm_biz_outbox', JSON.stringify(out));
+      }catch(e){}
+      done(false);
+    });
 }
 
 
@@ -10234,8 +10259,8 @@ function renderHotRank(){
   }).join('') + '</div>';
 }
 
-/* ---------- v0.34：联系页留言提交（写后端 /api/contact） ---------- */
-/* ponytail: 线上为静态托管，后端仅在本地可用——公网提交失败时落 mailto 兜底，接入正式表单服务后替换 */
+/* ---------- v0.34 联系页留言 · v0.81 诚实化 ----------
+   后端可用（本地/自部署）时真实写库；静态托管环境如实告知"保存在本机"，绝不假装成功。 */
 function submitContact(){
   var name = (document.getElementById('ct-name')||{}).value || '';
   var type = (document.getElementById('ct-type')||{}).value || '咨询';
@@ -10244,33 +10269,30 @@ function submitContact(){
   if(!name.trim()){ toast('请填写称呼'); return; }
   if(msg.trim().length < 5){ toast('留言内容至少 5 个字'); return; }
   var payload = JSON.stringify({ name: name.trim(), type: type, contact: ct.trim(), message: msg.trim() });
-  var isLocal = location.hostname === '127.0.0.1' || location.hostname === 'localhost' || location.protocol === 'file:';
-  fetch('http://127.0.0.1:8780/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: payload
-  }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+  var item = { id: 'LY-' + new Date().toISOString().slice(0,10) + '-' + String(Date.now()).slice(-6),
+               name: name.trim(), type: type, contact: ct.trim(), message: msg.trim(), date: new Date().toISOString() };
+  fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload })
+    .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
     .then(function(res){
       if(res.ok){
         toast('留言已登记（' + res.d.item.id + '），感谢！');
         var m = document.getElementById('ct-msg'); if(m) m.value = '';
         var note = document.getElementById('ct-note');
         if(note) note.textContent = '已提交：编号 ' + res.d.item.id + ' · ' + res.d.item.created;
-      } else {
-        toast('提交失败：' + (res.d.error || '未知错误'));
-      }
+      } else { throw new Error(res.d.error || '未知错误'); }
     }).catch(function(){
-      if(isLocal){
-        toast('本地后端未启动（python3 server.py）——留言暂存失败');
-      } else {
-        // 公网静态托管：mailto 兜底，不丢用户输入
-        var body = encodeURIComponent('称呼：' + name + '\n类型：' + type + '\n联系方式：' + ct + '\n\n' + msg);
-        location.href = 'mailto:contact@jfm.example?subject=' + encodeURIComponent('【花期册留言】' + type) + '&body=' + body;
-        var note = document.getElementById('ct-note');
-        if(note) note.textContent = '当前为演示环境，已为你唤起邮件客户端发送同内容留言。';
-      }
+      try{
+        var out = JSON.parse(localStorage.getItem('jfm_contact_outbox') || '[]');
+        out.unshift(item); localStorage.setItem('jfm_contact_outbox', JSON.stringify(out));
+      }catch(e){}
+      var m = document.getElementById('ct-msg'); if(m) m.value = '';
+      var note = document.getElementById('ct-note');
+      if(note) note.textContent = '当前为演示环境（静态托管）：留言编号 ' + item.id + '，已保存在本机浏览器；正式版接入后端后将自动同步，不会丢失。';
+      toast('留言已保存到本机（演示环境）');
+      if(typeof jfmTrack === 'function') jfmTrack('contact_submit', { type: type, local: true });
     });
 }
+
 
 
 /* ---------- 45-quguide ---------- */

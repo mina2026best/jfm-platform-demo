@@ -42,6 +42,7 @@ def article_html(cfg, css, header, footer_html, dialogs, extra_js):
 <meta property="og:description" content="{esc(cfg["desc"])}">
 <meta property="og:type" content="article">
 <link rel="canonical" href="https://mina2026best.github.io/jfm-platform-demo/articles/{cfg["fname"]}">
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":{cfg.get("schema_type", chr(34)+"Article"+chr(34))},"headline":"{esc(cfg["title"])}","description":"{esc(cfg["desc"])}","inLanguage":"zh-CN","datePublished":"{cfg.get("date", "2026-09-16")}","dateModified":"{cfg.get("date", "2026-09-16")}","author":{{"@type":"Organization","name":"{cfg.get("author", "花期册编辑部")}"}},"publisher":{{"@type":"Organization","name":"花期册 · BLOOM ALMANAC","logo":{{"@type":"ImageObject","url":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg"}}}},"mainEntityOfPage":"https://mina2026best.github.io/jfm-platform-demo/articles/{cfg["fname"]}"}}</script>{cfg.get("extra_ld","")}
 <link rel="stylesheet" href="../assets/{cfg["css_file"]}">
 <script>try{{var _tp=(localStorage.getItem('jfm_theme')||'auto');if(_tp==='dark'||(_tp==='auto'&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){{document.documentElement.classList.add('theme-dark')}}}}catch(e){{}}</script>
 </head>
@@ -150,6 +151,8 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
             "kicker": "资讯 · " + x.get("cat",""),
             "body_html": body,
             "meta_line": '<span>' + esc(x.get("src","编辑部")) + '</span><span>' + esc(x.get("date","")) + '</span><span class="art-status">已审核发布</span>',
+            "date": x.get("date", ""),
+            "author": x.get("src", "花期册编辑部"),
             "back": "news.html", "back_label": "资讯中心",
         }, f"article-news-{sl}.html")
 
@@ -393,9 +396,18 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
         am = re.search(r'<div class="a">([\s\S]*?)</div>\s*</details>', blk)
         body = '<p>' + (am.group(1) if am else "") + '</p>'
         body += '<p class="art-tip">更多同类问题见<a class="art-link" href="faq.html">家长 FAQ</a>；相关工具与政策已在上文链接中。</p>'
+        import re as _re2
+        _ans_txt = _re2.sub(r"<[^>]+>", "", am.group(1) if am else "")
+        import json as _json
+        _faq_ld = ('<script type="application/ld+json">' + _json.dumps({
+            "@context": "https://schema.org", "@type": "FAQPage",
+            "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": _ans_txt.strip()[:500]}}]
+        }, ensure_ascii=False) + '</script>')
         write({
-            "title": q, "desc": re.sub(r"<[^>]+>", "", am.group(1) if am else q)[:120],
+            "title": q, "desc": _ans_txt[:120] or q,
             "kicker": "家长 FAQ · " + cat,
+            "schema_type": '"FAQPage"',
+            "extra_ld": _faq_ld,
             "body_html": body,
             "meta_line": '<span>分类：' + esc(cat) + '</span>',
             "back": "faq.html", "back_label": "家长 FAQ",

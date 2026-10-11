@@ -241,8 +241,8 @@ def nav_html(cur_file, demo_tag, searchbox):
     ]
     mm = "<a href=\"{}\"{}>{}</a>".format
     mobile_html = "".join(
-        (f'<a href="{h}" class="{c}">{t}</a>' if c else f'<a href="{h}">{t}</a>')
-        for h, t, *c in [(m[0], m[1], m[2] if len(m) > 2 else "") for m in mobile]
+        (f'<a href="{m[0]}" class="{m[2]}">{m[1]}</a>' if len(m) > 2 and m[2] else f'<a href="{m[0]}">{m[1]}</a>')
+        for m in mobile
     )
     logo_href = "index.html"
     return f'''<div class="top">
@@ -273,6 +273,94 @@ def convert_links(html):
         html = html.replace(f'href="{anchor}"', f'href="{page}"')
     return html
 
+
+# ---------- v0.81：资讯列表静态预渲染（与 30-news.js 渲染结果逐字节对齐） ----------
+def _js_esc(x):
+    return (str(x if x is not None else '').replace('&','&amp;').replace('<','&lt;').replace('>','&gt;').replace('"','&quot;'))
+
+def _href_enc(u):
+    import urllib.parse as _up
+    try: return _js_esc(_up.quote(str(u), safe=":/?#[]@!$&'()*+,;=%~"))
+    except Exception: return _js_esc(u)
+
+def _js_seed(s):
+    h = 5381
+    for ch in str(s or ''):
+        h = ((h * 33) ^ ord(ch)) & 0xFFFFFFFF
+    return h
+
+def _photo_pool_assign(items):
+    """复刻 44-photos.js photoURLForItem：确定性 + 同页唯一（线性探测）"""
+    pool = ['school-gate-1.jpg','school-gate-2.jpg','school-gate-3.jpg','school-gate-4.jpg',
+            'school-gate-5.jpg','school-gate-6.jpg','school-gate-7.jpg',
+            'school-building.jpg','school-building-2.jpg','school-building-3.jpg','school-building-4.jpg',
+            'school-panorama.jpg','school-playground.jpg','school-library.jpg','school-courtyard.jpg',
+            'school-students.jpg','school-hill.jpg','school-river.jpg','school-plaza.jpg',
+            'school-gym.jpg','school-arts.jpg','school-science.jpg','school-culture.jpg',
+            'study-desk.jpg','classroom.jpg','office-docs.jpg','calendar-desk.jpg','city-scape.jpg']
+    used, out = {}, []
+    for seed in items:
+        n = len(pool); start = _js_seed(seed) % n; pick = pool[start]
+        for i in range(n):
+            f = pool[(start + i) % n]
+            if not used.get(f): used[f] = 1; pick = f; break
+        out.append(pick)
+    return out
+
+def _news_relevance(x):
+    srcs = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙']
+    kws = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州','中考','高考','小升初','幼升小','联招','指标到校','摇号','划片','志愿','录取','招生','自主命题','一分一段','特招线','普高','中职','转学','学区','学位','入学']
+    hay = (x.get('t','') + ' ' + x.get('sum','') + ' ' + x.get('src',''))
+    score = 5 if any(k in x.get('src','') for k in srcs) else 0
+    hits = 0
+    for k in kws:
+        if k in hay:
+            hits += 1
+            if hits >= 4: break
+    return score + min(hits, 4) * 2
+
+def build_news_static(artmap, limit=12):
+    dn = os.path.join(SRC, "data-news.js")
+    if not os.path.exists(dn): return ""
+    txt = read(dn)
+    m = re.search(r'var NEWS_FEED = (\[.*\]);?\s*$', txt, re.S)
+    if not m:
+        m = re.search(r'var NEWS_FEED = (\[.*?\n\]);', txt, re.S)
+    if not m: return ""
+    try:
+        feed = json.loads(m.group(1))
+    except Exception as _e:
+        print("[build] 资讯静态化解析失败，跳过:", _e); return ""
+    arr = [dict(x, _k='b'+str(i), _local=False) for i, x in enumerate(feed)]
+    arr.sort(key=lambda x: str(x.get('date','')), reverse=True)                     # newsCombined 日期排序
+    for x in arr: x['_rel'] = _news_relevance(x)
+    arr.sort(key=lambda x: (0 if x['_rel'] >= 4 else 1,), )                          # 相关性分组（稳定排序保日期序）
+    shown = arr[:limit]
+    alts = {'政策速递':'政策文件主题配图','升学动态':'校园新闻主题配图','家庭教育':'家庭教育主题配图','安全提醒':'校园安全主题配图','办事提醒':'日历办事主题配图'}
+    photos = _photo_pool_assign([x['_k'] + '|' + (x.get('t') or '') for x in shown])
+    html = []
+    for x, ph in zip(shown, photos):
+        lead = x is shown[0]
+        cat = x.get('cat','')
+        art = artmap.get('N|' + x.get('t',''), '')
+        if art: link = '<a class="ni-link" href="articles/' + art + '" title="阅读全文">' + _js_esc(x.get('t')) + '</a>'
+        elif x.get('url'): link = '<a class="ni-link" href="' + _href_enc(x.get('url')) + '" target="_blank" rel="noopener" title="阅读原文">' + _js_esc(x.get('t')) + ' ↗</a>'
+        else: link = '<span class="ni-link" role="text">' + _js_esc(x.get('t')) + '</span>'
+        body = ''
+        if x.get('body') or x.get('url'):
+            body = '<div class="ni-body" hidden>' + _js_esc(x.get('body') or '') + ('<div style="margin-top:6px"><a href="' + _href_enc(x.get('url')) + '" target="_blank" rel="noopener">原文链接 ↗</a></div>' if x.get('url') else '') + '</div>'
+        html.append('<div class="news-item' + (' lead' if lead else '') + '" data-key="' + _js_esc(x['_k']) + '" data-cat="' + _js_esc(cat) + '">'
+            + '<div class="ni-cover" aria-hidden="true"><img loading="lazy" decoding="async" src="assets/photos/' + ph + '" alt="' + _js_esc(alts.get(cat) or '教育资讯主题配图') + '"></div>'
+            + '<div class="ni-main"><div class="ni-head"><span class="ni-cat">' + _js_esc(cat) + '</span>'
+            + '<span>' + _js_esc(x.get('src','')) + '</span><span>' + _js_esc(x.get('date','')) + '</span></div>'
+            + '<h4 class="ni-title">' + link + ' <button class="ni-more" onclick="toggleNewsBody(this)" data-target="self">摘要 ▾</button></h4>'
+            + ('<p class="ni-sum">' + _js_esc(x.get('sum')) + '</p>' if x.get('sum') else '')
+            + body
+            + '<div class="ni-actions"><button class="mini-btn" onclick="copyNewsItem(\'' + _js_esc(x['_k']) + '\')">复制转发</button></div>'
+            + '</div></div>')
+    return ''.join(html)
+
+
 DIALOGS = None  # 缓存弹窗块
 
 def extract_dialogs(tpl):
@@ -281,7 +369,7 @@ def extract_dialogs(tpl):
     if DIALOGS is not None:
         return DIALOGS
     blocks = []
-    for did in ["school-modal", "news-editor", "kbd-modal", "changelog-modal"]:
+    for did in ["school-modal", "order-modal", "news-editor", "kbd-modal", "changelog-modal"]:
         m = re.search(r'<dialog id="' + did + r'">[\s\S]*?</dialog>', tpl)
         if not m:
             raise SystemExit("[build] 未找到 dialog：" + did)
@@ -364,6 +452,15 @@ def build_page(page, tpl, secs, css, js):
     for sid in page["sections"]:
         if sid in secs:
             content += "\n" + convert_links(secs[sid])
+    # v0.81：资讯列表静态预渲染（SEO/CLS/无 JS 三收益）
+    if fname == "news.html" and 'id="news-list"></div>' in content:
+        try:
+            _am = json.load(open(os.path.join(SRC, "data", "artmap.json"), encoding="utf-8"))
+        except Exception:
+            _am = {}
+        _cards = build_news_static(_am, limit=12)
+        if _cards:
+            content = content.replace('id="news-list"></div>', 'id="news-list" data-covers="1">' + _cards + '</div>', 1)
     # v0.43：内容页注入页面级 h1（无障碍文档大纲 + SEO；首屏页跳过）
     # 有 page-banner 的页面：h1 以视觉隐藏方式并入 banner（避免与 banner 标题重复）；无 banner：显示 page-h1
     if not page.get("hero") and content and '<h1' not in content:

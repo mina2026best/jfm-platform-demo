@@ -113,3 +113,8 @@
 .news-item{border-radius:12px}
 .news-item:hover{transform:translateY(-2px)}
 html.theme-dark .news-grid[data-covers="1"] .news-item.lead .ni-cover img{filter:brightness(.94)}
+
+/* v0.81：首条大图限高，消除 CLS（评估实测 956×538 巨图 → ~800px 空白区） */
+.news-grid[data-covers="1"] .news-item.lead .ni-cover{max-height:340px;overflow:hidden}
+.news-grid[data-covers="1"] .news-item.lead .ni-cover img{aspect-ratio:16/9;height:100%;object-fit:cover}
+.news-item .ni-cover img{aspect-ratio:10/7;object-fit:cover;width:100%}

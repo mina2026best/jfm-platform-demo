@@ -1,9 +1,9 @@
 /* ============ base ============ */
 
   :root{
-    --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#6B7683;
+    --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#5F6A76;
     --navy:#24344D; --navy2:#3E5375; --blue:#5D77A3; --line:#E3E7EC; --line2:#C9D1D9;
-    --accent:#0E7C66; --accent-soft:#E8F2EF; --warn:#B45309; --warn-soft:#FCF3E3;
+    --accent:#0E7C66; --accent-text:#0A6354; --accent-soft:#E8F2EF; --warn:#B45309; --warn-soft:#FCF3E3;
     --serif:"Songti SC","Noto Serif SC",serif;
     --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     --mono:ui-monospace,"SF Mono",Menlo,monospace;
@@ -943,6 +943,11 @@ footer .logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:6
 .news-item{border-radius:12px}
 .news-item:hover{transform:translateY(-2px)}
 html.theme-dark .news-grid[data-covers="1"] .news-item.lead .ni-cover img{filter:brightness(.94)}
+
+/* v0.81：首条大图限高，消除 CLS（评估实测 956×538 巨图 → ~800px 空白区） */
+.news-grid[data-covers="1"] .news-item.lead .ni-cover{max-height:340px;overflow:hidden}
+.news-grid[data-covers="1"] .news-item.lead .ni-cover img{aspect-ratio:16/9;height:100%;object-fit:cover}
+.news-item .ni-cover img{aspect-ratio:10/7;object-fit:cover;width:100%}
 
 
 /* ============ 30-school ============ */

@@ -1,8 +1,8 @@
 
   :root{
-    --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#6B7683;
+    --bg:#F6F7F9; --paper:#FFFFFF; --ink:#17212E; --ink2:#3C4858; --muted:#5F6A76;
     --navy:#24344D; --navy2:#3E5375; --blue:#5D77A3; --line:#E3E7EC; --line2:#C9D1D9;
-    --accent:#0E7C66; --accent-soft:#E8F2EF; --warn:#B45309; --warn-soft:#FCF3E3;
+    --accent:#0E7C66; --accent-text:#0A6354; --accent-soft:#E8F2EF; --warn:#B45309; --warn-soft:#FCF3E3;
     --serif:"Songti SC","Noto Serif SC",serif;
     --sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
     --mono:ui-monospace,"SF Mono",Menlo,monospace;

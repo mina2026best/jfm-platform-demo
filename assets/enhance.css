@@ -36,7 +36,7 @@ html.theme-dark{
 /* ---------- 1. 全局基底 ---------- */
 *,*::before,*::after{
   text-shadow:none !important;
-  background-image:none !important;   /* 去渐变，保留纯色 */
+  /* v0.83：移除 background-image:none 全局重置——它此前禁掉了全站所有背景图（含三关口图带） */
   backdrop-filter:none !important;
   animation:none !important;
   transition:color .16s ease,background-color .16s ease,border-color .16s ease,
@@ -485,3 +485,61 @@ footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1
 .sm-links{display:flex;flex-direction:column;gap:2px}
 .sm-links a{padding:7px 10px;border-radius:7px;color:var(--ink2);text-decoration:none;font-size:13.5px}
 .sm-links a:hover{background:var(--accent-soft);color:var(--accent)}
+
+/* ---------- v0.83 页眉字体放大 + 清雅分色 ---------- */
+.top nav.nav-main > a{font-size:15px;padding:8px 13px}
+.top nav.nav-main .nav-drop > a{font-size:15px;padding:8px 13px}
+.nav-panel a{font-size:14px}
+.logo{font-size:31px}
+.logo small{font-size:11px}
+/* 清雅分色：每个一级入口一个色相（低饱和，hover 保持加深），避免样式单一 */
+.top nav.nav-main > *:nth-child(1) > a{color:#C8342B}
+.top nav.nav-main > *:nth-child(2) > a{color:#3E6FA8}
+.top nav.nav-main > *:nth-child(3) > a{color:#1B7A44}
+.top nav.nav-main > *:nth-child(4) > a{color:#6B4FA0}
+.top nav.nav-main > *:nth-child(5) > a{color:#B45309}
+.top nav.nav-main > *:nth-child(6) > a{color:#4A6070}
+.top nav.nav-main > * > a:hover{color:var(--ink)}
+.top nav.nav-main > *:nth-child(1) > a:hover{color:#8F231C}
+.top nav.nav-main > *:nth-child(2) > a:hover{color:#2B5280}
+.top nav.nav-main > *:nth-child(3) > a:hover{color:#0F5330}
+.top nav.nav-main > *:nth-child(4) > a:hover{color:#4E3577}
+.top nav.nav-main > *:nth-child(5) > a:hover{color:#8A3D06}
+.searchbox input{font-size:14px}
+.demo-tag{font-size:12px;color:#8A6D3B;border-color:#C9A96A;background:#FBF6EA}
+
+/* ---------- v0.83 字阶强化 ---------- */
+.hero h1{font-size:40px !important;line-height:1.28 !important;max-width:600px}
+.hero .sub{font-size:15.5px}
+.sec-head h2{font-size:28px}
+.sec-desc{font-size:15px;line-height:1.85}
+.trust .t-num{font-size:34px}
+.trust .t-label{font-size:13px}
+.sd h3{font-family:var(--display);font-size:17px}
+.stage-doors .sd .no, .entries .no{letter-spacing:.18em}
+/* ---------- v0.83 卡片密度收紧（网址导航类单元窗口） ---------- */
+.dao-cat{padding:10px 14px 8px;border-radius:11px}
+.dao-cat h3{font-size:15px;margin-bottom:2px}
+.dao-sub{margin-bottom:5px;font-size:12px}
+.dao-list li{padding:3px 0}
+.dao-list a{font-size:13.5px}
+.dao-list span{font-size:11px;line-height:1.4}
+.dao-grid{gap:12px !important}
+.dao-zheng{margin-top:10px;padding:10px 13px}
+.dao-chips{margin-top:10px;gap:6px}
+/* 类似单元窗口同步收紧 */
+.thread{padding:10px 14px !important;margin-bottom:8px !important}
+.fact-filter{margin-bottom:12px}
+.toc-grid a{padding:12px 14px !important}
+.hot-strip{margin:10px 0}
+/* ---------- v0.83 图片运用：三关口卡片顶部实景图带 ---------- */
+.stage-doors .sd{overflow:hidden;padding-top:118px;
+  background-repeat:no-repeat;background-position:top center;background-size:100% 96px}
+.sd.sd-1{background-image:url("../assets/photos/school-gate-3.jpg")}
+.sd.sd-2{background-image:url("../assets/photos/school-building-2.jpg")}
+.sd.sd-3{background-image:url("../assets/photos/school-panorama.jpg")}
+.stage-doors .sd::before{display:none}
+@media (max-width:960px){ .stage-doors .sd{padding-top:98px;background-size:100% 78px} }
+/* ---------- v0.83 快捷通道行距收紧 ---------- */
+.home-grid2 .hot-rank a{padding:8px 2px !important}
+.home-grid2 .hot-rank{padding:2px 14px !important}

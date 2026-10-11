@@ -9634,8 +9634,9 @@ function renderDataSources(){
   var box = document.getElementById('ds-table'); if(!box) return;
   var rows = Object.keys(DATA_SOURCES).map(function(k, i){
     var d = DATA_SOURCES[k];
+    var anchor = '<tr id="src-' + k + '">';
     var link = d.url ? ' <a class="ds-link" href="' + hrefEnc(d.url) + '" target="_blank" rel="noopener">原文入口 ↗</a>' : '';
-    return '<tr><td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + link + '</td><td>' + esc(d.asOf) + '</td>'
+    return anchor + '<td>' + (i+1) + '</td><td>' + esc(d.label) + '</td><td>' + esc(d.source) + link + '</td><td>' + esc(d.asOf) + '</td>'
       + '<td><span class="ds-ver ' + (d.verified ? 'ok">✓ 已核验' : 'pending">○ 待核验') + '</span></td></tr>';
   }).join('');
   var verified = Object.keys(DATA_SOURCES).filter(function(k){ return DATA_SOURCES[k].verified; }).length;
@@ -10712,9 +10713,13 @@ function faqFilter(cat){
 /* 首页热点榜（由资讯 seed 生成，取前 8） */
 function jfmCleanTitle(t){
   var x = String(t || '');
+  x = x.replace(/^\s*要闻\s*[:：]?\s*/,'');
+  x = x.replace(/\s*20\d{2}-\d{2}-\d{2}\s*/g,' ');
   x = x.replace(/\s*\.\.\.\s*$/,'').replace(/…$/,'');
-  x = x.replace(/\s*20\d{2}-\d{2}-\d{2}\s*$/,'');
-  return x;
+  return x.replace(/\s+/g,' ').trim();
+}
+function jfmTitleKey(t){
+  return jfmCleanTitle(t).replace(/[，。：:、\s]/g,'').slice(0, 14);
 }
 function renderHotRank(){
   var box = document.getElementById('hot-rank'); if(!box) return;
@@ -10724,6 +10729,7 @@ function renderHotRank(){
     if(typeof jfmRelevance === 'function'){
       var local = all.filter(function(x){ return jfmRelevance(x) >= 8; });
       if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 2; });
       all = (local.length >= 4 ? local : all);
     }
     items = all.slice(0, 7);
@@ -10731,8 +10737,8 @@ function renderHotRank(){
   if(!items.length){ box.innerHTML = '<div class="empty-mini">资讯加载中…</div>'; return; }
   /* 澎湃头版式：第 1 条做头条大卡（大图 + 衬线大标题 + 摘要），2-7 做序号榜单 */
   var lead = items[0];
-  var leadKey = jfmCleanTitle(lead.t).slice(0, 14);
-  var rest = items.slice(1).filter(function(x){ return jfmCleanTitle(x.t).slice(0, 14) !== leadKey; });
+  var leadKey = jfmTitleKey(lead.t);
+  var rest = items.slice(1).filter(function(x){ return jfmTitleKey(x.t) !== leadKey; });
   var leadHref = 'news.html?s=' + encodeURIComponent((lead.t || '').slice(0, 12));
   var artKey = (typeof ARTMAP !== 'undefined') ? (ARTMAP['N|' + lead.t] || '') : '';
   if(artKey) leadHref = 'articles/' + artKey;
@@ -10740,14 +10746,14 @@ function renderHotRank(){
     + '<a class="hr-lead" href="' + leadHref + '">'
     + '<span class="hr-lead-tag">今日头条</span>'
     + '<span class="hr-lead-img"><img loading="lazy" decoding="async" src="' + (typeof photoURLForItem === "function" ? photoURLForItem((lead._k||"") + "|" + (lead.t||"")) : "") + '" alt="' + (typeof NEWS_PHOTO_ALT !== "undefined" ? (NEWS_PHOTO_ALT[lead.cat] || "教育资讯主题配图") : "教育资讯配图") + '"></span>'
-    + '<span class="hr-lead-main"><span class="hr-lead-title">' + esc(lead.t) + '</span>'
+    + '<span class="hr-lead-main"><span class="hr-lead-title">' + esc(jfmCleanTitle(lead.t)) + '</span>'
     + (lead.sum ? '<span class="hr-lead-sum">' + esc(lead.sum).slice(0, 80) + '…</span>' : '')
     + '<span class="hr-lead-meta">' + esc(lead.cat || '') + ' · ' + esc(lead.src || '') + ' · ' + esc(lead.date || '') + '</span></span></a>';
   if(rest.length){
     html += '<div class="hot-rank hr-list">' + rest.map(function(x, i){
       var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));
       return '<a href="' + href + '"><span class="no' + (i < 2 ? ' hot-no3' : ' hot-no') + '">' + (i + 2) + '</span>'
-        + '<span class="t">' + esc(x.t) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
+        + '<span class="t">' + esc(jfmCleanTitle(x.t)) + '</span><span class="meta">' + esc(x.cat || '') + '</span></a>';
     }).join('') + '</div>';
   }
   html += '</div>';

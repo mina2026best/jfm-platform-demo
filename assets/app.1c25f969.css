@@ -1408,6 +1408,12 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 /* 3) 深色模式：本组件的配色全部走主题变量（card/line/navy/accent），深色下自动成立；
    实测核对对比度由验证脚本读取计算样式完成，不额外硬编码颜色。 */
 
+/* v0.83：三关口卡片顶部实景图带（重要：app.css 层挂载，避免 enhance 层解析不确定性） */
+.stage-doors .sd{background-repeat:no-repeat;background-position:top center;background-size:100% 96px}
+.stage-doors .sd.sd-1{background-image:url("../assets/photos/school-gate-3.jpg")}
+.stage-doors .sd.sd-2{background-image:url("../assets/photos/school-building-2.jpg")}
+.stage-doors .sd.sd-3{background-image:url("../assets/photos/school-panorama.jpg")}
+
 
 /* ============ 32-forum ============ */
 /* ---------- v0.80 家长论坛 ---------- */

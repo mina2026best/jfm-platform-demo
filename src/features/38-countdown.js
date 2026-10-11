@@ -29,5 +29,5 @@ function renderCountdown(){
   var days = Math.round((best.t - now) / 86400000);
   var when = best.t.getFullYear() + ' 年 ' + (best.t.getMonth() + 1) + ' 月';
   var timing = days > 0 ? ('约 <b>' + days + '</b> 天') : '就在本月';
-  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="calendar.html">看升学日历 →</a> <span class="cd-note">（示例口径，以官方发布为准）</span>';
+  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="calendar.html">看升学日历 →</a> <span class="cd-note">（以当年官方发布为准）</span>';
 }

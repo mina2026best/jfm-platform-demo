@@ -145,6 +145,7 @@ function submitForumPost(e){
   saveForumThreads(arr);
   if(title) title.value=''; if(body) body.value='';
   forumBoard = board.value;
+  if(typeof jfmTrack === 'function') jfmTrack('forum_post', { board: board.value });
   renderForumBoards(); renderForumList();
   var box = document.getElementById('forum-list');
   if(box){ var first = box.querySelector('.forum-thread'); if(first) first.scrollIntoView({behavior:'smooth', block:'center'}); }

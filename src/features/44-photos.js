@@ -56,7 +56,7 @@ function schoolPhotoFile(name){
   return PHOTO_FILES[schoolPhotoKey(name)];
 }
 function schoolPhotoImg(name){
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园实景照片">';
+  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园外观示意图（非实拍）">';
 }
 /* hero / 入口卡 / 页眉横幅：各类固定不同照片；仅 hero 记入已用集合（它是同页最大图，列表须避让） */
 var ART_PHOTO = {

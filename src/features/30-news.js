@@ -36,10 +36,38 @@ function clearNewsQuery(){
   if(el){ el.value = ''; el.focus(); }
   newsQuery = ''; renderNews();
 }
+
+/* ---------- v0.80：重庆 K12 相关性优先（要闻榜与资讯流排序） ---------- */
+var JFM_LOCAL_SOURCES = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙'];
+var JFM_LOCAL_KEYWORDS = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州','中考','高考','小升初','幼升小','联招','指标到校','摇号','划片','志愿','录取','招生','自主命题','一分一段','特招线','普高','中职','转学','学区','学位','入学'];
+var newsLocalFirst = true;
+function jfmRelevance(x){
+  var hay = ((x.t||'') + ' ' + (x.sum||'') + ' ' + (x.src||''));
+  var score = 0;
+  for(var i=0;i<JFM_LOCAL_SOURCES.length;i++){ if((x.src||'').indexOf(JFM_LOCAL_SOURCES[i]) !== -1){ score += 5; break; } }
+  var hits = 0;
+  for(var j=0;j<JFM_LOCAL_KEYWORDS.length;j++){ if(hay.indexOf(JFM_LOCAL_KEYWORDS[j]) !== -1){ hits++; if(hits>=4) break; } }
+  score += Math.min(hits, 4) * 2;
+  return score;
+}
+function setNewsLocalFirst(on){
+  newsLocalFirst = !!on;
+  var box = document.getElementById('news-local-toggle');
+  if(box){ box.classList.toggle('on', newsLocalFirst); box.textContent = '重庆K12优先：' + (newsLocalFirst ? '开' : '关'); box.setAttribute('aria-pressed', newsLocalFirst ? 'true' : 'false'); }
+  renderNews(); renderHotRank();
+}
+
 function renderNews(){
   var box = document.getElementById('news-list'); if(!box) return;
   if(typeof resetPhotoUsage === 'function') resetPhotoUsage();   // v0.53：本页照片去重计数从零开始
   var arr = newsCombined();
+  if(typeof newsLocalFirst !== 'undefined' && newsLocalFirst){
+    arr = arr.map(function(x){ x._rel = jfmRelevance(x); return x; })
+             .sort(function(a,b){
+               var ga = a._rel >= 4 ? 0 : 1, gb = b._rel >= 4 ? 0 : 1;   /* 强相关（重庆/升学）优先组 */
+               return (ga - gb) || String(b.date||'').localeCompare(String(a.date||''));
+             });
+  }
   var q = newsQuery.trim().toLowerCase();
   var shown = arr.filter(function(x){
     if(newsFilter !== 'all' && x.cat !== newsFilter) return false;

@@ -89,7 +89,14 @@ function faqFilter(cat){
 function renderHotRank(){
   var box = document.getElementById('hot-rank'); if(!box) return;
   var items = [];
-  try{ items = newsCombined().slice(0, 8); }catch(e){ return; }
+  try{
+    var all = newsCombined();
+    if(typeof jfmRelevance === 'function'){
+      var local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      all = (local.length >= 4 ? local : all);
+    }
+    items = all.slice(0, 8);
+  }catch(e){ return; }
   if(!items.length){ box.innerHTML = '<div class="empty-mini">资讯加载中…</div>'; return; }
   box.innerHTML = '<div class="hot-rank">' + items.map(function(x, i){
     var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));

@@ -199,29 +199,38 @@ def build_js():
 
 def nav_html(cur_file, demo_tag, searchbox):
     """生成顶栏（含真跳转链接）。cur_file 用于 aria-current。"""
-    items = [
-        ("daohang.html", "导航"),
-        ("news.html", "资讯"),
-        ("calendar.html", "日历"),
-        ("policy.html", "政策"),
-        ("schools.html", "档案"),
-        ("compare.html", "对比"),
-        ("zy.html", "志愿"),
-        ("forum.html", "论坛"),
-        ("community.html", "社区"),
-        ("life.html", "生活"),
-        ("search.html", "搜索"),
-        ("problems.html", "速查"), ("faq.html", "FAQ"),
-        ("beans.html", "升学豆"),
-        ("me.html", "我的"),
-        ("plans.html", "会员", "cta"),
+    # v0.80：导航归并——6 个一级入口 + 下拉分组；全部子页面保留可达（解决 16 项认知过载）
+    def _cur(href):
+        return ' aria-current="page"' if href == cur_file else ""
+    groups = [
+        ("news.html", "资讯", None),
+        ("calendar.html", "日历", None),
+        ("quiz.html", "工具", [
+            ("quiz.html", "入学自查"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
+            ("zy.html", "志愿参考"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
+        ]),
+        ("policy.html", "政策资料", [
+            ("policy.html", "政策库与人话词典"), ("wiki.html", "升学百科"), ("faq.html", "家长 FAQ"),
+            ("data-sources.html", "数据来源与核验"),
+        ]),
+        ("forum.html", "论坛社区", [
+            ("forum.html", "家长论坛"), ("community.html", "家长社区"), ("life.html", "生活服务"),
+            ("beans.html", "升学豆"),
+        ]),
+        ("me.html", "我的", [
+            ("me.html", "孩子档案"), ("plans.html", "会员体系"), ("biz.html", "B 端合作"), ("contact.html", "联系留言"), ("about.html", "关于"),
+        ]),
     ]
-    def a(item):
-        href, label = item[0], item[1]
-        cls = f' class="{item[2]}"' if len(item) > 2 else ""
+    def a_group(g):
+        href, label, children = g
         cur = ' aria-current="page"' if href == cur_file else ""
-        return f'<a href="{href}"{cls}{cur}>{label}</a>'
-    nav = "<nav>" + "".join(a(i) for i in items) + "</nav>"
+        if not children:
+            return f'<a href="{href}"{cur}>{label}</a>'
+        subs = "".join(f'<a href="{ch}"{_cur(ch)}>{t}</a>' for ch, t in children)
+        return (f'<div class="nav-drop"{cur}>'
+                f'<a href="{href}" aria-haspopup="true">{label}<span class="nd-caret" aria-hidden="true"></span></a>'
+                f'<div class="nav-panel">{subs}</div></div>')
+    nav = '<nav class="nav-main">' + "".join(a_group(g) for g in groups) + "</nav>"
     mobile = [
         ("daohang.html", "网址导航"), ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
@@ -318,6 +327,16 @@ def build_page(page, tpl, secs, css, js):
                       f'<meta name="description" content="{page["desc"]}" />', head, count=1)
     # v0.43：全页注入分享标签
     head = head.replace('</head>', OG_TAGS.replace('{fname}', fname) + '\n</head>')
+    # v0.80：每页 BreadcrumbList 结构化数据（首页 > 当前页）
+    if fname != 'index.html':
+        _base = 'https://mina2026best.github.io/jfm-platform-demo/'
+        _pt = page.get('title', fname)
+        _crumb = {"@context": "https://schema.org", "@type": "BreadcrumbList",
+                  "itemListElement": [
+                      {"@type": "ListItem", "position": 1, "name": "首页", "item": _base},
+                      {"@type": "ListItem", "position": 2, "name": _pt, "item": _base + fname}]}
+        head = head.replace('</head>',
+            '<script type="application/ld+json">' + json.dumps(_crumb, ensure_ascii=False) + '</script>\n</head>')
     # 2) body：三段式（ann+top 头部 / 主内容 / 尾部）
     body_start = tpl.find("<body>") + len("<body>")
     footer_start = tpl.find("<footer>")
@@ -363,7 +382,7 @@ def build_page(page, tpl, secs, css, js):
     hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
-        + ann + "\n\n" + top_html + "\n\n" + hero + content \
+        + ann + "\n\n" + top_html + "\n\n" + '<main id="main">' + hero + content + '</main>' \
         + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
     # skip-link 目标：无 #main 时指到 body 顶部主内容
     if 'id="main"' not in out:

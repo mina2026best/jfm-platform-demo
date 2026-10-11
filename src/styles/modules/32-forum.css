@@ -47,3 +47,15 @@
   .forum-boards{flex-direction:row;flex-wrap:wrap}
   .forum-boards .fb{flex:1 1 40%}
 }
+
+  /* ---------- v0.80 订阅提醒条 ---------- */
+  .sub-band{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;
+    background:var(--navy);color:#DCE4EE;border-radius:12px;padding:26px 30px}
+  .sub-band h3{font-family:var(--serif);color:#fff;font-size:21px;margin:0 0 8px}
+  .sub-band p{font-size:13.5px;color:#9FADC0;line-height:1.75;margin:0}
+  .sub-band b{color:#7FD8C4}
+  .sub-form{display:flex;flex-direction:column;gap:10px}
+  .sub-form select{background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-size:14px;padding:10px 12px;font-family:var(--sans)}
+  .sub-form .btn-primary{display:inline-block;text-align:center;border:none;cursor:pointer}
+  .sub-ok{font-size:12px;color:#7FD8C4}
+  @media (max-width:860px){ .sub-band{grid-template-columns:1fr;padding:22px} }

@@ -22,4 +22,5 @@ function runQuiz(){
   L.push(dataBadge('zhibiao'));
   L.push('<span style="font-size:12px;color:var(--muted)">本自查为规则参考，不构成入学承诺；最终以区教委当年度政策与学校招生细则为准。</span>');
   box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
+  if(typeof jfmTrack === 'function') jfmTrack('quiz_complete', { stage: stageName, housing: hs });
 }

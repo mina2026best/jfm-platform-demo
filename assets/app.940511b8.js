@@ -9135,6 +9135,7 @@ function runQuiz(){
   L.push(dataBadge('zhibiao'));
   L.push('<span style="font-size:12px;color:var(--muted)">本自查为规则参考，不构成入学承诺；最终以区教委当年度政策与学校招生细则为准。</span>');
   box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
+  if(typeof jfmTrack === 'function') jfmTrack('quiz_complete', { stage: stageName, housing: hs });
 }
 
 
@@ -9400,10 +9401,38 @@ function clearNewsQuery(){
   if(el){ el.value = ''; el.focus(); }
   newsQuery = ''; renderNews();
 }
+
+/* ---------- v0.80：重庆 K12 相关性优先（要闻榜与资讯流排序） ---------- */
+var JFM_LOCAL_SOURCES = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙'];
+var JFM_LOCAL_KEYWORDS = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州','中考','高考','小升初','幼升小','联招','指标到校','摇号','划片','志愿','录取','招生','自主命题','一分一段','特招线','普高','中职','转学','学区','学位','入学'];
+var newsLocalFirst = true;
+function jfmRelevance(x){
+  var hay = ((x.t||'') + ' ' + (x.sum||'') + ' ' + (x.src||''));
+  var score = 0;
+  for(var i=0;i<JFM_LOCAL_SOURCES.length;i++){ if((x.src||'').indexOf(JFM_LOCAL_SOURCES[i]) !== -1){ score += 5; break; } }
+  var hits = 0;
+  for(var j=0;j<JFM_LOCAL_KEYWORDS.length;j++){ if(hay.indexOf(JFM_LOCAL_KEYWORDS[j]) !== -1){ hits++; if(hits>=4) break; } }
+  score += Math.min(hits, 4) * 2;
+  return score;
+}
+function setNewsLocalFirst(on){
+  newsLocalFirst = !!on;
+  var box = document.getElementById('news-local-toggle');
+  if(box){ box.classList.toggle('on', newsLocalFirst); box.textContent = '重庆K12优先：' + (newsLocalFirst ? '开' : '关'); box.setAttribute('aria-pressed', newsLocalFirst ? 'true' : 'false'); }
+  renderNews(); renderHotRank();
+}
+
 function renderNews(){
   var box = document.getElementById('news-list'); if(!box) return;
   if(typeof resetPhotoUsage === 'function') resetPhotoUsage();   // v0.53：本页照片去重计数从零开始
   var arr = newsCombined();
+  if(typeof newsLocalFirst !== 'undefined' && newsLocalFirst){
+    arr = arr.map(function(x){ x._rel = jfmRelevance(x); return x; })
+             .sort(function(a,b){
+               var ga = a._rel >= 4 ? 0 : 1, gb = b._rel >= 4 ? 0 : 1;   /* 强相关（重庆/升学）优先组 */
+               return (ga - gb) || String(b.date||'').localeCompare(String(a.date||''));
+             });
+  }
   var q = newsQuery.trim().toLowerCase();
   var shown = arr.filter(function(x){
     if(newsFilter !== 'all' && x.cat !== newsFilter) return false;
@@ -9988,7 +10017,7 @@ function renderCountdown(){
   var days = Math.round((best.t - now) / 86400000);
   var when = best.t.getFullYear() + ' 年 ' + (best.t.getMonth() + 1) + ' 月';
   var timing = days > 0 ? ('约 <b>' + days + '</b> 天') : '就在本月';
-  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="calendar.html">看升学日历 →</a> <span class="cd-note">（示例口径，以官方发布为准）</span>';
+  el.innerHTML = '距「' + esc(best.label) + '」（' + when + '）' + timing + ' · <a href="calendar.html">看升学日历 →</a> <span class="cd-note">（以当年官方发布为准）</span>';
 }
 
 
@@ -10189,7 +10218,14 @@ function faqFilter(cat){
 function renderHotRank(){
   var box = document.getElementById('hot-rank'); if(!box) return;
   var items = [];
-  try{ items = newsCombined().slice(0, 8); }catch(e){ return; }
+  try{
+    var all = newsCombined();
+    if(typeof jfmRelevance === 'function'){
+      var local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      all = (local.length >= 4 ? local : all);
+    }
+    items = all.slice(0, 8);
+  }catch(e){ return; }
   if(!items.length){ box.innerHTML = '<div class="empty-mini">资讯加载中…</div>'; return; }
   box.innerHTML = '<div class="hot-rank">' + items.map(function(x, i){
     var href = 'news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12));
@@ -10705,7 +10741,7 @@ function schoolPhotoFile(name){
   return PHOTO_FILES[schoolPhotoKey(name)];
 }
 function schoolPhotoImg(name){
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园实景照片">';
+  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + '校园外观示意图（非实拍）">';
 }
 /* hero / 入口卡 / 页眉横幅：各类固定不同照片；仅 hero 记入已用集合（它是同页最大图，列表须避让） */
 var ART_PHOTO = {
@@ -11662,6 +11698,7 @@ function submitForumPost(e){
   saveForumThreads(arr);
   if(title) title.value=''; if(body) body.value='';
   forumBoard = board.value;
+  if(typeof jfmTrack === 'function') jfmTrack('forum_post', { board: board.value });
   renderForumBoards(); renderForumList();
   var box = document.getElementById('forum-list');
   if(box){ var first = box.querySelector('.forum-thread'); if(first) first.scrollIntoView({behavior:'smooth', block:'center'}); }
@@ -11671,6 +11708,50 @@ function initForum(){
   var form = document.getElementById('forum-post-form');
   if(form){ form.addEventListener('submit', submitForumPost); }
   renderForumBoards(); renderForumList();
+}
+
+
+/* ---------- 53-subscribe ---------- */
+/* ---------- v0.80：节点提醒订阅（页脚订阅条 · 生成 .ics，本机不收集联系方式） ---------- */
+function subscribeNode(){
+  var stageEl = document.getElementById('sub-stage');
+  var stage = stageEl ? stageEl.value : '';
+  var items = document.querySelectorAll('.cal[data-stage="' + stage + '"]');
+  if(!items.length){ toast('该学段暂无节点数据'); return false; }
+  var stamp = new Date().toISOString().replace(/[-:]/g,'').split('.')[0] + 'Z';
+  var L = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//jfm demo//升学节点订阅//CN','CALSCALE:GREGORIAN','X-WR-CALNAME:花期册 · ' + stage + '升学节点'];
+  items.forEach(function(c, i){
+    var dEl = c.querySelector('.date'), hEl = c.querySelector('h4');
+    var m = ((dEl ? dEl.textContent : '') || '').match(/(\d{4})-(\d{2})/);
+    if(!m) return;
+    var ds = m[1] + m[2] + '01';
+    var d = new Date(parseInt(m[1],10), parseInt(m[2],10) - 1, 1);
+    d.setMonth(d.getMonth() + 1);
+    var de = d.getFullYear() + String(d.getMonth() + 1).padStart(2,'0') + '01';
+    L.push('BEGIN:VEVENT');
+    L.push('UID:jfm-sub-' + Date.now() + '-' + i + '@demo');
+    L.push('DTSTAMP:' + stamp);
+    L.push('DTSTART;VALUE=DATE:' + ds);
+    L.push('DTEND;VALUE=DATE:' + de);
+    L.push('SUMMARY:' + icsEsc(hEl ? hEl.textContent : stage + '节点'));
+    L.push('DESCRIPTION:花期册 · ' + stage + '节点提醒；以当年官方发布为准');
+    L.push('END:VEVENT');
+  });
+  L.push('END:VCALENDAR');
+  var blob = new Blob([L.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+  var u = URL.createObjectURL(blob), el = document.createElement('a');
+  el.href = u; el.download = 'jfm-' + stage + '-nodes.ics';
+  document.body.appendChild(el); el.click(); document.body.removeChild(el);
+  setTimeout(function(){ URL.revokeObjectURL(u); }, 800);
+  try{
+    var log = JSON.parse(localStorage.getItem('jfm_subscribe_log') || '[]');
+    log.push({ stage: stage, date: new Date().toISOString() });
+    localStorage.setItem('jfm_subscribe_log', JSON.stringify(log));
+  }catch(e){}
+  if(typeof jfmTrack === 'function') jfmTrack('subscribe_ics', { stage: stage });
+  var ok = document.getElementById('sub-ok'); if(ok) ok.hidden = false;
+  if(typeof toast === 'function') toast('已生成 ' + stage + ' 节点提醒日历（.ics）');
+  return false;
 }
 
 ;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}){ ARTMAP[k] = {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}[k]; } } })();

@@ -106,6 +106,24 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '' };
     <p class="cmp-note" style="margin-top:6px">采集说明：内置资讯由 src/news/seed.json 维护；工程侧提供 collect.py 采集脚本（公开页面抓取 → 待审核队列 → 审核后发布），站内编辑台支持人工采集整理与 JSON 导出交接。</p>
     <div class="news-next">关联入口：<a href="calendar.html">升学日历</a> <a href="policy.html">政策库</a> <a href="forum.html">家长论坛</a> <a href="quiz.html">入学自查</a></div>
   </div>
+</section>
+<section id="subscribe" class="alt">
+  <div class="wrap">
+    <div class="sub-band">
+      <div>
+        <h3>关键节点，提前提醒</h3>
+        <p>选择孩子学段，把报名、材料、考试等关键节点生成<b>本机日历订阅文件（.ics）</b>——导入手机日历即可自动提醒。演示阶段不收集手机号与邮箱；正式版将提供公众号与短信提醒通道。</p>
+      </div>
+      <form class="sub-form" action="#" onsubmit="return subscribeNode()" aria-label="节点提醒订阅">
+        <select id="sub-stage" aria-label="孩子学段">
+          <option value="幼升小">幼升小</option><option value="小升初">小升初</option>
+          <option value="初升高" selected>初升高</option><option value="高考">高考</option>
+        </select>
+        <button type="submit" class="btn-primary">生成节点提醒日历</button>
+        <span class="sub-ok" id="sub-ok" hidden>已生成并开始下载 .ics 文件；也可在「升学日历」页随时重新导出。</span>
+      </form>
+    </div>
+  </div>
 </section></main>
 
 <footer>

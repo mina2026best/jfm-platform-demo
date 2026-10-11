@@ -452,6 +452,9 @@ def build_page(page, tpl, secs, css, js):
     for sid in page["sections"]:
         if sid in secs:
             content += "\n" + convert_links(secs[sid])
+    # v0.81b：节点提醒订阅条——全站页面统一注入（此前仅存在于模板、未进组装，属遗漏）
+    if "subscribe" in secs and 'id="subscribe"' not in content:
+        content += "\n" + convert_links(secs["subscribe"])
     # v0.81：资讯列表静态预渲染（SEO/CLS/无 JS 三收益）
     if fname == "news.html" and 'id="news-list"></div>' in content:
         try:

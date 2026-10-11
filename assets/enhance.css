@@ -14,9 +14,15 @@
   --ink:#26303B;             /* 正文深灰（带一丝蓝，比纯灰更精神） */
   --ink2:#5A6672;            /* 次要 */
   --muted:#8B95A0;           /* 辅助 */
+<<<<<<< HEAD
   --faint:#5E6A75;           /* 最弱 */
   --navy:#26303B; --navy2:#3D4A57; --blue:#5D77A3;
   --accent:#1B7A44; --accent-hover:#156638; --accent-deep:#114F2A;
+=======
+  --faint:#AEB6BE;           /* 最弱 */
+  --navy:#26303B; --navy2:#3D4A57; --blue:#5D77A3;
+  --accent:#2E9E5B; --accent-hover:#26884D; --accent-deep:#1F6B40;
+>>>>>>> 072fff9de7628abca3fccee8adc848fd7a4b3a5b
   --accent-soft:#E9F4EC;
   --warn:#B45309; --warn-soft:#FCF3E3;
   --line:#ECEEEC; --line2:#DDE2DF;
@@ -434,9 +440,12 @@ footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1
 .stage-doors .sd::after{content:"0" counter(sd);position:absolute;right:0;top:6px;
   font-family:var(--display);font-size:52px;font-weight:600;line-height:1;
   color:var(--accent);opacity:.13;pointer-events:none}
+<<<<<<< HEAD
 
 /* v0.81：修复与 app.css 响应式规则的加载顺序覆盖——960px 以下必须隐藏桌面导航 */
 @media (max-width:960px){
   .top nav.nav-main{display:none !important}
   .top nav{display:none !important}
 }
+=======
+>>>>>>> 072fff9de7628abca3fccee8adc848fd7a4b3a5b

@@ -25,6 +25,50 @@ function dataBadge(key){
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "重庆大足：冒雨迁改电力线路 护航校园用电安全",
+    "url": "http://cq.people.com.cn/n2/2026/1014/c365412-41721668.html",
+    "src": "人民网重庆",
+    "cat": "升学动态",
+    "sum": "电力工人正在施放电缆。国网重庆大足供电公司供图10月11日，在大足区南山幼儿园新配电室，国网重庆大足供电公司员工紧锣密鼓地进行搭火作业，助推迁改项目按期竣工送电，以可靠电力保障筑牢校园安全防护屏障。大",
+    "date": "2026-10-15",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "南岸：少年逐趣探科学 童心立志启科创 小学师生走进迎龙创新港开展研学实践",
+    "url": "http://www.cq.xinhuanet.com/20261014/8efd51a7ef7c4f81aef2c4afb0f682bd/c.html",
+    "src": "新华网重庆",
+    "cat": "升学动态",
+    "sum": "南岸：少年逐趣探科学 童心立志启科创 小学师生走进迎龙创新港开展研学实践-\"下一步，迎龙创新港将持续用好青少年科学创新实践基地平台，常态化开展青少年科创研学活动，丰富辖区实践教育资源供给，助力青少年科学素养提升，服务南岸科创教育高质量发展。\"",
+    "date": "2026-10-15",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "第二届重庆市大学生临床检验技能竞赛举行 20所高校检验学子同场竞技",
+    "url": "https://www.cqnews.net/web/content_1559939566110597120.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "第二届重庆市大学生临床检验技能竞赛在重庆医科大学举行。",
+    "date": "2026-10-15",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "学生点外卖备注“生活费没了，多添点米饭，够吃一天”，老板举动感动网友",
+    "url": "https://www.cqnews.net/web/content_1559949892122140672.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "学生点外卖备注“生活费没了，多添点米饭，够吃一天”，老板举动感动网友",
+    "date": "2026-10-15",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆市2026年成人高考温馨提醒",
     "url": "https://www.cqzk.com.cn/CRKS/CRKS_news/2109905705199308800.html",
     "src": "重庆招考网",
@@ -316,6 +360,215 @@ var NEWS_FEED = [
     "src": "中国教育新闻网",
     "cat": "行业观察",
     "sum": "在社团里制作飞龙、飞马系列航模，走进职业院校参加职业体验活动……这两年，深圳北理莫斯科大学附属龙岗园山学校（以下简称“园山学校”）的活动越发丰富。初三学生蔡玮铭从小学起就在园山学校就读，“如今有些...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "重庆市教育委员会关于印发 重庆市农村幼儿园质量提升 十五条措施 的通知",
+    "url": "http://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/gfxwj/202610/t20261014_16232649.html",
+    "src": "重庆市教育委员会",
+    "cat": "政策速递",
+    "sum": "重庆市教育委员会关于印发《重庆市农村幼儿园质量提升十五条措施》的通知渝教发〔2026〕10号各区县（自治县）教委（教育局、公共服务局），有关直属单位： 党的二十大以来，全市学前教育实现了跨越发展，但部分农村幼儿园仍存在园舍条件落后、教育资源匮乏、教师配备不足、教研培训缺失、育人理念陈旧等突出问题，已成为全市学前教育高质量发展中迫切需要解决的薄弱环节和工作短板。经研究，特制定《重庆市农",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "市委常委会举行扩大会议 深入学习贯彻习近平总书记重要讲话精神 研究部署推动卫生与健康事业高质量发展等工作 市委书记袁家军主持并讲话",
+    "url": "https://www.cq.gov.cn/ywdt/jrcq/202610/t20261014_16233225.html",
+    "src": "重庆市政府网",
+    "cat": "政策速递",
+    "sum": "10月14日，市委常委会举行扩大会议，深入学习贯彻习近平总书记在庆祝中华人民共和国成立77周年招待会上的重要讲话精神，传达学习贯彻习近平总书记在全国卫生与健康大会上的重要讲话，研究部署有关工作。",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "教育部成立雄安教师发展中心",
+    "url": "https://www.eol.cn/news/yaowen/202610/t20261014_2782409.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "教育部在河北雄安成立雄安教师发展中心。",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "华东师范大学拟新增6个本科专业",
+    "url": "https://www.eol.cn/news/dongtai/202610/t20261014_2782430.shtml",
+    "src": "中国教育在线",
+    "cat": "行业观察",
+    "sum": "华东师范大学拟新增6个本科专业。",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "贵州天柱：校园艺术展演展风采",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/tpxw/202610/t20261014_2111530390.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "10月12日，贵州省黔东南苗族侗族自治州天柱县第七小学，学生在校园艺术展演活动现场参加比赛。贵州省黔东南苗族侗族自治州天柱县举办的校园艺术展演活动，吸引了众多中小学生参加绘画、书法、手工艺制作等艺术作...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "河北新乐：减灾进校园 急救学起来",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/tpxw/202610/t20261014_2111530392.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "10月13日，河北省新乐市东长寿学校，市中心医院医护人员指导学生练习心肺复苏操作。当日是第37个国际减灾日，新乐市东长寿学校开展防灾减灾安全教育活动。市中心医院医护人员现场指导学生练习心肺复苏，活动设置...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "雄安教师发展中心成立暨组团式教师轮岗实训研修开班活动举行",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530453.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "10月14日，雄安教师发展中心成立暨组团式教师轮岗实训研修开班活动在北京四中雄安校区举行。河北省政协主席，省委常委，雄安新区党工委书记、管委会主任张国华出席活动。教育部党组成员、副部长杜江峰出席活动并...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "江苏睢宁：田间学农事 研学趣味多",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/tpxw/202610/t20261014_2111530385.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "10月13日，江苏省徐州市铜山区启星学校组织学生来到睢宁县姚集镇松鼠咔咔乐园开展研学活动。大家走进田间，体验收山芋、摘花生等农事劳作，近距离感受农耕乐趣，在实践中学习农业知识，丰富课外实践体验。中国教...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "南京财经大学举办“守粮人”初心守望展",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530393.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 阿妮尔 通讯员 高婷婷 孙品妍）近日，南京财经大学举办“守粮人的光荣与梦想”之初心守望展，通过珍贵史料与鲜活口述回溯学校初创时“守粮人”白手起家、深耕粮食财经教育的奋...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "东北财经大学成立科技商学院",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530394.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 张菁）10月14日，东北财经大学科技商学院揭牌仪式暨首届科技商学建设论坛举办，来自政府部门、科研院所、高校及企业代表围绕AI时代的科技商学院建设与办学模式、校政企联合推...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中北大学西部计划工作实现新跨越",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530395.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 苏峰 通讯员 郭艳霞）近日，全国大学生志愿服务西部计划项目管理办公室公布2025—2026年度考核等次优秀志愿者名单，中北大学30名西部计划志愿者获评全国优秀，2026年西部计划...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "首都医科大学：首都高校科技成果转化巡回交流会第七场举办",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530397.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 施剑松）日前，首都高校科技成果转化巡回交流会第七场暨首都医科大学首届科技成果转化大赛决赛在首都医科大学科技园举办。首都医科大学校本部、临床医院科研团队、创新企业与...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "天津职业大学：打造人才培养新范式",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530399.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 陈欣然 通讯员 李敬）在2026年世界职业技术教育发展大会举行前夕，2026年世界职业院校技能大赛已如火如荼进行。记者从天津职业大学了解到，该校承办了中华传统技艺赛道争夺赛...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "内蒙古自治区满洲里市中等职业技术学校迎来首批俄罗斯留学生",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530400.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 苏勤）近日，内蒙古自治区满洲里市中等职业技术学校2026级国际专业班开学典礼隆重举行，24名俄罗斯籍国际学生跨越山海，正式踏入校园，开启在中国的求学逐梦之路。 地处中俄边...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "宁波市鄞州职业教育中心学校：老旧设备变身人文景观，助力传承工匠精神",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530401.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 史望颖 通讯员 王亚达）车床边，两人并肩，一人摇尾座手轮顶紧工件，一人调刀架刻度对刀；铣床边，两人分工，一人摇工作台纵向手轮送料，一人调横向进给看铣刀……近日，宁波...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "中国国际大学生创新大赛（2026）甘肃省分赛闭幕",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530402.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 尹晓军）近日，“建行杯”中国国际大学生创新大赛（2026）甘肃省分赛闭幕式暨颁奖典礼在甘肃中医药大学举行。与会领导嘉宾为获奖单位及团队代表颁奖，观看了兰州大学、甘肃中...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "山东郯城：县域“校园安全大脑”守护校园平安",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530409.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 魏海政 通讯员 李爱庭 张姝）“以前夜间10点开始一层层敲门，查完都快11点半了。现在校园安全大脑智能系统自动提醒，谁没归寝一眼就能看到。”近日，山东省临沂市郯城第一中学...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "一座城市的教育定力",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530321.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "10月的盘锦，丹顶鹤落进红海滩边的湿地，辽河口的芦苇已经泛白。这座因油而兴的辽西小城即将迎来一年一度属于教育的“节日”——培养良好习惯现场会（简称“现场会”）。 这项由知名教育改革家魏书生担任盘锦市教...",
+    "date": "2026-10-14",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "西安交通大学教授获国际相变存储领域最高奖",
+    "url": "http://www.jyb.cn/rmtzcg/xwy/wzxw/202610/t20261014_2111530405.html",
+    "src": "中国教育新闻网",
+    "cat": "行业观察",
+    "sum": "中国教育报-中国教育新闻网讯（记者 冯丽）记者日前从西安交通大学获悉，近日在比利时鲁汶举办的第24届欧洲相变存储与奥氏电子学会议上，西安交大张伟教授荣获奥弗辛斯基讲座奖。据悉，张伟是2026年度全球唯一获...",
     "date": "2026-10-14",
     "body": "",
     "reviewed": true,
@@ -10669,7 +10922,7 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-15 06:32", "seed": 46, "collected": 930, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-15 06:35", "seed": 46, "collected": 953, "fetchedPending": 2};
 
 
 var ARTMAP = {"N|家庭教育促进法要点：依法带娃，「训诫」不是吓唬": "article-news-25280274.html", "N|高一适应期：住校生第一个月的常见问题与对策": "article-news-8bef8675.html", "N|「双减」后学科培训现状：持证机构名单怎么查": "article-news-45ad72b1.html", "N|校园周边交通护学岗升级：家长志愿者报名启动": "article-news-ef22a387.html", "N|期中考试后，成绩单应该这样读（家长版）": "article-news-fd72aa23.html", "N|高中生选科风向：物理+化学组合占比继续走高": "article-news-b184d140.html", "N|重庆多个区公布 2026 秋季转学办理窗口": "article-news-0b829b59.html", "N|期末临近：各科复习的「家庭分工」建议": "article-news-f413dbf6.html", "N|「跨区就读」的三种合法路径与材料差异": "article-news-434176d3.html", "N|住宿安全与作息：寄宿家长每月必查的四件事": "article-news-9788835f.html", "N|指标到校名额是怎么分到初中的？一文看懂分配逻辑": "article-news-08de9c03.html", "N|秋游与研学季：校外活动的安全清单（家长版）": "article-news-a78472e7.html", "N|开学一个月，孩子说「不想上学」怎么办：三步沟通法": "article-news-5edcff32.html", "N|数学不好，还能走「强基」吗？——基础学科路线的三个判断": "article-news-393f8c67.html", "N|「综合素质评价」到底评什么？家长能做什么": "article-news-56491c4e.html", "N|2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴": "article-news-322b0469.html", "N|2026 年联招学校约 113 所（新增 10 所）": "article-news-ae92f623.html", "N|指标到校：市级重点高中 70% 计划分配到辖区初中": "article-news-c2282b52.html", "N|2026 年高考特招线公布：历史类 510 / 物理类 496": "article-news-44a54f04.html", "N|幼升小报名季：三对口材料与网报窗口提示": "article-news-81daf656.html", "N|全市护学岗 6,993 个：接送安全再补一层": "article-news-2f17b376.html", "N|开学季数据：重庆 K12 在校生规模约 376.3 万": "article-news-8fb6230a.html", "N|家庭年度教育支出复盘：先看结构，再看总量": "article-news-f2b57222.html", "N|初中阶段亲子沟通：先处理情绪，再处理问题": "article-news-dc8bcd75.html", "N|秋季流感季：校园防护与请假流程提示": "article-news-d4243bb6.html", "N|接送高峰行车安全：即停即走与护学通道": "article-news-24eba960.html", "N|材料核对月：把「三对口」收进一个文件袋": "article-news-03641436.html", "N|联招志愿梯度怎么排：冲稳保各留 1–2 所": "article-news-5c961a79.html", "N|随迁子女入学：居住证与材料清单提前备": "article-news-0a439449.html", "N|艺体与科技特长生：报名窗口与材料提示": "article-news-333fee44.html", "N|指标到校校内公示：家长需要盯的两件事": "article-news-195fe411.html", "N|新生入学体检与预防接种查验：开学季办事清单": "article-news-17d13d20.html", "N|培训退费纠纷：先看合同，再走属地监管渠道": "article-news-82ec666f.html", "N|周末少儿阅读：图书馆借阅卡办理与亲子共读建议": "article-news-48a72f92.html", "N|初三体育训练季：节奏、防护与营养的平衡": "article-news-555c5aeb.html", "N|高考体检与外语口试：时间节点提示": "article-news-42c20c89.html", "N|2027 年校历发布季启动：寒假安排将随校历公布": "article-news-44d7dd4c.html", "N|秋季流感防护：校园场景三件事": "article-news-6166dd90.html", "N|随迁子女入学材料季：居住证与社保要提前核对": "article-news-fadc6284.html", "N|主城区多所高中开放日集中举行": "article-news-bd3ce26b.html", "N|家庭教育：把「电子设备公约」写成家庭协议": "article-news-f387cf90.html", "N|开学后首个家长会：建议问老师的三个问题": "article-news-309819fe.html", "N|重庆市教委发布 2026 年义务教育招生入学工作通知": "article-news-f1b1f745.html", "N|2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496": "article-news-29b4d3d3.html", "N|阳光高考平台：军校招生军检线与报考流程答疑": "article-news-6beca3bf.html", "N|艾媒咨询：2025 年高考志愿填报市场付费规模预计 10.9 亿元": "article-news-391c4e83.html", "S|南开中学（沙坪坝）": "article-school-98250a24.html", "S|重庆一中（沙坪坝）": "article-school-57cbac3a.html", "S|巴蜀中学（渝中）": "article-school-10432c02.html", "S|重庆八中（沙坪坝）": "article-school-a9decd04.html", "S|育才中学（九龙坡）": "article-school-dbd33ba8.html", "S|西大附中（北碚）": "article-school-1b48d40c.html", "S|重庆十一中（南岸）": "article-school-54671c45.html", "S|重庆十八中（江北）": "article-school-38e4cb1a.html", "S|求精中学（渝中）": "article-school-fcf51a2b.html", "S|杨家坪中学（九龙坡）": "article-school-be27b3c6.html", "S|重庆三十七中（大渡口）": "article-school-e2077b3e.html", "S|巴蜀常春藤学校（两江新区）": "article-school-3b32267e.html", "S|兼善中学（北碚）": "article-school-16ca5f3c.html", "S|巴南中学（巴南）": "article-school-b43ae6cc.html", "S|渝北中学（渝北）": "article-school-51d6bf2d.html", "S|松树桥中学（渝北）": "article-school-153c178a.html", "S|两江育才中学（两江新区）": "article-school-362ce5f6.html", "S|大学城第一中学（沙坪坝）": "article-school-63fbbbbc.html", "S|凤鸣山中学（沙坪坝）": "article-school-ad683d69.html", "S|渝中区复旦中学（渝中）": "article-school-d282ceee.html", "L|要不要提前教拼音和算术？": "article-learn-7f5127fb.html", "L|指标到校和择校怎么权衡？": "article-learn-18edf1ba.html", "L|孩子成绩中等，路径怎么规划？": "article-learn-c460ab76.html", "L|志愿「冲稳保」怎么分配？": "article-learn-ba409771.html", "L|大考前，家长怎么说话不添乱？": "article-learn-c9eb2d89.html", "L|民办摇号没中，是不是就没学上了？": "article-learn-e1eac920.html", "L|住校还是走读，怎么决定？": "article-learn-0f041c0e.html", "L|强基计划值得报吗？": "article-learn-23a1fbd3.html", "L|公立和私立幼儿园，幼升小衔接有差别吗？": "article-learn-abd5a402.html", "L|奥数还值得学吗？": "article-learn-fa47210a.html", "L|家里老人育儿观念不一致，怎么破？": "article-learn-a98a7d05.html", "L|陪考三年，我做对了三件事": "article-experience-ec2dcbbc.html", "L|志愿填报：我们家做了三次模拟": "article-experience-cc52f067.html", "L|租房陪读一年：成本清单与踩坑": "article-experience-f7ddfee9.html", "L|从焦虑到放手：我把家长群取消了置顶": "article-experience-9f5a4396.html", "L|对口材料核对，我们家提前一年就开始了": "article-experience-43ed05df.html", "L|体育中考：我们从初一就开始「攒分」": "article-experience-20e61f26.html", "L|全家搬到学校隔壁，我们后悔了吗？": "article-experience-61d84a2c.html", "L|我把「别人家孩子」从家里请出去了": "article-experience-534eaf28.html", "L|报名前两个月，我们做对了四件小事": "article-experience-1c22e158.html", "L|高三一年，家长只做三件事": "article-experience-fc4236cb.html", "L|家长群信息太多？我的「三分钟过滤法」": "article-experience-dd419bcb.html", "L|给陪读家长的 5 条「少花钱」清单": "article-experience-8d4c5a92.html"};

@@ -353,6 +353,17 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "走进机器人学校，看机器人在课堂学会啥？ 精选 推荐 2026-10-16 09:48",
+    "url": "https://www.cqrb.cn/shishi/2026-10-16/2797642_pc.html",
+    "src": "重庆日报",
+    "cat": "升学动态",
+    "sum": "",
+    "date": "2026-10-16",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆大足：冒雨迁改电力线路 护航校园用电安全",
     "url": "http://cq.people.com.cn/n2/2026/1014/c365412-41721668.html",
     "src": "人民网重庆",
@@ -11525,4 +11536,4 @@ var NEWS_FEED = [
     "auto": true
   }
 ];
-var NEWS_META = {"generated": "2026-10-16 09:23", "seed": 46, "collected": 1010, "fetchedPending": 2};
+var NEWS_META = {"generated": "2026-10-16 09:55", "seed": 46, "collected": 1011, "fetchedPending": 2};

@@ -65,7 +65,7 @@ def rule_check(item, db):
 
 def normalize(raw, db):
     """把 inbox 条目转成 bagua.json 条目结构；缺字段补默认；强制免责。"""
-    return {
+    item = {
         "id": raw.get("id") or ("bg-" + datetime.date.today().strftime("%Y%m%d") + "-" + fingerprint(raw.get("ai_summary", "") + raw.get("original_url", ""))[:6]),
         "source_platform": raw.get("source_platform") or raw.get("platform") or "公开渠道",
         "author_name": raw.get("author_name") or raw.get("author") or "（博主昵称待确认）",
@@ -80,6 +80,17 @@ def normalize(raw, db):
         "reviewed": bool(raw.get("reviewed", False)),
         "added": datetime.date.today().isoformat(),
     }
+    # —— v1.8 透传字段：置顶声明 / 官方信源标记 / 四段蒸馏结构 ——
+    # 此前三者被 normalize 丢弃，导致管线入库内容永远是「浅摘要卡」且一律标「置顶未确认」。
+    if raw.get("not_pinned") is not None:
+        item["not_pinned"] = bool(raw.get("not_pinned"))
+    if raw.get("info_type"):
+        item["info_type"] = str(raw["info_type"])
+    if isinstance(raw.get("deep"), dict):
+        deep = raw["deep"]
+        if deep.get("core"):  # 四段蒸馏：核心论点必须有才认定有效
+            item["deep"] = {k: deep[k] for k in ("core", "details", "official", "action", "perspective") if deep.get(k)}
+    return item
 
 def main(dry=False):
     db = load(DB, {"items": [], "ban_words": [], "review_words": [], "tag_pool": [], "stages": [], "weekly": None})

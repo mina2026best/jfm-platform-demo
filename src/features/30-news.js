@@ -129,6 +129,7 @@ function newsItemHTML(x, lead){
   else { titleLink = '<span class="ni-link" role="text">' + esc(x.t) + '</span>'; }
   return '<div class="news-item' + (lead ? ' lead' : '') + '" data-key="' + esc(x._k) + '" data-cat="' + esc(x.cat) + '">' + cover + '<div class="ni-main">'
     + '<div class="ni-head"><span class="ni-cat">' + esc(x.cat) + '</span>'
+    + (x.stages && x.stages.length ? x.stages.map(function(sg){ return '<span class="stage-tag">' + esc(sg) + '</span>'; }).join('') : '')
     + '<span>' + esc(x.src || '') + '</span><span>' + esc(x.date || '') + '</span>'
     + (x._local ? '<span class="ni-tag local">本机编辑</span>' : '') + '</div>'
     + '<h4 class="ni-title">' + titleLink

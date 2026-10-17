@@ -19,6 +19,7 @@
   .news-item[data-cat="办事提醒"]{border-left-color:var(--muted)}
   .ni-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:var(--mono);font-size:11px;color:var(--muted)}
   .ni-cat{color:var(--accent);font-weight:700;letter-spacing:.04em}
+.stage-tag{display:inline-block;padding:1px 8px;border:1px solid var(--accent);border-radius:99px;font-size:10.5px;color:var(--accent);font-weight:600;letter-spacing:.04em;line-height:1.5;white-space:nowrap}
   .ni-tag.local{background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:1px 8px;font-size:11px}
   .ni-title{font-size:15px;color:var(--ink);margin:8px 0 6px;cursor:pointer}
   .ni-title:hover{color:var(--accent)}

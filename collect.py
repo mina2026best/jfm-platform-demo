@@ -11,6 +11,12 @@
 """
 import json, os, sys, re, datetime, urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import keywords_rules as KR   # v2.0 关键词硬门槛+五模块归类（剔除无法判定内容）
+except Exception:
+    KR = None
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 NEWS = os.path.join(ROOT, "src", "news")
 SEED = os.path.join(NEWS, "seed.json")
@@ -80,6 +86,34 @@ def fetch_all():
 def generate():
     seed = load(SEED, [])
     collected = load(COLLECTED, [])
+    if KR is not None:
+        # v2.0：生成前全量过滤（关键词硬门槛 + 五模块归类），无法判定不入库
+        kept, dropped = [], 0
+        for c in collected:
+            cat = KR.classify(c.get("t", ""), c.get("sum", ""), c.get("src", ""), c.get("body", ""))
+            if cat is None:
+                dropped += 1
+                continue
+            c["cat"] = cat
+            c["stages"] = KR.stage_tags(c.get("t", ""), c.get("sum", "") + " " + c.get("body", ""))
+            kept.append(c)
+        if dropped:
+            print(f"[v2.0-filter] 剔除无法判定 {dropped} 条；保留 {len(kept)} 条")
+        collected = kept
+    if KR is not None:
+        # v2.0：seed（编辑部内容）同样校验——营销/无法判定的不发布
+        kept_seed, dropped_seed = [], 0
+        for s in seed:
+            cat = KR.classify(s.get("t", ""), s.get("sum", ""), s.get("src", ""), s.get("body", ""))
+            if cat is None:
+                dropped_seed += 1
+                continue
+            s["cat"] = cat
+            s["stages"] = KR.stage_tags(s.get("t", ""), s.get("sum", "") + " " + s.get("body", ""))
+            kept_seed.append(s)
+        if dropped_seed:
+            print(f"[v2.0-filter] seed 剔除 {dropped_seed} 条")
+        seed = kept_seed
     pub = [c for c in collected if c.get("reviewed")]
     items = seed + pub
     items.sort(key=lambda x: (x.get("date") or ""), reverse=True)

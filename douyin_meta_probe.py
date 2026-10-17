@@ -61,5 +61,12 @@ if __name__ == '__main__':
       'https://www.douyin.com/video/7649672539999948066',   # 肖肖 摇号退路
       'https://www.douyin.com/zhuanti/7188857016562239549', # 米妈 民办汇总（话题页）
       'https://www.douyin.com/video/7422970398364552474',   # 蓝图 一诊时间
+      'https://www.douyin.com/shipin/7509927192986634249',  # 刘闻 重大招生计划
+      'https://www.douyin.com/shipin/7509922829627721737',  # 刘闻 历史类547分
+      'https://www.douyin.com/shipin/7521200368466823187',  # 罗洋 中考等级abc
+      'https://www.douyin.com/shipin/7509903950947223563',  # 全老师 云阳高考喜报
+      'https://www.douyin.com/video/7310178984405436428',   # 全老师 康德卷一诊
+      'https://www.douyin.com/zhuanti/7223894218488645687', # 米妈 2022清北榜（话题页）
+      'https://www.douyin.com/zhuanti/7247280162151221283', # 教育通 谢家湾（话题页）
     ]
     sys.exit(main(urls))

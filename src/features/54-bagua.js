@@ -45,7 +45,21 @@ function baguaCardHTML(x, i){
     : '<span class="bg-src muted">无公开链接</span>';
   var reviewTip = x.reviewed === false
     ? '<span class="bg-review-tip">该条为机器初筛结果，正在等待人工终审；展示内容不构成任何建议</span>' : '';
-  return '<div class="bg-card" data-bgkey="' + esc(x.id || ('g' + i)) + '">'
+  var bodyHTML;
+  if (x.deep) {
+    var d = x.deep;
+    var det = (d.details || []).map(function(it){ return '<div class="bg-det-item">' + esc(it) + '</div>'; }).join('');
+    var act = (d.action || []).map(function(it){ return '<li>' + esc(it) + '</li>'; }).join('');
+    bodyHTML = ''
+      + '<p class="bg-sec"><b>核心论点</b></p><p class="bg-p">' + esc(d.core || '') + '</p>'
+      + (det ? '<p class="bg-sec"><b>关键信息</b></p><div class="bg-details">' + det + '</div>' : '')
+      + (d.official ? '<p class="bg-sec"><b>官方口径对照</b></p><p class="bg-p bg-official">' + esc(d.official) + '</p>' : '')
+      + (act ? '<p class="bg-sec"><b>家长行动清单</b></p><ul class="bg-actions">' + act + '</ul>' : '')
+      + (d.perspective ? '<p class="bg-sec"><b>视角提醒</b></p><p class="bg-p bg-persp">' + esc(d.perspective) + '</p>' : '');
+  } else {
+    bodyHTML = '<p class="bg-sum">' + esc(x.ai_summary || '') + '</p>';
+  }
+  return '<div class="bg-card' + (x.deep ? ' deep' : '') + '" data-bgkey="' + esc(x.id || ('g' + i)) + '">'
     + '<div class="bg-card-head">'
     +   baguaPlatformBadge(x.source_platform)
     +   stages
@@ -53,7 +67,7 @@ function baguaCardHTML(x, i){
     +   '<span class="bg-author">' + esc(x.author_name || '佚名博主') + '</span>'
     +   '<span class="bg-date">' + esc((x.publish_time || '').slice(0, 10)) + '</span>'
     + '</div>'
-    + '<p class="bg-sum">' + esc(x.ai_summary || '') + '</p>'
+    + bodyHTML
     + (x.risk_note ? '<p class="bg-riskenote">风控备注：' + esc(x.risk_note) + '</p>' : '')
     + '<div class="bg-tags">' + tags + '</div>'
     + reviewTip
@@ -102,6 +116,7 @@ function renderBagua(){
   }
 
   renderBaguaTrend(db);
+  renderBaguaHosts(db);
 }
 
 /* 话题热度条：纯 CSS 条形图（每周随管线更新） */
@@ -127,3 +142,24 @@ function renderBaguaTrend(db){
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
+
+
+/* 主播声量对比：按在库条目数统计各主播（内容产量代理） */
+function renderBaguaHosts(db){
+  var box = document.getElementById('bagua-hosts');
+  if (!box) return;
+  var items = (db.items || []).filter(function(x){ return x.risk_level === '正常' || x.risk_level === '待人工复核'; });
+  var cnt = {};
+  items.forEach(function(x){ var a = x.author_name || '佚名'; cnt[a] = (cnt[a] || 0) + 1; });
+  var rows = Object.keys(cnt).map(function(a){ return { a: a, c: cnt[a] }; }).sort(function(p, q){ return q.c - p.c; }).slice(0, 8);
+  if (!rows.length) { box.innerHTML = ''; return; }
+  var max = rows[0].c || 1;
+  var bars = rows.map(function(r){
+    var pct = Math.round(r.c / max * 100);
+    return '<div class="bg-trend-row"><span class="bg-trend-tag">' + esc(r.a) + '</span>'
+      + '<div class="bg-trend-bar"><i style="width:' + pct + '%"></i></div>'
+      + '<span class="bg-trend-n">' + r.c + ' 条</span></div>';
+  }).join('');
+  box.innerHTML = '<div class="bg-trend-head">在库主播声量 <span class="bg-trend-gen">' + esc(db.weekly && db.weekly.generated || '') + ' 统计</span></div>' + bars
+    + '<p class="bg-trend-note">按在库条目数统计（内容产量的近似代理）；声量高低不代表观点正确性，每条均独立过风控。</p>';
+}

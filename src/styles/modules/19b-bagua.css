@@ -31,3 +31,15 @@
 .bg-trend-n{color:var(--faint);text-align:right;white-space:nowrap}
 .bg-trend-note{font-size:11.5px;color:var(--faint);margin-top:8px}
 @media(max-width:720px){.bg-trend-row{grid-template-columns:96px 1fr 78px}}
+/* deep 长文卡片 */
+.bg-card.deep{grid-column:1/-1}
+.bg-sec{font-size:12px;letter-spacing:.12em;color:var(--faint);margin:14px 0 6px}
+.bg-sec b{color:var(--accent)}
+.bg-p{font-size:14px;line-height:2;color:#222529}
+.bg-official{background:#F4F6F5;border-left:3px solid var(--accent);padding:10px 14px}
+.bg-persp{color:#5A4A28;background:#FBF7EE;padding:10px 14px;border-left:3px solid #B45309}
+.bg-details{border:1px solid var(--line);background:var(--paper)}
+.bg-det-item{padding:8px 14px;border-bottom:1px dashed var(--line);font-size:13px;line-height:1.8}
+.bg-det-item:last-child{border-bottom:none}
+.bg-actions{margin:6px 0 0 1.2em}
+.bg-actions li{font-size:13.5px;line-height:1.9;margin:6px 0}

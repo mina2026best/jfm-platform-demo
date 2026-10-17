@@ -150,6 +150,11 @@ def main(dry=False):
                 stats.setdefault("notWl", 0); stats["notWl"] += 1
                 lines.append(f"[白名单外] {item['author_name']} → 非用户指定名单，拒收")
                 continue
+            # 时效防混淆：仅接受最新非置顶作品时间戳；投递方若未声明「非置顶」则强制转人工复核
+            if not item.get("not_pinned", False) and item.get("source_platform") not in ("媒体/官方",):
+                item.setdefault("risk_level", "待人工复核")
+                item["risk_note"] = (item.get("risk_note", "") + "；" if item.get("risk_note") else "") + "时间戳未确认是否为置顶作品，需人工核对主页最新非置顶作品"
+                item["reviewed"] = False
             # 摘要长度校验（100-200 字，超出截断标记复核）
             slen = len(item["ai_summary"])
             if item["ai_summary"] and (slen < 60 or slen > 240):

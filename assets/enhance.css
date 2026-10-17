@@ -543,3 +543,22 @@ footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1
 /* ---------- v0.83 快捷通道行距收紧 ---------- */
 .home-grid2 .hot-rank a{padding:8px 2px !important}
 .home-grid2 .hot-rank{padding:2px 14px !important}
+
+/* ---------- v0.88 卡片质感与底部入口 ---------- */
+.sd{transition:transform .18s ease, box-shadow .18s ease}
+.sd:hover{transform:translateY(-3px);box-shadow:0 4px 10px rgba(36,52,77,.06),0 22px 44px -24px rgba(36,52,77,.4)}
+.sd-more{margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);
+  font-size:13px;font-weight:600;color:var(--accent);text-decoration:none}
+.sd-more:hover{color:var(--news-red,var(--accent))}
+.dao-cat,.hot-rank a{transition:transform .16s ease, box-shadow .16s ease}
+.dao-cat:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(36,52,77,.45)}
+/* 快捷通道彩色圆点 */
+.home-grid2 .hot-rank a .no{width:auto;min-width:0}
+.home-grid2 .hot-rank a::before{content:"";width:7px;height:7px;border-radius:50%;flex:none;align-self:center;
+  background:var(--accent);opacity:.75;margin-right:-4px}
+.home-grid2 .hot-rank a:nth-child(2)::before{background:#C8342B}
+.home-grid2 .hot-rank a:nth-child(3)::before{background:#3E6FA8}
+.home-grid2 .hot-rank a:nth-child(4)::before{background:#B45309}
+.home-grid2 .hot-rank a:nth-child(5)::before{background:#6B4FA0}
+.home-grid2 .hot-rank a:nth-child(6)::before{background:#0E7C8C}
+.home-grid2 .hot-rank a:nth-child(7)::before{background:#5A7D2A}

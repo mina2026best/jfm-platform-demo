@@ -103,10 +103,11 @@ function renderHotRank(){
   try{
     var all = newsCombined();
     if(typeof jfmRelevance === 'function'){
-      var local = all.filter(function(x){ return jfmRelevance(x) >= 8; });
-      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
-      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 2; });
-      all = (local.length >= 4 ? local : all);
+      /* 质量优先：宁缺毋滥——强相关不足时缩小榜单，不用弱相关凑数 */
+      var pool = all.filter(function(x){ return jfmRelevance(x) >= 8; });
+      if(pool.length < 3) pool = all.filter(function(x){ return jfmRelevance(x) >= 6; });
+      if(pool.length < 2) pool = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      all = pool;
     }
     items = all.slice(0, 7);
   }catch(e){ return; }

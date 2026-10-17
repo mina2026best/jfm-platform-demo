@@ -9893,8 +9893,8 @@ function clearNewsQuery(){
 /* ---------- v0.80：重庆 K12 相关性优先（要闻榜与资讯流排序） ---------- */
 var JFM_LOCAL_SOURCES = ['重庆市教育委员会','重庆市教育考试院','重庆招考网','华龙网','重庆市政府网','新华网重庆','人民网重庆','上游新闻','重庆日报','第1眼','上游','华龙'];
 var JFM_LOCAL_KEYWORDS = ['重庆','渝','巴南','江北','渝北','沙坪坝','九龙坡','南岸','渝中','北碚','大渡口','涪陵','万州'];
-var JFM_K12_KEYWORDS = ['小升初','幼升小','中考','高考','划片','摇号','指标到校','志愿','招生','学位','学区','转学','中小学','义务教育','双减','课后服务','教材','校园','家长','教委','普高','联招','考试','报名','录取','入学','K12','中小学校','区县'];   /* K12 家长核心痛点词：命中才算强相关 */
-var JFM_NEG_KEYWORDS = ['职业','职教','高校','大学','学院','研究生','考研','雅思','托福','留学','党建','思政','国际交流','世校赛','技能大赛','双一流','就业','科研','论文','竞赛','本科'];   /* 高教/职教/考试培优类：K12 家长不关注，重罚 */
+var JFM_K12_KEYWORDS = ['小升初','幼升小','中考','高考','划片','摇号','指标到校','志愿填报','中考志愿','高考志愿','招生','学位','学区','转学','中小学','义务教育','双减','课后服务','教材','校园','家长','教委','普高','联招','考试','报名','录取','入学','K12','中小学校','区县','学业水平','合格考'];   /* K12 家长核心痛点词：命中才算强相关 */
+var JFM_NEG_KEYWORDS = ['职业','职教','高校','大学','学院','研究生','考研','雅思','托福','留学','党建','思政','国际交流','世校赛','技能大赛','双一流','就业','科研','论文','竞赛','本科','旅游','游客','文旅','出入境','马拉松','研考','研招','调剂'];   /* 高教/职教/考试培优类：K12 家长不关注，重罚 */
 var newsLocalFirst = true;
 function jfmRelevance(x){
   var hay = ((x.t||'') + ' ' + (x.sum||'') + ' ' + (x.src||''));
@@ -10728,10 +10728,11 @@ function renderHotRank(){
   try{
     var all = newsCombined();
     if(typeof jfmRelevance === 'function'){
-      var local = all.filter(function(x){ return jfmRelevance(x) >= 8; });
-      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 4; });
-      if(local.length < 4) local = all.filter(function(x){ return jfmRelevance(x) >= 2; });
-      all = (local.length >= 4 ? local : all);
+      /* 质量优先：宁缺毋滥——强相关不足时缩小榜单，不用弱相关凑数 */
+      var pool = all.filter(function(x){ return jfmRelevance(x) >= 8; });
+      if(pool.length < 3) pool = all.filter(function(x){ return jfmRelevance(x) >= 6; });
+      if(pool.length < 2) pool = all.filter(function(x){ return jfmRelevance(x) >= 4; });
+      all = pool;
     }
     items = all.slice(0, 7);
   }catch(e){ return; }

@@ -1,0 +1,93 @@
+{
+  "note": "22 主播主页直采清单；SEARCH: 前缀表示主页 URL 待补（可通过 web_search 'm.douyin.com/share/user 主播名' 补齐后回填）",
+  "hosts": [
+    {
+      "name": "全老师说川渝升学",
+      "url": "SEARCH:全老师说川渝升学"
+    },
+    {
+      "name": "亮哥国际升学规划",
+      "url": "SEARCH:亮哥国际升学规划"
+    },
+    {
+      "name": "重庆初升高李老师",
+      "url": "SEARCH:重庆初升高李老师"
+    },
+    {
+      "name": "升学规划（林德教育）",
+      "url": "SEARCH:升学规划（林德教育）"
+    },
+    {
+      "name": "重庆周校懂",
+      "url": "SEARCH:重庆周校懂"
+    },
+    {
+      "name": "刘闻老师重庆升学规划",
+      "url": "SEARCH:刘闻老师重庆升学规划"
+    },
+    {
+      "name": "罗老师升学指导",
+      "url": "SEARCH:罗老师升学指导"
+    },
+    {
+      "name": "重庆彭老师聊升学",
+      "url": "SEARCH:重庆彭老师聊升学"
+    },
+    {
+      "name": "重庆教育升学交流",
+      "url": "SEARCH:重庆教育升学交流"
+    },
+    {
+      "name": "重庆佑妈",
+      "url": "SEARCH:重庆佑妈"
+    },
+    {
+      "name": "金茗老师重庆升学",
+      "url": "SEARCH:金茗老师重庆升学"
+    },
+    {
+      "name": "重庆搜舞艺考",
+      "url": "SEARCH:重庆搜舞艺考"
+    },
+    {
+      "name": "吴老师说教育",
+      "url": "SEARCH:吴老师说教育"
+    },
+    {
+      "name": "蓝图老师讲强基计划",
+      "url": "SEARCH:蓝图老师讲强基计划"
+    },
+    {
+      "name": "李老师精准升学",
+      "url": "SEARCH:李老师精准升学"
+    },
+    {
+      "name": "欧k老师聊升学",
+      "url": "SEARCH:欧k老师聊升学"
+    },
+    {
+      "name": "重庆教育通",
+      "url": "SEARCH:重庆教育通"
+    },
+    {
+      "name": "小草老师-初升高",
+      "url": "SEARCH:小草老师-初升高"
+    },
+    {
+      "name": "罗洋老师升学规划",
+      "url": "https://www.douyin.com/share/user/MS4wLjABAAAAT1j9rywVOG0BGOdoCxpsjFVFpSYUxIorhbqpIOSv"
+    },
+    {
+      "name": "北大僖爸",
+      "url": "SEARCH:北大僖爸"
+    },
+    {
+      "name": "重庆米妈",
+      "url": "https://www.douyin.com/share/user/MS4wLjABAAAAlc-5Ay9FwY2Kt0GzpI6CEC-OaSwUYP9-KDQ4zJmRIFY"
+    },
+    {
+      "name": "校园逛逛君",
+      "url": "SEARCH:校园逛逛君"
+    }
+  ]
+}

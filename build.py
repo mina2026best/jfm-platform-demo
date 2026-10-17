@@ -366,6 +366,7 @@ def build_news_static(artmap, limit=12):
         html.append('<div class="news-item' + (' lead' if lead else '') + '" data-key="' + _js_esc(x['_k']) + '" data-cat="' + _js_esc(cat) + '">'
             + '<div class="ni-cover" aria-hidden="true"><img loading="lazy" decoding="async" src="assets/photos/' + ph + '" alt="' + _js_esc(alts.get(cat) or '教育资讯主题配图') + '"></div>'
             + '<div class="ni-main"><div class="ni-head"><span class="ni-cat">' + _js_esc(cat) + '</span>'
+            + ''.join('<span class="stage-tag">' + _js_esc(sg) + '</span>' for sg in (x.get('stages') or []))
             + '<span>' + _js_esc(x.get('src','')) + '</span><span>' + _js_esc(x.get('date','')) + '</span></div>'
             + '<h4 class="ni-title">' + link + ' <button class="ni-more" onclick="toggleNewsBody(this)" data-target="self">摘要 ▾</button></h4>'
             + ('<p class="ni-sum">' + _js_esc(x.get('sum')) + '</p>' if x.get('sum') else '')

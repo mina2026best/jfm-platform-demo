@@ -12,6 +12,12 @@ from urllib.parse import urljoin, urlparse
 import urllib.request
 import certifi
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+try:
+    import keywords_rules as KR   # v2.0：入库前硬门槛预筛
+except Exception:
+    KR = None
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 NEWS = os.path.join(ROOT, "src", "news")
 SOURCES = os.path.join(NEWS, "sources.json")
@@ -192,16 +198,24 @@ def main():
         c.pop("_alive", None)
 
     # 3) 写入 collected.json（reviewed=true 自动发布）
+    # v2.0：入库前过关键词硬门槛+五模块归类，无法判定的内容丢弃不入库
+    admitted, rejected = [], 0
     for c in cands:
-        c["cat"] = c.get("cat") or cat_of(c["t"])
+        cat = KR.classify(c.get("t", ""), c.get("sum", "")) if KR else cat_of(c.get("t", ""))
+        if cat is None:
+            rejected += 1
+            continue
+        c["cat"] = cat
+        if KR: c["stages"] = KR.stage_tags(c.get("t", ""), c.get("sum", ""))
         c["date"] = real_date(c["url"]) or today
         c["sum"] = c.get("sum") or ""
         c["body"] = ""
         c["reviewed"] = True
         c["auto"] = True
         collected.append(c)
+        admitted.append(c)
     save(COLLECTED, collected)
-    print(f"[ok] 新增发布 {len(cands)} 条；colloected 累计 {len(collected)} 条")
+    print(f"[ok] 新增发布 {len(admitted)} 条；v2.0 门槛拦截 {rejected} 条；collected 累计 {len(collected)} 条")
 
     # 4) 重新生成 data-news.js
     r = subprocess.run([sys.executable, os.path.join(ROOT, "collect.py")], capture_output=True, text=True)

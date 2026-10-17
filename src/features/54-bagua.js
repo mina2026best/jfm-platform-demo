@@ -144,22 +144,34 @@ function renderBaguaTrend(db){
 })();
 
 
-/* 主播声量对比：按在库条目数统计各主播（内容产量代理） */
+/* 主播声量对比：按在库条目数统计各主播（内容产量代理），并挂载白名单核验档案（粉丝/获赞/活跃） */
 function renderBaguaHosts(db){
   var box = document.getElementById('bagua-hosts');
   if (!box) return;
   var items = (db.items || []).filter(function(x){ return x.risk_level === '正常' || x.risk_level === '待人工复核'; });
   var cnt = {};
   items.forEach(function(x){ var a = x.author_name || '佚名'; cnt[a] = (cnt[a] || 0) + 1; });
+  var wl = {};
+  var wlList = (db.whitelist && db.whitelist.hosts) || [];
+  wlList.forEach(function(h){ wl[h.name] = h; });
   var rows = Object.keys(cnt).map(function(a){ return { a: a, c: cnt[a] }; }).sort(function(p, q){ return q.c - p.c; }).slice(0, 8);
   if (!rows.length) { box.innerHTML = ''; return; }
   var max = rows[0].c || 1;
   var bars = rows.map(function(r){
     var pct = Math.round(r.c / max * 100);
-    return '<div class="bg-trend-row"><span class="bg-trend-tag">' + esc(r.a) + '</span>'
+    var h = wl[r.a];
+    var meta = '';
+    if (h && h.verified && (h.verified.fans || h.verified.likes)) {
+      var parts = [];
+      if (h.verified.fans) parts.push(esc(h.verified.fans));
+      if (h.verified.likes) parts.push(esc(h.verified.likes));
+      meta = '<span class="bg-host-meta">' + parts.join(' · ') + '</span>';
+    }
+    return '<div class="bg-trend-row bg-host-row"><span class="bg-trend-tag">' + esc(r.a) + (meta ? '<br>' + meta : '') + '</span>'
       + '<div class="bg-trend-bar"><i style="width:' + pct + '%"></i></div>'
       + '<span class="bg-trend-n">' + r.c + ' 条</span></div>';
   }).join('');
+  var wlOk = wlList.filter(function(h){ return h.user_verified; }).length;
   box.innerHTML = '<div class="bg-trend-head">在库主播声量 <span class="bg-trend-gen">' + esc(db.weekly && db.weekly.generated || '') + ' 统计</span></div>' + bars
-    + '<p class="bg-trend-note">按在库条目数统计（内容产量的近似代理）；声量高低不代表观点正确性，每条均独立过风控。</p>';
+    + '<p class="bg-trend-note">按在库条目数统计（内容产量的近似代理）；粉丝/获赞为账号级核验数据（' + wlOk + '/' + wlList.length + ' 位已人工/直采核验）。声量高低不代表观点正确性，每条均独立过风控。</p>';
 }

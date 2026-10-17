@@ -43,3 +43,6 @@
 .bg-det-item:last-child{border-bottom:none}
 .bg-actions{margin:6px 0 0 1.2em}
 .bg-actions li{font-size:13.5px;line-height:1.9;margin:6px 0}
+/* v1.9 主播档案行：粉丝/获赞核验数据 */
+.bg-host-row .bg-trend-tag{white-space:normal;line-height:1.5}
+.bg-host-meta{font-size:11px;color:var(--faint);font-weight:400}

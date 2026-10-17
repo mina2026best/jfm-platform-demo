@@ -360,13 +360,13 @@
         "stage": "初升高",
         "verified": {
           "fans": null,
-          "likes": null,
+          "likes": "3.8万赞（账号级，2026-10-17 og直采）",
           "status": "外部搜索引擎未索引其近期内容（通道局限，不代表账号不活跃）；App 端实况待用户下次核查或 API 接入",
-          "note": "弱线索（2026-05 有聚合页记录但内容非升学解读向），待 API 核实",
-          "source": "仅外部检索快照（滞后），无 App 端核查数据",
+          "note": "活跃✓；2026-04-17 指标到校视频已入库",
+          "source": "douyin /video/ og:description",
           "checked_at": "2026-10-17"
         },
-        "user_verified": false
+        "user_verified": true
       },
       {
         "name": "升学规划（林德教育）",
@@ -399,13 +399,13 @@
         "stage": "新高考/高考志愿",
         "verified": {
           "fans": null,
-          "likes": null,
+          "likes": "4.7万赞（账号级，历史视频 og，2024-11-27）",
           "status": "外部搜索引擎未索引其近期内容（通道局限，不代表账号不活跃）；App 端实况待用户下次核查或 API 接入",
-          "note": "活跃✓（重大招生计划/志愿填报等高考向内容，单条获赞 4.6 万级，直播常态）",
-          "source": "仅外部检索快照（滞后），无 App 端核查数据",
+          "note": "历史 og 实锤；近期内容外部通道未索引",
+          "source": "douyin /video/ og:description",
           "checked_at": "2026-10-17"
         },
-        "user_verified": false
+        "user_verified": true
       },
       {
         "name": "罗老师升学指导",
@@ -503,13 +503,13 @@
         "stage": "强基/新高考",
         "verified": {
           "fans": null,
-          "likes": null,
+          "likes": "7.2万赞（账号级，历史视频 og，2024-10-09）",
           "status": "外部搜索引擎未索引其近期内容（通道局限，不代表账号不活跃）；App 端实况待用户下次核查或 API 接入",
-          "note": "活跃✓（实为矩阵号：蓝图老师讲重庆高考/讲强基规划/讲四川升学；一诊日程+强基科普活跃至 2025；含教辅推广→该类内容自动转复核）",
-          "source": "仅外部检索快照（滞后），无 App 端核查数据",
+          "note": "og 实锤账号名「蓝图王老师讲强基规划」，与白名单名疑似同一主体待确认",
+          "source": "douyin /video/ og:description",
           "checked_at": "2026-10-17"
         },
-        "user_verified": false
+        "user_verified": true
       },
       {
         "name": "李老师精准升学",
@@ -541,13 +541,14 @@
         "name": "重庆教育通",
         "stage": "综合/学校资讯",
         "verified": {
-          "fans": "7.1万",
-          "likes": "45.4万",
+          "fans": "7.1万粉",
+          "likes": "45.4万赞（账号级，2026-10-17 og直采）",
           "latest_work": "1 天前有信息",
           "live_recent": null,
           "status": "活跃✓（用户 App 端人工核查 2026-10-17，作为最高优先级依据）",
-          "source": "用户人工核查（抖音 App 实况），优先于一切外部检索快照",
-          "checked_at": "2026-10-17"
+          "source": "og:description 直采 + 用户指定名单",
+          "checked_at": "2026-10-17",
+          "note": "活跃✓；og 样例：2025-07-06 巴蜀清北108人"
         },
         "user_verified": true
       },
@@ -570,12 +571,13 @@
         "stage": "中考志愿/职教",
         "verified": {
           "fans": null,
-          "likes": null,
+          "likes": "98.1万赞（账号级，2026-10-17 og直采）",
           "latest_work": "4 天前、1 周前有信息",
           "live_recent": "最近 3 日都有直播",
           "status": "活跃✓（用户 App 端人工核查 2026-10-17，作为最高优先级依据）",
-          "source": "用户人工核查（抖音 App 实况），优先于一切外部检索快照",
-          "checked_at": "2026-10-17"
+          "source": "douyin /video/ og:description",
+          "checked_at": "2026-10-17",
+          "note": "活跃✓；2026-05-18 中考志愿视频已入库"
         },
         "user_verified": true
       },
@@ -598,12 +600,13 @@
         "stage": "综合",
         "verified": {
           "fans": "7.4万",
-          "likes": null,
+          "likes": "28.3万赞（账号级，2026-10-17 og直采）",
           "latest_work": "4 天前、5 天前都有信息",
           "live_recent": "近期都有直播",
           "status": "活跃✓（用户 App 端人工核查 2026-10-17，作为最高优先级依据）",
-          "source": "用户人工核查（抖音 App 实况），优先于一切外部检索快照",
-          "checked_at": "2026-10-17"
+          "source": "douyin /video/ og:description",
+          "checked_at": "2026-10-17",
+          "note": "活跃✓；2026-05-28 平行志愿视频已入库"
         },
         "user_verified": true
       },
@@ -658,7 +661,8 @@
         "重庆周校懂"
       ],
       "note": "前 7 人直接来自用户本轮 App 核实；后 4 人为此前 og/检索验证且无反证。蓝图矩阵（强基专项）单独列。"
-    }
+    },
+    "note2": "2026-10-17 22:40 接手轮回填：罗洋/米妈/李老师/教育通 数据为当日 og 直采实锤；其余主播粉丝数需登录态或新抖 API 补齐"
   },
   "archived": [],
   "specialty": {

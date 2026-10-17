@@ -85,6 +85,29 @@ def main(dry=False):
     db = load(DB, {"items": [], "ban_words": [], "review_words": [], "tag_pool": [], "stages": [], "weekly": None})
     if not db.get("items"):
         print("[bagua] bagua.json 为空或缺失"); return 1
+
+    # —— 时效修剪 + 白名单强制（2026-10-17 用户清理令固化）——
+    import datetime as _dt
+    _today = _dt.date.today()
+    wl = [h["name"] for h in (db.get("whitelist", {}) or {}).get("hosts", [])]
+    pruned, keep_items = 0, []
+    for x in db.get("items", []):
+        is_official = x.get("info_type") == "official"
+        in_wl = x.get("author_name") in wl
+        pt = (x.get("publish_time") or x.get("added") or "")[:10]
+        try:
+            age = (_today - _dt.date.fromisoformat(pt or "2000-01-01")).days
+        except Exception:
+            age = 9999
+        if age > 300:
+            pruned += 1; continue                      # 过时效删除（官方信源同样受时效约束）
+        if not in_wl and not is_official:
+            pruned += 1; continue                      # 非白名单且非官方信源 → 删
+        keep_items.append(x)
+    if pruned:
+        db["items"] = keep_items
+        print(f"[prune] 时效/白名单修剪：移除 {pruned} 条，保留 {len(keep_items)} 条")
+
     os.makedirs(INBOX, exist_ok=True)
     files = sorted(glob.glob(os.path.join(INBOX, "*.json")) + glob.glob(os.path.join(INBOX, "*.md")))
     if not files:
@@ -121,6 +144,12 @@ def main(dry=False):
                 stats["dup"] += 1; lines.append(f"[去重] URL 已在库：{item['t'] if 't' in item else url[:56]}"); continue
             if fp in existing_fps:
                 stats["dup"] += 1; lines.append(f"[去重] 摘要指纹重复：{fp}"); continue
+            # 白名单强制：非白名单主播且非官方信源 → 直接拒收（用户 2026-10-17 清理令）
+            wl_names = [h["name"] for h in (db.get("whitelist", {}) or {}).get("hosts", [])]
+            if item["author_name"] not in wl_names and item.get("source_platform") != "媒体/官方":
+                stats.setdefault("notWl", 0); stats["notWl"] += 1
+                lines.append(f"[白名单外] {item['author_name']} → 非用户指定名单，拒收")
+                continue
             # 摘要长度校验（100-200 字，超出截断标记复核）
             slen = len(item["ai_summary"])
             if item["ai_summary"] and (slen < 60 or slen > 240):

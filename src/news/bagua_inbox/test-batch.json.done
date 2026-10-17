@@ -1,0 +1,6 @@
+[
+  {"source_platform": "抖音", "author_name": "测试主播A", "publish_time": "2026-10-16", "original_url": "https://www.douyin.com/video/test001", "content_type": "短视频", "stage": "初升高", "ai_summary": "该博主介绍重庆联招志愿的批次设置与填报时间安排，提醒家长关注市教育考试院当年公告，属于通用规则科普内容。", "tags": ["重庆联招", "重庆中考志愿"]},
+  {"source_platform": "抖音", "author_name": "测试主播B", "publish_time": "2026-10-16", "original_url": "https://www.douyin.com/video/test002", "content_type": "短视频", "stage": "小升初", "ai_summary": "该博主称有内部名额可以帮助进重点，暗示暗箱操作渠道，话术涉嫌违规。", "tags": ["重庆小升初"]},
+  {"source_platform": "小红书", "author_name": "测试博主C", "publish_time": "2026-10-15", "original_url": "https://www.xiaohongshu.com/explore/test003", "content_type": "图文笔记", "stage": "新高考", "ai_summary": "该博主分享广东新高考选科策略与赋分规则详解。", "tags": ["重庆新高考"]},
+  {"source_platform": "抖音", "author_name": "测试主播A", "publish_time": "2026-10-16", "original_url": "https://www.douyin.com/video/test001-dup", "content_type": "短视频", "stage": "初升高", "ai_summary": "该博主介绍重庆联招志愿的批次设置与填报时间安排，提醒家长关注市教育考试院当年公告，属于通用规则科普内容。", "tags": ["重庆联招"]}
+]

@@ -1035,6 +1035,8 @@ var NEWS_FEED = [
 var NEWS_META = {"generated": "2026-10-17 11:43", "seed": 21, "collected": 61, "fetchedPending": 0};
 
 
+window.BAGUA_DATA = {"version": "v1.0-20261017", "disclaimer_short": "自媒体观点索引，非官方政策，不构成填报建议", "ban_words": ["内部名额", "花钱进重点", "保录取", "代办入学", "暗箱操作", "低分稳进", "择校费", "操作学籍", "补录内部名额", "花钱改分", "交钱进本部", "代办转学学位"], "review_words": ["分数线预估", "稳上", "保底", "独家渠道", "内部消息", "一对一规划", "升学捷径", "抓住黄金期", "别错过", "揭秘", "隐蔽渠道"], "tag_pool": ["重庆小升初", "重庆初升高", "重庆指标到校", "重庆联招", "重庆中考志愿", "重庆新高考", "高考志愿填报", "学校解读", "升学时间提醒"], "stages": ["小升初", "初升高", "新高考"], "items": [{"id": "bg-20261017-001", "source_platform": "抖音", "author_name": "西部升学基地", "publish_time": "2026-08-19", "original_url": "https://www.douyin.com/video/7675651982354338752", "content_type": "短视频", "stage": "小升初", "ai_summary": "该博主梳理了 2026 届重庆小升初的整体升学节奏，涵盖从信息了解到最终入学的时间线安排，并提示家长按月份关注关键节点。具体月份节点以视频字幕为准，本条仅收录其时间线主题与学段范围；正式入学日程请以「渝快办·教育入学一件事」与各区教委当年公告为准。", "risk_level": "正常", "risk_note": "公开时间线类科普，未发现违规话术；细节以官方日程为准", "tags": ["重庆小升初", "升学时间提醒"], "reviewed": true, "added": "2026-10-17"}, {"id": "bg-20261017-002", "source_platform": "抖音", "author_name": "（博主昵称待视频页确认）", "publish_time": "2026-10-01", "original_url": "https://www.douyin.com/video/7691536627596617954", "content_type": "短视频", "stage": "小升初", "ai_summary": "该视频主题为「小升初推优的四个渠道」，使用了「隐蔽渠道」「别错过」等话术，暗示存在公开信息之外的升学路径。此类说法与重庆公办学校「公开、公平、公正」入学原则存在张力，家长需注意：推优类渠道无官方公开依据，谨防以「内部机会」为名的收费引导。", "risk_level": "待人工复核", "risk_note": "命中预警词「隐蔽渠道」「别错过」：暗示升学捷径，需人工核实是否涉及付费服务推销", "tags": ["重庆小升初"], "reviewed": false, "added": "2026-10-17"}, {"id": "bg-20261017-003", "source_platform": "抖音", "author_name": "（博主昵称待视频页确认）", "publish_time": "2026-06-10", "original_url": "https://www.douyin.com/video/7649672539999948066", "content_type": "短视频", "stage": "小升初", "ai_summary": "该视频讨论民办摇号未中签后的各区退路差异（如对口公办顺延、区内统筹等），提示家长在报名前比较「摇与不摇」两种路径。各区退路口径以当年区教委细则为准；视频观点属个人解读，不构成摇号策略建议。", "risk_level": "正常", "risk_note": "摇号规则科普类内容，未见违规话术", "tags": ["重庆小升初", "重庆中考志愿"], "reviewed": true, "added": "2026-10-17"}, {"id": "bg-20261017-004", "source_platform": "搜狐号（自媒体转载）", "author_name": "提分君（搜狐号）", "publish_time": "2026-03-19", "original_url": "https://www.sohu.com/a/998566782_120666067", "content_type": "图文笔记", "stage": "初升高", "ai_summary": "该自媒体称「2026 年重庆指标到校不取消、不缩额，主城区正常进行」，并以此回应此前流传的取消说法。该消息为自媒体口径，与官方政策文件存在时间差；指标到校是否实施及名额分配，以市教委当年文件与校内公示为准。", "risk_level": "待人工复核", "risk_note": "涉及政策传闻回应（「据消息称」句式），且文末存在升学服务导流嫌疑，需人工核实", "tags": ["重庆指标到校", "重庆初升高"], "reviewed": false, "added": "2026-10-17"}], "weekly": {"generated": "2026-10-17", "note": "话题热度按近 30 天收录条目统计；数据量随每日管线累积", "topics": [{"tag": "重庆小升初", "count": 3, "trend": "平"}, {"tag": "重庆中考志愿", "count": 2, "trend": "平"}, {"tag": "升学时间提醒", "count": 1, "trend": "平"}, {"tag": "重庆指标到校", "count": 1, "trend": "平"}, {"tag": "重庆初升高", "count": 1, "trend": "平"}, {"tag": "重庆联招", "count": 1, "trend": "平"}]}};
+
 var ARTMAP = {"N|家庭教育促进法要点：依法带娃，「训诫」不是吓唬": "article-news-25280274.html", "N|高一适应期：住校生第一个月的常见问题与对策": "article-news-8bef8675.html", "N|「双减」后学科培训现状：持证机构名单怎么查": "article-news-45ad72b1.html", "N|校园周边交通护学岗升级：家长志愿者报名启动": "article-news-ef22a387.html", "N|期中考试后，成绩单应该这样读（家长版）": "article-news-fd72aa23.html", "N|高中生选科风向：物理+化学组合占比继续走高": "article-news-b184d140.html", "N|重庆多个区公布 2026 秋季转学办理窗口": "article-news-0b829b59.html", "N|期末临近：各科复习的「家庭分工」建议": "article-news-f413dbf6.html", "N|「跨区就读」的三种合法路径与材料差异": "article-news-434176d3.html", "N|住宿安全与作息：寄宿家长每月必查的四件事": "article-news-9788835f.html", "N|指标到校名额是怎么分到初中的？一文看懂分配逻辑": "article-news-08de9c03.html", "N|秋游与研学季：校外活动的安全清单（家长版）": "article-news-a78472e7.html", "N|开学一个月，孩子说「不想上学」怎么办：三步沟通法": "article-news-5edcff32.html", "N|数学不好，还能走「强基」吗？——基础学科路线的三个判断": "article-news-393f8c67.html", "N|「综合素质评价」到底评什么？家长能做什么": "article-news-56491c4e.html", "N|2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴": "article-news-322b0469.html", "N|2026 年联招学校约 113 所（新增 10 所）": "article-news-ae92f623.html", "N|指标到校：市级重点高中 70% 计划分配到辖区初中": "article-news-c2282b52.html", "N|2026 年高考特招线公布：历史类 510 / 物理类 496": "article-news-44a54f04.html", "N|幼升小报名季：三对口材料与网报窗口提示": "article-news-81daf656.html", "N|全市护学岗 6,993 个：接送安全再补一层": "article-news-2f17b376.html", "N|开学季数据：重庆 K12 在校生规模约 376.3 万": "article-news-8fb6230a.html", "N|家庭年度教育支出复盘：先看结构，再看总量": "article-news-f2b57222.html", "N|初中阶段亲子沟通：先处理情绪，再处理问题": "article-news-dc8bcd75.html", "N|秋季流感季：校园防护与请假流程提示": "article-news-d4243bb6.html", "N|接送高峰行车安全：即停即走与护学通道": "article-news-24eba960.html", "N|材料核对月：把「三对口」收进一个文件袋": "article-news-03641436.html", "N|联招志愿梯度怎么排：冲稳保各留 1–2 所": "article-news-5c961a79.html", "N|随迁子女入学：居住证与材料清单提前备": "article-news-0a439449.html", "N|艺体与科技特长生：报名窗口与材料提示": "article-news-333fee44.html", "N|指标到校校内公示：家长需要盯的两件事": "article-news-195fe411.html", "N|新生入学体检与预防接种查验：开学季办事清单": "article-news-17d13d20.html", "N|培训退费纠纷：先看合同，再走属地监管渠道": "article-news-82ec666f.html", "N|周末少儿阅读：图书馆借阅卡办理与亲子共读建议": "article-news-48a72f92.html", "N|初三体育训练季：节奏、防护与营养的平衡": "article-news-555c5aeb.html", "N|高考体检与外语口试：时间节点提示": "article-news-42c20c89.html", "N|2027 年校历发布季启动：寒假安排将随校历公布": "article-news-44d7dd4c.html", "N|秋季流感防护：校园场景三件事": "article-news-6166dd90.html", "N|随迁子女入学材料季：居住证与社保要提前核对": "article-news-fadc6284.html", "N|主城区多所高中开放日集中举行": "article-news-bd3ce26b.html", "N|家庭教育：把「电子设备公约」写成家庭协议": "article-news-f387cf90.html", "N|开学后首个家长会：建议问老师的三个问题": "article-news-309819fe.html", "N|重庆市教委发布 2026 年义务教育招生入学工作通知": "article-news-f1b1f745.html", "N|2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496": "article-news-29b4d3d3.html", "N|阳光高考平台：军校招生军检线与报考流程答疑": "article-news-6beca3bf.html", "S|南开中学（沙坪坝）": "article-school-98250a24.html", "S|重庆一中（沙坪坝）": "article-school-57cbac3a.html", "S|巴蜀中学（渝中）": "article-school-10432c02.html", "S|重庆八中（沙坪坝）": "article-school-a9decd04.html", "S|育才中学（九龙坡）": "article-school-dbd33ba8.html", "S|西大附中（北碚）": "article-school-1b48d40c.html", "S|重庆十一中（南岸）": "article-school-54671c45.html", "S|重庆十八中（江北）": "article-school-38e4cb1a.html", "S|求精中学（渝中）": "article-school-fcf51a2b.html", "S|杨家坪中学（九龙坡）": "article-school-be27b3c6.html", "S|重庆三十七中（大渡口）": "article-school-e2077b3e.html", "S|巴蜀常春藤学校（两江新区）": "article-school-3b32267e.html", "S|兼善中学（北碚）": "article-school-16ca5f3c.html", "S|巴南中学（巴南）": "article-school-b43ae6cc.html", "S|渝北中学（渝北）": "article-school-51d6bf2d.html", "S|松树桥中学（渝北）": "article-school-153c178a.html", "S|两江育才中学（两江新区）": "article-school-362ce5f6.html", "S|大学城第一中学（沙坪坝）": "article-school-63fbbbbc.html", "S|凤鸣山中学（沙坪坝）": "article-school-ad683d69.html", "S|渝中区复旦中学（渝中）": "article-school-d282ceee.html", "L|要不要提前教拼音和算术？": "article-learn-7f5127fb.html", "L|指标到校和择校怎么权衡？": "article-learn-18edf1ba.html", "L|孩子成绩中等，路径怎么规划？": "article-learn-c460ab76.html", "L|志愿「冲稳保」怎么分配？": "article-learn-ba409771.html", "L|大考前，家长怎么说话不添乱？": "article-learn-c9eb2d89.html", "L|民办摇号没中，是不是就没学上了？": "article-learn-e1eac920.html", "L|住校还是走读，怎么决定？": "article-learn-0f041c0e.html", "L|强基计划值得报吗？": "article-learn-23a1fbd3.html", "L|公立和私立幼儿园，幼升小衔接有差别吗？": "article-learn-abd5a402.html", "L|奥数还值得学吗？": "article-learn-fa47210a.html", "L|家里老人育儿观念不一致，怎么破？": "article-learn-a98a7d05.html", "L|陪考三年，我做对了三件事": "article-experience-ec2dcbbc.html", "L|志愿填报：我们家做了三次模拟": "article-experience-cc52f067.html", "L|租房陪读一年：成本清单与踩坑": "article-experience-f7ddfee9.html", "L|从焦虑到放手：我把家长群取消了置顶": "article-experience-9f5a4396.html", "L|对口材料核对，我们家提前一年就开始了": "article-experience-43ed05df.html", "L|体育中考：我们从初一就开始「攒分」": "article-experience-20e61f26.html", "L|全家搬到学校隔壁，我们后悔了吗？": "article-experience-61d84a2c.html", "L|我把「别人家孩子」从家里请出去了": "article-experience-534eaf28.html", "L|报名前两个月，我们做对了四件小事": "article-experience-1c22e158.html", "L|高三一年，家长只做三件事": "article-experience-fc4236cb.html", "L|家长群信息太多？我的「三分钟过滤法」": "article-experience-dd419bcb.html", "L|给陪读家长的 5 条「少花钱」清单": "article-experience-8d4c5a92.html"};
 
 var LEARN_QA = [{"s": "幼升小", "q": "要不要提前教拼音和算术？", "a": "不建议系统性提前教学。多数小学实行「零起点教学」，抢跑优势通常在两个月内消失，反而容易让孩子开学后注意力下降。更值得投入的是「上学能力」：作息、握笔、表达需求、整理书包。", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "指标到校和择校怎么权衡？", "a": "先并排看两条路径：指标到校看「学籍连续性 + 校内表现」，择校看目标校招生范围与通勤成本。建议用「升学路径地图」把时间轴并排拉直，再对照孩子实际学籍做选择——不要问「哪个更好」，要问「哪个更适合我家」。", "by": "教育顾问 · 示范"}, {"s": "初升高", "q": "孩子成绩中等，路径怎么规划？", "a": "中等成绩段其实是路径最丰富的区间：普高统招、指标到校（若资格在）、民办、中职职教高考、艺体特长都可以纳入备选。建议逐条核对资格条件，再定主攻方向与保底方案。", "by": "教育顾问 · 示范"}, {"s": "高考", "q": "志愿「冲稳保」怎么分配？", "a": "常见做法是冲 2–3 个、稳 3–4 个、保 1–2 个，具体数量看批次规则与家庭风险承受度。先用「位次换算」做线差参考，正式填报以当年一分一段表为准。", "by": "教育顾问 · 示范"}, {"s": "家长心理", "q": "大考前，家长怎么说话不添乱？", "a": "少问「考得怎么样」，多问「今天想吃什么」。把焦虑留在自己这里，把稳定交给孩子。一句示范话术：「不管结果如何，我们都在。」", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "民办摇号没中，是不是就没学上了？", "a": "不是。公民同招下，未摇中的由公办统筹安排；关键是提前把公办对口路径的材料（户籍 / 居住等）逐项核对到位，别把全部筹码押在摇号上。", "by": "教育顾问 · 示范"}, {"s": "初升高", "q": "住校还是走读，怎么决定？", "a": "先算三笔账：单程通勤时间（超过 40 分钟要认真权衡）、孩子自理与作息习惯、家庭陪伴需求。可以先用一个月「试住期」再定；无论哪种，保持固定的沟通节奏。", "by": "教育顾问 · 示范"}, {"s": "高考", "q": "强基计划值得报吗？", "a": "强基适合「基础学科意向明确 + 能接受本硕博衔接培养」的孩子；它锁定的是一条长线路径，不适合「先占坑再说」。建议对照孩子真实的学科兴趣，再做决定。", "by": "教育顾问 · 示范"}, {"s": "幼升小", "q": "公立和私立幼儿园，幼升小衔接有差别吗？", "a": "小学零起点教学下，差别主要在习惯而非知识。重点是作息规律、能坐住 20 分钟、表达清楚需求；这些在家也能练。选择时更该看距离与接送可行性。", "by": "教育顾问 · 示范"}, {"s": "小升初", "q": "奥数还值得学吗？", "a": "如果目标是经批准的少数理科特色活动，系统奥数是基础；但对大多数孩子，把校内数学吃透 + 培养阅读理解更划算。学奥数前先问孩子愿不愿意，再问为什么学。", "by": "教育顾问 · 示范"}, {"s": "家长心理", "q": "家里老人育儿观念不一致，怎么破？", "a": "开家庭会议定「底线清单」：写明 3–5 条不可妥协项（如作息、屏幕时间），其余放手。父母是教育决策人，祖辈是执行伙伴——角色先分清，矛盾少一半。", "by": "教育顾问 · 示范"}];
@@ -4438,5 +4440,137 @@ function fallbackCopy(text){
   try{ document.execCommand('copy'); }catch(e){}
   document.body.removeChild(ta);
 }
+
+
+/* ---------- 54-bagua ---------- */
+/* ---------- 八卦社：自媒体升学观点索引（v1.0） ----------
+   定位：基于抖音/小红书公开内容的观点索引摘要，非官方政策。
+   规则：一票否决词命中不入库；免责段落每条强制；每日去重（id + author+title指纹）。 */
+var BAGUA_STAGES = ['小升初', '初升高', '新高考'];
+var baguaFilter = 'all';
+var baguaShown = 8;
+
+function baguaDB(){
+  var db = (typeof window.BAGUA_DATA !== 'undefined') ? window.BAGUA_DATA : null;
+  if (db && db.items && db.items.length) return db;
+  return { items: [], weekly: null, disclaimer_short: '自媒体观点索引，非官方政策，不构成填报建议' };
+}
+
+function setBaguaFilter(st){
+  baguaFilter = st || 'all';
+  baguaShown = 8;
+  renderBagua();
+}
+
+function moreBagua(){
+  baguaShown += 8;
+  renderBagua();
+}
+
+/* 风险徽章 */
+function baguaRiskBadge(rl){
+  if (rl === '正常') return '<span class="bg-risk ok">正常</span>';
+  if (rl === '待人工复核') return '<span class="bg-risk warn">待人工复核</span>';
+  return '';
+}
+
+/* 平台徽章 */
+function baguaPlatformBadge(p){
+  var cls = p === '抖音' ? 'dy' : (p === '小红书' ? 'xhs' : 'web');
+  return '<span class="bg-plat ' + cls + '">' + esc(p || '公开渠道') + '</span>';
+}
+
+/* 单条卡片：封面图 + 徽章行 + 摘要 + 标签 + 免责 + 原帖链接 */
+function baguaCardHTML(x, i){
+  var stages = (x.stage && BAGUA_STAGES.indexOf(x.stage) >= 0)
+    ? '<span class="stage-tag">' + esc(x.stage) + '</span>' : '';
+  var tags = (x.tags || []).map(function(t){ return '<span class="bg-tag">#' + esc(t) + '</span>'; }).join('');
+  var link = x.original_url
+    ? '<a class="bg-src" href="' + esc(x.original_url) + '" target="_blank" rel="noopener nofollow">原帖 ↗</a>'
+    : '<span class="bg-src muted">无公开链接</span>';
+  var reviewTip = x.reviewed === false
+    ? '<span class="bg-review-tip">该条为机器初筛结果，正在等待人工终审；展示内容不构成任何建议</span>' : '';
+  return '<div class="bg-card" data-bgkey="' + esc(x.id || ('g' + i)) + '">'
+    + '<div class="bg-card-head">'
+    +   baguaPlatformBadge(x.source_platform)
+    +   stages
+    +   baguaRiskBadge(x.risk_level)
+    +   '<span class="bg-author">' + esc(x.author_name || '佚名博主') + '</span>'
+    +   '<span class="bg-date">' + esc((x.publish_time || '').slice(0, 10)) + '</span>'
+    + '</div>'
+    + '<p class="bg-sum">' + esc(x.ai_summary || '') + '</p>'
+    + (x.risk_note ? '<p class="bg-riskenote">风控备注：' + esc(x.risk_note) + '</p>' : '')
+    + '<div class="bg-tags">' + tags + '</div>'
+    + reviewTip
+    + '<div class="bg-card-foot">'
+    +   '<span class="bg-disc">自媒体个人观点，非官方政策，不作为填报依据</span>'
+    +   link
+    + '</div></div>';
+}
+
+/* 主渲染：横幅 + 筛选 + 空状态 + 卡片流 */
+function renderBagua(){
+  var box = document.getElementById('bagua-list');
+  if (!box) return;
+  var db = baguaDB();
+  var items = db.items || [];
+  /* 只展示 正常(rev ok) + 待人工复核；高风险一律不入库（采集端保证，这里双保险） */
+  items = items.filter(function(x){ return x.risk_level === '正常' || x.risk_level === '待人工复核'; });
+  if (baguaFilter !== 'all') items = items.filter(function(x){ return x.stage === baguaFilter; });
+  items.sort(function(a, b){ return String(b.publish_time || '').localeCompare(String(a.publish_time || '')); });
+
+  /* 计数徽章 */
+  var all = (db.items || []).filter(function(x){ return x.risk_level === '正常' || x.risk_level === '待人工复核'; });
+  document.querySelectorAll('#bagua-filter .ff').forEach(function(b){
+    var st = b.getAttribute('data-bg');
+    var n = st === 'all' ? all.length : all.filter(function(x){ return x.stage === st; }).length;
+    b.textContent = b.getAttribute('data-label') + (n ? ' ' + n : '');
+  });
+
+  var shown = items.slice(0, baguaShown);
+  box.innerHTML = shown.length
+    ? shown.map(baguaCardHTML).join('')
+    : '<div class="bg-empty">近期暂无通过风控的博主观点摘要。八卦社每日自动整理，高风险与营销内容一律不收录；正式升学信息请看上方编辑部精选与政策库。</div>';
+
+  var more = document.getElementById('bagua-more');
+  if (more) {
+    if (items.length > baguaShown) {
+      more.hidden = false;
+      more.innerHTML = '<button class="mini-btn" onclick="moreBagua()">加载更多（还有 ' + (items.length - baguaShown) + ' 条）</button>';
+    } else { more.hidden = true; }
+  }
+
+  var meta = document.getElementById('bagua-meta');
+  if (meta) {
+    var pend = all.filter(function(x){ return x.reviewed === false; }).length;
+    meta.textContent = '已收录 ' + all.length + ' 条（待人工终审 ' + pend + ' 条）· 每日自动整理去重 · 高风险内容一票否决不入库';
+  }
+
+  renderBaguaTrend(db);
+}
+
+/* 话题热度条：纯 CSS 条形图（每周随管线更新） */
+function renderBaguaTrend(db){
+  var box = document.getElementById('bagua-trend');
+  if (!box) return;
+  var wk = db.weekly;
+  if (!wk || !wk.topics || !wk.topics.length) { box.innerHTML = ''; return; }
+  var max = Math.max.apply(null, wk.topics.map(function(t){ return t.count || 0; }).concat([1]));
+  var bars = wk.topics.slice(0, 6).map(function(t){
+    var pct = Math.round((t.count || 0) / max * 100);
+    return '<div class="bg-trend-row"><span class="bg-trend-tag">#' + esc(t.tag) + '</span>'
+      + '<div class="bg-trend-bar"><i style="width:' + pct + '%"></i></div>'
+      + '<span class="bg-trend-n">' + t.count + ' 条 · ' + esc(t.trend || '平') + '</span></div>';
+  }).join('');
+  box.innerHTML = '<div class="bg-trend-head">近 30 天话题热度 <span class="bg-trend-gen">' + esc(wk.generated || '') + ' 更新</span></div>' + bars
+    + '<p class="bg-trend-note">' + esc(wk.note || '') + '</p>';
+}
+
+/* 初始渲染：页面加载后若八卦社板块在当前页则立即渲染（含「全部」计数徽章） */
+(function(){
+  function boot(){ if (document.getElementById('bagua-list')) renderBagua(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
 
 ;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}){ ARTMAP[k] = {"P|2026 年中考政策：联招学校约 113 所": "article-policy-4126355e.html", "P|优质高中指标到校招生工作通知": "article-policy-12b91131.html", "P|随迁子女入学：「两为主、两纳入」保障": "article-policy-97b9ba86.html", "P|中考体育与健康：过程性评价 + 统一测试": "article-policy-1158f301.html", "P|高中阶段学生资助：免学费 + 国家助学金": "article-policy-f14c6d6e.html", "P|民办义务教育招生：超计划全部摇号": "article-policy-ff060ba4.html", "P|义务教育免试入学：划片就近 + 单校/多校对口": "article-policy-d294ba4d.html", "P|学籍管理：「人籍一致」与转学窗口": "article-policy-30d872b7.html", "P|中考加分与优待：对象、分值与申报": "article-policy-d774e7d8.html", "P|普通高中招生录取：批次设置与征集志愿": "article-policy-7a635f13.html", "P|校园食品安全与营养：家长监督权": "article-policy-d2076b4f.html", "P|「双减」与课后服务：作业时长与校外培训边界": "article-policy-7e7b666b.html", "P|义务教育经费保障：「两免一补」落到每个孩子头上": "article-policy-mianfei.html", "P|初中综合素质评价：指标到校与录取的真实一环": "article-policy-zhsz.html"}[k]; } } })();

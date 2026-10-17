@@ -40,3 +40,4 @@
 51-daohang.js
 52-forum.js
 53-subscribe.js
+54-bagua.js

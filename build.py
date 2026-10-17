@@ -20,8 +20,8 @@ PAGES = [
          desc="小升初对口与摇号、初升高指标到校与中考志愿、大学与专业选报的位次法——官方原文＋人话解读、升学日历、学校档案、择校对比，逐条标注来源。",
          sections=["stages", "home-top", "daohang", "calendar", "how"], hero=True),
     dict(file="news.html",   title="升学资讯中心 · 花期册",
-         desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源。",
-         sections=["news"]),
+         desc="政策速递、升学动态、家庭教育、安全提醒与办事提醒——编辑部采集并审核后发布，30 条内置资讯带官方来源；八卦社收录自媒体升学观点索引（非官方）。",
+         sections=["news", "bagua"]),
     dict(file="calendar.html", title="升学日历 · 花期册",
          desc="幼升小到高考的关键节点、行动清单与提醒导出——按孩子学段自动过滤。",
          sections=["calendar"]),
@@ -145,6 +145,11 @@ def build_js():
         extra = read(dn)
         guard("data-news.js", extra)
         data = data + "\n\n" + extra
+    bg = os.path.join(SRC, "news", "bagua.json")
+    if os.path.exists(bg):
+        _bagua = json.load(open(bg, encoding="utf-8"))
+        guard("news/bagua.json", json.dumps(_bagua, ensure_ascii=False))
+        data = data + "\n\nwindow.BAGUA_DATA = " + json.dumps(_bagua, ensure_ascii=False) + ";"
     am = os.path.join(SRC, "data", "artmap.json")
     # 构建时自动重生成 artmap（N|资讯 / S|学校 / L|学堂），与数据文件保持同步
     try:

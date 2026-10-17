@@ -201,6 +201,18 @@ var NEWS_FEED = [
     "stages": []
   },
   {
+    "t": "我市各地广泛开展应急救护知识普及与技能培训",
+    "url": "https://www.cbg.cn/a/5744/20260923/54fbcdbe12094d22b920d280abaa1633.html",
+    "src": "重庆网络广播电视台",
+    "cat": "安全提醒",
+    "sum": "【世界急救日】我市各地广泛开展应急救护知识普及与技能培训",
+    "date": "2026-10-01",
+    "body": "",
+    "reviewed": true,
+    "auto": true,
+    "stages": []
+  },
+  {
     "t": "市人大教科文卫委来綦调研学校安全与青少年心理健康工作",
     "url": "https://www.cbg.cn/a/46186/20260923/2d678334b4994130a6226a299850f8f0.html",
     "src": "重庆网络广播电视台",
@@ -371,6 +383,20 @@ var NEWS_FEED = [
   {
     "t": "筑牢安全防线 温情守护高考 ——忠县高质量完成2026年高...",
     "url": "https://www.cqzk.com.cn/news_districts/2066789465671311360.html",
+    "src": "重庆招考网",
+    "cat": "升学动态",
+    "sum": "",
+    "date": "2026-09-29",
+    "body": "",
+    "reviewed": true,
+    "auto": true,
+    "stages": [
+      "高考志愿"
+    ]
+  },
+  {
+    "t": "精心做好组织保障工作 确保高考安全平稳顺利",
+    "url": "https://www.cqzk.com.cn/news_districts/2064301226817462272.html",
     "src": "重庆招考网",
     "cat": "升学动态",
     "sum": "",
@@ -573,15 +599,15 @@ var NEWS_FEED = [
     ]
   },
   {
-    "t": "新学期健康提醒：这些传染病学校和家庭都要防",
-    "url": "https://wjw.sz.gov.cn/szcdc/ywdt/jcxx/content/post_12980208.html",
-    "src": "深圳疾控",
-    "date": "2026-09-10",
-    "sum": "勤洗手、常通风，保证睡眠与适量锻炼；前往人群密集场所科学佩戴口罩，防范秋季校园流感与诺如等传染病。",
+    "t": "谋定全域查实情 严督实导护开学 ——市教委扎实开展2026年秋季学期开学调研",
+    "url": "http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202609/t20260909_16054629.html",
+    "src": "重庆市教育委员会",
+    "cat": "政策速递",
+    "sum": "为贯彻落实教育部和市委市政府关于秋季开学工作的总体部署，扎实推进群防群治提高基层除险固安实战能力百日攻坚行动，市委教育工委、市教委，市政府教育督导室高度重视、统筹谋划、周密部署，通过“市级下沉调研、区县交叉互督、责任督学摸排”，对39个区县各级各类学校及培训机构开展全覆盖实地调研，切实保障2026年秋季学期平稳顺利开学。坚持高位推动，谋划部署早。市委教育工委、市教委将秋季开学工作作为近期重要任务，",
+    "date": "2026-09-09",
     "body": "",
     "reviewed": true,
     "auto": true,
-    "cat": "安全提醒",
     "stages": []
   },
   {
@@ -675,20 +701,6 @@ var NEWS_FEED = [
     ]
   },
   {
-    "t": "秋季开学学校传染病防控指南",
-    "url": "https://www.ndcpa.gov.cn/jbkzzx/c100040/common/content/content_2092793018823643136.html",
-    "src": "国家疾控局",
-    "date": "2026-08-27",
-    "sum": "开学前全面开展校园环境清扫与预防性消毒，储备洗手液、消毒剂、体温枪等物资；落实晨午检与因病缺勤登记，防范流感等校园传染病。",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "cat": "安全提醒",
-    "stages": [
-      "幼升小"
-    ]
-  },
-  {
     "t": "2025年重庆教育发展报告典型案例及咨政报告征稿选用情况公示",
     "url": "http://jw.cq.gov.cn/zwxx_209/gggs/202608/t20260817_15943689.html",
     "src": "重庆市教育委员会",
@@ -749,18 +761,6 @@ var NEWS_FEED = [
     "stages": [
       "幼升小"
     ]
-  },
-  {
-    "t": "重庆市中小学2026至2027年学年度校历公布",
-    "url": "https://m.gmw.cn/2026-07/02/content_1304516985.htm",
-    "src": "光明网",
-    "date": "2026-07-02",
-    "sum": "市教委发布《重庆市中小学2026至2027年学年度校历》：第一学期2026年9月1日开学，义务教育阶段2027年1月18日结束；春秋假实施学段和时间由各区县根据自身实际安排。",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "cat": "办事提醒",
-    "stages": []
   },
   {
     "t": "2026 年高考特招线公布：历史类 510 / 物理类 496",
@@ -886,18 +886,6 @@ var NEWS_FEED = [
     ]
   },
   {
-    "t": "2026年重庆义务教育阶段招生入学政策解读20问",
-    "url": "http://www.cqlp.gov.cn/zwgk_178/zczxwdk/xzbm/qjw/202604/t20260423_15631558.html",
-    "src": "梁平区政府网",
-    "date": "2026-04-23",
-    "sum": "围绕2026年义务教育招生入学政策整理20个高频问答：入学条件、报名方式、摇号录取、随迁子女入学、缓学等家长关注问题。",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "cat": "升学动态",
-    "stages": []
-  },
-  {
     "t": "2026 年联招学校约 113 所（新增 10 所）",
     "cat": "升学动态",
     "src": "重庆日报（2026-04-22 政策口径）",
@@ -922,18 +910,6 @@ var NEWS_FEED = [
     "stages": [
       "幼升小"
     ]
-  },
-  {
-    "t": "重庆市教育委员会等十四部门印发《在中小学探索实施春秋假的指导意见》",
-    "url": "https://www.cq.gov.cn/index/detail.html?policyId=5633",
-    "src": "重庆市政府网",
-    "date": "2026-03-12",
-    "sum": "推动落实双减政策，减轻学生过重学业负担，在全市中小学探索实施春秋假；不搞一刀切，由各区县结合实际安排。",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "cat": "政策速递",
-    "stages": []
   },
   {
     "t": "我市六个区成功创建国家义务教育优质均衡发展区",
@@ -1020,6 +996,18 @@ var NEWS_FEED = [
     "stages": []
   },
   {
+    "t": "市教委负责人就《高等教育突破跃升行动方案（2025—2027年）》答问",
+    "url": "http://jw.cq.gov.cn/zwgk/zfxxgkml/zcjd/zcwjk/202509/t20250919_15024695.html",
+    "src": "重庆市教育委员会",
+    "cat": "政策速递",
+    "sum": "",
+    "date": "2025-09-19",
+    "body": "",
+    "reviewed": true,
+    "auto": true,
+    "stages": []
+  },
+  {
     "t": "重庆市接受学生资助政策全生命周期评价",
     "url": "http://jw.cq.gov.cn/zwxx_209/bmdt/zsdwxx/202409/t20240929_13670665.html",
     "src": "重庆市教育委员会",
@@ -1042,21 +1030,9 @@ var NEWS_FEED = [
     "reviewed": true,
     "auto": true,
     "stages": []
-  },
-  {
-    "t": "学生转学手续如何办理？（黔江区政策问答）",
-    "url": "https://www.qianjiang.gov.cn/bmjd/xzfgzbm/qjw/zwgk_48917/gkml/zczxk/202302/t20230207_11575723.html",
-    "src": "黔江区政府网",
-    "date": "2023-02-07",
-    "sum": "确需转学的，由学生本人及其法定监护人持相关证件向转入学校提出申请，填写重庆市义务教育阶段学生转学申请表，经转入、转出学校及区县教委核办。",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "cat": "政策速递",
-    "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-17 11:28", "seed": 21, "collected": 63, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-17 11:43", "seed": 21, "collected": 61, "fetchedPending": 0};
 
 
 var ARTMAP = {"N|家庭教育促进法要点：依法带娃，「训诫」不是吓唬": "article-news-25280274.html", "N|高一适应期：住校生第一个月的常见问题与对策": "article-news-8bef8675.html", "N|「双减」后学科培训现状：持证机构名单怎么查": "article-news-45ad72b1.html", "N|校园周边交通护学岗升级：家长志愿者报名启动": "article-news-ef22a387.html", "N|期中考试后，成绩单应该这样读（家长版）": "article-news-fd72aa23.html", "N|高中生选科风向：物理+化学组合占比继续走高": "article-news-b184d140.html", "N|重庆多个区公布 2026 秋季转学办理窗口": "article-news-0b829b59.html", "N|期末临近：各科复习的「家庭分工」建议": "article-news-f413dbf6.html", "N|「跨区就读」的三种合法路径与材料差异": "article-news-434176d3.html", "N|住宿安全与作息：寄宿家长每月必查的四件事": "article-news-9788835f.html", "N|指标到校名额是怎么分到初中的？一文看懂分配逻辑": "article-news-08de9c03.html", "N|秋游与研学季：校外活动的安全清单（家长版）": "article-news-a78472e7.html", "N|开学一个月，孩子说「不想上学」怎么办：三步沟通法": "article-news-5edcff32.html", "N|数学不好，还能走「强基」吗？——基础学科路线的三个判断": "article-news-393f8c67.html", "N|「综合素质评价」到底评什么？家长能做什么": "article-news-56491c4e.html", "N|2027 届中考大事件月历（9 月–次年 6 月）｜家长版时间轴": "article-news-322b0469.html", "N|2026 年联招学校约 113 所（新增 10 所）": "article-news-ae92f623.html", "N|指标到校：市级重点高中 70% 计划分配到辖区初中": "article-news-c2282b52.html", "N|2026 年高考特招线公布：历史类 510 / 物理类 496": "article-news-44a54f04.html", "N|幼升小报名季：三对口材料与网报窗口提示": "article-news-81daf656.html", "N|全市护学岗 6,993 个：接送安全再补一层": "article-news-2f17b376.html", "N|开学季数据：重庆 K12 在校生规模约 376.3 万": "article-news-8fb6230a.html", "N|家庭年度教育支出复盘：先看结构，再看总量": "article-news-f2b57222.html", "N|初中阶段亲子沟通：先处理情绪，再处理问题": "article-news-dc8bcd75.html", "N|秋季流感季：校园防护与请假流程提示": "article-news-d4243bb6.html", "N|接送高峰行车安全：即停即走与护学通道": "article-news-24eba960.html", "N|材料核对月：把「三对口」收进一个文件袋": "article-news-03641436.html", "N|联招志愿梯度怎么排：冲稳保各留 1–2 所": "article-news-5c961a79.html", "N|随迁子女入学：居住证与材料清单提前备": "article-news-0a439449.html", "N|艺体与科技特长生：报名窗口与材料提示": "article-news-333fee44.html", "N|指标到校校内公示：家长需要盯的两件事": "article-news-195fe411.html", "N|新生入学体检与预防接种查验：开学季办事清单": "article-news-17d13d20.html", "N|培训退费纠纷：先看合同，再走属地监管渠道": "article-news-82ec666f.html", "N|周末少儿阅读：图书馆借阅卡办理与亲子共读建议": "article-news-48a72f92.html", "N|初三体育训练季：节奏、防护与营养的平衡": "article-news-555c5aeb.html", "N|高考体检与外语口试：时间节点提示": "article-news-42c20c89.html", "N|2027 年校历发布季启动：寒假安排将随校历公布": "article-news-44d7dd4c.html", "N|秋季流感防护：校园场景三件事": "article-news-6166dd90.html", "N|随迁子女入学材料季：居住证与社保要提前核对": "article-news-fadc6284.html", "N|主城区多所高中开放日集中举行": "article-news-bd3ce26b.html", "N|家庭教育：把「电子设备公约」写成家庭协议": "article-news-f387cf90.html", "N|开学后首个家长会：建议问老师的三个问题": "article-news-309819fe.html", "N|重庆市教委发布 2026 年义务教育招生入学工作通知": "article-news-f1b1f745.html", "N|2026 年高考特殊类型招生控制线公布：历史 510 / 物理 496": "article-news-29b4d3d3.html", "N|阳光高考平台：军校招生军检线与报考流程答疑": "article-news-6beca3bf.html", "S|南开中学（沙坪坝）": "article-school-98250a24.html", "S|重庆一中（沙坪坝）": "article-school-57cbac3a.html", "S|巴蜀中学（渝中）": "article-school-10432c02.html", "S|重庆八中（沙坪坝）": "article-school-a9decd04.html", "S|育才中学（九龙坡）": "article-school-dbd33ba8.html", "S|西大附中（北碚）": "article-school-1b48d40c.html", "S|重庆十一中（南岸）": "article-school-54671c45.html", "S|重庆十八中（江北）": "article-school-38e4cb1a.html", "S|求精中学（渝中）": "article-school-fcf51a2b.html", "S|杨家坪中学（九龙坡）": "article-school-be27b3c6.html", "S|重庆三十七中（大渡口）": "article-school-e2077b3e.html", "S|巴蜀常春藤学校（两江新区）": "article-school-3b32267e.html", "S|兼善中学（北碚）": "article-school-16ca5f3c.html", "S|巴南中学（巴南）": "article-school-b43ae6cc.html", "S|渝北中学（渝北）": "article-school-51d6bf2d.html", "S|松树桥中学（渝北）": "article-school-153c178a.html", "S|两江育才中学（两江新区）": "article-school-362ce5f6.html", "S|大学城第一中学（沙坪坝）": "article-school-63fbbbbc.html", "S|凤鸣山中学（沙坪坝）": "article-school-ad683d69.html", "S|渝中区复旦中学（渝中）": "article-school-d282ceee.html", "L|要不要提前教拼音和算术？": "article-learn-7f5127fb.html", "L|指标到校和择校怎么权衡？": "article-learn-18edf1ba.html", "L|孩子成绩中等，路径怎么规划？": "article-learn-c460ab76.html", "L|志愿「冲稳保」怎么分配？": "article-learn-ba409771.html", "L|大考前，家长怎么说话不添乱？": "article-learn-c9eb2d89.html", "L|民办摇号没中，是不是就没学上了？": "article-learn-e1eac920.html", "L|住校还是走读，怎么决定？": "article-learn-0f041c0e.html", "L|强基计划值得报吗？": "article-learn-23a1fbd3.html", "L|公立和私立幼儿园，幼升小衔接有差别吗？": "article-learn-abd5a402.html", "L|奥数还值得学吗？": "article-learn-fa47210a.html", "L|家里老人育儿观念不一致，怎么破？": "article-learn-a98a7d05.html", "L|陪考三年，我做对了三件事": "article-experience-ec2dcbbc.html", "L|志愿填报：我们家做了三次模拟": "article-experience-cc52f067.html", "L|租房陪读一年：成本清单与踩坑": "article-experience-f7ddfee9.html", "L|从焦虑到放手：我把家长群取消了置顶": "article-experience-9f5a4396.html", "L|对口材料核对，我们家提前一年就开始了": "article-experience-43ed05df.html", "L|体育中考：我们从初一就开始「攒分」": "article-experience-20e61f26.html", "L|全家搬到学校隔壁，我们后悔了吗？": "article-experience-61d84a2c.html", "L|我把「别人家孩子」从家里请出去了": "article-experience-534eaf28.html", "L|报名前两个月，我们做对了四件小事": "article-experience-1c22e158.html", "L|高三一年，家长只做三件事": "article-experience-fc4236cb.html", "L|家长群信息太多？我的「三分钟过滤法」": "article-experience-dd419bcb.html", "L|给陪读家长的 5 条「少花钱」清单": "article-experience-8d4c5a92.html"};

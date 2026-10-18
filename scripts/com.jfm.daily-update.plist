@@ -13,6 +13,8 @@
     <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>30</integer></dict>
     <dict><key>Hour</key><integer>13</integer><key>Minute</key><integer>45</integer></dict>
   </array>
+  <!-- RunAtLoad：用户登录/加载本任务时立即执行一次（开机即更新） -->
+  <key>RunAtLoad</key><true/>
   <key>StandardOutPath</key><string>/Users/agent/Documents/site/data/daily-update.log</string>
   <key>StandardErrorPath</key><string>/Users/agent/Documents/site/data/daily-update.log</string>
 </dict>

@@ -6,7 +6,7 @@ launchctl unload ~/Library/LaunchAgents/com.jfm.daily-update.plist 2>/dev/null
 launchctl load ~/Library/LaunchAgents/com.jfm.daily-update.plist
 
 ## 行为
-- 每日 07:30 / 13:45 自动执行 scripts_daily_update.sh：
+- 每日 13:45（每日一次） 自动执行 scripts_daily_update.sh：
   资讯抓取 → 八卦社自主采集（bagua_auto.py）→ 风控入库（bagua_daily.py）→ 重建 → 守卫推送
 - RunAtLoad：登录/加载任务时立即跑一次（开机即更新）
 - 日志：data/daily-update.log；手动触发：bash scripts_daily_update.sh

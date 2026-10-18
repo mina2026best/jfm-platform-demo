@@ -121,7 +121,8 @@ def main(dry=False):
         print(f"[prune] 时效/白名单修剪：移除 {pruned} 条，保留 {len(keep_items)} 条")
 
     os.makedirs(INBOX, exist_ok=True)
-    files = sorted(glob.glob(os.path.join(INBOX, "*.json")) + glob.glob(os.path.join(INBOX, "*.md")))
+    # v2.0：*.md 仅收 task-*.md（人工投递命名约定）；其余 md 是文档，禁止当投递消费
+    files = sorted(glob.glob(os.path.join(INBOX, "*.json")) + glob.glob(os.path.join(INBOX, "task-*.md")))
     if not files:
         print("[bagua] inbox 无新投递（通道 A/B 均空）"); return 0
 

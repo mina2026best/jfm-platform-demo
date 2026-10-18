@@ -45,17 +45,18 @@ def fingerprint(text):
     """摘要指纹：去空白取 md5 前 12 位（去重用，不存原文）"""
     return hashlib.md5(re.sub(r"\s+", "", text or "").encode("utf-8")).hexdigest()[:12]
 
-def rule_check(item, db):
+def rule_check(item, db, wl_names=None):
     """返回 (risk_level, risk_note, ok_to_admit)。规则顺序=提示词 Step4+额外约束。"""
     text = " ".join(str(item.get(k, "") or "") for k in ("ai_summary", "risk_note", "raw_note", "title"))
     # ① 一票否决（对原始观察文本与备注全查）
     for w in db["ban_words"]:
         if w in text:
             return "高风险，禁止收录", f"命中一票否决词「{w}」", False
-    # ② 非重庆升学范畴
+    # ② 非重庆升学范畴——v2.0：白名单主播为用户核验过的重庆升学账号，豁免地域词硬门槛
+    wl_names = wl_names if wl_names is not None else [h["name"] for h in (db.get("whitelist", {}) or {}).get("hosts", [])]
     chongqing_kw = ("重庆", "渝", "巴南", "江北", "渝北", "沙坪坝", "九龙坡", "南岸", "渝中", "北碚", "大渡口", "涪陵", "万州", "高新区", "两江新区", "联招", "指标到校")
-    stage_kw = ("小升初", "初升高", "中考", "高考", "志愿", "摇号", "派位", "指标到校", "联招", "升学")
-    if not (any(k in text for k in chongqing_kw) and any(k in text for k in stage_kw)):
+    stage_kw = ("小升初", "初升高", "中考", "高考", "志愿", "摇号", "派位", "指标到校", "联招", "升学", "春招", "强基", "艺考")
+    if item.get("author_name") not in wl_names and not (any(k in text for k in chongqing_kw) and any(k in text for k in stage_kw)):
         return "高风险，禁止收录", "内容不属于重庆小升初 / 初升高 / 高考志愿范畴", False
     # ③ 预警词
     hit_review = [w for w in db.get("review_words", []) if w in text]

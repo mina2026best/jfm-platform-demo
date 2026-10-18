@@ -1008,4 +1008,8 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
+<<<<<<< HEAD
 var NEWS_META = {"generated": "2026-10-18 09:45", "seed": 21, "collected": 61, "fetchedPending": 0};
+=======
+var NEWS_META = {"generated": "2026-10-18 09:50", "seed": 21, "collected": 61, "fetchedPending": 0};
+>>>>>>> 7e78673 (每日资讯自动更新 2026-10-18)

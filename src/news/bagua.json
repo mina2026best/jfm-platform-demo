@@ -287,6 +287,24 @@
         ],
         "perspective": "此为媒体调查报道（info_type=official），作为本板块博主生态的风控基准案例保留：与「名额交易」沾边的博主内容一律不入库。"
       }
+    },
+    {
+      "id": "bg-20261018-aab3c4",
+      "source_platform": "抖音",
+      "author_name": "罗洋老师升学规划",
+      "publish_time": "2026-09-08",
+      "original_url": "https://www.douyin.com/video/7682991429920139363",
+      "content_type": "短视频（自动采集 og）",
+      "stage": "新高考",
+      "ai_summary": "高三400多分都走春招了，你300多分还要冲高考？认清现实吧 - 罗洋老师升学规划于20260908发布在抖音，已经收获了98.1万个喜欢，来抖音，记录美好生活！",
+      "risk_level": "正常",
+      "risk_note": "自动采集初筛（bagua_auto.py），待人工/Agent 四段蒸馏；互动：98.1万赞",
+      "tags": [
+        "重庆新高考"
+      ],
+      "reviewed": false,
+      "added": "2026-10-18",
+      "not_pinned": true
     }
   ],
   "weekly": {
@@ -294,13 +312,13 @@
     "note": "话题热度按近 30 天收录条目统计；数据量随每日管线累积",
     "topics": [
       {
-        "tag": "重庆初升高",
+        "tag": "重庆新高考",
         "count": 4,
         "trend": "平"
       },
       {
-        "tag": "重庆新高考",
-        "count": 3,
+        "tag": "重庆初升高",
+        "count": 4,
         "trend": "平"
       },
       {

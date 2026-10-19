@@ -1,6 +1,18 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "教育部召开全国深化“双减”推进会暨校外培训规范管理体制改革试点推进会",
+    "url": "http://www.jyb.cn/rmtzgjyb/202610/t20261019_2111531742.html",
+    "src": "中国教育新闻网",
+    "cat": "政策速递",
+    "sum": "",
+    "stages": [],
+    "date": "2026-10-19",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆4个区、40所学校上榜！教育部公布首批全国中小学科技教育实验区和实验校名单",
     "url": "https://www.cqnews.net/web/content_1560393450243571712.html",
     "src": "华龙网",
@@ -1008,8 +1020,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-<<<<<<< HEAD
-var NEWS_META = {"generated": "2026-10-18 09:45", "seed": 21, "collected": 61, "fetchedPending": 0};
-=======
-var NEWS_META = {"generated": "2026-10-18 09:50", "seed": 21, "collected": 61, "fetchedPending": 0};
->>>>>>> 7e78673 (每日资讯自动更新 2026-10-18)
+var NEWS_META = {"generated": "2026-10-19 13:03", "seed": 21, "collected": 62, "fetchedPending": 0};

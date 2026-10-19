@@ -13,6 +13,20 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "2027各地高考报名时间及报名网址",
+    "url": "https://www.eol.cn/e_html/kaoshi/gkbm/index.shtml",
+    "src": "中国教育在线",
+    "cat": "升学动态",
+    "sum": "2027年高考报名在即，教育在线特别整理“2027年高考各地报名时间及报名网址”供广大考生查阅。提醒各位考生做好时间安排，切勿错过报名时间。/> <meta name=",
+    "stages": [
+      "高考志愿"
+    ],
+    "date": "2026-10-19",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆4个区、40所学校上榜！教育部公布首批全国中小学科技教育实验区和实验校名单",
     "url": "https://www.cqnews.net/web/content_1560393450243571712.html",
     "src": "华龙网",
@@ -1020,4 +1034,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-19 13:30", "seed": 21, "collected": 62, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-19 23:03", "seed": 21, "collected": 63, "fetchedPending": 0};

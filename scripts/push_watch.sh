@@ -1,6 +1,6 @@
 #!/bin/bash
 # 家长搭子 · 智能推送：先探可达性，通了立刻推（GitHub 本机间歇黑洞）
-cd ~/.openclaw-autoclaw/agents/auto-designer/workspace/DELIVERY/鸡父母平台-MVP网站 || exit 1
+cd "$(dirname "$0")/.." || exit 1   # 仓库根（原硬编码 auto-designer 旧路径已随 autoclaw 迁移失效，2026-10-19）
 probe() { curl -s -o /dev/null -m 8 -w "%{http_code}" https://github.com 2>/dev/null; }
 for i in $(seq 1 60); do
   code=$(probe)

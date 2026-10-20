@@ -86,6 +86,12 @@ def fetch_all():
 def generate():
     seed = load(SEED, [])
     collected = load(COLLECTED, [])
+    if KR is None:
+        # v2.1 fail-closed：词库不可用时，只放行"人工编辑、带有效分类"的条目，
+        # 抓取线（auto）条目一律不发——防止无闸内容流到页面（2026-10-20 事故固化）
+        seed = [s for s in seed if s.get("cat") in ("政策速递", "升学动态", "家庭教育", "安全提醒", "办事提醒")]
+        collected = [c for c in collected if not c.get("auto") and c.get("cat") in ("政策速递", "升学动态", "家庭教育", "安全提醒", "办事提醒")]
+        print("[fail-closed] keywords_rules 不可用：仅发布人工编辑条目，抓取条目全部拦截")
     if KR is not None:
         # v2.0：生成前全量过滤（关键词硬门槛 + 五模块归类），无法判定不入库
         kept, dropped = [], 0

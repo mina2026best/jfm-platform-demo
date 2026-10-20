@@ -98,3 +98,90 @@ fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/'
 fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
 PUSH_FAILED：本地 ae37734 未上线（线上 de05bd6）——查分叉或网络
 ===== 失败 2026-10-20 08:05:10 =====
+===== [0/4] 对齐线上 2026-10-20 13:45:05 =====
+error: RPC failed; curl 28 Failed to connect to github.com port 443 after 75000 ms: Couldn't connect to server
+fatal: expected flush after ref listing
+[warn] fetch 失败（网络），按本地状态继续
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆市教育委员会: 68 条候选
+  重庆市教育考试院: 76 条候选
+  重庆招考网: 49 条候选
+  人民网重庆: 2 条候选
+  新华网重庆: 15 条候选
+  重庆市政府网: 9 条候选
+  教育部: 65 条候选
+  重庆日报: 3 条候选
+  华龙网: 9 条候选
+  上游新闻: 0 条候选
+  渝中区教委: 0 条候选
+  中国教育在线: 77 条候选
+  华龙网教育: 7 条候选
+  重庆大学新闻网: 38 条候选
+  中国教育新闻网: 225 条候选
+  重庆网络广播电视台: 9 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 74 条（每源限 25） ==
+   · 要闻 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqksy.cn/web/article/2026-10/20/content_7135.html
+   · 要闻 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqksy.cn/web/article/2026-10/19/content_7134.html
+   · 重庆市2026年下半年高等教育自学考试温馨提醒 | https://www.cqksy.cn/web/article/2026-10/19/content_7134.html
+   · 重庆市2027年普通高校专升本统一考试大纲 | https://www.cqksy.cn/web/article/2026-10/20/content_7135.html
+   · 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqzk.com.cn/CRKS/CRKS_news/2112363462871584768.html
+   · 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqzk.com.cn/ZXKS/ZXKS_news/2111991214029508608.html
+   · 重庆工商大学第13期南山廉政论坛举办 | http://cq.people.com.cn/n2/2026/1019/c365416-41726517.html
+   · 重庆工商大学赫尔学院揭牌 | http://www.cq.xinhuanet.com/20261020/396911b5d77646cbbbdc255567811707/
+   · 邻居家突发火灾 9岁小学生上演“教科书式”报警救援 | http://www.cq.xinhuanet.com/20261020/d9d31f4963ba4f119c7bc8a36a67e447/
+   · 2026年全国城市联合招聘高校毕业生（重庆）秋季专场活动圆满落幕 | http://www.cq.xinhuanet.com/20261017/58ef69c9f8534d17923f7c2df0b17ec4/
+   · 市委常委会举行会议 深入学习贯彻习近平总书记重要讲话精神 分析前三季度经济社会形势 部署下阶段工作 市委 | https://www.cq.gov.cn/ywdt/jrcq/202610/t20261019_16257957.html
+   · 教育部等三部门部署防控儿童青少年高度近视 | http://www.moe.gov.cn/jyb_xwfb/gzdt_gzdt/s5987/202610/t20261020_145523
+[ok] 新增发布 74 条；v2.0 门槛拦截 0 条；collected 累计 1157 条
+[build] src/data-news.js：1200 条（种子 45 + 采集已审 1155）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 16 页：7682991429920139363, 7698203458721788520, 7628920200825556264, 7644783534401424678, 7641052428171948451, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 173, in <module>
+    sys.exit(main())
+  File "/Users/agent/Documents/site/bagua_auto.py", line 109, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 505, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1821, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 88 键
+[build] 多页构建 OK · 27 项 · 合计 468 KB
+  · assets/app.7916026e.css · 101 KB
+  · assets/app.f48947f7.js · 634 KB
+  · index.html · 36 KB · sha256:116f8823b920
+  · news.html · 29 KB · sha256:e7fa860aba58
+  · calendar.html · 27 KB · sha256:0fabec5d2c78
+  · policy.html · 30 KB · sha256:ca02c8cc8280
+  · quiz.html · 17 KB · sha256:caa225fb3a47
+  · schools.html · 15 KB · sha256:c60dec323d70
+  · compare.html · 17 KB · sha256:25eb2c954462
+  · zy.html · 16 KB · sha256:b5d305be8a6c
+  · forum.html · 17 KB · sha256:fd7c52f26f26
+  · community.html · 18 KB · sha256:80e59911f256
+  · life.html · 19 KB · sha256:a311727ae678
+  · beans.html · 15 KB · sha256:75a3fb5071e7
+  · me.html · 19 KB · sha256:f4cbfd6ad992
+  · plans.html · 16 KB · sha256:c6fb3e885d93
+  · biz.html · 16 KB · sha256:7d1b65d7f421
+  · data-sources.html · 15 KB · sha256:b433613e3140
+  · daohang.html · 15 KB · sha256:3b47444c2590
+  · about.html · 17 KB · sha256:b1ddc7d2a723
+  · search.html · 15 KB · sha256:0c2a9c365333
+  · contact.html · 17 KB · sha256:d1899e7f8ffc
+  · wiki.html · 18 KB · sha256:3db5a0094049
+  · problems.html · 15 KB · sha256:ac6d0fdcc85f
+  · faq.html · 22 KB · sha256:14d2831db944
+  · sitemap.html · 15 KB · sha256:a3ad5a34998e
+  · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
+===== [3/4] 提交 =====

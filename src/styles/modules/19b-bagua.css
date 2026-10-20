@@ -46,3 +46,8 @@
 /* v1.9 主播档案行：粉丝/获赞核验数据 */
 .bg-host-row .bg-trend-tag{white-space:normal;line-height:1.5}
 .bg-host-meta{font-size:11px;color:var(--faint);font-weight:400}
+/* 时效分级徽章（置顶≠最新纪律的可视化） */
+.bg-fresh{display:inline-block;padding:1px 8px;border-radius:99px;font-size:10.5px;font-weight:700;letter-spacing:.03em}
+.bg-fresh.hot{background:#0E7C66;color:#FFF}
+.bg-fresh.warm{background:#E7EFEA;color:var(--accent)}
+.bg-fresh.stale{background:#EEF0F2;color:#8A9096;border:1px solid var(--line)}

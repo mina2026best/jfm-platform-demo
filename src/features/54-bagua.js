@@ -35,6 +35,16 @@ function baguaPlatformBadge(p){
   return '<span class="bg-plat ' + cls + '">' + esc(p || '公开渠道') + '</span>';
 }
 
+/* 时效分级（2026-10-20 用户纪律固化：置顶消息≠最新消息，必须把发布时效亮给家长看）
+   ≤3 天=最新；≤30 天=近期；其余=历史存档（灰显）。日期一律取视频 og 真实发布时间。 */
+function baguaFreshBadge(pub){
+  if (!pub) return '<span class="bg-fresh stale">时效未核实</span>';
+  var days = Math.floor((Date.now() - new Date(pub + 'T00:00:00+08:00').getTime()) / 86400000);
+  if (days <= 3) return '<span class="bg-fresh hot">最新</span>';
+  if (days <= 30) return '<span class="bg-fresh warm">近30天</span>';
+  return '<span class="bg-fresh stale">历史存档</span>';
+}
+
 /* 单条卡片：封面图 + 徽章行 + 摘要 + 标签 + 免责 + 原帖链接 */
 function baguaCardHTML(x, i){
   var stages = (x.stage && BAGUA_STAGES.indexOf(x.stage) >= 0)
@@ -66,6 +76,7 @@ function baguaCardHTML(x, i){
     +   baguaRiskBadge(x.risk_level)
     +   '<span class="bg-author">' + esc(x.author_name || '佚名博主') + '</span>'
     +   '<span class="bg-date">' + esc((x.publish_time || '').slice(0, 10)) + '</span>'
+    +   baguaFreshBadge((x.publish_time || '').slice(0, 10))
     + '</div>'
     + bodyHTML
     + (x.risk_note ? '<p class="bg-riskenote">风控备注：' + esc(x.risk_note) + '</p>' : '')

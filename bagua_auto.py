@@ -101,7 +101,7 @@ def main():
     for x in load(os.path.join(ROOT, 'douyin-probe.json'), []):
         u = x.get('url', '')
         if ('/shipin/' in u or '/video/' in u) and u not in seeds: seeds.append(u)
-    seeds = seeds[:10]
+    seeds = seeds[:16]  # v1.1 扩种子：10→16（连续零新增时按巡检规则扩容）
     if not seeds:
         print('[auto] 无可用种子页'); return 1
     print('[auto] 种子 %d 页：%s' % (len(seeds), ', '.join(s.rsplit('/', 1)[-1] for s in seeds)))

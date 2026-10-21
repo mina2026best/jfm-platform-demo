@@ -292,3 +292,22 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · sitemap.html · 15 KB · sha256:2ae746e6c4e9
   · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
 ===== [3/4] 提交 =====
+[main 16ac85c] 每日资讯自动更新 2026-10-21
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 165 files changed, 1942 insertions(+), 2037 deletions(-)
+ rename assets/{app.14344079.js => app.dadc0fe4.js} (89%)
+===== [4/4] 推送 GitHub Pages =====
+   08f58f6..16ac85c  main -> main
+PUSH OK
+===== 完成 2026-10-21 09:24:02 =====

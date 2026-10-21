@@ -133,7 +133,7 @@ def _gate_hit(title: str, summary: str = "") -> bool:
             pass
     return False
 
-def classify(title: str, summary: str = "", src: str = "", body: str = "") -> str | None:
+def classify(title: str, summary: str = "", src: str = "", body: str = "") -> "str | None":  # 兼容 Python3.9（launchd 环境）：用字符串注解避免运行时求值
     """v2.0（与前端 JS 引擎语义对齐）：
        营销拦截 → 非K12排除 → gate硬门槛(标题+摘要) → 本地判定(标题+摘要+来源)
        → 非本地pipelineGate加验 → 模块打分(标题 + 摘要+正文body) → 阈值(本地2.5/非本地4)

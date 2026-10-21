@@ -396,3 +396,118 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · sitemap.html · 15 KB · sha256:42ab5728726e
   · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
 ===== [3/4] 提交 =====
+[main 9e8d245] 每日资讯自动更新 2026-10-21
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 164 files changed, 1774 insertions(+), 1917 deletions(-)
+ rename assets/{app.090efdc0.js => app.2210f5c4.js} (88%)
+===== [4/4] 推送 GitHub Pages =====
+   ada8ce6..9e8d245  main -> main
+PUSH OK
+===== 完成 2026-10-21 13:45:09 =====
+===== [0/4] 对齐线上 2026-10-21 17:56:20 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆招考网: 49 条候选
+  重庆市教育委员会: 67 条候选
+  重庆市教育考试院: 76 条候选
+  上游新闻: 0 条候选
+  人民网重庆: 3 条候选
+  重庆市政府网: 10 条候选
+  中国教育在线: 73 条候选
+  重庆日报: 0 条候选
+  新华网重庆: 8 条候选
+  渝中区教委: 0 条候选
+  教育部: 60 条候选
+  重庆大学新闻网: 40 条候选
+  华龙网教育: 7 条候选
+  华龙网: 2 条候选
+  大渝网: 0 条候选
+  重庆网络广播电视台: 5 条候选
+  中国教育新闻网: 231 条候选
+== 去重后新候选: 128 条（每源限 25） ==
+   · 重庆市2026年普通高校专升本考试一分段表 | https://www.cqzk.com.cn/CRKS/CRKS_news/2049770861696360448.html
+   · 重庆市教育委员会关于重庆市第六届小学音乐教师课堂教学技能现场展示活动获奖情况的公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202610/t20261021_16267224.html
+   · 重庆化工职业学院“三链耦合”驱动产教融合纵深发展 | http://jw.cq.gov.cn/zwxx_209/bmdt/gxxx/202610/t20261021_16267325.html
+   · 重庆电子科技职业大学“三个坚持”赋能职业教育数智化转型 | http://jw.cq.gov.cn/zwxx_209/bmdt/gxxx/202610/t20261021_16267316.html
+   · 重庆商务职业学院以“五大体系”强基铸魂 打造高素质专业化教师队伍 | http://jw.cq.gov.cn/zwxx_209/bmdt/gxxx/202610/t20261021_16267309.html
+   · 重庆大学以“四个聚焦”扎实推进美育浸润行动 | http://jw.cq.gov.cn/zwxx_209/bmdt/gxxx/202610/t20261021_16267301.html
+   · 重庆市2024年9月全国计算机等级考试 报名公告 | https://www.cqksy.cn/web/article/2024-06/21/content_6190.html
+   · 重庆市2024年同等学力人员申请硕士学位外国语水平和学科综合水平全国统一考试温馨提示 | https://www.cqksy.cn/web/article/2024-05/16/content_6107.html
+   · 重庆市2024年5月全国计算机等级考试报名公告 | https://www.cqksy.cn/web/article/2024-04/22/content_6046.html
+   · 重庆市2024年上半年中小学教师资格考试（面试）公告 | https://www.cqksy.cn/web/article/2024-04/02/content_6008.html
+   · 重庆市全国计算机等级考试研讨会召开 | https://www.cqksy.cn/web/article/2024-03/20/content_6005.html
+   · 2025-2026学年度第二学期普通高中学业水平合格性考试及报名有关安排的公告 | https://www.cqksy.cn/web/article/2026-03/23/content_6902.html
+[ok] 新增发布 1 条；v2.0 门槛拦截 99 条；collected 累计 267 条
+[v2.0-filter] 剔除无法判定 200 条；保留 67 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：88 条（种子 21 + 采集已审 67）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 16 页：7628920200825556264, 7682991429920139363, 7641052428171948451, 7644783534401424678, 7698203458721788520, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 173, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 109, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 88 键
+[build] 多页构建 OK · 27 项 · 合计 469 KB
+  · assets/app.9bea4807.css · 102 KB
+  · assets/app.392f9f2f.js · 277 KB
+  · index.html · 36 KB · sha256:5f06ebce8380
+  · news.html · 30 KB · sha256:31e75acfa2de
+  · calendar.html · 27 KB · sha256:05540b5bcb27
+  · policy.html · 30 KB · sha256:1daab8e76cfd
+  · quiz.html · 17 KB · sha256:1ab6feb6deba
+  · schools.html · 15 KB · sha256:a7abf0e5f583
+  · compare.html · 17 KB · sha256:9b616b314af9
+  · zy.html · 16 KB · sha256:986386e76fd4
+  · forum.html · 17 KB · sha256:91e55b5a9abc
+  · community.html · 18 KB · sha256:32ac46d0dae2
+  · life.html · 19 KB · sha256:f6bd8bc39f5d
+  · beans.html · 15 KB · sha256:8ade7e062f80
+  · me.html · 19 KB · sha256:b25c241e4286
+  · plans.html · 16 KB · sha256:a7150b774655
+  · biz.html · 16 KB · sha256:bc044bbd9c3d
+  · data-sources.html · 15 KB · sha256:5bfd35e6216d
+  · daohang.html · 15 KB · sha256:805dcf7349dd
+  · about.html · 17 KB · sha256:391142ee7582
+  · search.html · 15 KB · sha256:24caf32863ca
+  · contact.html · 17 KB · sha256:47a6c81f96b4
+  · wiki.html · 18 KB · sha256:01f0f220f296
+  · problems.html · 15 KB · sha256:edc9f8f90f90
+  · faq.html · 22 KB · sha256:514207e326ee
+  · sitemap.html · 15 KB · sha256:cf0b9f8730c3
+  · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
+===== [3/4] 提交 =====

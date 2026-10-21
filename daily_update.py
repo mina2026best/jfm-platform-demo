@@ -199,9 +199,14 @@ def main():
 
     # 3) 写入 collected.json（reviewed=true 自动发布）
     # v2.0：入库前过关键词硬门槛+五模块归类，无法判定的内容丢弃不入库
+    # v2.1 fail-closed：词库不可用时直接中止入库（2026-10-21 事故固化：launchd 环境内
+    # /usr/bin/python3 3.9 无法加载 str|None 注解导致 KR=None → 200 条无闸内容入库）
+    if KR is None:
+        print("[fail-closed] keywords_rules 不可用（多为 Python<3.10 注解问题）——本次不入库任何抓取内容")
+        return
     admitted, rejected = [], 0
     for c in cands:
-        cat = KR.classify(c.get("t", ""), c.get("sum", "")) if KR else cat_of(c.get("t", ""))
+        cat = KR.classify(c.get("t", ""), c.get("sum", ""))
         if cat is None:
             rejected += 1
             continue

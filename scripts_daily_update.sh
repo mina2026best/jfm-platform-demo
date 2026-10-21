@@ -21,12 +21,12 @@ if [ "${BEHIND:-0}" != "0" ]; then
 fi
 
 echo "===== [1/4] 抓取资讯 ====="
-python3 daily_update.py || { echo "[warn] 抓取失败，继续尝试重建"; }
+/usr/local/bin/python3 daily_update.py || { echo "[warn] 抓取失败，继续尝试重建"; }
 echo "===== [1.5/4] 八卦社每日整理 ====="
-python3 bagua_auto.py --max 12 || echo "[warn] 八卦社自动采集异常，继续管线"
-python3 bagua_daily.py || echo "[warn] 八卦社管线异常，继续重建"
+/usr/local/bin/python3 bagua_auto.py --max 12 || echo "[warn] 八卦社自动采集异常，继续管线"
+/usr/local/bin/python3 bagua_daily.py || echo "[warn] 八卦社管线异常，继续重建"
 echo "===== [2/4] 重建站点 ====="
-python3 build.py || { echo "BUILD_FAILED"; exit 1; }
+/usr/local/bin/python3 build.py || { echo "BUILD_FAILED"; exit 1; }
 echo "===== [3/4] 提交 ====="
 git add -A
 git commit -m "每日资讯自动更新 $(date '+%F')" 2>/dev/null || echo "(无变更)"

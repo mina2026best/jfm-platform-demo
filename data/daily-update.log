@@ -311,3 +311,88 @@ After doing this, you may fix the identity used for this commit with:
    08f58f6..16ac85c  main -> main
 PUSH OK
 ===== 完成 2026-10-21 09:24:02 =====
+===== [0/4] 对齐线上 2026-10-21 13:45:02 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆市教育考试院: 76 条候选
+  重庆市教育委员会: 69 条候选
+  重庆招考网: 49 条候选
+  重庆日报: 0 条候选
+  中国教育在线: 77 条候选
+  人民网重庆: 2 条候选
+  华龙网: 3 条候选
+  重庆市政府网: 10 条候选
+  上游新闻: 0 条候选
+  教育部: 60 条候选
+  新华网重庆: 9 条候选
+  渝中区教委: 0 条候选
+  重庆大学新闻网: 40 条候选
+  华龙网教育: 7 条候选
+  重庆网络广播电视台: 6 条候选
+  大渝网: 0 条候选
+  中国教育新闻网: 230 条候选
+== 去重后新候选: 181 条（每源限 25） ==
+   · 重庆市2025年成人高考温馨提示 | https://www.cqksy.cn/web/article/2025-10/13/content_6796.html
+   · 2025年在渝招生成人高校招生简章链接清单 | https://www.cqksy.cn/uploadFile/infopub/202509/1967427011731791872.pdf
+   · 重庆市高等教育自学考试考籍有关事项办理指南 | https://www.cqksy.cn/web/article/2026-08/25/content_7110.html
+   · 重庆市2026年下半年高等教育自学考试报名报考须知 | https://www.cqksy.cn/web/article/2026-07/24/content_7059.html
+   · 重庆市2026年上半年高等教育自学考试毕业申请办理有关事宜的公告 | https://www.cqksy.cn/web/article/2026-05/27/content_6984.html
+   · 重庆市2026年上半年高等教育自学考试温馨提醒 | https://www.cqksy.cn/web/article/2026-03/31/content_6914.html
+   · 重庆市2026年上半年高等教育自学考试报名报考须知 | https://www.cqksy.cn/web/article/2026-01/15/content_6868.html
+   · 关于重庆市2025年下半年高等教育自学考试 毕业证书申请办理时间及流程的公告 | https://www.cqksy.cn/web/article/2025-11/04/content_6815.html
+   · 关于参加重庆市2025年下半年高等教育自学考试的温馨提醒 | https://www.cqksy.cn/web/article/2025-10/13/content_6797.html
+   · 重庆市2025年下半年高等教育自学考试报考须知 | https://www.cqksy.cn/web/article/2025-08/20/content_6758.html
+   · 关于我市2025年上半年高等教育自学考试毕业证书办理时间及流程的公告 | https://www.cqksy.cn/web/article/2025-05/20/content_6589.html
+   · 中小学教师资格考试省级命题科目面试大纲 | https://www.cqksy.cn/web/article/2022-04/08/content_5501.html
+[ok] 新增发布 100 条；v2.0 门槛拦截 0 条；collected 累计 266 条
+[fail-closed] keywords_rules 不可用：仅发布人工编辑条目，抓取条目全部拦截
+[build] src/data-news.js：45 条（种子 45 + 采集已审 0）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 16 页：7644783534401424678, 7682991429920139363, 7641052428171948451, 7628920200825556264, 7698203458721788520, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 173, in <module>
+    sys.exit(main())
+  File "/Users/agent/Documents/site/bagua_auto.py", line 109, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 505, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 1821, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 88 键
+[build] 多页构建 OK · 27 项 · 合计 466 KB
+  · assets/app.9bea4807.css · 102 KB
+  · assets/app.2210f5c4.js · 256 KB
+  · index.html · 36 KB · sha256:e0a039e2fd96
+  · news.html · 27 KB · sha256:ee39ba757159
+  · calendar.html · 27 KB · sha256:5c12989d423c
+  · policy.html · 30 KB · sha256:620f498cb4b6
+  · quiz.html · 17 KB · sha256:f971e0cf106c
+  · schools.html · 15 KB · sha256:f43e0cf1e9b5
+  · compare.html · 17 KB · sha256:226207f2157a
+  · zy.html · 16 KB · sha256:99c3138027f5
+  · forum.html · 17 KB · sha256:369e3498ba79
+  · community.html · 18 KB · sha256:33cf01c14b2a
+  · life.html · 19 KB · sha256:861925a63114
+  · beans.html · 15 KB · sha256:012e60cbbb41
+  · me.html · 19 KB · sha256:67b1b0162bc0
+  · plans.html · 16 KB · sha256:970ac3e31a3a
+  · biz.html · 16 KB · sha256:770e44146e75
+  · data-sources.html · 15 KB · sha256:2816bedeab85
+  · daohang.html · 15 KB · sha256:f02144bd8851
+  · about.html · 17 KB · sha256:12e90c53c822
+  · search.html · 15 KB · sha256:48f76b917a27
+  · contact.html · 17 KB · sha256:7e6e9d1c953d
+  · wiki.html · 18 KB · sha256:adaaf6992725
+  · problems.html · 15 KB · sha256:1cd4035289cb
+  · faq.html · 22 KB · sha256:3ab21344ac13
+  · sitemap.html · 15 KB · sha256:42ab5728726e
+  · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
+===== [3/4] 提交 =====

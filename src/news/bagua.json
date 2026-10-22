@@ -323,10 +323,26 @@
       "reviewed": false,
       "added": "2026-10-20",
       "not_pinned": true
+    },
+    {
+      "id": "bg-20261022-017c00",
+      "source_platform": "抖音",
+      "author_name": "罗洋老师升学规划",
+      "publish_time": "2026-07-24",
+      "original_url": "https://www.douyin.com/video/7665946298722180736",
+      "content_type": "短视频（自动采集 og）",
+      "stage": "初升高",
+      "ai_summary": "400多分究竟该读职高还是普高 - 罗洋老师升学规划于20260724发布在抖音，已经收获了98.5万个喜欢，来抖音，记录美好生活！",
+      "risk_level": "正常",
+      "risk_note": "自动采集初筛（bagua_auto.py），待人工/Agent 四段蒸馏；互动：98.5万赞",
+      "tags": [],
+      "reviewed": false,
+      "added": "2026-10-22",
+      "not_pinned": true
     }
   ],
   "weekly": {
-    "generated": "2026-10-21",
+    "generated": "2026-10-22",
     "note": "话题热度按近 30 天收录条目统计；数据量随每日管线累积",
     "topics": [
       {

@@ -1,6 +1,18 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "大渡口区开展禁毒宣传进校园活动",
+    "url": "http://cq.people.com.cn/n2/2026/1021/c365407-41728774.html",
+    "src": "人民网重庆",
+    "cat": "安全提醒",
+    "sum": "10月21日，“青春无毒向阳而生”大渡口区禁毒宣传进校园活动在茄子溪中学举行，同步启动全民禁毒宣传月成果延伸暨秋季学期毒品预防教育工作。活动通过主分会场联动、线上线下融合，进一步增强青少年防范毒品及成",
+    "stages": [],
+    "date": "2026-10-22",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆市教育委员会关于重庆市第六届小学音乐教师课堂教学技能现场展示活动获奖情况的公示",
     "url": "http://jw.cq.gov.cn/zwxx_209/gggs/202610/t20261021_16267224.html",
     "src": "重庆市教育委员会",
@@ -1082,4 +1094,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-22 07:51", "seed": 21, "collected": 67, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-22 13:30", "seed": 21, "collected": 68, "fetchedPending": 0};

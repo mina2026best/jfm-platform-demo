@@ -739,3 +739,117 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · sitemap.html · 15 KB · sha256:ed8494c46c63
   · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
 ===== [3/4] 提交 =====
+[main c0bfa75] 每日资讯自动更新 2026-10-22
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 163 files changed, 257 insertions(+), 162 deletions(-)
+ rename assets/{app.d8bd1d9d.js => app.48383eb1.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+   e45309c..c0bfa75  main -> main
+PUSH OK
+===== 完成 2026-10-22 13:45:09 =====
+===== [0/4] 对齐线上 2026-10-23 08:08:54 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆招考网: 49 条候选
+  重庆市教育委员会: 66 条候选
+  重庆市教育考试院: 76 条候选
+  华龙网: 2 条候选
+  重庆市政府网: 6 条候选
+  重庆日报: 0 条候选
+  人民网重庆: 3 条候选
+  上游新闻: 0 条候选
+  新华网重庆: 8 条候选
+  渝中区教委: 0 条候选
+  教育部: 58 条候选
+  中国教育在线: 69 条候选
+  重庆大学新闻网: 40 条候选
+  华龙网教育: 7 条候选
+  中国教育新闻网: 220 条候选
+  重庆网络广播电视台: 4 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 202 条（每源限 25） ==
+   · 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqzk.com.cn/CRKS/CRKS_news/2112363462871584768.html
+   · 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqzk.com.cn/ZXKS/ZXKS_news/2111991214029508608.html
+   · 2026—2027学年度第一学期普通高中学业水平合格性考试及报名有关安排的公... 2026-10-08 | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html
+   · 重庆市2027年全国硕士研究生招生考试报名公告 2026-09-30 | https://www.cqzk.com.cn/YZYK/YZYK_news/2105284675033993216.html
+   · 重庆市2026年高职分类考试成绩公布时间 2026-03-24 | https://www.cqzk.com.cn/announcement/2036397436177195008.html
+   · 2026年普通高校招生第七阶段（高职专科批）第二次... | https://www.cqzk.com.cn/PTGK/PTGK_news/2086290914155405312.html
+   · 2026—2027学年度第一学期普通高中学业水平合格性... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html
+   · 2025-2026学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2035894402426839040.html
+   · 2025-2026学年度第一学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1967473383513497600.html
+   · 关于2024-2025学年度第二学期普通高中学业水平合格... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1907706935845158912.html
+   · 2023-2024学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1773610690454487040.html
+   · 重庆市2023-2024学年度第一学期普通高中学业水平合... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1706870833259458560.html
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 68 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：89 条（种子 21 + 采集已审 68）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 16 页：7665946298722180736, 7682991429920139363, 7641052428171948451, 7628920200825556264, 7644783534401424678, 7698203458721788520, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 173, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 109, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 88 键
+[build] 多页构建 OK · 27 项 · 合计 469 KB
+  · assets/app.9bea4807.css · 102 KB
+  · assets/app.6e7e52b4.js · 278 KB
+  · index.html · 36 KB · sha256:ff657a9cce68
+  · news.html · 30 KB · sha256:ef7bc1195ec9
+  · calendar.html · 27 KB · sha256:539822d0dacb
+  · policy.html · 30 KB · sha256:b0d702f65d54
+  · quiz.html · 17 KB · sha256:e160ce7b4f14
+  · schools.html · 15 KB · sha256:66931b928a59
+  · compare.html · 17 KB · sha256:dabab0a8bf6e
+  · zy.html · 16 KB · sha256:c4a87276f668
+  · forum.html · 17 KB · sha256:abcc43cf2e47
+  · community.html · 18 KB · sha256:101e71f85dc4
+  · life.html · 19 KB · sha256:025a2a4daf13
+  · beans.html · 15 KB · sha256:7be28b329050
+  · me.html · 19 KB · sha256:bd373b4d1057
+  · plans.html · 16 KB · sha256:0d8b7469306f
+  · biz.html · 16 KB · sha256:85c3a41c566c
+  · data-sources.html · 15 KB · sha256:8b3e929e080e
+  · daohang.html · 15 KB · sha256:d9da6588c61e
+  · about.html · 17 KB · sha256:7a28fbfb87c1
+  · search.html · 15 KB · sha256:4a286db53535
+  · contact.html · 17 KB · sha256:f4bea472133f
+  · wiki.html · 18 KB · sha256:e0ab4ae5f032
+  · problems.html · 15 KB · sha256:39127a1eadab
+  · faq.html · 22 KB · sha256:086d158d8f9a
+  · sitemap.html · 15 KB · sha256:47fcfbacf0e5
+  · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
+===== [3/4] 提交 =====

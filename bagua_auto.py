@@ -82,6 +82,18 @@ def guess_tags(text, pool):
         if k in text and v in pool and v not in tags: tags.append(v)
     return tags[:3]
 
+def aweme_id_date(url):
+    """v1.2：抖音 aweme ID 高 32 位 = 发布 Unix 秒（确定性解码，校准例：
+    7631482243214593332→2026-04-21、7491623163520961828→2025-03 均吻合）。
+    shipin 聚合页的「发布时间」字段会把旧 ID 标成新日期，一律以 ID 解码为准。"""
+    m = re.search(r'/(?:video|shipin)/(\d{15,20})', url or '')
+    if not m: return None
+    ts = int(m.group(1)) >> 32
+    try:
+        return datetime.date.fromtimestamp(ts)
+    except Exception:
+        return None
+
 def main():
     maxn = 12
     if '--max' in sys.argv: maxn = int(sys.argv[sys.argv.index('--max') + 1])
@@ -130,6 +142,11 @@ def main():
         m = re.search(r'于(\d{8})发布在抖音', desc)
         if not m: continue  # 无精确日期的不要（防旧内容顶替）
         pub = '%s-%s-%s' % (m.group(1)[:4], m.group(1)[4:6], m.group(1)[6:])
+        # v1.2：ID 解码交叉验证——偏差 ≤3 天视为时区/取整误差保留 og 日期；大偏差以 ID 为准
+        id_date = aweme_id_date(u)
+        if id_date is not None and abs((datetime.date.fromisoformat(pub) - id_date).days) > 3:
+            print('[auto][warn] og 日期 %s 与 ID 解码 %s 偏差过大 → 以 ID 为准：%s' % (pub, id_date.isoformat(), u[-24:]))
+            pub = id_date.isoformat()
         age = (datetime.date.today() - datetime.date.fromisoformat(pub)).days
         if age > 300: continue
         author = ''

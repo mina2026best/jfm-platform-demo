@@ -618,6 +618,8 @@ footer .logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:6
 .bg-fresh.hot{background:#0E7C66;color:#FFF}
 .bg-fresh.warm{background:#E7EFEA;color:var(--accent)}
 .bg-fresh.stale{background:#EEF0F2;color:#8A9096;border:1px solid var(--line)}
+/* v2.2 一句话备注行 */
+.bg-note-line{font-size:12px;color:#5A4A28;background:#FBF7EE;padding:8px 12px;border-left:3px solid #B45309;margin-top:10px}
 
 
 /* ============ 20-learn ============ */

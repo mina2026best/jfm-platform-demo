@@ -59,13 +59,11 @@ function baguaCardHTML(x, i){
   if (x.deep) {
     var d = x.deep;
     var det = (d.details || []).map(function(it){ return '<div class="bg-det-item">' + esc(it) + '</div>'; }).join('');
-    var act = (d.action || []).map(function(it){ return '<li>' + esc(it) + '</li>'; }).join('');
+    /* v2.2：主体=核心论点+关键信息（≥500 字客观详录主播/媒体原意）；评价类内容压缩为一句备注 */
     bodyHTML = ''
       + '<p class="bg-sec"><b>核心论点</b></p><p class="bg-p">' + esc(d.core || '') + '</p>'
       + (det ? '<p class="bg-sec"><b>关键信息</b></p><div class="bg-details">' + det + '</div>' : '')
-      + (d.official ? '<p class="bg-sec"><b>官方口径对照</b></p><p class="bg-p bg-official">' + esc(d.official) + '</p>' : '')
-      + (act ? '<p class="bg-sec"><b>家长行动清单</b></p><ul class="bg-actions">' + act + '</ul>' : '')
-      + (d.perspective ? '<p class="bg-sec"><b>视角提醒</b></p><p class="bg-p bg-persp">' + esc(d.perspective) + '</p>' : '');
+      + (d.note ? '<p class="bg-persp bg-note-line">' + esc(d.note) + '</p>' : '');
   } else {
     bodyHTML = '<p class="bg-sum">' + esc(x.ai_summary || '') + '</p>';
   }

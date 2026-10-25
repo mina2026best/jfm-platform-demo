@@ -1085,3 +1085,20 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · sitemap.html · 15 KB · sha256:969077783ae5
   · articles/ · 136 篇详情页（34 个旧文件已转为跳转）
 ===== [3/4] 提交 =====
+[main 9507e61] 每日资讯自动更新 2026-10-25
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 164 files changed, 438 insertions(+), 322 deletions(-)
+ rename assets/{app.e3bf42b5.js => app.7c786563.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Failed to connect to github.com port 443 after 75001 ms: Couldn't connect to server

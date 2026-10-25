@@ -351,6 +351,13 @@ html.theme-dark .btn-ghost{background:transparent}
   .hero h1{font-size:27px}
   .cta-band .cb-inner{padding:26px 22px}
   .caps{grid-template-columns:repeat(2,1fr)}
+  /* v2 修复：数据带移动端单列列表化（原 4 列网格+竖排标签在 390px 不可读） */
+  .trust{grid-template-columns:1fr;gap:0;margin-top:32px;padding-top:8px}
+  .trust .t-item{padding:12px 0;border-left:none !important}
+  .trust .t-item + .t-item{border-top:1px solid var(--line)}
+  .trust .t-num{font-size:22px}
+  .trust .t-label{letter-spacing:.02em;display:block}
+  .trust .t-label em{display:inline;margin-left:6px}
 }
 @media print{
   .js .rv{opacity:1}
@@ -508,12 +515,12 @@ footer .brand-mean,.site-foot .brand-mean{color:var(--ink2) !important;opacity:1
 .searchbox input{font-size:14px}
 .demo-tag{font-size:12px;color:#8A6D3B;border-color:#C9A96A;background:#FBF6EA}
 
-/* ---------- v0.83 字阶强化 ---------- */
-.hero h1{font-size:40px !important;line-height:1.28 !important;max-width:600px}
+/* ---------- v0.83 字阶强化（v2：桌面字号不变，移动端 clamp 收敛——修复 390px 下 h1=40px/数字 34px 压垮数据带的问题） ---------- */
+.hero h1{font-size:clamp(27px,4.2vw,40px) !important;line-height:1.28 !important;max-width:600px}
 .hero .sub{font-size:15.5px}
 .sec-head h2{font-size:28px}
 .sec-desc{font-size:15px;line-height:1.85}
-.trust .t-num{font-size:34px}
+.trust .t-num{font-size:clamp(22px,3.4vw,34px)}
 .trust .t-label{font-size:13px}
 .sd h3{font-family:var(--display);font-size:17px}
 .stage-doors .sd .no, .entries .no{letter-spacing:.18em}

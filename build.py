@@ -639,7 +639,7 @@ def main():
                        '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
-            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css" />')
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261025" />')
             out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
             # 替换主内容：定位 <main>…</main>
             import re as _re
@@ -655,7 +655,7 @@ def main():
             total += len(out)
             continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css" />')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261025" />')
         out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")

@@ -32,7 +32,7 @@ PAGES = [
          desc="3 问自查「我家能不能报」，一键生成入学材料清单（学段 × 户籍 × 住房）。",
          sections=["quiz"]),
     dict(file="schools.html", title="学校档案库 · 花期册",
-         desc="20 所学校档案：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
+         desc="学校档案库：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
          sections=["schools"]),
     dict(file="compare.html", title="择校对比器 · 花期册",
          desc="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。",
@@ -512,6 +512,17 @@ def build_page(page, tpl, secs, css, js):
 
 def main():
     tpl = read(f"{SRC}/template.html")
+    # v2.3：学校计数替换必须在 extract_sections 之前（否则各页 secs 携带未替换占位符）
+    try:
+        _sch = json.load(open(os.path.join(SRC, "data", "schools.json"), encoding="utf-8"))
+        _gg = sum(1 for v in _sch.values() if (v.get("办学性质") or "").startswith("公办"))
+        _mb = sum(1 for v in _sch.values() if (v.get("办学性质") or "").startswith("民办"))
+        tpl = (tpl.replace("__SCH_ALL__", str(len(_sch)))
+                  .replace("__SCH_GG__", str(_gg))
+                  .replace("__SCH_MB__", str(_mb))
+                  .replace("20 所学校档案", f"{len(_sch)} 所学校档案"))
+    except Exception as _e:
+        print('[warn] 学校计数注入失败：', repr(_e))
     css, js = build_css(), build_js()
     # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
     _pmap = {}

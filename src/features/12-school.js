@@ -106,7 +106,7 @@ function openSchool(name){
   currentOpenSchool = name;
   document.getElementById('sm-name').textContent = name;
   var kv = document.getElementById('sm-kv');
-  var rows = ['办学性质','所在区','区划说明','创办','校训','校区地址','校园规模','师资概况','办学特色','招生范围','中考录取参考','高考成绩','通勤参考','住宿','收费口径','指标到校','官网','资料来源','数据来源','暂缺字段'];
+  var rows = ['办学性质','所在区','区划说明','创办','校训','校区地址','校园规模','师资概况','办学特色','招生范围','班型设置','中考录取参考','高考成绩','通勤参考','住宿','收费口径','指标到校','官网','资料来源','数据来源','暂缺字段'];
   kv.innerHTML = rows.map(function(r){
     var raw = d[r];
     var v;

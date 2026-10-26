@@ -194,6 +194,31 @@ for k, v in db.items():
 print(f'中考录取参考：已注入 {sum(1 for v in db.values() if v.get("中考录取参考"))} 校')
 print(f'补丁：应用 {pg_ok} | 未匹配 {pg_skip}')
 
+# 7) 家长关注字段批次（batch-fields-*.json）
+import glob as _glob
+_fields_n = 0
+for fp in sorted(_glob.glob(f'{ROOT}/schools_inbox/batch-fields-*.json')):
+    try:
+        fitems = json.load(open(fp, encoding='utf-8'))
+    except Exception as e:
+        errors.append(f'[fields] {os.path.basename(fp)} 解析失败: {e}'); continue
+    for it in fitems:
+        k = it.get('键名', ''); t = resolve_key(k)
+        if not t:
+            errors.append(f'[fields] 未匹配：{k}'); continue
+        applied = False
+        for f in ('住宿', '收费口径', '指标到校', '班型设置', '通勤参考'):
+            v = it.get(f)
+            if v and not db[t].get(f):
+                db[t][f] = v; applied = True
+        src = it.get('来源', '')
+        srcs = [x.strip() for x in re.split('[；;]', src) if x.strip().startswith('http')]
+        if srcs:
+            db[t]['资料来源'] = sorted(set((db[t].get('资料来源') or []) + srcs))
+        if applied:
+            _fields_n += 1
+print(f'家长字段：应用 {_fields_n} 校')
+
 print(f'新增 {added} | 丰富 {enriched} | 跳过 {skipped} | 总量 {len(db)}')
 for e in errors:
     print(e)

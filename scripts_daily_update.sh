@@ -27,6 +27,8 @@ echo "===== [1.5/4] 八卦社每日整理 ====="
 /usr/local/bin/python3 bagua_daily.py || echo "[warn] 八卦社管线异常，继续重建"
 echo "===== [2/4] 重建站点 ====="
 /usr/local/bin/python3 build.py || { echo "BUILD_FAILED"; exit 1; }
+# v2.2 移动端溢出回归断言（本地文件检查，非阻塞）
+node scripts/overflow_check.js "file://$PWD/index.html" 2>/dev/null && echo "[ok] 移动端溢出回归通过" || echo "[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js"
 echo "===== [3/4] 提交 ====="
 git add -A
 git commit -m "每日资讯自动更新 $(date '+%F')" 2>/dev/null || echo "(无变更)"

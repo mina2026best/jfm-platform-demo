@@ -19,5 +19,7 @@ const { chromium } = require('playwright-core');
     return { scrollW: doc.scrollWidth, innerW: window.innerWidth, top: off.slice(0, 12) };
   });
   console.log(JSON.stringify(r, null, 1));
+  const bad = r.scrollW > r.innerW + 2 || (r.top||[]).some(o => o.right > r.innerW + 4);
+  process.exit(bad ? 1 : 0);
   await b.close();
 })();

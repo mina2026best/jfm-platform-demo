@@ -106,14 +106,21 @@ function openSchool(name){
   currentOpenSchool = name;
   document.getElementById('sm-name').textContent = name;
   var kv = document.getElementById('sm-kv');
-  var rows = ['办学性质','所在区','区划说明','创办','校训','校区地址','校园规模','师资概况','办学特色','招生范围','通勤参考','住宿','收费口径','指标到校','官网','数据来源','暂缺字段'];
+  var rows = ['办学性质','所在区','区划说明','创办','校训','校区地址','校园规模','师资概况','办学特色','招生范围','中考录取参考','高考成绩','通勤参考','住宿','收费口径','指标到校','官网','资料来源','数据来源','暂缺字段'];
   kv.innerHTML = rows.map(function(r){
     var raw = d[r];
     var v;
     if(r === '暂缺字段'){
-      v = '录取线类数据按合规不提供；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(raw || '') + '）';
+      v = '无官方发布的数据一律不展示（防误导）；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(raw || '') + '）';
     } else if(r === '官网'){
       v = raw ? '<a href="' + hrefEnc(raw) + '" target="_blank" rel="noopener">' + esc(String(raw).replace(/^https?:\/\//, '').replace(/\/$/, '')) + ' ↗</a>' : '暂缺';
+    } else if(r === '资料来源'){
+      var srcs = Array.isArray(raw) ? raw : String(raw || '').split(/[\s,，]+/).filter(function(u){ return /^https?:/.test(u); });
+      v = srcs.length
+        ? srcs.map(function(u, i){ return '<a href="' + hrefEnc(u) + '" target="_blank" rel="noopener">来源' + (i + 1) + ' ↗</a>'; }).join(' · ')
+        : '暂缺';
+    } else if(r === '中考录取参考' || r === '高考成绩'){
+      v = raw ? esc(raw) : '暂无官方发布（按教育部门规定，学校不炒作升学率；无来源数据不予展示，以免误导）';
     } else {
       v = esc(raw || '暂缺');
     }

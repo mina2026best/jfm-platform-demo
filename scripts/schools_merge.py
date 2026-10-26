@@ -63,7 +63,7 @@ ALIAS = {
 }
 
 def add_batch(path):
-    global added
+    global added, enriched, skipped
     try:
         items = json.load(open(path, encoding='utf-8'))
     except FileNotFoundError:
@@ -109,6 +109,90 @@ def add_batch(path):
 
 add_batch(f'{ROOT}/schools_inbox/batch-quxian.json')
 add_batch(f'{ROOT}/schools_inbox/batch-zhongxin.json')
+
+# 3) 补丁批次（batch-zhongxin2）：高考事实追加 + 字段核正
+def resolve_key(k):
+    if k in db: return k
+    nk = re.sub(r'（([^）]*?)区）', r'（\1）', k).replace('（高新区）','（沙坪坝）') if '大学城' in k else re.sub(r'（([^）]*?)区）', r'（\1）', k)
+    if nk in db: return nk
+    base = k.split('（')[0].replace('重庆市','').replace('重庆','',1)
+    cands = [dk for dk in db if dk.split('（')[0].lstrip('重庆') == base]
+    if len(cands) == 1: return cands[0]
+    cands2 = [dk for dk in db if base and base in dk.split('（')[0].replace('重庆市','').replace('重庆','',1)]
+    if len(cands2) == 1: return cands2[0]
+    return None
+
+try:
+    patches = json.load(open(f'{ROOT}/schools_inbox/batch-zhongxin2.json', encoding='utf-8'))
+except FileNotFoundError:
+    patches = []
+pg_ok = pg_skip = 0
+for it in patches:
+    k = it.get('键名', ''); t = resolve_key(k)
+    if not t:
+        errors.append(f'[patch] 未匹配：{k}'); pg_skip += 1; continue
+    if it.get('类型') == 'gaokao':
+        line = f"（{it.get('年度','')}，据{it.get('口径','官方')}）：{it.get('数据','')}"
+        cur = db[t].get('高考成绩')
+        db[t]['高考成绩'] = (cur + '\n' + line) if cur and line not in cur else (line if not cur else cur)
+        src = it.get('来源', '')
+        if src.startswith('http'):
+            db[t]['资料来源'] = sorted(set((db[t].get('资料来源') or []) + [src]))
+        pg_ok += 1
+    elif it.get('类型') == 'field':
+        f, v = it.get('字段'), it.get('值', '')
+        cur = db[t].get(f)
+        if not cur:
+            db[t][f] = v; pg_ok += 1
+        elif cur.strip() != v.strip():
+            if f == '校区地址' and v[:12] not in cur:
+                db[t][f] = cur + '；另一口径/校区：' + v
+                pg_ok += 1
+            # 其余字段已有值且不同 → 保留既有（不覆盖）
+        else:
+            pg_ok += 1
+
+
+# 4) 区县高考批次（batch-gaokao-quxian）→ 高考成绩
+try:
+    gk_items = json.load(open(f'{ROOT}/schools_inbox/batch-gaokao-quxian.json', encoding='utf-8'))
+except FileNotFoundError:
+    gk_items = []
+for it in gk_items:
+    k = it.get('键名', ''); t = resolve_key(k)
+    if not t:
+        errors.append(f'[gaokao] 未匹配：{k}'); continue
+    line = f"（{it.get('年度','')}，据{it.get('口径','官方发布')}）：{it.get('数据','')}"
+    cur = db[t].get('高考成绩')
+    if line in (cur or ''): continue
+    db[t]['高考成绩'] = (cur + '\n' + line) if cur else line
+    src = it.get('来源', '')
+    if src.startswith('http'):
+        db[t]['资料来源'] = sorted(set((db[t].get('资料来源') or []) + [src]))
+    # 有真实数据后更新暂缺说明
+    if '录取线' in (db[t].get('暂缺字段') or ''):
+        db[t]['暂缺字段'] = '近三年分学校实录线（官方未集中发布，逐步补充中）'
+
+# 5) 中考录取参考：全市联招三年线（联招区县学校）+ 万州区线（万州学校）
+lines_json = json.load(open(f'{ROOT}/schools_inbox/batch-lines.json', encoding='utf-8'))
+city = '；'.join(f"{x['年度']}年 {x['内容']}" for x in lines_json['全市联招'])
+city_src = [x['来源'] for x in lines_json['全市联招']]
+qx = {x['区县']: x for x in lines_json.get('区县', [])}
+qx_src = {x['区县']: x['来源'] for x in lines_json.get('区县', [])}
+LIANZHAO_QUS = {'渝中区','江北区','南岸区','沙坪坝区','九龙坡区','大渡口区','渝北区','北碚区','巴南区','两江新区','重庆高新区'}
+for k, v in db.items():
+    qu = v.get('所在区', '')
+    ref = None
+    if qu in LIANZHAO_QUS:
+        ref = f"全市联招统一录取送档线（官方口径，供参考，以当年公布为准）：{city}"
+    elif qu == '万州区':
+        q = qx.get('万州区')
+        ref = f"万州区普高最低录取控制线（2024，区教委划定）：{q['内容']}；全市联招线不适用于非联招区县" if q else None
+    if ref and not v.get('中考录取参考'):
+        v['中考录取参考'] = ref
+        v['资料来源'] = sorted(set((v.get('资料来源') or []) + (city_src if qu in LIANZHAO_QUS else [qx_src.get('万州区','')]))) if (qu in LIANZHAO_QUS or qx_src.get('万州区')) else v.get('资料来源')
+print(f'中考录取参考：已注入 {sum(1 for v in db.values() if v.get("中考录取参考"))} 校')
+print(f'补丁：应用 {pg_ok} | 未匹配 {pg_skip}')
 
 print(f'新增 {added} | 丰富 {enriched} | 跳过 {skipped} | 总量 {len(db)}')
 for e in errors:

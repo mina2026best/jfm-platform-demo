@@ -1339,3 +1339,102 @@ fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/'
    41d56d1..2e7ee4b  main -> main
 PUSH OK
 ===== 完成 2026-10-26 13:50:03 =====
+===== [0/4] 对齐线上 2026-10-27 08:58:51 =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Recv failure: Operation timed out
+[warn] fetch 失败（网络），按本地状态继续
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  华龙网: 8 条候选
+  重庆市教育委员会: 66 条候选
+  重庆招考网: 48 条候选
+  中国教育在线: 70 条候选
+  重庆市教育考试院: 74 条候选
+  上游新闻: 0 条候选
+  重庆市政府网: 6 条候选
+  新华网重庆: 9 条候选
+  教育部: 51 条候选
+  人民网重庆: 4 条候选
+  渝中区教委: 1 条候选
+  重庆日报: 0 条候选
+  华龙网教育: 6 条候选
+  重庆大学新闻网: 36 条候选
+  中国教育新闻网: 229 条候选
+  重庆网络广播电视台: 4 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 210 条（每源限 25） ==
+   · 银龄教师重返讲台，这次带乡村学生探索无人机、机器人！ | https://www.cqnews.net/web/content_1564530919682609152.html
+   · 全国重点网媒看重庆丨看新能源汽车工匠如何培育 记者团探访重庆这所工匠学院 | https://www.cqnews.net/web/content_1564359140474818560.html
+   · 让优质美育资源下沉乡村 2026年“乡村学校美育西部行”在渝启动 | https://www.cqnews.net/web/content_1564354647158886400.html
+   · 万岁山NPC“胖郎中”宣布离职：4个月把了9000人的脉，拒绝景区涨薪挽留，想当一名好中医，“在这里一辈 | https://www.cqnews.net/web/content_1564299476880977920.html
+   · 全新岗位快速涌现 职业教育如何“跟得上”？ | https://www.cqnews.net/web/content_1564251236855554048.html
+   · 孙心然夺得世界网球巡回赛青少年年终总决赛女单冠军 | https://www.cqnews.net/web/content_1563954680281538560.html
+   · 校友发起城市灯光献礼、中英共植友谊树......重庆医科大学这样“庆生” | https://www.cqnews.net/web/content_1563886729978572800.html
+   · 铜梁开展中小学人工智能教育展评活动 | https://www.cqnews.net/web/content_1564344486381948928.html
+   · 刘宴兵到重庆南开中学调研 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261016_16247032.html
+   · 刘宴兵到潼南区调研教育工作 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16217722.html
+   · 市教委举办2026年重庆市普通本科高校教师教学能力提升培训班 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16218705.html
+   · 市教委召开第二期“双高建设计划”工作推进会 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16218698.html
+[link-guard] 丢弃不可达链接 3 条：https://www.eol.cn/news/yaowen/202610/t20261013_2781913.shtm; https://www.eol.cn/news/yaowen/202610/t20261013_2781878.shtm; https://www.eol.cn/news/yaowen/202610/t20261020_2784412.shtm
+[ok] 新增发布 0 条；v2.0 门槛拦截 97 条；collected 累计 68 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：89 条（种子 21 + 采集已审 68）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 16 页：7682991429920139363, 7641052428171948451, 7628920200825556264, 7665946298722180736, 7698203458721788520, 7644783534401424678, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 151 键
+[build] 多页构建 OK · 27 项 · 合计 469 KB
+  · assets/app.903a1a96.css · 102 KB
+  · assets/app.552d8ee4.js · 341 KB
+  · index.html · 36 KB · sha256:b17f8e3a62e7
+  · news.html · 30 KB · sha256:c1ce56f5b355
+  · calendar.html · 27 KB · sha256:b88ac58a6017
+  · policy.html · 30 KB · sha256:6f5c9e0431d2
+  · quiz.html · 17 KB · sha256:eb7a557b1fe7
+  · schools.html · 15 KB · sha256:0cc14ff3d918
+  · compare.html · 17 KB · sha256:3ed0dfbd4387
+  · zy.html · 16 KB · sha256:b06d7b6d1004
+  · forum.html · 17 KB · sha256:cf7fa0173ff4
+  · community.html · 18 KB · sha256:612df81a4792
+  · life.html · 19 KB · sha256:4cb0d762ba82
+  · beans.html · 15 KB · sha256:c3dfa89e49dd
+  · me.html · 19 KB · sha256:9bf459dc7972
+  · plans.html · 16 KB · sha256:b65ab77d24c8
+  · biz.html · 16 KB · sha256:3221722934f7
+  · data-sources.html · 15 KB · sha256:2986ccd1961c
+  · daohang.html · 15 KB · sha256:69330fe3c35b
+  · about.html · 17 KB · sha256:2ad4e0c8f5b1
+  · search.html · 15 KB · sha256:3a05b5a2a606
+  · contact.html · 17 KB · sha256:44f9f1b54cb6
+  · wiki.html · 18 KB · sha256:1202372a7a52
+  · problems.html · 15 KB · sha256:5de921f10cd2
+  · faq.html · 22 KB · sha256:fca126607db3
+  · sitemap.html · 15 KB · sha256:140efdb5a86c
+  · articles/ · 199 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

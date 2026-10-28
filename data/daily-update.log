@@ -1659,3 +1659,26 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 199 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main 5ffad8c] 每日资讯自动更新 2026-10-28
+ Committer: aiagent <agent@minadeMac-mini.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 227 files changed, 553 insertions(+), 448 deletions(-)
+ rename assets/{app.5137d2ac.js => app.ec30bc18.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+PUSH_FAILED：本地 5ffad8c 未上线（线上 b65cd89）——查分叉或网络
+===== 失败 2026-10-28 08:18:05 =====

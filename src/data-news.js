@@ -1,6 +1,20 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "2026年录取新变局下，高三生如何定位志愿？",
+    "url": "https://www.eol.cn/kaoshi/gaokao/bkzn/202610/t20261028_2787550.shtml",
+    "src": "中国教育在线",
+    "cat": "升学动态",
+    "sum": "2026年北京高考录取数据变化显示，选科赛道在分化，专业组也拆得越来越细，很多组的投档线(位次)已经不能简单参照往年数据了。物化组系统性走强，而不限选科的赛道竞争压力减轻。",
+    "stages": [
+      "高考志愿"
+    ],
+    "date": "2026-10-28",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "大渡口区开展禁毒宣传进校园活动",
     "url": "http://cq.people.com.cn/n2/2026/1021/c365407-41728774.html",
     "src": "人民网重庆",
@@ -1094,4 +1108,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-28 13:48", "seed": 21, "collected": 68, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-29 06:50", "seed": 21, "collected": 69, "fetchedPending": 0};

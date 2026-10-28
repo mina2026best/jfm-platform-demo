@@ -1781,3 +1781,120 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 199 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main d3e9bd8] 每日资讯自动更新 2026-10-28
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 226 files changed, 324 insertions(+), 225 deletions(-)
+ rename assets/{app.3c2a084b.js => app.bfd28d8a.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Failed to connect to github.com port 443 after 75020 ms: Couldn't connect to server
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Recv failure: Operation timed out
+   1dff558..d3e9bd8  main -> main
+PUSH OK
+===== 完成 2026-10-28 13:54:25 =====
+===== [0/4] 对齐线上 2026-10-29 06:50:39 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆市教育考试院: 75 条候选
+  重庆市教育委员会: 66 条候选
+  人民网重庆: 3 条候选
+  重庆招考网: 49 条候选
+  华龙网: 4 条候选
+  上游新闻: 0 条候选
+  中国教育在线: 62 条候选
+  重庆日报: 0 条候选
+  重庆市政府网: 5 条候选
+  新华网重庆: 7 条候选
+  教育部: 50 条候选
+  渝中区教委: 1 条候选
+  重庆大学新闻网: 41 条候选
+  华龙网教育: 6 条候选
+  中国教育新闻网: 219 条候选
+  重庆网络广播电视台: 4 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 202 条（每源限 25） ==
+   · 2027年拟在渝招生普通高校招生专业（类）选考科目说明及要求 | https://www.cqksy.cn/web/article/2025-02/21/content_6474.html
+   · 要闻 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqksy.cn/web/article/2026-10/20/content_7135.html
+   · 要闻 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqksy.cn/web/article/2026-10/19/content_7134.html
+   · 要闻 2026—2027学年度第一学期普通高中学业水平合格性考试及报名有关安排的公告 2026-10-0 | https://www.cqksy.cn/web/article/2026-10/08/content_7132.html
+   · 要闻 重庆市2027年全国硕士研究生招生考试报名公告 2026-09-30 | https://www.cqksy.cn/web/article/2026-09/30/content_7131.html
+   · 动态 严护考纪 温情相伴 ——忠县扎实做好10月高等教育自学考试组考工作 2026-10-28 | https://www.cqksy.cn/web/article/2026-10/28/content_7141.html
+   · 动态 从严从细促规范 全力以赴护平安 ——梁平顺利完成2026年成人高校招生全国统一考试和下半年高等教育 | https://www.cqksy.cn/web/article/2026-10/28/content_7139.html
+   · 动态 2026年成人高考忠县考区组考工作圆满结束 2026-10-26 | https://www.cqksy.cn/web/article/2026-10/26/content_7138.html
+   · 2027年重庆市高等职业教育分类考试试卷结构及考试说明 | https://www.cqksy.cn/web/article/2026-09/29/content_7130.html
+   · 2024年拟在渝招生普通高校招生专业（类）选考科目要求说明 | https://www.cqksy.cn/web/article/2021-12/23/content_6794.html
+   · 重庆市普通高校艺术类本科招生专业与本市统考科类对应关系表（2027） | https://www.cqksy.cn/uploadFile/infopub/202609/2097960785686306816.pdf
+   · 重庆市2027年全国硕士研究生招生考试报名公告 | https://www.cqksy.cn/web/article/2026-09/30/content_7131.html
+[ok] 新增发布 1 条；v2.0 门槛拦截 99 条；collected 累计 69 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：90 条（种子 21 + 采集已审 69）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 18 页：7682991429920139363, 7644783534401424678, 7698203458721788520, 7665946298722180736, 7641052428171948451, 7628920200825556264, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 151 键
+[build] 多页构建 OK · 27 项 · 合计 469 KB
+  · assets/app.903a1a96.css · 102 KB
+  · assets/app.376a6f5e.js · 341 KB
+  · index.html · 36 KB · sha256:f237d86b7e83
+  · news.html · 30 KB · sha256:9b386fef0151
+  · calendar.html · 27 KB · sha256:116257977d80
+  · policy.html · 30 KB · sha256:03ae6579c14b
+  · quiz.html · 17 KB · sha256:f3aebe11d213
+  · schools.html · 15 KB · sha256:97f6ce2ed701
+  · compare.html · 17 KB · sha256:eef6a051374e
+  · zy.html · 16 KB · sha256:c939836e4fab
+  · forum.html · 17 KB · sha256:11e1cacfa3ab
+  · community.html · 18 KB · sha256:c417396f4cb5
+  · life.html · 19 KB · sha256:169c82b88ed1
+  · beans.html · 15 KB · sha256:c910e12d0091
+  · me.html · 19 KB · sha256:8d25f764c32c
+  · plans.html · 16 KB · sha256:0321ba01d493
+  · biz.html · 16 KB · sha256:4c8450695131
+  · data-sources.html · 15 KB · sha256:839fdf7239d4
+  · daohang.html · 15 KB · sha256:9bec584139c3
+  · about.html · 17 KB · sha256:033f079629c1
+  · search.html · 15 KB · sha256:01b5f9d5fac7
+  · contact.html · 17 KB · sha256:fcffa99bbad0
+  · wiki.html · 18 KB · sha256:b424c16d9c60
+  · problems.html · 15 KB · sha256:37b5b48f9ef9
+  · faq.html · 22 KB · sha256:71d6213943b6
+  · sitemap.html · 15 KB · sha256:c9604f5afe32
+  · articles/ · 199 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

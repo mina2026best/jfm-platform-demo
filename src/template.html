@@ -658,12 +658,12 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
         </div>
       </div>
       <aside class="term">
-        <h3>高频术语 · 人话词典（47 条）</h3>
+        <h3>高频术语 · 人话词典（49 条）</h3>
           <input id="term-q" type="search" placeholder="搜术语，如「转学」「摇号」…" aria-label="搜索术语" style="width:100%;margin:4px 0 10px;padding:9px 14px;border:1.5px solid var(--line2);border-radius:99px;font-family:var(--sans);font-size:13.5px;background:var(--bg);color:var(--ink)">
           <div class="fact-filter" id="term-filter" style="margin-bottom:12px">
-            <button class="ff on" data-tf="all" onclick="filterTerms('all')">全部（47）</button>
+            <button class="ff on" data-tf="all" onclick="filterTerms('all')">全部（49）</button>
             <button class="ff" data-tf="入学" onclick="filterTerms('入学')">入学（17）</button>
-            <button class="ff" data-tf="升学" onclick="filterTerms('升学')">升学（22）</button>
+            <button class="ff" data-tf="升学" onclick="filterTerms('升学')">升学（24）</button>
             <button class="ff" data-tf="政策" onclick="filterTerms('政策')">政策（7）</button>
             <button class="ff" data-tf="生活" onclick="filterTerms('生活')">生活（2）</button>
           </div>
@@ -715,6 +715,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
           <dt data-tg="升学">线差</dt><dd>分数 − 批次线。跨年比较用线差比绝对分稳（试卷难度波动被抵消）；填报时把你的线差与目标院校近三年「投档线差」对照。</dd>
           <dt data-tg="升学">选科要求</dt><dd>高校专业对首选/再选科目的要求（重庆 3+1+2）。高一选科前必须查目标专业——阳光高考平台可查全部专业的选科要求。</dd>
           <dt data-tg="政策">体检受限</dt><dd>《普通高等学校招生体检工作指导意见》列出的专业受限情形（色盲色弱、视力、身高等）。体检结论限报的专业，填报了也可能退档。</dd>
+          <dt data-tg="升学">中考体育</dt><dd>中考体育分数计入升学总分。2026 年重庆为三项：立定跳远、掷实心球、1 分钟跳绳，总分 50 分（15/15/20）；项目与分值逐年微调，以当年市教委方案为准。</dd>
+          <dt data-tg="升学">中考复读</dt><dd>重庆公办普通高中/初中不举办复读班（市教委明令）；往届生一般在 4 月下旬以社会考生身份报名下一年中考，但指标到校等资格可能受限——报名前先向区教委核实当年细则。</dd>
         </dl>
       </aside>
     </div>
@@ -783,6 +785,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
           <b>时间轴：</b>5 年级末评估（对口/民办/跨区三路线）→ 6 年级上学期盯民办简章 → 下学期 4–5 月区平台报名（公民同招）→ 6 月摇号/录取 → 7 月统筹补录。<br/>
           <b>必办三件：</b>① 核对学籍与户籍一致性；② 决定是否参加民办摇号（双轨准备材料）；③ 关注指标到校资格的学籍连续性要求。<br/>
           <b>常见误区：</b>押注民办不备公办后路；忽视「学位锁定」与「六年一户」；以为摇号可以多校同时报。<br/>
+          <b>新初一衔接：</b>入学后实行均衡编班（阳光分班），原则上不设重点班；分班考多考小学基础，考前两周回归课本错题即可；初一上学期重点建「分科错题本」与预习节奏，比报班更能打底。<br/>
           <b>工具入口：</b><a href="compare.html">择校对比器</a> · <a href="policy.html">摇号/公民同招词条</a> · <a href="community.html">长幼随学实测帖</a><br/>
           <b>官方入口：</b><a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html" target="_blank" rel="noopener">市教委义务教育入学通知原文 ↗</a> · <a href="https://zwykb.cq.gov.cn/" target="_blank" rel="noopener">渝快办（报名一件事） ↗</a>
         </div>
@@ -792,7 +795,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
         <div class="a">
           <b>时间轴：</b>初三上·期中定位 → 3 月中考报名+体检 → 4 月体育统一测试 → 5 月志愿宣讲+模拟填报 → 6 月中考 → 6 月底出分填志愿 → 7 月分批录取 + 征集志愿。<br/>
           <b>必办三件：</b>① 指标到校资格核对（学籍连续性）；② 志愿三模拟（一模粗排/细则细排/填报前微调）；③ 盯征集志愿公告。<br/>
-          <b>常见误区：</b>只看总分不看校内位次；指标到校=稳上重点；忽略体育过程性分值的积累期。<br/>
+          <b>常见误区：</b>只看总分不看校内位次；指标到校=稳上重点；忽略体育过程性分值的积累期；想复读才了解政策——公办校不举办复读班，往届生以社会考生报名且指标到校等资格可能受限，务必先向区教委核实。<br/>
+          <b>中考体育：</b>2026 年为三项（立定跳远、掷实心球、1 分钟跳绳），总分 50 分计入升学（15/15/20）；耐力与爆发力靠日常积累，初三上对照当年方案逐项模拟。<br/>
           <b>工具入口：</b><a href="zy.html">位次换算</a> · <a href="compare.html">高中对比</a> · <a href="calendar.html">节点提醒</a> · <a href="policy.html">批次与征集志愿条目</a><br/>
           <b>官方入口：</b><a href="https://www.cqksy.cn/site/techield/zhongkao/" target="_blank" rel="noopener">考试院中考栏目（报名/成绩/录取） ↗</a> · <a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html" target="_blank" rel="noopener">中考招生通知原文 ↗</a>
         </div>
@@ -1007,6 +1011,10 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     <div class="fact-filter" id="school-region-filter" aria-label="按区县筛选" style="margin-bottom:10px"></div>
     <p class="sc-stats" id="sc-stats"></p>
     <div class="school-grid" id="school-grid"></div>
+    <h3 class="qug-h" style="margin-top:26px">民办摇号 · 怎么查与防骗</h3>
+    <div id="yh-guide"></div>
+    <h3 class="qug-h" style="margin-top:26px">划片公告速查（9 区 · 2026/2025 官方直链）</h3>
+    <div id="pq-guide"></div>
     <h3 class="qug-h">区县入学指南 · 官方入口（11 区）</h3>
     <p class="sec-desc">各区招生细则由辖区教委发布：点击直达区政府/区教委官方页面，逐区附办理要点。入口于 2026-09-30 全部实测可达。</p>
     <div class="qug-grid" id="qu-guide"></div>
@@ -1031,6 +1039,43 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     </div>
     <div id="zy-result" aria-live="polite"><div class="cmp-empty">输入分数后点击「算线差 · 查位次」——同时得到 2026 精确位次（一分一段表）、三线差值与近三年对照。</div></div>
       <div id="zy-years3"></div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:34px 0 4px">志愿草表 · 冲稳保模拟（96 格）</h3>
+    <p class="sec-desc">输入分数，按「位次距离」从已核验的大学库中分档出冲/稳/保候选，点选加入草表；数据与口径同大学库，<b>辅助草稿、非录取预测</b>，正式填报以市教育考试院志愿系统为准。</p>
+    <div class="zy-tools">
+      <label>科类</label>
+      <select id="cb-subject" aria-label="草表科类"><option value="wl">物理类</option><option value="ls">历史类</option></select>
+      <label>分数</label>
+      <input id="cb-score" type="number" min="200" max="750" placeholder="如 580" aria-label="草表分数" />
+      <button onclick="cbRun()">生成候选</button>
+      <button class="cb-ghost" onclick="cbClear()">清空草表</button>
+      <button class="cb-ghost" onclick="cbPrint()">打印草表</button>
+    </div>
+    <div id="cb-suggest" aria-live="polite"></div>
+    <div id="cb-sheet" class="cb-sheet"></div>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:34px 0 4px">高一选科 · 专业门类选考要求速查（指引级）</h3>
+    <p class="sec-desc">依据教育部《普通高校本科招生专业选考科目要求指引（通用版）》整理；<b>同一专业不同学校可能不同</b>，逐校逐专业请以阳光高考平台查询为准。</p>
+    <div class="dx-twrap"><table class="art-table xk-table"><thead><tr><th>学科门类</th><th>选考要求（主流口径）</th><th>常见专业举例</th></tr></thead><tbody>
+      <tr><td>工学</td><td><b class="xk-hard">物理＋化学（基本硬性）</b></td><td>计算机、电子信息、机械、土木、材料</td></tr>
+      <tr><td>医学</td><td><b class="xk-hard">物理＋化学（基本硬性）</b></td><td>临床、口腔、药学、医学检验</td></tr>
+      <tr><td>理学</td><td>多数物理＋化学；心理/地理类部分不限</td><td>数学、物理、化学、生物、心理学</td></tr>
+      <tr><td>农学</td><td>多数物理＋化学</td><td>农学、园艺、动物医学、水产</td></tr>
+      <tr><td>经济学</td><td>多数不限；金融工程/精算部分要物理</td><td>金融学、经济学、国际经济与贸易</td></tr>
+      <tr><td>管理学</td><td>多数不限；管理科学与工程类要物理</td><td>会计、工商管理、人力资源管理</td></tr>
+      <tr><td>文学</td><td>不限</td><td>中国语言文学、外国语言文学、新闻传播</td></tr>
+      <tr><td>历史学</td><td>多数不限；考古学类部分建议化学</td><td>历史学、考古学、文物与博物馆</td></tr>
+      <tr><td>法学</td><td>不限（政治学类建议政治）</td><td>法学、政治学、社会学、公安学类</td></tr>
+      <tr><td>教育学</td><td>多数不限；教育技术学部分要物理</td><td>教育学、学前教育、体育教育</td></tr>
+      <tr><td>哲学</td><td>不限</td><td>哲学、逻辑学、宗教学</td></tr>
+      <tr><td>艺术学</td><td>不限（按艺术类批次录取）</td><td>音乐、美术、设计、播音</td></tr>
+    </tbody></table></div>
+    <p class="dx-tnote">依据：教育部《普通高校本科招生专业选考科目要求指引（通用版）》（2024 年招生起施行，理工农医类绝大多数要求「物理＋化学」双选）；逐校逐专业以<a class="art-link" href="https://gaokao.chsi.com.cn/" target="_blank" rel="noopener">阳光高考平台</a>查询为准（反爬站点请用浏览器打开）。2026-10-30 编辑部整理核验。</p>
+    <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:34px 0 4px">特殊类型招生 · 三条通道对照</h3>
+    <div class="dx-twrap"><table class="art-table xk-table"><thead><tr><th>通道</th><th>适合谁</th><th>报名窗口</th><th>要点</th></tr></thead><tbody>
+      <tr><td><b>强基计划</b></td><td>基础学科拔尖、有志长期科研</td><td>每年 4 月报名（阳光高考统一入口）</td><td>39 所 985 试点；高考成绩占比 ≥85%，校测考学科能力，录取在 7 月 5 日前完成；入学后不可转专业到非强基领域</td></tr>
+      <tr><td><b>综合评价</b></td><td>综合素养均衡、省内有试点校的</td><td>报名多在 4 月 30 日前后截止，校测在高考后</td><td>按「高考+校测+学业水平」综合分录取；在渝试点校有限，逐年核对当年简章</td></tr>
+      <tr><td><b>高校专项 / 地方专项</b></td><td>农村户籍、符合条件的考生</td><td>高校专项申报多在 4 月；地方专项随志愿填报</td><td><b>2026 年起高校专项不再由高校组织报名/审核/校测</b>，按省级统一申报与录取；需农村户籍连续 3 年＋县中连续 3 年学籍实际就读。录取线通常低于普通批，是符合条件考生的实惠通道</td></tr>
+    </tbody></table></div>
+    <p class="dx-tnote">要点为编辑部整理（2026-10-30 核验，来源：阳光高考平台 2026 年强基报名通知、新华网 2026 强基报道、山东省教育厅综评口径、各校 2026 年招生简章）；每年细则微调，报名前以当年简章原文为准。</p>
     <h3 style="font-family:var(--serif);font-size:19px;color:var(--navy);margin:30px 0 4px">升学不止一条路</h3>
     <p class="sec-desc">「一半孩子上不了普高」是被放大的误读——全国约 65% 学生升入普高（权威口径已核验，见数据来源页）。从初中起，就值得把这几条路径都摆上桌看：</p>
     <div class="pm-tabs">
@@ -1048,11 +1093,33 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   </div>
 </section>
 
+<section id="gaozhong">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">3.4 · 高中与联招库</span><h2>六年联招线，看清普高门槛走向</h2></div>
+    <p class="sec-desc">重庆市中考「联招」统一录取送档线 2021–2026 六年趋势＋头部高中逐校录取线（逐条标注来源）＋统招与指标到校双轨口径；不做排名、不构成录取预测。</p>
+    <div class="cmp-note dx-kv" style="margin-bottom:14px"><b>先读口径（重要）</b>　「联招统一录取送档线」＝重庆市教委每年公布的全市统一门槛（低于此线无法参与联招录取），≠各校录取线；<b>指标到校</b>占市级重点高中招生计划 70%（渝教基函口径），录取口径与统招不同，校内竞争、通常低于统招线；逐校录取线以当年报道/校招办公布为准，<b>未核验的年份如实留空</b>。数据源：重庆市教委历年公布（华龙网/新浪/上游新闻等转载）＋各校招生栏（逐条标注）。</div>
+    <div class="gz-trend" id="gz-trend"></div>
+    <div id="gz-songdang-table"></div>
+    <div class="cmp-note" style="margin:14px 0"><b>双轨口径怎么用</b>　统招线看的是「全区排位竞争」；指标到校看的是「校内排位」——孩子在年级前列，重点研究名额分配；在普高线边缘，联招送档线与征集志愿是生命线。统招线逐年下降≠变好考（报考人数、招生计划、试卷难度都在变），跨年请结合「位次」与当年招生计划看。目标校日常口碑与在读体验，到<a href="forum.html">家长论坛</a>听在读家长说。</div>
+    <h3 class="dx-h3">头部高中 · 历年录取线（逐校核验行）</h3>
+    <p class="sec-desc">仅收录能回溯到来源的核验行；空格＝该年未核验到公开口径，不估算、不补数。线别口径（统招/联招/区内）在格内标注。</p>
+    <div class="dx-twrap"><table class="art-table gz-table" id="gz-school-table"></table></div>
+    <p class="dx-tnote" id="gz-src-note"></p>
+    <h3 class="dx-h3">数据说明与边界</h3>
+    <div class="dx-notes">
+      <div><b>口径。</b>联招送档线＝全市统一门槛（市教委历年公布原值）；逐校线＝各校当年录取的最低分（口径各异：统招/联招/区内，逐格标注）。指标到校不在此表（按校内排序分配，无全市统一线）。</div>
+      <div><b>来源。</b>送档线：重庆市教委历年公布（华龙网/新浪新闻/上游新闻/澎湃等转载，逐条可回溯）；逐校线：各校招生栏与主流媒体年度报道（逐格标注来源，2026-10-30 核验）。数据每年 6–7 月录取季更新。</div>
+      <div><b>边界。</b>本页为历史公开信息整理，<b>不构成录取预测</b>；不做学校排名；区县口径与联招口径不同，跨口径比较无意义。发现数字可疑？<a href="contact.html">纠错通道</a>直达编辑部。</div>
+    </div>
+  </div>
+</section>
+
 <section id="daxue">
   <div class="wrap">
     <div class="sec-head"><span class="no">3.6 · 大学与专业库</span><h2>近五年在渝投档线，一眼看清门槛走向</h2></div>
     <p class="sec-desc">C9 / 985 / 211 共 <b>__DX_ALL__</b> 个在渝招生实体：本科批投档线五年趋势（2022–2026）＋ 一流学科 ＋ 就业数据 ＋ 官网直达，逐条标注来源与核验日期；不做排名、不构成录取预测。</p>
-    <div class="cmp-note dx-kv" style="margin-bottom:14px"><b>先读口径（重要）</b>　「投档线」＝重庆市普通类<b>本科批</b>平行志愿<b>投档最低分</b>，取该校当年全部普通类专业组中的最低值（中外合作 / 民族班 / 预科等特殊类型不计入，展开明细可见）；<b>分校与医学部独立招生、单独列示</b>；「位次」为对应年全市一分一段表的最低位次——跨年比较看位次与线差，别只看绝对分。数据源：掌上高考 · 中国教育在线院校数据集（2026-10-30 采集核验，逐校可回溯）＋重庆市教委历年批次线（新华网重庆 2026-06-25 已核验）。</div>
+    <div class="cmp-note dx-kv" style="margin-bottom:14px"><b>先读口径（重要）</b>　「投档线」＝重庆市普通类<b>本科批</b>平行志愿<b>投档最低分</b>，取该校当年全部普通类专业组中的最低值（中外合作 / 民族班 / 预科等特殊类型不计入，展开明细可见）；<b>分校与医学部独立招生、单独列示</b>；「位次」为对应年全市一分一段表的最低位次——跨年比较看位次与线差，别只看绝对分；「在渝计划」为该校当年全部专业组计划合计（含中外合作等），看盘子增减。数据源：掌上高考 · 中国教育在线院校数据集（2026-10-30 采集核验，逐校可回溯）＋重庆市教委历年批次线（新华网重庆 2026-06-25 已核验）。</div>
+    <div class="dx-favbar" id="dx-favbar"></div>
     <div class="dx-legend">
       <span class="lg"><span class="sw"></span>物理类</span>
       <span class="lg"><span class="sw ls"></span>历史类</span>
@@ -1090,6 +1157,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     <p class="dx-count" id="dx-count" role="status" aria-live="polite"></p>
     <div class="dx-grid" id="dx-grid"></div>
     <div class="cmp-empty" id="dx-empty" hidden>没有符合筛选条件的院校——试试放宽层次或清空搜索词。</div>
+    <div class="dx-cmp-panel" id="dx-cmp-panel"></div>
     <h3 class="dx-h3">数据说明与边界</h3>
     <div class="dx-notes">
       <div><b>口径。</b>主口径 = 普通类本科批平行志愿投档最低分（普通专业组最低值）。部分军校（国防科大、海军军医大学、空军军医大学）主要在提前批招生，对应年份标注「提前批 B 段（平行志愿）」口径；无公开数据的年份如实断线，不估算、不补数。</div>
@@ -1565,6 +1633,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
           <li><a href="#compare">择校对比</a></li>
           <li><a href="#zy">志愿与路径</a></li>
           <li><a href="#daxue">大学与专业库</a></li>
+          <li><a href="#gaozhong">高中与联招库</a></li>
           <li><a href="#forum">家长论坛</a></li>
           <li><a href="#community">家长社区</a></li>
           <li><a href="#learn">家长学堂</a></li>

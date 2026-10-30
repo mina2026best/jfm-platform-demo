@@ -21,7 +21,7 @@ function mountArt(){
 }
 
 /* ---------- v0.30：搜索页 / FAQ / 热点榜 ---------- */
-var HOT_WORDS = ['指标到校', '三对口', '军检线', '摇号', '随迁子女', '长幼随学', '南开中学', '特招线', '陪读租房', '材料清单'];
+var HOT_WORDS = ['指标到校', '三对口', '特招线', '摇号', '联招线', '选科', '清华大学', '西南大学', '长幼随学', '陪读租房'];
 function hotWordsHTML(){
   return HOT_WORDS.map(function(w){
     return '<a href="search.html?q=' + encodeURIComponent(w) + '">' + esc(w) + '</a>';

@@ -35,6 +35,22 @@ function dxSpan(s, cat){
   return { d: last[0] - first[0], y0:first[0], y1:last[0] };
 }
 
+function dxPlanChip(s){
+  /* 在渝招生计划（2026 与 2025 同科类合计对比；无采集件则不显示） */
+  var p = s.plan;
+  if(!p) return '';
+  function total(y){
+    var o = p[y]; if(!o) return null;
+    var n = (o.wl || 0) + (o.ls || 0);
+    return n > 0 ? n : null;
+  }
+  var cur = total('2026'), prev = total('2025');
+  if(!cur) return '';
+  var d = (cur && prev) ? (cur - prev) : null;
+  var cls = d === null ? '' : (d >= 0 ? 'up' : 'down');
+  return '<span>在渝计划 <b class="mono">' + cur + '</b><em>2026' + (d !== null ? ' · 较25年 ' + (d >= 0 ? '+' : '') + d : '') + '</em></span>';
+}
+
 function dxChart(s){
   var W = 320, H = 118, PL = 30, PR = 8, PT = 12, PB = 20;
   var vals = [];
@@ -143,11 +159,15 @@ function dxCard(s){
     }
   }
   var head = '<div class="dx-head">' + dxBadge(s) + '<h4>' + esc(s.name) + '</h4>'
+    + '<button class="dx-mini' + (dxCmpLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxCmpToggle(\'' + s.id + '\')" aria-label="加入对比">对比</button>'
+    + '<button class="dx-mini' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxFavToggle(\'' + s.id + '\', this)" aria-label="关注">' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? '★' : '☆') + '</button>'
+    + '<button class="dx-mini" onclick="dxPrintCard(\'' + s.id + '\')" aria-label="打印该校卡片">打印</button>'
     + (s.web ? '<a class="dx-web" href="' + esc(s.web) + '" target="_blank" rel="noopener">官网 ↗</a>' : '') + '</div>';
   var meta = '<p class="dx-meta">' + esc(s.city) + ' · ' + esc(s.type || '—') + (s.parent ? ' · 母体：' + esc(s.parent) : '') + '</p>';
   var stats = '<div class="dx-stats">'
     + '<span>最新物理 ' + (lw ? '<b class="mono">' + lw.rec[0] + '</b><em>' + lw.y + (lw.rec[1] ? ' · 位次 ' + lw.rec[1].toLocaleString() : '') + '</em>' : '—') + '</span>'
     + '<span>最新历史 ' + (ll ? '<b class="mono">' + ll.rec[0] + '</b><em>' + ll.y + (ll.rec[1] ? ' · 位次 ' + ll.rec[1].toLocaleString() : '') + '</em>' : '—') + '</span>'
+    + dxPlanChip(s)
     + '<span>五年变化 物理' + chg(sw) + ' · 历史' + chg(sl) + '</span></div>';
   var chart = s.gnote ? '<div class="dx-gnote">' + esc(s.gnote) + '</div>' : dxChart(s);
   return '<article class="dx-card" id="dx-' + esc(s.id) + '">' + head + meta + chart + stats
@@ -195,7 +215,16 @@ function dxRender(){
   var cnt = document.getElementById('dx-count');
   if(cnt) cnt.innerHTML = '符合条件 <b>' + list.length + '</b> / ' + DAXUE.schools.length + ' 个在渝招生实体' + (DX.q ? ' · 关键词「' + esc(DX.q) + '」' : '');
   var empty = document.getElementById('dx-empty');
-  if(empty) empty.hidden = list.length > 0;
+  if(empty){
+    if(list.length){ empty.hidden = true; }
+    else {
+      var near = DAXUE.schools.filter(function(s){ return DX.city ? s.city === DX.city : s.tier === '985'; }).slice(0, 3);
+      empty.hidden = false;
+      empty.innerHTML = '没有符合筛选条件的院校——试试放宽层次或清空搜索词。'
+        + (near.length ? '相近院校：' + near.map(function(s){ return '<a href="daxue.html?u=' + encodeURIComponent(s.name) + '">' + esc(s.name) + '</a>'; }).join('、') : '');
+    }
+  }
+  dxFavRenderBar(); dxCmpRenderPanel();
   grid.innerHTML = list.map(dxCard).join('');
 }
 
@@ -268,3 +297,133 @@ function dxInit(){
   }catch(e){}
   dxRender();
 }
+
+/* ---------- v0.93 志愿草表 · 冲稳保模拟（辅助草稿、非预测） ---------- */
+var CB_COLS = ['冲', '稳', '保'];
+function cbRankOf(sub, score){
+  if(typeof SECTION2026 === 'undefined') return null;
+  var sec = SECTION2026[sub]; if(!sec) return null;
+  if(sec[String(score)]) return sec[String(score)];
+  var s = score;
+  while(s >= 180 && !sec[String(s)]) s--;
+  return sec[String(s)] || null;
+}
+function cbLatestRank(s, cat){
+  var years = ['2026','2025','2024'];
+  for(var i = 0; i < years.length; i++){
+    var rec = s.L[cat] && s.L[cat][years[i]];
+    if(rec && rec[1]) return { rank: rec[1], year: years[i], score: rec[0] };
+  }
+  return null;
+}
+function cbRun(){
+  var sub = document.getElementById('cb-subject').value;
+  var v = parseInt(document.getElementById('cb-score').value, 10);
+  var box = document.getElementById('cb-suggest');
+  if(!v || v < 200 || v > 750){ box.innerHTML = '<div class="cmp-empty">请输入 200–750 之间的分数。</div>'; return; }
+  var R = cbRankOf(sub, v);
+  if(!R){ box.innerHTML = '<div class="cmp-empty">该分数暂无一分一段精确位次，请调整分数（或直接用上方位次工具核对）。</div>'; return; }
+  var groups = { '冲': [], '稳': [], '保': [] };
+  DAXUE.schools.forEach(function(s){
+    if(s.gnote) return;
+    var lr = cbLatestRank(s, sub);
+    if(!lr) return;
+    var ratio = lr.rank / R;
+    var col = ratio <= 0.88 ? '冲' : (ratio <= 1.06 ? '稳' : (ratio <= 1.6 ? '保' : null));
+    if(col) groups[col].push({ s: s, lr: lr, ratio: ratio });
+  });
+  CB_COLS.forEach(function(c){ groups[c].sort(function(a, b){ return b.ratio - a.ratio; }); groups[c] = groups[c].slice(0, 10); });
+  var colDesc = { '冲': '校线位次明显优于你，需要奇迹或招生计划波动', '稳': '校线位次与你基本同档，主力区间', '保': '校线位次明显低于你，安全垫' };
+  box.innerHTML = '<p class="dx-count">你的 ' + (sub === 'wl' ? '物理' : '历史') + '类 ' + v + ' 分 → 2026 位次 <b>' + R.toLocaleString() + '</b> 名。分档口径：以各校最近年份最低位次与你的位次之比划档（冲 ≤0.88 / 稳 0.88–1.06 / 保 1.06–1.6）。<b>辅助草稿，非录取预测。</b></p>'
+    + '<div class="cb-cols">' + CB_COLS.map(function(c){
+      return '<div class="cb-col"><b class="cb-t' + (c === '冲' ? ' hot' : (c === '保' ? ' safe' : '')) + '">' + c + '</b><i>' + colDesc[c] + '</i>'
+        + (groups[c].length ? groups[c].map(function(g){
+          return '<div class="cb-chip"><a href="daxue.html?u=' + encodeURIComponent(g.s.name) + '">' + esc(g.s.name) + '</a><small>' + g.lr.year + ' 位次 ' + g.lr.rank.toLocaleString() + '</small>'
+            + '<button onclick="cbAdd(\'' + c + '\',\'' + esc(g.s.name) + '\')" aria-label="加入' + c + '区">＋' + c + '</button></div>';
+        }).join('') : '<em>该区间暂无候选（可放宽分数或科类）</em>') + '</div>';
+    }).join('') + '</div>';
+  cbRenderSheet();
+}
+function cbLoad(){ try{ return JSON.parse(localStorage.getItem('dx_caobiao') || '{"冲":[],"稳":[],"保":[]}'); }catch(e){ return { '冲': [], '稳': [], '保': [] }; } }
+function cbSave(d){ try{ localStorage.setItem('dx_caobiao', JSON.stringify(d)); }catch(e){} }
+function cbAdd(col, name){
+  var d = cbLoad();
+  if(d[col].indexOf(name) < 0 && d[col].length < 32){ d[col].push(name); cbSave(d); }
+  cbRenderSheet();
+}
+function cbRemove(col, idx){
+  var d = cbLoad(); d[col].splice(idx, 1); cbSave(d); cbRenderSheet();
+}
+function cbClear(){
+  if(!confirm('清空草表所有已选院校？')) return;
+  cbSave({ '冲': [], '稳': [], '保': [] }); cbRenderSheet();
+}
+function cbRenderSheet(){
+  var box = document.getElementById('cb-sheet'); if(!box) return;
+  var d = cbLoad();
+  var any = CB_COLS.some(function(c){ return d[c].length; });
+  box.innerHTML = !any ? '<div class="cmp-empty">草表为空——上方生成候选后点「＋冲/＋稳/＋保」加入；草表存本机，可打印带去填报。</div>'
+    : '<div class="cb-cols cb-print-area">' + CB_COLS.map(function(c){
+      return '<div class="cb-col"><b class="cb-t' + (c === '冲' ? ' hot' : (c === '保' ? ' safe' : '')) + '">' + c + '（' + d[c].length + '）</b>'
+        + (d[c].length ? '<ol class="cb-list">' + d[c].map(function(n, i){
+          return '<li><span>' + esc(n) + '</span><button onclick="cbRemove(\'' + c + '\',' + i + ')" aria-label="移除">×</button></li>';
+        }).join('') + '</ol>' : '<em>空</em>') + '</div>';
+    }).join('') + '</div>';
+}
+function cbPrint(){ window.print(); }
+
+/* ---------- v0.93 大学收藏 / 对比 / 打印单校 / 空态引导 ---------- */
+function dxFavLoad(){ try{ return JSON.parse(localStorage.getItem('dx_fav') || '[]'); }catch(e){ return []; } }
+function dxFavSave(a){ try{ localStorage.setItem('dx_fav', JSON.stringify(a)); }catch(e){} }
+function dxFavToggle(id, btn){
+  var f = dxFavLoad(), i = f.indexOf(id);
+  if(i < 0){ f.push(id); btn.textContent = '★ 已关注'; btn.classList.add('on'); }
+  else { f.splice(i, 1); btn.textContent = '☆ 关注'; btn.classList.remove('on'); }
+  dxFavSave(f); dxFavRenderBar();
+}
+function dxFavRenderBar(){
+  var bar = document.getElementById('dx-favbar'); if(!bar) return;
+  var f = dxFavLoad();
+  if(!f.length){ bar.innerHTML = ''; return; }
+  var names = f.map(function(id){
+    var s = DAXUE.schools.find(function(x){ return String(x.id) === String(id); });
+    return s ? '<a class="cb-chip-inline" href="#dx-' + s.id + '">' + esc(s.name) + '</a>' : '';
+  }).join('');
+  bar.innerHTML = '<span class="dx-flab">我的关注</span>' + names + ' <button class="cb-ghost" onclick="dxFavSave([]);dxFavRenderBar();dxRender();">清空</button>';
+}
+function dxCmpLoad(){ try{ return JSON.parse(localStorage.getItem('dx_cmp') || '[]'); }catch(e){ return []; } }
+function dxCmpSave(a){ try{ localStorage.setItem('dx_cmp', JSON.stringify(a)); }catch(e){} }
+function dxCmpToggle(id){
+  var a = dxCmpLoad(), i = a.indexOf(id);
+  if(i < 0){ if(a.length >= 3){ toast('最多同时对比 3 所'); return; } a.push(id); } else a.splice(i, 1);
+  dxCmpSave(a); dxRender(); dxCmpRenderPanel();
+}
+function dxCmpRenderPanel(){
+  var panel = document.getElementById('dx-cmp-panel'); if(!panel) return;
+  var ids = dxCmpLoad();
+  if(!ids.length){ panel.innerHTML = ''; return; }
+  var list = ids.map(function(id){ return DAXUE.schools.find(function(x){ return String(x.id) === String(id); }); }).filter(Boolean);
+  function row(label, fn){
+    return '<tr><th>' + label + '</th>' + list.map(function(s){ return '<td>' + fn(s) + '</td>'; }).join('') + '</tr>';
+  }
+  function span(s, c){
+    var years = ['2026','2025','2024','2023','2022'];
+    for(var i = 0; i < years.length; i++){ var r = s.L[c] && s.L[c][years[i]]; if(r) return r[0] + '（' + years[i] + '）'; }
+    return '—';
+  }
+  panel.innerHTML = '<div class="cb-cmp-head"><b>大学对比（' + list.length + '/3）</b><button class="cb-ghost" onclick="dxCmpSave([]);dxRender();dxCmpRenderPanel();">清空对比</button></div>'
+    + '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>维度</th>' + list.map(function(s){ return '<th>' + esc(s.name) + '</th>'; }).join('') + '</tr></thead><tbody>'
+    + row('层次', function(s){ return (s.tier === '985' ? '985' : '211') + (s.c9 ? ' · C9' : '') + (s.branch ? ' · ' + s.branch : ''); })
+    + row('城市 / 类型', function(s){ return s.city + ' · ' + s.type; })
+    + row('最新物理投档', function(s){ return span(s, 'wl'); })
+    + row('最新历史投档', function(s){ return span(s, 'ls'); })
+    + row('一流学科（数）', function(s){ return (s.disc || []).length ? (s.disc.length + ' 个：' + s.disc.slice(0, 3).join('、') + (s.disc.length > 3 ? '…' : '')) : '—'; })
+    + row('就业数据', function(s){ return s.emp && s.emp.rate ? s.emp.y + ' ' + s.emp.rate : '以校方报告为准'; })
+    + row('官网', function(s){ return s.web ? '<a href="' + esc(s.web) + '" target="_blank" rel="noopener">直达 ↗</a>' : '—'; })
+    + '</tbody></table></div>';
+}
+function dxPrintCard(id){
+  document.body.setAttribute('data-printcard', id);
+  window.print();
+}
+window.addEventListener('afterprint', function(){ document.body.removeAttribute('data-printcard'); });

@@ -4875,16 +4875,17 @@ function dxChart(s){
 
 function dxDetail(s){
   var batch = (typeof DAXUE !== 'undefined' && DAXUE.meta.batch) || {};
-  var rows = '';
+  var rows = '', rankMissing = false;
   DX_YEARS.forEach(function(y){
     ['wl','ls'].forEach(function(c){
       var rec = s.L[c] && s.L[c][y];
       if(!rec) return;
+      if(rec[1] == null) rankMissing = true;
       var b = batch[y] ? batch[y][c] : null;
-      var d = (b != null && rec[0] != null) ? ('批线差 ' + (rec[0] - b >= 0 ? '+' : '') + (rec[0] - b)) : '—';
+      var d = (b != null && rec[0] != null) ? ((rec[0] - b >= 0 ? '+' : '') + (rec[0] - b)) : '—';
       rows += '<tr><td>' + y + '</td><td>' + dxCatLabel(c) + '</td><td class="mono">' + rec[0] + '</td>'
-        + '<td class="mono">' + (rec[1] ? rec[1].toLocaleString() : '—') + '</td>'
-        + '<td class="mono">' + d + '</td><td>' + (rec[2] ? esc(rec[2]) : '本科批') + '</td></tr>';
+        + '<td class="mono">' + (rec[1] != null ? rec[1].toLocaleString() : '—') + '</td>'
+        + '<td class="mono">' + d + '</td><td>' + (rec[2] ? esc(rec[2]) : '本科批·普通类') + '</td></tr>';
     });
   });
   if(!rows) return '<p class="dx-nodate">该校在渝无普通类本科批（含平行志愿提前批 B 段）投档数据——多为军校等特殊招生口径，详见上方说明。</p>';
@@ -4896,7 +4897,8 @@ function dxDetail(s){
     });
   });
   var noteLine = notes.length ? '<p class="dx-tnote">口径说明：' + notes.map(esc).join('；') + '</p>' : '';
-  return '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>年份</th><th>科类</th><th>投档最低分</th><th>最低位次</th><th>批线差</th><th>口径</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + noteLine;
+  if(rankMissing) noteLine += '<p class="dx-tnote">位次「—」＝该年公开数据未提供最低位次（多见于 2022 年高分段），分数本身已核验。</p>';
+  return '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>年份</th><th>科类</th><th>投档最低分</th><th>最低位次</th><th>批线差（对本科线）</th><th>口径</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + noteLine;
 }
 
 function dxBadge(s){

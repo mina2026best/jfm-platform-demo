@@ -36,7 +36,7 @@ function runPageSearch(qOverride){
   var head = document.getElementById('sp-head');
   if(!q){
     if(head) head.textContent = '输入关键词，搜全站';
-    out.innerHTML = '<div class="sp-empty">试试上方热门词，或直接输入：学校名 / 政策词 / 术语 / 资讯标题。</div>';
+    out.innerHTML = '<div class="sp-empty">试试上方热门词，或直接输入：学校名 / 大学名 / 政策词 / 术语 / 资讯标题。</div>';
     return;
   }
   if(head) head.textContent = '「' + q + '」的搜索结果';
@@ -59,6 +59,17 @@ function runPageSearch(qOverride){
       }
     });
   }catch(e){}
+  try{
+    if(typeof DAXUE !== 'undefined'){
+      DAXUE.schools.forEach(function(s){
+        var hay = (s.name + ' ' + s.city + ' ' + (s.disc || []).join(' ') + ' ' + (s.majors || []).join(' ') + ' ' + (s.tier || '') + ' ' + (s.branch || '')).toLowerCase();
+        if(hay.indexOf(ql) >= 0){
+          var lw = s.L && s.L.wl ? (s.L.wl['2026'] || s.L.wl['2025']) : null;
+          rows.push({ tag: '大学', t: s.name + (s.branch ? '（' + s.branch + '）' : ''), s: (s.tier === '985' ? '985' : '211') + ' · ' + s.city + ' · ' + (lw ? '2026物理投档 ' + lw[0] + ' 分' : '五年投档线趋势见专栏'), href: 'daxue.html?u=' + encodeURIComponent(s.name) });
+        }
+      });
+    }
+  }catch(e){}
   SEARCH_DB.forEach(function(x){
     if((x.s + ' ' + x.t).toLowerCase().indexOf(ql) >= 0){
       var pg = ANCHOR2PAGE[x.a] || 'index.html';
@@ -69,7 +80,7 @@ function runPageSearch(qOverride){
     out.innerHTML = '<div class="sp-empty">没有找到与「' + esc(q) + '」相关的内容——换个说法试试，或到<a href="forum.html" style="color:var(--accent)">家长论坛</a>发帖讨论。</div>';
     return;
   }
-  out.innerHTML = '<p class="cmp-note" style="margin-bottom:10px">共命中 ' + rows.length + ' 条（学校 / 资讯 / 政策 / 术语）</p>'
+  out.innerHTML = '<p class="cmp-note" style="margin-bottom:10px">共命中 ' + rows.length + ' 条（学校 / 大学 / 资讯 / 政策 / 术语）</p>'
     + '<div class="sp-list">' + rows.map(function(r){
       return '<a class="sp-row" href="' + r.href + '"><span class="s-badge">' + esc(r.tag) + '</span>'
         + '<span class="t">' + esc(r.t) + '<small>' + esc(r.s || '') + '</small></span></a>';

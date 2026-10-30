@@ -40,6 +40,9 @@ PAGES = [
     dict(file="zy.html",     title="志愿参考与路径地图 · 花期册",
          desc="2026 特招线位次换算 + 六大升学路径地图（普高统招 / 指标到校 / 民办 / 中职 / 艺体 / 国际班）。",
          sections=["zy"]),
+    dict(file="daxue.html",  title="大学与专业库 · 近五年在渝投档线趋势 · 花期册",
+         desc="C9 / 985 / 211 共 129 个在渝招生实体：2022–2026 本科批投档线五年趋势图（物理类 / 历史类，含位次与批线差）、一流学科、就业数据与官网直达，逐条标注来源与核验日期；不做排名、不构成录取预测。",
+         sections=["daxue"]),
     dict(file="forum.html",  title="家长论坛 · 花期册",
          desc="幼升小 / 小升初 / 初升高 / 高考志愿 / 陪读生活分区讨论：择校对比、材料办理、政策疑问，同区家长一起交流；禁广告、涉政策需注明官方来源。",
          sections=["forum"]),
@@ -216,7 +219,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("calendar.html", "日历", None),
         ("quiz.html", "工具", [
             ("quiz.html", "入学自查"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
-            ("zy.html", "志愿参考"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
+            ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
         ]),
         ("policy.html", "政策资料", [
             ("policy.html", "政策库与人话词典"), ("wiki.html", "升学百科"), ("faq.html", "家长 FAQ"),
@@ -243,7 +246,7 @@ def nav_html(cur_file, demo_tag, searchbox):
     mobile = [
         ("daohang.html", "网址导航"), ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
-        ("zy.html", "志愿参考"), ("forum.html", "家长论坛"), ("community.html", "家长社区"),
+        ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("forum.html", "家长论坛"), ("community.html", "家长社区"),
         ("community.html", "家长学堂"), ("life.html", "生活服务"),
         ("search.html", "站内搜索"), ("problems.html", "问题速查"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
         ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
@@ -272,7 +275,7 @@ def convert_links(html):
     mapping = {
         "#news": "news.html", "#calendar": "calendar.html", "#policy": "policy.html",
         "#quiz": "quiz.html", "#schools": "schools.html", "#compare": "compare.html",
-        "#zy": "zy.html", "#forum": "forum.html", "#community": "community.html",
+        "#zy": "zy.html", "#daxue": "daxue.html", "#forum": "forum.html", "#community": "community.html",
         "#learn": "community.html", "#life": "life.html", "#beans": "beans.html",
         "#me": "me.html", "#plans": "plans.html", "#biz": "biz.html",
         "#data-sources": "data-sources.html", "#about": "about.html", "#how": "about.html",
@@ -499,7 +502,7 @@ def build_page(page, tpl, secs, css, js):
     # 4) 公告条链接改 news.html
     ann = ann.replace('href="#news"', 'href="news.html"')
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
-    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>'
+    hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>'
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + '<main id="main">' + hero + content + '</main>' \
@@ -521,6 +524,16 @@ def main():
                   .replace("__SCH_GG__", str(_gg))
                   .replace("__SCH_MB__", str(_mb))
                   .replace("20 所学校档案", f"{len(_sch)} 所学校档案"))
+        # 大学与专业库计数（从 55-daxue-data.js 读取，防陈旧）
+        try:
+            _dxsrc = read(f"{SRC}/features/55-daxue-data.js")
+            import re as _re
+            _dxn = _re.search(r'schools\s*:\s*\[', _dxsrc)
+            _dx_count = len(_re.findall(r'\{"id"', _dxsrc)) or len(_re.findall(r'"id"\s*:', _dxsrc))
+            tpl = tpl.replace("__DX_ALL__", str(_dx_count))
+        except Exception as _e2:
+            print('[warn] 大学库计数注入失败：', repr(_e2))
+            tpl = tpl.replace("__DX_ALL__", "129")
     except Exception as _e:
         print('[warn] 学校计数注入失败：', repr(_e))
     css, js = build_css(), build_js()
@@ -624,7 +637,7 @@ def main():
         if pg["file"] == "sitemap.html":
             # v0.82：分组目录式站点地图（替代遗留旧版）
             groups = [
-                ("升学工具", "#0E7C66", [("quiz.html","入学自查"),("schools.html","学校档案"),("compare.html","择校对比"),("zy.html","志愿参考"),("calendar.html","升学日历"),("problems.html","问题速查"),("daohang.html","网址导航")]),
+                ("升学工具", "#0E7C66", [("quiz.html","入学自查"),("schools.html","学校档案"),("compare.html","择校对比"),("zy.html","志愿参考"),("daxue.html","大学与专业库"),("calendar.html","升学日历"),("problems.html","问题速查"),("daohang.html","网址导航")]),
                 ("政策资料", "#24344D", [("policy.html","政策库与人话词典"),("wiki.html","升学百科"),("faq.html","家长 FAQ"),("data-sources.html","数据来源与核验")]),
                 ("资讯与社区", "#C8342B", [("news.html","升学资讯"),("forum.html","家长论坛"),("community.html","家长社区"),("life.html","生活服务"),("beans.html","升学豆")]),
                 ("会员与服务", "#B45309", [("plans.html","会员体系"),("biz.html","B 端合作"),("me.html","孩子档案"),("contact.html","联系留言")]),

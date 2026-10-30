@@ -1,4 +1,5 @@
 10-demo-data.js
+55-daxue-data.js
 11-search.js
 12-school.js
 13-me.js
@@ -41,3 +42,5 @@
 52-forum.js
 53-subscribe.js
 54-bagua.js
+49-section2026.js
+56-daxue.js

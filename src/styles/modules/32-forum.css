@@ -1,5 +1,6 @@
 /* ---------- v0.80 家长论坛 ---------- */
 .forum-layout{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start}
+.forum-layout > *{min-width:0}
 .forum-side-h{font-family:var(--serif);font-size:15px;color:var(--navy);margin:0 0 8px}
 .forum-boards{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .forum-boards .fb{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;

@@ -258,7 +258,7 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 .stage-chips a:focus-visible,.sd-acts a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* 2) 三关口卡：与册页目录同族（白卡 + 品牌刻度），但每张卡给出「时间窗 + 三个可用工具」 */
-.stage-doors{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stage-doors{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .sd{position:relative;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);
   border-radius:14px;padding:22px 20px 18px;
   box-shadow:0 1px 2px rgba(36,52,77,.05),0 12px 26px -22px rgba(36,52,77,.55);
@@ -291,6 +291,7 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 
 /* v0.83：三关口卡片顶部实景图带（重要：app.css 层挂载，避免 enhance 层解析不确定性） */
 .stage-doors .sd{background-repeat:no-repeat;background-position:top center;background-size:100% 96px}
-.stage-doors .sd.sd-1{background-image:url("../assets/photos/school-gate-3.jpg")}
-.stage-doors .sd.sd-2{background-image:url("../assets/photos/school-building-2.jpg")}
-.stage-doors .sd.sd-3{background-image:url("../assets/photos/school-panorama.jpg")}
+.stage-doors .sd.sd-1{background-image:url("../assets/photos/school-playground.jpg")}
+.stage-doors .sd.sd-2{background-image:url("../assets/photos/school-gate-3.jpg")}
+.stage-doors .sd.sd-3{background-image:url("../assets/photos/school-building-2.jpg")}
+.stage-doors .sd.sd-4{background-image:url("../assets/photos/school-panorama.jpg")}

@@ -205,12 +205,17 @@ def main():
         print("[fail-closed] keywords_rules 不可用（多为 Python<3.10 注解问题）——本次不入库任何抓取内容")
         return
     admitted, rejected = [], 0
-    # v2.2 URL 拒绝清单：官方已摆链/长期 404 的条目不再重复入库（2026-10-30）
+    # v2.2 URL 拒绝清单：官方已摆链/长期 404 的条目不再重复入库，并从已入库列表中清洗（2026-10-31）
     URL_DENY = []
     try:
         URL_DENY = json.load(open(os.path.join(NEWS, "url_deny.json"), encoding="utf-8"))
     except Exception:
         URL_DENY = []
+    if URL_DENY:
+        before = len(collected)
+        collected = [x for x in collected if not any(d in (x.get("url") or "") for d in URL_DENY)]
+        if len(collected) != before:
+            print(f"[deny] 清洗已入库条目 {before - len(collected)} 条（拒链清单 {len(URL_DENY)} 条）")
     for c in cands:
         if any(d in (c.get("url") or "") for d in URL_DENY):
             rejected += 1

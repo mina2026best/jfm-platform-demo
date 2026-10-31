@@ -1,6 +1,20 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "南川区西南大学实验幼儿园开展中大班亲子秋游活动",
+    "url": "http://www.cq.xinhuanet.com/20261029/86b788530cd44d6295a4ba809d70bf3d/c.html",
+    "src": "新华网重庆",
+    "cat": "家庭教育",
+    "sum": "南川区西南大学实验幼儿园开展中大班亲子秋游活动-近日，重庆市南川区西南大学实验幼儿园组织中、大班幼儿及家长走进南川区神龙峡，开展亲子秋游活动。",
+    "stages": [
+      "幼升小"
+    ],
+    "date": "2026-10-31",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "沙坪坝：“童耀心光·心理健康校园行”启动",
     "url": "http://cq.people.com.cn/n2/2026/1029/c365411-41736608.html",
     "src": "人民网重庆",
@@ -1096,4 +1110,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-31 12:53", "seed": 21, "collected": 68, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-31 13:45", "seed": 21, "collected": 69, "fetchedPending": 0};

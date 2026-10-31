@@ -1096,4 +1096,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-10-31 09:08", "seed": 21, "collected": 68, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-10-31 12:53", "seed": 21, "collected": 68, "fetchedPending": 0};

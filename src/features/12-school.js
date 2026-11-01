@@ -69,7 +69,8 @@ function applySchoolFilters(){
   g.querySelectorAll('.school-card').forEach(function(card){
     var okN = schoolFilter === 'all' || (card.getAttribute('data-nature') || '') === schoolFilter;
     var okQ = schoolRegion === 'all' || (card.getAttribute('data-qu') || '') === schoolRegion;
-    var show = okN && okQ;
+    var okS = schoolStage === 'all' || (card.getAttribute('data-stage') || '') === schoolStage;
+    var show = okN && okQ && okS;
     card.style.display = show ? '' : 'none';
     if(show) n++;
   });
@@ -88,17 +89,19 @@ function renderSchools(){
   var g = document.getElementById('school-grid'); if(!g) return;
   g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
     var d = SCHOOL_DB[k], key = encodeURIComponent(k), qu = d['所在区'] || '';
-    return '<div class="school-card' + (QU_FILTER && qu === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(_schoolNature(k)) + '" data-qu="' + esc(qu) + '"><div class="sc-art" aria-hidden="true">' + schoolPhotoImg(k) + '</div><div class="sc-top"><span class="sc-badge">' + esc(_schoolNature(k)) + '</span><span class="sc-qu">' + esc(qu) + '</span>' + (QU_FILTER && qu === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
+    return '<div class="school-card' + (QU_FILTER && qu === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(_schoolNature(k)) + '" data-stage="' + esc(_schoolStage(k)) + '" data-qu="' + esc(qu) + '"><div class="sc-art" aria-hidden="true">' + schoolPhotoImg(k) + '</div><div class="sc-top"><span class="sc-badge">' + esc(_schoolNature(k)) + '</span><span class="sc-qu">' + esc(qu) + '</span><span class="sc-badge sc-stage">' + esc(_schoolStage(k)) + '</span>' + (QU_FILTER && qu === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
       + '<h4>' + esc(k) + '</h4>' + _factChips(k) + '<p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
       + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
       + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
   }).join('');
   initSchoolFilters();
+  initStageFilters();
   /* 恢复筛选状态（初始均为 all） */
   document.querySelectorAll('#school-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sf || 'all') === schoolFilter); });
   document.querySelectorAll('#school-region-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sr || 'all') === schoolRegion); });
   applySchoolFilters();
+  document.querySelectorAll('#school-stage-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.ss || 'all') === schoolStage); });
 }
 
 function openSchool(name){
@@ -152,4 +155,35 @@ function addToCompareName(name){
     }
   }
   toast('对比位已满（最多 3 所），请先清空后再加入');
+}
+
+
+/* ---------- v1.01 学段筛选（小学/中学） ---------- */
+var schoolStage = 'all';
+
+function _schoolStage(k){
+  var d = SCHOOL_DB[k] || {};
+  var hay = k + ' ' + (d['办学性质'] || '') + ' ' + (d['概况'] || '') + ' ' + (d['简介'] || '');
+  return hay.indexOf('小学') >= 0 ? '小学' : '中学';
+}
+
+function initStageFilters(){
+  var box = document.getElementById('school-stage-filter'); if(!box) return;
+  var cnt = { 'all': Object.keys(SCHOOL_DB).length, '小学': 0, '中学': 0 };
+  Object.keys(SCHOOL_DB).forEach(function(k){ cnt[_schoolStage(k)]++; });
+  cnt['all'] = Object.keys(SCHOOL_DB).length;
+  var labels = { 'all': '全部学段', '小学': '小学', '中学': '中学' };
+  box.innerHTML = ['all', '小学', '中学'].map(function(k){
+    return '<button class="ff' + (k === 'all' ? ' on' : '') + '" data-ss="' + k + '" onclick="filterSchoolsStage(\'' + k + '\')" aria-pressed="' + (k === 'all') + '">' + labels[k] + '（' + cnt[k] + '）</button>';
+  }).join('');
+}
+
+function filterSchoolsStage(st){
+  schoolStage = st || 'all';
+  document.querySelectorAll('#school-stage-filter .ff').forEach(function(b){
+    var on = b.dataset.ss === schoolStage;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  applySchoolFilters();
 }

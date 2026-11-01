@@ -2225,3 +2225,104 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 201 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+===== [0/4] 对齐线上 2026-11-01 13:45:00 =====
+error: RPC failed; curl 28 Recv failure: Operation timed out
+fatal: expected flush after ref listing
+[warn] fetch 失败（网络），按本地状态继续
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  人民网重庆: 5 条候选
+  重庆市教育委员会: 67 条候选
+  重庆招考网: 49 条候选
+  重庆市教育考试院: 75 条候选
+  中国教育在线: 61 条候选
+  重庆日报: 0 条候选
+  教育部: 50 条候选
+  重庆市政府网: 6 条候选
+  上游新闻: 0 条候选
+  华龙网: 6 条候选
+  新华网重庆: 7 条候选
+  渝中区教委: 0 条候选
+  重庆大学新闻网: 40 条候选
+  重庆网络广播电视台: 5 条候选
+  中国教育新闻网: 223 条候选
+  华龙网教育: 6 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 205 条（每源限 25） ==
+   · “慈医通·智地智城”川渝儿童医疗慈善救助项目在渝启动 | http://cq.people.com.cn/n2/2026/1029/c365406-41736567.html
+   · 2026年重庆市托育职业技能竞赛举办 | http://cq.people.com.cn/n2/2026/1029/c365406-41736513.html
+   · 西南大学附中教师获评全国“读书种子” | http://cq.people.com.cn/n2/2026/1030/c365416-41737366.html
+   · 第七届人工智能与机器人教育大会在渝举行 | http://cq.people.com.cn/n2/2026/1028/c365413-41734950.html
+   · 刘宴兵到重庆南开中学调研 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261016_16247032.html
+   · 刘宴兵到潼南区调研教育工作 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16217722.html
+   · 市教委举办2026年重庆市普通本科高校教师教学能力提升培训班 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16218705.html
+   · 市教委召开第二期“双高建设计划”工作推进会 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202610/t20261012_16218698.html
+   · 贯彻落实全国基础教育大会精神，重庆基础教育秋季学期这样干 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202609/t20260924_16130098.html
+   · 全市深化教育领域腐败整治工作推进会暨纪法培训会召开 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202609/t20260924_16130091.html
+   · 中国教育报刊社来渝召开“纪念红军长征胜利90周年主题采访”媒体对接工作会 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202609/t20260924_16130075.html
+   · 2026“外研社·国才杯”“理解当代中国”重庆市大学生多语种国际传播能力大赛拟获奖情况公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202610/t20261030_16323880.html
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 69 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：90 条（种子 21 + 采集已审 69）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 20 页：7644783534401424678, 7628920200825556264, 7641052428171948451, 7591687597492138164, 7698203458721788520, 7665946298722180736, 7694872958120502373, 7682991429920139363, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 29 项 · 合计 526 KB
+  · assets/app.f5b845fa.css · 114 KB
+  · assets/app.cf2832a9.js · 550 KB
+  · index.html · 38 KB · sha256:033009793405
+  · news.html · 30 KB · sha256:52f638e55759
+  · calendar.html · 27 KB · sha256:bab7467ea1cd
+  · policy.html · 33 KB · sha256:93aaae31cf40
+  · quiz.html · 17 KB · sha256:6ac16c0c0ac1
+  · schools.html · 16 KB · sha256:781dede54944
+  · compare.html · 17 KB · sha256:2665d9dd2456
+  · zy.html · 23 KB · sha256:b1ab724b5b25
+  · daxue.html · 18 KB · sha256:799dcfb42685
+  · gaozhong.html · 16 KB · sha256:7a5d8cf062e5
+  · forum.html · 17 KB · sha256:c7e2cd07c525
+  · community.html · 19 KB · sha256:2fbe8791c91d
+  · life.html · 19 KB · sha256:845cd8383c77
+  · beans.html · 15 KB · sha256:e6200822c229
+  · me.html · 19 KB · sha256:8b51843c0c32
+  · plans.html · 17 KB · sha256:755f635d8e50
+  · biz.html · 16 KB · sha256:e7568fa62af0
+  · data-sources.html · 15 KB · sha256:1883ba833b55
+  · daohang.html · 16 KB · sha256:fae6a6a034cd
+  · about.html · 18 KB · sha256:7866120df46b
+  · search.html · 16 KB · sha256:98699ff0c43b
+  · contact.html · 17 KB · sha256:7cd0022e501e
+  · wiki.html · 19 KB · sha256:1d2eb00a3141
+  · problems.html · 15 KB · sha256:55d528b06897
+  · faq.html · 27 KB · sha256:680791105ed7
+  · sitemap.html · 15 KB · sha256:9d9046fc85da
+  · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

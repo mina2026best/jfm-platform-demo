@@ -451,6 +451,22 @@ def build_page(page, tpl, secs, css, js):
                       {"@type": "ListItem", "position": 2, "name": _pt, "item": _base + fname}]}
         head = head.replace('</head>',
             '<script type="application/ld+json">' + json.dumps(_crumb, ensure_ascii=False) + '</script>\n</head>')
+    # v0.96：FAQPage 结构化数据（faq 页专用，26 问 → 搜索富摘要）
+    if fname == 'faq.html':
+        _faq = re.search(r'<section id="faq"[^>]*>([\s\S]*?)\n</section>', tpl)
+        if _faq:
+            _ents = []
+            for _m in re.finditer(r'<details class="faq-item"[^>]*data-cat="([^"]+)"(?! open)[^>]*>([\s\S]*?)</details>', _faq.group(1)):
+                _qm = re.search(r'<span class="cat">[^<]*</span>(?:<a[^>]*>)?([^<]+?)(?:</a>)?</summary>\s*<div class="a">([\s\S]*?)</div>', _m.group(2))
+                if not _qm:
+                    continue
+                _strip = lambda x: re.sub(r'<[^>]+>', '', re.sub(r'\s+', ' ', x)).strip()
+                _ents.append({"@type": "Question", "name": _strip(_qm.group(1)),
+                              "acceptedAnswer": {"@type": "Answer", "text": _strip(_qm.group(2))[:300]}})
+            if _ents:
+                _faqld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": _ents}
+                head = head.replace('</head>',
+                    '<script type="application/ld+json">' + json.dumps(_faqld, ensure_ascii=False) + '</script>\n</head>')
     # 2) body：三段式（ann+top 头部 / 主内容 / 尾部）
     body_start = tpl.find("<body>") + len("<body>")
     footer_start = tpl.find("<footer>")

@@ -140,3 +140,28 @@
 .pq-st.st-pend{background:var(--bg);color:var(--muted)}
 .pq-card a{font-size:12px;color:var(--navy2);text-decoration:none;line-height:1.5}
 .pq-card a:hover{color:var(--accent);text-decoration:underline}
+
+/* ============ 学校地图（v0.96） ============ */
+.mq-flex{display:flex;gap:16px;align-items:stretch;flex-wrap:wrap}
+.mq-svgwrap{flex:1.2;min-width:280px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.mq-listwrap{flex:1;min-width:240px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.mq-blob rect{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.4;cursor:pointer;transition:fill .15s}
+.mq-blob:hover rect{fill:#d8ece6}
+.mq-blob{cursor:pointer;outline:none}
+.mq-name{font-family:var(--serif);font-size:15px;fill:var(--navy);font-weight:700}
+.mq-n{font-family:var(--mono);font-size:11px;fill:var(--accent-text)}
+.mq-list{list-style:none;margin:0;padding:0;max-height:320px;overflow:auto}
+.mq-list li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.mq-s{color:var(--ink)}
+.mq-amap{font-size:11.5px;color:var(--accent);text-decoration:none;flex:none}
+.mq-amap:hover{text-decoration:underline}
+
+/* ============ 七龙珠系办学图谱 ============ */
+.dg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.dg-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:12.5px}
+.dg-head{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:4px;flex-wrap:wrap}
+.dg-head b{font-family:var(--serif);font-size:14.5px;color:var(--navy)}
+.dg-meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:6px}
+.dg-row{padding:2px 0;border-bottom:1px dashed var(--line);color:var(--ink2);line-height:1.6}
+.dg-row i{font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--accent);margin-right:6px}
+.dg-src{margin-top:6px;font-size:11.5px}

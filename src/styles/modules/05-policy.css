@@ -12,3 +12,6 @@
   .term dt{font-family:var(--mono);font-size:12.5px;color:var(--accent);padding-top:2px}
   .term dd{color:var(--ink2)}
 
+
+/* v0.96 称谓词条内链强调 */
+dt[data-tg] a.art-link{white-space:nowrap}

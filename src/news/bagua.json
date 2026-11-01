@@ -358,40 +358,9 @@
     }
   ],
   "weekly": {
-    "generated": "2026-10-30",
+    "generated": "2026-11-01",
     "note": "话题热度按近 30 天收录条目统计；数据量随每日管线累积",
-    "topics": [
-      {
-        "tag": "重庆初升高",
-        "count": 5,
-        "trend": "平"
-      },
-      {
-        "tag": "重庆新高考",
-        "count": 4,
-        "trend": "平"
-      },
-      {
-        "tag": "高考志愿填报",
-        "count": 3,
-        "trend": "平"
-      },
-      {
-        "tag": "重庆中考志愿",
-        "count": 2,
-        "trend": "平"
-      },
-      {
-        "tag": "重庆指标到校",
-        "count": 1,
-        "trend": "平"
-      },
-      {
-        "tag": "学校解读",
-        "count": 1,
-        "trend": "平"
-      }
-    ]
+    "topics": []
   },
   "whitelist": {
     "version": "v1.1-20261017",

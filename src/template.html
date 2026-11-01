@@ -1066,6 +1066,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <label>分数</label>
       <input id="cb-score" type="number" min="200" max="750" placeholder="如 580" aria-label="草表分数" />
       <button onclick="cbRun()">生成候选</button>
+      <button class="cb-ghost" onclick="cbCopy()">复制草表文本</button>
       <button class="cb-ghost" onclick="cbClear()">清空草表</button>
       <button class="cb-ghost" onclick="cbPrint()">打印草表</button>
     </div>
@@ -1197,6 +1198,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
           <option value="tier">排序：层次 · 名称</option>
           <option value="wl">最新物理投档线 高→低</option>
           <option value="ls">最新历史投档线 高→低</option>
+          <option value="plan">在渝计划（2026）多→少</option>
         </select>
       </div>
     </div>

@@ -234,7 +234,8 @@ function renderDaoFull(){
 function renderDaoZheng(){
   var z = document.getElementById('dao-zheng'); if(!z) return;
   z.innerHTML = '<b>' + esc(DAO_ZHENG.t) + '</b><p>' + esc(DAO_ZHENG.d) + '</p>'
-    + '<a href="' + hrefEnc(DAO_ZHENG.u) + '" target="_blank" rel="noopener">市政府公告原文 ↗</a>';
+    + '<a href="' + hrefEnc(DAO_ZHENG.u) + '" target="_blank" rel="noopener">市政府公告原文 ↗</a>'
+    + ' · <a href="schools.html#lj-guide">两江升学专题 →</a>';
 }
 /* 同一 section 注入首页与导航页：按当前页保留对应视图 */
 function initDao(){

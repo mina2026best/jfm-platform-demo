@@ -136,11 +136,20 @@ function dxDetail(s){
   return '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>年份</th><th>科类</th><th>投档最低分</th><th>最低位次</th><th>批线差（对本科线）</th><th>口径</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + noteLine;
 }
 
+function dxHasCoop(s){
+  return DX_YEARS.some(function(y){
+    return ['wl','ls'].some(function(c){
+      var r = s.L[c] && s.L[c][y];
+      return r && r[2] && r[2].indexOf('中外合作') >= 0;
+    });
+  });
+}
 function dxBadge(s){
   var out = '';
   if(s.tier === '985') out += '<span class="dx-badge b-985">985</span>';
   if(s.c9) out += '<span class="dx-badge b-c9">C9</span>';
   if(s.tier === '211' && !s.branch) out += '<span class="dx-badge b-211">211</span>';
+  if(dxHasCoop(s)) out += '<span class="dx-badge b-211">含中外合作组</span>';
   if(s.branch) out += '<span class="dx-badge b-br">' + esc(s.branch) + '</span>';
   return out;
 }
@@ -192,9 +201,14 @@ function dxFiltered(){
     }
     return true;
   });
-  if(DX.sort === 'wl' || DX.sort === 'ls'){
+  if(DX.sort === 'wl' || DX.sort === 'ls' || DX.sort === 'plan'){
     var c = DX.sort;
     list.sort(function(a, b){
+      if(c === 'plan'){
+        var pa = a.plan && a.plan['2026'] ? (a.plan['2026'].wl || 0) + (a.plan['2026'].ls || 0) : -1;
+        var pb = b.plan && b.plan['2026'] ? (b.plan['2026'].wl || 0) + (b.plan['2026'].ls || 0) : -1;
+        return pb - pa;
+      }
       var ra = dxLatest(a, c), rb = dxLatest(b, c);
       var va = ra ? ra.rec[0] : -1, vb = rb ? rb.rec[0] : -1;
       if(vb !== va) return vb - va;
@@ -360,6 +374,17 @@ function cbRemove(col, idx){
 function cbClear(){
   if(!confirm('清空草表所有已选院校？')) return;
   cbSave({ '冲': [], '稳': [], '保': [] }); cbRenderSheet();
+}
+function cbCopy(){
+  var d = cbLoad();
+  if(!CB_COLS.some(function(c){ return d[c].length; })){ toast('草表为空，先加入院校'); return; }
+  var txt = '重庆高考志愿草表（花期册 · 辅助草稿）\n';
+  CB_COLS.forEach(function(c){
+    txt += '\n【' + c + '】\n';
+    d[c].forEach(function(n, i){ txt += (i + 1) + '. ' + n + '\n'; });
+  });
+  txt += '\n—— 生成时间 ' + new Date().toLocaleDateString('zh-CN') + ' · 花期册 https://mina2026best.github.io/jfm-platform-demo/zy.html';
+  copyText(txt);
 }
 function cbRenderSheet(){
   var box = document.getElementById('cb-sheet'); if(!box) return;

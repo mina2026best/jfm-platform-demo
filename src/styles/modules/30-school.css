@@ -64,7 +64,8 @@
   html.theme-dark .qug-qu{color:#DCE4EE}
 
   /* —— v0.43：页面级 h1（与 sec-head 视觉协调，h1 包裹原 h2 文案由 build 注入）—— */
-  .page-h1{font-family:var(--serif);font-size:15px;color:var(--navy);font-weight:700;margin:20px 0 -14px;letter-spacing:.01em}
+  /* v0.98：层级修正——h1 原为 15px，比 h2(28px)/页眉 logo(31px) 都小，标题层级倒挂 */
+  .page-h1{font-family:var(--serif);font-size:30px;line-height:1.25;color:var(--navy);font-weight:700;margin:30px 0 10px;letter-spacing:.01em}
   @media print{ .page-h1{font-size:14pt} }
 
   /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
@@ -161,3 +162,10 @@
   @media print{ .gov-item{box-shadow:none;border-color:#CCC} .gov-go{display:none} }
   html.theme-dark .gov-item:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
   html.theme-dark .gov-name{color:#DCE4EE}
+
+  /* v0.99：列表分批的「再看 N 所」按钮（整宽一行，落在网格末尾） */
+  .sc-more-wrap{grid-column:1 / -1;text-align:center;padding:6px 0 2px}
+  .btn-more{font:inherit;font-size:14px;color:var(--accent);background:var(--paper);
+    border:1px solid var(--line);border-radius:6px;padding:11px 22px;cursor:pointer}
+  .btn-more:hover{border-color:var(--accent);background:var(--accent-soft)}
+  @media print{ .sc-more-wrap{display:none} }

@@ -2,6 +2,16 @@
 var currentOpenSchool = '';
 var schoolFilter = 'all';   // 办学性质（全部 / 公办 / 民办）
 var schoolRegion = 'all';   // 区县（v0.40）
+/* v0.99：深链——?qu=区县（03.3 地图跳回）、?stage=小学/中学（名校库页跳入） */
+(function(){
+  var m1 = /[?&]qu=([^&]+)/.exec(location.search);
+  if(m1){ try{ schoolRegion = decodeURIComponent(m1[1]); }catch(e){} }
+})();
+var _STAGE_PARAM = (function(){
+  var m = /[?&]stage=([^&]+)/.exec(location.search);
+  if(!m) return '';
+  try{ return decodeURIComponent(m[1]); }catch(e){ return ''; }
+})();
 
 function _schoolNature(name){ return (SCHOOL_DB[name]['办学性质'] || '').split('（')[0]; }
 
@@ -47,6 +57,7 @@ function initSchoolFilters(){
 
 function filterSchoolsRegion(qu){
   schoolRegion = qu || 'all';
+  schoolShown = SCHOOL_BATCH;
   document.querySelectorAll('#school-region-filter .ff').forEach(function(b){
     var on = b.dataset.sr === schoolRegion;
     b.classList.toggle('on', on);
@@ -56,6 +67,7 @@ function filterSchoolsRegion(qu){
 }
 function filterSchools(kind){
   schoolFilter = kind || 'all';
+  schoolShown = SCHOOL_BATCH;
   document.querySelectorAll('#school-filter .ff').forEach(function(b){
     var on = b.dataset.sf === schoolFilter;
     b.classList.toggle('on', on);
@@ -63,45 +75,48 @@ function filterSchools(kind){
   });
   applySchoolFilters();
 }
-function applySchoolFilters(){
-  var g = document.getElementById('school-grid'); if(!g) return;
-  var n = 0;
-  g.querySelectorAll('.school-card').forEach(function(card){
-    var okN = schoolFilter === 'all' || (card.getAttribute('data-nature') || '') === schoolFilter;
-    var okQ = schoolRegion === 'all' || (card.getAttribute('data-qu') || '') === schoolRegion;
-    var okS = schoolStage === 'all' || (card.getAttribute('data-stage') || '') === schoolStage;
-    var show = okN && okQ && okS;
-    card.style.display = show ? '' : 'none';
-    if(show) n++;
-  });
-  var emptyEl = document.getElementById('sc-empty');
-  if(n === 0){
-    if(!emptyEl){
-      emptyEl = document.createElement('div');
-      emptyEl.id = 'sc-empty'; emptyEl.className = 'empty-mini';
-      emptyEl.textContent = '该筛选组合下暂无学校——换个区县或性质试试，或点「全部」重置。';
-      g.appendChild(emptyEl);
-    }
-  } else if(emptyEl){ emptyEl.remove(); }
+/* v0.99：列表分批——90 条一次进 DOM 让手机页高 4.3 万 px。
+   筛选改为「先筛数据再渲染」，每批 24 张 + 再看 N 所；学段/性质/区县三条件共用一份数据过滤。 */
+var SCHOOL_BATCH = 24;
+var schoolShown = SCHOOL_BATCH;
+
+function _schoolCard(k){
+  var d = SCHOOL_DB[k], key = encodeURIComponent(k), qu = d['所在区'] || '';
+  return '<div class="school-card' + (QU_FILTER && qu === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(_schoolNature(k)) + '" data-stage="' + esc(_schoolStage(k)) + '" data-qu="' + esc(qu) + '"><div class="sc-art" aria-hidden="true">' + schoolPhotoImg(k) + '</div><div class="sc-top"><span class="sc-badge">' + esc(_schoolNature(k)) + '</span><span class="sc-qu">' + esc(qu) + '</span><span class="sc-badge sc-stage">' + esc(_schoolStage(k)) + '</span>' + (QU_FILTER && qu === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
+    + '<h4>' + esc(k) + '</h4>' + _factChips(k) + '<p>' + esc(d['简介'] || '') + '</p>'
+    + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
+    + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
+    + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
 }
 
-function renderSchools(){
+function applySchoolFilters(){
   var g = document.getElementById('school-grid'); if(!g) return;
-  g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
-    var d = SCHOOL_DB[k], key = encodeURIComponent(k), qu = d['所在区'] || '';
-    return '<div class="school-card' + (QU_FILTER && qu === QU_FILTER ? ' qu-match' : '') + '" data-nature="' + esc(_schoolNature(k)) + '" data-stage="' + esc(_schoolStage(k)) + '" data-qu="' + esc(qu) + '"><div class="sc-art" aria-hidden="true">' + schoolPhotoImg(k) + '</div><div class="sc-top"><span class="sc-badge">' + esc(_schoolNature(k)) + '</span><span class="sc-qu">' + esc(qu) + '</span><span class="sc-badge sc-stage">' + esc(_schoolStage(k)) + '</span>' + (QU_FILTER && qu === QU_FILTER ? '<span class="qu-badge">就在 ' + esc(QU_FILTER) + '</span>' : '') + '</div>'
-      + '<h4>' + esc(k) + '</h4>' + _factChips(k) + '<p>' + esc(d['简介'] || '') + '</p>'
-      + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
-      + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
-      + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
-  }).join('');
+  var keys = Object.keys(SCHOOL_DB).filter(function(k){
+    var qu = SCHOOL_DB[k]['所在区'] || '';
+    return (schoolFilter === 'all' || _schoolNature(k) === schoolFilter)
+        && (schoolRegion === 'all' || qu === schoolRegion)
+        && (schoolStage === 'all' || _schoolStage(k) === schoolStage);
+  });
+  if(!keys.length){
+    g.innerHTML = '<div class="empty-mini">该筛选组合下暂无学校——换个区县或性质试试，或点「全部」重置。</div>';
+    return;
+  }
+  var shown = keys.slice(0, schoolShown);
+  var rest = keys.length - shown.length;
+  g.innerHTML = shown.map(_schoolCard).join('')
+    + (rest > 0 ? '<div class="sc-more-wrap"><button class="btn-more" onclick="showMoreSchools()">再看 ' + Math.min(SCHOOL_BATCH, rest) + ' 所 · 共 ' + keys.length + ' 所</button></div>' : '');
+}
+function showMoreSchools(){ schoolShown += SCHOOL_BATCH; applySchoolFilters(); }
+
+function renderSchools(){
+  if(!document.getElementById('school-grid')) return;
   initSchoolFilters();
   initStageFilters();
-  /* 恢复筛选状态（初始均为 all） */
+  if(_STAGE_PARAM){ schoolStage = _STAGE_PARAM; }
   document.querySelectorAll('#school-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sf || 'all') === schoolFilter); });
   document.querySelectorAll('#school-region-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sr || 'all') === schoolRegion); });
-  applySchoolFilters();
   document.querySelectorAll('#school-stage-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.ss || 'all') === schoolStage); });
+  applySchoolFilters();
 }
 
 function openSchool(name){
@@ -180,6 +195,7 @@ function initStageFilters(){
 
 function filterSchoolsStage(st){
   schoolStage = st || 'all';
+  schoolShown = SCHOOL_BATCH;
   document.querySelectorAll('#school-stage-filter .ff').forEach(function(b){
     var on = b.dataset.ss === schoolStage;
     b.classList.toggle('on', on);

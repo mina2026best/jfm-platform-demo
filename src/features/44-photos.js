@@ -2,6 +2,8 @@
 /* v0.53：照片去重 —— 用满照片池，按条目确定性分配，同页不重复
    ponytail: 池 28 张，同页超过 28 个图位才会回绕；扩容只需往 PHOTO_POOL 加文件名 */
 var PHOTO_BASE = 'assets/photos/';
+/* v0.99：统一出 webp（构建前置转换，102 张 19.9→5.1MB）；jpg 原件保留给 CSS 背景与归档 */
+function phW(f){ return String(f).replace(/\.jpe?g$/i, '.webp'); }
 var PHOTO_FILES = {
   gate1:'school-gate-1.jpg', gate2:'school-gate-2.jpg', building:'school-building.jpg',
   panorama:'school-panorama.jpg', playground:'school-playground.jpg', library:'school-library.jpg',
@@ -19,7 +21,7 @@ var PHOTO_POOL = [
   'school-gym.jpg','school-arts.jpg','school-science.jpg','school-culture.jpg',
   'study-desk.jpg','classroom.jpg','office-docs.jpg','calendar-desk.jpg','city-scape.jpg'
 ];
-function photoURL(key){ return PHOTO_BASE + (PHOTO_FILES[key] || PHOTO_FILES.city); }
+function photoURL(key){ return PHOTO_BASE + phW(PHOTO_FILES[key] || PHOTO_FILES.city); }
 function photoImg(key, eager, alt){
   return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURL(key) + '" alt="' + (alt || '') + '">';
 }
@@ -36,9 +38,9 @@ function photoURLForItem(seed){
   var n = PHOTO_POOL.length, start = _seedNum(String(seed || '')) % n, i;
   for(i = 0; i < n; i++){
     var f = PHOTO_POOL[(start + i) % n];
-    if(!_usedPhoto[f]){ _usedPhoto[f] = 1; return PHOTO_BASE + f; }
+    if(!_usedPhoto[f]){ _usedPhoto[f] = 1; return PHOTO_BASE + phW(f); }
   }
-  return PHOTO_BASE + PHOTO_POOL[start];   // 池耗尽（>28 个图位）才回绕
+  return PHOTO_BASE + phW(PHOTO_POOL[start]);   // 池耗尽（>28 个图位）才回绕
 }
 function photoItemImg(seed, eager, alt){
   return '<img ' + (eager ? '' : 'loading="lazy" ') + 'decoding="async" src="' + photoURLForItem(seed) + '" alt="' + (alt || '') + '">';
@@ -57,7 +59,7 @@ function schoolPhotoFile(name){
 }
 function schoolPhotoImg(name){
   var real = typeof SCHOOL_PHOTOS !== 'undefined' && SCHOOL_PHOTOS[name];
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + schoolPhotoFile(name) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
+  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + phW(schoolPhotoFile(name)) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
 }
 /* hero / 入口卡 / 页眉横幅：各类固定不同照片；仅 hero 记入已用集合（它是同页最大图，列表须避让） */
 var ART_PHOTO = {
@@ -69,5 +71,5 @@ function artPhotoURL(kind){
   var f = ART_PHOTO[kind];
   if(!f) return '';
   if(kind === 'hero') _usedPhoto[f] = 1;   // 只预留 hero：剩 27 张足够首屏 24 条封面全不重复
-  return PHOTO_BASE + f;
+  return PHOTO_BASE + phW(f);
 }

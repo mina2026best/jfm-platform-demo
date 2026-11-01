@@ -1079,7 +1079,8 @@ html.theme-dark .news-grid[data-covers="1"] .news-item.lead .ni-cover img{filter
   html.theme-dark .qug-qu{color:#DCE4EE}
 
   /* —— v0.43：页面级 h1（与 sec-head 视觉协调，h1 包裹原 h2 文案由 build 注入）—— */
-  .page-h1{font-family:var(--serif);font-size:15px;color:var(--navy);font-weight:700;margin:20px 0 -14px;letter-spacing:.01em}
+  /* v0.98：层级修正——h1 原为 15px，比 h2(28px)/页眉 logo(31px) 都小，标题层级倒挂 */
+  .page-h1{font-family:var(--serif);font-size:30px;line-height:1.25;color:var(--navy);font-weight:700;margin:30px 0 10px;letter-spacing:.01em}
   @media print{ .page-h1{font-size:14pt} }
 
   /* —— v0.43：视觉隐藏 h1（有 page-banner 页面用）—— */
@@ -1176,6 +1177,13 @@ html.theme-dark .news-grid[data-covers="1"] .news-item.lead .ni-cover img{filter
   @media print{ .gov-item{box-shadow:none;border-color:#CCC} .gov-go{display:none} }
   html.theme-dark .gov-item:hover{box-shadow:0 12px 32px rgba(0,0,0,.42)}
   html.theme-dark .gov-name{color:#DCE4EE}
+
+  /* v0.99：列表分批的「再看 N 所」按钮（整宽一行，落在网格末尾） */
+  .sc-more-wrap{grid-column:1 / -1;text-align:center;padding:6px 0 2px}
+  .btn-more{font:inherit;font-size:14px;color:var(--accent);background:var(--paper);
+    border:1px solid var(--line);border-radius:6px;padding:11px 22px;cursor:pointer}
+  .btn-more:hover{border-color:var(--accent);background:var(--accent-soft)}
+  @media print{ .sc-more-wrap{display:none} }
 
 
 /* ============ 31-aesthetics ============ */
@@ -1478,6 +1486,28 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 .stage-doors .sd.sd-4{background-image:url("../assets/photos/school-panorama.jpg")}
 
 
+/* v0.98：学段入口四卡（原为线上手工内联样式，归位到模块层；豆瓣式：1px 边框、小圆角、无投影）
+   内容来自线上已存在的四张入口卡，仅改为源码 + 设计令牌，不新增功能。 */
+.stage-hub{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0 18px}
+.hub-card{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);
+  border-radius:6px;padding:16px;text-decoration:none;color:var(--ink);transition:border-color .18s,background .18s}
+.hub-card:hover,.hub-card:focus-visible{border-color:var(--accent);background:var(--accent-soft)}
+.hub-icon{font-size:22px;line-height:1}
+.hub-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy)}
+.hub-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+.hub-cta{font-size:12.5px;font-weight:600;color:var(--accent);margin-top:auto;padding-top:6px}
+@media (max-width:640px){ .stage-hub{gap:8px;margin:16px 0 12px} .hub-card{padding:12px} .hub-desc{font-size:12px} }
+
+/* v0.99：学校档案库分区导航（03.1–03.6），把原来挤在一页的主题拆开后可互达 */
+.sch-subnav-sec{padding:16px 0 0}
+.sch-subnav{display:flex;flex-wrap:wrap;gap:8px}
+.sch-subnav a{font-size:13.5px;line-height:1.4;padding:6px 13px;border:1px solid var(--line);
+  border-radius:999px;color:var(--muted);text-decoration:none;background:var(--paper)}
+.sch-subnav a:hover,.sch-subnav a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.sch-subnav a.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:600}
+@media (max-width:640px){ .sch-subnav{gap:6px} .sch-subnav a{font-size:12.5px;padding:5px 10px} }
+
+
 /* ============ 32-forum ============ */
 /* ---------- v0.80 家长论坛 ---------- */
 .forum-layout{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start}
@@ -1719,13 +1749,6 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 .kb-n{color:var(--ink);min-width:0}
 .kb-f{color:var(--muted);font-size:11.5px;flex:1;min-width:0;overflow-wrap:anywhere;word-break:break-word}
 .kb-row{overflow-wrap:anywhere}
-
-/* ============ 学校页分区导航 ============ */
-.sec-nav{display:flex;align-items:center;flex-wrap:wrap;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:14px}
-.sec-nav .sn-t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);flex:none;margin-right:4px}
-.sn-chip{font-size:12.5px;color:var(--navy2);background:var(--bg);border:1px solid var(--line2);border-radius:99px;padding:3px 12px;text-decoration:none}
-.sn-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
-.sn-chip.sn-ext{color:var(--accent);border-color:rgba(14,124,102,.4)}
 
   /* 文章详情页样式 */
   .crumb{font-size:12.5px;color:var(--muted);margin:18px 0 4px}

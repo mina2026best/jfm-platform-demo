@@ -37,3 +37,12 @@ function initStageDeepLink(){
   var target = btn ? document.querySelector('#calendar .cal-filter') : d;
   if(target && target.scrollIntoView) target.scrollIntoView({ block: 'center' });
 }
+
+/* v0.99：档案库分区导航当前项高亮（不依赖 boot 时序，DOMContentLoaded 即执行） */
+document.addEventListener('DOMContentLoaded', function(){
+  var nav = document.querySelector('.sch-subnav'); if(!nav) return;
+  var here = (location.pathname.split('/').pop() || 'index.html');
+  Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
+    if(a.getAttribute('href') === here){ a.classList.add('on'); a.setAttribute('aria-current','page'); }
+  });
+});

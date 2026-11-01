@@ -60,6 +60,19 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
 <link rel="dns-prefetch" href="https://www.cqksy.cn" />
 <link rel="dns-prefetch" href="https://www.cq.gov.cn" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='15' fill='%2324344D'/><rect x='16' y='13' width='32' height='38' rx='5' fill='%23E8EEF7'/><rect x='16' y='13' width='8' height='38' rx='4' fill='%230E7C66'/><circle cx='38' cy='26' r='6' fill='%230E7C66'/><path d='M38 32v11' stroke='%230E7C66' stroke-width='2.6' stroke-linecap='round'/></svg>" />
+
+<style>
+.stage-hub{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0}
+.hub-card{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:2px solid var(--line);
+  border-radius:14px;padding:18px 16px;text-decoration:none;color:var(--ink);transition:border-color .18s,transform .18s,box-shadow .18s}
+.hub-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 20px rgba(14,124,102,.12)}
+.hub-icon{font-size:28px;line-height:1}
+.hub-title{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--navy)}
+.hub-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.hub-cta{font-size:12px;font-weight:600;color:var(--accent);margin-top:auto}
+@media (max-width:640px){.stage-hub{grid-template-columns:1fr}}
+</style>
+
 </head>
 <body>
 
@@ -1090,6 +1103,33 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="sec-head"><span class="no">03.2 · 学校档案库</span><h2>官方数据 + 公开概况 + 审核制评价</h2></div>
     <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；每所学校含公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网，逐项标注来源）、招生与通勤档案、家长评价；争议评价走「证据 + 仲裁」流程，缺失字段如实标「暂缺」。</p>
+    <div class="stage-hub">
+      <a class="hub-card" href="xiaoxue.html">
+        <span class="hub-icon">🎓</span>
+        <b class="hub-title">小学名校库</b>
+        <span class="hub-desc">示范名单 · 各区口碑 · 幼升小工具</span>
+        <span class="hub-cta">进入 →</span>
+      </a>
+      <a class="hub-card" href="chuzhong.html">
+        <span class="hub-icon">🏫</span>
+        <b class="hub-title">初中名校库</b>
+        <span class="hub-desc">七龙珠图谱 · 摇号防骗 · 梯队口径</span>
+        <span class="hub-cta">进入 →</span>
+      </a>
+      <a class="hub-card" href="gaozhong.html">
+        <span class="hub-icon">📚</span>
+        <b class="hub-title">高中与联招库</b>
+        <span class="hub-desc">联招线趋势 · 逐校核验 · 梯队口径</span>
+        <span class="hub-cta">进入 →</span>
+      </a>
+      <a class="hub-card" href="daxue.html">
+        <span class="hub-icon">🎓</span>
+        <b class="hub-title">大学与专业库</b>
+        <span class="hub-desc">五年投档线 · 一流学科 · 就业数据</span>
+        <span class="hub-cta">进入 →</span>
+      </a>
+    </div>
+
     <div class="fact-filter" id="school-stage-filter" aria-label="按学段筛选" style="margin-bottom:10px"></div>
     <div class="fact-filter" id="school-filter" style="margin-bottom:10px">
       <button class="ff on" data-sf="all" onclick="filterSchools('all')">全部（__SCH_ALL__）</button>

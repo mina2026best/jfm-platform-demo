@@ -52,3 +52,5 @@
 61-dragon-data.js
 62-dragon.js
 63-map.js
+64-koubei-data.js
+64-koubei.js

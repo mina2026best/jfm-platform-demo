@@ -170,6 +170,7 @@ function dxCard(s){
     + '<span>最新物理 ' + (lw ? '<b class="mono">' + lw.rec[0] + '</b><em>' + lw.y + (lw.rec[1] ? ' · 位次 ' + lw.rec[1].toLocaleString() : '') + '</em>' : '—') + '</span>'
     + '<span>最新历史 ' + (ll ? '<b class="mono">' + ll.rec[0] + '</b><em>' + ll.y + (ll.rec[1] ? ' · 位次 ' + ll.rec[1].toLocaleString() : '') + '</em>' : '—') + '</span>'
     + dxPlanChip(s)
+    + dxFeeChip(s)
     + '<span>五年变化 物理' + chg(sw) + ' · 历史' + chg(sl) + '</span></div>';
   var chart = s.gnote ? '<div class="dx-gnote">' + esc(s.gnote) + '</div>' : dxChart(s);
   return '<article class="dx-card" id="dx-' + esc(s.id) + '">' + head + meta + chart + stats
@@ -429,3 +430,11 @@ function dxPrintCard(id){
   window.print();
 }
 window.addEventListener('afterprint', function(){ document.body.removeAttribute('data-printcard'); });
+
+/* v0.97 学费区间芯片（最新年全部专业组学费区间，含中外合作） */
+function dxFeeChip(s){
+  var f = s.fee;
+  if(!f || !f.max) return '';
+  var fmt = function(v){ return (Math.round(v * 10) / 10) + '万'; };
+  return '<span>学费 <b class="mono">' + fmt(f.min) + '–' + fmt(f.max) + '</b><em>' + f.year + ' · 各专业组区间</em></span>';
+}

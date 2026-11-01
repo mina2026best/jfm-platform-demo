@@ -13,7 +13,7 @@ const fs = require('fs');
     page.on('console', m => { if (m.type() === 'error') errs.push(m.text().slice(0, 160)); });
     page.on('pageerror', e => errs.push('PAGEERROR: ' + String(e.message).slice(0, 160)));
     page.on('requestfailed', r => { if (r.url().startsWith('http://localhost') || r.url().startsWith('file://')) fails.push(r.url().split('/').pop() + ' (' + (r.failure() || {}).errorText + ')'); });
-    await page.goto('http://localhost:8790/' + p, { waitUntil: 'networkidle', timeout: 25000 }).catch(e => errs.push('NAV: ' + e.message.slice(0, 80)));
+    await page.goto('http://localhost:8791/' + p, { waitUntil: 'networkidle', timeout: 25000 }).catch(e => errs.push('NAV: ' + e.message.slice(0, 80)));
     await page.waitForTimeout(900);
     report.push({ page: p, errs, fails: fails.slice(0, 4) });
     await ctx.close();

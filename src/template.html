@@ -1014,6 +1014,20 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="sec-head"><span class="no">03.2 · 学校档案库</span><h2>官方数据 + 公开概况 + 审核制评价</h2></div>
     <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；每所学校含公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网，逐项标注来源）、招生与通勤档案、家长评价；争议评价走「证据 + 仲裁」流程，缺失字段如实标「暂缺」。</p>
+    <div class="sec-nav" aria-label="学校模块分区导航">
+      <span class="sn-t">按学段找模块</span>
+      <a class="sn-chip sn-x" href="#sec-koubei">小学 · 示范与口碑</a>
+      <a class="sn-chip sn-x" href="#sec-dragon">初中 · 七龙珠图谱</a>
+      <a class="sn-chip sn-x" href="#sec-tiers">梯队 · 小/初/高</a>
+      <a class="sn-chip sn-x" href="#sec-yh">初中 · 民办摇号</a>
+      <a class="sn-chip sn-x" href="#sec-map">通用 · 通勤地图</a>
+      <a class="sn-chip sn-x" href="#sec-lj">通用 · 两江专题</a>
+      <a class="sn-chip sn-x" href="#sec-pq">通用 · 划片速查</a>
+      <a class="sn-chip sn-x" href="#sec-qu">通用 · 区县指南</a>
+      <a class="sn-chip sn-ext" href="gaozhong.html">高中与联招库 ↗</a>
+      <a class="sn-chip sn-ext" href="daxue.html">大学与专业库 ↗</a>
+    </div>
+    <div class="fact-filter" id="school-stage-filter" aria-label="按学段筛选" style="margin-bottom:10px"></div>
     <div class="fact-filter" id="school-filter" style="margin-bottom:10px">
       <button class="ff on" data-sf="all" onclick="filterSchools('all')">全部（__SCH_ALL__）</button>
       <button class="ff" data-sf="公办" onclick="filterSchools('公办')">公办（__SCH_GG__）</button>
@@ -1022,15 +1036,15 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     <div class="fact-filter" id="school-region-filter" aria-label="按区县筛选" style="margin-bottom:10px"></div>
     <p class="sc-stats" id="sc-stats"></p>
     <div class="school-grid" id="school-grid"></div>
-    <h3 class="qug-h" style="margin-top:26px">两江新区升学专题（原江北/渝北家长必读）</h3>
+    <h3 id="sec-lj" class="qug-h" style="margin-top:26px">两江新区升学专题（原江北/渝北家长必读）</h3>
     <div id="lj-guide"></div>
-    <h3 class="qug-h" style="margin-top:26px">按通勤看学校 · 主城九区示意</h3>
+    <h3 id="sec-map" class="qug-h" style="margin-top:26px">按通勤看学校 · 主城九区示意</h3>
     <div id="school-map"></div>
-    <h3 class="qug-h" style="margin-top:26px">七龙珠系办学图谱（直属 / 分校区 / 共办校怎么区分）</h3>
+    <h3 id="sec-dragon" class="qug-h" style="margin-top:26px">七龙珠系办学图谱（直属 / 分校区 / 共办校怎么区分）</h3>
     <div id="dragon-graph"></div>
-    <h3 class="qug-h" style="margin-top:26px">各区口碑小学参考名单（民间口径 · 不排位次）</h3>
+    <h3 id="sec-koubei" class="qug-h" style="margin-top:26px">各区口碑小学参考名单（民间口径 · 不排位次）</h3>
     <div id="koubei-list"></div>
-    <h3 class="qug-h" style="margin-top:26px">名校梯队 · 民间口径参考（小学 / 初中 / 高中）</h3>
+    <h3 id="sec-tiers" class="qug-h" style="margin-top:26px">名校梯队 · 民间口径参考（小学 / 初中 / 高中）</h3>
     <div class="cmp-note" style="margin-bottom:12px"><b>必读声明</b>　以下梯队为<b>民间流传口径</b>综合整理：无官方背书、<b>梯队内不分先后</b>、动态变化（民转公/集团化持续推进）；不构成择校建议，具体以当年招生政策与孩子适配度为准。小学梯队依据官方示范小学历批评定名单（见上方 A 段）；中学梯队为民间口径，各校客观事实（关系/师资/招生）见<a href="#dragon-graph">七龙珠系办学图谱</a>与<a href="gaozhong.html">高中与联招库</a>。</div>
     <div class="dx-notes">
       <div><b>小学 · 官方梯队锚点</b><br/>以市级示范小学历批评定名单为梯队依据：<b>首批 11 所</b>（人民/巴蜀/人和街系统内的渝中一实验·二实验/珊瑚/谢家湾/朝阳/渝北一实验等，名单见上方 A 段）为第一方阵，二至五批依次递进；「五朵金花」（巴蜀/人民/人和街/谢家湾/树人）均在此列。民间口径中的区域头部校（中华路/马家堡/沙坪坝小学/南开小学/融汇等）已在下方各区口碑名单标注。</div>
@@ -1038,13 +1052,13 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <div><b>高中 · 四大金刚与三大方阵（民间口径）</b><br/><b>第一方阵（四大金刚）</b>：巴蜀、八中、南开、一中——传统认知中的全市头部，竞赛与高分段优势突出。<br/><b>第二方阵（七龙珠其余）</b>：西大附中、育才、一外——西附理科与科创、育才陶行知特色与艺体文科、一外外语保送与多语种出口各具特色。<br/><b>区重点「小金刚」</b>：11 中、18 中、求精、29 中、杨家坪、朝阳、铁路中学等各区龙头。区县龙头：万州高级中学、涪陵五中、江津中学、合川中学、永川中学等（渝东北/渝西区域口碑突出，非联招区县口径见「区县中考机制差异」）。</div>
       <div><b>重要说明（原文要点）。</b>梯队划分无官方背书；民转公、集团化办学持续推进，办学规模与生源结构动态变化；<b>择校需结合孩子学习特点、家庭区位与升学规划综合判断，适合的学校才是最优选择</b>。</div>
     </div>
-    <h3 class="qug-h" style="margin-top:26px">民办摇号 · 怎么查与防骗</h3>
+    <h3 id="sec-yh" class="qug-h" style="margin-top:26px">民办摇号 · 怎么查与防骗</h3>
     <div id="yh-guide"></div>
-    <h3 class="qug-h" style="margin-top:26px">划片公告速查（9 区 · 2026/2025 官方直链）</h3>
+    <h3 id="sec-pq" class="qug-h" style="margin-top:26px">划片公告速查（9 区 · 2026/2025 官方直链）</h3>
     <div id="pq-guide"></div>
     <h3 class="qug-h" style="margin-top:26px">各区口碑小学参考名单（民间口径 · 不排位次）</h3>
     <div id="koubei-list"></div>
-    <h3 class="qug-h">区县入学指南 · 官方入口（11 区）</h3>
+    <h3 id="sec-qu" class="qug-h">区县入学指南 · 官方入口（11 区）</h3>
     <p class="sec-desc">各区招生细则由辖区教委发布：点击直达区政府/区教委官方页面，逐区附办理要点。入口于 2026-09-30 全部实测可达。</p>
     <div class="qug-grid" id="qu-guide"></div>
   </div>

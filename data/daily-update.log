@@ -2452,3 +2452,109 @@ After doing this, you may fix the identity used for this commit with:
    59344b09..60c4e2a9  main -> main
 PUSH OK
 ===== 完成 2026-11-02 08:52:54 =====
+===== [0/4] 对齐线上 2026-11-02 13:45:05 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆招考网: 49 条候选
+  重庆市教育委员会: 67 条候选
+  重庆市教育考试院: 75 条候选
+  人民网重庆: 5 条候选
+  上游新闻: 1 条候选
+  中国教育在线: 55 条候选
+  重庆市政府网: 5 条候选
+  新华网重庆: 7 条候选
+  渝中区教委: 0 条候选
+  重庆日报: 0 条候选
+  华龙网: 6 条候选
+  教育部: 50 条候选
+  华龙网教育: 6 条候选
+  重庆大学新闻网: 40 条候选
+  大渝网: 0 条候选
+  中国教育新闻网: 222 条候选
+  重庆网络广播电视台: 5 条候选
+== 去重后新候选: 205 条（每源限 25） ==
+   · 重庆市2026年下半年中小学教师资格考试（面试）公告 2026-10-30 | https://www.cqzk.com.cn/SHKS/SHKS_news/2116094734378831872.html
+   · 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqzk.com.cn/CRKS/CRKS_news/2112363462871584768.html
+   · 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqzk.com.cn/ZXKS/ZXKS_news/2111991214029508608.html
+   · 2026—2027学年度第一学期普通高中学业水平合格性考试及报名有关安排的公... 2026-10-08 | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html
+   · 重庆市2026年高职分类考试成绩公布时间 2026-03-24 | https://www.cqzk.com.cn/announcement/2036397436177195008.html
+   · 2026年普通高校招生第七阶段（高职专科批）第二次... | https://www.cqzk.com.cn/PTGK/PTGK_news/2086290914155405312.html
+   · 2026—2027学年度第一学期普通高中学业水平合格性... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html
+   · 2025-2026学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2035894402426839040.html
+   · 2025-2026学年度第一学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1967473383513497600.html
+   · 关于2024-2025学年度第二学期普通高中学业水平合格... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1907706935845158912.html
+   · 2023-2024学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1773610690454487040.html
+   · 重庆市2023-2024学年度第一学期普通高中学业水平合... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1706870833259458560.html
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 69 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：90 条（种子 21 + 采集已审 69）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 19 页：7698203458721788520, 7682991429920139363, 7665946298722180736, 7628920200825556264, 7641052428171948451, 7644783534401424678, 7694872958120502373, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 37 项 · 合计 646 KB
+  · assets/app.78fdb1f7.css · 116 KB
+  · assets/app.5519dc18.js · 250 KB
+  · assets/data.85f09ed5.js · 305 KB
+  · index.html · 38 KB · sha256:56b2312d1773
+  · news.html · 30 KB · sha256:2dde16a89625
+  · calendar.html · 27 KB · sha256:bd6aad684790
+  · policy.html · 33 KB · sha256:de89e39d53f9
+  · quiz.html · 17 KB · sha256:3df484f6f27d
+  · schools.html · 18 KB · sha256:27b6cb80781e
+  · schools-liangjiang.html · 15 KB · sha256:c237b2fe69b2
+  · schools-map.html · 15 KB · sha256:e5ba73fbebe1
+  · schools-tier.html · 17 KB · sha256:b633e0b11838
+  · schools-koubei.html · 15 KB · sha256:ad7f8201d091
+  · schools-guide.html · 16 KB · sha256:580ce01daa61
+  · compare.html · 17 KB · sha256:1066160c6185
+  · zy.html · 23 KB · sha256:68f324f1e2a3
+  · daxue.html · 18 KB · sha256:41f8147feaa6
+  · xiaoxue.html · 17 KB · sha256:d3b2ca7e81e4
+  · chuzhong.html · 17 KB · sha256:f06efa8229d7
+  · gaozhong.html · 17 KB · sha256:6820e5412133
+  · forum.html · 17 KB · sha256:ad997749ee91
+  · community.html · 19 KB · sha256:f23a37c99b52
+  · life.html · 19 KB · sha256:fe4a797fbdd1
+  · beans.html · 16 KB · sha256:e8dedc305b0f
+  · me.html · 19 KB · sha256:3ad6f6512357
+  · plans.html · 17 KB · sha256:f76c368a80ab
+  · biz.html · 16 KB · sha256:fa9076aae005
+  · data-sources.html · 15 KB · sha256:c236f4dd1911
+  · daohang.html · 16 KB · sha256:3849dc4f793a
+  · about.html · 18 KB · sha256:0693c71897a8
+  · search.html · 16 KB · sha256:431d09cfec6d
+  · contact.html · 17 KB · sha256:d5f476033384
+  · wiki.html · 19 KB · sha256:dc4fe6203c56
+  · problems.html · 15 KB · sha256:4356b58a9b11
+  · faq.html · 27 KB · sha256:7d2ab13dca47
+  · sitemap.html · 16 KB · sha256:6bc44615582a
+  · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

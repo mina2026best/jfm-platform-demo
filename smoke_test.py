@@ -37,7 +37,17 @@ CHECKS = {
                        (".news-filter .ff", 6, "分类筛选按钮")],
     "about.html":     [(".toc-grid a", 9, "册页目录条目（关于页）")],
     "data-sources.html": [("#ds-table tr", 3, "数据来源表行")],
-    "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片")],
+    "schools.html":   [("#school-grid .school-card", 20, "学校卡片"), ("#school-grid .sc-art img", 20, "学校照片"),
+                       ("#school-grid .sc-more-wrap .btn-more", 1, "列表分批「再看 N 所」按钮"),
+                       (".sch-subnav a", 6, "档案库分区导航")],
+    # v0.99：档案库拆页后的 5 个主题页（每页断言其正文容器真的被 JS 填满）
+    "schools-liangjiang.html":  [("#lj-guide .lj-card, #lj-guide *", 10, "两江专题内容"), (".sch-subnav a", 6, "分区导航")],
+    "schools-map.html":         [("#school-map svg", 1, "通勤地图 SVG"), ("#school-map .mq-blob", 9, "地图区县块"), (".sch-subnav a", 6, "分区导航")],
+    "schools-tier.html":        [("#dragon-graph .dg-card", 9, "七龙珠图谱卡片"), ("#dg-tabs .ff", 8, "图谱校系切换"), (".dx-notes div", 4, "梯队说明四段"), (".sch-subnav a", 6, "分区导航")],
+    "schools-koubei.html":      [("#koubei-list .kb-qu", 8, "口碑名单分区"), (".sch-subnav a", 6, "分区导航")],
+    "schools-guide.html":       [("#yh-guide *", 10, "民办摇号内容"), ("#pq-guide *", 20, "划片速查"), ("#qu-guide .qug-item", 11, "区县入学指南"), (".sch-subnav a", 6, "分区导航")],
+    "xiaoxue.html":             [("#koubei-list .kb-qu", 8, "示范小学/口碑分区"), ("#sec-demo", 1, "示范名单锚点")],
+    "chuzhong.html":            [("#dragon-graph .dg-card", 5, "七龙珠图谱卡片"), ("#yh-guide *", 10, "民办摇号内容")],
     "articles/article-school-54671c45.html": [("a[href^='http']", 2, "文章页外链")],
 }
 MOBILE_PAGES = ["index.html", "daohang.html", "news.html", "schools.html", "policy.html"]

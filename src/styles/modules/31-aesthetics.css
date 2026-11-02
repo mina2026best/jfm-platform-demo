@@ -295,3 +295,25 @@ html.theme-dark .toc-grid a>span:last-child{color:#9DAEC4}
 .stage-doors .sd.sd-2{background-image:url("../assets/photos/school-gate-3.jpg")}
 .stage-doors .sd.sd-3{background-image:url("../assets/photos/school-building-2.jpg")}
 .stage-doors .sd.sd-4{background-image:url("../assets/photos/school-panorama.jpg")}
+
+
+/* v0.98：学段入口四卡（原为线上手工内联样式，归位到模块层；豆瓣式：1px 边框、小圆角、无投影）
+   内容来自线上已存在的四张入口卡，仅改为源码 + 设计令牌，不新增功能。 */
+.stage-hub{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:22px 0 18px}
+.hub-card{display:flex;flex-direction:column;gap:4px;background:var(--paper);border:1px solid var(--line);
+  border-radius:6px;padding:16px;text-decoration:none;color:var(--ink);transition:border-color .18s,background .18s}
+.hub-card:hover,.hub-card:focus-visible{border-color:var(--accent);background:var(--accent-soft)}
+.hub-icon{font-size:22px;line-height:1}
+.hub-title{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy)}
+.hub-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+.hub-cta{font-size:12.5px;font-weight:600;color:var(--accent);margin-top:auto;padding-top:6px}
+@media (max-width:640px){ .stage-hub{gap:8px;margin:16px 0 12px} .hub-card{padding:12px} .hub-desc{font-size:12px} }
+
+/* v0.99：学校档案库分区导航（03.1–03.6），把原来挤在一页的主题拆开后可互达 */
+.sch-subnav-sec{padding:16px 0 0}
+.sch-subnav{display:flex;flex-wrap:wrap;gap:8px}
+.sch-subnav a{font-size:13.5px;line-height:1.4;padding:6px 13px;border:1px solid var(--line);
+  border-radius:999px;color:var(--muted);text-decoration:none;background:var(--paper)}
+.sch-subnav a:hover,.sch-subnav a:focus-visible{border-color:var(--accent);color:var(--accent)}
+.sch-subnav a.on{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);font-weight:600}
+@media (max-width:640px){ .sch-subnav{gap:6px} .sch-subnav a{font-size:12.5px;padding:5px 10px} }

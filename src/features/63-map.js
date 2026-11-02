@@ -24,7 +24,7 @@ function mapRender(){
   svg += '<text x="14" y="20" class="dx-tnote" style="font-size:11px">方位示意（非行政边界）· 点击区县筛选下方名单</text>';
   MAP_BLOBS.forEach(function(bl){
     var n = mapCount(bl.q);
-    svg += '<g class="mq-blob" onclick="filterSchoolsRegion(\'' + bl.q + '\');document.getElementById(\'school-grid\').scrollIntoView({behavior:\'smooth\'})" role="button" tabindex="0">'
+    svg += '<g class="mq-blob" data-qu="' + bl.q + '" onclick="pickDistrict(\'' + bl.q + '\')" role="button" tabindex="0">'
       + '<rect x="' + bl.x + '" y="' + bl.y + '" width="' + bl.w + '" height="' + bl.h + '" rx="14"/>'
       + '<text x="' + (bl.x + bl.w / 2) + '" y="' + (bl.y + bl.h / 2 - 4) + '" text-anchor="middle" class="mq-name">' + bl.q.replace('区', '') + '</text>'
       + '<text x="' + (bl.x + bl.w / 2) + '" y="' + (bl.y + bl.h / 2 + 14) + '" text-anchor="middle" class="mq-n">' + n + ' 所</text>'
@@ -41,4 +41,12 @@ function mapRender(){
   box.innerHTML = '<div class="mq-flex"><div class="mq-svgwrap">' + svg + '</div>'
     + '<div class="mq-listwrap"><p class="dx-count"><b>' + esc(cur) + '</b> 档案 ' + list.length + ' 所 · 点图切换区县</p><ul class="mq-list">' + (lis || '<em>该区暂无档案</em>') + '</ul>'
     + '<p class="dx-tnote">精确位置请点「高德」按校名＋地址查询；通勤建议早晚高峰实测（对比器清单有完整项）。</p></div></div>';
+}
+
+/* v0.99：03.3 地图页与 03.1 列表页已拆开——本页没有 #school-grid：
+   有 grid 就本页筛选并滚过去，没有就带着区县跳回 03.1（列表页会读 ?qu= 复原筛选）。 */
+function pickDistrict(q){
+  var g = document.getElementById('school-grid');
+  if(g){ filterSchoolsRegion(q); g.scrollIntoView({behavior:'smooth'}); return; }
+  location.href = 'schools.html?qu=' + encodeURIComponent(q);
 }

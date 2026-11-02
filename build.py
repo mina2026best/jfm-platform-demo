@@ -33,7 +33,23 @@ PAGES = [
          sections=["quiz"]),
     dict(file="schools.html", title="学校档案库 · 花期册",
          desc="学校档案库：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
-         sections=["schools"]),
+         sections=["sch-subnav", "schools"]),
+    # 档案库按主题拆页（原单页桌面 18420px / 手机 43102px）
+    dict(file="schools-liangjiang.html", title="两江新区升学专题 · 花期册",
+         desc="原江北 / 渝北家长必读：两江新区区划变动对划片、学校归属与报名口径的影响，逐条标注来源。",
+         sections=["sch-subnav", "sch-lj"]),
+    dict(file="schools-map.html", title="按通勤看学校（主城九区）· 花期册",
+         desc="主城九区学校分布示意：按片区与通勤距离看学校，点击片区直接筛出该区学校档案。",
+         sections=["sch-subnav", "sch-map"]),
+    dict(file="schools-tier.html", title="梯队与七龙珠图谱 · 花期册",
+         desc="七龙珠系直属 / 分校区 / 共办校怎么区分，小学初中高中的民间梯队口径与必读声明——不排位次、无官方背书。",
+         sections=["sch-subnav", "sch-tier"]),
+    dict(file="schools-koubei.html", title="各区口碑小学名单（民间口径）· 花期册",
+         desc="按区分组的口碑小学参考名单：来源分官方 / 媒体 / 社区三级，不排位次、不构成择校承诺。",
+         sections=["sch-subnav", "sch-koubei"]),
+    dict(file="schools-guide.html", title="民办摇号与划片速查指南 · 花期册",
+         desc="民办摇号怎么查与防骗、9 区划片公告官方直链、11 区县入学指南官方入口，入口逐条实测可达。",
+         sections=["sch-subnav", "sch-guide"]),
     dict(file="compare.html", title="择校对比器 · 花期册",
          desc="选 2–3 所学校横向对比，差异标记「●」与「仅看差异」折叠视图；数据缺失如实标注。",
          sections=["compare"]),
@@ -150,6 +166,8 @@ def build_css():
     return css
 
 def build_js():
+    """返回 (data_js, code_js)：数据与代码分文件——数据每天变，代码不变，
+    合在一起会让每日更新把整个 bundle 换名、回访用户重下全部代码。"""
     data = read(f"{SRC}/data.js")
     guard("data.js", data)
     dn = os.path.join(SRC, "data-news.js")
@@ -202,6 +220,9 @@ def build_js():
         _schools = json.load(open(sj, encoding="utf-8"))
         data += "\n\nvar SCHOOL_DB = " + json.dumps(_schools, ensure_ascii=False) + ";"
     feats = []
+    data_feats = []
+    # 纯数据模块进数据文件（改数据不动代码缓存）
+    DATA_FILES = {"10-demo-data.js", "55-daxue-data.js", "61-dragon-data.js", "64-koubei-data.js"}
     fdir = f"{SRC}/features"
     order = [l.strip() for l in read(f"{fdir}/_order.txt").splitlines() if l.strip() and not l.startswith("#")]
     seen = set()
@@ -212,11 +233,12 @@ def build_js():
         seen.add(f)
         body = read(p)
         guard(f"features/{f}", body)
-        feats.append(f"/* ---------- {f[:-3]} ---------- */\n" + body)
+        block = f"/* ---------- {f[:-3]} ---------- */\n" + body
+        (data_feats if f in DATA_FILES else feats).append(block)
     for f in sorted(os.listdir(fdir)):
         if f.endswith(".js") and f not in seen and f != "_order.txt":
             sys.exit(f"[build] 模块 {f} 未登记进 _order.txt")
-    return data + "\n\n" + "\n\n".join(feats)
+    return data + "\n\n" + "\n\n".join(data_feats), "\n\n".join(feats)
 
 def nav_html(cur_file, demo_tag, searchbox):
     """生成顶栏（含真跳转链接）。cur_file 用于 aria-current。"""
@@ -536,6 +558,15 @@ def build_page(page, tpl, secs, css, js):
     if 'id="main"' not in out:
         out = out.replace('<a class="skip-link" href="#main">跳到主要内容</a>',
                           '<a class="skip-link" href="index.html">回到首页</a>')
+    # og:* 页面级差异化（原全站同一串）
+    _ogt = (page.get("title") or "").replace('"', "&quot;")
+    _ogd = (page.get("desc") or "").replace('"', "&quot;")
+    if _ogt:
+        out = out.replace('<meta property="og:title" content="花期册 - 重庆升学政策与志愿指南" />',
+                          f'<meta property="og:title" content="{_ogt}" />')
+    if _ogd:
+        out = out.replace('<meta property="og:description" content="小升初 / 初升高 / 高考志愿三条主线：可核验的政策原文、节点日历与工具，逐条标注来源。" />',
+                          f'<meta property="og:description" content="{_ogd}" />')
     return encode_hrefs(out)
 
 def main():
@@ -561,13 +592,14 @@ def main():
             tpl = tpl.replace("__DX_ALL__", "129")
     except Exception as _e:
         print('[warn] 学校计数注入失败：', repr(_e))
-    css, js = build_css(), build_js()
+    css = build_css()
+    data_js, js = build_js()
     # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
     _pmap = {}
     for _m in re.finditer(r'<div class="pol-item"[^>]*>\s*<h4><a class="art-t" href="articles/(article-policy-[a-z0-9]+\.html)">([^<]+)</a>', tpl):
         _pmap["P|" + _m.group(2).strip()] = _m.group(1)
     if _pmap:
-        js += "\n;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in " + json.dumps(_pmap, ensure_ascii=False) + "){ ARTMAP[k] = " + json.dumps(_pmap, ensure_ascii=False) + "[k]; } } })();"
+        data_js += "\n;(function(){ if(typeof ARTMAP !== 'undefined'){ for(var k in " + json.dumps(_pmap, ensure_ascii=False) + "){ ARTMAP[k] = " + json.dumps(_pmap, ensure_ascii=False) + "[k]; } } })();"
     secs = extract_sections(tpl)
     missing = [p for pg in PAGES for p in pg["sections"] if p not in secs]
     if missing:
@@ -618,18 +650,26 @@ def main():
     os.makedirs(assets_dir, exist_ok=True)
     css_hash = hashlib.sha256(full_css.encode()).hexdigest()[:8]
     js_hash = hashlib.sha256(js.encode()).hexdigest()[:8]
+    data_hash = hashlib.sha256(data_js.encode()).hexdigest()[:8]
     css_file = f"app.{css_hash}.css"
     js_file = f"app.{js_hash}.js"
+    data_file = f"data.{data_hash}.js"
     with open(os.path.join(assets_dir, css_file), "w", encoding="utf-8") as f:
         f.write(full_css)
     with open(os.path.join(assets_dir, js_file), "w", encoding="utf-8") as f:
         f.write(js)
+    with open(os.path.join(assets_dir, data_file), "w", encoding="utf-8") as f:
+        f.write(data_js)
+    # 数据必须先于代码执行（两个 defer 按文档顺序）
+    js_tags = f'<script src="assets/{data_file}" defer></script>\n<script src="assets/{js_file}" defer></script>'
     # 清理旧哈希产物，防 assets/ 膨胀
     for fn in os.listdir(assets_dir):
-        if fn.startswith("app.") and fn not in (css_file, js_file):
+        if (fn.startswith("app.") and fn not in (css_file, js_file)) or \
+           (fn.startswith("data.") and fn.endswith(".js") and fn != data_file):
             os.remove(os.path.join(assets_dir, fn))
     built.append(f"assets/{css_file} · {len(full_css)//1024} KB")
     built.append(f"assets/{js_file} · {len(js)//1024} KB")
+    built.append(f"assets/{data_file} · {len(data_js)//1024} KB")
 
     # 404 兜底页（门户标配）
     demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', tpl)
@@ -663,6 +703,7 @@ def main():
             # v0.82：分组目录式站点地图（替代遗留旧版）
             groups = [
                 ("升学工具", "#0E7C66", [("quiz.html","入学自查"),("schools.html","学校档案"),("compare.html","择校对比"),("zy.html","志愿参考"),("daxue.html","大学与专业库"),("gaozhong.html","高中与联招库"),("calendar.html","升学日历"),("problems.html","问题速查"),("daohang.html","网址导航")]),
+                ("学校档案库", "#0E7C66", [("schools.html","03.1 总览与筛选"),("schools-liangjiang.html","03.2 两江专题"),("schools-map.html","03.3 通勤地图"),("schools-tier.html","03.4 梯队与图谱"),("schools-koubei.html","03.5 口碑名单"),("schools-guide.html","03.6 报名指南")]),
                 ("政策资料", "#24344D", [("policy.html","政策库与人话词典"),("wiki.html","升学百科"),("faq.html","家长 FAQ"),("data-sources.html","数据来源与核验")]),
                 ("资讯与社区", "#C8342B", [("news.html","升学资讯"),("forum.html","家长论坛"),("community.html","家长社区"),("life.html","生活服务"),("beans.html","升学豆")]),
                 ("会员与服务", "#B45309", [("plans.html","会员体系"),("biz.html","B 端合作"),("me.html","孩子档案"),("contact.html","联系留言")]),
@@ -688,8 +729,8 @@ def main():
                        '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
-            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261025" />')
-            out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261101" />')
+            out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
             # 替换主内容：定位 <main>…</main>
             import re as _re
             out = _re.sub(r'<main id="main">[\s\S]*?</main>', '<main id="main">' + sm_body + '</main>', out, count=1)
@@ -704,8 +745,8 @@ def main():
             total += len(out)
             continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261025" />')
-        out = out.replace("<script>//__BUILD_JS__</script>", f'<script src="assets/{js_file}" defer></script>')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261101" />')
+        out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")
         path = os.path.join(OUT_DIR, pg["file"])
@@ -777,7 +818,8 @@ def main():
         if _fn.endswith(".html"):
             _p = os.path.join(art_dir, _fn)
             _h = open(_p, encoding="utf-8").read()
-            _h2 = encode_hrefs(_h)
+            _h2 = encode_hrefs(_h).replace(f'<script src="../assets/{js_file}" defer></script>',
+                                           f'<script src="../assets/{data_file}" defer></script>\n<script src="../assets/{js_file}" defer></script>')
             if _h2 != _h:
                 open(_p, "w", encoding="utf-8").write(_h2)
     # sitemap 生成（GitHub Pages 域名，带 lastmod）

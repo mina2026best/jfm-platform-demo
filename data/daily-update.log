@@ -2664,3 +2664,118 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main fcf008c7] 每日资讯自动更新 2026-11-03
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 281 files changed, 386 insertions(+), 280 deletions(-)
+ rename assets/{data.f178553a.js => data.20094645.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+   90d1c1be..fcf008c7  main -> main
+PUSH OK
+===== 完成 2026-11-03 13:45:12 =====
+===== [0/4] 对齐线上 2026-11-04 09:17:08 =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Could not resolve host: github.com
+[warn] fetch 失败（网络），按本地状态继续
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  新华网重庆: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  人民网重庆: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆招考网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  上游新闻: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  华龙网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆市教育考试院: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  中国教育在线: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆日报: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  中国教育新闻网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆市政府网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  华龙网教育: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆市教育委员会: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  教育部: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  渝中区教委: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆网络广播电视台: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  重庆大学新闻网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+  大渝网: 0 条候选 · ERR:<urlopen error [Errno 8] nodename nor servname provided, or not known>
+== 去重后新候选: 0 条（每源限 25） ==
+[ok] 新增发布 0 条；v2.0 门槛拦截 0 条；collected 累计 74 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：95 条（种子 21 + 采集已审 74）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 19 页：7641052428171948451, 7628920200825556264, 7644783534401424678, 7698203458721788520, 7694872958120502373, 7682991429920139363, 7665946298722180736, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 37 项 · 合计 671 KB
+  · assets/app.78fdb1f7.css · 116 KB
+  · assets/app.7dc95050.js · 249 KB
+  · assets/data.19d03691.js · 307 KB
+  · index.html · 38 KB · sha256:371666d54e26
+  · news.html · 31 KB · sha256:d5ab7b5cc658
+  · calendar.html · 28 KB · sha256:75a2e15903f1
+  · policy.html · 34 KB · sha256:6a252e605922
+  · quiz.html · 18 KB · sha256:39139084ef3f
+  · schools.html · 20 KB · sha256:a0d2212d2c90
+  · schools-liangjiang.html · 16 KB · sha256:783bc41f353b
+  · schools-map.html · 16 KB · sha256:42f9ea3118cb
+  · schools-tier.html · 17 KB · sha256:592e6be7966e
+  · schools-koubei.html · 16 KB · sha256:d97e4c421f2a
+  · schools-guide.html · 16 KB · sha256:ce98b2b2c4cb
+  · compare.html · 18 KB · sha256:fb3329f4f814
+  · zy.html · 24 KB · sha256:eba5d7c5bee2
+  · daxue.html · 19 KB · sha256:508b349379ec
+  · xiaoxue.html · 17 KB · sha256:c28f7f502ffb
+  · chuzhong.html · 17 KB · sha256:09c8501cf4ef
+  · gaozhong.html · 18 KB · sha256:813b1e65cafb
+  · forum.html · 18 KB · sha256:91c349401d12
+  · community.html · 19 KB · sha256:c20a96aa5615
+  · life.html · 20 KB · sha256:eedbb0b46b66
+  · beans.html · 16 KB · sha256:7b91b44ca4f2
+  · me.html · 20 KB · sha256:4800979b2e6a
+  · plans.html · 17 KB · sha256:b18fdacec63b
+  · biz.html · 17 KB · sha256:60f4b00ccc4b
+  · data-sources.html · 16 KB · sha256:c882acdaa520
+  · daohang.html · 17 KB · sha256:f2531e4f07bd
+  · about.html · 18 KB · sha256:f72be4492e3d
+  · search.html · 16 KB · sha256:8ae68ee00fa1
+  · contact.html · 18 KB · sha256:7a576c0199f0
+  · wiki.html · 20 KB · sha256:ec0b70213474
+  · problems.html · 16 KB · sha256:7df59089eb54
+  · faq.html · 28 KB · sha256:8101a4b79b4b
+  · sitemap.html · 17 KB · sha256:4af1f5851e6e
+  · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

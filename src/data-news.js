@@ -1,12 +1,38 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "【市教委】550场双选！重庆启动“渝快就·创未来”促就业系列活动",
+    "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261104_16351122.html",
+    "src": "重庆市政府网",
+    "cat": "政策速递",
+    "sum": "",
+    "stages": [],
+    "date": "2026-11-04",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "【市教委】重庆：中职学校安排实习原则上不跨省",
     "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261103_16343670.html",
     "src": "重庆市政府网",
     "cat": "政策速递",
     "sum": "",
     "stages": [],
+    "date": "2026-11-03",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "重庆市人民政府教育督导室关于开展县域学前教育普及普惠市级评估的公告",
+    "url": "http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261103_16345815.html",
+    "src": "重庆市教育委员会",
+    "cat": "政策速递",
+    "sum": "根据中共中央国务院《关于学前教育深化改革规范发展的若干意见》、教育部《县域学前教育普及普惠督导评估办法》以及重庆市《县域学前教育普及普惠督导评估工作方案》要求，经研究，定于2026年11月4日至6日对北碚区、大足区、璧山区、开州区、城口县开展学前教育普及普惠市级评估实地核查。实地核查期间，如有相关意见，请以电话、电子邮件等方式向我室或教育部教育督导局反映。重庆市人民政府教育督导室 监督举报电话：0",
+    "stages": [
+      "幼升小"
+    ],
     "date": "2026-11-03",
     "body": "",
     "reviewed": true,
@@ -1172,4 +1198,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-04 09:17", "seed": 21, "collected": 74, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-04 13:30", "seed": 21, "collected": 76, "fetchedPending": 0};

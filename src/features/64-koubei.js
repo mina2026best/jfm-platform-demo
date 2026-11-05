@@ -2,6 +2,8 @@
    数据：64-koubei-data.js（三源融合：研究员采集 + 来源升级 + 示范批次官方名单）。
    红线：示范名单为官方历史评定（仅名单不排名）；口碑为民间口径分层标注、不排位次。 */
 function kbCn(n){ return ['一','二','三','四','五'][n - 1] || n; }
+var kbFilter = '';
+function kbSetFilter(q){ kbFilter = q || ''; kbRender(); }
 function kbRender(){
   var box = document.getElementById('koubei-list');
   if(!box || typeof KOUBEI === 'undefined') return;
@@ -15,12 +17,16 @@ function kbRender(){
     }).join('')
     + '<p class="dx-tnote">名单出处：' + esc(KOUBEI.demoSrc.o) + '（<a class="art-link" href="' + esc(KOUBEI.demoSrc.u) + '" target="_blank" rel="noopener">原文 ↗</a>）。示范评定为历史口径，部分校名沿用历史称呼（如渝中区第一/第二实验小学、铜梁县实验小学）；名单仅陈述评定事实，不构成择校建议。</p>';
   /* B. 各区口碑参考（含示范徽标） */
+  var allQ = [];
+  KOUBEI.items.forEach(function(it){ if(allQ.indexOf(it.qu) < 0) allQ.push(it.qu); });
+  allQ.sort();
   var byq = {};
   KOUBEI.items.forEach(function(it){
     var q = it.qu || '其他';
     (byq[q] = byq[q] || []).push(it);
   });
   var qs = Object.keys(byq).sort();
+  if(kbFilter && byq[kbFilter]) { var filtered = {}; filtered[kbFilter] = byq[kbFilter]; byq = filtered; }
   var LV = { '官方': 'ok', '媒体': 'ok', '社区': 'pend' };
   var secB = qs.map(function(q){
     var its = byq[q].sort(function(a, b){ return a.name < b.name ? -1 : 1; });
@@ -38,6 +44,11 @@ function kbRender(){
       }).join('') + '</div></div>';
   }).join('');
   box.innerHTML = '<div class="cmp-note" style="margin-bottom:12px"><b>使用须知</b>　示范名单为官方历史评定（仅名单、不排名）；口碑参考为<b>民间口径</b>：非官方评价、不排位次、不构成择校承诺。来源三级——【官方】【媒体】可溯源、【社区】仅参考。</div>'
-    + secA + '<h4 class="kb-sub" style="margin-top:18px">B · 各区口碑参考名单（民间口径 · 不排位次）</h4>' + secB
+    + secA + '<div class="kb-filterbar" style="margin-bottom:12px"><span class="sn-t">筛选区县</span>'
+    + allQ.map(function(q){
+        var n = KOUBEI.items.filter(function(it){ return it.qu === q; }).length;
+        return '<button class="ff' + (kbFilter === q ? ' on' : '') + '" onclick="kbSetFilter(\'' + q + '\')">' + esc(q) + '（' + n + '）</button>';
+      }).join('') + '</div>'
+    + '<h4 class="kb-sub" style="margin-top:18px">B · 各区口碑参考名单（来源分层 · 不排位次）</h4>' + secB
     + '<p class="dx-tnote">名单为编辑部采集整理（2026-10-31/11-01），逐校标注来源；『仅参考』的社区口径请自行甄别。遗漏或异议走<a href="contact.html" style="color:var(--accent)">纠错通道</a>。</p>';
 }

@@ -1,6 +1,20 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "2027年高考报名陆续启动 教育部发布防骗预警",
+    "url": "https://www.cqnews.net/web/content_1567859439457996800.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "2027年高考报名陆续启动 教育部发布防骗预警",
+    "stages": [
+      "高考志愿"
+    ],
+    "date": "2026-11-05",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "【市教委】550场双选！重庆启动“渝快就·创未来”促就业系列活动",
     "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261104_16351122.html",
     "src": "重庆市政府网",
@@ -1210,4 +1224,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-05 08:05", "seed": 21, "collected": 77, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-05 13:30", "seed": 21, "collected": 78, "fetchedPending": 0};

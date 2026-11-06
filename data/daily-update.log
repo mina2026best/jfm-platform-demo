@@ -3160,3 +3160,131 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main d8b654c3] 每日资讯自动更新 2026-11-05
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 281 files changed, 388 insertions(+), 280 deletions(-)
+ rename assets/{data.c35b9bc4.js => data.98a2177d.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Recv failure: Operation timed out
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Failed to connect to github.com port 443 after 75024 ms: Couldn't connect to server
+fatal: unable to access 'https://github.com/mina2026best/jfm-platform-demo.git/': Failed to connect to github.com port 443 after 75020 ms: Couldn't connect to server
+   d1827334..d8b654c3  main -> main
+PUSH OK
+===== 完成 2026-11-05 13:51:08 =====
+===== [0/4] 对齐线上 2026-11-06 08:23:17 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆招考网: 50 条候选
+  重庆市教育委员会: 68 条候选
+  重庆市教育考试院: 75 条候选
+  重庆日报: 0 条候选
+  重庆市政府网: 5 条候选
+  教育部: 54 条候选
+  上游新闻: 0 条候选
+  华龙网: 4 条候选
+  人民网重庆: 6 条候选
+  中国教育在线: 60 条候选
+  渝中区教委: 0 条候选
+  新华网重庆: 6 条候选
+  重庆大学新闻网: 40 条候选
+  中国教育新闻网: 223 条候选
+  重庆网络广播电视台: 5 条候选
+  华龙网教育: 6 条候选
+  大渝网: 0 条候选
+== 去重后新候选: 202 条（每源限 25） ==
+   · 关于2026年下半年重庆市中小学教师资格考试（面试）考区设置的温馨提示 2026-11-03 | https://www.cqzk.com.cn/SHKS/SHKS_news/2117454426682265600.html
+   · 重庆市2026年下半年中小学教师资格考试（面试）公告 2026-10-30 | https://www.cqzk.com.cn/SHKS/SHKS_news/2116094734378831872.html
+   · 重庆市2027年普通高校专升本统一考试大纲 2026-10-20 | https://www.cqzk.com.cn/CRKS/CRKS_news/2112363462871584768.html
+   · 重庆市2026年下半年高等教育自学考试温馨提醒 2026-10-19 | https://www.cqzk.com.cn/ZXKS/ZXKS_news/2111991214029508608.html
+   · 重庆市2026年高职分类考试成绩公布时间 2026-03-24 | https://www.cqzk.com.cn/announcement/2036397436177195008.html
+   · 2026年普通高校招生第七阶段（高职专科批）第二次... | https://www.cqzk.com.cn/PTGK/PTGK_news/2086290914155405312.html
+   · 2026—2027学年度第一学期普通高中学业水平合格性... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2108026031468810240.html
+   · 2025-2026学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/2035894402426839040.html
+   · 2025-2026学年度第一学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1967473383513497600.html
+   · 关于2024-2025学年度第二学期普通高中学业水平合格... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1907706935845158912.html
+   · 2023-2024学年度第二学期普通高中学业水平合格性考... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1773610690454487040.html
+   · 重庆市2023-2024学年度第一学期普通高中学业水平合... | https://www.cqzk.com.cn/XYSPKS/XYSPKS_news/1706870833259458560.html
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 78 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：99 条（种子 21 + 采集已审 78）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 20 页：7682991429920139363, 7665946298722180736, 7644783534401424678, 7641052428171948451, 7698203458721788520, 7628920200825556264, 7694872958120502373, 7596147910983666994, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 37 项 · 合计 672 KB
+  · assets/app.78fdb1f7.css · 116 KB
+  · assets/app.3a602057.js · 250 KB
+  · assets/data.930c96f7.js · 309 KB
+  · index.html · 38 KB · sha256:10e289f37bfe
+  · news.html · 31 KB · sha256:390c68fff958
+  · calendar.html · 28 KB · sha256:fcb6e6d29b46
+  · policy.html · 34 KB · sha256:6aeceb6f769e
+  · quiz.html · 18 KB · sha256:a379cb3470da
+  · schools.html · 20 KB · sha256:06555248dd45
+  · schools-liangjiang.html · 16 KB · sha256:15ffdc7ea851
+  · schools-map.html · 16 KB · sha256:6bfb49f29b3e
+  · schools-tier.html · 17 KB · sha256:0e9912336eb5
+  · schools-koubei.html · 16 KB · sha256:08be7f12bad4
+  · schools-guide.html · 16 KB · sha256:647483b77576
+  · compare.html · 18 KB · sha256:7ab1717e26b0
+  · zy.html · 24 KB · sha256:2b6e6e350374
+  · daxue.html · 19 KB · sha256:ab07b9265f4e
+  · xiaoxue.html · 17 KB · sha256:7ce83d35ce53
+  · chuzhong.html · 17 KB · sha256:8975b3cd4ff5
+  · gaozhong.html · 18 KB · sha256:4e080b45f98c
+  · forum.html · 18 KB · sha256:e8d0175c2e0c
+  · community.html · 19 KB · sha256:ce098aefe3a1
+  · life.html · 20 KB · sha256:2e1eb1d4dde3
+  · beans.html · 16 KB · sha256:3dcc562e3058
+  · me.html · 20 KB · sha256:67629bdb6c3a
+  · plans.html · 17 KB · sha256:a535c1495489
+  · biz.html · 17 KB · sha256:87312c42bba7
+  · data-sources.html · 16 KB · sha256:6c7efa6e9ef5
+  · daohang.html · 17 KB · sha256:1cad94626b12
+  · about.html · 18 KB · sha256:e9fe10928034
+  · search.html · 16 KB · sha256:024f0a066d76
+  · contact.html · 18 KB · sha256:e3797c613560
+  · wiki.html · 20 KB · sha256:7891e73b58f9
+  · problems.html · 16 KB · sha256:101e5b0bbc26
+  · faq.html · 28 KB · sha256:0ab8a870dac8
+  · sitemap.html · 17 KB · sha256:c7ae111686cb
+  · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

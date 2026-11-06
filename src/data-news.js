@@ -1,6 +1,18 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "【市教委】让残疾孩子享受更优质教育资源！重庆推进高中阶段融合教育发展",
+    "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261106_16366192.html",
+    "src": "重庆市政府网",
+    "cat": "政策速递",
+    "sum": "",
+    "stages": [],
+    "date": "2026-11-06",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "2027年高考报名陆续启动 教育部发布防骗预警",
     "url": "https://www.cqnews.net/web/content_1567859439457996800.html",
     "src": "华龙网",
@@ -1224,4 +1236,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-06 13:30", "seed": 21, "collected": 78, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-06 13:45", "seed": 21, "collected": 79, "fetchedPending": 0};

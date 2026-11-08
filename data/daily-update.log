@@ -3541,3 +3541,22 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · articles/ · 245 篇详情页（34 个旧文件已转为跳转）
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main c73fb360] 每日资讯自动更新 2026-11-09
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 283 files changed, 726 insertions(+), 559 deletions(-)
+ rename assets/{data.a67b28cb.js => data.9b930d88.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+   433eec55..c73fb360  main -> main
+PUSH OK
+===== 完成 2026-11-09 07:50:19 =====

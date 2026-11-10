@@ -1,6 +1,30 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "渝中区开展青少年安全自护教育消防探营活动",
+    "url": "http://cq.people.com.cn/n2/2026/1109/c365416-41745870.html",
+    "src": "人民网重庆",
+    "cat": "安全提醒",
+    "sum": "人民网重庆11月9日电（陈琦、刘敏）在全国消防日来临之际，渝中区青少年校外活动中心开展“聚焦119•童心致敬火焰蓝”青少年安全自护教育消防探营活动，让青少年在沉浸式体验中学习消防知识，切身感受“火焰蓝",
+    "stages": [],
+    "date": "2026-11-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "国家发改委：多渠道增加普通高中和高等教育学位供给",
+    "url": "https://www.eol.cn/news/yaowen/202611/t20261110_2792297.shtml",
+    "src": "中国教育在线",
+    "cat": "升学动态",
+    "sum": "11月10日，国家发展改革委社会发展司副司长黄玮茹表示，“十五五”时期，高中和高等教育学位供需矛盾凸显。",
+    "stages": [],
+    "date": "2026-11-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "【市教委】让残疾孩子享受更优质教育资源！重庆推进高中阶段融合教育发展",
     "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261106_16366192.html",
     "src": "重庆市政府网",
@@ -1250,4 +1274,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-09 13:46", "seed": 21, "collected": 80, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-10 11:25", "seed": 21, "collected": 82, "fetchedPending": 0};

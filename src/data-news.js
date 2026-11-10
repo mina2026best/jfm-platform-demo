@@ -25,6 +25,18 @@ var NEWS_FEED = [
     "auto": true
   },
   {
+    "t": "国家发展改革委：多渠道增加普通高中和高等教育学位供给",
+    "url": "https://www.cqnews.net/web/content_1569658004975489024.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "国家发展改革委：多渠道增加普通高中和高等教育学位供给",
+    "stages": [],
+    "date": "2026-11-10",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "【市教委】让残疾孩子享受更优质教育资源！重庆推进高中阶段融合教育发展",
     "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261106_16366192.html",
     "src": "重庆市政府网",
@@ -1274,4 +1286,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-10 11:25", "seed": 21, "collected": 82, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-10 13:30", "seed": 21, "collected": 83, "fetchedPending": 0};

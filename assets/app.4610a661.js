@@ -3746,7 +3746,9 @@ function dxCard(s){
       var src = s.emp.src ? ' <a class="dx-empsrc" href="' + esc(s.emp.src.u) + '" target="_blank" rel="noopener" title="' + esc((s.emp.src.o || '') + '《' + (s.emp.src.t || '') + '》' + (s.emp.src.d || '')) + '">来源 ↗</a>' : '';
       emp = '<div class="dx-emp"><i>就业</i>' + esc(s.emp.y || '') + esc(s.emp.label || '毕业去向落实率') + ' <b class="mono">' + esc(s.emp.rate) + '</b>' + (s.emp.note ? '<em>（' + esc(s.emp.note) + '）</em>' : '') + src + '</div>';
     } else {
-      emp = '<div class="dx-emp"><i>就业</i>' + esc(s.emp.note || '以校方当年就业质量报告为准') + '</div>';
+      var noPub = ['清华大学','北京大学','浙江大学','南京大学','武汉大学','华中科技大学','中山大学','东南大学','北京师范大学','西北工业大学','厦门大学','中南大学'];
+      var isNoPub = noPub.indexOf(s.name) >= 0;
+      emp = '<div class="dx-emp"><i>就业</i>' + (isNoPub ? '<em>官方未公布总体落实率（2024 届起多校不再统一发布）</em>' : esc(s.emp.note || '以校方当年就业质量报告为准')) + '</div>';
     }
   }
   var head = '<div class="dx-head">' + dxBadge(s) + '<h4>' + esc(s.name) + '</h4>'
@@ -3781,9 +3783,14 @@ function dxFiltered(){
     }
     return true;
   });
-  if(DX.sort === 'wl' || DX.sort === 'ls' || DX.sort === 'plan'){
+  if(DX.sort === 'wl' || DX.sort === 'ls' || DX.sort === 'plan' || DX.sort === 'rank'){
     var c = DX.sort;
     list.sort(function(a, b){
+      if(c === 'rank'){
+        var ra2 = dxLatest(a, DX.cat === 'ls' ? 'ls' : 'wl'), rb2 = dxLatest(b, DX.cat === 'ls' ? 'ls' : 'wl');
+        var va2 = ra2 && ra2.rec[1] ? ra2.rec[1] : 999999, vb2 = rb2 && rb2.rec[1] ? rb2.rec[1] : 999999;
+        return va2 - vb2;
+      }
       if(c === 'plan'){
         var pa = a.plan && a.plan['2026'] ? (a.plan['2026'].wl || 0) + (a.plan['2026'].ls || 0) : -1;
         var pb = b.plan && b.plan['2026'] ? (b.plan['2026'].wl || 0) + (b.plan['2026'].ls || 0) : -1;

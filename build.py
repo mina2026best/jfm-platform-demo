@@ -660,6 +660,7 @@ def main():
         f.write(js)
     with open(os.path.join(assets_dir, data_file), "w", encoding="utf-8") as f:
         f.write(data_js)
+
     # 数据必须先于代码执行（两个 defer 按文档顺序）
     js_tags = f'<script src="assets/{data_file}" defer></script>\n<script src="assets/{js_file}" defer></script>'
     # 清理旧哈希产物，防 assets/ 膨胀

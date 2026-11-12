@@ -20,8 +20,12 @@
     .form-row textarea{min-width:0}
     .rq{grid-template-columns:1fr}
     .wrap{padding:0 16px}
-    .searchbox{max-width:none;flex:1;min-width:0}
-    .top .wrap{gap:10px}
+    .searchbox{max-width:none;flex:1 1 100%;min-width:0}
+    .top .wrap{gap:10px;flex-wrap:wrap;height:auto;min-height:56px;padding:6px 0}
+    .top .logo{order:1}
+    .fs-ctl{order:2;margin-left:auto;margin-right:10px}
+    .nav-burger{order:3}
+    .searchbox{order:4}
     .demo-tag{display:none}
     dialog{width:96%}
   }

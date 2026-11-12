@@ -21,6 +21,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 NEWS = os.path.join(ROOT, "src", "news")
 SEED = os.path.join(NEWS, "seed.json")
 COLLECTED = os.path.join(NEWS, "collected.json")
+DENY = os.path.join(NEWS, "url_deny.json")
 SOURCES = os.path.join(NEWS, "sources.json")
 OUT = os.path.join(ROOT, "src", "data-news.js")
 
@@ -83,9 +84,22 @@ def fetch_all():
     print(f"[fetch] 本次新增 {added} 条待审核；累计 {len(collected)} 条（reviewed=true 才会发布）")
 
 
+def _deny_filter(items, deny):
+    """v2.2：发布池全量拒链过滤（不只新增）——每日合并远端池时防止已失效链接回流。"""
+    if not deny:
+        return items, 0
+    kept = [n for n in items if not any(d in (n.get("url") or "") for d in deny)]
+    return kept, len(items) - len(kept)
+
 def generate():
     seed = load(SEED, [])
     collected = load(COLLECTED, [])
+    # v2.2：拒链清单全量过滤（含远端合并回流的死链）
+    _deny = load(DENY, [])
+    seed, _d1 = _deny_filter(seed, _deny)
+    collected, _d2 = _deny_filter(collected, _deny)
+    if _d1 + _d2:
+        print(f"[v2.2-deny] 拒链过滤 {_d1 + _d2} 条（seed {_d1} + collected {_d2}）")
     if KR is None:
         # v2.1 fail-closed：词库不可用时，只放行"人工编辑、带有效分类"的条目，
         # 抓取线（auto）条目一律不发——防止无闸内容流到页面（2026-10-20 事故固化）

@@ -4,7 +4,7 @@
 src/ 的样式 / 数据 / 功能模块 / HTML 骨架 → 多页站点（每页单文件自包含、可双击打开）。
 用法：python3 build.py   （在网站目录执行）
 """
-import os, re, sys, hashlib, json, datetime
+import os, re, sys, hashlib, json, datetime, email.utils
 
 # v0.85：站点 URL 单源配置——切换正式域名时只改这一行（canonical/OG/JSON-LD/sitemap/robots 全站生效）
 import os as _os
@@ -293,6 +293,12 @@ def nav_html(cur_file, demo_tag, searchbox):
     <a class="logo" href="{logo_href}" style="color:inherit;text-decoration:none"><span class="dot"></span>花期册<small>BLOOM ALMANAC · 重庆</small></a>
     {demo_tag}
     {searchbox}
+    <div class="fs-ctl" role="group" aria-label="字号调节">
+      <span class="fs-lead">字号</span>
+      <button type="button" class="fs-btn" data-fs="md" aria-pressed="true">A</button>
+      <button type="button" class="fs-btn" data-fs="lg" aria-pressed="false">A+</button>
+      <button type="button" class="fs-btn" data-fs="xl" aria-pressed="false">A++</button>
+    </div>
     {nav}
     <button class="nav-burger" id="navBurger" aria-label="打开菜单" aria-expanded="false" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
   </div>
@@ -300,6 +306,16 @@ def nav_html(cur_file, demo_tag, searchbox):
     {mobile_html}
   </div>
 </div>'''
+
+QUICKBAR = (
+    '<nav class="m-quickbar" aria-label="移动端快捷导航">'
+    '<a href="index.html">首页</a>'
+    '<a href="schools.html">学校库</a>'
+    '<a href="zy.html">志愿工具</a>'
+    '<a href="news.html">资讯</a>'
+    '<a href="faq.html">FAQ</a>'
+    '</nav>'
+)
 
 def convert_links(html):
     """站内 #锚点 → 对应 .html 页面（模板正文用）。JS 里 goSearch/goNewsByKey 等已在源码跨页化。"""
@@ -509,7 +525,7 @@ def build_page(page, tpl, secs, css, js):
     # 兜底：直接重建头部
     demo_tag_m = re.search(r'<span class="demo-tag">[^<]*</span>', body_tpl)
     demo_tag = demo_tag_m.group(0) if demo_tag_m else '<span class="demo-tag">重庆升学信息平台</span>'
-    search_m = re.search(r'<div class="searchbox">[\s\S]*?<div id="search-panel"[^>]*></div>\s*</div>', body_tpl)
+    search_m = re.search(r'<(?:div|form) class="searchbox"[\s\S]*?<div id="search-panel"[^>]*></div>\s*</(?:div|form)>', body_tpl)
     searchbox = search_m.group(0) if search_m else ""
     top_html = nav_html(fname, demo_tag, searchbox)
     # 3) 主内容
@@ -553,7 +569,7 @@ def build_page(page, tpl, secs, css, js):
 
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
         + ann + "\n\n" + top_html + "\n\n" + '<main id="main">' + hero + content + '</main>' \
-        + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
+        + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + QUICKBAR + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
     # skip-link 目标：无 #main 时指到 body 顶部主内容
     if 'id="main"' not in out:
         out = out.replace('<a class="skip-link" href="#main">跳到主要内容</a>',
@@ -590,6 +606,7 @@ def main():
         except Exception as _e2:
             print('[warn] 大学库计数注入失败：', repr(_e2))
             tpl = tpl.replace("__DX_ALL__", "129")
+        tpl = tpl.replace("__BUILD_DATE__", datetime.date.today().isoformat())
     except Exception as _e:
         print('[warn] 学校计数注入失败：', repr(_e))
     css = build_css()
@@ -730,7 +747,7 @@ def main():
                        '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
-            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261101" />')
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112b" />')
             out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
             # 替换主内容：定位 <main>…</main>
             import re as _re
@@ -746,7 +763,7 @@ def main():
             total += len(out)
             continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261101" />')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112b" />')
         out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")
@@ -860,6 +877,56 @@ def main():
         built.append(f"articles/ · {len(articles)} 篇详情页（{stale} 个旧文件已转为跳转）")
     else:
         built.append(f"articles/ · {len(articles)} 篇详情页")
+
+
+    # ---------- RSS 资讯订阅（v1.08）----------
+    def _gen_rss():
+        try:
+            _items = []
+            for _f in ("seed.json", "collected.json"):
+                _p = os.path.join(SRC, "news", _f)
+                if os.path.exists(_p):
+                    _items.extend(json.load(open(_p, encoding="utf-8")))
+            _deny = []
+            _dp = os.path.join(SRC, "news", "url_deny.json")
+            if os.path.exists(_dp):
+                _deny = json.load(open(_dp, encoding="utf-8"))
+            _items = [n for n in _items
+                      if n.get("t") and n.get("url")
+                      and not any(d in (n.get("url") or "") for d in _deny)]
+            _items.sort(key=lambda n: n.get("date") or "", reverse=True)
+            _items = _items[:30]
+            from xml.sax.saxutils import escape as _xesc
+            def _rfc822(d):
+                try:
+                    dt = datetime.datetime.strptime(d, "%Y-%m-%d").replace(
+                        hour=8, tzinfo=datetime.timezone(datetime.timedelta(hours=8)))
+                    return email.utils.format_datetime(dt)
+                except Exception:
+                    return ""
+            now = email.utils.format_datetime(datetime.datetime.now(
+                tz=datetime.timezone(datetime.timedelta(hours=8))))
+            L = ['<?xml version="1.0" encoding="UTF-8"?>',
+                 '<rss version="2.0"><channel>',
+                 '<title>' + _xesc('花期册 · 重庆升学资讯') + '</title>',
+                 '<link>' + SITE_BASE + '/</link>',
+                 '<description>' + _xesc('重庆家长升学信息平台：政策、节点与学校信息，逐条标注来源与核验日期。') + '</description>',
+                 '<language>zh-CN</language>',
+                 '<lastBuildDate>' + now + '</lastBuildDate>']
+            for n in _items:
+                desc = re.sub(r"\s+", " ", (n.get("sum") or n.get("t") or ""))[:300]
+                L.append('<item><title>' + _xesc(n["t"]) + '</title>'
+                         + '<link>' + _xesc(n["url"]) + '</link>'
+                         + '<description>' + _xesc('【' + (n.get("src") or '编辑部') + '·' + (n.get("date") or '') + '】' + desc) + '</description>'
+                         + '<pubDate>' + _rfc822(n.get("date") or "") + '</pubDate>'
+                         + '<guid>' + _xesc(n["url"]) + '</guid></item>')
+            L.append('</channel></rss>')
+            with open(os.path.join(ROOT, "rss.xml"), "w", encoding="utf-8") as f:
+                f.write("\n".join(L) + "\n")
+            built.append("rss.xml · %d 条资讯" % len(_items))
+        except Exception as e:
+            print("[build] RSS 生成失败（不影响页面）:", e)
+    _gen_rss()
 
     print(f"[build] 多页构建 OK · {len(built)} 项 · 合计 {total//1024} KB")
     for b in built:

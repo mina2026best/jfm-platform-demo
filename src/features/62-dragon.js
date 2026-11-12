@@ -32,7 +32,7 @@ function dgRender(){
         return '<a class="art-link" href="' + x.u + '" target="_blank" rel="noopener">' + esc(x.t || '原文') + ' ↗</a>';
       }).filter(Boolean).join(' · ');
       return '<article class="dg-card"><div class="dg-head"><b>' + esc(e.name) + '</b>'
-        + '<span class="pq-st st-' + badge + '">' + esc(short) + (e.doubt ? ' ⚠' : '') + '</span></div>'
+        + '<span class="pq-st st-' + badge + '">' + esc(short) + (e.doubt ? ' ⚠' : '') + '</span></div>' + (function(){ var base = e.name.split('（')[0]; var hit = typeof SCHOOL_DB !== 'undefined' && Object.keys(SCHOOL_DB).find(function(k){ return k.split('（')[0] === base; }); return hit ? ' <a class="art-link" href="schools.html?school=' + encodeURIComponent(hit) + '">档案 ↗</a>' : ''; })()
         + '<div class="dg-meta">' + esc(f['区县'] || '—') + ' · ' + esc(f['学段'] || '—') + '</div>'
         + '<div class="dg-row"><i>关系</i>' + esc(rt) + '</div>'
         + row('师资', '师资关系') + row('管理', '管理关系') + row('招生', '招生方式') + row('学费', '学费口径')

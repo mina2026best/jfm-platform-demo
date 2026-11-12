@@ -2536,7 +2536,9 @@ function schoolPhotoFile(name){
 }
 function schoolPhotoImg(name){
   var real = typeof SCHOOL_PHOTOS !== 'undefined' && SCHOOL_PHOTOS[name];
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + phW(schoolPhotoFile(name)) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
+  var pf = schoolPhotoFile(name);
+  var dim = (typeof PHOTO_DIM !== 'undefined' && PHOTO_DIM[pf]) ? ' width="' + PHOTO_DIM[pf][0] + '" height="' + PHOTO_DIM[pf][1] + '"' : '';
+  return '<img loading="lazy" decoding="async"' + dim + ' src="' + PHOTO_BASE + phW(pf) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
 }
 /* hero / 入口卡 / 页眉横幅：各类固定不同照片；仅 hero 记入已用集合（它是同页最大图，列表须避让） */
 var ART_PHOTO = {
@@ -4478,7 +4480,7 @@ function dgRender(){
         return '<a class="art-link" href="' + x.u + '" target="_blank" rel="noopener">' + esc(x.t || '原文') + ' ↗</a>';
       }).filter(Boolean).join(' · ');
       return '<article class="dg-card"><div class="dg-head"><b>' + esc(e.name) + '</b>'
-        + '<span class="pq-st st-' + badge + '">' + esc(short) + (e.doubt ? ' ⚠' : '') + '</span></div>'
+        + '<span class="pq-st st-' + badge + '">' + esc(short) + (e.doubt ? ' ⚠' : '') + '</span></div>' + (function(){ var base = e.name.split('（')[0]; var hit = typeof SCHOOL_DB !== 'undefined' && Object.keys(SCHOOL_DB).find(function(k){ return k.split('（')[0] === base; }); return hit ? ' <a class="art-link" href="schools.html?school=' + encodeURIComponent(hit) + '">档案 ↗</a>' : ''; })()
         + '<div class="dg-meta">' + esc(f['区县'] || '—') + ' · ' + esc(f['学段'] || '—') + '</div>'
         + '<div class="dg-row"><i>关系</i>' + esc(rt) + '</div>'
         + row('师资', '师资关系') + row('管理', '管理关系') + row('招生', '招生方式') + row('学费', '学费口径')

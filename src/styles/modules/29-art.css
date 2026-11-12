@@ -24,7 +24,7 @@
     border-radius:14px;overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;
     padding:30px 34px;margin:20px 0 26px;color:#fff}
   .page-banner .pb-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-  .page-banner h2{font-family:var(--serif);font-size:26px;margin:0 0 8px;color:#fff}
+  .page-banner h2{font-family:var(--serif);font-size:30px;line-height:1.25;margin:0 0 8px;color:#fff}
   .page-banner .pb-sub{font-size:14px;color:rgba(255,255,255,.78);max-width:56em;line-height:1.7}
   .page-banner .pb-art{width:200px;flex:none;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.28)}
   .page-banner .pb-art svg{aspect-ratio:10/7}

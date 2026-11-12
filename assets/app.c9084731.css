@@ -137,6 +137,10 @@
 /* v0.96 称谓词条内链强调 */
 dt[data-tg] a.art-link{white-space:nowrap}
 
+  /* v1.09：词典来源附注长 URL 断行 */
+  .pol dd span{overflow-wrap:anywhere}
+  .pol dd a{overflow-wrap:anywhere}
+
 
 /* ============ 06-compare ============ */
   /* ---------- 对比器 ---------- */
@@ -848,6 +852,12 @@ footer .logo-dot::after{content:"";position:absolute;right:-1px;top:-1px;width:6
     body{padding-bottom:52px}
     .to-top{bottom:64px}
   }
+
+  /* ---------- v1.09：收藏中心聚合 ---------- */
+  .watch-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .watch-row:last-child{border-bottom:none}
+  .watch-lab{flex:none;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;min-width:64px}
+  .sch-fav-btn.on{border-color:var(--accent);color:var(--accent)}
 
 
 /* ============ 25-lifecalc ============ */

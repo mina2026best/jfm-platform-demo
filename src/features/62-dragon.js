@@ -26,7 +26,11 @@ function dgRender(){
       var badge = 'pend';
       for(var k in DRAGON_RT){ if(short.indexOf(k) >= 0){ badge = DRAGON_RT[k]; break; } }
       function row(l, k){ var v = f[k]; return v ? '<div class="dg-row"><i>' + l + '</i>' + esc(String(v)).slice(0, 120) + '</div>' : ''; }
-      var src = (e.srcs || []).slice(0, 2).map(function(x){ return '<a class="art-link" href="' + x.u + '" target="_blank" rel="noopener">' + esc(x.t) + ' ↗</a>'; }).join(' · ');
+      var src = (e.srcs || []).slice(0, 2).map(function(x){
+        if (typeof x === 'string') { var m2 = x.match(/https?:\/\/[^\s）)，;；]+/); return m2 ? '<a class="art-link" href="' + m2[0] + '" target="_blank" rel="noopener">原文 ↗</a>' : esc(x.slice(0, 40)); }
+        if (!x || !x.u) return esc((x && x.t) || '');
+        return '<a class="art-link" href="' + x.u + '" target="_blank" rel="noopener">' + esc(x.t || '原文') + ' ↗</a>';
+      }).filter(Boolean).join(' · ');
       return '<article class="dg-card"><div class="dg-head"><b>' + esc(e.name) + '</b>'
         + '<span class="pq-st st-' + badge + '">' + esc(short) + (e.doubt ? ' ⚠' : '') + '</span></div>'
         + '<div class="dg-meta">' + esc(f['区县'] || '—') + ' · ' + esc(f['学段'] || '—') + '</div>'

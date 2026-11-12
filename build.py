@@ -675,6 +675,19 @@ def main():
         f.write(full_css)
     with open(os.path.join(assets_dir, js_file), "w", encoding="utf-8") as f:
         f.write(js)
+    # v1.09：构建期从模板日历卡提取节点数据（订阅 CTA 全站可用，P1-2）
+    import re as _re
+    _cal_nodes = []
+    for _m in _re.finditer(r'<div class="cal" data-stage="([^"]+)">([\s\S]*?)(?=<div class="cal" data-stage=|</section>|</div>\s*<div class="cal-wrap|$)', tpl):
+        _stage = _m.group(1)
+        _blk = _m.group(2)
+        _d = _re.search(r'<span class="date">([\d]{4}-[\d]{2})', _blk)
+        _t = _re.search(r'<h4>([^<]+)</h4>', _blk)
+        if _d and _t:
+            _cal_nodes.append({"stage": _stage, "date": _d.group(1), "title": _t.group(1)})
+    if _cal_nodes:
+        data_js += "\n\nvar CAL_NODES = " + json.dumps(_cal_nodes, ensure_ascii=False) + ";"
+        built.append("CAL_NODES · %d 个节点" % len(_cal_nodes))
     with open(os.path.join(assets_dir, data_file), "w", encoding="utf-8") as f:
         f.write(data_js)
 
@@ -747,7 +760,7 @@ def main():
                        '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
-            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112b" />')
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112d" />')
             out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
             # 替换主内容：定位 <main>…</main>
             import re as _re
@@ -763,7 +776,7 @@ def main():
             total += len(out)
             continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112b" />')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112d" />')
         out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")

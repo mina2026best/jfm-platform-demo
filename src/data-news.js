@@ -25,18 +25,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "国家发展改革委：多渠道增加普通高中和高等教育学位供给",
-    "url": "https://www.cqnews.net/web/content_1569658004975489024.html",
-    "src": "华龙网",
-    "cat": "升学动态",
-    "sum": "国家发展改革委：多渠道增加普通高中和高等教育学位供给",
-    "stages": [],
-    "date": "2026-11-10",
-    "body": "",
-    "reviewed": true,
-    "auto": true
-  },
-  {
     "t": "【市教委】让残疾孩子享受更优质教育资源！重庆推进高中阶段融合教育发展",
     "url": "https://www.cq.gov.cn/ywdt/zwhd/bmdt/202611/t20261106_16366192.html",
     "src": "重庆市政府网",
@@ -213,18 +201,6 @@ var NEWS_FEED = [
     "body": "",
     "reviewed": true,
     "auto": true
-  },
-  {
-    "t": "留学中心扎实开展 2026级国际新生入学教育系列活动",
-    "url": "https://news.cqu.edu.cn/info/1002/1270141.htm",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "新学期开学以来，留学中心组织开展了报到注册、健康体检、法治安全教育、校史参观等新生入学教育系列活动，全方位指引2026级国际新生适应校园生活，助力他们开启在渝求学新征程。",
-    "date": "2026-10-20",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "stages": []
   },
   {
     "t": "市纪委监委驻市教委纪检监察组组长李剑波到市学生就业与创新创业服务中心调研",
@@ -519,20 +495,6 @@ var NEWS_FEED = [
     ]
   },
   {
-    "t": "重庆市2026年高职分类考试志愿填报时间 2026-03-24",
-    "url": "https://www.cqzk.com.cn/announcement/2036397049110044672.html",
-    "src": "重庆招考网",
-    "cat": "升学动态",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "stages": [
-      "高考志愿"
-    ]
-  },
-  {
     "t": "重庆市2026年高职分类考试考生照顾资格信息公示办法 2026-03-24",
     "url": "https://www.cqzk.com.cn/announcement/2036396472120614912.html",
     "src": "重庆招考网",
@@ -611,18 +573,6 @@ var NEWS_FEED = [
     "stages": [
       "高考志愿"
     ]
-  },
-  {
-    "t": "重庆市教育考试院",
-    "url": "https://www.cqksy.cn/",
-    "src": "重庆招考网",
-    "cat": "政策速递",
-    "sum": "",
-    "date": "2026-09-29",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "stages": []
   },
   {
     "t": "不只考数学！2027丘成桐数学领军计划招生简章公布",
@@ -1248,4 +1198,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-12 08:13", "seed": 21, "collected": 80, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-12 13:58", "seed": 21, "collected": 76, "fetchedPending": 0};

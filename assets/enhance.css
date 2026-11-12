@@ -91,6 +91,18 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
 .top .wrap{flex-wrap:nowrap}
 @media (max-width:620px){.top .wrap{flex-wrap:wrap}}
 .nav-drop:nth-last-child(-n+2) .nav-panel{left:auto;right:0}
+@media (max-width:1600px) and (min-width:961px){
+  .top .wrap{gap:13px}
+  .demo-tag{display:none}
+  .logo{font-size:25px}
+  .logo small{font-size:9px}
+  .searchbox input{width:150px}
+  .fs-ctl{margin-left:4px;gap:3px}
+  .fs-btn{padding:4px 5px;font-size:11px}
+  .fs-btn[data-fs="lg"]{font-size:12px}
+  .fs-btn[data-fs="xl"]{font-size:13px}
+  .top nav.nav-main .nav-drop > a, .top nav.nav-main > a{font-size:13px;padding:7px 8px;margin:0 2px}
+}
 .top nav{display:flex;flex-wrap:nowrap;white-space:nowrap;min-width:0}
 .top nav a{color:var(--accent);font-size:13px;padding:4px 3px;margin:0 5px;border-radius:0;white-space:nowrap}
 .top nav a:hover{color:var(--ink)}

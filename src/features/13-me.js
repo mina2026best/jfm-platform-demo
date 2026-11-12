@@ -29,3 +29,49 @@ function removeAlert(btn){
   document.querySelectorAll('.alert-btn').forEach(function(b){ if(b.dataset.title === t){ b.classList.remove('on'); b.textContent = '设提醒'; } });
   renderAlerts(); toast('已删除提醒');
 }
+
+
+/* ---------- v1.09 收藏中心：大学关注 / 对比清单 / 学校关注 聚合 ---------- */
+function renderWatch(){
+  var box = document.getElementById('me-watch'); if(!box) return;
+  var html = '';
+  /* 大学关注 */
+  var dx = []; try{ dx = JSON.parse(localStorage.getItem('dx_fav') || '[]'); }catch(e){}
+  if(typeof DAXUE !== 'undefined' && dx.length){
+    var chips = dx.map(function(id){
+      var s2 = DAXUE.schools.find(function(x){ return String(x.id) === String(id); });
+      return s2 ? '<a class="cb-chip-inline" href="daxue.html#dx-' + s2.id + '">★ ' + esc(s2.name) + '</a>' : '';
+    }).filter(Boolean).join('');
+    if(chips) html += '<div class="watch-row"><span class="watch-lab">大学关注</span>' + chips + ' <button class="mini-btn danger" onclick="watchClear(\'dx_fav\')">清空</button></div>';
+  }
+  /* 大学对比清单 */
+  var cmp = []; try{ cmp = JSON.parse(localStorage.getItem('dx_cmp') || '[]'); }catch(e){}
+  if(typeof DAXUE !== 'undefined' && cmp.length){
+    var names = cmp.map(function(id){
+      var s3 = DAXUE.schools.find(function(x){ return String(x.id) === String(id); });
+      return s3 ? esc(s3.name) : '';
+    }).filter(Boolean).join(' vs ');
+    if(names) html += '<div class="watch-row"><span class="watch-lab">大学对比</span><span>' + names + '</span> <a class="mini-btn" href="daxue.html#compare">去恢复</a></div>';
+  }
+  /* 学校关注（K12） */
+  var sch = []; try{ sch = JSON.parse(localStorage.getItem('sch_fav') || '[]'); }catch(e){}
+  if(sch.length){
+    var schips = sch.map(function(n){
+      var art = (typeof ARTMAP !== 'undefined' && ARTMAP['S|' + n]) ? 'articles/' + ARTMAP['S|' + n] : 'schools.html';
+      return '<a class="cb-chip-inline" href="' + art + '">★ ' + esc(n) + '</a>';
+    }).join('');
+    html += '<div class="watch-row"><span class="watch-lab">学校关注</span>' + schips + ' <button class="mini-btn danger" onclick="watchClear(\'sch_fav\')">清空</button></div>';
+  }
+  if(!html){
+    box.innerHTML = '<div class="empty-mini">还没有关注任何学校或大学。在学校卡片、大学卡片上点「☆ 关注」就会出现在这里，方便随时回看。</div>';
+    return;
+  }
+  box.innerHTML = html;
+}
+function watchClear(key){
+  try{ localStorage.setItem(key, '[]'); }catch(e){}
+  renderWatch();
+  if(key === 'dx_fav' && typeof dxFavRenderBar === 'function'){ dxFavRenderBar(); }
+  if(key === 'sch_fav' && typeof schFavRestore === 'function'){ schFavRestore(); }
+  toast('已清空');
+}

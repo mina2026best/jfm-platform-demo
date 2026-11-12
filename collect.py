@@ -100,6 +100,33 @@ def generate():
     collected, _d2 = _deny_filter(collected, _deny)
     if _d1 + _d2:
         print(f"[v2.2-deny] 拒链过滤 {_d1 + _d2} 条（seed {_d1} + collected {_d2}）")
+    # v2.3：近重复过滤（同一事件多源转发，标题相似度 > 0.9 保留更早/更完整的一条）
+    def _sim_title(a, b):
+        a, b = _clean(a or ""), _clean(b or "")
+        if not a or not b:
+            return 0.0
+        if a == b:
+            return 1.0
+        sa, sb = set(a), set(b)
+        if not sa or not sb:
+            return 0.0
+        return len(sa & sb) / min(len(sa), len(sb))
+    def _dedupe(items):
+        kept = []
+        dropped = 0
+        for n in items:
+            dup = False
+            for k in kept:
+                if n.get("date") == k.get("date") and _sim_title(n.get("t"), k.get("t")) > 0.9:
+                    dup = True
+                    dropped += 1
+                    break
+            if not dup:
+                kept.append(n)
+        return kept, dropped
+    collected, _dd = _dedupe(collected)
+    if _dd:
+        print(f"[v2.3-dedupe] 近重复剔除 {_dd} 条")
     if KR is None:
         # v2.1 fail-closed：词库不可用时，只放行"人工编辑、带有效分类"的条目，
         # 抓取线（auto）条目一律不发——防止无闸内容流到页面（2026-10-20 事故固化）

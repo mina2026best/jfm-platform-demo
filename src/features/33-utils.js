@@ -1,21 +1,31 @@
-/* ---------- v0.14：大字版无障碍 / 本机数据管理 ---------- */
+/* ---------- v0.14 大字版 → v1.09 统一到三档字号体系（jfm_fs: md/lg/xl） ---------- */
 function initFsToggle(){
-  var on = false;
-  try{ on = localStorage.getItem('jfm_fs') === '1'; }catch(e){}
-  if(on) document.documentElement.classList.add('fs-large');
+  try{
+    var v = localStorage.getItem('jfm_fs');
+    if(v === '1'){ /* 旧版二值迁移 */
+      localStorage.setItem('jfm_fs', 'lg'); v = 'lg';
+    }
+    if(v === '0'){ localStorage.setItem('jfm_fs', 'md'); v = 'md'; }
+  }catch(e){}
   var btn = document.getElementById('fsToggle');
-  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); }
+  if(btn){ btn.textContent = '字号：标准 / 大 / 特大（顶部 A 组可调）'; btn.setAttribute('aria-pressed', 'false'); }
 }
 function toggleFs(){
-  var on = document.documentElement.classList.toggle('fs-large');
-  try{ localStorage.setItem('jfm_fs', on ? '1' : '0'); }catch(e){}
+  /* 兼容旧入口：循环三档 */
+  var cur = 'md';
+  try{ cur = localStorage.getItem('jfm_fs') || 'md'; }catch(e){}
+  var next = cur === 'md' ? 'lg' : (cur === 'lg' ? 'xl' : 'md');
+  try{ localStorage.setItem('jfm_fs', next); }catch(e){}
+  if(document.documentElement.setAttribute){
+    document.documentElement.setAttribute('data-fs', next);
+  }
   var btn = document.getElementById('fsToggle');
-  if(btn){ btn.textContent = on ? '大字版：已开' : '大字版：关'; btn.classList.toggle('on', on); btn.setAttribute('aria-pressed', String(on)); }
-  toast(on ? '已开启大字版（可在「我的」随时切换）' : '已恢复标准字号');
+  if(btn){ btn.textContent = '字号：' + (next === 'md' ? '标准' : next === 'lg' ? '大' : '特大'); }
+  toast('字号已切换为「' + (next === 'md' ? '标准' : next === 'lg' ? '大' : '特大') + '」（顶部 A 组可随时调）');
 }
 function exportMyData(){
   var out = {};
-  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed'].forEach(function(k){
+  ['jfm_children','jfm_active','jfm_alerts','jfm_cmp_fav','jfm_news_user','jfm_profile','jfm_fs','jfm_theme','jfm_ann_closed','sch_fav','dx_fav','dx_cmp','dx_caobiao'].forEach(function(k){
     try{ var v = localStorage.getItem(k); if(v !== null && v !== undefined) out[k] = v; }catch(e){}
   });
   out._exportedAt = new Date().toISOString();

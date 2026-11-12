@@ -85,6 +85,25 @@ function applySchoolFilters(){
   } else if(emptyEl){ emptyEl.remove(); }
 }
 
+/* ---------- v1.09 学校关注（收藏中心聚合到「我的」页） ---------- */
+function schFavLoad(){ try{ return JSON.parse(localStorage.getItem('sch_fav') || '[]'); }catch(e){ return []; } }
+function schFavSave(a){ try{ localStorage.setItem('sch_fav', JSON.stringify(a)); }catch(e){} }
+function schFavToggle(key, btn){
+  var name = decodeURIComponent(key);
+  var f = schFavLoad(), i = f.indexOf(name);
+  if(i < 0){ f.push(name); toast('已关注：' + name + '（到「我的」页查看）'); }
+  else { f.splice(i, 1); toast('已取消关注：' + name); }
+  schFavSave(f); schFavRestore();
+  if(typeof renderWatch === 'function') renderWatch();
+}
+function schFavRestore(){
+  var f = schFavLoad();
+  document.querySelectorAll('.sch-fav-btn').forEach(function(b){
+    var on = f.indexOf(b.getAttribute('data-school')) >= 0;
+    b.textContent = on ? '★ 已关注' : '☆ 关注';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
 function renderSchools(){
   var g = document.getElementById('school-grid'); if(!g) return;
   g.innerHTML = Object.keys(SCHOOL_DB).map(function(k){
@@ -93,10 +112,14 @@ function renderSchools(){
       + '<h4>' + esc(k) + '</h4>' + _factChips(k) + '<p>' + esc(d['简介'] || '') + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
       + '<a class="sc-page" href="articles/' + (ARTMAP['S|' + k] || '') + '">详情页</a>'
-      + '<button class="mini-btn" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))">加入对比</button></div></div>';
+      + '<button class="mini-btn sch-cmp-btn" data-school="' + esc(k) + '" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))" aria-pressed="false">加入对比</button>'
+      + '<button class="mini-btn sch-fav-btn" data-school="' + esc(k) + '" onclick="schFavToggle(decodeURIComponent(\'' + key + '\'), this)" aria-pressed="false">☆ 关注</button></div></div>';
   }).join('');
   initSchoolFilters();
   initStageFilters();
+  schFavRestore();
+  schCmpRestore();
+  schCmpRenderPanel();
   /* 恢复筛选状态（初始均为 all） */
   document.querySelectorAll('#school-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sf || 'all') === schoolFilter); });
   document.querySelectorAll('#school-region-filter .ff').forEach(function(b){ b.classList.toggle('on', (b.dataset.sr || 'all') === schoolRegion); });
@@ -145,6 +168,12 @@ function openSchool(name){
 function addToCompareCurrent(){ addToCompareName(currentOpenSchool); }
 function addToCompareName(name){
   var sels = ['sel-a','sel-b','sel-c'];
+  var hasSels = sels.some(function(id){ return document.getElementById(id); });
+  if(!hasSels){
+    /* v1.09：档案/学校页无下拉——走页内停靠对比（sch_cmp），修复"永远提示已满"断链 */
+    schCmpToggle(name);
+    return;
+  }
   for(var i=0;i<sels.length;i++){
     var sel = document.getElementById(sels[i]);
     if(sel && !sel.value){
@@ -155,6 +184,80 @@ function addToCompareName(name){
     }
   }
   toast('对比位已满（最多 3 所），请先清空后再加入');
+}
+
+/* ---------- v1.09 学校停靠对比器（对齐大学对比器交互；不排名、每格带来源） ---------- */
+function schCmpLoad(){ try{ return JSON.parse(localStorage.getItem('sch_cmp') || '[]'); }catch(e){ return []; } }
+function schCmpSave(a){ try{ localStorage.setItem('sch_cmp', JSON.stringify(a)); }catch(e){} }
+function schCmpToggle(name){
+  if(!SCHOOL_DB[name]){ toast('未找到该校档案：' + name); return; }
+  var a = schCmpLoad();
+  var i = a.indexOf(name);
+  if(i >= 0){ a.splice(i, 1); toast('已移出对比：' + name); }
+  else{
+    if(a.length >= 3){ toast('最多同时对比 3 所'); return; }
+    /* 学段闸门：同档（小学/中学）内对比 */
+    for(var j=0;j<a.length;j++){
+      if(_schoolStage(a[j]) !== _schoolStage(name)){
+        toast('学段不同不能对比（' + _schoolStage(a[j]) + ' vs ' + _schoolStage(name) + '）；先清空当前对比再选');
+        return;
+      }
+    }
+    a.push(name);
+    toast('已加入对比（' + a.length + '/3）：' + name);
+  }
+  schCmpSave(a);
+  schCmpRenderPanel();
+  schCmpRestore();
+}
+function schCmpRestore(){
+  var a = schCmpLoad();
+  document.querySelectorAll('.sch-cmp-btn').forEach(function(b){
+    var on = a.indexOf(b.getAttribute('data-school')) >= 0;
+    b.textContent = on ? '✓ 已在对比' : '加入对比';
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
+function schCmpClear(){ schCmpSave([]); schCmpRenderPanel(); schCmpRestore(); toast('已清空对比'); }
+function schCmpRenderPanel(){
+  var panel = document.getElementById('sch-cmp-panel'); if(!panel) return;
+  var names = schCmpLoad().filter(function(n){ return SCHOOL_DB[n]; });
+  if(names.length < 2){ panel.innerHTML = ''; return; }
+  function row(label, fn){ return '<tr><th>' + label + '</th>' + names.map(function(n){ return '<td>' + fn(SCHOOL_DB[n], n) + '</td>'; }).join('') + '</tr>'; }
+  function koubeiCell(n){
+    if(typeof KOUBEI === 'undefined') return '—';
+    var it = KOUBEI.items.find(function(x){ return x.name === n; });
+    if(!it) return '<span class="cmp-empty">未采集（不补数）</span>';
+    var url = (it.src.match(/https?:\/\/[^\s）)]+/) || [''])[0];
+    var link = url ? '<a href="' + hrefEnc(url) + '" target="_blank" rel="noopener">依据 ↗</a>' : '';
+    return '<span class="sc-badge">' + it.level + '级来源</span>' + link;
+  }
+  function dragonCell(n){
+    if(typeof DRAGON === 'undefined') return '—';
+    var ent = null;
+    for(var s=0;s<DRAGON.systems.length && !ent;s++){
+      ent = DRAGON.systems[s].entities.find(function(x){ return x.name === n; });
+    }
+    if(!ent) return '<span class="cmp-empty">非七系或未采集</span>';
+    return esc(ent.fields['关系类型'] || '—') + (ent.doubt ? ' <span class="sc-badge" title="存疑，详见梯队与图谱页">⚠ 存疑</span>' : '');
+  }
+  var html = '<div class="cb-cmp-head"><b>学校对比（' + names.length + '/3 · ' + esc(_schoolStage(names[0]) || '同学段') + '）</b>'
+    + '<button class="cb-ghost" onclick="schCmpClear()">清空对比</button></div>'
+    + '<div class="dx-twrap"><table class="art-table cmp-table"><thead><tr><th>维度</th>'
+    + names.map(function(n){ return '<th>' + esc(n) + '</th>'; }).join('') + '</tr></thead><tbody>'
+    + row('所在区', function(d){ return esc(d['所在区'] || '暂缺'); })
+    + row('办学性质', function(d){ return esc(d['办学性质'] || '暂缺'); })
+    + row('创办', function(d){ return esc(d['创办'] || '暂缺'); })
+    + row('招生范围', function(d){ return esc(d['招生范围'] || '暂缺'); })
+    + row('收费口径', function(d){ return esc(d['收费口径'] || '暂缺'); })
+    + row('住宿', function(d){ return esc(d['住宿'] || '暂缺'); })
+    + row('指标到校', function(d){ return esc(d['指标到校'] || '暂缺'); })
+    + row('地址与通勤', function(d){ return esc((d['校区地址'] || '暂缺') + (d['通勤参考'] ? '；' + d['通勤参考'] : '')); })
+    + row('口碑与来源层', function(d, n){ return koubeiCell(n); })
+    + row('系属（七系图谱）', function(d, n){ return dragonCell(n); })
+    + '</tbody></table></div>'
+    + '<p class="cmp-note">口径声明：本表只并列官方可核验信息，<b>不排名、不构成录取承诺</b>；缺失字段如实标注「暂缺/未采集」，不估算不补数。口碑来源层仅收录有来源的名单（官方/媒体/社区），社区级仅参考。招生与收费以当年度区教委官方发布为准。</p>';
+  panel.innerHTML = html;
 }
 
 

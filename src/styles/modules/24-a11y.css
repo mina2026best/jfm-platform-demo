@@ -39,3 +39,9 @@
     body{padding-bottom:52px}
     .to-top{bottom:64px}
   }
+
+  /* ---------- v1.09：收藏中心聚合 ---------- */
+  .watch-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+  .watch-row:last-child{border-bottom:none}
+  .watch-lab{flex:none;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.08em;min-width:64px}
+  .sch-fav-btn.on{border-color:var(--accent);color:var(--accent)}

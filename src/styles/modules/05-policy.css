@@ -15,3 +15,7 @@
 
 /* v0.96 称谓词条内链强调 */
 dt[data-tg] a.art-link{white-space:nowrap}
+
+  /* v1.09：词典来源附注长 URL 断行 */
+  .pol dd span{overflow-wrap:anywhere}
+  .pol dd a{overflow-wrap:anywhere}

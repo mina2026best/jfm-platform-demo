@@ -1,6 +1,18 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "程丽华赴长寿区宣讲党的二十届五中全会精神时强调 深入学习贯彻全会精神 以高质量党建引领政协履职高质量发展",
+    "url": "http://www.cq.xinhuanet.com/20261111/e296197d5b194f4694bad336c7954340/c.html",
+    "src": "新华网重庆",
+    "cat": "升学动态",
+    "sum": "程丽华赴长寿区宣讲党的二十届五中全会精神时强调 深入学习贯彻全会精神 以高质量党建引领政协履职高质量发展-\"她强调，要深入学习贯彻党的二十届五中全会精神，深学细悟习近平党建思想，落实市委纵深推进新时代市域党建新高地建设部署，以高质量党建引领政协履职高质量发展。\"",
+    "stages": [],
+    "date": "2026-11-12",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "渝中区开展青少年安全自护教育消防探营活动",
     "url": "http://cq.people.com.cn/n2/2026/1109/c365416-41745870.html",
     "src": "人民网重庆",
@@ -1248,4 +1260,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-12 08:14", "seed": 21, "collected": 80, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-12 13:01", "seed": 21, "collected": 81, "fetchedPending": 0};

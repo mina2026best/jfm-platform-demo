@@ -60,7 +60,7 @@ PAGES = [
          desc="C9 / 985 / 211 共 129 个在渝招生实体：2022–2026 本科批投档线五年趋势图（物理类 / 历史类，含位次与批线差）、一流学科、就业数据与官网直达，逐条标注来源与核验日期；不做排名、不构成录取预测。",
          sections=["daxue"]),
     dict(file="xiaoxue.html", title="小学名校库 · 示范名单与口碑参考 · 花期册",
-         desc="重庆市级示范小学历批评定名单（5 批 24 所）+ 各区口碑参考（44 所，来源分层标注）+ 幼升小工具联动，逐条标注来源与核验日期；不做排名、不构成择校承诺。",
+         desc="重庆市级示范小学历批评定名单（5 批 24 所）+ 各区口碑参考（60 所，来源分层标注）+ 幼升小工具联动，逐条标注来源与核验日期；不做排名、不构成择校承诺。",
          sections=["xiaoxue"]),
     dict(file="chuzhong.html", title="初中名校库 · 七龙珠系办学图谱 · 花期册",
          desc="七龙珠系 64 实体办学关系图谱（直属本部 / 分校区 / 共办托管 / 民转公逐实体区分）+ 民办摇号防骗 + 各区头部公办参考，逐条标注来源与核验日期；不做排名、不构成录取预测。",
@@ -250,7 +250,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("calendar.html", "日历", None),
         ("quiz.html", "工具", [
             ("quiz.html", "入学自查"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
-            ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("gaozhong.html", "高中与联招库"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
+            ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("gaozhong.html", "高中与联招库"), ("xiaoxue.html", "小学名校库"), ("chuzhong.html", "初中名校库"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
         ]),
         ("policy.html", "政策资料", [
             ("policy.html", "政策库与人话词典"), ("wiki.html", "升学百科"), ("faq.html", "家长 FAQ"),
@@ -278,7 +278,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("daohang.html", "网址导航"), ("news.html", "升学资讯"), ("quiz.html", "入学自查"), ("calendar.html", "升学日历"),
         ("policy.html", "政策库"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
         ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("gaozhong.html", "高中与联招库"), ("forum.html", "家长论坛"), ("community.html", "家长社区"),
-        ("community.html", "家长学堂"), ("life.html", "生活服务"),
+        ("life.html", "生活服务"),
         ("search.html", "站内搜索"), ("problems.html", "问题速查"), ("faq.html", "家长 FAQ"), ("beans.html", "升学豆"),
         ("me.html", "我的"), ("biz.html", "B端合作"), ("plans.html", "会员", "cta"),
     ]
@@ -288,7 +288,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         for m in mobile
     )
     logo_href = "index.html"
-    return f'''<div class="top">
+    return f'''<header class="top" role="banner">
   <div class="wrap">
     <a class="logo" href="{logo_href}" style="color:inherit;text-decoration:none"><span class="dot"></span>花期册<small>BLOOM ALMANAC · 重庆</small></a>
     {demo_tag}
@@ -305,13 +305,13 @@ def nav_html(cur_file, demo_tag, searchbox):
   <div class="mobile-menu" id="mobileMenu" hidden>
     {mobile_html}
   </div>
-</div>'''
+</header>'''
 
 QUICKBAR = (
     '<nav class="m-quickbar" aria-label="移动端快捷导航">'
     '<a href="index.html">首页</a>'
     '<a href="schools.html">学校库</a>'
-    '<a href="zy.html">志愿工具</a>'
+    '<a href="zy.html">志愿参考</a>'
     '<a href="news.html">资讯</a>'
     '<a href="faq.html">FAQ</a>'
     '</nav>'
@@ -760,7 +760,7 @@ def main():
                        '<p class="sec-desc">全部页面按用途分组；各版块内的具体内容（每条政策、每所学校、每篇资讯）从对应列表页进入。</p>'
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
-            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112d" />')
+            out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
             out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
             # 替换主内容：定位 <main>…</main>
             import re as _re
@@ -776,7 +776,7 @@ def main():
             total += len(out)
             continue
         out = build_page(pg, tpl, secs, css, js)
-        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112d" />')
+        out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
         out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")

@@ -1,7 +1,7 @@
   /* ---------- 表单与新增模块 ---------- */
   .form-card{grid-column:1/-1;background:var(--navy);color:#DCE4EE;border-radius:10px;padding:20px 22px}
   .form-card h4{color:#fff;font-size:15px;margin-bottom:4px}
-  .form-card .hint{font-size:12.5px;color:#9FADC0;margin-bottom:12px}
+  .form-card .hint{font-size:12.5px;color:#5F6B7C;margin-bottom:12px}
   .form-row{display:flex;gap:10px;flex-wrap:wrap}
   .form-row textarea{flex:1;min-height:84px;background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-family:var(--sans);font-size:14px;padding:10px 12px;resize:vertical}
   .form-row select{background:#1B2940;border:1px solid #3E5375;border-radius:8px;color:#fff;font-size:14px;padding:8px 12px}

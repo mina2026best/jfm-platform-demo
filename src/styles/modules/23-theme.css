@@ -103,3 +103,14 @@
     html.theme-dark select,
     html.theme-dark textarea{background:#101A29;color:var(--ink)}
   }
+
+  /* v1.10：暗色模式徽标/卡片配色修复（性能审查 H1/M2） */
+  html.theme-dark .dx-badge.b-985{background:rgba(64,168,143,.18);color:#7DCBB6;border-color:rgba(64,168,143,.4)}
+  html.theme-dark .dx-badge.b-c9{background:#2B3B55;color:#C9D8F0;border-color:#3C4F6E}
+  html.theme-dark .bg-trend{background:#16202E;border-color:#2A3A50}
+  html.theme-dark .bg-trend .bg-host-meta{color:#9FB3CC}
+  html.theme-dark .sc-badge{background:rgba(64,168,143,.16);color:#7DCBB6}
+
+  /* v1.10：暗色页脚/表单提示色（亮色改深灰后暗色需反转） */
+  html.theme-dark footer p, html.theme-dark footer li{color:#9FB3CC}
+  html.theme-dark .form-card .hint{color:#9FB3CC}

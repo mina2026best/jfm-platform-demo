@@ -89,7 +89,9 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
 .logo .dot::after{background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .logo small{color:var(--faint);font-weight:400;font-size:10.5px;letter-spacing:.22em;font-family:var(--mono);vertical-align:4px}
 .top .wrap{flex-wrap:nowrap}
-.top nav{display:flex;flex-wrap:wrap;white-space:nowrap;min-width:0}
+@media (max-width:620px){.top .wrap{flex-wrap:wrap}}
+.nav-drop:nth-last-child(-n+2) .nav-panel{left:auto;right:0}
+.top nav{display:flex;flex-wrap:nowrap;white-space:nowrap;min-width:0}
 .top nav a{color:var(--accent);font-size:13px;padding:4px 3px;margin:0 5px;border-radius:0;white-space:nowrap}
 .top nav a:hover{color:var(--ink)}
 .top nav a.on{color:var(--accent);font-weight:600;border-bottom:2px solid var(--accent);padding-bottom:4px}
@@ -99,7 +101,8 @@ html.theme-dark .top{background:rgba(16,21,26,.97)}
   font-size:13px;color:var(--ink);padding:7px 14px;width:200px}
 .demo-tag{border:none;background:none;color:var(--faint);padding:0;font-size:11px;letter-spacing:.06em;white-space:nowrap}
 @media (max-width:1360px){.demo-tag{display:none}}
-@media (max-width:1200px){.searchbox input{width:160px}}
+@media (max-width:1200px) and (min-width:641px){.searchbox input{width:160px}}
+@media (max-width:640px){.searchbox input{width:100%;min-width:0}}
 .searchbox input::placeholder{color:var(--faint)}
 .searchbox input:focus{border-color:var(--accent);outline:none;background:var(--bg)}
 .search-panel{border:1px solid var(--line);border-radius:10px;background:var(--bg)}

@@ -215,18 +215,6 @@ var NEWS_FEED = [
     "auto": true
   },
   {
-    "t": "留学中心扎实开展 2026级国际新生入学教育系列活动",
-    "url": "https://news.cqu.edu.cn/info/1002/1270141.htm",
-    "src": "重庆大学新闻网",
-    "cat": "升学动态",
-    "sum": "新学期开学以来，留学中心组织开展了报到注册、健康体检、法治安全教育、校史参观等新生入学教育系列活动，全方位指引2026级国际新生适应校园生活，助力他们开启在渝求学新征程。",
-    "date": "2026-10-20",
-    "body": "",
-    "reviewed": true,
-    "auto": true,
-    "stages": []
-  },
-  {
     "t": "市纪委监委驻市教委纪检监察组组长李剑波到市学生就业与创新创业服务中心调研",
     "url": "http://jw.cq.gov.cn/zwxx_209/bmdt/zsdwxx/202610/t20261020_16262629.html",
     "src": "重庆市教育委员会",
@@ -1222,4 +1210,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-12 13:59", "seed": 21, "collected": 78, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-12 14:00", "seed": 21, "collected": 77, "fetchedPending": 0};

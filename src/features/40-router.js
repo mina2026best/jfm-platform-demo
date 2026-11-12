@@ -36,6 +36,12 @@ function bootPageRoute(){
   if(qparam('fav') === '1' && document.getElementById('sel-a')){
     restoreFav();
   }
+  // v1.10：schools.html?stage=小学|中学 → 落地即筛选
+  var stg = qparam('stage');
+  if(stg && document.getElementById('school-grid')){
+    var target = document.querySelector('#school-stage-filter .ff[data-ss="' + stg + '"]');
+    if(target){ target.click(); var g = document.getElementById('school-grid'); if(g) g.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
   // 4) schools.html?fav=1 → 加入对比后跳转
   var add = qparam('add');
   if(add && document.getElementById('sel-a')){

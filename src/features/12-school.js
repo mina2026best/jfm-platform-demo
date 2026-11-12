@@ -137,7 +137,7 @@ function openSchool(name){
     var raw = d[r];
     var v;
     if(r === '暂缺字段'){
-      v = '无官方发布的数据一律不展示（防误导）；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(raw || '') + '）';
+      v = '无官方发布的数据一律不展示（防误导）；分数定位可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 线差位次工具</a>。' + (raw ? '字段备注：' + esc(raw || '') : '');
     } else if(r === '官网'){
       v = raw ? '<a href="' + hrefEnc(raw) + '" target="_blank" rel="noopener">' + esc(String(raw).replace(/^https?:\/\//, '').replace(/\/$/, '')) + ' ↗</a>' : '暂缺';
     } else if(r === '资料来源'){

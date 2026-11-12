@@ -2,7 +2,10 @@
 /* ---------- v0.3：全站搜索 ---------- */
 var SEARCH_DB = [
  {t:'政策',s:'2026 年中考政策：联招学校约 113 所',a:'#policy'},
- {t:'政策',s:'优质高中指标到校招生工作通知（渝教基函〔2025〕21号）',a:'#policy'},
+ {t:'政策',s:'优质高中指标到校（2025 学年 21号 / 2026 年度 18 号执行）',a:'#policy'},
+ {t:'政策',s:'学位紧张学校名单（按学年分列 · 渝中/九龙坡/沙坪坝/南岸/渝北）',a:'schools-tier.html'},
+ {t:'政策',s:'联招线六年趋势与逐校送档线',a:'gaozhong.html'},
+ {t:'工具',s:'志愿草表与冲稳保分档（线差位次工具）',a:'zy.html'},
  {t:'政策',s:'随迁子女入学「两为主」/ 中考体育 / 学生资助 / 民办摇号（v0.20 新条目）',a:'#policy'},
  {t:'术语',s:'三对口 / 六年一户 / 指标到校 / 联招 / 长幼随学 / 位次 / 强基计划 / 军检线',a:'#policy'},
  {t:'术语',s:'征集志愿 / 生源地助学贷款 / 跨区就读 / 职教高考（共 18 条）',a:'#policy'},
@@ -59,7 +62,7 @@ var ANCHOR2PAGE = {'#news':'news.html','#calendar':'calendar.html','#policy':'po
 /* v0.40：学校档案检索增强（概况字段全量入库） */
 function _schoolHay(name){
   var d = SCHOOL_DB[name] || {};
-  return (name + ' ' + (d['全称']||'') + ' ' + (d['简介']||'') + ' ' + (d['概况']||'') + ' ' + (d['校训']||'') + ' ' + (d['校区地址']||'') + ' ' + (d['创办']||'') + ' ' + (d['办学特色']||'')).toLowerCase();
+  return (name + ' ' + (d['全称']||'') + ' ' + (d['简介']||'') + ' ' + (d['概况']||'') + ' ' + (d['校训']||'') + ' ' + (d['校区地址']||'') + ' ' + (d['创办']||'') + ' ' + (d['办学特色']||'') + ' ' + (d['招生范围']||'') + ' ' + (d['指标到校']||'')).toLowerCase();
 }
 function _schoolHint(name, q){
   var d = SCHOOL_DB[name] || {};
@@ -248,7 +251,7 @@ function openSchool(name){
     var raw = d[r];
     var v;
     if(r === '暂缺字段'){
-      v = '无官方发布的数据一律不展示（防误导）；可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 位次换算</a> 替代（' + esc(raw || '') + '）';
+      v = '无官方发布的数据一律不展示（防误导）；分数定位可到 <a href="zy.html" style="color:var(--accent)">志愿参考 · 线差位次工具</a>。' + (raw ? '字段备注：' + esc(raw || '') : '');
     } else if(r === '官网'){
       v = raw ? '<a href="' + hrefEnc(raw) + '" target="_blank" rel="noopener">' + esc(String(raw).replace(/^https?:\/\//, '').replace(/\/$/, '')) + ' ↗</a>' : '暂缺';
     } else if(r === '资料来源'){
@@ -823,7 +826,7 @@ function runQuiz(){
     L.push('· 隔代/其他情形：以「实际居住 + 监护关系」材料为准，建议直接咨询区教委基教科，并把答复记录存档。');
   }
   if(st === '初中') L.push('· 初升高通道多元：<b>指标到校</b>（70% 名额分到初中）是重要路径，保持学籍连续是前提；同时关注联招志愿梯度。');
-  if(st === '高中') L.push('· 高考路径多元：普通高考之外还有艺体、高职分类考试等；分数参考可先用上方「位次换算」工具。');
+  if(st === '高中') L.push('· 高考路径多元：普通高考之外还有艺体、高职分类考试等；分数定位可到「志愿参考」页使用线差位次工具（zy.html）。');
   L.push(dataBadge('zhibiao'));
   L.push('<span style="font-size:12px;color:var(--muted)">本自查为规则参考，不构成入学承诺；最终以区教委当年度政策与学校招生细则为准。</span>');
   box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
@@ -1652,7 +1655,7 @@ function initStageDeepLink(){
 
 /* v0.99：档案库分区导航当前项高亮（不依赖 boot 时序，DOMContentLoaded 即执行） */
 document.addEventListener('DOMContentLoaded', function(){
-  var nav = document.querySelector('.sch-subnav'); if(!nav) return;
+  var nav = document.querySelector('.sec-nav'); if(!nav) return;
   var here = (location.pathname.split('/').pop() || 'index.html');
   Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
     if(a.getAttribute('href') === here){ a.classList.add('on'); a.setAttribute('aria-current','page'); }
@@ -1854,6 +1857,12 @@ function bootPageRoute(){
   // 3) compare.html?fav=1 → 恢复收藏对比
   if(qparam('fav') === '1' && document.getElementById('sel-a')){
     restoreFav();
+  }
+  // v1.10：schools.html?stage=小学|中学 → 落地即筛选
+  var stg = qparam('stage');
+  if(stg && document.getElementById('school-grid')){
+    var target = document.querySelector('#school-stage-filter .ff[data-ss="' + stg + '"]');
+    if(target){ target.click(); var g = document.getElementById('school-grid'); if(g) g.scrollIntoView({behavior:'smooth', block:'start'}); }
   }
   // 4) schools.html?fav=1 → 加入对比后跳转
   var add = qparam('add');
@@ -2086,7 +2095,7 @@ var QU_GUIDE = [
  {
   "qu": "江北区",
   "url": "https://zwykb.cq.gov.cn/",
-  "org": "江北区政府信息公开（暂无独立可达官网，经渝快办统一入口）",
+  "org": "江北区政府信息公开（2026-01 起原辖区由两江新区代管，过渡期招生以当年公告为准；经渝快办统一入口）",
   "note": "义务教育入学经「渝快办 → 义务教育入学一件事」网上报名"
  },
  {
@@ -2116,7 +2125,7 @@ var QU_GUIDE = [
  {
   "qu": "渝北区",
   "url": "https://zwykb.cq.gov.cn/",
-  "org": "渝北区政府信息公开（经渝快办统一入口）",
+  "org": "渝北区政府信息公开（2026-01 起原辖区由两江新区代管，过渡期招生以当年公告为准；经渝快办统一入口）",
   "note": "中央公园/空港双片区快速扩张；随迁子女材料由各教管中心核验"
  },
  {
@@ -2638,7 +2647,7 @@ var PROBLEMS = [
     "calendar.html"
    ]
   ],
-  "tip": "买房≠立刻有学位：先查该房产是否处于学位锁定/落户年限限制，再对照当年划片范围。"
+  "tip": "买房≠立刻有学位：先查该房产是否处于学位锁定/落户年限限制，再对照当年划片范围。", "tools": [["划片公告速查", "schools-guide.html#sec-pq"], ["学位供给口径表", "schools-tier.html"]]
  },
  {
   "q": "外地户籍，能在重庆读公办小学吗？",

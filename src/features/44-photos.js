@@ -59,7 +59,9 @@ function schoolPhotoFile(name){
 }
 function schoolPhotoImg(name){
   var real = typeof SCHOOL_PHOTOS !== 'undefined' && SCHOOL_PHOTOS[name];
-  return '<img loading="lazy" decoding="async" src="' + PHOTO_BASE + phW(schoolPhotoFile(name)) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
+  var pf = schoolPhotoFile(name);
+  var dim = (typeof PHOTO_DIM !== 'undefined' && PHOTO_DIM[pf]) ? ' width="' + PHOTO_DIM[pf][0] + '" height="' + PHOTO_DIM[pf][1] + '"' : '';
+  return '<img loading="lazy" decoding="async"' + dim + ' src="' + PHOTO_BASE + phW(pf) + '" alt="' + esc(name) + (real ? '校园实景（图片来源见档案来源）' : '校园外观示意图（非实拍）') + '">';
 }
 /* hero / 入口卡 / 页眉横幅：各类固定不同照片；仅 hero 记入已用集合（它是同页最大图，列表须避让） */
 var ART_PHOTO = {

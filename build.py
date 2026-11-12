@@ -221,6 +221,7 @@ def build_js():
         data += "\n\nvar SCHOOL_DB = " + json.dumps(_schools, ensure_ascii=False) + ";"
     feats = []
     data_feats = []
+    daxue_data = ""
     # 纯数据模块进数据文件（改数据不动代码缓存）
     DATA_FILES = {"10-demo-data.js", "55-daxue-data.js", "61-dragon-data.js", "64-koubei-data.js"}
     fdir = f"{SRC}/features"
@@ -234,11 +235,16 @@ def build_js():
         body = read(p)
         guard(f"features/{f}", body)
         block = f"/* ---------- {f[:-3]} ---------- */\n" + body
-        (data_feats if f in DATA_FILES else feats).append(block)
+        if f == "55-daxue-data.js":
+            daxue_data = block
+        elif f in DATA_FILES:
+            data_feats.append(block)
+        else:
+            feats.append(block)
     for f in sorted(os.listdir(fdir)):
         if f.endswith(".js") and f not in seen and f != "_order.txt":
             sys.exit(f"[build] 模块 {f} 未登记进 _order.txt")
-    return data + "\n\n" + "\n\n".join(data_feats), "\n\n".join(feats)
+    return data + "\n\n" + "\n\n".join(data_feats), "\n\n".join(feats), daxue_data
 
 def nav_html(cur_file, demo_tag, searchbox):
     """生成顶栏（含真跳转链接）。cur_file 用于 aria-current。"""
@@ -567,8 +573,30 @@ def build_page(page, tpl, secs, css, js):
     # 旧锚点书签重定向脚本（进页后若带旧 #hash 自动跳对应页）
     hash_redirect = '<script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#gaozhong":"gaozhong.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>'
 
+    _crumb_html = ""
+    _crumb_paths = {
+        "schools.html": [("首页", "index.html"), ("学校档案库", "")],
+        "schools-liangjiang.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("两江专题", "")],
+        "schools-map.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("通勤地图", "")],
+        "schools-tier.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("梯队与图谱", "")],
+        "schools-koubei.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("口碑名单", "")],
+        "schools-guide.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("报名指南", "")],
+        "xiaoxue.html": [("首页", "index.html"), ("小学名校库", "")],
+        "chuzhong.html": [("首页", "index.html"), ("初中名校库", "")],
+        "gaozhong.html": [("首页", "index.html"), ("高中与联招库", "")],
+        "daxue.html": [("首页", "index.html"), ("大学与专业库", "")],
+        "zy.html": [("首页", "index.html"), ("志愿参考", "")],
+    }
+    if fname in _crumb_paths:
+        _parts = []
+        for _nm, _hr in _crumb_paths[fname]:
+            if _hr:
+                _parts.append('<a href="' + _hr + '">' + _nm + '</a>')
+            else:
+                _parts.append('<span aria-current="page">' + _nm + '</span>')
+        _crumb_html = '<nav class="crumbs" aria-label="面包屑">' + '<span class="c-sep">›</span>'.join(_parts) + '</nav>'
     out = head + "\n<body>\n\n" + f'<div id="readBar" aria-hidden="true"></div>\n\n<a class="skip-link" href="#main">跳到主要内容</a>\n\n' \
-        + ann + "\n\n" + top_html + "\n\n" + '<main id="main">' + hero + content + '</main>' \
+        + ann + "\n\n" + top_html + "\n\n" + '<main id="main">' + _crumb_html + hero + content + '</main>' \
         + "\n\n" + footer + "\n" + hash_redirect + "\n" + dlg["dialogs"] + "\n" + QUICKBAR + "\n" + dlg["toast"] + "\n" + dlg["totop"] + "\n" + dlg["toscript"] + "\n</body>\n</html>"
     # skip-link 目标：无 #main 时指到 body 顶部主内容
     if 'id="main"' not in out:
@@ -610,7 +638,7 @@ def main():
     except Exception as _e:
         print('[warn] 学校计数注入失败：', repr(_e))
     css = build_css()
-    data_js, js = build_js()
+    data_js, js, daxue_js = build_js()
     # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
     _pmap = {}
     for _m in re.finditer(r'<div class="pol-item"[^>]*>\s*<h4><a class="art-t" href="articles/(article-policy-[a-z0-9]+\.html)">([^<]+)</a>', tpl):
@@ -688,8 +716,33 @@ def main():
     if _cal_nodes:
         data_js += "\n\nvar CAL_NODES = " + json.dumps(_cal_nodes, ensure_ascii=False) + ";"
         built.append("CAL_NODES · %d 个节点" % len(_cal_nodes))
+    # v1.10：图片尺寸表（CLS 修复 M3）
+    try:
+        from PIL import Image as _PILImage
+        _pdirs = [os.path.join(ROOT, "assets", "photos"), os.path.join(ROOT, "assets", "photos", "schools")]
+        _dims = {}
+        for _pdir in _pdirs:
+            if not os.path.isdir(_pdir):
+                continue
+            for _fn in sorted(os.listdir(_pdir)):
+                if _fn.endswith(".webp"):
+                    try:
+                        _im = _PILImage.open(os.path.join(_pdir, _fn))
+                        _rel = _fn if _pdir.endswith("photos") else "schools/" + _fn
+                        _dims[_rel.replace(".webp", ".jpg")] = list(_im.size)
+                    except Exception:
+                        pass
+        if _dims:
+            data_js += "\n\nvar PHOTO_DIM = " + json.dumps(_dims) + ";"
+            built.append("PHOTO_DIM · %d 张" % len(_dims))
+    except Exception as _e:
+        print("[build] PHOTO_DIM 跳过:", _e)
     with open(os.path.join(assets_dir, data_file), "w", encoding="utf-8") as f:
         f.write(data_js)
+    # v1.10：daxue 数据独立分包（549KB 不再全站加载；daxue/me/search 三页按需）
+    daxue_file = "data-daxue." + hashlib.sha256(daxue_js.encode()).hexdigest()[:8] + ".js"
+    with open(os.path.join(assets_dir, daxue_file), "w", encoding="utf-8") as f:
+        f.write(daxue_js)
 
     # 数据必须先于代码执行（两个 defer 按文档顺序）
     js_tags = f'<script src="assets/{data_file}" defer></script>\n<script src="assets/{js_file}" defer></script>'
@@ -761,7 +814,10 @@ def main():
                        '<div class="sm-grid">' + ghtml + '</div></div>')
             out = build_page(pg, tpl, secs, css, js)
             out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
-            out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
+            page_js_tags = js_tags
+            if pg["file"] in ("daxue.html", "me.html", "search.html"):
+                page_js_tags = f'<script src="assets/{daxue_file}" defer></script>\n' + js_tags
+            out = out.replace("<script>//__BUILD_JS__</script>", page_js_tags)
             # 替换主内容：定位 <main>…</main>
             import re as _re
             out = _re.sub(r'<main id="main">[\s\S]*?</main>', '<main id="main">' + sm_body + '</main>', out, count=1)
@@ -777,7 +833,10 @@ def main():
             continue
         out = build_page(pg, tpl, secs, css, js)
         out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
-        out = out.replace("<script>//__BUILD_JS__</script>", js_tags)
+        page_js_tags = js_tags
+        if pg["file"] in ("daxue.html", "me.html", "search.html"):
+            page_js_tags = f'<script src="assets/{daxue_file}" defer></script>\n' + js_tags
+        out = out.replace("<script>//__BUILD_JS__</script>", page_js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:
             sys.exit(f"[build] 占位符未替换干净：{pg['file']}")
         path = os.path.join(OUT_DIR, pg["file"])

@@ -795,10 +795,59 @@ document.addEventListener('click', function(e){
 
 /* ---------- 21-cal-filter ---------- */
 /* ---------- v0.5：日历学段筛选 ---------- */
+var calStageMode = 'all';
+var calViewMode = 'card';
+function setCalView(mode){
+  calViewMode = mode;
+  var grid = document.querySelector('#calendar .cal-grid');
+  var month = document.getElementById('cal-month');
+  if(!grid || !month) return;
+  grid.style.display = (mode === 'card') ? '' : 'none';
+  month.hidden = (mode !== 'month');
+  document.querySelectorAll('#cal-view .ff').forEach(function(b){
+    var on = b.dataset.cv === mode;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  if(mode === 'month') renderCalMonth();
+}
+function renderCalMonth(){
+  var month = document.getElementById('cal-month'); if(!month) return;
+  var groups = {};
+  var order = [];
+  document.querySelectorAll('#calendar .cal-grid .cal').forEach(function(c){
+    var vis = (calStageMode === 'all' || c.dataset.stage === calStageMode);
+    if(!vis) return;
+    var d = (c.querySelector('.date') || {}).textContent || '';
+    var m = d.match(/(\d{4}-\d{2})/);
+    var key = m ? m[1] : '全年';
+    if(!groups[key]){ groups[key] = []; if(m) order.push(key); }
+    groups[key].push(c);
+  });
+  order.sort();
+  var html = '';
+  if(order.length){
+    order.forEach(function(key){
+      var cnt = groups[key].length;
+      html += '<h3 class="calm-h" id="calm-' + key + '">' + key + ' <span class="calm-n">' + cnt + ' 个节点</span></h3><div class="cal-grid calm-grid">';
+      groups[key].forEach(function(c){ html += '<div class="calm-cell">' + c.outerHTML + '</div>'; });
+      html += '</div>';
+    });
+  }
+  if(groups['全年']){
+    html += '<h3 class="calm-h">全年 / 通用 <span class="calm-n">' + groups['全年'].length + ' 个节点</span></h3><div class="cal-grid calm-grid">';
+    groups['全年'].forEach(function(c){ html += '<div class="calm-cell">' + c.outerHTML + '</div>'; });
+    html += '</div>';
+  }
+  if(!html){ month.innerHTML = '<div class="cmp-empty">当前学段筛选下暂无节点。</div>'; return; }
+  month.innerHTML = html;
+}
 function filterCal(mode){
+  calStageMode = mode;
   document.querySelectorAll('#calendar .cal').forEach(function(c){
     c.style.display = (mode === 'all' || c.dataset.stage === mode) ? '' : 'none';
   });
+  if(calViewMode === 'month') renderCalMonth();
   document.querySelectorAll('#calendar .cal-filter .ff').forEach(function(b){
     b.classList.toggle('on', b.dataset.cf === mode);
   });
@@ -3971,7 +4020,9 @@ function dxCard(s){
     + '<button class="dx-mini' + (dxCmpLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxCmpToggle(\'' + s.id + '\')" aria-label="加入对比">对比</button>'
     + '<button class="dx-mini' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxFavToggle(\'' + s.id + '\', this)" aria-label="关注">' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? '★' : '☆') + '</button>'
     + '<button class="dx-mini" onclick="dxPrintCard(\'' + s.id + '\')" aria-label="打印该校卡片">打印</button>'
-    + (s.web ? '<a class="dx-web" href="' + esc(s.web) + '" target="_blank" rel="noopener">官网 ↗</a>' : '') + '</div>';
+    + (s.web ? '<a class="dx-web" href="' + esc(s.web) + '" target="_blank" rel="noopener">官网 ↗</a>' : '')
+    + '<a class="dx-web" href="articles/dx-' + esc(s.id) + '.html">详情页 ›</a>'
+    + '<a class="dx-web" href="https://gaokao.chsi.com.cn/zsgs/zhangcheng/" target="_blank" rel="noopener" title="阳光高考章程库：站内检索校名可查当年招生章程原文">章程 ↗</a>' + '</div>';
   var meta = '<p class="dx-meta">' + esc(s.city) + ' · ' + esc(s.type || '—') + (s.parent ? ' · 母体：' + esc(s.parent) : '') + '</p>';
   var stats = '<div class="dx-stats">'
     + '<span>最新物理 ' + (lw ? '<b class="mono">' + lw.rec[0] + '</b><em>' + lw.y + (lw.rec[1] ? ' · 位次 ' + lw.rec[1].toLocaleString() : '') + '</em>' : '—') + '</span>'
@@ -4084,6 +4135,7 @@ function dxBind(){
 function dxInit(){
   var grid = document.getElementById('dx-grid');
   if(!grid || typeof DAXUE === 'undefined') return;
+  dxMajorInit();
   /* 层次按钮动态计数（防陈旧） */
   var cnt = { all: DAXUE.schools.length, c9: 0, '985': 0, '211': 0, branch: 0 };
   var cities = {}, types = {};
@@ -4265,6 +4317,52 @@ function dxFeeChip(s){
   if(!f || !f.max) return '';
   var fmt = function(v){ return (Math.round(v * 10) / 10) + '万'; };
   return '<span>学费 <b class="mono">' + fmt(f.min) + '–' + fmt(f.max) + '</b><em>' + f.year + ' · 各专业组区间</em></span>';
+}
+
+
+/* ---------- v1.12：专业速查（按专业找校 · 数据=516 条真实在渝招生专业名） ---------- */
+var DXM = { q: '', list: [] };
+function dxMajorInit(){
+  var sel = document.getElementById('dxm-select');
+  if(!sel || typeof DAXUE === 'undefined') return;
+  var set = {};
+  DAXUE.schools.forEach(function(s){
+    (s.majors || []).forEach(function(m){ if(m) set[m] = 1; });
+  });
+  DXM.list = Object.keys(set).sort();
+  var opts = DXM.list.map(function(m){ return '<option value="' + esc(m) + '">' + esc(m) + '</option>'; }).join('');
+  sel.innerHTML = '<option value="">选择专业名</option>' + opts;
+}
+function dxMajorRun(){
+  var sel = document.getElementById('dxm-select');
+  var out = document.getElementById('dxm-out');
+  if(!sel || !out) return;
+  var m = sel.value;
+  DXM.q = m;
+  if(!m){ out.innerHTML = '<div class="cmp-empty">选择专业名后，列出在渝招生中开设该专业的 985/211 院校及其最新投档线。</div>'; return; }
+  var hits = DAXUE.schools.filter(function(s){ return (s.majors || []).indexOf(m) >= 0; });
+  function latest(s, cat){
+    var L = (s.L && s.L[cat]) || {};
+    var ys = ['2026','2025','2024','2023','2022'];
+    for(var i=0;i<ys.length;i++){ var r = L[ys[i]]; if(r) return r[0] + '（' + ys[i] + '）'; }
+    return '—';
+  }
+  hits.sort(function(a,b){
+    var la = latest(a,'wl').split('（')[0], lb = latest(b,'wl').split('（')[0];
+    return (parseFloat(lb)||9999) - (parseFloat(la)||9999);
+  });
+  var rows = hits.map(function(s){
+    var detail = 'articles/dx-' + s.id + '.html';
+    return '<tr><td>' + esc(s.name) + (s.c9 ? ' <span class="dx-badge b-c9">C9</span>' : '') + '</td>'
+      + '<td>' + esc(s.tier) + '</td>'
+      + '<td class="mono">' + latest(s, 'wl') + '</td>'
+      + '<td class="mono">' + latest(s, 'ls') + '</td>'
+      + '<td><a class="art-link" href="' + detail + '">详情 ›</a></td></tr>';
+  }).join('');
+  out.innerHTML = '<p class="cmp-note">「' + esc(m) + '」共命中 ' + hits.length + ' 所 985/211（按最新物理投档分降序）；命中口径＝该校在渝招生代表性专业列表含此专业。</p>'
+    + '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>院校</th><th>层次</th><th>最新物理投档</th><th>最新历史投档</th><th>详情</th></tr></thead><tbody>'
+    + (rows || '<tr><td colspan="5">未命中</td></tr>') + '</tbody></table></div>'
+    + '<p class="dx-tnote">数据：掌上高考采集的各校在渝招生代表性专业（516 条）；不代表该校全部专业，完整名单以当年招生计划为准。</p>';
 }
 
 

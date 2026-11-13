@@ -439,3 +439,110 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
         with open(fp, "w", encoding="utf-8") as fh:
             fh.write(html)
     return made
+
+# ---------- v1.12：大学详情页生成器（对标掌上高考院校详情；数据 100% 来自 DAXUE 真实采集，无编造） ----------
+def gen_daxue_pages(daxue_js, css, header_tpl, footer_html, dialogs, extra_js, out_dir, css_file=None, js_file=None):
+    """从 DAXUE 真实数据生成 articles/dx-<id>.html 详情页；返回 [fname,...]。"""
+    import json as _json
+    JS_FILE = js_file or ""
+    start = daxue_js.index("var DAXUE = ") + len("var DAXUE = ")
+    daxue = _json.loads(daxue_js[start:daxue_js.rindex("}") + 1])
+    years = ["2022", "2023", "2024", "2025", "2026"]
+    os.makedirs(out_dir, exist_ok=True)
+    made = []
+    keep = set()
+    header = header_tpl
+    for s in daxue.get("schools", []):
+        sid = str(s.get("id"))
+        fname = "dx-" + sid + ".html"
+        keep.add(fname)
+        badge = s.get("tier", "") + (s.get("c9", False) and " · C9" or "")
+        # 五年投档线表
+        def line_table(cat, label):
+            L = (s.get("L") or {}).get(cat) or {}
+            if not L:
+                return ""
+            rows = ""
+            diff = ""
+            for y in years:
+                r = L.get(y)
+                if r:
+                    score, rank = r[0], (r[1] if len(r) > 1 else None)
+                    rows += "<tr><td>" + y + "</td><td><b>" + esc(str(score)) + "</b></td><td>" + (esc(str(rank)) if rank else "—") + "</td></tr>"
+            if not rows:
+                return ""
+            return ('<h3 id="sec-line">' + label + '五年投档线（2022–2026）</h3>'
+                    '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>年份</th><th>投档最低分</th><th>最低位次</th></tr></thead><tbody>'
+                    + rows + '</tbody></table></div>'
+                    '<p class="dx-tnote">口径：普通类本科批平行志愿投档最低分（中外合作/民族班/预科不计入主口径）。位次为同分排序位，供跨年比较。</p>')
+        body = ""
+        body += line_table("wl", "物理类")
+        body += line_table("ls", "历史类")
+        # 在渝计划
+        plan = s.get("plan") or {}
+        if plan:
+            prows = ""
+            for y in years:
+                p = plan.get(y)
+                if p:
+                    prows += "<tr><td>" + y + " 年</td><td>" + esc(str(p.get("wl", "—"))) + "</td><td>" + esc(str(p.get("ls", "—"))) + "</td></tr>"
+            if prows:
+                body += ('<h3 id="sec-plan">在渝招生计划（物理类 / 历史类）</h3>'
+                         '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>年份</th><th>物理类（人）</th><th>历史类（人）</th></tr></thead><tbody>'
+                         + prows + '</tbody></table></div><p class="dx-tnote">来源：掌上高考 · 中国教育在线院校数据集（api.zjzw.cn 公开接口），逐年在渝计划合计。</p>')
+        # 双一流学科
+        disc = s.get("disc")
+        if disc:
+            if isinstance(disc, list):
+                disct = "、".join(disc)
+            else:
+                disct = str(disc)
+            body += '<h3 id="sec-disc">双一流建设学科（教育部第二轮名单，2022-02）</h3><p>' + esc(disct) + '</p><p class="dx-tnote">来源：教育部《第二轮「双一流」建设高校及建设学科名单》（官方 PDF 直采）。</p>'
+        # 就业
+        emp = s.get("emp") or {}
+        if emp.get("rate"):
+            src = emp.get("src") or {}
+            srcl = (' <a class="art-link" href="' + esc(src.get("u", "")) + '" target="_blank" rel="noopener">来源 ↗</a>') if src.get("u") else ""
+            body += ('<h3 id="sec-emp">就业数据</h3><p>' + esc(emp.get("y", "") or "") + " " + esc(emp.get("label", "毕业去向落实率"))
+                     + " <b>" + esc(emp["rate"]) + "</b>" + (("<em>（" + esc(emp["note"]) + "）</em>") if emp.get("note") else "") + srcl + '</p>'
+                     + '<p class="dx-tnote">来源：' + esc((src.get("o", "") or "") + " " + (src.get("t", "") or "") + " " + (src.get("d", "") or "")) + '；口径以校方当年报告为最终依据。</p>')
+        elif emp.get("note"):
+            body += '<h3 id="sec-emp">就业数据</h3><p>' + esc(emp["note"]) + '</p><p class="dx-tnote">多数头部高校自 2024 届起官方报告不再公布总体落实率——这是官方披露口径问题，不是数据缺失；以校方当年报告为最终口径。</p>'
+        # 学费
+        fee = s.get("fee")
+        if fee and fee.get("max") is not None:
+            body += '<h3 id="sec-fee">学费区间（' + esc(str(fee.get("year", ""))) + '）</h3><p>普通专业约 <b>' + esc(str(fee.get("min", ""))) + '</b> – <b>' + esc(str(fee.get("max", ""))) + '</b> 万元 / 年（中外合作等特殊项目可能更高，以当年招生简章为准）。</p>'
+        # 特色专业
+        majors = s.get("majors") or []
+        if majors:
+            body += '<h3 id="sec-major">特色 / 主干专业（该校在渝招生的代表性专业）</h3><p>' + esc("、".join(majors)) + '</p><p class="dx-tnote">来源：掌上高考 · 该校在渝招生专业的代表性列表；完整专业及方向以当年招生计划为准。</p>'
+        # 说明（军校/艺术类等 gnote）
+        if s.get("gnote"):
+            body += '<h3 id="sec-note">特别说明</h3><p>' + esc(s["gnote"]) + '</p>'
+        web_link = ('<li>学校官网：<a class="art-link" href="' + esc(s.get("web", "")) + '" target="_blank" rel="noopener">' + esc((s.get("web", "") or "").replace("https://", "").replace("http://", "")) + ' ↗</a></li>') if s.get("web") else ''
+        body += ('<h3 id="sec-link">官方入口</h3><ul>'
+                 + web_link
+                 + '<li>招生章程：教育部阳光高考平台章程库 <a class="art-link" href="https://gaokao.chsi.com.cn/zsgs/zhangcheng/" target="_blank" rel="noopener">gaokao.chsi.com.cn ↗</a>（站内检索校名可查当年章程原文）</li>'
+                 + '<li>在渝招生计划与历年数据：<a class="art-link" href="../daxue.html">大学与专业库总表</a></li>'
+                 + '</ul>')
+        desc = (s.get("name", "") + "近五年在渝投档线与位次趋势、在渝招生计划、双一流学科、就业数据与特色专业——逐条标注来源，不做录取承诺。")
+        meta = esc(s.get("city", "")) + " · " + esc(s.get("type", "")) + " · " + esc(badge) + " · 数据核验 2026-11-12"
+        cfg = {"title": s.get("name", "") + " · 在渝投档线与招生 | 花期册",
+               "desc": desc[:150], "kicker": "UNIVERSITY · 院校档案", "body_html": body,
+               "meta_line": meta, "back": "../daxue.html", "back_label": "大学与专业库",
+               "fname": fname, "css_file": css_file, "js_file": JS_FILE}
+        html = article_html(cfg, css, header, footer_html, dialogs, extra_js)
+        html = fix_rel(html)
+        with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
+            f.write(html)
+        made.append(fname)
+    # 陈旧 dx 文件转跳转
+    stale = 0
+    for fn in os.listdir(out_dir):
+        if fn.startswith("dx-") and fn.endswith(".html") and fn not in keep:
+            with open(os.path.join(out_dir, fn), "w", encoding="utf-8") as f:
+                f.write('<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../daxue.html"><title>已迁移</title>')
+            stale += 1
+    if stale:
+        made.append("dx- 旧文件转跳转 %d 个" % stale)
+    return made

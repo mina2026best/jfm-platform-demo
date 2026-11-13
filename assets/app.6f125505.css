@@ -124,6 +124,12 @@
   .cal .src{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--muted);border-top:1px dashed var(--line);padding-top:8px}
 
 
+  /* v1.12：日历按月视图（对标中考网月份轴） */
+  .calm-h{font-family:var(--serif);font-size:19px;color:var(--navy);margin:26px 0 10px}
+  .calm-h .calm-n{font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:.08em}
+  .calm-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media (max-width:640px){.calm-grid{grid-template-columns:1fr}}
+
 
 /* ============ 05-policy ============ */
   /* ---------- 政策列表 ---------- */

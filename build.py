@@ -904,6 +904,10 @@ def main():
     art_footer = convert_links(art_footer_raw)
     art_dir = os.path.join(ROOT, "articles")
     articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
+    # v1.12：大学详情页（对标掌上高考院校详情；数据 100% DAXUE 真实采集）
+    from article_gen import gen_daxue_pages
+    dx_made = gen_daxue_pages(daxue_js, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
+    built.append("articles/ · 大学详情页 %d 页" % len([x for x in dx_made if x.endswith(".html")]))
     for _fn in os.listdir(art_dir):
         if _fn.endswith(".html"):
             _p = os.path.join(art_dir, _fn)
@@ -931,7 +935,7 @@ def main():
         f.write("\n".join(sm))
     with open(os.path.join(ROOT, "robots.txt"), "w", encoding="utf-8") as f:
         f.write("User-agent: *\nAllow: /\nSitemap: " + site + "sitemap.xml\n")
-    keep = set(articles)
+    keep = set(articles) | {x for x in dx_made if x.endswith(".html")}
     stale = 0
     if os.path.isdir(art_dir):
         for fn in os.listdir(art_dir):

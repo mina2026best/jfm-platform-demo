@@ -12,7 +12,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"花期册 · BLOOM ALMANAC","url":"https://mina2026best.github.io/jfm-platform-demo/","logo":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg","areaServed":"重庆市","knowsAbout":["重庆小升初","重庆中考","指标到校","高考志愿填报"]}</script>
 <link rel="alternate" type="application/rss+xml" title="花期册 · 重庆升学资讯订阅" href="rss.xml" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学指南","url":"https://mina2026best.github.io/jfm-platform-demo/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mina2026best.github.io/jfm-platform-demo/search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-<link rel="stylesheet" href="assets/app.89ef6ff2.css" />
+<link rel="stylesheet" href="assets/app.6f125505.css" />
 <link rel="stylesheet" href="assets/enhance.css?v=20261112f" />
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
@@ -119,7 +119,11 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
     <p class="sec-desc">17 个全年关键节点（覆盖幼升小 → 高考全学段），每条附「现在该做什么」行动清单与官方来源链接；节点每年微调，以官方发布为准。保存「孩子档案」后按学段自动过滤；支持提醒设置与行动清单打印。</p>
-    <div class="fact-filter cal-filter" style="margin-bottom:14px">
+    <div class="fact-filter cal-filter" id="cal-view" style="margin-bottom:14px">
+      <span class="mu-label" style="margin-right:6px">视图</span>
+      <button class="ff on" data-cv="card" onclick="setCalView('card')" aria-pressed="true">卡片视图</button>
+      <button class="ff" data-cv="month" onclick="setCalView('month')" aria-pressed="false">按月视图</button>
+      <span class="mu-label" style="margin:0 6px 0 14px">学段</span>
       <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
       <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
       <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
@@ -132,6 +136,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <button class="mini-btn" onclick="printTodoList()">打印行动清单</button>
       <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF</span>
     </div>
+    <div id="cal-month" hidden></div>
     <div class="cal-grid">
       <div class="cal" data-stage="幼升小">
         <span class="date">2027-06</span><span class="stage">幼升小</span>
@@ -366,7 +371,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       </div>
     </div>
     <div class="legal">
-      数据更新 <time datetime="2026-11-12">2026-11-12</time> · <a href="rss.xml" class="linkbtn" style="text-decoration:underline">RSS 订阅</a> ·
+      数据更新 <time datetime="2026-11-13">2026-11-13</time> · <a href="rss.xml" class="linkbtn" style="text-decoration:underline">RSS 订阅</a> ·
       © 2026 花期册 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 · 数据逐条标注来源与核验日期 ·
       监管对齐：重庆「清朗巴渝」专项行动五条红线已纳入内容审核词库 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 ·
       未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 ·
@@ -375,8 +380,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   </div>
 </footer>
 
-<script src="assets/data.831863fd.js" defer></script>
-<script src="assets/app.7abba493.js" defer></script>
+<script src="assets/data.71570bdc.js" defer></script>
+<script src="assets/app.e3659191.js" defer></script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#gaozhong":"gaozhong.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">

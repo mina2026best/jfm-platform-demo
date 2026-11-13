@@ -12,7 +12,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"花期册 · BLOOM ALMANAC","url":"https://mina2026best.github.io/jfm-platform-demo/","logo":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg","areaServed":"重庆市","knowsAbout":["重庆小升初","重庆中考","指标到校","高考志愿填报"]}</script>
 <link rel="alternate" type="application/rss+xml" title="花期册 · 重庆升学资讯订阅" href="rss.xml" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学指南","url":"https://mina2026best.github.io/jfm-platform-demo/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mina2026best.github.io/jfm-platform-demo/search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-<link rel="stylesheet" href="assets/app.89ef6ff2.css" />
+<link rel="stylesheet" href="assets/app.6f125505.css" />
 <link rel="stylesheet" href="assets/enhance.css?v=20261112f" />
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
@@ -119,6 +119,13 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="sec-head"><span class="no">3.6 · 大学与专业库</span><h2>近五年在渝投档线，一眼看清门槛走向</h2></div>
     <p class="sec-desc">C9 / 985 / 211 共 <b>129</b> 个在渝招生实体：本科批投档线五年趋势（2022–2026）＋ 一流学科 ＋ 就业数据 ＋ 官网直达，逐条标注来源与核验日期；不做排名、不构成录取预测。还没算位次？先到 <a href="zy.html">志愿参考 · 线差位次工具</a> 把分数换算成等位分再回来对照。</p>
+    <h3 class="qug-h" style="margin-top:30px">按专业找校 · 专业速查（在渝招生 985/211）</h3>
+    <p class="sec-desc">选一个专业名，列出开设该专业（在渝招生代表性专业）的 985/211 院校及其最新投档线——数据来自掌上高考采集的 516 条真实专业条目，不做任何推荐排序。</p>
+    <div class="zy-tools" style="margin-bottom:14px">
+      <select id="dxm-select" aria-label="选择专业" style="flex:1;min-width:200px;font-size:13.5px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--paper);color:var(--ink)"></select>
+      <button class="btn-main" onclick="dxMajorRun()">查开设院校</button>
+    </div>
+    <div id="dxm-out" aria-live="polite"><div class="cmp-empty">选择专业名后，列出在渝招生中开设该专业的 985/211 院校及其最新投档线。</div></div>
     <div class="cmp-note dx-kv" style="margin-bottom:14px"><b>先读口径（重要）</b>　「投档线」＝重庆市普通类<b>本科批</b>平行志愿<b>投档最低分</b>，取该校当年全部普通类专业组中的最低值（中外合作 / 民族班 / 预科等特殊类型不计入，展开明细可见）；<b>分校与医学部独立招生、单独列示</b>；「位次」为对应年全市一分一段表的最低位次——跨年比较看位次与线差，别只看绝对分；「在渝计划」为该校当年全部专业组计划合计（含中外合作等），看盘子增减。数据源：掌上高考 · 中国教育在线院校数据集（2026-10-30 采集核验，逐校可回溯）＋重庆市教委历年批次线（新华网重庆 2026-06-25 已核验）。</div>
     <div class="dx-favbar" id="dx-favbar"></div>
     <div class="dx-legend">
@@ -245,7 +252,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       </div>
     </div>
     <div class="legal">
-      数据更新 <time datetime="2026-11-12">2026-11-12</time> · <a href="rss.xml" class="linkbtn" style="text-decoration:underline">RSS 订阅</a> ·
+      数据更新 <time datetime="2026-11-13">2026-11-13</time> · <a href="rss.xml" class="linkbtn" style="text-decoration:underline">RSS 订阅</a> ·
       © 2026 花期册 · 不构成收益或录取承诺 · 涉及政策以重庆市教委及各区县当年度官方发布为准 · 数据逐条标注来源与核验日期 ·
       监管对齐：重庆「清朗巴渝」专项行动五条红线已纳入内容审核词库 · 会员服务协议、隐私政策与退款规则将在正式上线版本中全文公示 ·
       未成年人个人信息按《个人信息保护法》第 28/31 条最小必要收集 ·
@@ -255,8 +262,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
 </footer>
 
 <script src="assets/data-daxue.aa5e3068.js" defer></script>
-<script src="assets/data.831863fd.js" defer></script>
-<script src="assets/app.7abba493.js" defer></script>
+<script src="assets/data.71570bdc.js" defer></script>
+<script src="assets/app.e3659191.js" defer></script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#gaozhong":"gaozhong.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">

@@ -34,6 +34,15 @@ PAGES = [
     dict(file="schools.html", title="学校档案库 · 花期册",
          desc="学校档案库：公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网）、招生范围与通勤参考，逐字段标注来源与核验日期。",
          sections=["sch-subnav", "schools"]),
+    dict(file="schools-xx.html", title="小学档案 · 花期册",
+         desc="5 所小学 + 九年一贯制学校档案：概况、划片、口碑来源层（官方/媒体/社区）、示范批次与学位紧张标注——逐条标注来源。",
+         sections=["sch-subnav", "schools-xx"]),
+    dict(file="schools-cz.html", title="初中档案 · 花期册",
+         desc="12 所纯初中 + 23 所含初中部的完全中学档案：划片/摇号口径、七系系属与民转公标注——逐条标注来源。",
+         sections=["sch-subnav", "schools-cz"]),
+    dict(file="schools-gz.html", title="高中档案（含完中） · 花期册",
+         desc="市级重点联招校、区县高中与完中档案：联招口径、指标到校、收费标准与市级重点标注——逐条标注来源。",
+         sections=["sch-subnav", "schools-gz"]),
     # 档案库按主题拆页（原单页桌面 18420px / 手机 43102px）
     dict(file="schools-liangjiang.html", title="两江新区升学专题 · 花期册",
          desc="原江北 / 渝北家长必读：两江新区区划变动对划片、学校归属与报名口径的影响，逐条标注来源。",
@@ -219,6 +228,11 @@ def build_js():
     if os.path.exists(sj):
         _schools = json.load(open(sj, encoding="utf-8"))
         data += "\n\nvar SCHOOL_DB = " + json.dumps(_schools, ensure_ascii=False) + ";"
+    # v1.13：学段核对稿（逐校人工核对，basis=分类依据）
+    stj = os.path.join(SRC, "data", "schools_stage.json")
+    if os.path.exists(stj):
+        _stage = json.load(open(stj, encoding="utf-8"))
+        data += "\n\nvar SCHOOL_STAGE_MAP = " + json.dumps(_stage, ensure_ascii=False) + ";"
     feats = []
     data_feats = []
     daxue_data = ""
@@ -581,6 +595,9 @@ def build_page(page, tpl, secs, css, js):
         "schools-tier.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("梯队与图谱", "")],
         "schools-koubei.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("口碑名单", "")],
         "schools-guide.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("报名指南", "")],
+        "schools-xx.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("小学档案", "")],
+        "schools-cz.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("初中档案", "")],
+        "schools-gz.html": [("首页", "index.html"), ("学校档案库", "schools.html"), ("高中档案", "")],
         "xiaoxue.html": [("首页", "index.html"), ("小学名校库", "")],
         "chuzhong.html": [("首页", "index.html"), ("初中名校库", "")],
         "gaozhong.html": [("首页", "index.html"), ("高中与联招库", "")],

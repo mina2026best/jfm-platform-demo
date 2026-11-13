@@ -1057,6 +1057,10 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <a class="sn-chip sn-x" href="schools-tier.html">梯队与图谱</a>
       <a class="sn-chip sn-x" href="schools-koubei.html">口碑名单</a>
       <a class="sn-chip sn-x" href="schools-guide.html">报名指南</a>
+      <span class="sn-t" style="margin-left:14px">学段档案分册</span>
+      <a class="sn-chip sn-x" href="schools-xx.html">小学档案</a>
+      <a class="sn-chip sn-x" href="schools-cz.html">初中档案</a>
+      <a class="sn-chip sn-x" href="schools-gz.html">高中档案</a>
       <span class="sn-t" style="margin-left:14px">按学段进入</span>
       <a class="sn-chip sn-x" href="xiaoxue.html">小学名校库 ↗</a>
       <a class="sn-chip sn-x" href="chuzhong.html">初中名校库 ↗</a>
@@ -1121,6 +1125,39 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     <h3 id="sec-qu" class="qug-h">区县入学指南 · 官方入口（11 区口径）</h3>
     <p class="sec-desc">各区招生细则由辖区教委发布：点击直达区政府/区教委官方页面。<b>区划说明</b>：2026-01 起原江北区、渝北区辖区由两江新区代管（渝府发〔2025〕15号），两江新区代管片区的招生细则以两江新区教育局当年发布为准；上方「划片公告速查（9 区）」为中心城区口径，两套口径互为补充。</p>
     <div class="qug-grid" id="qu-guide"></div>
+  </div>
+</section>
+
+<section id="schools-xx" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03.7 · 小学档案</span><h2>小学档案分册（5 所 + 九年一贯制）</h2></div>
+    <p class="sec-desc">档案库收录的小学实体分册：概况、划片、口碑来源层与学位紧张标注逐条真实匹配（未匹配的学校如实不显示标签）。分类筛选与全站学校卡能力一致（对比/关注/档案）。</p>
+    <div class="fact-filter cal-filter" id="xx-filters" style="margin-bottom:14px"></div>
+    <div class="school-grid" id="school-grid-xx"></div>
+    <div id="sch-cmp-panel-xx" aria-live="polite"></div>
+    <p class="dx-tnote">学段口径：含九年一贯制学校（谢家湾学校，原谢家湾小学）。学段判定以核对稿为准（办学性质/招生范围逐校核对，2026-11-13）。</p>
+  </div>
+</section>
+
+<section id="schools-cz">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03.8 · 初中档案</span><h2>初中档案分册（纯初中 12 所 + 含初中部完中 23 所）</h2></div>
+    <p class="sec-desc">小升初视角：纯初中（区内划片/派位、民转公摇号）与含初中部的完全中学并列呈现，完中卡带「含高中部」徽标；七系系属以图谱核对稿为准。</p>
+    <div class="fact-filter cal-filter" id="cz-filters" style="margin-bottom:14px"></div>
+    <div class="school-grid" id="school-grid-cz"></div>
+    <div id="sch-cmp-panel-cz" aria-live="polite"></div>
+    <p class="dx-tnote">学段口径：完中（初高中并存）同时收录于高中档案页——两页徽标互见，家长按需检索。分类依据逐校核对（2026-11-13）。</p>
+  </div>
+</section>
+
+<section id="schools-gz" class="alt">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">03.9 · 高中档案</span><h2>高中档案分册（市级重点联招校 · 区县高中 · 完中 · 一贯制高中部）</h2></div>
+    <p class="sec-desc">初升高视角：联招市级重点、区县重点高中与含高中部的完中并列呈现，完中卡带「含初中部」徽标；市级重点标注来自档案「办学性质」字段原文。</p>
+    <div class="fact-filter cal-filter" id="gz-filters" style="margin-bottom:14px"></div>
+    <div class="school-grid" id="school-grid-gz"></div>
+    <div id="sch-cmp-panel-gz" aria-live="polite"></div>
+    <p class="dx-tnote">学段口径：巴蜀常春藤为十二年一贯制（民办，含高中部）。志愿填报工具见志愿参考页；联招线六年趋势见高中与联招库。分类依据逐校核对（2026-11-13）。</p>
   </div>
 </section>
 
@@ -1206,6 +1243,14 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="sec-head"><span class="no">03.2 · 学校档案库</span><h2>官方数据 + 公开概况 + 审核制评价</h2></div>
     <p class="sec-desc">不做排名、不炒作升学率（教育部门明令禁止）；每所学校含公开概况（创办 / 校训 / 规模 / 师资 / 地址 / 官网，逐项标注来源）、招生与通勤档案、家长评价；争议评价走「证据 + 仲裁」流程，缺失字段如实标「暂缺」。</p>
+
+    <div class="qug-h" style="margin-top:22px;margin-bottom:10px">按学段进入档案分册（推荐入口）</div>
+    <div class="sm-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+      <a class="hub-card" href="schools-xx.html" style="display:flex;flex-direction:column;gap:4px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink)"><b style="font-family:var(--serif);font-size:16px;color:var(--navy)">小学档案</b><span class="sc-qu">5 所 + 九年一贯制 · 口碑层 / 示范批次 / 学位紧张分类</span></a>
+      <a class="hub-card" href="schools-cz.html" style="display:flex;flex-direction:column;gap:4px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink)"><b style="font-family:var(--serif);font-size:16px;color:var(--navy)">初中档案</b><span class="sc-qu">纯初中 12 + 含初中部完中 23 · 七系系属 / 民办摇号分类</span></a>
+      <a class="hub-card" href="schools-gz.html" style="display:flex;flex-direction:column;gap:4px;background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--ink)"><b style="font-family:var(--serif);font-size:16px;color:var(--navy)">高中档案</b><span class="sc-qu">市级重点联招 + 区县高中 + 完中 73 所 · 市级重点 / 完中 / 民办分类</span></a>
+    </div>
+    <div class="cmp-note" style="margin-bottom:18px">分类浏览：<a href="schools-koubei.html">口碑与示范名单（60 校 · 来源分层）</a> · <a href="schools-tier.html">梯队与学位供给（按学年分列）</a> · <a href="chuzhong.html#dragon-graph">七系办学图谱（64 实体）</a> · <a href="schools-guide.html">报名指南与划片直链</a>。下方为全部 90 校速览（三维筛选）。</div>
     <div class="stage-hub">
       <a class="hub-card" href="xiaoxue.html">
         <span class="hub-icon">🎓</span>

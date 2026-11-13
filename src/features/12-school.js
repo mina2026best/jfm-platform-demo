@@ -220,7 +220,7 @@ function schCmpRestore(){
 }
 function schCmpClear(){ schCmpSave([]); schCmpRenderPanel(); schCmpRestore(); toast('已清空对比'); }
 function schCmpRenderPanel(){
-  var panel = document.getElementById('sch-cmp-panel'); if(!panel) return;
+  var panel = document.getElementById('sch-cmp-panel') || document.querySelector('[id^="sch-cmp-panel-"]'); if(!panel) return;
   var names = schCmpLoad().filter(function(n){ return SCHOOL_DB[n]; });
   if(names.length < 2){ panel.innerHTML = ''; return; }
   function row(label, fn){ return '<tr><th>' + label + '</th>' + names.map(function(n){ return '<td>' + fn(SCHOOL_DB[n], n) + '</td>'; }).join('') + '</tr>'; }
@@ -289,4 +289,117 @@ function filterSchoolsStage(st){
     b.setAttribute('aria-pressed', String(on));
   });
   applySchoolFilters();
+}
+
+
+/* ---------- v1.13：学段档案分册（小学/初中/高中三页，数据=逐校核对稿） ---------- */
+var STAGE_PAGE_CONF = {
+  xx: { name: '小学档案', grid: 'school-grid-xx', filters: 'xx-filters', pick: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return !!m && m.stage === '小学'; },
+        chips: [
+          { label: '口碑来源·官方', match: function(k){ var it = (typeof KOUBEI !== 'undefined') && KOUBEI.items.find(function(i){ return i.name === k.split('（')[0]; }); return !!it && it.level === '官方'; } },
+          { label: '口碑来源·媒体', match: function(k){ var it = (typeof KOUBEI !== 'undefined') && KOUBEI.items.find(function(i){ return i.name === k.split('（')[0]; }); return !!it && it.level === '媒体'; } },
+          { label: '市级示范（历批）', match: function(k){ var it = (typeof KOUBEI !== 'undefined') && KOUBEI.items.find(function(i){ return i.name === k.split('（')[0]; }); return !!it && it.demo > 0; } },
+          { label: '渝中区学位紧张（2026）', match: function(k){ return /渝中/.test(k) && /巴蜀小学|人民小学|人和街小学/.test(k); } },
+          { label: '九年一贯制', match: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return !!m && m.tag === '九年一贯'; } }
+        ] },
+  cz: { name: '初中档案', grid: 'school-grid-cz', filters: 'cz-filters', pick: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return !!m && (m.stage === '初中' || m.tag === '完中'); },
+        chips: [
+          { label: '纯初中（划片/派位）', match: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return m && m.stage === '初中'; } },
+          { label: '完中·含高中部', match: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return m && m.tag === '完中'; } },
+          { label: '民办（摇号）', match: function(k){ var d = SCHOOL_DB[k] || {}; return /民办/.test(d['办学性质'] || '') && /摇号/.test(d['招生范围'] || ''); } },
+          { label: '七系系属', match: function(k){ var base = k.split('（')[0]; return (typeof DRAGON !== 'undefined') && DRAGON.systems.some(function(sys){ return sys.entities.some(function(e){ return e.name.split('（')[0].trim() === base; }); }); } },
+          { label: '沙区学位紧张（2026 初中）', match: function(k){ return /沙坪坝/.test(k) && /重庆七中|凤鸣山|青木关|树人中学/.test(k); } }
+        ] },
+  gz: { name: '高中档案', grid: 'school-grid-gz', filters: 'gz-filters', pick: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return !!m && m.stage === '高中'; },
+        chips: [
+          { label: '市级重点（联招）', match: function(k){ var d = SCHOOL_DB[k] || {}; return /市级重点/.test(d['办学性质'] || ''); } },
+          { label: '完中·含初中部', match: function(k){ var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k]; return m && m.tag === '完中'; } },
+          { label: '民办', match: function(k){ var d = SCHOOL_DB[k] || {}; return /民办/.test(d['办学性质'] || ''); } },
+          { label: '中心城区', match: function(k){ var d = SCHOOL_DB[k] || {}; return /渝中|江北|南岸|沙坪坝|九龙坡|大渡口/.test(d['所在区'] || ''); } },
+          { label: '主城新区/远郊', match: function(k){ var d = SCHOOL_DB[k] || {}; return !/渝中|江北|南岸|沙坪坝|九龙坡|大渡口/.test(d['所在区'] || ''); } }
+        ] }
+};
+
+function stageCardHTML(k){
+  var d = SCHOOL_DB[k] || {};
+  var key = encodeURIComponent(k);
+  var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k];
+  var badge = '';
+  if (m && m.tag === '完中') badge = '<span class="sc-badge" style="background:#22314A;color:#C9D8F0">含高中部</span>';
+  if (m && m.tag === '完中' && typeof STAGE_PAGE_CUR !== 'undefined' && STAGE_PAGE_CUR === 'gz') badge = '<span class="sc-badge" style="background:#22314A;color:#C9D8F0">含初中部</span>';
+  var stg = document.getElementById('school-grid-xx') ? 'xx' : (document.getElementById('school-grid-cz') ? 'cz' : 'gz');
+  return '<div class="school-card" data-qu="' + esc(d['所在区'] || '') + '"><div class="sc-art" aria-hidden="true">' + schoolPhotoImg(k) + '</div><div class="sc-top"><span class="sc-badge">' + esc(_schoolNature(k)) + '</span><span class="sc-qu">' + esc(d['所在区'] || '') + '</span><span class="sc-badge sc-stage">' + esc(_schoolStage(k)) + '</span>' + badge + '</div>'
+    + '<h4>' + esc(k) + '</h4>' + _factChips(k) + '<p>' + esc(d['简介'] || '') + '</p>'
+    + '<div class="sc-actions"><button class="mini-btn" onclick="openSchool(decodeURIComponent(\'' + key + '\'))">查看档案</button>'
+    + '<a class="sc-page" href="articles/' + (typeof ARTMAP !== 'undefined' && ARTMAP['S|' + k] ? ARTMAP['S|' + k] : '') + '">详情页</a>'
+    + '<button class="mini-btn sch-cmp-btn" data-school="' + esc(k) + '" onclick="addToCompareName(decodeURIComponent(\'' + key + '\'))" aria-pressed="false">加入对比</button>'
+    + '<button class="mini-btn sch-fav-btn" data-school="' + esc(k) + '" onclick="schFavToggle(decodeURIComponent(\'' + key + '\'), this)" aria-pressed="false">☆ 关注</button></div>'
+    + '<div class="sc-qu" style="margin-top:6px">分类依据：' + esc((m && m.basis) || '—') + '</div></div>';
+}
+
+var STAGE_PAGE_CUR = '';
+var STAGE_CHIP_CUR = {};
+function renderStagePages(){
+  Object.keys(STAGE_PAGE_CONF).forEach(function(pid){
+    var conf = STAGE_PAGE_CONF[pid];
+    var grid = document.getElementById(conf.grid);
+    if(!grid || typeof SCHOOL_DB === 'undefined' || typeof SCHOOL_STAGE_MAP === 'undefined') return;
+    STAGE_PAGE_CUR = pid;
+    var keys = Object.keys(SCHOOL_DB).filter(conf.pick);
+    window['_keys_' + pid] = keys;
+    STAGE_CHIP_CUR[pid] = '';
+    paintStageGrid(pid);
+    buildStageFilters(pid, keys, conf);
+    if(typeof schFavRestore === 'function') schFavRestore();
+    if(typeof schCmpRestore === 'function') schCmpRestore();
+  });
+  STAGE_PAGE_CUR = '';
+}
+function paintStageGrid(pid){
+  var conf = STAGE_PAGE_CONF[pid];
+  var grid = document.getElementById(conf.grid); if(!grid) return;
+  var keys = (window['_keys_' + pid] || []);
+  var chip = STAGE_CHIP_CUR[pid];
+  var shown = keys.filter(function(k){
+    if(!chip) return true;
+    var c = conf.chips.find(function(x){ return x.label === chip; });
+    return c ? c.match(k) : true;
+  });
+  grid.innerHTML = '<div class="cmp-note" style="margin-bottom:10px">显示 ' + shown.length + ' / ' + keys.length + ' 所（分类无标签的学校在「全部」下可见）</div>' + shown.map(stageCardHTML).join('');
+  if(typeof schFavRestore === 'function') schFavRestore();
+  if(typeof schCmpRestore === 'function') schCmpRestore();
+}
+function stageChipFilter(pid, label){
+  STAGE_CHIP_CUR[pid] = label;
+  paintStageGrid(pid);
+}
+function buildStageFilters(pid, keys, conf){
+  var box = document.getElementById(conf.filters); if(!box) return;
+  var qus = [];
+  keys.forEach(function(k){ var q = (SCHOOL_DB[k]['所在区'] || '').trim(); if(q && qus.indexOf(q) < 0) qus.push(q); });
+  var html = '<button class="ff on" onclick="stageChipFilter(\'' + pid + '\',\'\')">全部（' + keys.length + '）</button>';
+  qus.forEach(function(q){ html += '<button class="ff" onclick="stageQuFilter(\'' + pid + '\',\'' + esc(q) + '\')">' + esc(q) + '</button>'; });
+  conf.chips.forEach(function(c){
+    var n = keys.filter(c.match).length;
+    html += '<button class="ff" style="border-style:dashed" onclick="stageQuFilter(\'' + pid + '\',\'@' + esc(c.label) + '\')">' + esc(c.label) + '（' + n + '）</button>';
+  });
+  box.innerHTML = html;
+}
+function stageQuFilter(pid, q){
+  var conf = STAGE_PAGE_CONF[pid];
+  var grid = document.getElementById(conf.grid); if(!grid) return;
+  var keys = (window['_keys_' + pid] || []);
+  var shown;
+  if(!q){ shown = keys; }
+  else if(q.charAt(0) === '@'){
+    var label = q.slice(1);
+    var c = conf.chips.find(function(x){ return x.label === label; });
+    shown = keys.filter(c ? c.match : function(){ return true; });
+  } else {
+    shown = keys.filter(function(k){ return (SCHOOL_DB[k]['所在区'] || '') === q; });
+  }
+  STAGE_CHIP_CUR[pid] = q.charAt(0) === '@' ? q.slice(1) : '';
+  grid.innerHTML = '<div class="cmp-note" style="margin-bottom:10px">显示 ' + shown.length + ' / ' + keys.length + ' 所（分类无标签的学校在「全部」下可见）</div>' + shown.map(stageCardHTML).join('');
+  if(typeof schFavRestore === 'function') schFavRestore();
+  if(typeof schCmpRestore === 'function') schCmpRestore();
 }

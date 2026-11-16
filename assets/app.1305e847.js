@@ -996,6 +996,15 @@ function runQuiz(){
 }
 
 
+/* ---------- v1.12：首页「测线差·查位次」快测卡（对标掌上高考第一屏工具化；输出=线差+位次，不做概率承诺） ---------- */
+function quickZy(){
+  var sub = document.getElementById('zq-subject').value;
+  var sc = document.getElementById('zq-score').value;
+  if(!sc){ document.getElementById('zq-score').focus(); return; }
+  location.href = 'zy.html?zys=' + encodeURIComponent(sub) + '&zyscore=' + encodeURIComponent(sc);
+}
+
+
 /* ---------- 23-data-sources ---------- */
 /* ---------- v0.7：数据来源面板 ---------- */
 function renderDataSources(){
@@ -1221,7 +1230,7 @@ function fundCalc(){
   box.innerHTML='<div class="fund-out"><b>'+st+'阶段参照：</b>'+ref+cmp+'<br/><br/>'+dataBadge('cifr')+'<br/><span style="font-size:12px;color:var(--muted)">风险提示：本工具仅提供公开调查数据的参照对照，不推荐任何金融/保险产品；教育金规划请以家庭整体现金流为前提。</span></div>';
 }
 function bootV3(){
-  initSelects(); renderSchools(); initStageFilters(); renderStagePages(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderWatch(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); initDao(); bootPageRoute(); initStageDeepLink(); dxInit(); gzInit(); yhRender(); pqRender(); ljRender(); mapRender(); dgRender(); kbRender();
+  initSelects(); renderSchools(); initStageFilters(); renderStagePages(); renderQuGuide(); renderProblems(); migrateProfile(); renderKids(); kidNote(); applyKidFilter(); renderKidBar(); restoreAlerts(); renderMeFav(); renderWatch(); renderMeStats(); renderCountdown(); mountArt(); renderHotRank(); renderNews(); renderQuickNews(); renderLearn(); initAnnBar(); initSearchShortcut(); initScrollSpy(); initFsToggle(); initTheme(); initPageUI(); initKbdHelp(); initDialogFocusTrap(); renderPath('普高统招（联招）'); renderDataSources(); initDao(); bootPageRoute(); initStageDeepLink(); dxInit(); gzInit(); yhRender(); pqRender(); ljRender(); mapRender(); dgRender(); kbRender();
   var mb = document.getElementById('me-beans'), bv = document.getElementById('beans-val');
   if(mb && bv) mb.textContent = bv.textContent;
 }
@@ -1535,6 +1544,21 @@ function exportNews(){
   document.body.appendChild(a); a.click();
   setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 1200);
   toast('已导出资讯 JSON（' + payload.items.length + ' 条）');
+}
+
+
+/* ---------- v1.12：首页「重庆招考快讯」置顶栏（对标掌上高考省级官方资讯流；只取官方渠道条目） ---------- */
+function renderQuickNews(){
+  var box = document.getElementById('kuai-xun'); if(!box) return;
+  if(typeof newsCombined !== 'function') return;
+  var items = newsCombined().filter(function(x){
+    var official = /考试院|教委|掌上高考|阳光高考/.test(x.src || '');
+    return (x.cat === '政策速递' || x.cat === '升学动态') && official;
+  }).sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); }).slice(0, 4);
+  if(!items.length){ box.hidden = true; return; }
+  box.innerHTML = items.map(function(x){
+    return '<div class="kx-row"><a href="news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12)) + '">' + esc(x.t) + '</a><span class="kx-meta">' + esc(x.src || '') + ' · ' + esc(x.date || '') + '</span></div>';
+  }).join('');
 }
 
 
@@ -2019,6 +2043,15 @@ function bootPageRoute(){
   // 3) compare.html?fav=1 → 恢复收藏对比
   if(qparam('fav') === '1' && document.getElementById('sel-a')){
     restoreFav();
+  }
+  // v1.12：zy.html?zys=wl|ls&zyscore=n → 位次换算预填（首页快测卡入口）
+  var zys = qparam('zys'), zyscore = qparam('zyscore');
+  if (zys && zyscore && document.getElementById('zy-subject')) {
+    document.getElementById('zy-subject').value = (zys === 'ls') ? 'ls' : 'wl';
+    document.getElementById('zy-score').value = zyscore;
+    if (typeof runZy === 'function') runZy();
+    var zt = document.querySelector('.zy-tools');
+    if (zt) zt.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   // v1.10：schools.html?stage=小学|中学 → 落地即筛选
   var stg = qparam('stage');
@@ -4443,6 +4476,16 @@ function dxMajorInit(){
     (s.majors || []).forEach(function(m){ if(m) set[m] = 1; });
   });
   DXM.list = Object.keys(set).sort();
+  /* 热门专业 = 516 条条目中该校覆盖数频次 TOP8（真实统计，非编辑推荐） */
+  var freq = {};
+  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m) freq[m] = (freq[m] || 0) + 1; }); });
+  var hot = Object.keys(freq).sort(function(a, b){ return freq[b] - freq[a]; }).slice(0, 8);
+  var hotBox = document.getElementById('dxm-hot');
+  if(hotBox){
+    hotBox.innerHTML = '<span class="dx-flab">热门专业</span>' + hot.map(function(m){
+      return '<button class="ff" onclick="dxMajorPick(\'' + esc(m) + '\')">' + esc(m) + '（' + freq[m] + ' 校）</button>';
+    }).join('');
+  }
   var opts = DXM.list.map(function(m){ return '<option value="' + esc(m) + '">' + esc(m) + '</option>'; }).join('');
   sel.innerHTML = '<option value="">选择专业名</option>' + opts;
 }
@@ -4476,6 +4519,15 @@ function dxMajorRun(){
     + '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>院校</th><th>层次</th><th>最新物理投档</th><th>最新历史投档</th><th>详情</th></tr></thead><tbody>'
     + (rows || '<tr><td colspan="5">未命中</td></tr>') + '</tbody></table></div>'
     + '<p class="dx-tnote">数据：掌上高考采集的各校在渝招生代表性专业（516 条）；不代表该校全部专业，完整名单以当年招生计划为准。</p>';
+}
+
+
+function dxMajorPick(m){
+  var sel = document.getElementById('dxm-select');
+  if(sel){ sel.value = m; }
+  dxMajorRun();
+  var el = document.getElementById('dxm-out');
+  if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 

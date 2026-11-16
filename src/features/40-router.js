@@ -36,6 +36,15 @@ function bootPageRoute(){
   if(qparam('fav') === '1' && document.getElementById('sel-a')){
     restoreFav();
   }
+  // v1.12：zy.html?zys=wl|ls&zyscore=n → 位次换算预填（首页快测卡入口）
+  var zys = qparam('zys'), zyscore = qparam('zyscore');
+  if (zys && zyscore && document.getElementById('zy-subject')) {
+    document.getElementById('zy-subject').value = (zys === 'ls') ? 'ls' : 'wl';
+    document.getElementById('zy-score').value = zyscore;
+    if (typeof runZy === 'function') runZy();
+    var zt = document.querySelector('.zy-tools');
+    if (zt) zt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
   // v1.10：schools.html?stage=小学|中学 → 落地即筛选
   var stg = qparam('stage');
   if(stg && document.getElementById('school-grid')){

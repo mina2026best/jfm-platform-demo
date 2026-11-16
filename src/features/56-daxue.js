@@ -485,6 +485,16 @@ function dxMajorInit(){
     (s.majors || []).forEach(function(m){ if(m) set[m] = 1; });
   });
   DXM.list = Object.keys(set).sort();
+  /* 热门专业 = 516 条条目中该校覆盖数频次 TOP8（真实统计，非编辑推荐） */
+  var freq = {};
+  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m) freq[m] = (freq[m] || 0) + 1; }); });
+  var hot = Object.keys(freq).sort(function(a, b){ return freq[b] - freq[a]; }).slice(0, 8);
+  var hotBox = document.getElementById('dxm-hot');
+  if(hotBox){
+    hotBox.innerHTML = '<span class="dx-flab">热门专业</span>' + hot.map(function(m){
+      return '<button class="ff" onclick="dxMajorPick(\'' + esc(m) + '\')">' + esc(m) + '（' + freq[m] + ' 校）</button>';
+    }).join('');
+  }
   var opts = DXM.list.map(function(m){ return '<option value="' + esc(m) + '">' + esc(m) + '</option>'; }).join('');
   sel.innerHTML = '<option value="">选择专业名</option>' + opts;
 }
@@ -518,4 +528,13 @@ function dxMajorRun(){
     + '<div class="dx-twrap"><table class="art-table dx-table"><thead><tr><th>院校</th><th>层次</th><th>最新物理投档</th><th>最新历史投档</th><th>详情</th></tr></thead><tbody>'
     + (rows || '<tr><td colspan="5">未命中</td></tr>') + '</tbody></table></div>'
     + '<p class="dx-tnote">数据：掌上高考采集的各校在渝招生代表性专业（516 条）；不代表该校全部专业，完整名单以当年招生计划为准。</p>';
+}
+
+
+function dxMajorPick(m){
+  var sel = document.getElementById('dxm-select');
+  if(sel){ sel.value = m; }
+  dxMajorRun();
+  var el = document.getElementById('dxm-out');
+  if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }

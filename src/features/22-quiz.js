@@ -24,3 +24,12 @@ function runQuiz(){
   box.innerHTML = '<div class="zy-out">' + L.join('<br/>') + '</div>';
   if(typeof jfmTrack === 'function') jfmTrack('quiz_complete', { stage: stageName, housing: hs });
 }
+
+
+/* ---------- v1.12：首页「测线差·查位次」快测卡（对标掌上高考第一屏工具化；输出=线差+位次，不做概率承诺） ---------- */
+function quickZy(){
+  var sub = document.getElementById('zq-subject').value;
+  var sc = document.getElementById('zq-score').value;
+  if(!sc){ document.getElementById('zq-score').focus(); return; }
+  location.href = 'zy.html?zys=' + encodeURIComponent(sub) + '&zyscore=' + encodeURIComponent(sc);
+}

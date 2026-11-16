@@ -138,6 +138,16 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
           <a class="btn-ghost" href="#calendar">看本学期升学节点</a>
         </div>
         <div class="cd-bar" id="cd-bar" aria-live="polite"></div>
+    <div class="zy-quick" role="search" aria-label="线差位次快测">
+      <span class="zq-t">测线差 · 查位次</span>
+      <select id="zq-subject" aria-label="选科">
+        <option value="wl">物理类</option>
+        <option value="ls">历史类</option>
+      </select>
+      <input id="zq-score" type="number" min="200" max="750" placeholder="高考分数" aria-label="高考分数" />
+      <button class="zq-btn" onclick="quickZy()">算一下 →</button>
+      <span class="zq-note">2026 官方批次线 · 一分一段精确位次</span>
+    </div>
         <div class="stage-chips" id="stage-chips" aria-label="按学段直达">
           <span class="sc-lead">按学段直达</span>
           <a href="wiki.html#幼升小">幼升小</a>
@@ -171,7 +181,9 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   <div class="wrap">
     <div class="home-grid2">
       <div>
-        <h3 style="font-family:var(--serif);font-size:18px;color:var(--navy);margin:0 0 10px">要闻与热门 <a href="news.html" style="font-size:12.5px;color:var(--accent);text-decoration:none;margin-left:8px">进入资讯中心 →</a></h3>
+        <h3 style="font-family:var(--serif);font-size:18px;color:var(--navy);margin:0 0 10px">重庆招考快讯 <span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.08em">考试院 · 教委 · 官方渠道置顶</span> <a href="news.html" style="font-size:12.5px;color:var(--accent);text-decoration:none;margin-left:8px">进入资讯中心 →</a></h3>
+        <div id="kuai-xun" aria-live="polite"></div>
+        <h3 style="font-family:var(--serif);font-size:16px;color:var(--navy);margin:18px 0 10px">要闻与热门</h3>
         <div id="hot-rank"><div class="empty-mini">资讯加载中…</div></div>
       </div>
       <div>
@@ -1495,6 +1507,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <select id="dxm-select" aria-label="选择专业" style="flex:1;min-width:200px;font-size:13.5px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--paper);color:var(--ink)"></select>
       <button class="btn-main" onclick="dxMajorRun()">查开设院校</button>
     </div>
+    <div id="dxm-hot" class="ff-row" style="margin-bottom:10px"></div>
     <div id="dxm-out" aria-live="polite"><div class="cmp-empty">选择专业名后，列出在渝招生中开设该专业的 985/211 院校及其最新投档线。</div></div>
     <div class="cmp-note dx-kv" style="margin-bottom:14px"><b>先读口径（重要）</b>　「投档线」＝重庆市普通类<b>本科批</b>平行志愿<b>投档最低分</b>，取该校当年全部普通类专业组中的最低值（中外合作 / 民族班 / 预科等特殊类型不计入，展开明细可见）；<b>分校与医学部独立招生、单独列示</b>；「位次」为对应年全市一分一段表的最低位次——跨年比较看位次与线差，别只看绝对分；「在渝计划」为该校当年全部专业组计划合计（含中外合作等），看盘子增减。数据源：掌上高考 · 中国教育在线院校数据集（2026-10-30 采集核验，逐校可回溯）＋重庆市教委历年批次线（新华网重庆 2026-06-25 已核验）。</div>
     <div class="dx-favbar" id="dx-favbar"></div>

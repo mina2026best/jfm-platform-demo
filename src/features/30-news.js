@@ -292,3 +292,18 @@ function exportNews(){
   setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 1200);
   toast('已导出资讯 JSON（' + payload.items.length + ' 条）');
 }
+
+
+/* ---------- v1.12：首页「重庆招考快讯」置顶栏（对标掌上高考省级官方资讯流；只取官方渠道条目） ---------- */
+function renderQuickNews(){
+  var box = document.getElementById('kuai-xun'); if(!box) return;
+  if(typeof newsCombined !== 'function') return;
+  var items = newsCombined().filter(function(x){
+    var official = /考试院|教委|掌上高考|阳光高考/.test(x.src || '');
+    return (x.cat === '政策速递' || x.cat === '升学动态') && official;
+  }).sort(function(a, b){ return (b.date || '').localeCompare(a.date || ''); }).slice(0, 4);
+  if(!items.length){ box.hidden = true; return; }
+  box.innerHTML = items.map(function(x){
+    return '<div class="kx-row"><a href="news.html?s=' + encodeURIComponent((x.t || '').slice(0, 12)) + '">' + esc(x.t) + '</a><span class="kx-meta">' + esc(x.src || '') + ' · ' + esc(x.date || '') + '</span></div>';
+  }).join('');
+}

@@ -25,3 +25,17 @@
   .brand-claim{display:inline-block;margin-top:10px;font-family:var(--serif);font-size:16px;color:var(--accent);font-weight:700}
   .brand-mean{color:var(--ink2)}
   @media (max-width:720px){ .hero-kicker{font-size:11px;letter-spacing:.08em;padding:4px 11px} }
+
+  /* v1.12：首页快测卡（对标掌上高考第一屏工具化） */
+  .zy-quick{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px;max-width:640px}
+  .zy-quick .zq-t{font-family:var(--serif);font-weight:700;font-size:14px;color:var(--navy)}
+  .zy-quick select{font-size:13px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:#fff;color:var(--ink)}
+  .zy-quick input{width:110px;font-size:13px;padding:6px 10px;border:1px solid var(--line2);border-radius:8px;font-family:var(--sans)}
+  .zy-quick .zq-btn{border:none;background:var(--accent);color:#fff;border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
+  .zy-quick .zq-btn:hover{background:var(--accent-hover)}
+  .zy-quick .zq-note{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  /* v1.12：首页招考快讯行 */
+  .kx-row{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+  .kx-row a{color:var(--ink2);text-decoration:none;font-size:13.5px}
+  .kx-row a:hover{color:var(--accent)}
+  .kx-row .kx-meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-left:auto;white-space:nowrap}

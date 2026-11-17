@@ -10,7 +10,7 @@ const { chromium } = require('playwright-core');
     const off = [];
     document.querySelectorAll('*').forEach(el => {
       const rect = el.getBoundingClientRect();
-      if (rect.width > 0 && (el.scrollWidth - el.clientWidth > 4 || rect.right > window.innerWidth + 4)) {
+      if (rect.width > 0 && rect.right > window.innerWidth + 4) {
         const cs = getComputedStyle(el);
         off.push({ tag: el.tagName, cls: String(el.className).slice(0, 50), sw: el.scrollWidth, cw: el.clientWidth, right: Math.round(rect.right), ws: cs.whiteSpace, disp: cs.display, minw: cs.minWidth });
       }

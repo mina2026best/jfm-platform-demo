@@ -922,17 +922,23 @@ def main():
     art_dir = os.path.join(ROOT, "articles")
     articles = gen_articles(tpl, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
     # v1.12：大学详情页（对标掌上高考院校详情；数据 100% DAXUE 真实采集）
-    from article_gen import gen_daxue_pages
+    from article_gen import gen_daxue_pages, gen_qu_pages
     dx_made = gen_daxue_pages(daxue_js, art_css, art_header, art_footer, dlg["dialogs"], "", art_dir, css_file=css_file, js_file=js_file)
     built.append("articles/ · 大学详情页 %d 页" % len([x for x in dx_made if x.endswith(".html")]))
-    for _fn in os.listdir(art_dir):
-        if _fn.endswith(".html"):
-            _p = os.path.join(art_dir, _fn)
-            _h = open(_p, encoding="utf-8").read()
-            _h2 = encode_hrefs(_h).replace(f'<script src="../assets/{js_file}" defer></script>',
-                                           f'<script src="../assets/{data_file}" defer></script>\n<script src="../assets/{js_file}" defer></script>')
-            if _h2 != _h:
-                open(_p, "w", encoding="utf-8").write(_h2)
+    # v1.13：区县专题页（对标本地宝「区县×学段」一页式；客户端渲染自全站数据包）
+    qu_dir = os.path.join(ROOT, "qu")
+    qu_made = gen_qu_pages(art_css, art_header, art_footer, dlg["dialogs"], "", qu_dir, css_file=css_file, js_file=js_file)
+    built.append("qu/ · 区县专题页 %d 页" % len([x for x in qu_made if x.endswith(".html")]))
+    qu_dir_post = os.path.join(ROOT, "qu")
+    for _root_dir in (art_dir, qu_dir_post):
+        for _fn in os.listdir(_root_dir):
+            if _fn.endswith(".html"):
+                _p = os.path.join(_root_dir, _fn)
+                _h = open(_p, encoding="utf-8").read()
+                _h2 = encode_hrefs(_h).replace(f'<script src="../assets/{js_file}" defer></script>',
+                                               f'<script src="../assets/{data_file}" defer></script>\n<script src="../assets/{js_file}" defer></script>')
+                if _h2 != _h:
+                    open(_p, "w", encoding="utf-8").write(_h2)
     # sitemap 生成（GitHub Pages 域名，带 lastmod）
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     site = SITE_BASE + "/"
@@ -941,6 +947,9 @@ def main():
         if pg_["file"] == "sitemap.html":
             continue  # sitemap.html 无实体页（站点地图由 footer 覆盖）
         sm.append(f"<url><loc>{site}{pg_['file']}</loc><lastmod>{lastmod}</lastmod></url>")
+    for fn in sorted(os.listdir(os.path.join(ROOT, "qu"))):
+        if fn.endswith(".html"):
+            sm.append(f"<url><loc>{site}qu/{fn}</loc><lastmod>{lastmod}</lastmod></url>")
     for fn in sorted(os.listdir(art_dir)):
         if fn.endswith(".html"):
             content_head = open(os.path.join(art_dir, fn), encoding="utf-8").read()[:300]

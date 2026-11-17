@@ -13,7 +13,7 @@ def slugify(text):
     h = hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
     return h
 
-ROOT_PAGES = {"index","news","calendar","policy","quiz","schools","compare","zy","forum","community","life","beans","me","plans","biz","data-sources","about","search","faq","wiki","contact","problems","404"}
+ROOT_PAGES = {"index","news","calendar","policy","quiz","schools","compare","zy","forum","community","life","beans","me","plans","biz","data-sources","about","search","faq","wiki","contact","problems","404","daxue","gaozhong","xiaoxue","chuzhong","daohang","sitemap","schools-liangjiang","schools-map","schools-tier","schools-koubei","schools-guide","schools-xx","schools-cz","schools-gz"}
 def fix_rel(html):
     """文章页位于 articles/ 子目录：把指向站点根页面的相对链接改为 ../ 前缀。"""
     def rep(m):
@@ -441,6 +441,79 @@ def gen_articles(tpl, css, header_tpl, footer_html, dialogs, extra_js, out_dir, 
     return made
 
 # ---------- v1.12：大学详情页生成器（对标掌上高考院校详情；数据 100% 来自 DAXUE 真实采集，无编造） ----------
+
+
+# ---------- v1.13：区县专题页生成器（对标本地宝「区县×学段」一页式专题；数据=QU_GUIDE/PQ_ROWS/SCHOOL_DB/newsCombined 全站真实数据，客户端渲染） ----------
+QU_PAGES = [
+  {"slug": "yuzhong", "qu": "渝中区"},
+  {"slug": "dadukou", "qu": "大渡口区"},
+  {"slug": "jiangbei", "qu": "江北区"},
+  {"slug": "shapingba", "qu": "沙坪坝区"},
+  {"slug": "jiulongpo", "qu": "九龙坡区"},
+  {"slug": "nanan", "qu": "南岸区"},
+  {"slug": "beibei", "qu": "北碚区"},
+  {"slug": "yubei", "qu": "渝北区"},
+  {"slug": "banan", "qu": "巴南区"},
+  {"slug": "liangjiang", "qu": "两江新区"},
+  {"slug": "gaoxin", "qu": "高新区"}
+]
+
+def gen_qu_pages(css, header_tpl, footer_html, dialogs, extra_js, out_dir, css_file=None, js_file=None):
+    """生成 qu/<slug>.html 区县专题页壳；页面数据由客户端从全站数据包渲染（renderQuPage）。"""
+    made = []
+    os.makedirs(out_dir, exist_ok=True)
+    keep = set()
+    for pg in QU_PAGES:
+        fname = pg["slug"] + ".html"
+        keep.add(fname)
+        qu = pg["qu"]
+        cfg = {
+            "title": qu + "升学专题 · 划片/学校/官方入口 | 花期册",
+            "desc": qu + "升学一页通：区教委官方入口、划片公告直链、本区学校档案、学位供给与本区招考快讯——数据全站统一来源，逐条标注。",
+            "kicker": "DISTRICT · " + qu,
+            "body_html": (
+                '<script>window.QU_PAGE = ' + _json_str(qu) + ';</script>'
+                '<div class="cmp-note" style="margin-bottom:14px"><b>区划说明</b>　2026-01 起原江北区、渝北区辖区由两江新区代管（渝府发〔2025〕15号），跨区报名以当年官方划片为准。</div>'
+                '<div class="me-grid">'
+                '<div class="me-card"><h4>' + esc(qu) + ' · 官方入口</h4><div id="qu-entry"><div class="empty-mini">加载中…</div></div></div>'
+                '<div class="me-card"><h4>划片公告 · 官方直链</h4><div id="qu-pq"><div class="empty-mini">加载中…</div></div></div>'
+                '</div>'
+                '<h3 class="qug-h" style="margin:26px 0 10px">' + esc(qu) + ' · 学校档案</h3>'
+                '<div class="cmp-note" style="margin-bottom:10px">本区学校档案（含学段标注与分类依据）；对比/关注按钮与全站一致。</div>'
+                '<div id="qu-school-tools" class="ff-row" style="margin-bottom:10px"></div>'
+                '<div class="school-grid" id="qu-school-grid"></div>'
+                '<h3 class="qug-h" style="margin:26px 0 10px">' + esc(qu) + ' · 本区招考快讯</h3>'
+                '<div id="qu-news" aria-live="polite"><div class="empty-mini">加载中…</div></div>'
+                '<div class="cmp-note" style="margin-top:16px"><b>延伸阅读</b>　<a href="../schools-tier.html">全区学位供给口径（按学年分列）</a> · <a href="../schools-guide.html">报名指南与划片总表</a> · <a href="../faq.html">家长 FAQ（37 问）</a></div>'
+            ),
+            "meta_line": "数据全站统一来源 · 逐条标注 · 2026-11-13 核",
+            "back": "../schools-guide.html", "back_label": "区县指南",
+            "fname": fname, "css_file": css_file, "js_file": js_file
+        }
+        extra = ('document.addEventListener("DOMContentLoaded", function(){'
+                 ' window.QU_PAGE = ' + _json_str(qu) + ';'
+                 ' try { if (typeof renderQuPage === "function") renderQuPage(); } catch(e) {}'
+                 '});')
+        html = article_html(cfg, css, header_tpl, footer_html, dialogs, extra_js + extra)
+        html = fix_rel(html)
+        with open(os.path.join(out_dir, fname), "w", encoding="utf-8") as f:
+            f.write(html)
+        made.append(fname)
+    # 陈旧文件转跳转
+    stale = 0
+    for fn in os.listdir(out_dir):
+        if fn.endswith(".html") and fn not in keep:
+            with open(os.path.join(out_dir, fn), "w", encoding="utf-8") as f:
+                f.write('<!DOCTYPE html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../schools-guide.html"><title>已迁移</title>')
+            stale += 1
+    if stale:
+        made.append("qu/ 旧文件转跳转 %d 个" % stale)
+    return made
+
+def _json_str(v):
+    import json as _j
+    return _j.dumps(v, ensure_ascii=False)
+
 def gen_daxue_pages(daxue_js, css, header_tpl, footer_html, dialogs, extra_js, out_dir, css_file=None, js_file=None):
     """从 DAXUE 真实数据生成 articles/dx-<id>.html 详情页；返回 [fname,...]。"""
     import json as _json

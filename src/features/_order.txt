@@ -55,3 +55,4 @@
 64-koubei-data.js
 64-koubei.js
 65-a11y.js
+71-qupage.js

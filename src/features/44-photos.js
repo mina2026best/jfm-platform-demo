@@ -1,7 +1,7 @@
 /* ---------- v0.37：实景照片系统（校园实景素材） ---------- */
 /* v0.53：照片去重 —— 用满照片池，按条目确定性分配，同页不重复
    ponytail: 池 28 张，同页超过 28 个图位才会回绕；扩容只需往 PHOTO_POOL 加文件名 */
-var PHOTO_BASE = 'assets/photos/';
+var PHOTO_BASE = (typeof window !== 'undefined' && window.QU_PAGE ? '../' : '') + 'assets/photos/';
 /* v0.99：统一出 webp（构建前置转换，102 张 19.9→5.1MB）；jpg 原件保留给 CSS 背景与归档 */
 function phW(f){ return String(f).replace(/\.jpe?g$/i, '.webp'); }
 var PHOTO_FILES = {

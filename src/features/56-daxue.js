@@ -478,6 +478,10 @@ function dxFeeChip(s){
 /* ---------- v1.12：专业速查（按专业找校 · 数据=516 条真实在渝招生专业名） ---------- */
 var DXM = { q: '', list: [] };
 function dxMajorInit(){
+  try{
+    var pre = sessionStorage.getItem('dxm_prefill');
+    if(pre){ window.DXM_PRELOAD = pre; sessionStorage.removeItem('dxm_prefill'); }
+  }catch(e){}
   var sel = document.getElementById('dxm-select');
   if(!sel || typeof DAXUE === 'undefined') return;
   var set = {};
@@ -497,6 +501,11 @@ function dxMajorInit(){
   }
   var opts = DXM.list.map(function(m){ return '<option value="' + esc(m) + '">' + esc(m) + '</option>'; }).join('');
   sel.innerHTML = '<option value="">选择专业名</option>' + opts;
+  if(window.DXM_PRELOAD && DXM.list.indexOf(window.DXM_PRELOAD) >= 0){
+    sel.value = window.DXM_PRELOAD;
+    if(typeof dxMajorRun === 'function') dxMajorRun();
+    window.DXM_PRELOAD = '';
+  }
 }
 function dxMajorRun(){
   var sel = document.getElementById('dxm-select');

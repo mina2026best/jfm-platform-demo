@@ -1173,6 +1173,20 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   </div>
 </section>
 
+<section id="zhuanye">
+  <div class="wrap">
+    <div class="sec-head"><span class="no">04 · 专业库</span><h2>按专业找校 · 在渝招生专业库</h2></div>
+    <p class="sec-desc">覆盖 985/211 在渝招生的 <b>__ZY_ALL__</b> 个专业（掌上高考公开数据集采集的各校代表性专业，516 条条目去重）。每卡含开设校数、代表校与最新投档线区间；<b>不含</b>年薪/男女比等无来源统计——数据维度以可核验为限。</p>
+    <div class="zy-tools" style="margin-bottom:14px">
+      <input id="zym-q" type="search" placeholder="搜专业名，如「计算机」「临床」…" aria-label="搜索专业" style="flex:1;min-width:200px;font-size:13.5px;padding:8px 12px;border:1px solid var(--line2);border-radius:8px;background:var(--paper);color:var(--ink)" oninput="zymRender()" />
+      <select id="zym-letter" aria-label="字母索引" style="font-size:13px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--paper);color:var(--ink)" onchange="zymRender()"><option value="">全部</option></select>
+    </div>
+    <p class="sc-stats" id="zym-count" role="status" aria-live="polite"></p>
+    <div class="school-grid" id="zym-grid"></div>
+    <div class="cmp-note" style="margin-top:14px"><b>口径说明</b>　「开设校数」＝985/211 在渝招生实体中，代表性专业列表含此专业的校数（掌上高考采集口径）；不代表全市开设院校总数。专业详情（代码/修业年限/学位）以教育部目录与院校当年简章为准——本站无该数据源，如实不展示。</div>
+  </div>
+</section>
+
 
 <section id="xiaoxue">
   <div class="wrap">

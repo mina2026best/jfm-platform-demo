@@ -43,6 +43,9 @@ PAGES = [
     dict(file="schools-gz.html", title="高中档案（含完中） · 花期册",
          desc="市级重点联招校、区县高中与完中档案：联招口径、指标到校、收费标准与市级重点标注——逐条标注来源。",
          sections=["sch-subnav", "schools-gz"]),
+    dict(file="zhuanye.html", title="在渝招生专业库 · 花期册",
+         desc="985/211 在渝招生专业库（211 个专业，掌上高考公开数据集采集）：开设校数、代表校与最新投档线区间，按专业找校——不做推荐排序、不含无来源统计。",
+         sections=["sch-subnav", "zhuanye"]),
     # 档案库按主题拆页（原单页桌面 18420px / 手机 43102px）
     dict(file="schools-liangjiang.html", title="两江新区升学专题 · 花期册",
          desc="原江北 / 渝北家长必读：两江新区区划变动对划片、学校归属与报名口径的影响，逐条标注来源。",
@@ -270,7 +273,7 @@ def nav_html(cur_file, demo_tag, searchbox):
         ("calendar.html", "日历", None),
         ("quiz.html", "工具", [
             ("quiz.html", "入学自查"), ("schools.html", "学校档案"), ("compare.html", "择校对比"),
-            ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("gaozhong.html", "高中与联招库"), ("xiaoxue.html", "小学名校库"), ("chuzhong.html", "初中名校库"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
+            ("zy.html", "志愿参考"), ("daxue.html", "大学与专业库"), ("zhuanye.html", "专业库"), ("gaozhong.html", "高中与联招库"), ("xiaoxue.html", "小学名校库"), ("chuzhong.html", "初中名校库"), ("problems.html", "问题速查"), ("daohang.html", "网址导航"),
         ]),
         ("policy.html", "政策资料", [
             ("policy.html", "政策库与人话词典"), ("wiki.html", "升学百科"), ("faq.html", "家长 FAQ"),
@@ -656,6 +659,18 @@ def main():
         print('[warn] 学校计数注入失败：', repr(_e))
     css = build_css()
     data_js, js, daxue_js = build_js()
+    # v1.12：专业总数（DAXUE majors 去重）注入 __ZY_ALL__
+    try:
+        _dm = re.search(r'var DAXUE = (\{[\s\S]*?\});', daxue_js)
+        _daxue = json.loads(_dm.group(1))
+        _majors = set()
+        for _s in _daxue.get("schools", []):
+            for _m in (_s.get("majors") or []):
+                if _m and str(_m).strip(): _majors.add(str(_m).strip())
+        tpl = tpl.replace("__ZY_ALL__", str(len(_majors)))
+    except Exception as _e:
+        print("[build] __ZY_ALL__ 注入失败:", _e)
+        tpl = tpl.replace("__ZY_ALL__", "211")
     # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
     _pmap = {}
     for _m in re.finditer(r'<div class="pol-item"[^>]*>\s*<h4><a class="art-t" href="articles/(article-policy-[a-z0-9]+\.html)">([^<]+)</a>', tpl):
@@ -832,7 +847,7 @@ def main():
             out = build_page(pg, tpl, secs, css, js)
             out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
             page_js_tags = js_tags
-            if pg["file"] in ("daxue.html", "me.html", "search.html"):
+            if pg["file"] in ("daxue.html", "me.html", "search.html", "zhuanye.html"):
                 page_js_tags = f'<script src="assets/{daxue_file}" defer></script>\n' + js_tags
             out = out.replace("<script>//__BUILD_JS__</script>", page_js_tags)
             # 替换主内容：定位 <main>…</main>
@@ -851,7 +866,7 @@ def main():
         out = build_page(pg, tpl, secs, css, js)
         out = out.replace("<style>/*__BUILD_CSS__*/</style>", f'<link rel="stylesheet" href="assets/{css_file}" />\n<link rel="stylesheet" href="assets/enhance.css?v=20261112f" />')
         page_js_tags = js_tags
-        if pg["file"] in ("daxue.html", "me.html", "search.html"):
+        if pg["file"] in ("daxue.html", "me.html", "search.html", "zhuanye.html"):
             page_js_tags = f'<script src="assets/{daxue_file}" defer></script>\n' + js_tags
         out = out.replace("<script>//__BUILD_JS__</script>", page_js_tags)
         if "/*__BUILD_CSS__*/" in out or "//__BUILD_JS__" in out:

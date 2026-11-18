@@ -56,3 +56,4 @@
 64-koubei.js
 65-a11y.js
 71-qupage.js
+72-zhuanye.js

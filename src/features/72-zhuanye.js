@@ -3,7 +3,7 @@ var ZYM = { all: [], view: [] };
 function zymInit(){
   if(typeof DAXUE === 'undefined') return;
   var freq = {};
-  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m) (freq[m] = freq[m] || []).push(sc); }); });
+  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m && String(m).trim()){ var mm = String(m).trim(); (freq[mm] = freq[mm] || []).push(sc); } }); });
   ZYM.all = Object.keys(freq).map(function(m){
     var schools = freq[m];
     function latest(s, cat){

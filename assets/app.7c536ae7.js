@@ -4477,7 +4477,7 @@ function dxMajorInit(){
   if(!sel || typeof DAXUE === 'undefined') return;
   var set = {};
   DAXUE.schools.forEach(function(s){
-    (s.majors || []).forEach(function(m){ if(m) set[m] = 1; });
+    (s.majors || []).forEach(function(m){ if(m && String(m).trim()) set[String(m).trim()] = 1; });
   });
   DXM.list = Object.keys(set).sort();
   /* 热门专业 = 516 条条目中该校覆盖数频次 TOP8（真实统计，非编辑推荐） */
@@ -4996,7 +4996,7 @@ var ZYM = { all: [], view: [] };
 function zymInit(){
   if(typeof DAXUE === 'undefined') return;
   var freq = {};
-  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m) (freq[m] = freq[m] || []).push(sc); }); });
+  DAXUE.schools.forEach(function(sc){ (sc.majors || []).forEach(function(m){ if(m && String(m).trim()){ var mm = String(m).trim(); (freq[mm] = freq[mm] || []).push(sc); } }); });
   ZYM.all = Object.keys(freq).map(function(m){
     var schools = freq[m];
     function latest(s, cat){

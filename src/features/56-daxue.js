@@ -486,7 +486,7 @@ function dxMajorInit(){
   if(!sel || typeof DAXUE === 'undefined') return;
   var set = {};
   DAXUE.schools.forEach(function(s){
-    (s.majors || []).forEach(function(m){ if(m) set[m] = 1; });
+    (s.majors || []).forEach(function(m){ if(m && String(m).trim()) set[String(m).trim()] = 1; });
   });
   DXM.list = Object.keys(set).sort();
   /* 热门专业 = 516 条条目中该校覆盖数频次 TOP8（真实统计，非编辑推荐） */

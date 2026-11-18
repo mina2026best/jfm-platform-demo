@@ -44,7 +44,7 @@ PAGES = [
          desc="市级重点联招校、区县高中与完中档案：联招口径、指标到校、收费标准与市级重点标注——逐条标注来源。",
          sections=["sch-subnav", "schools-gz"]),
     dict(file="zhuanye.html", title="在渝招生专业库 · 花期册",
-         desc="985/211 在渝招生专业库（211 个专业，掌上高考公开数据集采集）：开设校数、代表校与最新投档线区间，按专业找校——不做推荐排序、不含无来源统计。",
+         desc="985/211 在渝招生专业库（210 个专业，掌上高考公开数据集采集；专业数随每年招生计划刷新）：开设校数、代表校与最新投档线区间，按专业找校——不做推荐排序、不含无来源统计。",
          sections=["sch-subnav", "zhuanye"]),
     # 档案库按主题拆页（原单页桌面 18420px / 手机 43102px）
     dict(file="schools-liangjiang.html", title="两江新区升学专题 · 花期册",
@@ -661,8 +661,8 @@ def main():
     data_js, js, daxue_js = build_js()
     # v1.12：专业总数（DAXUE majors 去重）注入 __ZY_ALL__
     try:
-        _dm = re.search(r'var DAXUE = (\{[\s\S]*?\});', daxue_js)
-        _daxue = json.loads(_dm.group(1))
+        _dm_start = daxue_js.index('var DAXUE = ') + len('var DAXUE = ')
+        _daxue = json.loads(daxue_js[_dm_start : daxue_js.rindex('}') + 1])
         _majors = set()
         for _s in _daxue.get("schools", []):
             for _m in (_s.get("majors") or []):
@@ -670,7 +670,7 @@ def main():
         tpl = tpl.replace("__ZY_ALL__", str(len(_majors)))
     except Exception as _e:
         print("[build] __ZY_ALL__ 注入失败:", _e)
-        tpl = tpl.replace("__ZY_ALL__", "211")
+        tpl = tpl.replace("__ZY_ALL__", "210")
     # v0.44：P| 政策条目映射（ARTMAP 运行时合并），供问题速查真链
     _pmap = {}
     for _m in re.finditer(r'<div class="pol-item"[^>]*>\s*<h4><a class="art-t" href="articles/(article-policy-[a-z0-9]+\.html)">([^<]+)</a>', tpl):

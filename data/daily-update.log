@@ -5090,3 +5090,26 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · rss.xml · 30 条资讯
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main d298f934] 每日资讯自动更新 2026-11-18
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 427 files changed, 1406 insertions(+), 1269 deletions(-)
+ rename assets/{data.f105f028.js => data.06be7d50.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+PUSH_FAILED：本地 d298f934 未上线（线上 a5e4ca85）——查分叉或网络
+===== 失败 2026-11-18 08:12:16 =====

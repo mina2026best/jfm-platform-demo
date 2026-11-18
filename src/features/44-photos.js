@@ -67,7 +67,10 @@ function schoolPhotoImg(name){
 var ART_PHOTO = {
   'hero':'school-students.jpg', 'policy':'office-docs.jpg', 'schools':'school-panorama.jpg',
   'fact':'school-culture.jpg',
-  'banner-policy':'school-plaza.jpg', 'banner-faq':'school-library.jpg'
+  'banner-policy':'banners/banner-policy.jpg', 'banner-faq':'banners/banner-faq.jpg',
+  'banner-wiki':'banners/banner-wiki.jpg', 'banner-problems':'banners/banner-problems.jpg',
+  'banner-zy':'banners/banner-zy.jpg', 'banner-guide':'banners/banner-guide.jpg',
+  'banner-calendar':'banners/banner-calendar.jpg', 'banner-daxue':'banners/banner-daxue.jpg'
 };
 function artPhotoURL(kind){
   var f = ART_PHOTO[kind];

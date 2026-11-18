@@ -28,6 +28,7 @@
   .page-banner .pb-sub{font-size:14px;color:rgba(255,255,255,.78);max-width:56em;line-height:1.7}
   .page-banner .pb-art{width:200px;flex:none;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.28)}
   .page-banner .pb-art svg{aspect-ratio:10/7}
+  .page-banner .pb-art img{display:block;width:100%;height:140px;object-fit:cover;aspect-ratio:10/7}
   @media (max-width:860px){
     .page-banner{grid-template-columns:1fr;padding:24px 22px}
     .page-banner .pb-art{width:160px}

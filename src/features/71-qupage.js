@@ -37,12 +37,37 @@ function renderQuPage(){
       var q = d['所在区'] || '';
       return q.indexOf(qu) >= 0 || q.indexOf(base) >= 0;
     });
+    window._qu_keys = keys;
+    var stageOf = function(k){
+      var m = (typeof SCHOOL_STAGE_MAP !== 'undefined') && SCHOOL_STAGE_MAP[k];
+      if(!m) return '其他';
+      if(m.tag === '完中') return '完中（含初高中）';
+      return m.stage;
+    };
+    var stCount = {};
+    keys.forEach(function(k){ var st = stageOf(k); stCount[st] = (stCount[st] || 0) + 1; });
     if(tools){
-      var qus = [];
-      keys.forEach(function(k){ var q = SCHOOL_DB[k]['所在区'] || ''; if(qus.indexOf(q) < 0) qus.push(q); });
-      tools.innerHTML = '<span class="dx-flab">收录</span><span class="cmp-note">' + keys.length + ' 所（学段见卡上徽标；区划调整前的原口径校保留原「所在区」并附区划说明）</span>';
+      var chipHtml = '<button class="ff on" data-qs="">全部（' + keys.length + '）</button>';
+      ['小学','初中','高中','完中（含初高中）'].forEach(function(st){
+        if(stCount[st]) chipHtml += '<button class="ff" data-qs="' + st + '">' + st + '（' + stCount[st] + '）</button>';
+      });
+      chipHtml += '<span class="dx-flab" style="margin-left:10px">学段核对稿逐校标注 · 未标注学校在「全部」可见</span>';
+      tools.innerHTML = chipHtml;
+      tools.onclick = function(ev){
+        var b = ev.target.closest('button[data-qs]');
+        if(!b) return;
+        tools.querySelectorAll('.ff').forEach(function(x){ x.classList.toggle('on', x === b); });
+        paintQuSchools(b.getAttribute('data-qs'));
+      };
     }
-    grid.innerHTML = keys.map(stageCardHTML).join('');
+    paintQuSchools('');
+  }
+
+  function paintQuSchools(stageFilter){
+    var grid2 = document.getElementById('qu-school-grid'); if(!grid2) return;
+    var keys2 = (window._qu_keys || []);
+    var shown = stageFilter ? keys2.filter(function(k){ return stageOf(k) === stageFilter; }) : keys2;
+    grid2.innerHTML = shown.map(stageCardHTML).join('');
     if(typeof schFavRestore === 'function') schFavRestore();
     if(typeof schCmpRestore === 'function') schCmpRestore();
   }

@@ -1246,4 +1246,8 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
+<<<<<<< HEAD
 var NEWS_META = {"generated": "2026-11-18 08:52", "seed": 21, "collected": 80, "fetchedPending": 0};
+=======
+var NEWS_META = {"generated": "2026-11-18 08:10", "seed": 21, "collected": 80, "fetchedPending": 0};
+>>>>>>> d298f934 (每日资讯自动更新 2026-11-18)

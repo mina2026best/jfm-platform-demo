@@ -175,7 +175,7 @@ function dxCard(s){
     + '<button class="dx-mini' + (dxCmpLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxCmpToggle(\'' + s.id + '\')" aria-label="加入对比">对比</button>'
     + '<button class="dx-mini' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? ' on' : '') + '" onclick="dxFavToggle(\'' + s.id + '\', this)" aria-label="关注">' + (dxFavLoad().indexOf(String(s.id)) >= 0 ? '★' : '☆') + '</button>'
     + '<button class="dx-mini" onclick="dxPrintCard(\'' + s.id + '\')" aria-label="打印该校卡片">打印</button>'
-    + (s.web ? '<a class="dx-web" href="' + esc(s.web) + '" target="_blank" rel="noopener">官网 ↗</a>' : '')
+    + (s.zgr ? '<span class="dx-web" style="cursor:default">主管部门：' + esc(s.zgr) + '</span>' : '')+ (s.web ? '<a class="dx-web" href="' + esc(s.web) + '" target="_blank" rel="noopener">官网 ↗</a>' : '')
     + '<a class="dx-web" href="articles/dx-' + esc(s.id) + '.html">详情页 ›</a>'
     + '<a class="dx-web" href="https://gaokao.chsi.com.cn/zsgs/zhangcheng/" target="_blank" rel="noopener" title="阳光高考章程库：站内检索校名可查当年招生章程原文">章程 ↗</a>' + '</div>';
   var meta = '<p class="dx-meta">' + esc(s.city) + ' · ' + esc(s.type || '—') + (s.parent ? ' · 母体：' + esc(s.parent) : '') + '</p>';
@@ -193,6 +193,7 @@ function dxCard(s){
 
 function dxFiltered(){
   var list = DAXUE.schools.filter(function(s){
+    if(DX.zgr && zgrGroup(s.zgr) !== DX.zgr) return false;
     if(DX.tier === 'c9' && !s.c9) return false;
     if(DX.tier === '985' && (s.tier !== '985' || s.branch)) return false;
     if(DX.tier === '211' && (s.tier !== '211' || s.branch)) return false;
@@ -273,6 +274,15 @@ function dxBind(){
     DX.cat = b.dataset.dxc;
     dxRender();
   });
+  var zgrRow = document.getElementById('dx-zgr');
+  if(zgrRow) zgrRow.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-dxz]');
+    if(!b) return;
+    zgrRow.querySelectorAll('.ff').forEach(function(x){ x.classList.remove('on'); });
+    b.classList.add('on');
+    DX.zgr = b.dataset.dxz || '';
+    dxRender();
+  });
   var q = document.getElementById('dx-q');
   if(q){
     var t = null;
@@ -287,10 +297,33 @@ function dxBind(){
   });
 }
 
+
+function zgrGroup(zgr){
+  if(!zgr) return '';
+  if(/教育部/.test(zgr) || /^(复旦大学|中国人民大学|浙江大学|合肥工业大学)$/.test(zgr)) return '教育部直属';
+  if(/工业和信息化部/.test(zgr)) return '工信部直属';
+  if(/中国科学院/.test(zgr)) return '中国科学院主管';
+  if(/军委|后勤部|训练管理部/.test(zgr)) return '军队院校';
+  if(/国家民委|体育总局|统战部|交通运输部/.test(zgr)) return '其他中央部委';
+  if(/省|自治区/.test(zgr)) return '省级（地方）';
+  if(/市$/.test(zgr)) return '市级（地方）';
+  return '其他';
+}
+
 function dxInit(){
   var grid = document.getElementById('dx-grid');
   if(!grid || typeof DAXUE === 'undefined') return;
   dxMajorInit();
+  /* 隶属 chips（主管部门，掌上高考公开数据集 2026-11-18 采集） */
+  var zgrBox = document.getElementById('dx-zgr');
+  if(zgrBox){
+    var groups = {};
+    DAXUE.schools.forEach(function(s){ var g = zgrGroup(s.zgr); if(g) groups[g] = (groups[g] || 0) + 1; });
+    var defs = ['教育部直属','工信部直属','中国科学院主管','军队院校','其他中央部委','省级（地方）','市级（地方）'];
+    zgrBox.innerHTML = '<button class="ff" data-dxz="">全部</button>' + defs.filter(function(d2){ return groups[d2]; }).map(function(d2){
+      return '<button class="ff" data-dxz="' + d2 + '">' + d2 + '（' + groups[d2] + '）</button>';
+    }).join('');
+  }
   /* 层次按钮动态计数（防陈旧） */
   var cnt = { all: DAXUE.schools.length, c9: 0, '985': 0, '211': 0, branch: 0 };
   var cities = {}, types = {};

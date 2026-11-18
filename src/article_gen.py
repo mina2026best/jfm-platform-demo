@@ -599,7 +599,7 @@ def gen_daxue_pages(daxue_js, css, header_tpl, footer_html, dialogs, extra_js, o
                  + '<li>在渝招生计划与历年数据：<a class="art-link" href="../daxue.html">大学与专业库总表</a></li>'
                  + '</ul>')
         desc = (s.get("name", "") + "近五年在渝投档线与位次趋势、在渝招生计划、双一流学科、就业数据与特色专业——逐条标注来源，不做录取承诺。")
-        meta = esc(s.get("city", "")) + " · " + esc(s.get("type", "")) + " · " + esc(badge) + " · 数据核验 2026-11-12"
+        meta = esc(s.get("city", "")) + " · " + esc(s.get("type", "")) + (esc(" · 主管部门：" + s["zgr"]) if s.get("zgr") else "") + " · " + esc(badge) + " · 数据核验 2026-11-18"
         cfg = {"title": s.get("name", "") + " · 在渝投档线与招生 | 花期册",
                "desc": desc[:150], "kicker": "UNIVERSITY · 院校档案", "body_html": body,
                "meta_line": meta, "back": "../daxue.html", "back_label": "大学与专业库",

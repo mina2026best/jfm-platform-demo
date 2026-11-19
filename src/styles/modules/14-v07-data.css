@@ -13,3 +13,7 @@
   .ds-ver.ok{background:var(--accent-soft);color:var(--accent)}
   .ds-ver.pending{background:var(--warn-soft);color:var(--warn)}
 
+
+  /* v3.2 宽表移动端：容器内横向滚动，杜绝页面级溢出 */
+  #ds-table{max-width:100%;overflow-x:auto}
+  #ds-table .ds-table{min-width:640px}

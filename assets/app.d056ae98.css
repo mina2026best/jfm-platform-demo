@@ -436,6 +436,10 @@ dt[data-tg] a.art-link{white-space:nowrap}
   .ds-ver.pending{background:var(--warn-soft);color:var(--warn)}
 
 
+  /* v3.2 宽表移动端：容器内横向滚动，杜绝页面级溢出 */
+  #ds-table{max-width:100%;overflow-x:auto}
+  #ds-table .ds-table{min-width:640px}
+
 
 /* ============ 15-calendar ============ */
   /* ---------- v0.6：路径地图 / 日历行动清单 ---------- */

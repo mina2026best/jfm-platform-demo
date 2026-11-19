@@ -252,7 +252,22 @@ function dxRender(){
     }
   }
   dxFavRenderBar(); dxCmpRenderPanel();
-  grid.innerHTML = list.map(dxCard).join('');
+  /* v1.16：首屏 20 张 + 加载更多（控制页面长度，129 全量数据保留在内存） */
+  DX.shown = Math.min(DX.shown || 20, list.length);
+  var shownList = list.slice(0, DX.shown);
+  grid.innerHTML = shownList.map(dxCard).join('')
+    + (list.length > DX.shown
+        ? '<div class="cmp-note" style="text-align:center;padding:16px 0"><button class="btn-main" onclick="dxMore()">加载更多（已显示 ' + DX.shown + ' / ' + list.length + '）</button></div>'
+        : (DX.shown > 20 ? '<div class="cmp-note" style="text-align:center">已显示全部 ' + list.length + ' 所</div>' : ''));
+}
+DX.shown = 20;
+function dxMore(){
+  DX.shown += 30;
+  dxRender();
+  var g = document.getElementById('dx-grid');
+  var cards = g.querySelectorAll('article');
+  if(cards[DX.shown - 30] || cards[cards.length - 30]) {}
+  try { cards[Math.min(DX.shown, cards.length) - 30].scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch(e) {}
 }
 
 function dxBind(){
@@ -263,6 +278,7 @@ function dxBind(){
     tier.querySelectorAll('.ff').forEach(function(x){ x.classList.remove('on'); });
     b.classList.add('on');
     DX.tier = b.dataset.dxt;
+    DX.shown = 20;
     dxRender();
   });
   var cat = document.getElementById('dx-cat');
@@ -272,6 +288,7 @@ function dxBind(){
     cat.querySelectorAll('.ff').forEach(function(x){ x.classList.remove('on'); });
     b.classList.add('on');
     DX.cat = b.dataset.dxc;
+    DX.shown = 20;
     dxRender();
   });
   var zgrRow = document.getElementById('dx-zgr');
@@ -281,6 +298,7 @@ function dxBind(){
     zgrRow.querySelectorAll('.ff').forEach(function(x){ x.classList.remove('on'); });
     b.classList.add('on');
     DX.zgr = b.dataset.dxz || '';
+    DX.shown = 20;
     dxRender();
   });
   var q = document.getElementById('dx-q');

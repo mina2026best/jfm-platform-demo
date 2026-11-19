@@ -4,7 +4,7 @@ var NEWS_CATS = ['政策速递','升学动态','家庭教育','安全提醒','�
 var newsFilter = 'all';
 var newsQuery = '';
 var neEditingId = null;
-var NEWS_PAGE_SIZE = 24;      // v0.53：与照片池（28 张）匹配——一屏之内封面不重复；加载更多每次 +24
+var NEWS_PAGE_SIZE = 12;      // v1.16：12 条/屏（页面长度控制），加载更多 +12      // v0.53：与照片池（28 张）匹配——一屏之内封面不重复；加载更多每次 +24
 var newsShown = NEWS_PAGE_SIZE;
 function moreNews(){ newsShown += NEWS_PAGE_SIZE; renderNews(); }
 

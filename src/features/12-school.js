@@ -365,12 +365,23 @@ function paintStageGrid(pid){
     var c = conf.chips.find(function(x){ return x.label === chip; });
     return c ? c.match(k) : true;
   });
-  grid.innerHTML = '<div class="cmp-note" style="margin-bottom:10px">显示 ' + shown.length + ' / ' + keys.length + ' 所（分类无标签的学校在「全部」下可见）</div>' + shown.map(stageCardHTML).join('');
+  var cap = STAGE_SHOWN[pid] || 20;
+  /* v1.16：首屏 20 + 加载更多（schools-gz 73 校长度控制） */
+  var cap = 20;
+  var shownCap = shown.slice(0, cap);
+  grid.innerHTML = '<div class="cmp-note" style="margin-bottom:10px">显示 ' + shownCap.length + ' / ' + keys.length + ' 所</div>' + shownCap.map(stageCardHTML).join('')
+    + (shown.length > cap ? '<div class="cmp-note" style="text-align:center;padding:14px 0"><button class="btn-main" onclick="stageMore(\'' + pid + '\')">加载更多（已显示 ' + shownCap.length + ' / ' + shown.length + '）</button></div>' : '');
   if(typeof schFavRestore === 'function') schFavRestore();
   if(typeof schCmpRestore === 'function') schCmpRestore();
 }
+var STAGE_SHOWN = {};
+function stageMore(pid){
+  STAGE_SHOWN[pid] = (STAGE_SHOWN[pid] || 20) + 30;
+  paintStageGrid(pid);
+}
 function stageChipFilter(pid, label){
   STAGE_CHIP_CUR[pid] = label;
+  STAGE_SHOWN[pid] = 20;
   paintStageGrid(pid);
 }
 function buildStageFilters(pid, keys, conf){

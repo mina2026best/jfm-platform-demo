@@ -12,7 +12,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"花期册 · BLOOM ALMANAC","url":"https://mina2026best.github.io/jfm-platform-demo/","logo":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg","areaServed":"重庆市","knowsAbout":["重庆小升初","重庆中考","指标到校","高考志愿填报"]}</script>
 <link rel="alternate" type="application/rss+xml" title="花期册 · 重庆升学资讯订阅" href="rss.xml" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学指南","url":"https://mina2026best.github.io/jfm-platform-demo/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mina2026best.github.io/jfm-platform-demo/search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-<link rel="stylesheet" href="assets/app.5f4832e8.css" />
+<link rel="stylesheet" href="assets/app.24ac4f84.css" />
 <link rel="stylesheet" href="assets/enhance.css?v=20261112f" />
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
@@ -283,103 +283,12 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
     <p style="margin-top:12px"><a class="btn-main" style="text-decoration:none" href="daohang.html" id="dao-entry">查看全部 <b id="dao-all-count">73</b> 个入口 · 分类导航 →</a></p>
   </div>
 </section>
-<section id="calendar">
+<section id="cal-preview">
   <div class="wrap">
-    <div class="page-banner"><div><div class="pb-kicker">CALENDAR · 升学日历</div><h2>全年升学节点，按月看清要做什么</h2><p class="pb-sub">17 个关键节点覆盖幼升小到高考：卡片视图逐条行动清单，按月视图一整月一目了然。</p></div><div class="pb-art" data-art="banner-calendar" aria-hidden="true"></div></div>
-    <div class="sec-head"><span class="no">01 · 升学日历</span><h2>这个学期，别错过这些节点</h2></div>
-    <p class="sec-desc">17 个全年关键节点（覆盖幼升小 → 高考全学段），每条附「现在该做什么」行动清单与官方来源链接；节点每年微调，以官方发布为准。保存「孩子档案」后按学段自动过滤；支持提醒设置与行动清单打印。</p>
-    <div class="fact-filter cal-filter" id="cal-view" style="margin-bottom:14px">
-      <span class="mu-label" style="margin-right:6px">视图</span>
-      <button class="ff on" data-cv="card" onclick="setCalView('card')" aria-pressed="true">卡片视图</button>
-      <button class="ff" data-cv="month" onclick="setCalView('month')" aria-pressed="false">按月视图</button>
-      <span class="mu-label" style="margin:0 6px 0 14px">学段</span>
-      <button class="ff on" data-cf="all" onclick="filterCal('all')">全部学段</button>
-      <button class="ff" data-cf="幼升小" onclick="filterCal('幼升小')">幼升小</button>
-      <button class="ff" data-cf="小升初" onclick="filterCal('小升初')">小升初</button>
-      <button class="ff" data-cf="初升高" onclick="filterCal('初升高')">初升高</button>
-      <button class="ff" data-cf="高考" onclick="filterCal('高考')">高考</button>
-      <button class="ff" data-cf="全阶段" onclick="filterCal('全阶段')">全阶段</button>
-    </div>
-    <div id="cal-personal" class="cal-personal" hidden></div>
-    <div class="cal-tools">
-      <button class="mini-btn" onclick="printTodoList()">打印行动清单</button>
-      <span class="cmp-note">按当前过滤结果生成，可直接打印或另存 PDF</span>
-    </div>
-    <div id="cal-month" hidden></div>
+    <div class="sec-head"><span class="no">01 · 升学日历</span><h2>近期关键节点（未来 6 个）</h2></div>
+    <p class="sec-desc">按时间排序的近期升学节点；完整 17 节点、按月视图与「现在该做什么」行动清单见 <a href="calendar.html">升学日历 →</a>。</p>
     <div class="cal-grid">
-      <div class="cal" data-stage="幼升小">
-        <span class="date">2027-06</span><span class="stage">幼升小</span>
-        <h4>幼升小报名与材料准备</h4>
-        <p>「三对口」材料清单、六年一户核查、长幼随学申请——以各区当年招生入学政策为准。</p>
-        <div class="src">依据：各区教委当年招生入学政策</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 备齐三对口材料（户口、房产、出生证明）<br/>✓ 二孩家庭了解「长幼随学」申请通道<br/>✓ 盯住网上报名窗口，错过要等统筹</div></details>
-        <button class="alert-btn" data-title="幼升小报名与材料准备（2027-06）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="小升初">
-        <span class="date">2026-09</span><span class="stage">小升初</span>
-        <h4>转学与户籍材料核对</h4>
-        <p>跨区转入家庭核对「三对口」材料与学位占用情况，错过转学的，正式版提供补救路径清单。</p>
-        <div class="src">依据：渝教基函〔2026〕18号（2026 年度）及各区细则</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 核对「三对口」材料：户口本、房产证、出生证明<br/>✓ 查学位占用：问街道或原业主，比问中介靠谱<br/>✓ 新房落户越早越好——部分区对落户年限有要求</div></details>
-        <button class="alert-btn" data-title="转学与户籍材料核对（2026-09）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="初升高">
-        <span class="date">2026-10</span><span class="stage">初升高</span>
-        <h4>指标到校资格摸底</h4>
-        <p>市级重点高中招生计划的 <b>约 70%</b> 分配到辖区初中（2025 学年渝教基函〔2025〕21号口径；2026 年度按渝教基函〔2026〕18号执行）；家长可核对学籍与连续就读要求。</p>
-        <div class="src">来源：重庆市教委文件（已核验）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 确认孩子学籍连续（中途转学可能失去资格）<br/>✓ 找班主任了解校内排位的参考口径<br/>✓ 盯区教委当年细则：名额、条件每年微调</div></details>
-        <button class="alert-btn" data-title="指标到校资格摸底（2026-10）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="初升高">
-        <span class="date">2027-04</span><span class="stage">初升高</span>
-        <h4>中考报名与联招志愿准备</h4>
-        <p>2026 年联招学校约 113 所（第一批次市级重点约 94 所）；志愿填报窗口以次年 4 月政策公布为准。</p>
-        <div class="src">来源：重庆日报 2026-04-22 政策口径</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 盯 4 月政策发布：联招校名单、批次设置<br/>✓ 提前拟志愿梯度：冲、稳、保各留 1–2 所<br/>✓ 用平台「位次换算」估位置（正式版接入一分一段）</div></details>
-        <button class="alert-btn" data-title="中考报名与联招志愿准备（2027-04）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="高考">
-        <span class="date">2027-06</span><span class="stage">高考</span>
-        <h4>高考特招线公布后行动清单</h4>
-        <p>2026 年实际口径：特招线历史类 510 / 物理类 496；军检线（报考军校的体检参考）历史类男 517/女 631、物理类男 533/女 573。正式版自动替换当年口径。</p>
-        <div class="src">来源：新华网重庆 2026-06-25（已核验）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 对照线差定位：过特招线多少分 → 位次区间<br/>✓ 研究 3–5 个专业方向（兴趣 × 就业 × 分数匹配）<br/>✓ 防志愿填报骗局：凡称「内部渠道/内部名额」的均按诈骗处理</div></details>
-        <button class="alert-btn" data-title="高考特招线公布后行动清单（2027-06）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="幼升小">
-        <span class="date">2027-03</span><span class="stage">幼升小</span>
-        <h4>招生政策发布月：盯住区教委公告</h4>
-        <p>每年 3–4 月各区教委发布义务教育招生入学工作通知（划片范围、材料清单、报名窗口）。这是全年最重要的「信息节点」——错过官方发布，只能靠二手信息。</p>
-        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">重庆市教委政策文件库 ↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 收藏本区教委官网「招生入学」栏目<br/>✓ 对照去年划片范围初判对口学校<br/>✓ 有疑问直接打教委咨询电话（官方公布）</div></details>
-        <button class="alert-btn" data-title="招生政策发布月（2027-03）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="幼升小">
-        <span class="date">2027-06</span><span class="stage">幼升小</span>
-        <h4>网上信息采集与报名（义务教育入学「一件事」）</h4>
-        <p>重庆义务教育入学已接入「渝快办」网上办理通道，幼升小信息采集集中在 6 月；材料线上核验，现场确认以各区安排为准。</p>
-        <div class="src">官方入口：<a href="https://zwykb.cq.gov.cn/" target="_blank" rel="noopener">渝快办 · 重庆市政务服务网 ↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 提前注册渝快办账号并实名认证<br/>✓ 备齐户口/房产/出生证明扫描件<br/>✓ 报名窗口开启当日提交，避开最后一天拥堵</div></details>
-        <button class="alert-btn" data-title="网上信息采集与报名（2027-06）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="小升初">
-        <span class="date">2026-11</span><span class="stage">小升初</span>
-        <h4>期中考后定位：校内排位决定指标到校筹码</h4>
-        <p>小升初已定，真正的变量是初中三年。期中考后关注孩子在年级的排位趋势——「指标到校」按校内排序分配，三年稳定在年级前列是最实在的筹码。</p>
-        <div class="src">依据：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260421_15627210.html" target="_blank" rel="noopener">市教委中考招生通知（指标到校 70% 口径）↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 建立三年成绩曲线（别只看一次考试）<br/>✓ 与班主任沟通年级排名口径<br/>✓ 慎重对待转学：可能影响指标到校资格</div></details>
-        <button class="alert-btn" data-title="期中考后定位（2026-11）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="小升初">
-        <span class="date">2027-04</span><span class="stage">小升初</span>
-        <h4>初中招生政策发布与报名窗口</h4>
-        <p>小升初与幼升小同窗口期（4 月政策、6 月报名）：民办超计划摇号、公办划片对口；「公民同招」下未摇中回公办统筹。</p>
-        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html" target="_blank" rel="noopener">市教委义务教育入学通知 ↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 民办意向校查资质与往年摇号中签率<br/>✓ 公办对口校实地走一遍通勤路线<br/>✓ 摇号未中预案：确认统筹接收校情况</div></details>
-        <button class="alert-btn" data-title="初中招生政策发布（2027-04）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="初升高">
+    <div class="cal" data-stage="初升高">
         <span class="date">2026-12</span><span class="stage">初升高</span>
         <h4>期末备考与体育项目冬训窗口</h4>
         <p>中考体育占分且过程性评价贯穿三年；冬季是耐力项目训练黄金期。期末成绩直接影响区统考排位与指标到校筹码。</p>
@@ -387,23 +296,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
         <details class="todo"><summary>现在该做什么</summary><div>✓ 体育弱项（长跑/跳绳）制定冬训计划<br/>✓ 期末后对照区统考排位修正目标校<br/>✓ 关注中考体育当年测试项目是否有调整</div></details>
         <button class="alert-btn" data-title="期末备考与冬训（2026-12）" onclick="toggleAlert(this)">设提醒</button>
       </div>
-      <div class="cal" data-stage="初升高">
-        <span class="date">2027-06</span><span class="stage">初升高</span>
-        <h4>中考与出分：志愿窗口只有 3–5 天</h4>
-        <p>中考 6 月中旬举行，出分后志愿填报窗口极短。冲稳保梯度要提前拟好——出分当天才知道线，没有时间从头研究。</p>
-        <div class="src">官方入口：<a href="https://www.cqksy.cn/" target="_blank" rel="noopener">重庆市教育考试院 ↗</a>（成绩查询与录取动态）</div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 出分前完成志愿草表（冲稳保各 1–2 所）<br/>✓ 用「位次换算」工具交叉验证目标校<br/>✓ 录取期间每天查考试院录取动态与征集志愿</div></details>
-        <button class="alert-btn" data-title="中考与志愿窗口（2027-06）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="高考">
-        <span class="date">2026-11</span><span class="stage">高考</span>
-        <h4>高考报名月（高三第一件事）</h4>
-        <p>重庆高考报名通常在 11 月进行（应届生在学校统一办理）；随迁子女、社会考生需关注专项报名通道与材料。错过报名没有补报。</p>
-        <div class="src">官方入口：<a href="https://www.cqksy.cn/site/techield/gkzs/" target="_blank" rel="noopener">重庆市教育考试院 · 高考栏目 ↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 确认报名资格与所需证件（身份证有效期！）<br/>✓ 艺体生同步确认统考报名<br/>✓ 关注空军/民航招飞等专项报名时间</div></details>
-        <button class="alert-btn" data-title="高考报名月（2026-11）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="高考">
+    <div class="cal" data-stage="高考">
         <span class="date">2027-01</span><span class="stage">高考</span>
         <h4>期末统考（一模）：全市排位参考</h4>
         <p>高三上期末多区联考/全市统考，是一模定位的主要依据。用「线差 + 位次」双法对照目标院校近三年投档位次，校准志愿池。</p>
@@ -411,15 +304,7 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
         <details class="todo"><summary>现在该做什么</summary><div>✓ 统考后用位次法对照目标校近三年投档位次<br/>✓ 志愿池按「冲稳保」整理成表格<br/>✓ 强基计划/综合评价关注高校报名窗口</div></details>
         <button class="alert-btn" data-title="一模定位（2027-01）" onclick="toggleAlert(this)">设提醒</button>
       </div>
-      <div class="cal" data-stage="高考">
-        <span class="date">2027-04</span><span class="stage">高考</span>
-        <h4>强基计划 / 综合评价 / 高校专项报名季</h4>
-        <p>强基计划报名一般在 4 月（阳光高考平台统一入口），高校专项与综合评价窗口紧随其后；各校截止日不同，错过不补。</p>
-        <div class="src">官方入口：<a href="https://gaokao.chsi.com.cn/" target="_blank" rel="noopener">阳光高考平台（浏览器打开）↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 梳理孩子符合条件的专项类型<br/>✓ 报名材料：成绩单/自荐信/获奖证明<br/>✓ 逐校登记报名截止日（勿信最后一天）</div></details>
-        <button class="alert-btn" data-title="专项计划报名季（2027-04）" onclick="toggleAlert(this)">设提醒</button>
-      </div>
-      <div class="cal" data-stage="高考">
+    <div class="cal" data-stage="高考">
         <span class="date">2027-02</span><span class="stage">高考</span>
         <h4>艺体统考成绩与校考季</h4>
         <p>艺术类统考成绩 1–2 月公布；校考院校在此期间组织专业考试。文化课不能停——综合分改革后文化课权重逐年上升。</p>
@@ -427,42 +312,32 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
         <details class="todo"><summary>现在该做什么</summary><div>✓ 统考成绩出来立即对照往年录取位次<br/>✓ 校考行程提前规划（跨省考试留缓冲）<br/>✓ 文化课复习计划不因校考中断</div></details>
         <button class="alert-btn" data-title="艺体统考与校考（2027-02）" onclick="toggleAlert(this)">设提醒</button>
       </div>
-      <div class="cal" data-stage="全阶段">
-        <span class="date">全年</span><span class="stage">全阶段</span>
-        <h4>资助申请窗口：别错过免学费与助学金</h4>
-        <p>高中阶段城乡低保/特困学生免教科书等资助按学年申请（秋季学期集中受理）；中职免学费与国家助学金覆盖面更广。资助是申请制——不申请就没有。</p>
-        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202502/t20250207_14265633.html" target="_blank" rel="noopener">市教委高中免教科书通知 ↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 开学两周内向学校提交资助申请<br/>✓ 低保证/特困证等材料准备<br/>✓ 中职家庭了解「中职国家助学金」覆盖范围</div></details>
-        <button class="alert-btn" data-title="资助申请窗口（全年）" onclick="toggleAlert(this)">设提醒</button>
+    <div class="cal" data-stage="幼升小">
+        <span class="date">2027-03</span><span class="stage">幼升小</span>
+        <h4>招生政策发布月：盯住区教委公告</h4>
+        <p>每年 3–4 月各区教委发布义务教育招生入学工作通知（划片范围、材料清单、报名窗口）。这是全年最重要的「信息节点」——错过官方发布，只能靠二手信息。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">重庆市教委政策文件库 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 收藏本区教委官网「招生入学」栏目<br/>✓ 对照去年划片范围初判对口学校<br/>✓ 有疑问直接打教委咨询电话（官方公布）</div></details>
+        <button class="alert-btn" data-title="招生政策发布月（2027-03）" onclick="toggleAlert(this)">设提醒</button>
       </div>
-      <div class="cal" data-stage="全阶段">
-        <span class="date">全年</span><span class="stage">全阶段</span>
-        <h4>转学窗口：学期初集中受理</h4>
-        <p>义务教育阶段转学一般在学期初集中办理（政策依据：人籍一致与转学窗口管理）。注意：初中转学可能影响指标到校资格连续性——动迁家庭先算这笔账。</p>
-        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/" target="_blank" rel="noopener">市教委政策文件库（学籍管理类）↗</a></div>
-        <details class="todo"><summary>现在该做什么</summary><div>✓ 先问转入校有无学位（官网公布咨询电话）<br/>✓ 指标到校资格连续性先与区教委确认<br/>✓ 材料备齐再跑流程，避免两头跑</div></details>
-        <button class="alert-btn" data-title="转学窗口（学期初）" onclick="toggleAlert(this)">设提醒</button>
+    <div class="cal" data-stage="初升高">
+        <span class="date">2027-04</span><span class="stage">初升高</span>
+        <h4>中考报名与联招志愿准备</h4>
+        <p>2026 年联招学校约 113 所（第一批次市级重点约 94 所）；志愿填报窗口以次年 4 月政策公布为准。</p>
+        <div class="src">来源：重庆日报 2026-04-22 政策口径</div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 盯 4 月政策发布：联招校名单、批次设置<br/>✓ 提前拟志愿梯度：冲、稳、保各留 1–2 所<br/>✓ 用平台「位次换算」估位置（正式版接入一分一段）</div></details>
+        <button class="alert-btn" data-title="中考报名与联招志愿准备（2027-04）" onclick="toggleAlert(this)">设提醒</button>
+      </div>
+    <div class="cal" data-stage="小升初">
+        <span class="date">2027-04</span><span class="stage">小升初</span>
+        <h4>初中招生政策发布与报名窗口</h4>
+        <p>小升初与幼升小同窗口期（4 月政策、6 月报名）：民办超计划摇号、公办划片对口；「公民同招」下未摇中回公办统筹。</p>
+        <div class="src">官方入口：<a href="https://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/qtwj/202604/t20260423_15632186.html" target="_blank" rel="noopener">市教委义务教育入学通知 ↗</a></div>
+        <details class="todo"><summary>现在该做什么</summary><div>✓ 民办意向校查资质与往年摇号中签率<br/>✓ 公办对口校实地走一遍通勤路线<br/>✓ 摇号未中预案：确认统筹接收校情况</div></details>
+        <button class="alert-btn" data-title="初中招生政策发布（2027-04）" onclick="toggleAlert(this)">设提醒</button>
       </div>
     </div>
-    <h3 style="font-family:var(--serif);font-size:20px;color:var(--navy);margin:40px 0 4px">过来人说 · 关键节点经验分享</h3>
-    <p class="sec-desc">审核制展示：家长提交亲身经验 → 人工核验（不收广告、不带联系方式）→ 标注学段与时间展示。点击「我也来分享」提交你的踩坑记录。</p>
-    <div class="exp-grid" id="exp-grid"></div>
-    <div class="exp-tools">
-      <button class="mini-btn" onclick="openExpForm()">我也来分享</button>
-      <span class="cmp-note">提交后经人工核验展示（1–3 天）；请勿包含广告、联系方式与未核实的升学承诺。</span>
-    </div>
-    <dialog id="exp-modal" class="dlg">
-      <div class="dlg-head"><b>分享你的经验</b><button class="dlg-x" onclick="document.getElementById('exp-modal').close()" aria-label="关闭">×</button></div>
-      <div class="dlg-body">
-        <label class="f-l">孩子学段<select id="exp-stage" style="width:100%"><option>幼升小</option><option>小升初</option><option>初升高</option><option>高考</option><option>全阶段通用</option></select></label>
-        <form id="exp-form" action="#" onsubmit="submitExp();return false;">
-        <label class="f-l">节点/场景<input id="exp-title" maxlength="40" style="width:100%" placeholder="一句话概括经验主题，如：幼升小材料一次过"></label>
-        <label class="f-l">经验内容（300 字内）<textarea id="exp-body" rows="5" maxlength="300" style="width:100%" placeholder="例：我们是渝北的，幼升小报名前先在渝快办做了实名认证，材料一次过……"></textarea></label>
-        <label class="f-l">称呼（可选）<input id="exp-name" maxlength="12" style="width:100%" placeholder="如：一年级豆豆妈"></label>
-        <div class="dlg-actions"><button class="mini-btn" type="submit">提交（经人工核验后展示）</button><span id="exp-note" style="font-size:12px;color:var(--muted)"></span></div>
-        </form>
-      </div>
-    </dialog>
+    <div style="text-align:center;margin:18px 0"><a class="btn-main" style="text-decoration:none" href="calendar.html">查看全部 17 个节点与按月视图 →</a></div>
   </div>
 </section>
 <section id="how">
@@ -578,8 +453,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
   </div>
 </footer>
 
-<script src="assets/data.70317b9f.js" defer></script>
-<script src="assets/app.dd4b9e74.js" defer></script>
+<script src="assets/data.572231a9.js" defer></script>
+<script src="assets/app.b63c502a.js" defer></script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#gaozhong":"gaozhong.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">

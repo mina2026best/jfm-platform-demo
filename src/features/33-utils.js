@@ -80,3 +80,19 @@ function renderMeStats(){
   function cnt(k){ var n = 0; try{ var v = JSON.parse(localStorage.getItem(k) || '[]'); if(v && v.length) n = v.length; }catch(e){} return n; }
   el.innerHTML = '<span class="ms-chip">孩子 <b>' + cnt('jfm_children') + '</b></span><span class="ms-chip">提醒 <b>' + cnt('jfm_alerts') + '</b></span><span class="ms-chip">对比收藏 <b>' + cnt('jfm_cmp_fav') + '</b></span><span class="ms-chip">本机资讯 <b>' + cnt('jfm_news_user') + '</b></span>';
 }
+
+
+/* ---------- v1.16：页内锚点自动展开所在 details（折叠区导航体验） ---------- */
+(function(){
+  function openTarget(t){ var dd = t.closest('details'); if(dd && !dd.open) dd.open = true; }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('.sec-nav a[href^="#"], .crumbs a[href^="#"]');
+    if(!a) return;
+    var t = document.querySelector(a.getAttribute('href'));
+    if(t) openTarget(t);
+  });
+  if(location.hash){
+    var t = document.querySelector(location.hash);
+    if(t) openTarget(t);
+  }
+})();

@@ -1,6 +1,30 @@
 /* ---------- 资讯数据（由 collect.py 生成 · 请勿手改；改内容请编辑 src/news/seed.json 后重新运行） ---------- */
 var NEWS_FEED = [
   {
+    "t": "“新娘跟妆日薪四五千”上热搜，凌晨开工、淡季断单，带火职校招生",
+    "url": "https://www.cqnews.net/web/content_1573237116011409408.html",
+    "src": "华龙网",
+    "cat": "升学动态",
+    "sum": "“新娘跟妆日薪四五千”上热搜，凌晨开工、淡季断单，带火职校招生",
+    "stages": [],
+    "date": "2026-11-20",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
+    "t": "铜梁：法治安全教育宣讲进校园",
+    "url": "https://www.cqnews.net/web/content_1573044865972957184.html",
+    "src": "华龙网",
+    "cat": "安全提醒",
+    "sum": "铜梁：法治安全教育宣讲进校园",
+    "stages": [],
+    "date": "2026-11-20",
+    "body": "",
+    "reviewed": true,
+    "auto": true
+  },
+  {
     "t": "重庆市教育委员会关于2026年重庆市青少年创新人才培养雏鹰计划微课建设评选结果的公示",
     "url": "http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261119_16439980.html",
     "src": "重庆市教育委员会",
@@ -1270,4 +1294,4 @@ var NEWS_FEED = [
     "stages": []
   }
 ];
-var NEWS_META = {"generated": "2026-11-20 06:32", "seed": 21, "collected": 82, "fetchedPending": 0};
+var NEWS_META = {"generated": "2026-11-20 13:30", "seed": 21, "collected": 84, "fetchedPending": 0};

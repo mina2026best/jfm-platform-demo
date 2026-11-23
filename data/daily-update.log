@@ -5501,3 +5501,120 @@ After doing this, you may fix the identity used for this commit with:
    f7598685..93229b89  main -> main
 PUSH OK
 ===== 完成 2026-11-23 07:57:48 =====
+===== [0/4] 对齐线上 2026-11-23 13:45:05 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  人民网重庆: 8 条候选
+  重庆招考网: 52 条候选
+  重庆市教育委员会: 68 条候选
+  重庆市教育考试院: 76 条候选
+  中国教育在线: 53 条候选
+  重庆市政府网: 5 条候选
+  重庆日报: 1 条候选
+  上游新闻: 0 条候选
+  新华网重庆: 6 条候选
+  渝中区教委: 0 条候选
+  教育部: 56 条候选
+  重庆大学新闻网: 36 条候选
+  华龙网教育: 6 条候选
+  重庆网络广播电视台: 5 条候选
+  大渝网: 0 条候选
+  中国教育新闻网: 224 条候选
+  华龙网: 10 条候选
+== 去重后新候选: 213 条（每源限 25） ==
+   · “文物青年说”大学生文物创意创作大赛在渝举行 | http://cq.people.com.cn/n2/2026/1120/c365401-41756703.html
+   · 2026重庆市青少年航空模型锦标赛(第二站)收官 | http://cq.people.com.cn/n2/2026/1122/c365411-41757689.html
+   · 西南政法大学首届东盟卓越检察官项目开班 | http://cq.people.com.cn/n2/2026/1121/c365416-41757254.html
+   · 福耀科技大学校长王树国访问重庆理工大学 | http://cq.people.com.cn/n2/2026/1121/c365416-41757081.html
+   · “小志愿”暖童心 “大志愿”显担当 | http://cq.people.com.cn/n2/2026/1120/c365416-41756653.html
+   · 重庆智能工程职业学院授牌华为智慧校园样板点 | http://cq.people.com.cn/n2/2026/1120/c365416-41756651.html
+   · 渝西地区优化金融营商环境培训会在江津举办 | http://cq.people.com.cn/n2/2026/1119/c365413-41755603.html
+   · 2027年重庆市高等职业教育分类考试专业技能测试考试说明 2026-11-11 | https://www.cqzk.com.cn/PTGK/PTGK_news/2120375920848637952.html
+   · 重庆市2026年各类成人高校招生录取最低控制分数线 2026-11-11 | https://www.cqzk.com.cn/CRKS/CRKS_news/2120358365715075072.html
+   · 重庆市2026年下半年高等教育自学考试毕业申请办理有关事宜的公告 2026-11-09 | https://www.cqzk.com.cn/ZXKS/ZXKS_news/2119602530571358208.html
+   · 关于2026年下半年重庆市中小学教师资格考试（面试）考区设置的温馨提示 2026-11-03 | https://www.cqzk.com.cn/SHKS/SHKS_news/2117454426682265600.html
+   · 重庆市2026年高职分类考试成绩公布时间 2026-03-24 | https://www.cqzk.com.cn/announcement/2036397436177195008.html
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 87 条
+[v2.3-dedupe] 近重复剔除 3 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：105 条（种子 21 + 采集已审 84）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 20 页：7665946298722180736, 7694872958120502373, 7682991429920139363, 7698203458721788520, 7641052428171948451, 7596147910983666994, 7628920200825556264, 7644783534401424678, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[prune] 时效/白名单修剪：移除 1 条，保留 11 条
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 46 项 · 合计 830 KB
+  · CAL_NODES · 21 个节点
+  · PHOTO_DIM · 105 张
+  · assets/app.d056ae98.css · 122 KB
+  · assets/app.b63c502a.js · 290 KB
+  · assets/data.6ac4f275.js · 233 KB
+  · index.html · 33 KB · sha256:807d40e050c8
+  · news.html · 33 KB · sha256:5f5887e07971
+  · calendar.html · 30 KB · sha256:617a124284d4
+  · policy.html · 37 KB · sha256:b9fae7af9e18
+  · quiz.html · 19 KB · sha256:931c727f1af8
+  · schools.html · 25 KB · sha256:40807b648ce6
+  · schools-xx.html · 19 KB · sha256:d0ca0c43b6de
+  · schools-cz.html · 19 KB · sha256:50bca2953c35
+  · schools-gz.html · 19 KB · sha256:f9a3a7864caf
+  · zhuanye.html · 20 KB · sha256:78e96c1eabee
+  · schools-liangjiang.html · 19 KB · sha256:39978a7e571d
+  · schools-map.html · 19 KB · sha256:1d114d64fbe8
+  · schools-tier.html · 24 KB · sha256:5a542b34b3ef
+  · schools-koubei.html · 19 KB · sha256:f3c9032d514b
+  · schools-guide.html · 19 KB · sha256:d0c131282722
+  · compare.html · 20 KB · sha256:df73067e1d25
+  · zy.html · 29 KB · sha256:ab138c2631f3
+  · daxue.html · 22 KB · sha256:58dbe2336032
+  · xiaoxue.html · 19 KB · sha256:bd92527481c0
+  · chuzhong.html · 19 KB · sha256:07199c8bbb5c
+  · gaozhong.html · 20 KB · sha256:5a5fa81ff86e
+  · forum.html · 20 KB · sha256:3c1e60143b01
+  · community.html · 21 KB · sha256:a1d220e2fe54
+  · life.html · 22 KB · sha256:88ad42410741
+  · beans.html · 18 KB · sha256:a5448ebcad91
+  · me.html · 22 KB · sha256:bcad2565f49f
+  · plans.html · 19 KB · sha256:223e48b9fb68
+  · biz.html · 18 KB · sha256:84979d96e2c9
+  · data-sources.html · 18 KB · sha256:cb3c34fdbde9
+  · daohang.html · 18 KB · sha256:aaaf05ef394b
+  · about.html · 20 KB · sha256:1545477263e9
+  · search.html · 18 KB · sha256:35275864910f
+  · contact.html · 20 KB · sha256:5473df50aa57
+  · wiki.html · 22 KB · sha256:7cc7cb0acd5e
+  · problems.html · 18 KB · sha256:b14dd65b7ef3
+  · faq.html · 35 KB · sha256:d01363983385
+  · sitemap.html · 18 KB · sha256:905292f08b30
+  · articles/ · 大学详情页 129 页
+  · qu/ · 区县专题页 11 页
+  · articles/ · 257 篇详情页（34 个旧文件已转为跳转）
+  · rss.xml · 30 条资讯
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

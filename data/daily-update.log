@@ -5754,3 +5754,22 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · rss.xml · 30 条资讯
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main 9ce4936d] 每日资讯自动更新 2026-11-24
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 439 files changed, 1441 insertions(+), 1305 deletions(-)
+ rename assets/{data.6ac4f275.js => data.3afbbe4c.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+   3094a327..9ce4936d  main -> main
+PUSH OK
+===== 完成 2026-11-24 08:39:27 =====

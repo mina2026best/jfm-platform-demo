@@ -5618,3 +5618,139 @@ FileNotFoundError: [Errno 2] No such file or directory: 'node'
   · rss.xml · 30 条资讯
 [warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
 ===== [3/4] 提交 =====
+[main 3094a327] 每日资讯自动更新 2026-11-23
+ Committer: aiagent <agent@minadeMac-mini.lan>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 438 files changed, 554 insertions(+), 437 deletions(-)
+ rename assets/{data.6edc4f03.js => data.6ac4f275.js} (99%)
+===== [4/4] 推送 GitHub Pages =====
+   78df8970..3094a327  main -> main
+PUSH OK
+===== 完成 2026-11-23 13:45:17 =====
+===== [0/4] 对齐线上 2026-11-24 08:39:18 =====
+===== [1/4] 抓取资讯 =====
+== 源抓取统计 ==
+  重庆市教育委员会: 68 条候选
+  重庆市教育考试院: 76 条候选
+  重庆招考网: 52 条候选
+  中国教育在线: 56 条候选
+  教育部: 56 条候选
+  上游新闻: 0 条候选
+  重庆日报: 1 条候选
+  人民网重庆: 6 条候选
+  重庆市政府网: 6 条候选
+  新华网重庆: 7 条候选
+  渝中区教委: 0 条候选
+  华龙网: 9 条候选
+  重庆大学新闻网: 35 条候选
+  华龙网教育: 6 条候选
+  中国教育新闻网: 234 条候选
+  大渝网: 0 条候选
+  重庆网络广播电视台: 5 条候选
+== 去重后新候选: 212 条（每源限 25） ==
+   · 市委教育工委举行学习贯彻党的二十届五中全会精神宣讲报告会 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202611/t20261118_16433329.html
+   · 市委教育工委2026年下半年巡察完成进驻 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202611/t20261118_16433311.html
+   · 重庆人工智能学院联合培养对接会顺利召开 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202611/t20261118_16433288.html
+   · ​市委教育工委2026年下半年巡察工作启动 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202611/t20261113_16406562.html
+   · 向美而行 逐梦未来！重庆市第八届大学生艺术展演活动现场集中展演在重庆大学顺利开幕 | http://jw.cq.gov.cn/zwxx_209/bmdt/zhxx/202611/t20261113_16406527.html
+   · 2026年重庆市大学生RPA财务机器人应用与开发竞赛拟获奖情况公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261119_16440246.html
+   · 关于2026年重庆市大学生商科创新能力大赛拟获奖情况公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261119_16440240.html
+   · 关于第五届重庆市大学生区块链技术应用创新大赛拟获奖情况公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261119_16440221.html
+   · 重庆市教育委员会等七部门关于开展2027年教育部重庆高等研究院校企联合人才培养和科研攻关项目申报工作的通 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261117_16425745.html
+   · 重庆市教育委员会关于全国学校美育名师工作室拟推荐名单的公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261112_16401572.html
+   · 第六届重庆市大学生企业财务大数据智能决策竞赛拟获奖情况公示 | http://jw.cq.gov.cn/zwxx_209/gggs/202611/t20261112_16400070.html
+   · 重庆市中小学教师学历提升行动方案（2026—2035年） | http://jw.cq.gov.cn/zwgk/zfxxgkml/zcwj/gfxwj/202611/t20261103_16346267
+[ok] 新增发布 0 条；v2.0 门槛拦截 100 条；collected 累计 87 条
+[v2.3-dedupe] 近重复剔除 3 条
+[v2.0-filter] seed 剔除 24 条
+[build] src/data-news.js：105 条（种子 21 + 采集已审 84）
+===== [1.5/4] 八卦社每日整理 =====
+[auto] 种子 20 页：7628920200825556264, 7641052428171948451, 7665946298722180736, 7596147910983666994, 7644783534401424678, 7682991429920139363, 7694872958120502373, 7698203458721788520, 7523957918183394620, 7367049783636248576, 7441518094729678114, 7675651982354338752, 7691536627596617954, 7649672539999948066, 7422970398364552474, 7509927192986634249, 7509922829627721737, 7521200368466823187, 7509903950947223563, 7310178984405436428
+Traceback (most recent call last):
+  File "/Users/agent/Documents/site/bagua_auto.py", line 190, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/agent/Documents/site/bagua_auto.py", line 121, in main
+    pages = run_node(CRAWL_JS, seeds)
+  File "/Users/agent/Documents/site/bagua_auto.py", line 60, in run_node
+    r = subprocess.run(['node', '-e', js] + urls, capture_output=True, text=True, timeout=timeout)
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1970, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'node'
+[warn] 八卦社自动采集异常，继续管线
+[prune] 时效/白名单修剪：移除 1 条，保留 11 条
+[bagua] inbox 无新投递（通道 A/B 均空）
+===== [2/4] 重建站点 =====
+  · artmap 自动重生成 · 195 键
+[build] 多页构建 OK · 46 项 · 合计 830 KB
+  · CAL_NODES · 21 个节点
+  · PHOTO_DIM · 105 张
+  · assets/app.d056ae98.css · 122 KB
+  · assets/app.b63c502a.js · 290 KB
+  · assets/data.3afbbe4c.js · 233 KB
+  · index.html · 33 KB · sha256:dbf0b4ea4f65
+  · news.html · 33 KB · sha256:de7bcf8a7012
+  · calendar.html · 30 KB · sha256:be2b83587c04
+  · policy.html · 37 KB · sha256:a3962f632cf8
+  · quiz.html · 19 KB · sha256:c4865d854ee6
+  · schools.html · 25 KB · sha256:e2f9582f1088
+  · schools-xx.html · 19 KB · sha256:1c251f3d1a45
+  · schools-cz.html · 19 KB · sha256:8cbcc3ea0195
+  · schools-gz.html · 19 KB · sha256:3d9540ea10e6
+  · zhuanye.html · 20 KB · sha256:ced7f81ca472
+  · schools-liangjiang.html · 19 KB · sha256:ff4912d7d28a
+  · schools-map.html · 19 KB · sha256:11a9bf1184be
+  · schools-tier.html · 24 KB · sha256:c1827172a4ea
+  · schools-koubei.html · 19 KB · sha256:fcc4f8a1896d
+  · schools-guide.html · 19 KB · sha256:44bd5a71a144
+  · compare.html · 20 KB · sha256:3637759a7993
+  · zy.html · 29 KB · sha256:98d9c548cd2d
+  · daxue.html · 22 KB · sha256:b38ae83081b9
+  · xiaoxue.html · 19 KB · sha256:e4c6f4148e67
+  · chuzhong.html · 19 KB · sha256:112b63cc045d
+  · gaozhong.html · 20 KB · sha256:7a76280277a9
+  · forum.html · 20 KB · sha256:56c7cffa8dce
+  · community.html · 21 KB · sha256:9a1dda146fb9
+  · life.html · 22 KB · sha256:ee5b5f8f9d00
+  · beans.html · 18 KB · sha256:79c421c2ad75
+  · me.html · 22 KB · sha256:ee2e8b4239f6
+  · plans.html · 19 KB · sha256:d8aab24b605e
+  · biz.html · 18 KB · sha256:0afd182cb024
+  · data-sources.html · 18 KB · sha256:c924ef495d7f
+  · daohang.html · 18 KB · sha256:aa7025deeba5
+  · about.html · 20 KB · sha256:6ca65c34857a
+  · search.html · 18 KB · sha256:34cb51356f49
+  · contact.html · 20 KB · sha256:7c5c54116d69
+  · wiki.html · 22 KB · sha256:1d19dcc94323
+  · problems.html · 18 KB · sha256:bc7947788932
+  · faq.html · 35 KB · sha256:91d1275bf401
+  · sitemap.html · 18 KB · sha256:63338649274f
+  · articles/ · 大学详情页 129 页
+  · qu/ · 区县专题页 11 页
+  · articles/ · 257 篇详情页（34 个旧文件已转为跳转）
+  · rss.xml · 30 条资讯
+[warn] 移动端可能横向溢出——人工复核 scripts/overflow_check.js
+===== [3/4] 提交 =====

@@ -668,6 +668,16 @@ def main():
             for _m in (_s.get("majors") or []):
                 if _m and str(_m).strip(): _majors.add(str(_m).strip())
         tpl = tpl.replace("__ZY_ALL__", str(len(_majors)))
+        # v1.17：门类映射（教育部《本科专业目录（2025年）》精确匹配；目录外名称如实不标）
+        try:
+            _catj = json.loads(read(os.path.join(SRC, "moe_catalog_2025.json")))
+            _cmap = {m: c for m, c in _catj["map"].items() if m in _majors}
+            tpl = tpl.replace("__MOE_CAT__", json.dumps(_cmap, ensure_ascii=False, separators=(",", ":")))
+            tpl = tpl.replace("__MOE_ORDER__", json.dumps(_catj["order"], ensure_ascii=False))
+        except Exception as _e2:
+            print("[build] 门类映射注入失败:", _e2)
+            tpl = tpl.replace("__MOE_CAT__", "{}")
+            tpl = tpl.replace("__MOE_ORDER__", "[]")
     except Exception as _e:
         print("[build] __ZY_ALL__ 注入失败:", _e)
         tpl = tpl.replace("__ZY_ALL__", "210")

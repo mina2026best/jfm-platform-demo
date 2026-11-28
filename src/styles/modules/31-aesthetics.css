@@ -6,10 +6,10 @@
   @media (max-width:720px){ section{padding:44px 0} }
 
   /* —— 2. 统一卡片语言：可悬浮卡片获得「上浮 + 柔和投影」，静态卡片保持克制 —— */
-  .school-card,.pol-item,.news-item,.rq-card,.life-card,.thread,.lq,.sp-row,.hot-rank a,.cell,.term,.panel{
+  .school-card,.pol-item,.news-item,.rq-card,.life-card,.thread,.lq,.sp-row,.hot-rank a,.cell,.term,.panel,.cal,.dx-card{
     transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   }
-  .school-card:hover,.pol-item:hover,.news-item:hover,.rq-card:hover,.thread:hover,.lq:hover,.sp-row:hover{
+  .school-card:hover,.pol-item:hover,.news-item:hover,.rq-card:hover,.thread:hover,.lq:hover,.sp-row:hover,.cal:hover,.dx-card:hover{
     transform:translateY(-3px);
     box-shadow:0 12px 32px rgba(23,33,46,.10);
     border-color:var(--line2);

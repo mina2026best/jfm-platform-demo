@@ -1,5 +1,5 @@
 /* ---------- v1.12：专业库页（对标掌上高考 /special；数据=516 条真实在渝招生专业条目反查） ---------- */
-var ZYM = { all: [], view: [] };
+var ZYM = { all: [], view: [], cat: "" };
 function zymInit(){
   if(typeof DAXUE === 'undefined') return;
   var freq = {};
@@ -19,6 +19,24 @@ function zymInit(){
     return { m: m, n: schools.length, top: top3, wmin: wlmin, wmax: wlmax };
   });
   ZYM.all.sort(function(a, b){ return b.n - a.n || a.m.localeCompare(b.m, 'zh'); });
+  /* v1.17：学科门类（教育部目录精确匹配；未匹配如实「未标注」） */
+  var MC = window.MOE_CAT || {};
+  ZYM.all.forEach(function(x){ x.c = MC[x.m] || ''; });
+  var ORDER = (window.MOE_ORDER && window.MOE_ORDER.length ? window.MOE_ORDER : []);
+  var cnts = {}; ZYM.all.forEach(function(x){ cnts[x.c] = (cnts[x.c] || 0) + 1; });
+  var chips = '<button class="ff on" data-zc="" aria-pressed="true">全部（' + ZYM.all.length + '）</button>';
+  ORDER.forEach(function(c){
+    if(cnts[c]) chips += '<button class="ff" data-zc="' + esc(c) + '" aria-pressed="false">' + esc(c) + '（' + cnts[c] + '）</button>';
+  });
+  if(cnts['']) chips += '<button class="ff" data-zc="__none__" aria-pressed="false">未标注（' + cnts[''] + '）</button>';
+  var catBox = document.getElementById('zym-cats');
+  if(catBox){
+    catBox.innerHTML = chips;
+    catBox.addEventListener('click', function(e){
+      var b = e.target.closest('.ff'); if(!b) return;
+      zymCat(b.getAttribute('data-zc') || '');
+    });
+  }
   var letters = {};
   ZYM.all.forEach(function(x){
     var L = x.m.charAt(0).toUpperCase();
@@ -37,6 +55,8 @@ function zymRender(){
   var Lsel = (document.getElementById('zym-letter') || {}).value || '';
   q = q.trim().toLowerCase();
   ZYM.view = ZYM.all.filter(function(x){
+    if(ZYM.cat === '__none__' && x.c) return false;
+    if(ZYM.cat && ZYM.cat !== '__none__' && x.c !== ZYM.cat) return false;
     if(Lsel && x.m.charAt(0).toUpperCase() !== Lsel) return false;
     if(q && x.m.toLowerCase().indexOf(q) < 0) return false;
     return true;
@@ -46,12 +66,21 @@ function zymRender(){
   var grid = document.getElementById('zym-grid'); if(!grid) return;
   grid.innerHTML = ZYM.view.slice(0, 60).map(function(x){
     var wl = (x.wmin !== null) ? ' 最新投档 ' + x.wmin + '–' + x.wmax : '';
-    return '<article class="school-card"><div class="sc-top"><span class="sc-badge">' + x.n + ' 校开设</span><span class="sc-qu">' + esc(x.m.charAt(0)) + '</span></div>'
+    return '<article class="school-card"><div class="sc-top"><span class="sc-badge">' + x.n + ' 校开设</span>' + (x.c ? '<span class="sc-badge" style="background:var(--paper2);color:var(--muted);font-weight:400">' + esc(x.c) + '</span>' : '') + '<span class="sc-qu">' + esc(x.m.charAt(0)) + '</span></div>'
       + '<h4>' + esc(x.m) + '</h4>'
       + '<p>' + esc('代表校：' + x.top.map(function(s){ return s.name; }).join('、')) + '</p>'
       + '<p class="mono" style="font-size:12px;color:var(--muted)">' + wl + '</p>'
       + '<div class="sc-actions"><button class="mini-btn" onclick="zymOpen(\'' + esc(x.m) + '\')">查看开设院校 →</button></div></article>';
   }).join('') + (ZYM.view.length > 60 ? '<div class="cmp-empty">仅显示前 60 个——请用搜索或字母索引缩小范围。</div>' : '');
+}
+function zymCat(c){
+  ZYM.cat = c || '';
+  document.querySelectorAll('#zym-cats .ff').forEach(function(b){
+    var on = (b.getAttribute('data-zc') || '') === ZYM.cat;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
+  zymRender();
 }
 function zymOpen(m){
   var target = 'daxue.html#dxm';

@@ -12,7 +12,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"花期册 · BLOOM ALMANAC","url":"https://mina2026best.github.io/jfm-platform-demo/","logo":"https://mina2026best.github.io/jfm-platform-demo/assets/og-cover.jpg","areaServed":"重庆市","knowsAbout":["重庆小升初","重庆中考","指标到校","高考志愿填报"]}</script>
 <link rel="alternate" type="application/rss+xml" title="花期册 · 重庆升学资讯订阅" href="rss.xml" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"花期册 · 重庆家长升学指南","url":"https://mina2026best.github.io/jfm-platform-demo/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://mina2026best.github.io/jfm-platform-demo/search.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
-<link rel="stylesheet" href="assets/app.d056ae98.css" />
+<link rel="stylesheet" href="assets/app.60f29c1f.css" />
 <link rel="stylesheet" href="assets/enhance.css?v=20261112f" />
 <script>
 /* v0.80 埋点配置：填入正式 ID 即自动激活；留空时仅记录本机事件日志（jfm_event_log），不外发任何数据 */
@@ -146,8 +146,11 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
       <select id="zym-letter" aria-label="字母索引" style="font-size:13px;padding:8px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--paper);color:var(--ink)" onchange="zymRender()"><option value="">全部</option></select>
     </div>
     <p class="sc-stats" id="zym-count" role="status" aria-live="polite"></p>
+    <div class="fact-filter" id="zym-cats" style="margin:0 0 12px" aria-label="学科门类筛选"></div>
     <div class="school-grid" id="zym-grid"></div>
+    <script>window.MOE_CAT = {"经济学":"经济学","国民经济管理":"经济学","财政学":"经济学","金融学":"经济学","保险学":"经济学","经济与金融":"经济学","国际经济与贸易":"经济学","法学":"法学","知识产权":"法学","国际政治":"法学","外交学":"法学","社会学":"法学","民族学":"法学","侦查学":"法学","教育学":"教育学","华文教育":"教育学","体育教育":"教育学","运动训练":"教育学","运动人体科学":"教育学","休闲体育":"教育学","汉语言文学":"文学","法语":"文学","历史学":"历史学","考古学":"历史学","物理学":"理学","化学":"理学","应用化学":"理学","天文学":"理学","大气科学":"理学","海洋科学":"理学","地质学":"理学","生物科学":"理学","生态学":"理学","心理学":"理学","统计学":"理学","数据科学":"理学","机械工程":"工学","车辆工程":"工学","精密仪器":"工学","材料科学与工程":"工学","冶金工程":"工学","宝石及材料工艺学":"工学","电子信息工程":"工学","通信工程":"工学","信息工程":"工学","水声工程":"工学","人工智能":"工学","自动化":"工学","计算机科学与技术":"工学","软件工程":"工学","网络空间安全":"工学","土木工程":"工学","制药工程":"工学","地质工程":"工学","石油工程":"工学","海洋油气工程":"工学","纺织工程":"工学","交通运输":"工学","航海技术":"工学","轮机工程":"工学","船舶与海洋工程":"工学","环境工程":"工学","生物医学工程":"工学","食品科学与工程":"工学","乳品工程":"工学","建筑学":"工学","城乡规划":"工学","风景园林":"工学","安全工程":"工学","生物工程":"工学","生物制药":"工学","农学":"农学","园艺":"农学","植物保护":"农学","动物科学":"农学","动物医学":"农学","林学":"农学","园林":"农学","草业科学":"农学","基础医学":"医学","临床医学":"医学","儿科学":"医学","口腔医学":"医学","预防医学":"医学","中医学":"医学","药学":"医学","药物制剂":"医学","临床药学":"医学","中药学":"医学","护理学":"医学","管理科学":"管理学","工商管理":"管理学","会计学":"管理学","物流工程":"管理学","旅游管理":"管理学","音乐表演":"艺术学","音乐学":"艺术学","音乐教育":"艺术学","广播电视编导":"艺术学","美术学":"艺术学"}; window.MOE_ORDER = ["哲学", "经济学", "法学", "教育学", "文学", "历史学", "理学", "工学", "农学", "医学", "管理学", "艺术学"];</script>
     <div class="cmp-note" style="margin-top:14px"><b>口径说明</b>　「开设校数」＝985/211 在渝招生实体中，代表性专业列表含此专业的校数（掌上高考采集口径）；不代表全市开设院校总数。专业详情（代码/修业年限/学位）以教育部目录与院校当年简章为准——本站无该数据源，如实不展示。</div>
+    <div class="cmp-note" style="margin-top:10px"><b>门类口径</b>　学科门类依据教育部《普通高等学校本科专业目录（2025年）》（2025年4月印发，moe.gov.cn，检索于 2026-11-28），按专业名精确匹配；目录外名称（如招生大类、专业方向）如实标注「未标注」，不作推测归类。</div>
   </div>
 </section>
 <section id="subscribe" class="alt">
@@ -235,8 +238,8 @@ window.JFM_ANALYTICS = { ga4Id: '', plausibleDomain: '', custom: { script: 'http
 </footer>
 
 <script src="assets/data-daxue.7e4c06c0.js" defer></script>
-<script src="assets/data.4b25ff72.js" defer></script>
-<script src="assets/app.b63c502a.js" defer></script>
+<script src="assets/data.716f3f7e.js" defer></script>
+<script src="assets/app.5bb18285.js" defer></script>
 
 <script>(function(){var h=location.hash;var m={"#news":"news.html","#calendar":"calendar.html","#policy":"policy.html","#quiz":"quiz.html","#schools":"schools.html","#compare":"compare.html","#zy":"zy.html","#daxue":"daxue.html","#gaozhong":"gaozhong.html","#forum":"forum.html","#community":"community.html","#learn":"community.html","#life":"life.html","#beans":"beans.html","#me":"me.html","#plans":"plans.html","#biz":"biz.html","#data-sources":"data-sources.html","#about":"about.html","#faq":"faq.html","#problems":"problems.html","#searchpage":"search.html","#wiki":"wiki.html","#contact":"contact.html"};if(h&&m[h]&&location.pathname.indexOf(m[h])===-1){location.replace(m[h]);}})();</script>
 <dialog id="school-modal"><div class="dlg">

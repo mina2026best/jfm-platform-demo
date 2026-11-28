@@ -1,0 +1,27 @@
+/* ============ v1.17：入场渐显（克制动效） ============
+   原则：只做 8px 位移 + 透明度，时长 320ms，一次触发不回放；
+   首屏内容永不渐显（JS 判定），动态插入内容（加载更多）不渐显。
+   卡片 hover 统一语言在 31-aesthetics（.cal/.dx-card 已并入）。 */
+
+.rv{opacity:0;transform:translateY(8px)}
+.rv.rv-on{opacity:1;transform:none;transition:opacity .32s ease-out,transform .32s ease-out}
+
+/* 列表微错落：同容器相邻卡片 40ms 级联（最多 6 个，避免长列表尾延迟） */
+.rv-group .rv.rv-on:nth-child(2){transition-delay:40ms}
+.rv-group .rv.rv-on:nth-child(3){transition-delay:80ms}
+.rv-group .rv.rv-on:nth-child(4){transition-delay:120ms}
+.rv-group .rv.rv-on:nth-child(5){transition-delay:160ms}
+.rv-group .rv.rv-on:nth-child(6){transition-delay:200ms}
+
+/* 主按钮 hover 轻微上浮 */
+.btn-main{transition:transform .18s ease-out,box-shadow .18s ease-out}
+.btn-main:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(14,124,102,.22)}
+
+/* 减弱动效：全站动效退化（覆盖 31-aesthetics hover 与本模块渐显） */
+@media (prefers-reduced-motion: reduce){
+  .rv{opacity:1;transform:none}
+  .rv.rv-on,.rv.rv-on:nth-child(2),.rv.rv-on:nth-child(3),.rv.rv-on:nth-child(4),.rv.rv-on:nth-child(5),.rv.rv-on:nth-child(6){transition:none}
+  .school-card,.pol-item,.news-item,.rq-card,.life-card,.thread,.lq,.sp-row,.hot-rank a,.cell,.term,.panel,.cal,.dx-card,.btn-main,
+  .school-card:hover,.pol-item:hover,.news-item:hover,.rq-card:hover,.thread:hover,.lq:hover,.sp-row:hover,.cal:hover,.dx-card:hover,.btn-main:hover,
+  .qug-item:hover,.pb-card:hover{transition:none;transform:none}
+}

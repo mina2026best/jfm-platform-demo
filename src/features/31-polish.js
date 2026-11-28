@@ -85,3 +85,34 @@ function openChangelog(){
   var d = document.getElementById('changelog-modal');
   if(d && d.showModal) d.showModal();
 }
+
+
+/* ---------- v1.17：入场渐显（克制动效） ---------- */
+function initReveal(){
+  try{ if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; }catch(e){}
+  if(!('IntersectionObserver' in window)) return;
+  var vh = window.innerHeight || 800;
+  var sel = '.sec-head,.sec-desc,.cal,.school-card,.pol-item,.dx-card,.page-banner';
+  var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+  var pend = [];
+  els.forEach(function(el){
+    var r = el.getBoundingClientRect();
+    /* 仅首屏以下内容参与渐显；已在视口内的保持可见 */
+    if(r.top > vh * 0.9) pend.push(el);
+  });
+  if(!pend.length) return;
+  pend.forEach(function(el){
+    el.classList.add('rv');
+    var p = el.parentElement;
+    if(p && (p.className.indexOf('cal-grid') >= 0 || p.className.indexOf('pol-list') >= 0 || p.className.indexOf('grid') >= 0)) el._rvg = p;
+  });
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        en.target.classList.add('rv-on');
+        io.unobserve(en.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
+  pend.forEach(function(el){ io.observe(el); });
+}

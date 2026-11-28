@@ -60,3 +60,7 @@
   .sub-form .btn-primary{display:inline-block;text-align:center;border:none;cursor:pointer}
   .sub-ok{font-size:12px;color:#7FD8C4}
   @media (max-width:860px){ .sub-band{grid-template-columns:1fr;padding:22px} }
+
+/* v1.17：移动端限宽（SELECT 写死宽度在窄屏溢出容器） */
+#forum-post-form select,#forum-post-form input,#forum-post-form textarea{max-width:100%}
+#fp-board{width:100%}
